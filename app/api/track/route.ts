@@ -45,8 +45,16 @@ export async function POST(request: NextRequest) {
     .eq('api_key', api_key)
     .single()
 
-  if (clientError || !client) {
-    return NextResponse.json({ error: 'Invalid API key' }, { status: 401 })
+  if (clientError) {
+    // PGRST116 = no rows found → bad API key. Anything else is a real DB error.
+    if (clientError.code === 'PGRST116') {
+      return NextResponse.json({ error: 'Invalid API key' }, { status: 401 })
+    }
+    console.error('Client lookup error:', clientError)
+    return NextResponse.json(
+      { error: 'Database error during client lookup', detail: clientError.message },
+      { status: 500 }
+    )
   }
 
   if (!client.active) {
@@ -55,32 +63,47 @@ export async function POST(request: NextRequest) {
 
   const estimated_value = client.avg_lead_value ?? 0
 
-  // Upsert lead — same session updates the existing row
+  // Coerce numeric fields — JSON body values may arrive as strings
+  const payload = {
+    client_id: client.id,
+    session_id,
+    name: name ?? null,
+    email: email ?? null,
+    phone: phone ?? null,
+    fields_completed: Number(fields_completed ?? 0),
+    total_fields: Number(total_fields ?? 0),
+    time_on_form: Number(time_on_form ?? 0),
+    device_type: device_type ?? null,
+    estimated_value,
+    status: 'abandoned',
+    form_data: form_data ?? null,
+  }
+
+  // Upsert lead — same session updates the existing row.
+  // Requires a UNIQUE constraint on leads.session_id in Supabase.
   const { data: lead, error: leadError } = await supabase
     .from('leads')
-    .upsert(
-      {
-        client_id: client.id,
-        session_id,
-        name: name ?? null,
-        email: email ?? null,
-        phone: phone ?? null,
-        fields_completed: fields_completed ?? 0,
-        total_fields: total_fields ?? 0,
-        time_on_form: time_on_form ?? 0,
-        device_type: device_type ?? null,
-        estimated_value,
-        status: 'abandoned',
-        form_data: form_data ?? null,
-      },
-      { onConflict: 'session_id' }
-    )
+    .upsert(payload, { onConflict: 'session_id' })
     .select('id')
     .single()
 
   if (leadError) {
-    console.error('Lead upsert error:', leadError)
-    return NextResponse.json({ error: 'Failed to store lead' }, { status: 500 })
+    console.error('Lead upsert error:', {
+      message: leadError.message,
+      code: leadError.code,
+      details: leadError.details,
+      hint: leadError.hint,
+      payload,
+    })
+    return NextResponse.json(
+      {
+        error: 'Failed to store lead',
+        detail: leadError.message,
+        code: leadError.code,
+        hint: leadError.hint,
+      },
+      { status: 500 }
+    )
   }
 
   return NextResponse.json(
