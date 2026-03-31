@@ -8,10 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
     "next": "^15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "@supabase/supabase-js": "^2.49.4"
+    "resend": "^4.8.0"
   },
   "devDependencies": {
     "@types/node": "^20",

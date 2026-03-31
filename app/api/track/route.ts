@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { sendEmailForLead } from '@/lib/email'
 
 // Handle CORS preflight from tracking script on client sites
 export async function OPTIONS() {
@@ -41,7 +42,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes')
     .eq('api_key', api_key)
     .single()
 
@@ -104,6 +105,30 @@ export async function POST(request: NextRequest) {
       },
       { status: 500 }
     )
+  }
+
+  // Schedule or immediately send recovery email if enabled and lead has an email.
+  if (client.auto_email_enabled && email) {
+    const delayMinutes = client.email_delay_minutes ?? 0
+
+    if (delayMinutes > 0) {
+      // Store when the email should be sent. Only set this once — the .is('email_send_after', null)
+      // filter prevents the 15s heartbeat upserts from resetting an already-scheduled time.
+      const sendAfter = new Date(Date.now() + delayMinutes * 60 * 1000).toISOString()
+      supabase
+        .from('leads')
+        .update({ email_send_after: sendAfter })
+        .eq('id', lead.id)
+        .is('email_send_after', null)
+        .then(({ error }) => {
+          if (error) console.error('Failed to schedule email for lead', lead.id, error.message)
+        })
+    } else {
+      // delay = 0: send immediately
+      sendEmailForLead(lead.id).catch(err =>
+        console.error('Auto email failed for lead', lead.id, err)
+      )
+    }
   }
 
   return NextResponse.json(
