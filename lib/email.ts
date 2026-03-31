@@ -78,12 +78,16 @@ export type EmailResult =
   | { success: false; error: string }
 
 export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
+  console.log('sendEmailForLead called:', leadId)
+
   // ── 1. Fetch lead ──────────────────────────────────────────────────────────
   const { data: lead, error: leadError } = await supabase
     .from('leads')
     .select('id, name, email, email_sent, form_data, client_id')
     .eq('id', leadId)
     .single()
+
+  console.log('Lead data:', lead?.email, 'already sent:', lead?.email_sent)
 
   if (leadError || !lead) return { success: false, error: 'Lead not found' }
   if (!lead.email)      return { success: false, error: 'Lead has no email address' }
@@ -140,6 +144,8 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
     ? `${senderName} <${client.from_email}>`
     : `${senderName} <onboarding@resend.dev>`
 
+  console.log('Calling Resend with:', lead.email, subject)
+
   let emailId: string
   try {
     const resend = getResend()
@@ -151,13 +157,14 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
     })
     if (error || !data) {
       const detail = error?.message ?? 'Resend returned no data'
-      console.error('Resend error:', detail)
+      console.log('Resend error:', detail)
       return { success: false, error: detail }
     }
+    console.log('Email sent successfully')
     emailId = data.id
   } catch (err) {
     const detail = err instanceof Error ? err.message : String(err)
-    console.error('Resend send error:', detail)
+    console.log('Resend error:', detail)
     return { success: false, error: detail }
   }
 

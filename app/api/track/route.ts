@@ -125,6 +125,7 @@ export async function POST(request: NextRequest) {
         })
     } else {
       // delay = 0: send immediately
+      console.log('Sending immediate email to:', email, 'for lead:', lead.id)
       sendEmailForLead(lead.id).catch(err =>
         console.error('Auto email failed for lead', lead.id, err)
       )
