@@ -57,6 +57,7 @@ function buildHtml(bodyContent: string, vars: Record<string, string>): string {
 
     <!-- Footer -->
     <div style="padding:24px 40px;font-size:12px;color:#a1a1aa;line-height:1.6;">
+      ${(vars.contact_phone || vars.contact_email) ? `<p style="margin:0 0 8px;">Questions? ${vars.contact_phone ? `Call us at <a href="tel:${vars.contact_phone}" style="color:#71717a;text-decoration:none;">${vars.contact_phone}</a>` : ''}${vars.contact_phone && vars.contact_email ? ' or email ' : ''}${vars.contact_email ? `<a href="mailto:${vars.contact_email}" style="color:#ff6b35;text-decoration:none;">${vars.contact_email}</a>` : ''}</p>` : ''}
       <p style="margin:0 0 4px;">You received this email because you started a form on <strong style="color:#71717a;">${business_name}</strong>.</p>
       <p style="margin:0;">Powered by <a href="https://leadcatch.app" style="color:#ff6b35;text-decoration:none;">LeadCatch</a></p>
     </div>
@@ -96,7 +97,7 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
   // ── 2. Fetch client ────────────────────────────────────────────────────────
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, name, message_template, booking_url, from_email, email_header, sender_name')
+    .select('id, name, message_template, booking_url, from_email, email_header, sender_name, contact_phone, contact_email')
     .eq('id', lead.client_id)
     .single()
 
@@ -124,10 +125,12 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
   const emailHeader: string = client.email_header ?? client.name
 
   const vars: Record<string, string> = {
-    name:          firstName,
-    business_name: emailHeader,
+    name:           firstName,
+    business_name:  emailHeader,
     service,
-    booking_url:   client.booking_url ?? '#',
+    booking_url:    client.booking_url    ?? '#',
+    contact_phone:  (client as any).contact_phone  ?? '',
+    contact_email:  (client as any).contact_email  ?? '',
   }
 
   const subject = fill(DEFAULT_SUBJECT, vars)
