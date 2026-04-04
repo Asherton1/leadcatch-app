@@ -1,0 +1,160 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@supabase/supabase-js'
+import { Resend } from 'resend'
+
+export const dynamic = 'force-dynamic'
+
+const resend = new Resend(process.env.RESEND_API_KEY!)
+
+export async function GET(req: NextRequest) {
+  // Verify cron secret to prevent unauthorized access
+  const authHeader = req.headers.get('authorization')
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL ?? '',
+    process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '',
+  )
+
+  // Get all active clients
+  const { data: clients, error: clientErr } = await supabase
+    .from('clients')
+    .select('id, name, email, first_name, avg_lead_value')
+    .eq('active', true)
+
+  if (clientErr || !clients || clients.length === 0) {
+    console.log('[weekly-report] No active clients or error:', clientErr?.message)
+    return NextResponse.json({ sent: 0 })
+  }
+
+  const now = new Date()
+  const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString()
+  let sent = 0
+
+  for (const client of clients) {
+    if (!client.email) continue
+
+    // Get leads from the past 7 days
+    const { data: leads } = await supabase
+      .from('leads')
+      .select('id, name, email, status, estimated_value, created_at')
+      .eq('client_id', client.id)
+      .gte('created_at', weekAgo)
+      .order('created_at', { ascending: false })
+
+    const weekLeads = leads ?? []
+    if (weekLeads.length === 0) continue // Skip clients with no activity
+
+    const totalLeads = weekLeads.length
+    const recovered = weekLeads.filter(l => l.status === 'converted').length
+    const contacted = weekLeads.filter(l => l.status === 'contacted').length
+    const open = weekLeads.filter(l => l.status === 'open').length
+    const avgValue = client.avg_lead_value || 400
+    const revenueAtRisk = totalLeads * avgValue
+    const recoveredRevenue = recovered * avgValue
+    const recoveryRate = totalLeads > 0 ? Math.round((recovered / totalLeads) * 100) : 0
+
+    const firstName = client.first_name || client.name?.split(' ')[0] || 'there'
+    const weekOf = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+
+    // Top 5 leads for the table
+    const topLeads = weekLeads.slice(0, 5)
+    const leadsTableRows = topLeads.map(l => {
+      const statusColor = l.status === 'converted' ? '#22c55e' : l.status === 'contacted' ? '#60a5fa' : '#fbbf24'
+      const statusLabel = (l.status || 'open').charAt(0).toUpperCase() + (l.status || 'open').slice(1)
+      return `<tr>
+        <td style="padding: 10px 12px; border-bottom: 1px solid #1e1e1e; color: #fff; font-size: 14px;">${l.name || '—'}</td>
+        <td style="padding: 10px 12px; border-bottom: 1px solid #1e1e1e; color: #888; font-size: 14px;">${l.email || '—'}</td>
+        <td style="padding: 10px 12px; border-bottom: 1px solid #1e1e1e;"><span style="color: ${statusColor}; font-weight: 600; font-size: 12px; background: ${statusColor}15; padding: 3px 8px; border-radius: 4px;">${statusLabel}</span></td>
+      </tr>`
+    }).join('')
+
+    const html = `
+      <div style="font-family: 'Inter', -apple-system, sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a0a; color: #fff; padding: 40px; border-radius: 12px;">
+        <div style="margin-bottom: 32px;">
+          <span style="font-size: 22px; font-weight: 700; color: #fff;">Re</span><span style="font-size: 22px; font-weight: 700; color: #ff6b35;">Capture</span>
+          <span style="font-size: 11px; color: #888; margin-left: 12px;">Weekly Report</span>
+        </div>
+
+        <p style="color: #aaa; font-size: 16px; margin-bottom: 8px;">Hi ${firstName},</p>
+        <p style="color: #aaa; font-size: 15px; margin-bottom: 32px;">Here's your lead recovery summary for the week of <strong style="color: #fff;">${weekOf}</strong>.</p>
+
+        <div style="display: flex; gap: 12px; margin-bottom: 32px;">
+          <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px; text-align: center;">
+            <div style="font-size: 28px; font-weight: 700; color: #ff6b35;">${totalLeads}</div>
+            <div style="font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Abandoned Leads</div>
+          </div>
+          <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px; text-align: center;">
+            <div style="font-size: 28px; font-weight: 700; color: #f87171;">$${revenueAtRisk.toLocaleString()}</div>
+            <div style="font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Revenue at Risk</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-bottom: 32px;">
+          <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px; text-align: center;">
+            <div style="font-size: 28px; font-weight: 700; color: #22c55e;">${recovered}</div>
+            <div style="font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Recovered</div>
+          </div>
+          <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px; text-align: center;">
+            <div style="font-size: 28px; font-weight: 700; color: #22c55e;">$${recoveredRevenue.toLocaleString()}</div>
+            <div style="font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Revenue Saved</div>
+          </div>
+        </div>
+
+        <div style="background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px; margin-bottom: 32px; text-align: center;">
+          <div style="font-size: 36px; font-weight: 700; color: ${recoveryRate > 20 ? '#22c55e' : '#fbbf24'};">${recoveryRate}%</div>
+          <div style="font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Recovery Rate</div>
+        </div>
+
+        ${weekLeads.length > 0 ? `
+        <h3 style="font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">Recent Leads</h3>
+        <table style="width: 100%; border-collapse: collapse; background: #111; border-radius: 8px; overflow: hidden; margin-bottom: 32px;">
+          <thead>
+            <tr style="background: #1a1a1a;">
+              <th style="padding: 10px 12px; text-align: left; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Name</th>
+              <th style="padding: 10px 12px; text-align: left; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Email</th>
+              <th style="padding: 10px 12px; text-align: left; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Status</th>
+            </tr>
+          </thead>
+          <tbody>${leadsTableRows}</tbody>
+        </table>
+        ` : ''}
+
+        <div style="text-align: center; margin-bottom: 32px;">
+          <a href="https://userecapture.com/dashboard" style="display: inline-block; background: #ff6b35; color: #000; font-weight: 700; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-size: 15px;">View Full Dashboard</a>
+        </div>
+
+        <div style="border-top: 1px solid #1e1e1e; padding-top: 20px;">
+          <p style="color: #444; font-size: 12px; text-align: center; margin: 0;">ReCapture · Weekly Report · Born & Built in Dallas, Texas</p>
+        </div>
+      </div>
+    `
+
+    try {
+      await resend.emails.send({
+        from: 'ReCapture <hello@userecapture.com>',
+        to: client.email,
+        subject: `Your Weekly Lead Report — ${totalLeads} leads captured, $${revenueAtRisk.toLocaleString()} at risk`,
+        html,
+      })
+      sent++
+      console.log(`[weekly-report] Sent to ${client.email}`)
+    } catch (err) {
+      console.error(`[weekly-report] Failed to send to ${client.email}:`, err)
+    }
+  }
+
+  // Notify Ash
+  try {
+    await resend.emails.send({
+      from: 'ReCapture <hello@userecapture.com>',
+      to: 'asherton.c@me.com',
+      subject: `Weekly Reports Sent — ${sent} clients`,
+      html: `<p>Weekly reports sent to ${sent} active clients at ${now.toLocaleString()}.</p>`,
+    })
+  } catch {}
+
+  return NextResponse.json({ sent, timestamp: now.toISOString() })
+}
