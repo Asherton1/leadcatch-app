@@ -256,8 +256,17 @@ export default function LandingPage() {
             <span style={{ color: '#fff' }}>Re</span><span className="logo-accent">Capture</span>
           </Link>
         </div>
-        <p>© 2026 Recapture · userecapture.com · Form Abandonment Recovery Platform</p>
-        <p>Born & Built in Dallas, Texas 🤘</p>
+        <p style={{ color: '#7a7f8e', fontSize: '14px', marginBottom: '20px', maxWidth: '400px', margin: '12px auto 20px' }}>
+          Form abandonment recovery for high-ticket service businesses. Capture every lead. Recover lost revenue.
+        </p>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '20px', flexWrap: 'wrap' }}>
+          <Link href="/test-form" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Live Demo</Link>
+          <Link href="/signup" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Start Free Trial</Link>
+          <Link href="/login" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Login</Link>
+          <a href="mailto:hello@userecapture.com" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Contact</a>
+        </div>
+        <p style={{ color: '#555', fontSize: '12px' }}>© 2026 ReCapture · userecapture.com</p>
+        <p style={{ color: '#555', fontSize: '12px' }}>Born & Built in Dallas, Texas 🤘</p>
       </footer>
     </div>
   )
