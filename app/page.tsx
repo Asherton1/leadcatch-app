@@ -52,7 +52,7 @@ export default function LandingPage() {
         <div style={{
           width: '100%',
           maxWidth: '1200px',
-          margin: '140px auto 80px',
+          margin: '160px auto 80px',
           padding: '0 20px',
         }}>
           <div style={{
