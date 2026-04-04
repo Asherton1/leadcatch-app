@@ -265,7 +265,7 @@ export default function LandingPage() {
           <Link href="/login" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Login</Link>
           <a href="mailto:hello@userecapture.com" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Contact</a>
         </div>
-        <p style={{ color: '#555', fontSize: '12px' }}>© 2026 ReCapture · userecapture.com</p>
+        <p style={{ color: '#555', fontSize: '12px' }}>© 2026 ReCapture</p>
         <p style={{ color: '#555', fontSize: '12px' }}>Born & Built in Dallas, Texas 🤘</p>
       </footer>
     </div>
