@@ -2,8 +2,21 @@ import './globals.css'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
-  description: 'Capture partial form submissions and auto-recover lost leads. Built for med spas, dental practices, and luxury service businesses.',
+  title: 'ReCapture — Form Abandonment Recovery for Med Spas, Dental & Luxury Services',
+  description: 'Stop losing 60% of your leads. ReCapture tracks partial form submissions in real-time and auto-recovers abandoned leads for med spas, dental practices, plastic surgery, and luxury service businesses. 14-day free trial.',
+  metadataBase: new URL('https://userecapture.com'),
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  keywords: ['form abandonment recovery', 'lead recovery software', 'partial form capture', 'med spa lead generation', 'dental practice leads', 'form tracking', 'abandoned form recovery', 'lead capture SaaS', 'high-ticket lead recovery'],
   openGraph: {
     title: 'ReCapture — Stop Losing 60% of Your Leads',
     description: 'Capture partial form submissions and auto-recover lost leads. Built for med spas, dental practices, and luxury service businesses.',
@@ -30,7 +43,41 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'SoftwareApplication',
+              name: 'ReCapture',
+              applicationCategory: 'BusinessApplication',
+              operatingSystem: 'Web',
+              description: 'Form abandonment recovery platform for high-ticket service businesses. Capture partial form submissions and auto-recover lost leads.',
+              url: 'https://userecapture.com',
+              offers: {
+                '@type': 'AggregateOffer',
+                lowPrice: '150',
+                highPrice: '200',
+                priceCurrency: 'USD',
+                offerCount: 2,
+              },
+              creator: {
+                '@type': 'Organization',
+                name: 'ReCapture',
+                url: 'https://userecapture.com',
+                address: {
+                  '@type': 'PostalAddress',
+                  addressLocality: 'Dallas',
+                  addressRegion: 'TX',
+                  addressCountry: 'US',
+                },
+              },
+            }),
+          }}
+        />
+        {children}
+      </body>
     </html>
   )
 }
