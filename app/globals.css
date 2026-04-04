@@ -1,0 +1,21 @@
+/* Logo icon animations */
+@keyframes bracketLeft {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-2px); }
+}
+@keyframes bracketRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(2px); }
+}
+@keyframes dotPulse {
+  0%, 100% { r: 5; opacity: 1; }
+  50% { r: 6; opacity: 0.85; }
+}
+@keyframes dotGlow {
+  0%, 100% { r: 8; opacity: 0; }
+  50% { r: 12; opacity: 0.15; }
+}
+.logo-bl { animation: bracketLeft 3s ease-in-out infinite; }
+.logo-br { animation: bracketRight 3s ease-in-out infinite; }
+.logo-dp { animation: dotPulse 3s ease-in-out infinite; }
+.logo-dg { animation: dotGlow 3s ease-in-out infinite; }
