@@ -123,7 +123,7 @@ export async function POST(req: NextRequest) {
         </ul>
 
         <div style="background: #1a1a1a; border-left: 3px solid #ff6b35; border-radius: 0 8px 8px 0; padding: 16px; margin-bottom: 32px;">
-          <p style="color: #fff; font-weight: 700; margin-bottom: 4px;">🔒 Free Trial Active</p>
+          <p style="color: #fff; font-weight: 700; margin-bottom: 4px;">Free Trial Active</p>
           <p style="color: #aaa; font-size: 14px; margin: 0;">Your card will be charged $200/month on <strong style="color: #fff;">${trialEndDate}</strong>. Cancel anytime before then.</p>
         </div>
 

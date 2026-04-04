@@ -51,7 +51,7 @@ export default function LandingPage() {
         {/* Dashboard Demo GIF */}
         <div style={{
           width: '100%',
-          maxWidth: '900px',
+          maxWidth: '1200px',
           margin: '48px auto 0',
           padding: '0 20px',
         }}>
@@ -62,9 +62,12 @@ export default function LandingPage() {
             border: '1px solid rgba(255, 107, 53, 0.2)',
             boxShadow: '0 0 60px rgba(255, 107, 53, 0.08), 0 0 120px rgba(255, 107, 53, 0.04)',
           }}>
-            <img
-              src="/dashboard-demo.gif"
-              alt="ReCapture dashboard showing leads being captured and recovered in real-time"
+            <video
+              src="/dashboard-demo.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
               style={{
                 width: '100%',
                 height: 'auto',
