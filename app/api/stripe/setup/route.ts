@@ -74,11 +74,36 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: msg }, { status: 500 })
   }
 
-  const trialEndsAt = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString()
+  // ── Create subscription with 14-day trial ──
+  let subscription: Stripe.Subscription
+  try {
+    subscription = await stripe.subscriptions.create({
+      customer: customer.id,
+      items: [{ price: process.env.STRIPE_PRICE_ID! }],
+      trial_period_days: 14,
+      payment_settings: {
+        payment_method_types: ['card'],
+        save_default_payment_method: 'on_subscription',
+      },
+      metadata: { supabase_user_id: user.id },
+    })
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'Subscription creation failed'
+    console.error('[stripe/setup] subscription error:', msg)
+    return NextResponse.json({ error: msg }, { status: 500 })
+  }
+
+  const trialEndsAt = subscription.trial_end
+    ? new Date(subscription.trial_end * 1000).toISOString()
+    : new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString()
 
   const { error: dbErr } = await supabase
     .from('clients')
-    .update({ stripe_customer_id: customer.id, trial_ends_at: trialEndsAt })
+    .update({
+      stripe_customer_id: customer.id,
+      stripe_subscription_id: subscription.id,
+      trial_ends_at: trialEndsAt,
+    })
     .eq('user_id', user.id)
 
   if (dbErr) console.error('[stripe/setup] DB update error:', dbErr.message)
