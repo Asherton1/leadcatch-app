@@ -42,7 +42,12 @@ export default function TestForm() {
               <circle className="logo-dg" cx="18" cy="18" r="8" fill="#ff6b35"/>
               <circle className="logo-dp" cx="18" cy="18" r="5" fill="#ff6b35"/>
             </svg>
-            <span><span style={{ color: '#fff' }}>Re</span><span style={{ color: '#ff6b35' }}>Capture</span></span></span></div>
+            <span><span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><svg width="24" height="24" viewBox="0 0 36 36" style={{ flexShrink: 0 }}>
+              <g className="logo-bl"><path d="M10 5 L4 5 L4 31 L10 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
+              <g className="logo-br"><path d="M26 5 L32 5 L32 31 L26 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
+              <circle className="logo-dg" cx="18" cy="18" r="8" fill="#ff6b35"/>
+              <circle className="logo-dp" cx="18" cy="18" r="5" fill="#ff6b35"/>
+            </svg><span><span style={{ color: '#fff' }}>Re</span><span style={{ color: '#ff6b35' }}>Capture</span></span></span></span></span></div>
         <div style={s.card}>
           <h2 style={s.successTitle}><span style={{ color: '#10b981' }}>✓</span> Request Received</h2>
           <p style={s.successText}>We've received your request and will be in touch within 24 hours. Unlike traditional CRMs that only track completed submissions, ReCapture captures the leads your business never knew existed — turning silent abandonment into recovered revenue.</p>
@@ -62,7 +67,12 @@ export default function TestForm() {
               <circle className="logo-dg" cx="18" cy="18" r="8" fill="#ff6b35"/>
               <circle className="logo-dp" cx="18" cy="18" r="5" fill="#ff6b35"/>
             </svg>
-            <span><span style={{ color: '#fff' }}>Re</span><span style={{ color: '#ff6b35' }}>Capture</span></span></span></div>
+            <span><span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><svg width="24" height="24" viewBox="0 0 36 36" style={{ flexShrink: 0 }}>
+              <g className="logo-bl"><path d="M10 5 L4 5 L4 31 L10 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
+              <g className="logo-br"><path d="M26 5 L32 5 L32 31 L26 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
+              <circle className="logo-dg" cx="18" cy="18" r="8" fill="#ff6b35"/>
+              <circle className="logo-dp" cx="18" cy="18" r="5" fill="#ff6b35"/>
+            </svg><span><span style={{ color: '#fff' }}>Re</span><span style={{ color: '#ff6b35' }}>Capture</span></span></span></span></span></div>
         <div style={s.card}>
           <button style={s.closeBtn} onClick={() => router.push('/')}>✕</button>
           <div style={s.cardHeader}>

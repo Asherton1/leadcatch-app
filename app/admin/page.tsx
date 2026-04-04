@@ -75,7 +75,12 @@ export default function AdminPage() {
               <circle className="logo-dg" cx="18" cy="18" r="8" fill="#ff6b35"/>
               <circle className="logo-dp" cx="18" cy="18" r="5" fill="#ff6b35"/>
             </svg>
-            <span><span style={{ color: '#fff' }}>Re</span><span style={{ color: '#ff6b35' }}>Capture</span></span>
+            <span><span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><svg width="24" height="24" viewBox="0 0 36 36" style={{ flexShrink: 0 }}>
+              <g className="logo-bl"><path d="M10 5 L4 5 L4 31 L10 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
+              <g className="logo-br"><path d="M26 5 L32 5 L32 31 L26 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
+              <circle className="logo-dg" cx="18" cy="18" r="8" fill="#ff6b35"/>
+              <circle className="logo-dp" cx="18" cy="18" r="5" fill="#ff6b35"/>
+            </svg><span><span style={{ color: '#fff' }}>Re</span><span style={{ color: '#ff6b35' }}>Capture</span></span></span></span>
           <span style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.12em', color: '#ff6b35', background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.3)', borderRadius: '4px', padding: '2px 6px' }}>ADMIN</span>
         </div>
         <button style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: '6px', color: '#666', fontSize: '0.8125rem', padding: '0.5rem 1rem', cursor: 'pointer', fontFamily: 'inherit' }} onClick={() => supabase.auth.signOut().then(() => router.push('/'))}>Sign Out</button>
