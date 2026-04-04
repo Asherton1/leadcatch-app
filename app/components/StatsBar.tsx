@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react'
 // ─── Count-up hook ────────────────────────────────────────────────────────────
 function useCountUp(end: number, duration = 1800, triggered = false): number {
   const [value, setValue] = useState(0)
-  const frameRef    = useRef<number>()
-  const startRef    = useRef<number>()
+  const frameRef    = useRef<number>(0)
+  const startRef    = useRef<number>(0)
   const hasRun      = useRef(false)
 
   useEffect(() => {

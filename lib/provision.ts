@@ -27,6 +27,7 @@ export interface ClientRecord {
   email_header: string | null
   active: boolean
   stripe_customer_id: string | null
+  email: string | null
   trial_ends_at: string | null
 }
 
@@ -34,7 +35,7 @@ const SELECT_COLS = [
   'id', 'user_id', 'name', 'first_name', 'last_name', 'company_name',
   'api_key', 'avg_lead_value', 'auto_email_enabled', 'email_delay_minutes',
   'sender_name', 'email_header', 'active',
-  'stripe_customer_id', 'trial_ends_at',
+  'email', 'stripe_customer_id', 'trial_ends_at',
 ].join(', ')
 
 function makeApiKey(): string {
@@ -68,7 +69,7 @@ export async function ensureClient(
     .maybeSingle()
 
   if (fetchErr) console.error('[provision] fetch error:', fetchErr.message)
-  if (existing) return existing as ClientRecord
+  if (existing) return existing as unknown as ClientRecord
 
   // 2. Derive display name
   const first = firstName?.trim() || ''
@@ -104,6 +105,7 @@ export async function ensureClient(
       sender_name:         'The Leadback',
       email_header:        'Revenue Recovery',
       active:              true,
+      email:               email,
     })
     .select(SELECT_COLS)
     .single()
@@ -113,5 +115,5 @@ export async function ensureClient(
     return null
   }
 
-  return created as ClientRecord
+  return created as unknown as ClientRecord
 }

@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid API key' }, { status: 401 })
   }
   if (clientError) {
-    return NextResponse.json({ error: 'Database error', detail: clientError.message }, { status: 500 })
+    return NextResponse.json({ error: 'Database error', detail: (clientError as Error).message }, { status: 500 })
   }
 
   const { data: lead, error: leadError } = await supabase
