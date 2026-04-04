@@ -5,7 +5,7 @@ import GSAPAnimations from './components/GSAPAnimations'
 import PricingSection from './components/PricingSection'
 
 export const metadata = {
-  title: 'Recapture — Form Abandonment Recovery for High-Ticket Businesses',
+  title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
   description: 'Capture partial form submissions and auto-recover lost leads. Built for med spas, dental practices, and luxury service businesses.',
 }
 
@@ -34,12 +34,12 @@ export default function LandingPage() {
           Here&apos;s the Proof.
         </h1>
         <p className="hero-subtitle hero-animate-delay">
-          Every day, prospects start your contact form—and vanish. You never knew they existed.
-          Recapture catches what you&apos;re missing and shows you exactly where revenue is slipping away.
+          Every day, prospects start filling out your form — then vanish before hitting submit.
+          ReCapture catches them and shows you exactly where revenue is slipping away.
         </p>
         <div className="cta-group hero-animate-delay2">
-          <Link href="/test-form" className="cta-primary">See Live Demo</Link>
-          <Link href="/dashboard" className="cta-secondary">View Dashboard</Link>
+          <Link href="/test-form" className="cta-primary">Try the Live Demo</Link>
+          <Link href="/signup" className="cta-secondary">Start Free Trial</Link>
         </div>
 
         {/* Dashboard Demo GIF */}
@@ -105,8 +105,8 @@ export default function LandingPage() {
             <div className="problem-number">03</div>
             <h3 className="problem-title">Leads Turn Into Ghosts</h3>
             <p className="problem-text">
-              If 100 visitors start your form and 60 don&apos;t finish, that&apos;s 15-20 lost bookings per month.
-              For a $400 service, you&apos;re leaving $6k-8k on the table. Every single month.
+              If 100 visitors start your form and 60 don&apos;t finish, that&apos;s 15–20 lost bookings per month.
+              For a $1,500 average service, that&apos;s $22k–$30k walking out the door. Every single month.
             </p>
           </div>
         </div>
@@ -174,8 +174,8 @@ export default function LandingPage() {
 
       <section className="lc-section">
         <div className="section-label">PRODUCT</div>
-        <h2 className="section-title">How Recapture Works</h2>
-        <p className="section-subtitle">A single script tag on your website. Everything else is automatic.</p>
+        <h2 className="section-title">How ReCapture Works</h2>
+        <p className="section-subtitle">A single script tag on your website. Everything else is automated.</p>
         <div className="features-grid">
           <div className="feature-card">
             <div className="feature-card-icon">
@@ -237,44 +237,17 @@ export default function LandingPage() {
 
       <PricingSection />
 
-      <section className="lc-section">
-        <div className="section-label">SOCIAL PROOF</div>
-        <h2 className="section-title">Trusted by Elite Practices</h2>
-        <div className="testimonials">
-          <div className="testimonial">
-            <div className="quote-stars">★★★★★</div>
-            <p className="quote-text">&quot;I had no idea we were losing this many leads. First week revealed 14 partial submissions. We recovered three—that&apos;s $1,200 we would have lost.&quot;</p>
-            <div className="author">
-              <div className="author-avatar">DM</div>
-              <div className="author-info"><h4>Dr. Michael Chen</h4><p>Brilliant Smiles Dental</p></div>
-            </div>
-          </div>
-          <div className="testimonial">
-            <div className="quote-stars">★★★★★</div>
-            <p className="quote-text">&quot;We were spending $8k/month on Google Ads. Turns out 60% started our form but never finished. Now we recover those leads. The ROI is undeniable.&quot;</p>
-            <div className="author">
-              <div className="author-avatar">SL</div>
-              <div className="author-info"><h4>Sarah Lopez</h4><p>Elite Med Spa Dallas</p></div>
-            </div>
-          </div>
-          <div className="testimonial">
-            <div className="quote-stars">★★★★★</div>
-            <p className="quote-text">&quot;Installation took two minutes. First partial lead appeared 20 minutes later. Simple, effective, essential.&quot;</p>
-            <div className="author">
-              <div className="author-avatar">JT</div>
-              <div className="author-info"><h4>James Thompson</h4><p>Thompson Plastic Surgery</p></div>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       <section className="final-cta">
         <div className="final-cta-glow" />
         <div className="section-label">GET STARTED</div>
         <h2>Stop Losing Revenue.<br />Start Recovering Leads.</h2>
         <p>Free 2-week trial. No credit card required to start. If you&apos;re losing leads, you&apos;ll know within 48 hours.</p>
-        <Link href="/test-form" className="cta-primary">See Live Demo</Link>
-        <p className="final-cta-note">Trusted by 100+ med spas, dental practices, and luxury service businesses</p>
+        <div className="cta-group" style={{ justifyContent: 'center' }}>
+          <Link href="/test-form" className="cta-primary">Try the Live Demo</Link>
+          <Link href="/signup" className="cta-secondary">Start Free Trial</Link>
+        </div>
       </section>
 
       <footer className="lc-footer">
