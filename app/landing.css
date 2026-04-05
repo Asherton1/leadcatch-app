@@ -981,3 +981,20 @@
 .logo-br { animation: bracketRight 3s ease-in-out infinite; }
 .logo-dp { animation: dotPulse 3s ease-in-out infinite; }
 .logo-dg { animation: dotGlow 3s ease-in-out infinite; }
+
+/* ── Pricing upgrade hint ── */
+.pricing-upgrade-hint {
+  font-size: 0.8125rem;
+  color: #555;
+  text-align: center;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+.pricing-upgrade-hint a {
+  color: #ff6b35;
+  text-decoration: none;
+  font-weight: 600;
+}
+.pricing-upgrade-hint a:hover {
+  text-decoration: underline;
+}
