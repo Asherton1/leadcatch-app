@@ -107,7 +107,7 @@ export default function LandingPage() {
             <h3 className="problem-title">Every Extra Field Costs You</h3>
             <p className="problem-text">
               Five fields might seem reasonable — but data shows most visitors abandon after three.
-              Every extra field is a silent conversion killer. And until now, you had no way to see it&apos;t see—until now.
+              Every extra field is a silent conversion killer. And until now, you had no way to see it.
             </p>
           </div>
           <div className="problem-card fade-up" style={{ animationDelay: '0.2s' }}>
