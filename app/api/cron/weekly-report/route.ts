@@ -84,7 +84,7 @@ export async function GET(req: NextRequest) {
       const up = pct > 0
       const color = inverse ? (up ? '#f87171' : '#22c55e') : (up ? '#22c55e' : '#f87171')
       const arrow = up ? '&#9650;' : '&#9660;'
-      return \` <span style="font-size: 12px; color: \${color};">\${arrow} \${Math.abs(pct)}%</span>\`
+      return ` <span style="font-size: 12px; color: ${color};">${arrow} ${Math.abs(pct)}%</span>`
     }
 
     const leadsArrow = trend(totalLeads, prevTotal)

@@ -38,7 +38,7 @@ export default function PricingSection() {
             <li><span className="check-icon">✓</span>Manual follow-up tools</li>
             <li><span className="check-icon">✓</span>Email support</li>
           </ul>
-          <Link href="/signup" className="pricing-cta pricing-cta-secondary">Start Free Trial</Link>
+          <Link href="/signup?plan=essentials" className="pricing-cta pricing-cta-secondary">Start Free Trial</Link>
         </div>
 
         <div className="pricing-card pricing-card-featured">
@@ -57,7 +57,7 @@ export default function PricingSection() {
             <li><span className="check-icon check-orange">✓</span>Custom send delay timing</li>
             <li><span className="check-icon check-orange">✓</span>Priority support</li>
           </ul>
-          <Link href="/signup" className="pricing-cta pricing-cta-primary">Start Free Trial</Link>
+          <Link href="/signup?plan=pro" className="pricing-cta pricing-cta-primary">Start Free Trial</Link>
         </div>
       </div>
     </section>

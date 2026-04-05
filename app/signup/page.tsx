@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { loadStripe } from '@stripe/stripe-js'
@@ -20,7 +21,7 @@ const CARD_OPTIONS = {
 const trialEndDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 
 export default function SignupPage() {
-  return <Elements stripe={stripePromise}><SignupForm /></Elements>
+  return <Suspense><Elements stripe={stripePromise}><SignupForm /></Elements></Suspense>
 }
 
 function SignupForm() {
@@ -35,6 +36,16 @@ function SignupForm() {
   const [cardError, setCardError] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const searchParams = useSearchParams()
+  const [plan, setPlan] = useState<'essentials' | 'pro'>('pro')
+
+  useEffect(() => {
+    const p = searchParams.get('plan')
+    if (p === 'essentials' || p === 'pro') setPlan(p)
+  }, [searchParams])
+
+  const planPrice = plan === 'essentials' ? 150 : 200
+  const planName = plan === 'essentials' ? 'Essentials' : 'Pro'
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -56,7 +67,7 @@ function SignupForm() {
     const setupRes = await fetch('/api/stripe/setup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token: session?.access_token, paymentMethodId: paymentMethod.id, firstName: firstName.trim(), lastName: lastName.trim(), companyName: companyName.trim() || null }),
+      body: JSON.stringify({ token: session?.access_token, paymentMethodId: paymentMethod.id, firstName: firstName.trim(), lastName: lastName.trim(), companyName: companyName.trim() || null, plan }),
     })
     if (!setupRes.ok) { const json = await setupRes.json().catch(() => ({})); console.error('[signup] setup failed:', json.error) }
     router.replace('/get-started')
@@ -108,6 +119,21 @@ function SignupForm() {
             <input style={s.input} type="password" placeholder="Min. 8 characters" value={password} onChange={e => setPassword(e.target.value)} required autoComplete="new-password" />
           </div>
           <div style={s.divider} />
+          <p style={s.sectionLabel}>Your Plan</p>
+          <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.25rem' }}>
+            <button type="button" onClick={() => setPlan('essentials')} style={{ flex: 1, padding: '1rem', background: plan === 'essentials' ? '#1a1a1a' : '#0d0d0d', border: plan === 'essentials' ? '2px solid #ff6b35' : '1px solid #2a2a2a', borderRadius: '10px', cursor: 'pointer', textAlign: 'center' as const }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: plan === 'essentials' ? '#ff6b35' : '#666', textTransform: 'uppercase' as const, letterSpacing: '0.08em', marginBottom: '0.25rem' }}>Essentials</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff' }}>$150<span style={{ fontSize: '0.75rem', color: '#555', fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: '0.6875rem', color: '#555', marginTop: '0.25rem' }}>See your lost leads</div>
+            </button>
+            <button type="button" onClick={() => setPlan('pro')} style={{ flex: 1, padding: '1rem', background: plan === 'pro' ? '#1a1a1a' : '#0d0d0d', border: plan === 'pro' ? '2px solid #ff6b35' : '1px solid #2a2a2a', borderRadius: '10px', cursor: 'pointer', textAlign: 'center' as const, position: 'relative' as const }}>
+              {plan === 'pro' && <div style={{ position: 'absolute' as const, top: '-8px', right: '12px', background: '#ff6b35', color: '#000', fontSize: '0.5625rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px', textTransform: 'uppercase' as const, letterSpacing: '0.05em' }}>Popular</div>}
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: plan === 'pro' ? '#ff6b35' : '#666', textTransform: 'uppercase' as const, letterSpacing: '0.08em', marginBottom: '0.25rem' }}>Pro</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff' }}>$200<span style={{ fontSize: '0.75rem', color: '#555', fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: '0.6875rem', color: '#555', marginTop: '0.25rem' }}>Auto-recover your leads</div>
+            </button>
+          </div>
+          <div style={s.divider} />
           <p style={s.sectionLabel}>Payment Method</p>
           <div style={s.field}>
             <label style={s.label}>Card Details <span style={s.req}>*</span></label>
@@ -122,7 +148,7 @@ function SignupForm() {
               <span style={s.trialTitle}>Free Trial — No Charge Today</span>
             </div>
             <p style={s.trialSub}>
-              Your card will be charged <strong style={s.trialAmount}>$200/month</strong> on <strong style={s.trialAmount}>{trialEndDate}</strong>. Cancel anytime before then and you won&apos;t be billed.
+              Plan: <strong style={s.trialAmount}>{planName}</strong> · Your card will be charged <strong style={s.trialAmount}>${planPrice}/month</strong> on <strong style={s.trialAmount}>{trialEndDate}</strong>. Cancel anytime before then and you won&apos;t be billed.
             </p>
           </div>
           {error && <p style={s.errorMsg}>{error}</p>}

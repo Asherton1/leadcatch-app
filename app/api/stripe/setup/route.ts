@@ -18,6 +18,7 @@ export async function POST(req: NextRequest) {
   let firstName: string | undefined
   let lastName: string | undefined
   let companyName: string | undefined
+  let plan: string = 'pro'
 
   try {
     const body = await req.json()
@@ -27,6 +28,7 @@ export async function POST(req: NextRequest) {
     firstName   = body.firstName   ?? undefined
     lastName    = body.lastName    ?? undefined
     companyName = body.companyName ?? undefined
+    plan = body.plan === 'essentials' ? 'essentials' : 'pro'
     if (!token)           throw new Error('missing token')
     if (!paymentMethodId) throw new Error('missing paymentMethodId')
   } catch (err) {
@@ -79,7 +81,7 @@ export async function POST(req: NextRequest) {
   try {
     subscription = await stripe.subscriptions.create({
       customer: customer.id,
-      items: [{ price: process.env.STRIPE_PRICE_ID! }],
+      items: [{ price: plan === 'essentials' ? process.env.STRIPE_PRICE_ID_ESSENTIALS! : process.env.STRIPE_PRICE_ID! }],
       trial_period_days: 14,
       payment_settings: {
         payment_method_types: ['card'],
@@ -102,6 +104,7 @@ export async function POST(req: NextRequest) {
     .update({
       stripe_customer_id: customer.id,
       stripe_subscription_id: subscription.id,
+      plan,
       trial_ends_at: trialEndsAt,
     })
     .eq('user_id', user.id)
@@ -149,7 +152,7 @@ export async function POST(req: NextRequest) {
 
         <div style="background: #1a1a1a; border-left: 3px solid #ff6b35; border-radius: 0 8px 8px 0; padding: 16px; margin-bottom: 32px;">
           <p style="color: #fff; font-weight: 700; margin-bottom: 4px;">Free Trial Active</p>
-          <p style="color: #aaa; font-size: 14px; margin: 0;">Your card will be charged $200/month on <strong style="color: #fff;">${trialEndDate}</strong>. Cancel anytime before then.</p>
+          <p style="color: #aaa; font-size: 14px; margin: 0;">Your card will be charged $${plan === 'essentials' ? '150' : '200'}/month on <strong style="color: #fff;">${trialEndDate}</strong>. Cancel anytime before then.</p>
         </div>
 
         <a href="https://userecapture.com/dashboard" style="display: inline-block; background: #ff6b35; color: #000; font-weight: 700; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-size: 15px;">Go to Your Dashboard →</a>

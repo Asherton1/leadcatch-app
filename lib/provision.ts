@@ -26,6 +26,7 @@ export interface ClientRecord {
   sender_name: string | null
   email_header: string | null
   active: boolean
+  plan: string | null
   stripe_customer_id: string | null
   email: string | null
   trial_ends_at: string | null
@@ -35,7 +36,7 @@ const SELECT_COLS = [
   'id', 'user_id', 'name', 'first_name', 'last_name', 'company_name',
   'api_key', 'avg_lead_value', 'auto_email_enabled', 'email_delay_minutes',
   'sender_name', 'email_header', 'active',
-  'email', 'stripe_customer_id', 'trial_ends_at',
+  'email', 'plan', 'stripe_customer_id', 'trial_ends_at',
 ].join(', ')
 
 function makeApiKey(): string {
@@ -102,7 +103,7 @@ export async function ensureClient(
       avg_lead_value:      400,
       auto_email_enabled:  true,
       email_delay_minutes: 0,
-      sender_name:         'The Leadback',
+      sender_name:         'ReCapture',
       email_header:        'Revenue Recovery',
       active:              true,
       email:               email,
