@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
   // Get all active clients
   const { data: clients, error: clientErr } = await supabase
     .from('clients')
-    .select('id, name, email, first_name, avg_lead_value')
+    .select('id, name, email, first_name, avg_lead_value, plan')
     .eq('active', true)
 
   if (clientErr || !clients || clients.length === 0) {
@@ -87,11 +87,12 @@ export async function GET(req: NextRequest) {
       return ` <span style="font-size: 12px; color: ${color};">${arrow} ${Math.abs(pct)}%</span>`
     }
 
-    const leadsArrow = trend(totalLeads, prevTotal)
-    const riskArrow = trend(revenueAtRisk, prevRevenueAtRisk, true)
-    const recoveredArrow = trend(recovered, prevRecovered)
-    const savedArrow = trend(recoveredRevenue, prevRecoveredRevenue)
-    const rateArrow = trend(recoveryRate, prevRecoveryRate)
+    const isPro = client.plan !== 'essentials'
+    const leadsArrow = isPro ? trend(totalLeads, prevTotal) : ''
+    const riskArrow = isPro ? trend(revenueAtRisk, prevRevenueAtRisk, true) : ''
+    const recoveredArrow = isPro ? trend(recovered, prevRecovered) : ''
+    const savedArrow = isPro ? trend(recoveredRevenue, prevRecoveredRevenue) : ''
+    const rateArrow = isPro ? trend(recoveryRate, prevRecoveryRate) : ''
 
     const firstName = client.first_name || client.name?.split(' ')[0] || 'there'
     const weekOf = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
