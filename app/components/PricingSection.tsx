@@ -30,13 +30,14 @@ export default function PricingSection() {
             <span className="price-amount">{essentials}</span>
             <span className="price-period">/mo{annual ? ' · billed annually' : ''}</span>
           </div>
-          <p className="pricing-desc">Everything you need to capture and manage abandoned leads.</p>
+          <p className="pricing-desc">See every lead you're losing. Follow up manually.</p>
           <ul className="pricing-features">
-            <li><span className="check-icon">✓</span>Form tracking & lead capture</li>
-            <li><span className="check-icon">✓</span>Real-time dashboard</li>
-            <li><span className="check-icon">✓</span>Revenue estimation</li>
-            <li><span className="check-icon">✓</span>Manual follow-up tools</li>
-            <li><span className="check-icon">✓</span>Email support</li>
+            <li><span className="check-icon">✓</span>Real-time form abandonment tracking</li>
+            <li><span className="check-icon">✓</span>Lead dashboard with contact details</li>
+            <li><span className="check-icon">✓</span>Lead status management</li>
+            <li><span className="check-icon">✓</span>Revenue-at-risk estimation</li>
+            <li><span className="check-icon">✓</span>Weekly email report</li>
+            <li><span className="check-icon">✓</span>Manual follow-up (email & call)</li>
           </ul>
           <Link href="/signup?plan=essentials" className="pricing-cta pricing-cta-secondary">Start Free Trial</Link>
         </div>
@@ -49,12 +50,13 @@ export default function PricingSection() {
             <span className="price-amount">{pro}</span>
             <span className="price-period">/mo{annual ? ' · billed annually' : ''}</span>
           </div>
-          <p className="pricing-desc">Full automation. Recover leads while you sleep.</p>
+          <p className="pricing-desc">Automated recovery. Leads come back without lifting a finger.</p>
           <ul className="pricing-features">
             <li><span className="check-icon">✓</span>Everything in Essentials</li>
-            <li><span className="check-icon check-orange">✓</span>Auto-email recovery</li>
-            <li><span className="check-icon check-orange">✓</span>Custom email templates</li>
-            <li><span className="check-icon check-orange">✓</span>Custom send delay timing</li>
+            <li><span className="check-icon check-orange">✓</span>Automated lead recovery emails</li>
+            <li><span className="check-icon check-orange">✓</span>Custom sender name & branding</li>
+            <li><span className="check-icon check-orange">✓</span>Configurable send delay timing</li>
+            <li><span className="check-icon check-orange">✓</span>Weekly reports with trend analytics</li>
             <li><span className="check-icon check-orange">✓</span>Priority support</li>
           </ul>
           <Link href="/signup?plan=pro" className="pricing-cta pricing-cta-primary">Start Free Trial</Link>
