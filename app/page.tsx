@@ -40,8 +40,8 @@ export default function LandingPage() {
           Here&apos;s the Proof.
         </h1>
         <p className="hero-subtitle hero-animate-delay">
-          Every day, prospects start filling out your form — then vanish before hitting submit.
-          ReCapture catches them and shows you exactly where revenue is slipping away.
+          Every day, high-value prospects start filling out your contact form — then vanish before hitting submit.
+          ReCapture captures their info the moment they start typing and gives you a second chance to close the deal.
         </p>
         <div className="cta-group hero-animate-delay2">
           <Link href="/test-form" className="cta-primary">Try the Live Demo</Link>
@@ -96,23 +96,23 @@ export default function LandingPage() {
         <div className="problem-grid">
           <div className="problem-card fade-up">
             <div className="problem-number">01</div>
-            <h3 className="problem-title">They Start, Then Disappear</h3>
+            <h3 className="problem-title">They Start. Then Vanish.</h3>
             <p className="problem-text">
-              A prospect finds your site, clicks your form, enters their name and email—then their phone rings.
-              They switch tabs. They never return. You never knew they were there.
+              A prospect finds your site, opens your form, types their name and email — then their phone buzzes.
+              They switch tabs. They never come back. And you never knew they existed.
             </p>
           </div>
           <div className="problem-card fade-up" style={{ animationDelay: '0.1s' }}>
             <div className="problem-number">02</div>
-            <h3 className="problem-title">Your Form is Too Long</h3>
+            <h3 className="problem-title">Every Extra Field Costs You</h3>
             <p className="problem-text">
-              Five fields might seem reasonable, but data shows most people abandon after three.
-              Every additional field is a conversion barrier you can&apos;t see—until now.
+              Five fields might seem reasonable — but data shows most visitors abandon after three.
+              Every extra field is a silent conversion killer. And until now, you had no way to see it&apos;t see—until now.
             </p>
           </div>
           <div className="problem-card fade-up" style={{ animationDelay: '0.2s' }}>
             <div className="problem-number">03</div>
-            <h3 className="problem-title">Leads Turn Into Ghosts</h3>
+            <h3 className="problem-title">Ghost Leads Are Bleeding You Dry</h3>
             <p className="problem-text">
               If 100 visitors start your form and 60 don&apos;t finish, that&apos;s 15–20 lost bookings per month.
               For a $1,500 average service, that&apos;s $22k–$30k walking out the door. Every single month.
@@ -150,7 +150,7 @@ export default function LandingPage() {
       <section className="lc-section screenshot-section">
         <div className="section-label">THE DASHBOARD</div>
         <h2 className="section-title">Every Lost Lead. Right In Front of You.</h2>
-        <p className="section-subtitle">Real names. Real emails. Real money you can recover.</p>
+        <p className="section-subtitle">Names. Emails. Phone numbers. Dollar amounts. Every lead that slipped away — now right in front of you.</p>
         <div className="screenshot-glow-wrap">
           <div className="screenshot-glow" />
           <div className="screenshot-mock">
@@ -183,8 +183,8 @@ export default function LandingPage() {
 
       <section className="lc-section">
         <div className="section-label">PRODUCT</div>
-        <h2 className="section-title">How ReCapture Works</h2>
-        <p className="section-subtitle">A single script tag on your website. Everything else is automated.</p>
+        <h2 className="section-title">Built to Recover Revenue</h2>
+        <p className="section-subtitle">One script tag. Full automation. Every feature designed to bring leads back.</p>
         <div className="features-grid">
           <div className="feature-card">
             <div className="feature-card-icon">
@@ -193,7 +193,7 @@ export default function LandingPage() {
               </svg>
             </div>
             <h3 className="feature-card-title">Universal Tracking</h3>
-            <p className="feature-card-text">Works on any website, any form builder. One script tag, zero configuration.</p>
+            <p className="feature-card-text">One script tag works on any website — WordPress, Wix, Webflow, custom HTML. Zero configuration required.</p>
           </div>
           <div className="feature-card">
             <div className="feature-card-icon">
@@ -220,7 +220,7 @@ export default function LandingPage() {
               </svg>
             </div>
             <h3 className="feature-card-title">Email Auto-Recovery</h3>
-            <p className="feature-card-text">Automated follow-up emails sent immediately or on a custom delay.</p>
+            <p className="feature-card-text">ReCapture automatically emails abandoned leads on your behalf — instantly or on a delay you set.</p>
           </div>
           <div className="feature-card">
             <div className="feature-card-icon">
@@ -239,7 +239,7 @@ export default function LandingPage() {
               </svg>
             </div>
             <h3 className="feature-card-title">Analytics Dashboard</h3>
-            <p className="feature-card-text">Clean dashboard with real-time data, revenue metrics, and complete lead visibility.</p>
+            <p className="feature-card-text">Real-time metrics, revenue tracking, and complete visibility into every lead — updated the moment someone touches your form.</p>
           </div>
         </div>
       </section>
@@ -252,7 +252,7 @@ export default function LandingPage() {
         <div className="final-cta-glow" />
         <div className="section-label">GET STARTED</div>
         <h2>Stop Losing Revenue.<br />Start Recovering Leads.</h2>
-        <p>Free 2-week trial. No credit card required to start. If you&apos;re losing leads, you&apos;ll know within 48 hours.</p>
+        <p>14-day free trial. Cancel anytime. If you&apos;re losing leads, you&apos;ll know within 48 hours.</p>
         <div className="cta-group" style={{ justifyContent: 'center' }}>
           <Link href="/test-form" className="cta-primary">Try the Live Demo</Link>
           <Link href="/signup" className="cta-secondary">Start Free Trial</Link>
