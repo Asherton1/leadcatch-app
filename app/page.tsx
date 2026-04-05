@@ -130,19 +130,19 @@ export default function LandingPage() {
             <div className="how-step-num">01</div>
             
             <h3 className="how-step-title">Install in 60 Seconds</h3>
-            <p className="how-step-text">Paste one script tag before your closing body tag. Works on any website — WordPress, Wix, Webflow, custom HTML. No developer needed.</p>
+            <p className="how-step-text">Copy one line of code into your website. Works with WordPress, Wix, Webflow, Squarespace, or any custom site. Takes less time than making coffee.</p>
           </div>
           <div className="how-step">
             <div className="how-step-num">02</div>
             
             <h3 className="how-step-title">Capture Every Lead</h3>
-            <p className="how-step-text">The moment someone types their name or email into your form, ReCapture saves it — even if they close the tab, get distracted, or never hit submit.</p>
+            <p className="how-step-text">The instant a visitor types into your form, ReCapture captures their name, email, and phone — even if they close the tab, get distracted, or abandon halfway through.</p>
           </div>
           <div className="how-step">
             <div className="how-step-num">03</div>
             
             <h3 className="how-step-title">Recover Lost Revenue</h3>
-            <p className="how-step-text">Follow up directly from your dashboard or let automated emails do it for you. Turn silent abandonment into booked appointments and closed deals.</p>
+            <p className="how-step-text">Reach out manually from your dashboard or let ReCapture send automated recovery emails on your behalf. Turn invisible drop-offs into booked appointments and closed revenue.</p>
           </div>
         </div>
       </section>
@@ -202,7 +202,7 @@ export default function LandingPage() {
               </svg>
             </div>
             <h3 className="feature-card-title">Real-Time Capture</h3>
-            <p className="feature-card-text">Name, email, and phone captured the moment typed—even if the form is never submitted.</p>
+            <p className="feature-card-text">Contact details captured the instant a visitor starts typing — even if they never hit submit.</p>
           </div>
           <div className="feature-card">
             <div className="feature-card-icon">
@@ -211,7 +211,7 @@ export default function LandingPage() {
               </svg>
             </div>
             <h3 className="feature-card-title">Revenue Estimation</h3>
-            <p className="feature-card-text">See the exact dollar value of every abandoned lead based on your average client value.</p>
+            <p className="feature-card-text">Every abandoned lead shows its dollar value based on your average service price. See exactly how much revenue is walking out the door.</p>
           </div>
           <div className="feature-card">
             <div className="feature-card-icon">
@@ -229,7 +229,7 @@ export default function LandingPage() {
               </svg>
             </div>
             <h3 className="feature-card-title">Status Tracking</h3>
-            <p className="feature-card-text">Mark leads as Open, Contacted, Converted, or Lost. Track your recovery rate.</p>
+            <p className="feature-card-text">Track every lead through your pipeline — Open, Contacted, Converted, or Lost. Know your exact recovery rate at a glance.</p>
           </div>
           <div className="feature-card">
             <div className="feature-card-icon">
