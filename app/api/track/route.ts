@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan')
     .eq('api_key', api_key)
     .single()
 
@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Schedule or immediately send recovery email if enabled and lead has an email.
-  if (client.auto_email_enabled && email) {
+  if (client.auto_email_enabled && email && client.plan !== 'essentials') {
     const delayMinutes = client.email_delay_minutes ?? 0
 
     if (delayMinutes > 0) {
