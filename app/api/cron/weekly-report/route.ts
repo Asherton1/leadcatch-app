@@ -36,7 +36,7 @@ export async function GET(req: NextRequest) {
   for (const client of clients) {
     if (!client.email) continue
 
-    // Get leads from the past 7 days
+    // Get leads from the past 7 days (this week)
     const { data: leads } = await supabase
       .from('leads')
       .select('id, name, email, status, estimated_value, created_at')
@@ -47,6 +47,18 @@ export async function GET(req: NextRequest) {
     const weekLeads = leads ?? []
     if (weekLeads.length === 0) continue // Skip clients with no activity
 
+    // Get leads from the PREVIOUS week (for comparison)
+    const twoWeeksAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000).toISOString()
+    const { data: prevLeads } = await supabase
+      .from('leads')
+      .select('id, status')
+      .eq('client_id', client.id)
+      .gte('created_at', twoWeeksAgo)
+      .lt('created_at', weekAgo)
+
+    const prevWeekLeads = prevLeads ?? []
+
+    // This week stats
     const totalLeads = weekLeads.length
     const recovered = weekLeads.filter(l => l.status === 'converted').length
     const contacted = weekLeads.filter(l => l.status === 'contacted').length
@@ -55,6 +67,31 @@ export async function GET(req: NextRequest) {
     const revenueAtRisk = totalLeads * avgValue
     const recoveredRevenue = recovered * avgValue
     const recoveryRate = totalLeads > 0 ? Math.round((recovered / totalLeads) * 100) : 0
+
+    // Previous week stats
+    const prevTotal = prevWeekLeads.length
+    const prevRecovered = prevWeekLeads.filter(l => l.status === 'converted').length
+    const prevRevenueAtRisk = prevTotal * avgValue
+    const prevRecoveredRevenue = prevRecovered * avgValue
+    const prevRecoveryRate = prevTotal > 0 ? Math.round((prevRecovered / prevTotal) * 100) : 0
+
+    // Trend arrows helper
+    function trend(current: number, previous: number, inverse = false): string {
+      if (previous === 0 && current === 0) return ''
+      if (previous === 0) return ' <span style="font-size: 12px; color: #22c55e;">&#9650; NEW</span>'
+      const pct = Math.round(((current - previous) / previous) * 100)
+      if (pct === 0) return ' <span style="font-size: 12px; color: #888;">&#8212; 0%</span>'
+      const up = pct > 0
+      const color = inverse ? (up ? '#f87171' : '#22c55e') : (up ? '#22c55e' : '#f87171')
+      const arrow = up ? '&#9650;' : '&#9660;'
+      return \` <span style="font-size: 12px; color: \${color};">\${arrow} \${Math.abs(pct)}%</span>\`
+    }
+
+    const leadsArrow = trend(totalLeads, prevTotal)
+    const riskArrow = trend(revenueAtRisk, prevRevenueAtRisk, true)
+    const recoveredArrow = trend(recovered, prevRecovered)
+    const savedArrow = trend(recoveredRevenue, prevRecoveredRevenue)
+    const rateArrow = trend(recoveryRate, prevRecoveryRate)
 
     const firstName = client.first_name || client.name?.split(' ')[0] || 'there'
     const weekOf = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
@@ -83,28 +120,28 @@ export async function GET(req: NextRequest) {
 
         <div style="display: flex; gap: 12px; margin-bottom: 32px;">
           <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px; text-align: center;">
-            <div style="font-size: 28px; font-weight: 700; color: #ff6b35;">${totalLeads}</div>
+            <div style="font-size: 28px; font-weight: 700; color: #ff6b35;">${totalLeads}${leadsArrow}</div>
             <div style="font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Abandoned Leads</div>
           </div>
           <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px; text-align: center;">
-            <div style="font-size: 28px; font-weight: 700; color: #f87171;">$${revenueAtRisk.toLocaleString()}</div>
+            <div style="font-size: 28px; font-weight: 700; color: #f87171;">$${revenueAtRisk.toLocaleString()}${riskArrow}</div>
             <div style="font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Revenue at Risk</div>
           </div>
         </div>
 
         <div style="display: flex; gap: 12px; margin-bottom: 32px;">
           <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px; text-align: center;">
-            <div style="font-size: 28px; font-weight: 700; color: #22c55e;">${recovered}</div>
+            <div style="font-size: 28px; font-weight: 700; color: #22c55e;">${recovered}${recoveredArrow}</div>
             <div style="font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Recovered</div>
           </div>
           <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px; text-align: center;">
-            <div style="font-size: 28px; font-weight: 700; color: #22c55e;">$${recoveredRevenue.toLocaleString()}</div>
+            <div style="font-size: 28px; font-weight: 700; color: #22c55e;">$${recoveredRevenue.toLocaleString()}${savedArrow}</div>
             <div style="font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Revenue Saved</div>
           </div>
         </div>
 
         <div style="background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 20px; margin-bottom: 32px; text-align: center;">
-          <div style="font-size: 36px; font-weight: 700; color: ${recoveryRate > 20 ? '#22c55e' : '#fbbf24'};">${recoveryRate}%</div>
+          <div style="font-size: 36px; font-weight: 700; color: ${recoveryRate > 20 ? '#22c55e' : '#fbbf24'};">${recoveryRate}%${rateArrow}</div>
           <div style="font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Recovery Rate</div>
         </div>
 
