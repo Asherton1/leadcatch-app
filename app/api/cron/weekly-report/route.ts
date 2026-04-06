@@ -188,7 +188,7 @@ export async function GET(req: NextRequest) {
   try {
     await resend.emails.send({
       from: 'ReCapture <hello@userecapture.com>',
-      to: 'Ashpod1@gmail.com',
+      to: 'asherton.c@me.com',
       subject: `Weekly Reports Sent — ${sent} clients`,
       html: `<p>Weekly reports sent to ${sent} active clients at ${now.toLocaleString()}.</p>`,
     })
