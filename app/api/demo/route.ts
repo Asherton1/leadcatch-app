@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   await supabase.from('demo_requests').insert({ name, email, phone, service, message })
 
   await resend.emails.send({
-    from: 'ReCapture <hello@userecapture.com>',
+    from: 'ReCapture <onboarding@resend.dev>',
     to: 'asherton.c@me.com',
     subject: `🔥 New Demo Request — ${name}`,
     html: `

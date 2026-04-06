@@ -164,7 +164,7 @@ export async function POST(req: NextRequest) {
 
   // ── Notify Ash of new signup ──
   await resend.emails.send({
-    from: 'ReCapture <hello@userecapture.com>',
+    from: 'ReCapture <onboarding@resend.dev>',
     to: 'asherton.c@me.com',
     subject: `🚀 New Signup — ${displayName}`,
     html: `
