@@ -184,13 +184,85 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  // Notify Ash
+  // Notify Ash — full Monday briefing
   try {
+    const clientRows = clientSummaries.map(c => `
+      <tr>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #fff; font-size: 14px;">${c.name}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #888; font-size: 14px;">${c.email}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #ff6b35; font-weight: 700; font-size: 14px;">${c.leads}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #f87171; font-weight: 700; font-size: 14px;">$${c.atRisk.toLocaleString()}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #22c55e; font-weight: 700; font-size: 14px;">${c.recovered}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #22c55e; font-weight: 700; font-size: 14px;">$${c.savedRevenue.toLocaleString()}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: ${c.rate > 20 ? '#22c55e' : '#fbbf24'}; font-weight: 700; font-size: 14px;">${c.rate}%</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; font-size: 12px;"><span style="background: ${c.plan === 'pro' ? 'rgba(255,107,53,0.15)' : 'rgba(255,255,255,0.08)'}; color: ${c.plan === 'pro' ? '#ff6b35' : '#888'}; padding: 3px 8px; border-radius: 4px; font-weight: 600;">${(c.plan || 'pro').toUpperCase()}</span></td>
+      </tr>
+    `).join('')
+
+    const totalLeadsAll = clientSummaries.reduce((sum, c) => sum + c.leads, 0)
+    const totalAtRisk = clientSummaries.reduce((sum, c) => sum + c.atRisk, 0)
+    const totalRecovered = clientSummaries.reduce((sum, c) => sum + c.recovered, 0)
+    const totalSaved = clientSummaries.reduce((sum, c) => sum + c.savedRevenue, 0)
+    const weekOf = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+
     await resend.emails.send({
       from: 'ReCapture <onboarding@resend.dev>',
       to: 'asherton.c@me.com',
-      subject: `Weekly Reports Sent — ${sent} clients`,
-      html: `<p>Weekly reports sent to ${sent} active clients at ${now.toLocaleString()}.</p>`,
+      subject: `Monday Briefing — ${sent} reports sent · ${totalLeadsAll} leads · $${totalAtRisk.toLocaleString()} at risk`,
+      html: `
+        <div style="font-family: 'Inter', -apple-system, sans-serif; max-width: 700px; margin: 0 auto; background: #0a0a0a; color: #fff; padding: 40px; border-radius: 12px;">
+          <div style="margin-bottom: 32px;">
+            <span style="font-size: 22px; font-weight: 700; color: #fff;">Re</span><span style="font-size: 22px; font-weight: 700; color: #ff6b35;">Capture</span>
+            <span style="font-size: 11px; color: #888; margin-left: 12px;">Monday Briefing</span>
+          </div>
+
+          <p style="color: #aaa; font-size: 15px; margin-bottom: 32px;">Week of <strong style="color: #fff;">${weekOf}</strong> — ${sent} client reports sent.</p>
+
+          <div style="display: flex; gap: 12px; margin-bottom: 32px;">
+            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
+              <div style="font-size: 24px; font-weight: 700; color: #ff6b35;">${totalLeadsAll}</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Total Leads</div>
+            </div>
+            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
+              <div style="font-size: 24px; font-weight: 700; color: #f87171;">$${totalAtRisk.toLocaleString()}</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Total at Risk</div>
+            </div>
+            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
+              <div style="font-size: 24px; font-weight: 700; color: #22c55e;">${totalRecovered}</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Recovered</div>
+            </div>
+            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
+              <div style="font-size: 24px; font-weight: 700; color: #22c55e;">$${totalSaved.toLocaleString()}</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Revenue Saved</div>
+            </div>
+          </div>
+
+          <h3 style="font-size: 13px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">Client Breakdown</h3>
+          <table style="width: 100%; border-collapse: collapse; background: #111; border-radius: 8px; overflow: hidden; margin-bottom: 32px;">
+            <thead>
+              <tr style="background: #1a1a1a;">
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Client</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Email</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Leads</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">At Risk</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Recovered</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Saved</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Rate</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Plan</th>
+              </tr>
+            </thead>
+            <tbody>${clientRows}</tbody>
+          </table>
+
+          <div style="text-align: center;">
+            <a href="https://userecapture.com/admin" style="display: inline-block; background: #ff6b35; color: #000; font-weight: 700; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 14px;">Open Admin Dashboard</a>
+          </div>
+
+          <div style="border-top: 1px solid #1e1e1e; padding-top: 20px; margin-top: 32px;">
+            <p style="color: #444; font-size: 12px; text-align: center; margin: 0;">ReCapture · Monday Briefing · ${weekOf}</p>
+          </div>
+        </div>
+      `,
     })
   } catch {}
 
