@@ -106,7 +106,7 @@ export default function Post() {
       <div className="blog-post-author">
         <div className="blog-post-author-avatar">AC</div>
         <div>
-          <div className="blog-post-author-name">Ash Chraibi</div>
+          <div className="blog-post-author-name">Asherton C.</div>
           <div className="blog-post-author-role">Founder, ReCapture</div>
         </div>
       </div>
