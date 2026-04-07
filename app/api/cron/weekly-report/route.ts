@@ -306,7 +306,7 @@ export async function GET(req: NextRequest) {
             </tr></table>
           </td></tr>
           <!-- CLIENT BREAKDOWN -->
-          \${clientSummaries.length > 0 ? `
+          ${clientSummaries.length > 0 ? `
           <tr><td style="font-size:11px;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;padding:0 0 10px 0;font-weight:700;">Client Breakdown</td></tr>
           <tr><td style="padding:0 0 24px 0;">
             <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border-radius:8px;overflow:hidden;">
@@ -317,13 +317,13 @@ export async function GET(req: NextRequest) {
                 <th style="padding:10px 12px;text-align:center;font-size:10px;color:#666;text-transform:uppercase;">Rate</th>
                 <th style="padding:10px 12px;text-align:center;font-size:10px;color:#666;text-transform:uppercase;">Plan</th>
               </tr>
-              \${clientSummaries.map(c => `
+              ${clientSummaries.map(c => `
               <tr>
-                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;color:#fff;font-size:13px;">\${c.name}<br/><span style="color:#555;font-size:11px;">\${c.email}</span></td>
-                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;color:#ff6b35;font-weight:700;font-size:14px;text-align:center;">\${c.leads}</td>
-                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;color:#f87171;font-weight:700;font-size:14px;text-align:center;">$\${c.atRisk.toLocaleString()}</td>
-                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;color:\${c.rate > 20 ? '#22c55e' : '#fbbf24'};font-weight:700;font-size:14px;text-align:center;">\${c.rate}%</td>
-                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;text-align:center;"><span style="background:\${c.plan === 'pro' ? 'rgba(255,107,53,0.15)' : 'rgba(255,255,255,0.08)'};color:\${c.plan === 'pro' ? '#ff6b35' : '#888'};padding:3px 8px;border-radius:4px;font-weight:600;font-size:11px;">\${(c.plan || 'pro').toUpperCase()}</span></td>
+                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;color:#fff;font-size:13px;">${c.name}<br/><span style="color:#555;font-size:11px;">${c.email}</span></td>
+                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;color:#ff6b35;font-weight:700;font-size:14px;text-align:center;">${c.leads}</td>
+                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;color:#f87171;font-weight:700;font-size:14px;text-align:center;">$${c.atRisk.toLocaleString()}</td>
+                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;color:${c.rate > 20 ? '#22c55e' : '#fbbf24'};font-weight:700;font-size:14px;text-align:center;">${c.rate}%</td>
+                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;text-align:center;"><span style="background:${c.plan === 'pro' ? 'rgba(255,107,53,0.15)' : 'rgba(255,255,255,0.08)'};color:${c.plan === 'pro' ? '#ff6b35' : '#888'};padding:3px 8px;border-radius:4px;font-weight:600;font-size:11px;">${(c.plan || 'pro').toUpperCase()}</span></td>
               </tr>
               `).join('')}
             </table>
@@ -339,7 +339,7 @@ export async function GET(req: NextRequest) {
                 <th style="padding:8px 12px;text-align:left;font-size:10px;color:#666;text-transform:uppercase;">Email</th>
                 <th style="padding:8px 12px;text-align:center;font-size:10px;color:#666;text-transform:uppercase;">Status</th>
               </tr>
-              \${signupRows}
+              ${signupRows}
             </table>
           </td></tr>
 
@@ -352,12 +352,12 @@ export async function GET(req: NextRequest) {
                 <th style="padding:8px 12px;text-align:left;font-size:10px;color:#666;text-transform:uppercase;">Email</th>
                 <th style="padding:8px 12px;text-align:center;font-size:10px;color:#666;text-transform:uppercase;">Expires</th>
               </tr>
-              \${expiringRows}
+              ${expiringRows}
             </table>
           </td></tr>
 
           <!-- ZERO ACTIVITY -->
-          \${zeroActivity.length > 0 ? `
+          ${zeroActivity.length > 0 ? `
           <tr><td style="font-size:11px;color:#f87171;text-transform:uppercase;letter-spacing:1px;padding:0 0 10px 0;font-weight:700;">Zero Activity — Tracker Not Installed</td></tr>
           <tr><td style="padding:0 0 24px 0;">
             <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border-radius:8px;overflow:hidden;">
@@ -366,7 +366,7 @@ export async function GET(req: NextRequest) {
                 <th style="padding:8px 12px;text-align:left;font-size:10px;color:#666;text-transform:uppercase;">Email</th>
                 <th style="padding:8px 12px;text-align:center;font-size:10px;color:#666;text-transform:uppercase;">Status</th>
               </tr>
-              \${zeroRows}
+              ${zeroRows}
             </table>
           </td></tr>
           ` : ''}
@@ -378,7 +378,7 @@ export async function GET(req: NextRequest) {
 
           <!-- Footer -->
           <tr><td style="border-top:1px solid #1e1e1e;padding:20px 0 0 0;text-align:center;">
-            <span style="color:#444;font-size:12px;">ReCapture · Monday Briefing · \${weekOf}</span>
+            <span style="color:#444;font-size:12px;">ReCapture · Monday Briefing · ${weekOf}</span>
           </td></tr>
 
         </table>
