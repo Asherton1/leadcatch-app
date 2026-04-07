@@ -27,7 +27,7 @@ export default function BlogIndex() {
       </nav>
 
       <div className="blog-hero">
-        <h1>Insights</h1>
+        <h1><span style={{ color: "#fff" }}>In</span><span style={{ color: "#ff6b35" }}>sights</span></h1>
         <p className="blog-hero-sub">Straight talk on form abandonment, lead recovery, and the revenue most businesses don&apos;t know they&apos;re losing.</p>
         <div className="blog-hero-line" />
       </div>
