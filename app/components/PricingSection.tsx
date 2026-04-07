@@ -10,7 +10,6 @@ export default function PricingSection() {
 
   return (
     <section className="lc-section pricing-section">
-      <div className="section-label">PRICING</div>
       <h2 className="section-title">Simple, Transparent Pricing</h2>
       <p className="section-subtitle">No setup fees. No long-term contracts. Cancel anytime.</p>
 

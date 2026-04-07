@@ -119,7 +119,6 @@ export default function LandingPage() {
       </section>
 
       <section className="lc-section how-it-works-section">
-        <div className="section-label">HOW IT WORKS</div>
         <h2 className="section-title">Three Steps to Recovered Revenue</h2>
         <p className="section-subtitle">No complex setup. No dev team required. Just results.</p>
         <div className="how-it-works-grid">
@@ -145,7 +144,6 @@ export default function LandingPage() {
       </section>
 
       <section className="lc-section screenshot-section">
-        <div className="section-label">THE DASHBOARD</div>
         <h2 className="section-title">Every Lost Lead. Right In Front of You.</h2>
         <p className="section-subtitle">Names. Emails. Phone numbers. Dollar amounts. Every lead that slipped away — now right in front of you.</p>
         <div className="screenshot-glow-wrap">
@@ -179,7 +177,6 @@ export default function LandingPage() {
       </section>
 
       <section className="lc-section">
-        <div className="section-label">PRODUCT</div>
         <h2 className="section-title">Built to Recover Revenue</h2>
         <p className="section-subtitle">One script tag. Full automation. Every feature designed to bring leads back.</p>
         <div className="features-grid">
@@ -247,7 +244,6 @@ export default function LandingPage() {
 
       <section className="final-cta">
         <div className="final-cta-glow" />
-        <div className="section-label">GET STARTED</div>
         <h2>Stop Losing Revenue.<br />Start Recovering Leads.</h2>
         <p>7-day free trial. Cancel anytime. If you&apos;re losing leads, you&apos;ll know within 48 hours.</p>
         <div className="cta-group" style={{ justifyContent: 'center' }}>
