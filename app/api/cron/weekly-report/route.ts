@@ -188,18 +188,36 @@ export async function GET(req: NextRequest) {
 
   // Notify Ash — full Monday briefing
   try {
-    const clientRows = clientSummaries.map(c => `
-      <tr>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #fff; font-size: 14px;">${c.name}</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #888; font-size: 14px;">${c.email}</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #ff6b35; font-weight: 700; font-size: 14px;">${c.leads}</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #f87171; font-weight: 700; font-size: 14px;">$${c.atRisk.toLocaleString()}</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #22c55e; font-weight: 700; font-size: 14px;">${c.recovered}</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #22c55e; font-weight: 700; font-size: 14px;">$${c.savedRevenue.toLocaleString()}</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: ${c.rate > 20 ? '#22c55e' : '#fbbf24'}; font-weight: 700; font-size: 14px;">${c.rate}%</td>
-        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; font-size: 12px;"><span style="background: ${c.plan === 'pro' ? 'rgba(255,107,53,0.15)' : 'rgba(255,255,255,0.08)'}; color: ${c.plan === 'pro' ? '#ff6b35' : '#888'}; padding: 3px 8px; border-radius: 4px; font-weight: 600;">${(c.plan || 'pro').toUpperCase()}</span></td>
-      </tr>
-    `).join('')
+    // Get ALL clients for business overview (not just ones with leads)
+    const { data: allClients } = await supabase
+      .from('clients')
+      .select('id, name, email, first_name, plan, active, trial_ends_at, stripe_customer_id, created_at')
+
+    const allClientsList = allClients ?? []
+    const activeCount = allClientsList.filter(c => c.active).length
+    const proCount = allClientsList.filter(c => c.active && c.plan !== 'essentials').length
+    const essentialsCount = allClientsList.filter(c => c.active && c.plan === 'essentials').length
+
+    // MRR calculation
+    const mrr = (proCount * 200) + (essentialsCount * 150)
+
+    // New signups this week
+    const newSignups = allClientsList.filter(c => {
+      const created = new Date(c.created_at).getTime()
+      return created >= (now.getTime() - 7 * 24 * 60 * 60 * 1000)
+    })
+
+    // Trials expiring in next 7 days
+    const expiringTrials = allClientsList.filter(c => {
+      if (!c.trial_ends_at) return false
+      const expires = new Date(c.trial_ends_at).getTime()
+      return expires > now.getTime() && expires <= (now.getTime() + 7 * 24 * 60 * 60 * 1000)
+    })
+
+    // Clients with zero activity (no leads at all)
+    const zeroActivity = allClientsList.filter(c => {
+      return c.active && !clientSummaries.find(s => s.email === c.email)
+    })
 
     const totalLeadsAll = clientSummaries.reduce((sum, c) => sum + c.leads, 0)
     const totalAtRisk = clientSummaries.reduce((sum, c) => sum + c.atRisk, 0)
@@ -207,10 +225,51 @@ export async function GET(req: NextRequest) {
     const totalSaved = clientSummaries.reduce((sum, c) => sum + c.savedRevenue, 0)
     const weekOf = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 
+    // Client breakdown rows
+    const clientRows = clientSummaries.map(c => `
+      <tr>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #fff; font-size: 13px;">${c.name}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #888; font-size: 13px;">${c.email}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #ff6b35; font-weight: 700; font-size: 13px;">${c.leads}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #f87171; font-weight: 700; font-size: 13px;">$${c.atRisk.toLocaleString()}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #22c55e; font-weight: 700; font-size: 13px;">${c.recovered}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: #22c55e; font-weight: 700; font-size: 13px;">$${c.savedRevenue.toLocaleString()}</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; color: ${c.rate > 20 ? '#22c55e' : '#fbbf24'}; font-weight: 700; font-size: 13px;">${c.rate}%</td>
+        <td style="padding: 10px 14px; border-bottom: 1px solid #1e1e1e; font-size: 12px;"><span style="background: ${c.plan === 'pro' ? 'rgba(255,107,53,0.15)' : 'rgba(255,255,255,0.08)'}; color: ${c.plan === 'pro' ? '#ff6b35' : '#888'}; padding: 3px 8px; border-radius: 4px; font-weight: 600;">${(c.plan || 'pro').toUpperCase()}</span></td>
+      </tr>
+    `).join('')
+
+    // New signups rows
+    const signupRows = newSignups.length > 0 ? newSignups.map(s => `
+      <tr>
+        <td style="padding: 8px 14px; border-bottom: 1px solid #1e1e1e; color: #fff; font-size: 13px;">${s.name || s.first_name || '—'}</td>
+        <td style="padding: 8px 14px; border-bottom: 1px solid #1e1e1e; color: #888; font-size: 13px;">${s.email}</td>
+        <td style="padding: 8px 14px; border-bottom: 1px solid #1e1e1e; font-size: 12px;"><span style="background: rgba(34,197,94,0.15); color: #22c55e; padding: 3px 8px; border-radius: 4px; font-weight: 600;">NEW</span></td>
+      </tr>
+    `).join('') : '<tr><td colspan="3" style="padding: 12px 14px; color: #555; font-size: 13px;">No new signups this week.</td></tr>'
+
+    // Expiring trials rows
+    const expiringRows = expiringTrials.length > 0 ? expiringTrials.map(t => `
+      <tr>
+        <td style="padding: 8px 14px; border-bottom: 1px solid #1e1e1e; color: #fff; font-size: 13px;">${t.name || t.first_name || '—'}</td>
+        <td style="padding: 8px 14px; border-bottom: 1px solid #1e1e1e; color: #888; font-size: 13px;">${t.email}</td>
+        <td style="padding: 8px 14px; border-bottom: 1px solid #1e1e1e; color: #fbbf24; font-size: 13px;">${new Date(t.trial_ends_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
+      </tr>
+    `).join('') : '<tr><td colspan="3" style="padding: 12px 14px; color: #555; font-size: 13px;">No trials expiring this week.</td></tr>'
+
+    // Zero activity rows
+    const zeroRows = zeroActivity.length > 0 ? zeroActivity.map(z => `
+      <tr>
+        <td style="padding: 8px 14px; border-bottom: 1px solid #1e1e1e; color: #fff; font-size: 13px;">${z.name || z.first_name || '—'}</td>
+        <td style="padding: 8px 14px; border-bottom: 1px solid #1e1e1e; color: #888; font-size: 13px;">${z.email}</td>
+        <td style="padding: 8px 14px; border-bottom: 1px solid #1e1e1e; font-size: 12px;"><span style="background: rgba(248,113,113,0.15); color: #f87171; padding: 3px 8px; border-radius: 4px; font-weight: 600;">NO DATA</span></td>
+      </tr>
+    `).join('') : ''
+
     await resend.emails.send({
       from: 'ReCapture <onboarding@resend.dev>',
       to: 'asherton.c@me.com',
-      subject: `Monday Briefing — ${sent} reports sent · ${totalLeadsAll} leads · $${totalAtRisk.toLocaleString()} at risk`,
+      subject: `Monday Briefing — $${mrr}/mo MRR · ${activeCount} clients · ${totalLeadsAll} leads · $${totalAtRisk.toLocaleString()} at risk`,
       html: `
         <div style="font-family: 'Inter', -apple-system, sans-serif; max-width: 700px; margin: 0 auto; background: #0a0a0a; color: #fff; padding: 40px; border-radius: 12px;">
           <div style="margin-bottom: 32px;">
@@ -218,16 +277,39 @@ export async function GET(req: NextRequest) {
             <span style="font-size: 11px; color: #888; margin-left: 12px;">Monday Briefing</span>
           </div>
 
-          <p style="color: #aaa; font-size: 15px; margin-bottom: 32px;">Week of <strong style="color: #fff;">${weekOf}</strong> — ${sent} client reports sent.</p>
+          <p style="color: #aaa; font-size: 15px; margin-bottom: 32px;">Week of <strong style="color: #fff;">${weekOf}</strong></p>
 
-          <div style="display: flex; gap: 12px; margin-bottom: 32px;">
+          <!-- Business Overview -->
+          <h3 style="font-size: 11px; color: #ff6b35; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Business Overview</h3>
+          <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
+              <div style="font-size: 24px; font-weight: 700; color: #22c55e;">$${mrr.toLocaleString()}</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Monthly MRR</div>
+            </div>
+            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
+              <div style="font-size: 24px; font-weight: 700; color: #fff;">${activeCount}</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Active Clients</div>
+            </div>
+            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
+              <div style="font-size: 24px; font-weight: 700; color: #ff6b35;">${proCount}</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Pro</div>
+            </div>
+            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
+              <div style="font-size: 24px; font-weight: 700; color: #888;">${essentialsCount}</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Essentials</div>
+            </div>
+          </div>
+
+          <!-- Lead Performance -->
+          <h3 style="font-size: 11px; color: #ff6b35; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">This Week's Performance</h3>
+          <div style="display: flex; gap: 12px; margin-bottom: 24px;">
             <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
               <div style="font-size: 24px; font-weight: 700; color: #ff6b35;">${totalLeadsAll}</div>
-              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Total Leads</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Leads Captured</div>
             </div>
             <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
               <div style="font-size: 24px; font-weight: 700; color: #f87171;">$${totalAtRisk.toLocaleString()}</div>
-              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Total at Risk</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Revenue at Risk</div>
             </div>
             <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
               <div style="font-size: 24px; font-weight: 700; color: #22c55e;">${totalRecovered}</div>
@@ -239,24 +321,68 @@ export async function GET(req: NextRequest) {
             </div>
           </div>
 
-          <h3 style="font-size: 13px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">Client Breakdown</h3>
-          <table style="width: 100%; border-collapse: collapse; background: #111; border-radius: 8px; overflow: hidden; margin-bottom: 32px;">
+          <!-- Client Breakdown -->
+          ${clientSummaries.length > 0 ? `
+          <h3 style="font-size: 11px; color: #ff6b35; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Client Breakdown</h3>
+          <table style="width: 100%; border-collapse: collapse; background: #111; border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
             <thead>
               <tr style="background: #1a1a1a;">
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Client</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Email</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Leads</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">At Risk</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Recovered</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Saved</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Rate</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Plan</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Client</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Email</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Leads</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">At Risk</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Recovered</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Saved</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Rate</th>
+                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Plan</th>
               </tr>
             </thead>
             <tbody>${clientRows}</tbody>
           </table>
+          ` : ''}
 
-          <div style="text-align: center;">
+          <!-- New Signups -->
+          <h3 style="font-size: 11px; color: #ff6b35; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">New Signups This Week</h3>
+          <table style="width: 100%; border-collapse: collapse; background: #111; border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
+            <thead>
+              <tr style="background: #1a1a1a;">
+                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Name</th>
+                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Email</th>
+                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Status</th>
+              </tr>
+            </thead>
+            <tbody>${signupRows}</tbody>
+          </table>
+
+          <!-- Trials Expiring -->
+          <h3 style="font-size: 11px; color: #fbbf24; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">⚠ Trials Expiring This Week</h3>
+          <table style="width: 100%; border-collapse: collapse; background: #111; border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
+            <thead>
+              <tr style="background: #1a1a1a;">
+                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Client</th>
+                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Email</th>
+                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Expires</th>
+              </tr>
+            </thead>
+            <tbody>${expiringRows}</tbody>
+          </table>
+
+          <!-- Zero Activity Warning -->
+          ${zeroActivity.length > 0 ? `
+          <h3 style="font-size: 11px; color: #f87171; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">🚨 Zero Activity — Tracker May Not Be Installed</h3>
+          <table style="width: 100%; border-collapse: collapse; background: #111; border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
+            <thead>
+              <tr style="background: #1a1a1a;">
+                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Client</th>
+                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Email</th>
+                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Status</th>
+              </tr>
+            </thead>
+            <tbody>${zeroRows}</tbody>
+          </table>
+          ` : ''}
+
+          <div style="text-align: center; margin-top: 8px;">
             <a href="https://userecapture.com/admin" style="display: inline-block; background: #ff6b35; color: #000; font-weight: 700; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 14px;">Open Admin Dashboard</a>
           </div>
 
