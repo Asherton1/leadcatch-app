@@ -283,71 +283,28 @@ export async function GET(req: NextRequest) {
           <tr><td style="color:#aaa;font-size:15px;padding:0 0 28px 0;">Week of <strong style="color:#fff;">${weekOf}</strong></td></tr>
 
           <!-- BUSINESS OVERVIEW -->
+          <!-- BUSINESS OVERVIEW -->
           <tr><td style="font-size:11px;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;padding:0 0 10px 0;font-weight:700;">Business Overview</td></tr>
-          <tr><td style="padding:0 0 8px 0;">
-            <table width="100%" cellpadding="0" cellspacing="0">
-              <tr>
-                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
-                  <div style="font-size:22px;font-weight:700;color:#22c55e;">$\${mrr.toLocaleString()}</div>
-                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">MRR</div>
-                </td>
-                <td width="4%"></td>
-                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
-                  <div style="font-size:22px;font-weight:700;color:#fff;">\${activeCount}</div>
-                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">Active Clients</div>
-                </td>
-              </tr>
-            </table>
-          </td></tr>
           <tr><td style="padding:0 0 24px 0;">
-            <table width="100%" cellpadding="0" cellspacing="0">
-              <tr>
-                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
-                  <div style="font-size:22px;font-weight:700;color:#ff6b35;">\${proCount}</div>
-                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">Pro</div>
-                </td>
-                <td width="4%"></td>
-                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
-                  <div style="font-size:22px;font-weight:700;color:#888;">\${essentialsCount}</div>
-                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">Essentials</div>
-                </td>
-              </tr>
-            </table>
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td style="width:50%;padding:0 4px 8px 0;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#22c55e;">$${mrr.toLocaleString()}</div><div style="font-size:9px;color:#666;text-transform:uppercase;margin-top:4px;">MRR</div></td></tr></table></td>
+              <td style="width:50%;padding:0 0 8px 4px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#fff;">${activeCount}</div><div style="font-size:9px;color:#666;text-transform:uppercase;margin-top:4px;">Active Clients</div></td></tr></table></td>
+            </tr><tr>
+              <td style="width:50%;padding:0 4px 0 0;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#ff6b35;">${proCount}</div><div style="font-size:9px;color:#666;text-transform:uppercase;margin-top:4px;">Pro</div></td></tr></table></td>
+              <td style="width:50%;padding:0 0 0 4px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#888;">${essentialsCount}</div><div style="font-size:9px;color:#666;text-transform:uppercase;margin-top:4px;">Essentials</div></td></tr></table></td>
+            </tr></table>
           </td></tr>
-
-          <!-- THIS WEEK'S PERFORMANCE -->
+          <!-- THIS WEEKS PERFORMANCE -->
           <tr><td style="font-size:11px;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;padding:0 0 10px 0;font-weight:700;">This Week's Performance</td></tr>
-          <tr><td style="padding:0 0 8px 0;">
-            <table width="100%" cellpadding="0" cellspacing="0">
-              <tr>
-                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
-                  <div style="font-size:22px;font-weight:700;color:#ff6b35;">\${totalLeadsAll}</div>
-                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">Leads Captured</div>
-                </td>
-                <td width="4%"></td>
-                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
-                  <div style="font-size:22px;font-weight:700;color:#f87171;">$\${totalAtRisk.toLocaleString()}</div>
-                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">At Risk</div>
-                </td>
-              </tr>
-            </table>
-          </td></tr>
           <tr><td style="padding:0 0 24px 0;">
-            <table width="100%" cellpadding="0" cellspacing="0">
-              <tr>
-                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
-                  <div style="font-size:22px;font-weight:700;color:#22c55e;">\${totalRecovered}</div>
-                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">Recovered</div>
-                </td>
-                <td width="4%"></td>
-                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
-                  <div style="font-size:22px;font-weight:700;color:#22c55e;">$\${totalSaved.toLocaleString()}</div>
-                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">Revenue Saved</div>
-                </td>
-              </tr>
-            </table>
+            <table width="100%" cellpadding="0" cellspacing="0"><tr>
+              <td style="width:50%;padding:0 4px 8px 0;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#ff6b35;">${totalLeadsAll}</div><div style="font-size:9px;color:#666;text-transform:uppercase;margin-top:4px;">Leads Captured</div></td></tr></table></td>
+              <td style="width:50%;padding:0 0 8px 4px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#f87171;">$${totalAtRisk.toLocaleString()}</div><div style="font-size:9px;color:#666;text-transform:uppercase;margin-top:4px;">At Risk</div></td></tr></table></td>
+            </tr><tr>
+              <td style="width:50%;padding:0 4px 0 0;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#22c55e;">${totalRecovered}</div><div style="font-size:9px;color:#666;text-transform:uppercase;margin-top:4px;">Recovered</div></td></tr></table></td>
+              <td style="width:50%;padding:0 0 0 4px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#22c55e;">$${totalSaved.toLocaleString()}</div><div style="font-size:9px;color:#666;text-transform:uppercase;margin-top:4px;">Revenue Saved</div></td></tr></table></td>
+            </tr></table>
           </td></tr>
-
           <!-- CLIENT BREAKDOWN -->
           \${clientSummaries.length > 0 ? `
           <tr><td style="font-size:11px;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;padding:0 0 10px 0;font-weight:700;">Client Breakdown</td></tr>
