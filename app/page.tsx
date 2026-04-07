@@ -6,7 +6,7 @@ import PricingSection from './components/PricingSection'
 
 export const metadata = {
   title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
-  description: 'Capture partial form submissions and auto-recover lost leads. Built for med spas, dental practices, and luxury service businesses.',
+  description: 'Capture partial form submissions and auto-recover lost leads. Born &amp; Built in Dallas, Texas.',
 }
 
 export default function LandingPage() {
@@ -28,9 +28,9 @@ export default function LandingPage() {
         <Link href="/login" className="nav-cta">Login</Link>
       </nav>
 
-      <section className="hero hero-bg">
+      <section className="hero">
         
-        <p className="hero-eyebrow">Built for med spas, dental practices, and luxury service businesses</p>
+        <p className="hero-eyebrow">Born &amp; Built in Dallas, Texas</p>
         <h1 className="hero-animate">
           You&apos;re Losing<br />
           <span className="hero-highlight">60% of Your Leads</span><br />
