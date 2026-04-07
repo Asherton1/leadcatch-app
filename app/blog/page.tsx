@@ -46,7 +46,7 @@ export default function BlogIndex() {
             </div>
             <div className="blog-featured-title">The Hidden Cost of Form Abandonment (And What It&apos;s Really Costing Your Business)</div>
             <div className="blog-featured-excerpt">Most businesses obsess over traffic and ad spend. Almost none of them track the leads that start filling out a form and never finish.</div>
-            <span className="blog-featured-cta">Read article <span>\u2192</span></span>
+            <span className="blog-featured-cta">Read article <span>→</span></span>
           </div>
         </Link>
       </div>
