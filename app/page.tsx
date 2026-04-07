@@ -26,14 +26,14 @@ export default function LandingPage() {
             <span><span style={{ color: '#fff' }}>Re</span><span className="logo-accent">Capture</span></span>
           </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.75rem' }}>
-          <Link href="/blog" style={{ color: '#888', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>Insights</Link>
+          <Link href="/blog" className="nav-cta" style={{ background: 'transparent' }}>Insights</Link>
           <Link href="/login" className="nav-cta">Login</Link>
         </div>
       </nav>
 
       <section className="hero">
         
-        <p className="hero-eyebrow">Born &amp; Built in Dallas, Texas</p>
+        <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '2rem' }}>Born &amp; Built in Dallas, Texas</p>
         <h1 className="hero-animate">
           You&apos;re Losing<br />
           <span className="hero-highlight">60% of Your Leads</span><br />
