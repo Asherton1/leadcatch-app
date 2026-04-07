@@ -32,6 +32,7 @@ export async function GET(req: NextRequest) {
   const now = new Date()
   const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString()
   let sent = 0
+  const clientSummaries: { name: string; email: string; leads: number; atRisk: number; recovered: number; savedRevenue: number; rate: number; plan: string }[] = []
 
   for (const client of clients) {
     if (!client.email) continue
@@ -178,6 +179,7 @@ export async function GET(req: NextRequest) {
         html,
       })
       sent++
+      clientSummaries.push({ name: client.name || client.first_name || 'Unknown', email: client.email, leads: totalLeads, atRisk: revenueAtRisk, recovered, savedRevenue: recoveredRevenue, rate: recoveryRate, plan: client.plan || 'pro' })
       console.log(`[weekly-report] Sent to ${client.email}`)
     } catch (err) {
       console.error(`[weekly-report] Failed to send to ${client.email}:`, err)
