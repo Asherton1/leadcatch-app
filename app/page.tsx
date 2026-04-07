@@ -25,8 +25,10 @@ export default function LandingPage() {
             </svg>
             <span><span style={{ color: '#fff' }}>Re</span><span className="logo-accent">Capture</span></span>
           </Link>
-        <Link href="/blog" style={{ color: '#666', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>Blog</Link>
-        <Link href="/login" className="nav-cta">Login</Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.75rem' }}>
+          <Link href="/blog" style={{ color: '#888', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>Blog</Link>
+          <Link href="/login" className="nav-cta">Login</Link>
+        </div>
       </nav>
 
       <section className="hero">
