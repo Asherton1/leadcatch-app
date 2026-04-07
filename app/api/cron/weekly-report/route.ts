@@ -271,125 +271,162 @@ export async function GET(req: NextRequest) {
       to: 'asherton.c@me.com',
       subject: `Monday Briefing — $${mrr}/mo MRR · ${activeCount} clients · ${totalLeadsAll} leads · $${totalAtRisk.toLocaleString()} at risk`,
       html: `
-        <div style="font-family: 'Inter', -apple-system, sans-serif; max-width: 700px; margin: 0 auto; background: #0a0a0a; color: #fff; padding: 40px; border-radius: 12px;">
-          <div style="margin-bottom: 32px;">
-            <span style="font-size: 22px; font-weight: 700; color: #fff;">Re</span><span style="font-size: 22px; font-weight: 700; color: #ff6b35;">Capture</span>
-            <span style="font-size: 11px; color: #888; margin-left: 12px;">Monday Briefing</span>
-          </div>
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;font-family:'Inter',-apple-system,sans-serif;">
+        <tr><td align="center" style="padding:20px 10px;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#0a0a0a;color:#fff;">
 
-          <p style="color: #aaa; font-size: 15px; margin-bottom: 32px;">Week of <strong style="color: #fff;">${weekOf}</strong></p>
+          <tr><td style="padding:0 0 24px 0;">
+            <span style="font-size:22px;font-weight:700;color:#fff;">Re</span><span style="font-size:22px;font-weight:700;color:#ff6b35;">Capture</span>
+            <span style="font-size:11px;color:#888;margin-left:12px;">Monday Briefing</span>
+          </td></tr>
 
-          <!-- Business Overview -->
-          <h3 style="font-size: 11px; color: #ff6b35; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Business Overview</h3>
-          <div style="display: flex; gap: 12px; margin-bottom: 24px;">
-            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
-              <div style="font-size: 24px; font-weight: 700; color: #22c55e;">$${mrr.toLocaleString()}</div>
-              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Monthly MRR</div>
-            </div>
-            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
-              <div style="font-size: 24px; font-weight: 700; color: #fff;">${activeCount}</div>
-              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Active Clients</div>
-            </div>
-            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
-              <div style="font-size: 24px; font-weight: 700; color: #ff6b35;">${proCount}</div>
-              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Pro</div>
-            </div>
-            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
-              <div style="font-size: 24px; font-weight: 700; color: #888;">${essentialsCount}</div>
-              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Essentials</div>
-            </div>
-          </div>
+          <tr><td style="color:#aaa;font-size:15px;padding:0 0 28px 0;">Week of <strong style="color:#fff;">${weekOf}</strong></td></tr>
 
-          <!-- Lead Performance -->
-          <h3 style="font-size: 11px; color: #ff6b35; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">This Week's Performance</h3>
-          <div style="display: flex; gap: 12px; margin-bottom: 24px;">
-            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
-              <div style="font-size: 24px; font-weight: 700; color: #ff6b35;">${totalLeadsAll}</div>
-              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Leads Captured</div>
-            </div>
-            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
-              <div style="font-size: 24px; font-weight: 700; color: #f87171;">$${totalAtRisk.toLocaleString()}</div>
-              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Revenue at Risk</div>
-            </div>
-            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
-              <div style="font-size: 24px; font-weight: 700; color: #22c55e;">${totalRecovered}</div>
-              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Recovered</div>
-            </div>
-            <div style="flex: 1; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 16px; text-align: center;">
-              <div style="font-size: 24px; font-weight: 700; color: #22c55e;">$${totalSaved.toLocaleString()}</div>
-              <div style="font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Revenue Saved</div>
-            </div>
-          </div>
-
-          <!-- Client Breakdown -->
-          ${clientSummaries.length > 0 ? `
-          <h3 style="font-size: 11px; color: #ff6b35; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Client Breakdown</h3>
-          <table style="width: 100%; border-collapse: collapse; background: #111; border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
-            <thead>
-              <tr style="background: #1a1a1a;">
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Client</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Email</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Leads</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">At Risk</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Recovered</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Saved</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Rate</th>
-                <th style="padding: 10px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Plan</th>
+          <!-- BUSINESS OVERVIEW -->
+          <tr><td style="font-size:11px;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;padding:0 0 10px 0;font-weight:700;">Business Overview</td></tr>
+          <tr><td style="padding:0 0 8px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
+                  <div style="font-size:22px;font-weight:700;color:#22c55e;">$\${mrr.toLocaleString()}</div>
+                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">MRR</div>
+                </td>
+                <td width="4%"></td>
+                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
+                  <div style="font-size:22px;font-weight:700;color:#fff;">\${activeCount}</div>
+                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">Active Clients</div>
+                </td>
               </tr>
-            </thead>
-            <tbody>${clientRows}</tbody>
-          </table>
+            </table>
+          </td></tr>
+          <tr><td style="padding:0 0 24px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
+                  <div style="font-size:22px;font-weight:700;color:#ff6b35;">\${proCount}</div>
+                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">Pro</div>
+                </td>
+                <td width="4%"></td>
+                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
+                  <div style="font-size:22px;font-weight:700;color:#888;">\${essentialsCount}</div>
+                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">Essentials</div>
+                </td>
+              </tr>
+            </table>
+          </td></tr>
+
+          <!-- THIS WEEK'S PERFORMANCE -->
+          <tr><td style="font-size:11px;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;padding:0 0 10px 0;font-weight:700;">This Week's Performance</td></tr>
+          <tr><td style="padding:0 0 8px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
+                  <div style="font-size:22px;font-weight:700;color:#ff6b35;">\${totalLeadsAll}</div>
+                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">Leads Captured</div>
+                </td>
+                <td width="4%"></td>
+                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
+                  <div style="font-size:22px;font-weight:700;color:#f87171;">$\${totalAtRisk.toLocaleString()}</div>
+                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">At Risk</div>
+                </td>
+              </tr>
+            </table>
+          </td></tr>
+          <tr><td style="padding:0 0 24px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
+                  <div style="font-size:22px;font-weight:700;color:#22c55e;">\${totalRecovered}</div>
+                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">Recovered</div>
+                </td>
+                <td width="4%"></td>
+                <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:14px;text-align:center;">
+                  <div style="font-size:22px;font-weight:700;color:#22c55e;">$\${totalSaved.toLocaleString()}</div>
+                  <div style="font-size:9px;color:#666;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;">Revenue Saved</div>
+                </td>
+              </tr>
+            </table>
+          </td></tr>
+
+          <!-- CLIENT BREAKDOWN -->
+          \${clientSummaries.length > 0 ? `
+          <tr><td style="font-size:11px;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;padding:0 0 10px 0;font-weight:700;">Client Breakdown</td></tr>
+          <tr><td style="padding:0 0 24px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border-radius:8px;overflow:hidden;">
+              <tr style="background:#1a1a1a;">
+                <th style="padding:10px 12px;text-align:left;font-size:10px;color:#666;text-transform:uppercase;">Client</th>
+                <th style="padding:10px 12px;text-align:center;font-size:10px;color:#666;text-transform:uppercase;">Leads</th>
+                <th style="padding:10px 12px;text-align:center;font-size:10px;color:#666;text-transform:uppercase;">At Risk</th>
+                <th style="padding:10px 12px;text-align:center;font-size:10px;color:#666;text-transform:uppercase;">Rate</th>
+                <th style="padding:10px 12px;text-align:center;font-size:10px;color:#666;text-transform:uppercase;">Plan</th>
+              </tr>
+              \${clientSummaries.map(c => `
+              <tr>
+                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;color:#fff;font-size:13px;">\${c.name}<br/><span style="color:#555;font-size:11px;">\${c.email}</span></td>
+                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;color:#ff6b35;font-weight:700;font-size:14px;text-align:center;">\${c.leads}</td>
+                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;color:#f87171;font-weight:700;font-size:14px;text-align:center;">$\${c.atRisk.toLocaleString()}</td>
+                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;color:\${c.rate > 20 ? '#22c55e' : '#fbbf24'};font-weight:700;font-size:14px;text-align:center;">\${c.rate}%</td>
+                <td style="padding:10px 12px;border-top:1px solid #1e1e1e;text-align:center;"><span style="background:\${c.plan === 'pro' ? 'rgba(255,107,53,0.15)' : 'rgba(255,255,255,0.08)'};color:\${c.plan === 'pro' ? '#ff6b35' : '#888'};padding:3px 8px;border-radius:4px;font-weight:600;font-size:11px;">\${(c.plan || 'pro').toUpperCase()}</span></td>
+              </tr>
+              `).join('')}
+            </table>
+          </td></tr>
           ` : ''}
 
-          <!-- New Signups -->
-          <h3 style="font-size: 11px; color: #ff6b35; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">New Signups This Week</h3>
-          <table style="width: 100%; border-collapse: collapse; background: #111; border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
-            <thead>
-              <tr style="background: #1a1a1a;">
-                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Name</th>
-                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Email</th>
-                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Status</th>
+          <!-- NEW SIGNUPS -->
+          <tr><td style="font-size:11px;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;padding:0 0 10px 0;font-weight:700;">New Signups This Week</td></tr>
+          <tr><td style="padding:0 0 24px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border-radius:8px;overflow:hidden;">
+              <tr style="background:#1a1a1a;">
+                <th style="padding:8px 12px;text-align:left;font-size:10px;color:#666;text-transform:uppercase;">Name</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;color:#666;text-transform:uppercase;">Email</th>
+                <th style="padding:8px 12px;text-align:center;font-size:10px;color:#666;text-transform:uppercase;">Status</th>
               </tr>
-            </thead>
-            <tbody>${signupRows}</tbody>
-          </table>
+              \${signupRows}
+            </table>
+          </td></tr>
 
-          <!-- Trials Expiring -->
-          <h3 style="font-size: 11px; color: #fbbf24; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">⚠ Trials Expiring This Week</h3>
-          <table style="width: 100%; border-collapse: collapse; background: #111; border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
-            <thead>
-              <tr style="background: #1a1a1a;">
-                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Client</th>
-                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Email</th>
-                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Expires</th>
+          <!-- TRIALS EXPIRING -->
+          <tr><td style="font-size:11px;color:#fbbf24;text-transform:uppercase;letter-spacing:1px;padding:0 0 10px 0;font-weight:700;">Trials Expiring This Week</td></tr>
+          <tr><td style="padding:0 0 24px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border-radius:8px;overflow:hidden;">
+              <tr style="background:#1a1a1a;">
+                <th style="padding:8px 12px;text-align:left;font-size:10px;color:#666;text-transform:uppercase;">Client</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;color:#666;text-transform:uppercase;">Email</th>
+                <th style="padding:8px 12px;text-align:center;font-size:10px;color:#666;text-transform:uppercase;">Expires</th>
               </tr>
-            </thead>
-            <tbody>${expiringRows}</tbody>
-          </table>
+              \${expiringRows}
+            </table>
+          </td></tr>
 
-          <!-- Zero Activity Warning -->
-          ${zeroActivity.length > 0 ? `
-          <h3 style="font-size: 11px; color: #f87171; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">🚨 Zero Activity — Tracker May Not Be Installed</h3>
-          <table style="width: 100%; border-collapse: collapse; background: #111; border-radius: 8px; overflow: hidden; margin-bottom: 24px;">
-            <thead>
-              <tr style="background: #1a1a1a;">
-                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Client</th>
-                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Email</th>
-                <th style="padding: 8px 14px; text-align: left; font-size: 10px; color: #666; text-transform: uppercase;">Status</th>
+          <!-- ZERO ACTIVITY -->
+          \${zeroActivity.length > 0 ? `
+          <tr><td style="font-size:11px;color:#f87171;text-transform:uppercase;letter-spacing:1px;padding:0 0 10px 0;font-weight:700;">Zero Activity — Tracker Not Installed</td></tr>
+          <tr><td style="padding:0 0 24px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border-radius:8px;overflow:hidden;">
+              <tr style="background:#1a1a1a;">
+                <th style="padding:8px 12px;text-align:left;font-size:10px;color:#666;text-transform:uppercase;">Client</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;color:#666;text-transform:uppercase;">Email</th>
+                <th style="padding:8px 12px;text-align:center;font-size:10px;color:#666;text-transform:uppercase;">Status</th>
               </tr>
-            </thead>
-            <tbody>${zeroRows}</tbody>
-          </table>
+              \${zeroRows}
+            </table>
+          </td></tr>
           ` : ''}
 
-          <div style="text-align: center; margin-top: 8px;">
-            <a href="https://userecapture.com/admin" style="display: inline-block; background: #ff6b35; color: #000; font-weight: 700; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 14px;">Open Admin Dashboard</a>
-          </div>
+          <!-- CTA -->
+          <tr><td style="text-align:center;padding:16px 0;">
+            <a href="https://userecapture.com/admin" style="display:inline-block;background:#ff6b35;color:#000;font-weight:700;padding:12px 24px;border-radius:8px;text-decoration:none;font-size:14px;">Open Admin Dashboard</a>
+          </td></tr>
 
-          <div style="border-top: 1px solid #1e1e1e; padding-top: 20px; margin-top: 32px;">
-            <p style="color: #444; font-size: 12px; text-align: center; margin: 0;">ReCapture · Monday Briefing · ${weekOf}</p>
-          </div>
-        </div>
+          <!-- Footer -->
+          <tr><td style="border-top:1px solid #1e1e1e;padding:20px 0 0 0;text-align:center;">
+            <span style="color:#444;font-size:12px;">ReCapture · Monday Briefing · \${weekOf}</span>
+          </td></tr>
+
+        </table>
+        </td></tr>
+        </table>
       `,
     })
   } catch {}
