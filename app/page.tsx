@@ -252,7 +252,7 @@ export default function LandingPage() {
         <div className="final-cta-glow" />
         <div className="section-label">GET STARTED</div>
         <h2>Stop Losing Revenue.<br />Start Recovering Leads.</h2>
-        <p>14-day free trial. Cancel anytime. If you&apos;re losing leads, you&apos;ll know within 48 hours.</p>
+        <p>7-day free trial. Cancel anytime. If you&apos;re losing leads, you&apos;ll know within 48 hours.</p>
         <div className="cta-group" style={{ justifyContent: 'center' }}>
           <Link href="/test-form" className="cta-primary">Try the Live Demo</Link>
           <Link href="/signup" className="cta-secondary">Start Free Trial</Link>

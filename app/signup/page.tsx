@@ -18,7 +18,7 @@ const CARD_OPTIONS = {
   hidePostalCode: true,
 }
 
-const trialEndDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+const trialEndDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 
 export default function SignupPage() {
   return <Suspense><Elements stripe={stripePromise}><SignupForm /></Elements></Suspense>
@@ -90,7 +90,7 @@ function SignupForm() {
         <button style={s.closeBtn} onClick={() => router.push('/')}>✕</button>
         <div style={s.cardHeader}>
           <h1 style={s.title}>Create your account</h1>
-          <p style={s.subtitle}>Start your 14-day free trial — no charge today</p>
+          <p style={s.subtitle}>Start your 7-day free trial — no charge today</p>
         </div>
         <form onSubmit={handleSubmit} style={s.form} noValidate>
           <p style={s.sectionLabel}>Your Info</p>

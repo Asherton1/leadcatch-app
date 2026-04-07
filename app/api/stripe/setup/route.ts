@@ -76,13 +76,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: msg }, { status: 500 })
   }
 
-  // ── Create subscription with 14-day trial ──
+  // ── Create subscription with 7-day trial ──
   let subscription: Stripe.Subscription
   try {
     subscription = await stripe.subscriptions.create({
       customer: customer.id,
       items: [{ price: plan === 'essentials' ? process.env.STRIPE_PRICE_ID_ESSENTIALS! : process.env.STRIPE_PRICE_ID! }],
-      trial_period_days: 14,
+      trial_period_days: 7,
       payment_settings: {
         payment_method_types: ['card'],
         save_default_payment_method: 'on_subscription',
@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
 
   const trialEndsAt = subscription.trial_end
     ? new Date(subscription.trial_end * 1000).toISOString()
-    : new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString()
+    : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
 
   const { error: dbErr } = await supabase
     .from('clients')
@@ -119,7 +119,7 @@ export async function POST(req: NextRequest) {
     .single()
 
   const apiKey = clientRow?.api_key ?? 'Check your dashboard'
-  const trialEndDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000)
+  const trialEndDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
     .toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 
   // ── Send onboarding email ──

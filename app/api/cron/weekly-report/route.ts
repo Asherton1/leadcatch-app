@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
     if (weekLeads.length === 0) continue // Skip clients with no activity
 
     // Get leads from the PREVIOUS week (for comparison)
-    const twoWeeksAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000).toISOString()
+    const twoWeeksAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString()
     const { data: prevLeads } = await supabase
       .from('leads')
       .select('id, status')
