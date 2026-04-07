@@ -26,7 +26,7 @@ export default function LandingPage() {
             <span><span style={{ color: '#fff' }}>Re</span><span className="logo-accent">Capture</span></span>
           </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.75rem' }}>
-          <Link href="/blog" style={{ color: '#888', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>Blog</Link>
+          <Link href="/blog" style={{ color: '#888', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>Insights</Link>
           <Link href="/login" className="nav-cta">Login</Link>
         </div>
       </nav>
@@ -273,7 +273,7 @@ export default function LandingPage() {
         <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '20px', flexWrap: 'wrap' }}>
           <Link href="/test-form" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Live Demo</Link>
           <Link href="/signup" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Start Free Trial</Link>
-          <Link href="/blog" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Blog</Link>
+          <Link href="/blog" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Insights</Link>
           <Link href="/login" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Login</Link>
           <a href="mailto:hello@userecapture.com" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Contact</a>
         </div>

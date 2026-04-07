@@ -20,7 +20,7 @@ export default function BlogIndex() {
           <span><span style={{ color: '#fff', fontWeight: 700, fontSize: '1.25rem' }}>Re</span><span style={{ color: '#ff6b35', fontWeight: 700, fontSize: '1.25rem' }}>Capture</span></span>
         </Link>
         <div className="blog-nav-links">
-          <Link href="/blog">Blog</Link>
+          <Link href="/blog">Insights</Link>
           <Link href="/test-form">Demo</Link>
           <Link href="/signup">Start Trial</Link>
         </div>
