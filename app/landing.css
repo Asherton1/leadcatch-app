@@ -998,3 +998,33 @@
 .pricing-upgrade-hint a:hover {
   text-decoration: underline;
 }
+
+
+/* ── Hero eyebrow ── */
+.hero-eyebrow {
+  font-size: 0.9375rem;
+  color: #666;
+  letter-spacing: 0.01em;
+  margin-bottom: 1.75rem;
+  font-weight: 400;
+}
+
+/* ── Hero background gradient ── */
+.hero-bg {
+  position: relative;
+}
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 40%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 107, 53, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-bg > * {
+  position: relative;
+  z-index: 1;
+}

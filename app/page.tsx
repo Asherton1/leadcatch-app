@@ -28,12 +28,9 @@ export default function LandingPage() {
         <Link href="/login" className="nav-cta">Login</Link>
       </nav>
 
-      <section className="hero">
+      <section className="hero hero-bg">
         
-        <div className="hero-badge">
-          <div className="badge-dot" />
-          <span>Born in Dallas · Built for Elite Service Businesses</span>
-        </div>
+        <p className="hero-eyebrow">Built for med spas, dental practices, and luxury service businesses</p>
         <h1 className="hero-animate">
           You&apos;re Losing<br />
           <span className="hero-highlight">60% of Your Leads</span><br />
