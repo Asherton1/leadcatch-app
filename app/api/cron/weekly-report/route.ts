@@ -113,7 +113,7 @@ export async function GET(req: NextRequest) {
     const html = `
       <div style="font-family: 'Inter', -apple-system, sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a0a; color: #fff; padding: 40px; border-radius: 12px;">
         <div style="margin-bottom: 32px;">
-          <span style="font-size: 22px; font-weight: 700; color: #fff;">Re</span><span style="font-size: 22px; font-weight: 700; color: #ff6b35;">Capture</span>
+          <img src="https://userecapture.com/logo-email.svg" alt="ReCapture" width="140" height="32" style="display:inline-block;vertical-align:middle;" />
           <span style="font-size: 11px; color: #888; margin-left: 12px;">Weekly Report</span>
         </div>
 

@@ -134,7 +134,7 @@ export async function POST(req: NextRequest) {
 
         <!-- Header -->
         <tr><td style="padding:0 0 8px 0;">
-          <span style="font-size:22px;font-weight:700;color:#fff;">Re</span><span style="font-size:22px;font-weight:700;color:#ff6b35;">Capture</span>
+          <img src="https://userecapture.com/logo-email.svg" alt="ReCapture" width="140" height="32" style="display:block;" />
         </td></tr>
 
         <!-- Welcome -->
