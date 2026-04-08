@@ -109,6 +109,7 @@
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
+  color: #ff6b35;
 }
 .about-values-grid {
   display: grid;
@@ -124,7 +125,7 @@
 .about-value h3 {
   font-size: 0.9375rem;
   font-weight: 700;
-  color: #fff;
+  color: #ff6b35;
   margin-bottom: 0.625rem;
 }
 .about-value p {
@@ -144,6 +145,7 @@
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 0.75rem;
+  color: #ff6b35;
 }
 .about-cta p {
   font-size: 1rem;

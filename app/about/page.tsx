@@ -17,7 +17,7 @@ export default function AboutPage() {
       <div className="about-hero">
         <div className="about-hero-content">
           <h1>The leads were always there.<br /><span className="about-highlight">Nobody was watching.</span></h1>
-          <p className="about-hero-sub">ReCapture was We spent over a decade running ad campaigns for high-ticket businesses and got tired of watching good money disappear into a black hole between the first keystroke and the submit button.</p>
+          <p className="about-hero-sub">We spent over a decade running ad campaigns for high-ticket businesses and got tired of watching good money disappear into a black hole between the first keystroke and the submit button.</p>
         </div>
       </div>
 
