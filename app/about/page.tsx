@@ -60,8 +60,9 @@ export default function AboutPage() {
       </div>
 
       <div className="about-founder">
+        <div className="about-founder-inner">
         <div className="about-founder-image">
-          <Image src="/founder.png" alt="Asherton C. — Founder of ReCapture" width={400} height={400} style={{ objectFit: 'cover', filter: 'grayscale(100%)', borderRadius: '50%', width: '100%', height: 'auto' }} />
+          <Image src="/founder.png" alt="Asherton C. — Founder of ReCapture" width={400} height={400} style={{ objectFit: 'cover', filter: 'grayscale(100%)', borderRadius: '10px', width: '100%', height: 'auto' }} />
         </div>
         <div className="about-founder-info">
           <p className="about-founder-label">Founder</p>
@@ -72,6 +73,7 @@ export default function AboutPage() {
             <span className="about-founder-dot"></span>
             Dallas, Texas
           </div>
+        </div>
         </div>
       </div>
 
