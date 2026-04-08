@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import BlogNav from '../components/BlogNav'
 import Image from 'next/image'
 import '../blog/blog.css'
 import './about.css'
@@ -11,22 +12,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="about-page">
-      <nav className="blog-nav">
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-          <svg width="24" height="24" viewBox="0 0 36 36">
-            <g className="logo-bl"><path d="M10 5 L4 5 L4 31 L10 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
-            <g className="logo-br"><path d="M26 5 L32 5 L32 31 L26 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
-            <circle className="logo-dg" cx="18" cy="18" r="8" fill="#ff6b35"/>
-            <circle className="logo-dp" cx="18" cy="18" r="5" fill="#ff6b35"/>
-          </svg>
-          <span><span style={{ color: '#fff', fontWeight: 700, fontSize: '1.25rem' }}>Re</span><span style={{ color: '#ff6b35', fontWeight: 700, fontSize: '1.25rem' }}>Capture</span></span>
-        </Link>
-        <div className="blog-nav-links">
-          <Link href="/blog">Insights</Link>
-          <Link href="/test-form">Demo</Link>
-          <Link href="/signup">Start Trial</Link>
-        </div>
-      </nav>
+      <BlogNav />
 
       <div className="about-hero">
         <div className="about-hero-content">
