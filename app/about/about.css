@@ -62,8 +62,10 @@
   border-bottom: 1px solid #1a1a1a;
 }
 .about-founder-image {
-  border-radius: 12px;
+  border-radius: 50%;
   overflow: hidden;
+  width: 240px;
+  height: 240px;
 }
 .about-founder-label {
   font-size: 0.6875rem;
