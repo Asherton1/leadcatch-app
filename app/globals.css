@@ -19,3 +19,11 @@
 .logo-br { animation: bracketRight 3s ease-in-out infinite; }
 .logo-dp { animation: dotPulse 3s ease-in-out infinite; }
 .logo-dg { animation: dotGlow 3s ease-in-out infinite; }
+
+
+/* Fix signup form row on mobile */
+@media (max-width: 640px) {
+  div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+}
