@@ -71,8 +71,11 @@
 }
 
 /* Prevent any horizontal overflow globally */
-html, body {
-  overflow-x: hidden;
+html {
+  overflow: clip;
+}
+body {
+  overflow-x: clip;
 }
 
 /* Ensure all images scale */
