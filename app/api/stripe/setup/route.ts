@@ -139,7 +139,7 @@ export async function POST(req: NextRequest) {
 
         <!-- Welcome -->
         <tr><td style="padding:24px 0 8px 0;">
-          <h1 style="font-size:26px;font-weight:700;color:#fff;margin:0 0 12px 0;">Welcome aboard, ${first || 'there'}.</h1>
+          <h1 style="font-size:26px;font-weight:700;color:#ff6b35;margin:0 0 12px 0;">Welcome aboard, ${first || 'there'}.</h1>
           <p style="font-size:15px;color:#888;line-height:1.7;margin:0;">Your account is live. Here's everything you need to start capturing the leads your website has been losing.</p>
         </td></tr>
 
@@ -178,12 +178,12 @@ export async function POST(req: NextRequest) {
           <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
               <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:16px;vertical-align:top;">
-                <p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 4px 0;">Within minutes</p>
+                <p style="font-size:13px;font-weight:700;color:#ff6b35;margin:0 0 4px 0;">Within minutes</p>
                 <p style="font-size:12px;color:#666;margin:0;line-height:1.6;">The tracker starts capturing partial form submissions as soon as it's installed.</p>
               </td>
               <td width="4%"></td>
               <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:16px;vertical-align:top;">
-                <p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 4px 0;">Within 48 hours</p>
+                <p style="font-size:13px;font-weight:700;color:#ff6b35;margin:0 0 4px 0;">Within 48 hours</p>
                 <p style="font-size:12px;color:#666;margin:0;line-height:1.6;">You'll see real leads in your dashboard — names, emails, and phone numbers of people who abandoned your form.</p>
               </td>
             </tr>
@@ -193,12 +193,12 @@ export async function POST(req: NextRequest) {
           <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
               <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:16px;vertical-align:top;">
-                <p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 4px 0;">Every Monday</p>
+                <p style="font-size:13px;font-weight:700;color:#ff6b35;margin:0 0 4px 0;">Every Monday</p>
                 <p style="font-size:12px;color:#666;margin:0;line-height:1.6;">You'll receive a weekly report with leads captured, revenue at risk, and recovery metrics.</p>
               </td>
               <td width="4%"></td>
               <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:16px;vertical-align:top;">
-                <p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 4px 0;">${plan !== 'essentials' ? 'Automated recovery' : 'Manual follow-up'}</p>
+                <p style="font-size:13px;font-weight:700;color:#ff6b35;margin:0 0 4px 0;">${plan !== 'essentials' ? 'Automated recovery' : 'Manual follow-up'}</p>
                 <p style="font-size:12px;color:#666;margin:0;line-height:1.6;">${plan !== 'essentials' ? 'ReCapture will automatically email abandoned leads on your behalf to bring them back.' : 'Use your dashboard to follow up with every lead via email or phone call.'}</p>
               </td>
             </tr>
@@ -211,7 +211,7 @@ export async function POST(req: NextRequest) {
         </td></tr>
         <tr><td style="padding:0 0 24px 0;">
           <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #1e1e1e;border-radius:8px;">
-            <tr><td style="padding:14px 16px;font-family:monospace;font-size:14px;color:#ff6b35;word-break:break-all;">
+            <tr><td style="padding:14px 16px;font-family:monospace;font-size:14px;color:#fff;word-break:break-all;">
               ${apiKey}
             </td></tr>
           </table>
