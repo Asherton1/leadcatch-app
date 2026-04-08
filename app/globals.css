@@ -146,3 +146,11 @@ input, textarea, select, button {
     padding: 1.25rem !important;
   }
 }
+
+
+/* Force signup name fields to stack on mobile */
+@media (max-width: 640px) {
+  .signup-name-row {
+    grid-template-columns: 1fr !important;
+  }
+}

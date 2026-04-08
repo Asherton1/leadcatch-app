@@ -94,7 +94,7 @@ function SignupForm() {
         </div>
         <form onSubmit={handleSubmit} style={s.form} noValidate>
           <p style={s.sectionLabel}>Your Info</p>
-          <div style={s.row}>
+          <div style={s.row} className="signup-name-row">
             <div style={s.field}>
               <label style={s.label}>First Name <span style={s.req}>*</span></label>
               <input style={s.input} type="text" placeholder="Jane" value={firstName} onChange={e => setFirstName(e.target.value)} required autoFocus />
@@ -174,8 +174,7 @@ const s: Record<string, React.CSSProperties> = {
   title: { fontSize: '1.5rem', fontWeight: 700, color: '#fff', marginBottom: '0.375rem', letterSpacing: '-0.02em' },
   subtitle: { fontSize: '0.875rem', color: '#555', lineHeight: 1.5 },
   form: { display: 'flex', flexDirection: 'column', gap: '1.125rem' },
-  row: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', },
-  '@media (max-width: 768px)': { row: { gridTemplateColumns: '1fr' } },
+  row: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' },
   field: { display: 'flex', flexDirection: 'column', gap: '0.375rem' },
   divider: { height: '1px', background: '#1e1e1e', margin: '0.25rem 0' },
   sectionLabel: { fontSize: '0.6875rem', fontWeight: 700, color: '#333', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '-0.25rem' },
