@@ -3,6 +3,7 @@ import './landing.css'
 import StatsBar from './components/StatsBar'
 import GSAPAnimations from './components/GSAPAnimations'
 import PricingSection from './components/PricingSection'
+import MobileNav from './components/MobileNav'
 
 export const metadata = {
   title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
@@ -25,10 +26,7 @@ export default function LandingPage() {
             </svg>
             <span><span style={{ color: '#fff' }}>Re</span><span className="logo-accent">Capture</span></span>
           </Link>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.75rem' }}>
-          <Link href="/blog" style={{ color: '#ff6b35', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>Insights</Link>
-          <Link href="/login" className="nav-cta">Login</Link>
-        </div>
+        <MobileNav />
       </nav>
 
       <section className="hero">

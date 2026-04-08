@@ -1010,3 +1010,51 @@
 }
 
 
+
+
+/* ── Mobile Nav ── */
+.nav-desktop { display: flex; align-items: center; gap: 1.75rem; }
+.nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+.nav-mobile-menu { display: none; }
+
+@media (max-width: 768px) {
+  .nav-desktop { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-mobile-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #111;
+    border-bottom: 1px solid #1e1e1e;
+    padding: 1.5rem;
+    gap: 1rem;
+    z-index: 100;
+    animation: menuSlide 0.2s ease;
+  }
+  @keyframes menuSlide {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .nav-mobile-menu a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .nav-mobile-menu a:last-child { border-bottom: none; }
+  .nav-mobile-cta {
+    background: #ff6b35 !important;
+    color: #000 !important;
+    font-weight: 700 !important;
+    text-align: center;
+    padding: 0.875rem !important;
+    border-radius: 8px;
+    border-bottom: none !important;
+  }
+  .lc-nav { position: relative; }
+}
