@@ -8,6 +8,13 @@
 
 /* ── Nav ── */
 .blog-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   max-width: 960px;
   margin: 0 auto;
   padding: 1.75rem 2rem;
@@ -353,7 +360,14 @@
   .blog-post-header { padding: 3rem 1.5rem 2rem; }
   .blog-post-header h1 { font-size: 2rem; }
   .blog-post-body { padding: 2rem 1.5rem 3rem; }
-  .blog-nav { padding: 1.25rem 1.5rem; }
+  .blog-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04); padding: 1.25rem 1.5rem; }
   .blog-hero::after { display: none; }
 }
 
@@ -368,7 +382,14 @@
 @media (max-width: 768px) {
   .blog-nav-desktop { display: none; }
   .blog-nav-hamburger { display: flex; }
-  .blog-nav { position: relative; }
+  .blog-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04); position: relative; }
   .blog-nav-mobile-menu {
     display: flex;
     flex-direction: column;
