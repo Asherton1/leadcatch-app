@@ -17,7 +17,7 @@ export default function AboutPage() {
       <div className="about-hero">
         <div className="about-hero-content">
           <h1>The leads were always there.<br /><span className="about-highlight">Nobody was watching.</span></h1>
-          <p className="about-hero-sub">ReCapture was built by someone who spent over a decade running ad campaigns for high-ticket businesses — and got tired of watching good money disappear into a black hole between the first keystroke and the submit button.</p>
+          <p className="about-hero-sub">ReCapture was We spent over a decade running ad campaigns for high-ticket businesses and got tired of watching good money disappear into a black hole between the first keystroke and the submit button.</p>
         </div>
       </div>
 
@@ -53,8 +53,9 @@ export default function AboutPage() {
         <div className="about-founder-info">
           <p className="about-founder-label">Founder</p>
           <h2>Asherton C.</h2>
-          <p className="about-founder-bio">Originally from San Diego, California. Bachelor’s degree in Art & Design with a minor in Marketing and Business. Over 10 years in digital marketing and advertising, managing $100K+ in monthly ad spend across 38+ long-term clients spanning med spas, dental practices, luxury real estate, and high-end service businesses.</p>
-          <p className="about-founder-bio">The same obsession with performance marketing that built a career managing campaigns for elite brands is what led to ReCapture — a product born out of seeing the same problem over and over, and finally building the solution.</p>
+          <p className="about-founder-bio">Originally from San Diego, California. Holds a Bachelor&apos;s degree in Art & Design with a minor in Marketing and Business. Over 10 years deep in digital marketing and advertising, managing $100K+ in monthly ad spend across 38+ long-term clients spanning med spas, dental practices, luxury real estate, and high-end service businesses.</p>
+          <p className="about-founder-bio">Equal parts creative and analytical. Fascinated by the intersection of technology, behavioral science, and marketing — the kind of person who reverse-engineers why people do what they do online and builds systems around it. When not building ReCapture, you&apos;ll find him exploring emerging tech, reading about human psychology, or figuring out how to make machines do the heavy lifting so people don&apos;t have to.</p>
+          <p className="about-founder-bio">The same obsession with performance and precision that built a career managing campaigns for elite brands is what led to ReCapture — a product born out of seeing the same problem over and over, and finally building the solution.</p>
           <div className="about-founder-location">
             <span className="about-founder-dot"></span>
             Dallas, Texas
