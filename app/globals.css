@@ -21,9 +21,128 @@
 .logo-dg { animation: dotGlow 3s ease-in-out infinite; }
 
 
-/* Fix signup form row on mobile */
+
+/* ══════════════════════════════════════════════════════ */
+/* COMPREHENSIVE MOBILE OPTIMIZATION                      */
+/* ══════════════════════════════════════════════════════ */
+
+/* Signup: stack first/last name on mobile */
 @media (max-width: 640px) {
   div[style*="gridTemplateColumns"] {
     grid-template-columns: 1fr !important;
+  }
+}
+
+/* Landing: dashboard mock stats 4-col -> 2-col -> 1-col */
+@media (max-width: 768px) {
+  .mock-content {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .mock-row {
+    padding: 10px 14px !important;
+  }
+  .mock-num {
+    font-size: 22px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .mock-content {
+    grid-template-columns: 1fr !important;
+  }
+  .hero h1 {
+    font-size: 2.25rem !important;
+  }
+  .section-title {
+    font-size: 1.75rem !important;
+  }
+  .final-cta h2 {
+    font-size: 1.75rem !important;
+  }
+}
+
+/* Footer: wrap links on mobile */
+@media (max-width: 640px) {
+  .lc-footer div[style*="display: flex"] {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 12px !important;
+  }
+}
+
+/* Prevent any horizontal overflow globally */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Ensure all images scale */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent code blocks from overflowing */
+pre, code {
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+/* Ensure form inputs don't overflow on mobile */
+input, textarea, select, button {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Problem cards text overflow */
+@media (max-width: 480px) {
+  .problem-card, .feature-card {
+    padding: 1.5rem !important;
+  }
+  .step-card {
+    padding: 1.5rem !important;
+  }
+}
+
+/* Dashboard: lead table horizontal scroll on small screens */
+@media (max-width: 640px) {
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Pricing cards: ensure proper padding on mobile */
+@media (max-width: 480px) {
+  .pricing-card {
+    padding: 1.5rem !important;
+  }
+  .pricing-card h3 {
+    font-size: 1.25rem !important;
+  }
+  .pricing-price {
+    font-size: 2rem !important;
+  }
+}
+
+/* Blog featured card: ensure text doesn't overflow */
+@media (max-width: 480px) {
+  .blog-featured-title {
+    font-size: 1.25rem !important;
+  }
+  .blog-featured-content {
+    padding: 1.5rem !important;
+  }
+}
+
+/* About: founder section tighter on small screens */
+@media (max-width: 480px) {
+  .about-hero h1 {
+    font-size: 1.75rem !important;
+  }
+  .about-values-grid {
+    gap: 1rem !important;
+  }
+  .about-value {
+    padding: 1.25rem !important;
   }
 }
