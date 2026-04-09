@@ -12,7 +12,6 @@ export default function MobileNav() {
         <Link href="/about" style={{ color: '#ff6b35', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>About</Link>
         <Link href="/blog" style={{ color: '#ff6b35', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>Insights</Link>
         <Link href="/#pricing" style={{ color: '#ff6b35', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>Pricing</Link>
-        <Link href="/#pricing" style={{ color: '#ff6b35', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>Pricing</Link>
         <Link href="/login" className="nav-cta">Login</Link>
       </div>
 
