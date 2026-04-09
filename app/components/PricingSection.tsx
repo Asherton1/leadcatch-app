@@ -47,16 +47,16 @@ export default function PricingSection() {
           <div className="pricing-price">
             <span className="price-dollar">$</span>
             <span className="price-amount">{essentials}</span>
-            <span className="price-period">/mo{annual ? ' \u00b7 billed annually' : ''}</span>
+            <span className="price-period">/mo{annual ? ' · billed annually' : ''}</span>
           </div>
-          <p className="pricing-desc">See every lead you\u2019re losing. Follow up manually.</p>
+          <p className="pricing-desc">See every lead you’re losing. Follow up manually.</p>
           <ul className="pricing-features">
-            <li><span className="check-icon">\u2713</span>Real-time form abandonment tracking</li>
-            <li><span className="check-icon">\u2713</span>Lead dashboard with contact details</li>
-            <li><span className="check-icon">\u2713</span>Lead status management</li>
-            <li><span className="check-icon">\u2713</span>Revenue-at-risk estimation</li>
-            <li><span className="check-icon">\u2713</span>Weekly email report</li>
-            <li><span className="check-icon">\u2713</span>Manual follow-up (email & call)</li>
+            <li><span className="check-icon">✓</span>Real-time form abandonment tracking</li>
+            <li><span className="check-icon">✓</span>Lead dashboard with contact details</li>
+            <li><span className="check-icon">✓</span>Lead status management</li>
+            <li><span className="check-icon">✓</span>Revenue-at-risk estimation</li>
+            <li><span className="check-icon">✓</span>Weekly email report</li>
+            <li><span className="check-icon">✓</span>Manual follow-up (email & call)</li>
           </ul>
           <Link href="/signup?plan=essentials" className="pricing-cta pricing-cta-secondary">Start Free Trial</Link>
           <p className="pricing-upgrade-hint">Want automated recovery? <Link href="/signup?plan=pro">Upgrade to Pro</Link> anytime.</p>
@@ -68,16 +68,16 @@ export default function PricingSection() {
           <div className="pricing-price">
             <span className="price-dollar">$</span>
             <span className="price-amount">{pro}</span>
-            <span className="price-period">/mo{annual ? ' \u00b7 billed annually' : ''}</span>
+            <span className="price-period">/mo{annual ? ' · billed annually' : ''}</span>
           </div>
           <p className="pricing-desc">Automated recovery. Leads come back without lifting a finger.</p>
           <ul className="pricing-features">
-            <li><span className="check-icon">\u2713</span>Everything in Essentials</li>
-            <li><span className="check-icon check-orange">\u2713</span>Automated lead recovery emails</li>
-            <li><span className="check-icon check-orange">\u2713</span>Custom sender name & branding</li>
-            <li><span className="check-icon check-orange">\u2713</span>Configurable send delay timing</li>
-            <li><span className="check-icon check-orange">\u2713</span>Weekly reports with trend analytics</li>
-            <li><span className="check-icon check-orange">\u2713</span>Priority support</li>
+            <li><span className="check-icon">✓</span>Everything in Essentials</li>
+            <li><span className="check-icon check-orange">✓</span>Automated lead recovery emails</li>
+            <li><span className="check-icon check-orange">✓</span>Custom sender name & branding</li>
+            <li><span className="check-icon check-orange">✓</span>Configurable send delay timing</li>
+            <li><span className="check-icon check-orange">✓</span>Weekly reports with trend analytics</li>
+            <li><span className="check-icon check-orange">✓</span>Priority support</li>
           </ul>
           <Link href="/signup?plan=pro" className="pricing-cta pricing-cta-primary">Start Free Trial</Link>
         </div>
@@ -89,14 +89,14 @@ export default function PricingSection() {
           </div>
           <p className="pricing-desc">Multiple locations. One powerful dashboard. Volume pricing built for scale.</p>
           <ul className="pricing-features">
-            <li><span className="check-icon check-orange">\u2713</span>Everything in Pro</li>
-            <li><span className="check-icon check-orange">\u2713</span>Unlimited websites & locations</li>
-            <li><span className="check-icon check-orange">\u2713</span>Centralized multi-location dashboard</li>
-            <li><span className="check-icon check-orange">\u2713</span>Per-location reporting & analytics</li>
-            <li><span className="check-icon check-orange">\u2713</span>White-glove onboarding & installation</li>
-            <li><span className="check-icon check-orange">\u2713</span>Custom-branded recovery emails per site</li>
-            <li><span className="check-icon check-orange">\u2713</span>Executive roll-up reports</li>
-            <li><span className="check-icon check-orange">\u2713</span>Dedicated account manager</li>
+            <li><span className="check-icon check-orange">✓</span>Everything in Pro</li>
+            <li><span className="check-icon check-orange">✓</span>Unlimited websites & locations</li>
+            <li><span className="check-icon check-orange">✓</span>Centralized multi-location dashboard</li>
+            <li><span className="check-icon check-orange">✓</span>Per-location reporting & analytics</li>
+            <li><span className="check-icon check-orange">✓</span>White-glove onboarding & installation</li>
+            <li><span className="check-icon check-orange">✓</span>Custom-branded recovery emails per site</li>
+            <li><span className="check-icon check-orange">✓</span>Executive roll-up reports</li>
+            <li><span className="check-icon check-orange">✓</span>Dedicated account manager</li>
           </ul>
           <button onClick={() => setShowEnterprise(true)} className="pricing-cta pricing-cta-primary">Talk to Us</button>
         </div>
@@ -108,8 +108,8 @@ export default function PricingSection() {
             <button className="enterprise-close" onClick={() => setShowEnterprise(false)}>&times;</button>
             {!submitted ? (
               <>
-                <h3 className="enterprise-modal-title">Let\u2019s build your plan</h3>
-                <p className="enterprise-modal-sub">Tell us about your business and we\u2019ll put together a custom package that fits.</p>
+                <h3 className="enterprise-modal-title">Let’s build your plan</h3>
+                <p className="enterprise-modal-sub">Tell us about your business and we’ll put together a custom package that fits.</p>
                 <div className="enterprise-form" role="form">
                   <div className="enterprise-row">
                     <div className="enterprise-field">
@@ -142,9 +142,9 @@ export default function PricingSection() {
               </>
             ) : (
               <div className="enterprise-success">
-                <div className="enterprise-success-icon">\u2713</div>
-                <h3>We\u2019ll be in touch</h3>
-                <p>Thanks for reaching out. We\u2019ll review your inquiry and get back to you within 24 hours.</p>
+                <div className="enterprise-success-icon">✓</div>
+                <h3>We’ll be in touch</h3>
+                <p>Thanks for reaching out. We’ll review your inquiry and get back to you within 24 hours.</p>
                 <button className="enterprise-submit" onClick={() => setShowEnterprise(false)}>Close</button>
               </div>
             )}

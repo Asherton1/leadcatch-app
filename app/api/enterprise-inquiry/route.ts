@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: 'ReCapture <onboarding@resend.dev>',
       to: 'asherton.c@me.com',
-      subject: '\ud83c\udfe2 Enterprise Inquiry \u2014 ' + company,
+      subject: '🏢 Enterprise Inquiry — ' + company,
       html: '<h2>New Enterprise Inquiry</h2>' +
         '<p><strong>Name:</strong> ' + name + '</p>' +
         '<p><strong>Email:</strong> ' + email + '</p>' +
