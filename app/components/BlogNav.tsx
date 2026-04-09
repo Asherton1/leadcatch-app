@@ -21,6 +21,7 @@ export default function BlogNav() {
       <div className="blog-nav-desktop">
         <Link href="/about">About</Link>
         <Link href="/blog">Insights</Link>
+        <Link href="/#pricing">Pricing</Link>
         <Link href="/test-form">Demo</Link>
         <Link href="/signup">Start Trial</Link>
       </div>
@@ -39,6 +40,7 @@ export default function BlogNav() {
         <div className="blog-nav-mobile-menu" onClick={() => setOpen(false)}>
           <Link href="/about">About</Link>
           <Link href="/blog">Insights</Link>
+          <Link href="/#pricing">Pricing</Link>
           <Link href="/test-form">Demo</Link>
           <Link href="/login">Login</Link>
           <Link href="/signup" className="blog-nav-mobile-cta">Start Free Trial</Link>

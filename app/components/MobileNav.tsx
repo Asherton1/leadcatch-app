@@ -11,6 +11,7 @@ export default function MobileNav() {
       <div className="nav-desktop">
         <Link href="/about" style={{ color: '#ff6b35', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>About</Link>
         <Link href="/blog" style={{ color: '#ff6b35', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>Insights</Link>
+        <Link href="/#pricing" style={{ color: '#ff6b35', textDecoration: 'none', fontSize: '0.9375rem', fontWeight: 500 }}>Pricing</Link>
         <Link href="/login" className="nav-cta">Login</Link>
       </div>
 
@@ -28,6 +29,7 @@ export default function MobileNav() {
         <div className="nav-mobile-menu" onClick={() => setOpen(false)}>
           <Link href="/about">About</Link>
           <Link href="/blog">Insights</Link>
+          <Link href="/#pricing">Pricing</Link>
           <Link href="/login">Login</Link>
           <Link href="/signup" className="nav-mobile-cta">Start Free Trial</Link>
         </div>
