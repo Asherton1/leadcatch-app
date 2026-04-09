@@ -493,6 +493,7 @@
 }
 
 .pricing-tier {
+  color: #ff6b35 !important;
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -502,6 +503,7 @@
 }
 
 .pricing-card-featured .pricing-tier {
+  color: #ff6b35 !important;
   color: var(--orange);
 }
 
@@ -1233,4 +1235,21 @@
   .enterprise-modal {
     padding: 1.75rem;
   }
+}
+
+/* Align pricing buttons to same line */
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+}
+.pricing-features {
+  flex: 1;
+}
+.pricing-cta {
+  margin-top: auto;
+}
+.pricing-upgrade-hint {
+  margin-top: -0.5rem;
+  position: relative;
+  bottom: -1.5rem;
 }

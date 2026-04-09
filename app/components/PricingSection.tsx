@@ -98,7 +98,7 @@ export default function PricingSection() {
             <li><span className="check-icon check-orange">✓</span>Executive roll-up reports</li>
             <li><span className="check-icon check-orange">✓</span>Dedicated account manager</li>
           </ul>
-          <button onClick={() => setShowEnterprise(true)} className="pricing-cta pricing-cta-primary">Talk to Us</button>
+          <button onClick={() => setShowEnterprise(true)} className="pricing-cta pricing-cta-primary">Contact Us</button>
         </div>
       </div>
 
