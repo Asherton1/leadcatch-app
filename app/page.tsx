@@ -181,70 +181,91 @@ export default function LandingPage() {
         <h2 className="section-title">Built to Recover Revenue</h2>
         <p className="section-subtitle">One script tag. Full automation. Every feature designed to bring leads back.</p>
         <div className="features-grid">
+          {/* ROW 1 — The wow */}
           <div className="feature-card">
             <div className="feature-card-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
-              </svg>
-            </div>
-            <h3 className="feature-card-title">Universal Tracking</h3>
-            <p className="feature-card-text">One script tag works on any website — WordPress, Wix, Webflow, custom HTML. Zero configuration required.</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-card-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="12" cy="12" r="3"/><path d="M13 2.05A10 10 0 0 1 22 12"/><path d="M11 21.95A10 10 0 0 1 2 12"/><path d="M12 8v4l3 3"/>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
               </svg>
             </div>
             <h3 className="feature-card-title">Real-Time Capture</h3>
-            <p className="feature-card-text">Contact details captured the instant a visitor starts typing — even if they never hit submit.</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-card-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-              </svg>
-            </div>
-            <h3 className="feature-card-title">Revenue Estimation</h3>
-            <p className="feature-card-text">Every abandoned lead shows its dollar value based on your average service price. See exactly how much revenue is walking out the door.</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-card-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-              </svg>
-            </div>
-            <h3 className="feature-card-title">Email Auto-Recovery</h3>
-            <p className="feature-card-text">ReCapture automatically emails abandoned leads on your behalf — instantly or on a delay you set.</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-card-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
-            </div>
-            <h3 className="feature-card-title">Status Tracking</h3>
-            <p className="feature-card-text">Track every lead through your pipeline — Open, Contacted, Converted, or Lost. Know your exact recovery rate at a glance.</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-card-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-                <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-              </svg>
-            </div>
-            <h3 className="feature-card-title">Analytics Dashboard</h3>
-            <p className="feature-card-text">Real-time metrics, revenue tracking, and complete visibility into every lead — updated the moment someone touches your form.</p>
+            <p className="feature-card-text">The instant a visitor types into your form, their name, email, and phone are captured. Before they hit submit. Before they leave. Before you lose them.</p>
           </div>
           <div className="feature-card">
             <div className="feature-card-icon">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+              </svg>
+            </div>
+            <h3 className="feature-card-title">The Invisible Pipeline</h3>
+            <p className="feature-card-text">These leads don&apos;t exist in your CRM. They don&apos;t show up in Google Analytics. They never hit submit. But they were there — typing, interested, ready to book. We make them visible.</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </div>
+            <h3 className="feature-card-title">Revenue-at-Risk Calculator</h3>
+            <p className="feature-card-text">Every abandoned lead shows its dollar value based on your average service price. Watch in real time as the revenue you&apos;re losing adds up — then recover it.</p>
+          </div>
+
+          {/* ROW 2 — The engine */}
+          <div className="feature-card">
+            <div className="feature-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+            <h3 className="feature-card-title">Universal Tracking</h3>
+            <p className="feature-card-text">One script tag works on any website — WordPress, Wix, Webflow, Squarespace, custom HTML. Install in 60 seconds. Zero configuration.</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+              </svg>
+            </div>
+            <h3 className="feature-card-title">Automated Recovery</h3>
+            <p className="feature-card-text">ReCapture emails abandoned leads on your behalf automatically — with your branding, your name, and timing you control. They come back without you lifting a finger.</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </div>
+            <h3 className="feature-card-title">Lead Pipeline</h3>
+            <p className="feature-card-text">Track every lead from capture to close — Open, Contacted, Converted, or Lost. Know your exact recovery rate and see which follow-ups are working.</p>
+          </div>
+
+          {/* ROW 3 — The intelligence */}
+          <div className="feature-card">
+            <div className="feature-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21.21 15.89A10 10 0 1 1 8 2.83" /><path d="M22 12A10 10 0 0 0 12 2v10z" />
+              </svg>
+            </div>
+            <h3 className="feature-card-title">Analytics Dashboard</h3>
+            <p className="feature-card-text">Real-time metrics, revenue tracking, and complete visibility into every lead. Updated the moment someone touches your form. No guessing.</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
               </svg>
             </div>
             <h3 className="feature-card-title">Connect to Any CRM</h3>
-            <p className="feature-card-text">Send captured leads directly to HubSpot, Salesforce, GoHighLevel, or any tool you use. Works with Zapier, Make, and custom webhooks.</p>
+            <p className="feature-card-text">Send captured leads to HubSpot, Salesforce, GoHighLevel, or any tool you already use. Works with Zapier, Make, and custom webhooks.</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
+              </svg>
+            </div>
+            <h3 className="feature-card-title">Weekly Reports & Export</h3>
+            <p className="feature-card-text">Performance reports delivered to your inbox every Monday. Export your leads to CSV anytime. Your data, your way, always accessible.</p>
           </div>
         </div>
       </section>
