@@ -236,6 +236,16 @@ export default function LandingPage() {
             <h3 className="feature-card-title">Analytics Dashboard</h3>
             <p className="feature-card-text">Real-time metrics, revenue tracking, and complete visibility into every lead — updated the moment someone touches your form.</p>
           </div>
+          <div className="feature-card">
+            <div className="feature-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+            </div>
+            <h3 className="feature-card-title">Connect to Any CRM</h3>
+            <p className="feature-card-text">Send captured leads directly to HubSpot, Salesforce, GoHighLevel, or any tool you use. Works with Zapier, Make, and custom webhooks.</p>
+          </div>
         </div>
       </section>
 
