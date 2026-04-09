@@ -59,7 +59,7 @@ export default function PricingSection() {
             <li><span className="check-icon">✓</span>Manual follow-up (email & call)</li>
           </ul>
           <Link href="/signup?plan=essentials" className="pricing-cta pricing-cta-secondary">Start Free Trial</Link>
-          <p className="pricing-upgrade-hint">Want automated recovery? <Link href="/signup?plan=pro">Upgrade to Pro</Link> anytime.</p>
+          <div className="pricing-upgrade-hint"><p>Want automated recovery?</p><p><Link href="/signup?plan=pro">Upgrade to Pro</Link> anytime.</p></div>
         </div>
 
         <div className="pricing-card pricing-card-featured">
