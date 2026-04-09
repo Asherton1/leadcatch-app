@@ -124,7 +124,7 @@ export default function PricingSection() {
                   <div className="enterprise-row">
                     <div className="enterprise-field">
                       <label>Company Name *</label>
-                      <input type="text" placeholder="Willow Bridge Property Co." value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} required />
+                      <input type="text" placeholder="Acme Property Group" value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} required />
                     </div>
                     <div className="enterprise-field">
                       <label>Number of Locations</label>
