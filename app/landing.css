@@ -1237,19 +1237,30 @@
   }
 }
 
-/* Align pricing buttons to same line */
-.pricing-card {
-  display: flex;
-  flex-direction: column;
+
+
+/* ── Pricing card alignment ── */
+.pricing-grid-3 {
+  align-items: stretch !important;
 }
-.pricing-features {
-  flex: 1;
+.pricing-grid-3 .pricing-card {
+  display: flex !important;
+  flex-direction: column !important;
 }
-.pricing-cta {
-  margin-top: auto;
+.pricing-grid-3 .pricing-features {
+  flex: 1 !important;
 }
-.pricing-upgrade-hint {
-  margin-top: -0.5rem;
+.pricing-grid-3 .pricing-cta {
+  margin-top: auto !important;
+}
+.pricing-grid-3 .pricing-upgrade-hint {
+  position: absolute;
+  bottom: -2.5rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.pricing-grid-3 .pricing-card {
   position: relative;
-  bottom: -1.5rem;
+  margin-bottom: 2.5rem;
 }
