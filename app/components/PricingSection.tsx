@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 export default function PricingSection() {
@@ -8,9 +8,18 @@ export default function PricingSection() {
   const [formData, setFormData] = useState({ name: '', email: '', company: '', locations: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
+  const [openTier, setOpenTier] = useState<number | null>(1)
+  const [isMobile, setIsMobile] = useState(false)
 
   const essentials = annual ? 127 : 150
   const pro = annual ? 167 : 200
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const handleEnterprise = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -28,6 +37,149 @@ export default function PricingSection() {
     setSending(false)
   }
 
+  const tiers = [
+    {
+      name: 'Essentials',
+      price: `$${essentials}`,
+      period: `/mo${annual ? ' · billed annually' : ''}`,
+      desc: "See every lead you're losing. Follow up manually.",
+      featured: false,
+      badge: null,
+      features: [
+        'Real-time form abandonment tracking',
+        'Lead dashboard with contact details',
+        'Lead status management',
+        'Revenue-at-risk estimation',
+        'Weekly email report',
+        'Manual follow-up (email & call)',
+      ],
+      orangeFrom: 99,
+      cta: <Link href="/signup?plan=essentials" className="pricing-cta pricing-cta-secondary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem' }}>Start Free Trial</Link>,
+      extra: <div className="pricing-upgrade-hint"><p>Want automated recovery?</p><p><Link href="/signup?plan=pro">Upgrade to Pro</Link> anytime.</p></div>,
+    },
+    {
+      name: 'Pro',
+      price: `$${pro}`,
+      period: `/mo${annual ? ' · billed annually' : ''}`,
+      desc: "Automated recovery. Leads come back without lifting a finger.",
+      featured: true,
+      badge: 'Most Popular',
+      features: [
+        'Everything in Essentials',
+        'Automated lead recovery emails',
+        'Custom sender name & branding',
+        'Configurable send delay timing',
+        'Weekly reports with trend analytics',
+        'Priority support',
+      ],
+      orangeFrom: 1,
+      cta: <Link href="/signup?plan=pro" className="pricing-cta pricing-cta-primary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem' }}>Start Free Trial</Link>,
+      extra: null,
+    },
+    {
+      name: 'Enterprise',
+      price: 'Custom',
+      period: '',
+      desc: 'Multiple locations. One powerful dashboard. Volume pricing built for scale.',
+      featured: false,
+      badge: null,
+      features: [
+        'Everything in Pro',
+        'Unlimited websites & locations',
+        'Centralized multi-location dashboard',
+        'Per-location reporting & analytics',
+        'White-glove onboarding & installation',
+        'Custom-branded recovery emails per site',
+        'Executive roll-up reports',
+        'Dedicated account manager',
+      ],
+      orangeFrom: 0,
+      cta: <button onClick={() => setShowEnterprise(true)} className="pricing-cta pricing-cta-primary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem', width: '100%' }}>Contact Us</button>,
+      extra: null,
+    },
+  ]
+
+  const renderDesktop = () => (
+    <div className="pricing-grid pricing-grid-3">
+      {tiers.map((t, i) => (
+        <div className={`pricing-card${t.featured ? ' pricing-card-featured' : ''}${i === 2 ? ' pricing-card-enterprise' : ''}`} key={i}>
+          {t.badge && <div className="pricing-badge">{t.badge}</div>}
+          <div className="pricing-tier">{t.name}</div>
+          <div className="pricing-price">
+            {t.name !== 'Enterprise' ? (
+              <>
+                <span className="price-dollar">$</span>
+                <span className="price-amount">{t.name === 'Essentials' ? essentials : pro}</span>
+                <span className="price-period">{t.period}</span>
+              </>
+            ) : (
+              <span className="price-amount" style={{ fontSize: '2rem' }}>Custom</span>
+            )}
+          </div>
+          <p className="pricing-desc">{t.desc}</p>
+          <ul className="pricing-features">
+            {t.features.map((f, fi) => (
+              <li key={fi}><span className={`check-icon${fi >= t.orangeFrom ? ' check-orange' : ''}`}>✓</span>{f}</li>
+            ))}
+          </ul>
+          {t.cta}
+          {t.extra}
+        </div>
+      ))}
+    </div>
+  )
+
+  const renderMobile = () => (
+    <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+      {tiers.map((t, i) => (
+        <div key={i} style={{ borderBottom: '1px solid #1e1e1e', overflow: 'hidden' }}>
+          <button
+            onClick={() => setOpenTier(openTier === i ? null : i)}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '1.25rem 0',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              textAlign: 'left',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              {t.badge && <span style={{ fontSize: '0.65rem', background: 'rgba(255,107,53,0.15)', color: '#ff6b35', padding: '0.2rem 0.5rem', borderRadius: '4px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>★</span>}
+              <span style={{ fontSize: '1.1rem', fontWeight: 700, color: openTier === i ? '#ff6b35' : '#fff', transition: 'color 0.3s' }}>{t.name}</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35' }}>{t.price}<span style={{ fontSize: '0.75rem', color: '#666', fontWeight: 400 }}>{t.period}</span></span>
+              <span style={{ color: openTier === i ? '#ff6b35' : '#555', fontSize: '1.25rem', transition: 'transform 0.3s, color 0.3s', transform: openTier === i ? 'rotate(45deg)' : 'none', flexShrink: 0 }}>+</span>
+            </div>
+          </button>
+          <div style={{
+            maxHeight: openTier === i ? '600px' : '0',
+            opacity: openTier === i ? 1 : 0,
+            transition: 'max-height 0.4s ease, opacity 0.3s ease',
+            overflow: 'hidden',
+          }}>
+            <p style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, margin: '0 0 1rem 0' }}>{t.desc}</p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1rem 0' }}>
+              {t.features.map((f, fi) => (
+                <li key={fi} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', padding: '0.4rem 0', fontSize: '0.875rem', color: '#bbb' }}>
+                  <span style={{ color: fi >= t.orangeFrom ? '#ff6b35' : '#555', flexShrink: 0 }}>✓</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            {t.cta}
+            {t.extra}
+            <div style={{ height: '1.25rem' }} />
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+
   return (
     <section className="lc-section pricing-section" id="pricing">
       <h2 className="section-title">Simple, Transparent Pricing</h2>
@@ -41,66 +193,7 @@ export default function PricingSection() {
         <span className={annual ? 'toggle-active' : ''}>Annual <span className="save-badge">Save 15%</span></span>
       </div>
 
-      <div className="pricing-grid pricing-grid-3">
-        <div className="pricing-card">
-          <div className="pricing-tier">Essentials</div>
-          <div className="pricing-price">
-            <span className="price-dollar">$</span>
-            <span className="price-amount">{essentials}</span>
-            <span className="price-period">/mo{annual ? ' · billed annually' : ''}</span>
-          </div>
-          <p className="pricing-desc">See every lead you’re losing. Follow up manually.</p>
-          <ul className="pricing-features">
-            <li><span className="check-icon">✓</span>Real-time form abandonment tracking</li>
-            <li><span className="check-icon">✓</span>Lead dashboard with contact details</li>
-            <li><span className="check-icon">✓</span>Lead status management</li>
-            <li><span className="check-icon">✓</span>Revenue-at-risk estimation</li>
-            <li><span className="check-icon">✓</span>Weekly email report</li>
-            <li><span className="check-icon">✓</span>Manual follow-up (email & call)</li>
-          </ul>
-          <Link href="/signup?plan=essentials" className="pricing-cta pricing-cta-secondary">Start Free Trial</Link>
-          <div className="pricing-upgrade-hint"><p>Want automated recovery?</p><p><Link href="/signup?plan=pro">Upgrade to Pro</Link> anytime.</p></div>
-        </div>
-
-        <div className="pricing-card pricing-card-featured">
-          <div className="pricing-badge">Most Popular</div>
-          <div className="pricing-tier">Pro</div>
-          <div className="pricing-price">
-            <span className="price-dollar">$</span>
-            <span className="price-amount">{pro}</span>
-            <span className="price-period">/mo{annual ? ' · billed annually' : ''}</span>
-          </div>
-          <p className="pricing-desc">Automated recovery. Leads come back without lifting a finger.</p>
-          <ul className="pricing-features">
-            <li><span className="check-icon">✓</span>Everything in Essentials</li>
-            <li><span className="check-icon check-orange">✓</span>Automated lead recovery emails</li>
-            <li><span className="check-icon check-orange">✓</span>Custom sender name & branding</li>
-            <li><span className="check-icon check-orange">✓</span>Configurable send delay timing</li>
-            <li><span className="check-icon check-orange">✓</span>Weekly reports with trend analytics</li>
-            <li><span className="check-icon check-orange">✓</span>Priority support</li>
-          </ul>
-          <Link href="/signup?plan=pro" className="pricing-cta pricing-cta-primary">Start Free Trial</Link>
-        </div>
-
-        <div className="pricing-card pricing-card-enterprise">
-          <div className="pricing-tier">Enterprise</div>
-          <div className="pricing-price">
-            <span className="price-amount" style={{ fontSize: '2rem' }}>Custom</span>
-          </div>
-          <p className="pricing-desc">Multiple locations. One powerful dashboard. Volume pricing built for scale.</p>
-          <ul className="pricing-features">
-            <li><span className="check-icon check-orange">✓</span>Everything in Pro</li>
-            <li><span className="check-icon check-orange">✓</span>Unlimited websites & locations</li>
-            <li><span className="check-icon check-orange">✓</span>Centralized multi-location dashboard</li>
-            <li><span className="check-icon check-orange">✓</span>Per-location reporting & analytics</li>
-            <li><span className="check-icon check-orange">✓</span>White-glove onboarding & installation</li>
-            <li><span className="check-icon check-orange">✓</span>Custom-branded recovery emails per site</li>
-            <li><span className="check-icon check-orange">✓</span>Executive roll-up reports</li>
-            <li><span className="check-icon check-orange">✓</span>Dedicated account manager</li>
-          </ul>
-          <button onClick={() => setShowEnterprise(true)} className="pricing-cta pricing-cta-primary">Contact Us</button>
-        </div>
-      </div>
+      {isMobile ? renderMobile() : renderDesktop()}
 
       {showEnterprise && (
         <div className="enterprise-overlay" onClick={(e) => { if (e.target === e.currentTarget) setShowEnterprise(false) }}>
@@ -108,8 +201,8 @@ export default function PricingSection() {
             <button className="enterprise-close" onClick={() => setShowEnterprise(false)}>&times;</button>
             {!submitted ? (
               <>
-                <h3 className="enterprise-modal-title">Let’s build your plan</h3>
-                <p className="enterprise-modal-sub">Tell us about your business and we’ll put together a custom package that fits.</p>
+                <h3 className="enterprise-modal-title">Let&apos;s build your plan</h3>
+                <p className="enterprise-modal-sub">Tell us about your business and we&apos;ll put together a custom package that fits.</p>
                 <div className="enterprise-form" role="form">
                   <div className="enterprise-row">
                     <div className="enterprise-field">
@@ -143,8 +236,8 @@ export default function PricingSection() {
             ) : (
               <div className="enterprise-success">
                 <div className="enterprise-success-icon">✓</div>
-                <h3>We’ll be in touch</h3>
-                <p>Thanks for reaching out. We’ll review your inquiry and get back to you within 24 hours.</p>
+                <h3>We&apos;ll be in touch</h3>
+                <p>Thanks for reaching out. We&apos;ll review your inquiry and get back to you within 24 hours.</p>
                 <button className="enterprise-submit" onClick={() => setShowEnterprise(false)}>Close</button>
               </div>
             )}
