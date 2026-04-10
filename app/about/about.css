@@ -182,3 +182,5 @@
   .about-values-grid { grid-template-columns: 1fr; }
   .about-story { padding: 0 1.5rem 3rem; }
 }
+
+.about-value h3 { white-space: nowrap; }
