@@ -5,6 +5,8 @@ import GSAPAnimations from './components/GSAPAnimations'
 import PricingSection from './components/PricingSection'
 import MobileNav from './components/MobileNav'
 import FeaturesAccordion from './components/FeaturesAccordion'
+import ProblemAccordion from './components/ProblemAccordion'
+import StepsAccordion from './components/StepsAccordion'
 
 export const metadata = {
   title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
@@ -92,57 +94,13 @@ export default function LandingPage() {
 
       <section className="lc-section">
         <h2 className="section-title">The Invisible Revenue Leak</h2>
-        <div className="problem-grid">
-          <div className="problem-card fade-up">
-            <div className="problem-number">01</div>
-            <h3 className="problem-title">They Start. Then Vanish.</h3>
-            <p className="problem-text">
-              A prospect finds your site, opens your form, types their name and email — then their phone buzzes.
-              They switch tabs. They never come back. And you never knew they existed.
-            </p>
-          </div>
-          <div className="problem-card fade-up" style={{ animationDelay: '0.1s' }}>
-            <div className="problem-number">02</div>
-            <h3 className="problem-title">Every Extra Field Costs You</h3>
-            <p className="problem-text">
-              Five fields might seem reasonable — but data shows most visitors abandon after three.
-              Every extra field is a silent conversion killer. And until now, you had no way to see it.
-            </p>
-          </div>
-          <div className="problem-card fade-up" style={{ animationDelay: '0.2s' }}>
-            <div className="problem-number">03</div>
-            <h3 className="problem-title">Ghost Leads Are Bleeding You Dry</h3>
-            <p className="problem-text">
-              If 100 visitors start your form and 60 don&apos;t finish, that&apos;s 15–20 lost bookings per month.
-              For a $1,500 average service, that&apos;s $22k–$30k walking out the door. Every single month.
-            </p>
-          </div>
-        </div>
+        <ProblemAccordion />
       </section>
 
       <section className="lc-section how-it-works-section">
         <h2 className="section-title">Three Steps to Recovered Revenue</h2>
         <p className="section-subtitle">No complex setup. No dev team required. Just results.</p>
-        <div className="how-it-works-grid">
-          <div className="how-step">
-            <div className="how-step-num">01</div>
-            
-            <h3 className="how-step-title">Install in 60 Seconds</h3>
-            <p className="how-step-text">Copy one line of code into your website. Works with WordPress, Wix, Webflow, Squarespace, or any custom site. Takes less time than making coffee.</p>
-          </div>
-          <div className="how-step">
-            <div className="how-step-num">02</div>
-            
-            <h3 className="how-step-title">Capture Every Lead</h3>
-            <p className="how-step-text">The instant a visitor types into your form, ReCapture captures their name, email, and phone — even if they close the tab, get distracted, or abandon halfway through.</p>
-          </div>
-          <div className="how-step">
-            <div className="how-step-num">03</div>
-            
-            <h3 className="how-step-title">Recover Lost Revenue</h3>
-            <p className="how-step-text">Reach out manually from your dashboard or let ReCapture send automated recovery emails on your behalf. Turn invisible drop-offs into booked appointments and closed revenue.</p>
-          </div>
-        </div>
+        <StepsAccordion />
       </section>
 
       <section className="lc-section screenshot-section">
