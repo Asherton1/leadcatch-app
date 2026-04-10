@@ -101,10 +101,17 @@
 .hero {
   padding-top: 8rem;
   position: relative;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 10rem 6rem 5rem;
   text-align: center;
+  background: linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url('/hero-bg.jpg') center/cover no-repeat;
+}
+.hero > * {
+  position: relative;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-badge {
