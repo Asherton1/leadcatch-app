@@ -37,7 +37,7 @@ export default function BlogIndex() {
         </Link>
       </div>
 
-      <div className="blog-more">
+      <div className="blog-more" style={{ maxWidth: "960px", margin: "0 auto", padding: "0 2rem 5rem" }}>
         <h2 style={{ color: '#ff6b35', fontSize: '1.5rem', fontWeight: 700, margin: '0 0 2rem 0' }}>More Insights</h2>
         <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
           <Link href="/blog/google-analytics-form-conversions" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem', textDecoration: 'none', transition: 'border-color 0.2s' }}>
