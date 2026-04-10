@@ -280,7 +280,7 @@ export default function LandingPage() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, color: '#ff6b35' }}>R</div>
               <div>
-                <p style={{ margin: 0, fontWeight: 600, color: '#fff', fontSize: '0.875rem' }}>Richie H.</p>
+                <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.875rem' }}>Richie H.</p>
                 <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>Clear PH Design</p>
               </div>
             </div>
@@ -290,7 +290,7 @@ export default function LandingPage() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, color: '#ff6b35' }}>D</div>
               <div>
-                <p style={{ margin: 0, fontWeight: 600, color: '#fff', fontSize: '0.875rem' }}>Dave M.</p>
+                <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.875rem' }}>Dave M.</p>
                 <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>ESD Health</p>
               </div>
             </div>
@@ -300,7 +300,7 @@ export default function LandingPage() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, color: '#ff6b35' }}>D</div>
               <div>
-                <p style={{ margin: 0, fontWeight: 600, color: '#fff', fontSize: '0.875rem' }}>Dillon R.</p>
+                <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.875rem' }}>Dillon R.</p>
                 <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>Business Owner</p>
               </div>
             </div>
@@ -310,7 +310,7 @@ export default function LandingPage() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, color: '#ff6b35' }}>M</div>
               <div>
-                <p style={{ margin: 0, fontWeight: 600, color: '#fff', fontSize: '0.875rem' }}>Mike T.</p>
+                <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.875rem' }}>Mike T.</p>
                 <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>3Con Partners</p>
               </div>
             </div>
