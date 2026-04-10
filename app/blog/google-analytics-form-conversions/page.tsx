@@ -148,8 +148,8 @@ export default function Post() {
         <div className="blog-author" style={{ display: 'flex', alignItems: 'center', gap: '1rem', borderTop: '1px solid #1e1e1e', paddingTop: '2rem', marginTop: '3rem' }}>
           <div style={{ width: 48, height: 48, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.875rem', fontWeight: 700, color: '#ff6b35', flexShrink: 0 }}>AC</div>
           <div>
-            <p style={{ margin: 0, fontWeight: 600, color: '#fff', fontSize: '0.9rem' }}>Asherton C.</p>
-            <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>Founder, ReCapture</p>
+            <p style={{ margin: 0, fontWeight: 600, color: '#fff', fontSize: '0.9rem' }}>ReCapture Team</p>
+            <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>userecapture.com</p>
           </div>
         </div>
 

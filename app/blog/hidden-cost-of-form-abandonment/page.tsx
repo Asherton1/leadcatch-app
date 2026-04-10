@@ -92,8 +92,8 @@ export default function Post() {
       <div className="blog-post-author">
         <div className="blog-post-author-avatar">AC</div>
         <div>
-          <div className="blog-post-author-name">Asherton C.</div>
-          <div className="blog-post-author-role">Founder, ReCapture</div>
+          <div className="blog-post-author-name">ReCapture Team</div>
+          <div className="blog-post-author-role">userecapture.com</div>
         </div>
       </div>
 
