@@ -1288,3 +1288,15 @@
     grid-template-columns: 1fr !important;
   }
 }
+
+@media (max-width: 480px) {
+  .hero { padding: 6rem 1.25rem 2.5rem !important; }
+  .hero h1 { font-size: 2rem !important; }
+  .section-title { font-size: 1.75rem !important; }
+  .section-subtitle { font-size: 0.9rem !important; padding: 0 0.5rem; }
+  .lc-section { padding: 0 1.25rem !important; }
+  .final-cta { padding: 3rem 1.25rem !important; }
+  .final-cta h2 { font-size: 1.75rem !important; }
+  .lc-footer { padding: 2rem 1.25rem !important; }
+  .testimonials-grid { grid-template-columns: 1fr !important; padding: 0 0.5rem !important; }
+}
