@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import BlogNav from '../../components/BlogNav'
 import '../blog.css'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'The Hidden Cost of Form Abandonment — ReCapture Blog',
@@ -22,6 +23,10 @@ export default function Post() {
         </div>
         <h1>The Hidden Cost of Form Abandonment</h1>
         <p className="post-subtitle">You&apos;re spending thousands driving traffic to your website. But what happens after someone clicks your contact form?</p>
+      </div>
+
+      <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
+        <Image src="/blog-form-abandonment.webp" alt="Form abandonment visualization" fill style={{ objectFit: 'cover' }} />
       </div>
 
       <div className="blog-post-divider"><hr /></div>

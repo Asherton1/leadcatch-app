@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import BlogNav from '../../components/BlogNav'
 import '../blog.css'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'Why Your Google Analytics Is Lying to You About Form Conversions — ReCapture Blog',
@@ -23,6 +24,10 @@ export default function Post() {
         </div>
         <h1>Why Your Google Analytics Is Lying to You About Form Conversions</h1>
         <p className="post-subtitle">You&apos;re measuring traffic in and submissions out. But nobody is measuring what happens in between — and that&apos;s where the money is.</p>
+      </div>
+
+      <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
+        <Image src="/blog-ga-lying.webp" alt="Broken analytics dashboard" fill style={{ objectFit: 'cover' }} />
       </div>
 
       <div className="blog-post-divider"><hr /></div>
