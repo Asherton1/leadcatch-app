@@ -23,6 +23,7 @@ export default function BlogNav() {
         <Link href="/blog">Insights</Link>
         <Link href="/#pricing">Pricing</Link>
         <Link href="/test-form">Demo</Link>
+        <Link href="/login" style={{ color: "#ff6b35", border: "1px solid rgba(255,107,53,0.4)", padding: "0.4rem 1rem", borderRadius: "6px" }}>Login</Link>
         <Link href="/signup">Start Trial</Link>
       </div>
 
