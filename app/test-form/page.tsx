@@ -111,7 +111,7 @@ export default function TestForm() {
               {loading ? 'Submitting…' : 'Request Demo →'}
             </button>
           </form>
-          <p style={s.hint}>🧪 <strong>Demo hint:</strong> Fill 3+ fields then close or navigate away — it will appear as a partial submission in your <a href="/dashboard" style={s.hintLink}>Recapture dashboard</a>.</p>
+          
         </div>
       </div>
     </>
