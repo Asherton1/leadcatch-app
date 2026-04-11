@@ -34,10 +34,15 @@
 
 /* ── Blog Hero ── */
 .blog-hero {
-  max-width: 960px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 6rem 2rem 4rem;
   position: relative;
+  background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.9)), url('/hero-bg.jpg') center/cover no-repeat;
+}
+.blog-hero-content {
+  max-width: 960px;
+  margin: 0 auto;
 }
 .blog-hero::after {
   content: '';

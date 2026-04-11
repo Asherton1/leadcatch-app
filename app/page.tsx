@@ -225,6 +225,7 @@ export default function LandingPage() {
         </div>
         <p style={{ color: '#555', fontSize: '12px' }}>© 2026 ReCapture</p>
         <p style={{ color: '#555', fontSize: '12px' }}>Born & Built in Dallas, Texas 🤘</p>
+        <p style={{ color: '#555', fontSize: '12px', marginTop: '8px' }}>hello@userecapture.com</p>
       </footer>
     </div>
   )

@@ -54,7 +54,7 @@ export default function TestForm() {
 
   return (
     <>
-      <Script src="https://userecapture.com/track.js?key=esd_1ab9b0af-2401-4f0e-81f9-77ec683c7afb" strategy="afterInteractive" />
+      <Script src="https://userecapture.com/track.js?key=clearph_86a88a7241f8206c217a206f" strategy="afterInteractive" />
       <div style={s.page}>
         <div style={s.logoWrap}><span style={s.logoText}>
             <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><svg width="24" height="24" viewBox="0 0 36 36" style={{ flexShrink: 0 }}>
@@ -100,6 +100,10 @@ export default function TestForm() {
                 <option value="plastic-surgery">Plastic Surgery</option>
                 <option value="wellness">Wellness / Health Clinic</option>
                 <option value="legal">Legal Services</option>
+                <option value="property-mgmt">Property Management</option>
+                <option value="luxury-auto">Luxury Auto</option>
+                <option value="real-estate">Real Estate</option>
+                <option value="home-services">Home Services</option>
                 <option value="other">Other</option>
               </select>
             </div>
