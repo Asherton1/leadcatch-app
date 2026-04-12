@@ -17,7 +17,6 @@ export default function BlogIndex() {
         <h1><span style={{ color: "#fff" }}>In</span><span style={{ color: "#ff6b35" }}>sights</span></h1>
         <p className="blog-hero-sub">Straight talk on form abandonment, lead recovery, and the revenue most businesses don&apos;t know they&apos;re losing.</p>
         <div className="blog-hero-line" />
-        </div>
       </div>
 
       <div className="blog-featured">
