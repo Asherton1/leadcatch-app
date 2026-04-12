@@ -25,7 +25,7 @@ export default function ComparePage() {
         </div>
       </div>
 
-      <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '2rem 2rem' }}>
+      <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '2rem 2rem 3rem' }}>
 
         <h2>The Short Version</h2>
         <p>Insiteful is a solid form analytics and optimization tool built for marketers running A/B tests and conversion rate experiments across many form types. ReCapture is built specifically for high-ticket service businesses — med spas, dental practices, luxury real estate, property management — where a single recovered lead can be worth $1,500 to $10,000+.</p>

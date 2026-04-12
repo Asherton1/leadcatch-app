@@ -608,3 +608,16 @@
   background: #333;
   border-radius: 2px;
 }
+
+
+/* Tighten space before footer on all pages */
+.lc-footer {
+  margin-top: 0 !important;
+}
+
+
+@media (max-width: 768px) {
+  .blog-post-body {
+    padding-bottom: 1.5rem !important;
+  }
+}

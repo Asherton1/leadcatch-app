@@ -1399,3 +1399,20 @@
     display: flex !important;
   }
 }
+
+
+/* Reduce gap before footer */
+.pricing-section {
+  margin-bottom: 4rem !important;
+}
+
+
+/* Reduce gap before footer on mobile */
+@media (max-width: 768px) {
+  .lc-section {
+    margin-bottom: 3rem !important;
+  }
+  .pricing-section {
+    margin-bottom: 2rem !important;
+  }
+}
