@@ -53,7 +53,7 @@ export default function LandingPage() {
         <div style={{
           width: '100%',
           maxWidth: '1200px',
-          margin: '160px auto 80px',
+          margin: '80px auto 60px',
           padding: '0 20px',
         }}>
           <div style={{
@@ -220,11 +220,12 @@ export default function LandingPage() {
           <Link href="/signup" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Start Free Trial</Link>
           <Link href="/about" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>About</Link>
           <Link href="/blog" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Insights</Link>
+          <Link href="/compare" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Compare</Link>
           <Link href="/login" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Login</Link>
           <a href="mailto:hello@userecapture.com" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Contact</a>
         </div>
         <p style={{ color: '#555', fontSize: '12px' }}>© 2026 ReCapture</p>
-        <p style={{ color: '#555', fontSize: '12px' }}>Born & Built in Dallas, Texas 🤘</p>
+        <p style={{ color: '#555', fontSize: '12px' }}>Born & Built in Dallas, Texas</p>
         <p style={{ color: '#555', fontSize: '12px', marginTop: '8px' }}>hello@userecapture.com</p>
       </footer>
     </div>
