@@ -592,7 +592,7 @@ export default function Dashboard() {
         <div className="stat-card">
           <div className="stat-header">
             <div className="stat-label">Partial Submissions</div>
-            <div className="stat-icon">📊</div>
+            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg></div>
           </div>
           <div className="stat-value">{isLoading ? '—' : stats.total_leads}</div>
         </div>
