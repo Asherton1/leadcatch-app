@@ -25,7 +25,7 @@ export default function ComparePage() {
         </div>
       </div>
 
-      <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '3rem 2rem' }}>
+      <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '2rem 2rem' }}>
 
         <h2>The Short Version</h2>
         <p>Insiteful is a solid form analytics and optimization tool built for marketers running A/B tests and conversion rate experiments across many form types. ReCapture is built specifically for high-ticket service businesses — med spas, dental practices, luxury real estate, property management — where a single recovered lead can be worth $1,500 to $10,000+.</p>
@@ -87,7 +87,7 @@ export default function ComparePage() {
 
         <div style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a1a 100%)', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2.5rem', margin: '3rem 0', textAlign: 'center' }}>
           <h3 style={{ color: '#ff6b35', fontSize: '1.5rem', margin: '0 0 0.75rem 0' }}>Ready to recover your lost leads?</h3>
-          <p style={{ color: '#888', margin: '0 0 1.5rem 0' }}>Start your free trial — no credit card required.</p>
+          <p style={{ color: '#888', margin: '0 0 1.5rem 0' }}>Start your free trial — full access from day one.</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/test-form" style={{ display: 'inline-block', background: '#ff6b35', color: '#000', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>Try the Live Demo</Link>
             <Link href="/signup" style={{ display: 'inline-block', background: 'transparent', color: '#ff6b35', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem', border: '1px solid rgba(255,107,53,0.4)' }}>Start Free Trial</Link>
