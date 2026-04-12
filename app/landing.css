@@ -1311,3 +1311,16 @@
     border-radius: 6px;
   }
 }
+
+@media (max-width: 768px) {
+  .hero-subtitle {
+    font-size: 0.85rem !important;
+    line-height: 1.6 !important;
+  }
+}
+@media (max-width: 480px) {
+  .hero-subtitle {
+    font-size: 0.8rem !important;
+    line-height: 1.6 !important;
+  }
+}
