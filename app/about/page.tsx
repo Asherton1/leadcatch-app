@@ -98,6 +98,7 @@ export default function AboutPage() {
           <span style={{ color: '#444', fontSize: '12px' }}>ReCapture · Born & Built in Dallas, Texas</span>
         </a>
       </footer>
+      <Footer />
     </div>
   )
 }
