@@ -49,7 +49,7 @@ export default function ComparePage() {
                 ['Enterprise multi-location', check, cross, cross],
                 ['Flat monthly pricing', check, cross, '?'],
                 ['Industry-specific focus', 'High-ticket services', 'Generic SaaS / B2B', 'Generic / all industries'],
-                ['Free trial', '14 days', '$7 paid trial', '14 days'],
+                ['Free trial', '7 days', '$7 paid trial', '7 days'],
                 ['Setup complexity', '1 script tag', '1 script tag', '1 script tag'],
                 ['Weekly client reports', check, cross, cross],
                 ['Dedicated account support', check, cross, cross],
