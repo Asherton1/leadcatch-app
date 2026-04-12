@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Footer from '../../components/Footer'
 import BlogNav from '../../components/BlogNav'
 import '../blog.css'
 import Image from 'next/image'
@@ -109,6 +110,7 @@ export default function Post() {
           <Link href="/test-form">Try the Live Demo →</Link>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

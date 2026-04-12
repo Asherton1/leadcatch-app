@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import BlogNav from '../components/BlogNav'
+import Footer from '../components/Footer'
 import './blog.css'
 
 export const metadata = {
@@ -59,6 +60,7 @@ export default function BlogIndex() {
           </Link>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

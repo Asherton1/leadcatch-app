@@ -18,7 +18,7 @@ export default function MobileNav() {
       <div className="nav-desktop">
         <Link href="/about" className={isActive('/about') ? 'nav-link nav-active' : 'nav-link'}>About</Link>
         <Link href="/blog" className={isActive('/blog') ? 'nav-link nav-active' : 'nav-link'}>Insights</Link>
-        <Link href="/#pricing" className="nav-link">Pricing</Link>
+        <Link href="/pricing" className="nav-link">Pricing</Link>
         <Link href="/test-form" className={isActive('/test-form') ? 'nav-link nav-active' : 'nav-link'}>Demo</Link>
         <Link href="/compare" className={isActive('/compare') ? 'nav-link nav-active' : 'nav-link'}>Compare</Link>
         <Link href="/start-trial" className={isActive('/start-trial') ? 'nav-link nav-active' : 'nav-link'}>Start Trial</Link>
@@ -39,7 +39,7 @@ export default function MobileNav() {
         <div className="nav-mobile-menu" onClick={() => setOpen(false)}>
           <Link href="/about">About</Link>
           <Link href="/blog">Insights</Link>
-          <Link href="/#pricing">Pricing</Link>
+          <Link href="/pricing">Pricing</Link>
           <Link href="/test-form">Demo</Link>
           <Link href="/compare">Compare</Link>
           <Link href="/login">Login</Link>

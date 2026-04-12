@@ -8,11 +8,10 @@ import '../landing.css'
 
 export default function StartTrial() {
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Inter', -apple-system, sans-serif" }}>
+    <div className="landing" style={{ minHeight: '100vh', background: '#0a0a0a' }}>
       <BlogNav />
 
-      {/* Hero — same spacing as Compare/About */}
-      <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 4rem' }}>
+      <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 2rem' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
           <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Start Your Free Trial</p>
           <h1 style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>Stop Losing Leads. Start Recovering Revenue.</h1>
@@ -20,9 +19,7 @@ export default function StartTrial() {
         </div>
       </div>
 
-      {/* Exact same pricing component as homepage */}
       <PricingSection />
-
       <Footer />
     </div>
   )

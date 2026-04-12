@@ -575,3 +575,17 @@
 @media (max-width: 480px) {
   .lc-footer { padding: 2rem 1.25rem; }
 }
+
+
+/* Blog page spacing for fixed nav */
+.blog-list-page {
+  padding-top: 7rem;
+}
+.blog-post {
+  padding-top: 0;
+}
+@media (max-width: 768px) {
+  .blog-list-page {
+    padding-top: 5.5rem;
+  }
+}
