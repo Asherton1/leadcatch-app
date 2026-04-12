@@ -21,7 +21,7 @@ export default function ComparePage() {
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
           <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Comparison</p>
           <h1 style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>ReCapture vs the Competition</h1>
-          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Three tools that capture partial form data — built for very different businesses. See how they stack up.</p>
+          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Not all form abandonment tools are created equal. Most were built for SaaS companies and eCommerce checkouts — not for the high-ticket service businesses that need them most. We built ReCapture specifically for med spas, dental practices, luxury real estate, and property management companies where a single recovered lead can mean $1,500 to $10,000 in revenue. Here\'s how we compare to the alternatives.</p>
         </div>
       </div>
 
@@ -32,7 +32,8 @@ export default function ComparePage() {
         <p>If you&apos;re a performance marketer optimizing e-commerce funnels, Insiteful might be the right fit. If you run a business where every lead matters and you need to see names, emails, and phone numbers from people who started your form but never submitted — ReCapture was built for you.</p>
 
         <div style={{ margin: '3rem 0', overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem', background: '#0d0d0d', borderRadius: '12px', overflow: 'hidden' }}>
+          <div className="compare-table-wrap">
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem', background: '#0d0d0d', borderRadius: '12px', overflow: 'hidden', minWidth: '600px' }}>
             <thead>
               <tr>
                 <th style={{ textAlign: 'left', padding: '1rem 0.75rem', color: '#555', fontWeight: 600, borderBottom: '1px solid #1a1a1a', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', width: '28%' }}>Feature</th>
@@ -66,6 +67,7 @@ export default function ComparePage() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
 
         <h2>Pricing</h2>

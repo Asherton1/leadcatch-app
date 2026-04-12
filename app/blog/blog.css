@@ -589,3 +589,22 @@
     padding-top: 5.5rem;
   }
 }
+
+
+/* Compare table mobile scroll */
+.compare-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+  border: 1px solid #1a1a1a;
+}
+.compare-table-wrap::-webkit-scrollbar {
+  height: 4px;
+}
+.compare-table-wrap::-webkit-scrollbar-track {
+  background: #111;
+}
+.compare-table-wrap::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 2px;
+}
