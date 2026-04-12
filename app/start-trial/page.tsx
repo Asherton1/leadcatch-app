@@ -19,7 +19,7 @@ export default function StartTrial() {
         </div>
       </div>
 
-      <div style={{ marginTop: "-6rem" }}>
+      <div style={{ marginTop: "-7rem" }}>
         <PricingSection />
       </div>
       <Footer />
