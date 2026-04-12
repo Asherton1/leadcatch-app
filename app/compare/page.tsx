@@ -13,11 +13,11 @@ export default function ComparePage() {
     <div className="blog-post">
       <BlogNav />
 
-      <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.9)), url("/hero-bg.jpg") center/cover no-repeat', padding: '6rem 2rem 4rem' }}>
-        <div style={{ maxWidth: '720px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 4rem' }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
           <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Comparison</p>
           <h1 style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>ReCapture vs Insiteful</h1>
-          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8 }}>Both tools capture partial form data. But they&apos;re built for very different businesses. Here&apos;s how they compare.</p>
+          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Both tools capture partial form data. But they&apos;re built for very different businesses. Here&apos;s how they compare.</p>
         </div>
       </div>
 
@@ -28,11 +28,11 @@ export default function ComparePage() {
         <p>If you&apos;re a performance marketer optimizing e-commerce funnels, Insiteful might be the right fit. If you run a business where every lead matters and you need to see names, emails, and phone numbers from people who started your form but never submitted — ReCapture was built for you.</p>
 
         <div style={{ margin: '3rem 0', overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem', background: '#0d0d0d', borderRadius: '12px', overflow: 'hidden' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid #1e1e1e' }}>
                 <th style={{ textAlign: 'left', padding: '1rem 0.75rem', color: '#888', fontWeight: 600 }}>Feature</th>
-                <th style={{ textAlign: 'center', padding: '1rem 0.75rem', color: '#ff6b35', fontWeight: 700 }}>ReCapture</th>
+                <th style={{ textAlign: 'center', padding: '1.25rem 0.75rem', color: '#ff6b35', fontWeight: 700, fontSize: '1rem', background: 'rgba(255, 107, 53, 0.06)' }}>ReCapture</th>
                 <th style={{ textAlign: 'center', padding: '1rem 0.75rem', color: '#888', fontWeight: 600 }}>Insiteful</th>
               </tr>
             </thead>
