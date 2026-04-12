@@ -54,14 +54,14 @@ export default function LandingPage() {
           width: '100%',
           maxWidth: '1200px',
           margin: '80px auto 60px',
-          padding: '0 20px',
+          padding: '0 10px',
         }}>
           <div style={{
             position: 'relative',
-            borderRadius: '16px',
+            borderRadius: '12px',
             overflow: 'hidden',
-            border: '1px solid rgba(255, 107, 53, 0.2)',
-            boxShadow: '0 0 60px rgba(255, 107, 53, 0.08), 0 0 120px rgba(255, 107, 53, 0.04)',
+            border: '1px solid rgba(255, 107, 53, 0.25)',
+            boxShadow: '0 0 80px rgba(255, 107, 53, 0.12), 0 0 160px rgba(255, 107, 53, 0.06)',
           }}>
             <video
               src="/dashboard-demo.mp4"

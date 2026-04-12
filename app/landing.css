@@ -1300,3 +1300,14 @@
   .lc-footer { padding: 2rem 1.25rem !important; }
   .testimonials-grid { grid-template-columns: 1fr !important; padding: 0 0.5rem !important; }
 }
+
+@media (max-width: 768px) {
+  .hero video {
+    border-radius: 8px;
+  }
+}
+@media (max-width: 480px) {
+  .hero video {
+    border-radius: 6px;
+  }
+}
