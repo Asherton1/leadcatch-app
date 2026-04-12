@@ -9,25 +9,20 @@ export default function MobileNav() {
   const path = usePathname()
 
   const isActive = (href: string) => {
-    if (href === '/#pricing') return path === '/' ? false : false
+    if (href === '/#pricing') return false
     return path === href || path.startsWith(href + '/')
   }
-
-  const linkStyle = (href: string) => ({
-    color: isActive(href) ? '#ff6b35' : undefined,
-    position: 'relative' as const,
-  })
 
   return (
     <>
       <div className="nav-desktop">
-        <Link href="/about" style={linkStyle('/about')} className={isActive('/about') ? 'nav-active' : ''}>About</Link>
-        <Link href="/blog" style={linkStyle('/blog')} className={isActive('/blog') ? 'nav-active' : ''}>Insights</Link>
-        <Link href="/#pricing">Pricing</Link>
-        <Link href="/test-form" style={linkStyle('/test-form')} className={isActive('/test-form') ? 'nav-active' : ''}>Demo</Link>
-        <Link href="/compare" style={linkStyle('/compare')} className={isActive('/compare') ? 'nav-active' : ''}>Compare</Link>
-        <Link href="/signup">Start Trial</Link>
-        <Link href="/login" style={{ color: "#ff6b35", border: "1px solid rgba(255,107,53,0.4)", padding: "0.4rem 1rem", borderRadius: "6px" }}>Login</Link>
+        <Link href="/about" className={isActive('/about') ? 'nav-link nav-active' : 'nav-link'}>About</Link>
+        <Link href="/blog" className={isActive('/blog') ? 'nav-link nav-active' : 'nav-link'}>Insights</Link>
+        <Link href="/#pricing" className="nav-link">Pricing</Link>
+        <Link href="/test-form" className={isActive('/test-form') ? 'nav-link nav-active' : 'nav-link'}>Demo</Link>
+        <Link href="/compare" className={isActive('/compare') ? 'nav-link nav-active' : 'nav-link'}>Compare</Link>
+        <Link href="/start-trial" className={isActive('/start-trial') ? 'nav-link nav-active' : 'nav-link'}>Start Trial</Link>
+        <Link href="/login" className="nav-login">Login</Link>
       </div>
 
       <button
@@ -48,7 +43,7 @@ export default function MobileNav() {
           <Link href="/test-form">Demo</Link>
           <Link href="/compare">Compare</Link>
           <Link href="/login">Login</Link>
-          <Link href="/signup" className="nav-mobile-cta">Start Free Trial</Link>
+          <Link href="/start-trial" className="nav-mobile-cta">Start Free Trial</Link>
         </div>
       )}
     </>
