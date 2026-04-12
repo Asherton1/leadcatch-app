@@ -2,6 +2,7 @@ import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import Image from 'next/image'
 import '../blog/blog.css'
+import Footer from '../components/Footer'
 import './about.css'
 
 export const metadata = {

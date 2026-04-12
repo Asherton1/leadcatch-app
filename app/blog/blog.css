@@ -495,3 +495,83 @@
     display: flex !important;
   }
 }
+
+
+/* ===== SHARED NAV (identical to homepage) ===== */
+.lc-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 6rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  z-index: 1000;
+}
+.logo-accent {
+  color: #ff6b35;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-mobile-menu {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 10, 0.98);
+  border-top: 1px solid #1a1a1a;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  z-index: 999;
+}
+.nav-mobile-menu a {
+  color: #bbb;
+  text-decoration: none;
+  font-size: 1rem;
+}
+.nav-mobile-cta {
+  color: #ff6b35 !important;
+  font-weight: 600;
+}
+
+/* ===== SHARED FOOTER ===== */
+.lc-footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 3.5rem 6rem;
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.lc-footer p + p { margin-top: 0.375rem; font-size: 0.75rem; }
+
+/* ===== FIXED NAV SPACING ===== */
+.about-page .about-hero { padding-top: 8rem; }
+
+@media (max-width: 768px) {
+  .lc-nav { padding: 1.25rem 1.5rem; }
+  .lc-footer { padding: 2.5rem 1.5rem; }
+}
+@media (max-width: 480px) {
+  .lc-footer { padding: 2rem 1.25rem; }
+}

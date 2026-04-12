@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import '../blog/blog.css'
+import Footer from '../components/Footer'
 
 export const metadata = {
   title: 'ReCapture vs the Competition — Form Abandonment Recovery Comparison',
@@ -94,6 +95,7 @@ export default function ComparePage() {
         </div>
 
       </div>
+          <Footer />
     </div>
   )
 }
