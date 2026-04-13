@@ -342,9 +342,8 @@ export default function TestForm() {
                 borderRadius: 12,
                 textAlign: 'center',
               }}>
-                <p style={{ color: '#bbb', fontSize: '0.85rem', lineHeight: 1.6, margin: '0 0 0.75rem 0' }}>
-                  <strong style={{ color: '#ff6b35' }}>That&apos;s a captured lead.</strong> Without ReCapture, this person would have vanished without a trace.
-                </p>
+                <p style={{ color: '#ff6b35', fontSize: '1rem', fontWeight: 700, margin: '0 0 0.35rem 0' }}>That&apos;s a captured lead.</p>
+                <p style={{ color: '#bbb', fontSize: '0.85rem', lineHeight: 1.6, margin: '0 0 0.75rem 0' }}>Without ReCapture, this person would have vanished without a trace.</p>
                 <Link href="/start-trial" style={{
                   display: 'inline-block',
                   padding: '0.625rem 1.5rem',
