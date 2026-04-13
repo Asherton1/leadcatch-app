@@ -98,8 +98,8 @@ export default function TestForm() {
         <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 4rem' }}>
           <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
             <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Live Demo</p>
-            <h1 style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>Watch Your Data Get Captured — Live</h1>
-            <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Start typing in the form below. Watch the dashboard on the right update in real time with your information — before you ever hit submit. This is exactly what your leads see when they abandon your form.</p>
+            <h1 style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>See ReCapture in Action</h1>
+            <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Start typing in the form. Watch the dashboard update with your data in real time — before you ever hit submit.</p>
           </div>
         </div>
 
