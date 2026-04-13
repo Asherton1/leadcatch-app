@@ -45,7 +45,7 @@ export default function IndustriesAccordion() {
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <ind.Icon />
-                  <span style={{ color: '#ff6b35', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{ind.label}</span>
+                  <span style={{ color: '#fff', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{ind.label}</span>
                   <span style={{ color: '#555', fontSize: '0.75rem' }}>{ind.stat}</span>
                 </div>
                 <span style={{ color: '#ff6b35', fontSize: '1.2rem', transition: 'transform 0.3s ease', transform: isOpen ? 'rotate(45deg)' : 'none', display: 'inline-block' }}>+</span>
