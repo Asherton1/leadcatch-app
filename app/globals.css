@@ -207,3 +207,10 @@ input, textarea, select, button {
     height: 28px !important;
   }
 }
+
+/* Industries grid mobile */
+@media (max-width: 768px) {
+  .industries-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -12,7 +12,7 @@ export default function Footer() {
       <p style={{ color: '#7a7f8e', fontSize: '14px', marginBottom: '20px', maxWidth: '400px', margin: '12px auto 20px' }}>
         Form abandonment recovery for high-ticket service businesses. Capture every lead. Recover lost revenue.
       </p>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '20px', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '16px', flexWrap: 'wrap' }}>
         <Link href="/about" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>About</Link>
         <Link href="/blog" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Insights</Link>
         <Link href="/pricing" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Pricing</Link>
@@ -22,6 +22,11 @@ export default function Footer() {
         <Link href="/start-trial" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Start Trial</Link>
         <Link href="/login" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Login</Link>
         <a href="mailto:hello@userecapture.com" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Contact</a>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '20px', flexWrap: 'wrap' }}>
+        <Link href="/for-med-spas" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>Med Spas</Link>
+        <Link href="/for-dental" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>Dental</Link>
+        <Link href="/for-property-management" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>Property Management</Link>
       </div>
       <p style={{ color: '#555', fontSize: '12px' }}>&copy; 2026 ReCapture</p>
       <p style={{ color: '#555', fontSize: '12px' }}>Born &amp; Built in Dallas, Texas</p>
