@@ -21,11 +21,11 @@ export default function ComparePage() {
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
           <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Comparison</p>
           <h1 style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>ReCapture vs the Competition</h1>
-          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Not all form abandonment tools are created equal. Most were built for SaaS companies and eCommerce checkouts — not for the high-ticket service businesses that need them most. We built ReCapture specifically for med spas, dental practices, luxury real estate, and property management companies where a single recovered lead can mean $1,500 to $10,000 in revenue. Here\'s how we compare to the alternatives.</p>
+          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Not all form abandonment tools are created equal. Most were built for SaaS companies and eCommerce checkouts — not for the high-ticket service businesses that need them most. We built ReCapture specifically for med spas, dental practices, luxury real estate, and property management companies where a single recovered lead can mean $1,500 to $10,000 in revenue. Here&apos;s how we compare to the alternatives.</p>
         </div>
       </div>
 
-      <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '2rem 2rem 3rem' }}>
+      <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '1rem 2rem 3rem' }}>
 
         <h2>The Short Version</h2>
         <p>Insiteful is a solid form analytics and optimization tool built for marketers running A/B tests and conversion rate experiments across many form types. ReCapture is built specifically for high-ticket service businesses — med spas, dental practices, luxury real estate, property management — where a single recovered lead can be worth $1,500 to $10,000+.</p>
