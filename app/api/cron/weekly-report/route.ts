@@ -13,6 +13,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
+  const testMode = req.nextUrl.searchParams.get('test') === 'true'
+
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL ?? '',
     process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '',
@@ -174,7 +176,7 @@ export async function GET(req: NextRequest) {
     try {
       await resend.emails.send({
         from: 'ReCapture <hello@userecapture.com>',
-        to: client.email,
+        to: testMode ? 'asherton.c@me.com' : client.email,
         subject: `Your Weekly Lead Report — ${totalLeads} leads captured, $${revenueAtRisk.toLocaleString()} at risk`,
         html,
       })
