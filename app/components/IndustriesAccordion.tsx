@@ -23,7 +23,7 @@ export default function IndustriesAccordion() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <div className="industries-accordion" style={{ maxWidth: '600px', margin: '2rem auto 0', padding: '0 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+    <div className="industries-accordion" style={{ maxWidth: '600px', margin: '2rem auto 0', padding: '0 1.5rem', flexDirection: 'column', gap: '0.5rem' }}>
       {industries.map((ind, i) => (
         <div key={i} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 10, overflow: 'hidden' }}>
           <button
