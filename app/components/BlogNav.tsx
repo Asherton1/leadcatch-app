@@ -6,7 +6,7 @@ export default function BlogNav() {
   return (
     <nav className="lc-nav">
       <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-        <Image src="/logo.png" alt="ReCapture" width={130} height={34} style={{ height: '28px', width: 'auto' }} priority />
+        <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" priority />
       </Link>
       <MobileNav />
     </nav>

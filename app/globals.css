@@ -196,3 +196,14 @@ input, textarea, select, button {
 @media (max-width: 768px) {
   .lc-nav { padding: 1.25rem 1.5rem; }
 }
+
+/* Logo image sizing */
+.nav-logo-img {
+  height: 36px !important;
+  width: auto !important;
+}
+@media (max-width: 768px) {
+  .nav-logo-img {
+    height: 28px !important;
+  }
+}

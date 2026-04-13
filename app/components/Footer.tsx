@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="lc-footer">
       <div className="footer-logo">
         <Link href="/" style={{ textDecoration: 'none', display: 'inline-block' }}>
-          <Image src="/logo.png" alt="ReCapture" width={130} height={34} style={{ height: '28px', width: 'auto' }} />
+          <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" />
         </Link>
       </div>
       <p style={{ color: '#7a7f8e', fontSize: '14px', marginBottom: '20px', maxWidth: '400px', margin: '12px auto 20px' }}>

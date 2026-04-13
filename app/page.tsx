@@ -22,7 +22,7 @@ export default function LandingPage() {
 
       <nav className="lc-nav">
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            <Image src="/logo.png" alt="ReCapture" width={130} height={34} style={{ height: '28px', width: 'auto' }} priority />
+            <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" priority />
           </Link>
         <MobileNav />
       </nav>
@@ -198,7 +198,7 @@ export default function LandingPage() {
       <footer className="lc-footer">
         <div className="footer-logo">
           <Link href="/" style={{ textDecoration: 'none', display: 'inline-block' }}>
-            <Image src="/logo.png" alt="ReCapture" width={130} height={34} style={{ height: '28px', width: 'auto' }} />
+            <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" />
           </Link>
         </div>
         <p style={{ color: '#7a7f8e', fontSize: '14px', marginBottom: '20px', maxWidth: '400px', margin: '12px auto 20px' }}>
