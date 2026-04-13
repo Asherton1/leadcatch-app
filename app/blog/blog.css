@@ -515,8 +515,8 @@
 }
 .logo-accent {
   color: #ff6b35;
-  font-weight: 700;
-  font-size: 1.25rem;
+  background: none;
+  -webkit-text-fill-color: unset;
 }
 .nav-hamburger {
   display: none;
