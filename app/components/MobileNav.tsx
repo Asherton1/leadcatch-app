@@ -21,7 +21,7 @@ export default function MobileNav() {
         <Link href="/pricing" className={isActive('/pricing') ? 'nav-link nav-active' : 'nav-link'}>Pricing</Link>
         <Link href="/test-form" className={isActive('/test-form') ? 'nav-link nav-active' : 'nav-link'}>Live Demo</Link>
         <Link href="/compare" className={isActive('/compare') ? 'nav-link nav-active' : 'nav-link'}>Compare</Link>
-        <Link href="/calculator" className={isActive('/calculator') ? 'nav-link nav-active' : 'nav-link'}>ROI Calculator</Link>
+        <Link href="/calculator" className={isActive('/calculator') ? 'nav-link nav-active' : 'nav-link'}>ROI Estimator</Link>
         <Link href="/start-trial" className={isActive('/start-trial') ? 'nav-link nav-active' : 'nav-link'}>Start Trial</Link>
         <Link href="/login" className="nav-login">Login</Link>
       </div>
@@ -43,7 +43,7 @@ export default function MobileNav() {
           <Link href="/pricing">Pricing</Link>
           <Link href="/test-form">Live Demo</Link>
           <Link href="/compare">Compare</Link>
-          <Link href="/calculator">ROI Calculator</Link>
+          <Link href="/calculator">ROI Estimator</Link>
           <Link href="/login">Login</Link>
           <Link href="/start-trial" className="nav-mobile-cta">Start Free Trial</Link>
         </div>
