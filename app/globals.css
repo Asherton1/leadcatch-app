@@ -229,3 +229,20 @@ input, textarea, select, button {
   .industries-accordion { display: flex !important; }
   .industries-grid { display: none !important; }
 }
+
+/* Fix mobile accordion sections spacing and text */
+@media (max-width: 768px) {
+  .how-it-works-section {
+    text-align: left !important;
+  }
+  .how-it-works-section .section-title,
+  .how-it-works-section .section-subtitle {
+    text-align: center !important;
+  }
+  .lc-section {
+    margin: 4rem auto !important;
+  }
+  .section-subtitle {
+    margin-bottom: 1rem !important;
+  }
+}
