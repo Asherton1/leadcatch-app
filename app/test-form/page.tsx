@@ -381,7 +381,7 @@ export default function TestForm() {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 2rem;
-          align-items: start;
+          align-items: stretch;
         }
         .demo-dash-col {
           position: sticky;
