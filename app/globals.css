@@ -222,3 +222,10 @@ input, textarea, select, button {
   .compare-mobile { display: flex !important; }
   .compare-desktop { display: none !important; }
 }
+
+/* Industries: grid on desktop, accordion on mobile */
+.industries-accordion { display: none; }
+@media (max-width: 768px) {
+  .industries-accordion { display: flex !important; }
+  .industries-grid { display: none !important; }
+}
