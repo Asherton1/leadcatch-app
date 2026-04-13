@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import './landing.css'
 import StatsBar from './components/StatsBar'
 import GSAPAnimations from './components/GSAPAnimations'
@@ -20,14 +21,8 @@ export default function LandingPage() {
       <GSAPAnimations />
 
       <nav className="lc-nav">
-        <Link href="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <svg width="24" height="24" viewBox="0 0 36 36" style={{ flexShrink: 0, display: 'inline-block', verticalAlign: 'middle' }}>
-              <g className="logo-bl"><path d="M10 5 L4 5 L4 31 L10 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
-              <g className="logo-br"><path d="M26 5 L32 5 L32 31 L26 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
-              <circle className="logo-dg" cx="18" cy="18" r="8" fill="#ff6b35"/>
-              <circle className="logo-dp" cx="18" cy="18" r="5" fill="#ff6b35"/>
-            </svg>
-            <span><span style={{ color: '#fff' }}>Re</span><span className="logo-accent">Capture</span></span>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+            <Image src="/logo.png" alt="ReCapture" width={130} height={34} style={{ height: '28px', width: 'auto' }} priority />
           </Link>
         <MobileNav />
       </nav>
@@ -202,14 +197,8 @@ export default function LandingPage() {
 
       <footer className="lc-footer">
         <div className="footer-logo">
-          <Link href="/" className="logo" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
-            <svg width="24" height="24" viewBox="0 0 36 36" style={{ flexShrink: 0, display: 'inline-block', verticalAlign: 'middle' }}>
-              <g className="logo-bl"><path d="M10 5 L4 5 L4 31 L10 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
-              <g className="logo-br"><path d="M26 5 L32 5 L32 31 L26 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
-              <circle className="logo-dg" cx="18" cy="18" r="8" fill="#ff6b35"/>
-              <circle className="logo-dp" cx="18" cy="18" r="5" fill="#ff6b35"/>
-            </svg>
-            <span><span style={{ color: '#fff' }}>Re</span><span className="logo-accent">Capture</span></span>
+          <Link href="/" style={{ textDecoration: 'none', display: 'inline-block' }}>
+            <Image src="/logo.png" alt="ReCapture" width={130} height={34} style={{ height: '28px', width: 'auto' }} />
           </Link>
         </div>
         <p style={{ color: '#7a7f8e', fontSize: '14px', marginBottom: '20px', maxWidth: '400px', margin: '12px auto 20px' }}>
