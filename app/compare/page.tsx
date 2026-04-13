@@ -46,16 +46,18 @@ export default function ComparePage() {
               {[
                 ['Partial form capture', check, check, check],
                 ['Auto-recovery emails', check, check, check],
-                ['Revenue-at-risk calculator', check, cross, cross],
+                ['Revenue-at-risk dashboard', check, cross, cross],
+                ['ROI Estimator tool', check, cross, cross],
+                ['Interactive live demo', check, cross, cross],
                 ['Enterprise multi-location', check, cross, cross],
-                ['Flat monthly pricing', check, cross, '?'],
-                ['Industry-specific focus', 'High-ticket services', 'Generic SaaS / B2B', 'Generic / all industries'],
-                ['Free trial', '7 days', '$7 paid trial', '7 days'],
-                ['Setup complexity', '1 script tag', '1 script tag', '1 script tag'],
                 ['Weekly client reports', check, cross, cross],
                 ['Dedicated account support', check, cross, cross],
-                ['White-label option', 'Coming soon', cross, 'Paid add-on'],
+                ['Industry-specific focus', 'High-ticket services', 'Generic SaaS / B2B', 'Generic / all industries'],
+                ['Flat monthly pricing', check, cross, '?'],
                 ['Transparent pricing', '$150-200/mo', 'Session-based (unclear)', 'Contact for pricing'],
+                ['Free trial', '7 days', '$7 paid trial', '7 days'],
+                ['Setup complexity', '1 script tag', '1 script tag', '1 script tag'],
+                ['White-label option', 'Coming soon', cross, 'Paid add-on'],
                 ['Location', 'Dallas, TX', 'Phoenix, AZ', 'Not disclosed'],
               ].map((row, i) => (
                 <tr key={i}>
@@ -76,7 +78,7 @@ export default function ComparePage() {
 
         <h2>Who ReCapture Is Built For</h2>
         <p>ReCapture was built by a digital marketing consultant who spent 10+ years managing $100K+ in monthly ad spend for med spas, dental practices, luxury real estate, and property management companies. Every feature was designed around one question: <em>what would these businesses actually need to recover lost leads and see ROI in the first week?</em></p>
-        <p>That&apos;s why ReCapture includes a revenue-at-risk calculator that shows the dollar value of every abandoned lead. It&apos;s why we built a multi-location dashboard for enterprise clients managing 10, 20, or 50+ properties. And it&apos;s why our automated recovery emails are branded to your business — not ours.</p>
+        <p>That&apos;s why ReCapture includes a revenue-at-risk dashboard that shows the dollar value of every abandoned lead, plus an ROI Estimator that lets prospects see exactly how much their forms are costing them before they even sign up. It&apos;s why we built a multi-location dashboard for enterprise clients managing 10, 20, or 50+ properties. And it&apos;s why our automated recovery emails are branded to your business — not ours.</p>
 
         <h2>Who Insiteful Is Built For</h2>
         <p>Insiteful is a strong tool for performance marketers and CRO specialists who want detailed form field analytics, funnel visualizations, and A/B testing insights. If you&apos;re optimizing checkout flows or running multivariate tests on lead gen forms, Insiteful has features ReCapture doesn&apos;t — like save-and-continue-later and field-level confusion detection.</p>
