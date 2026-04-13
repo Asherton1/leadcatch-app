@@ -63,7 +63,7 @@ export default function ProblemAccordion() {
               textAlign: 'left',
             }}
           >
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: openIdx === i ? '#ff6b35' : '#333', fontFamily: 'monospace', flexShrink: 0, transition: 'color 0.3s' }}>{p.num}</span>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#ff6b35', fontFamily: 'monospace', flexShrink: 0, transition: 'color 0.3s' }}>{p.num}</span>
             <span style={{ flex: 1, fontSize: '1rem', fontWeight: 600, color: openIdx === i ? '#ff6b35' : '#fff', transition: 'color 0.3s' }}>{p.title}</span>
             <span style={{ color: openIdx === i ? '#ff6b35' : '#555', fontSize: '1.25rem', transition: 'transform 0.3s, color 0.3s', transform: openIdx === i ? 'rotate(45deg)' : 'none', flexShrink: 0 }}>+</span>
           </button>

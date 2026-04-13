@@ -101,7 +101,7 @@ export default function FeaturesAccordion() {
               textAlign: 'left',
             }}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={openIdx === i ? '#ff6b35' : '#555'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, transition: 'stroke 0.3s' }} dangerouslySetInnerHTML={{ __html: f.icon }} />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke='#ff6b35' strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, transition: 'stroke 0.3s' }} dangerouslySetInnerHTML={{ __html: f.icon }} />
             <span style={{ flex: 1, fontSize: '1rem', fontWeight: 600, color: openIdx === i ? '#ff6b35' : '#fff', transition: 'color 0.3s' }}>{f.title}</span>
             <span style={{ color: openIdx === i ? '#ff6b35' : '#555', fontSize: '1.25rem', transition: 'transform 0.3s, color 0.3s', transform: openIdx === i ? 'rotate(45deg)' : 'none', flexShrink: 0 }}>+</span>
           </button>
