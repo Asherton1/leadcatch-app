@@ -93,11 +93,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <footer style={{ maxWidth: '720px', margin: '0 auto', padding: '2rem', borderTop: '1px solid #1a1a1a', textAlign: 'center' }}>
-        <a href="https://userecapture.com" style={{ textDecoration: 'none' }}>
-          <span style={{ color: '#444', fontSize: '12px' }}>ReCapture · Born & Built in Dallas, Texas</span>
-        </a>
-      </footer>
       <Footer />
     </div>
   )
