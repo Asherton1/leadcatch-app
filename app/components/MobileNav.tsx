@@ -19,9 +19,10 @@ export default function MobileNav() {
         <Link href="/about" className={isActive('/about') ? 'nav-link nav-active' : 'nav-link'}>About</Link>
         <Link href="/blog" className={isActive('/blog') ? 'nav-link nav-active' : 'nav-link'}>Insights</Link>
         <Link href="/pricing" className={isActive('/pricing') ? 'nav-link nav-active' : 'nav-link'}>Pricing</Link>
-        <Link href="/test-form" className={isActive('/test-form') ? 'nav-link nav-active' : 'nav-link'}>Demo</Link>
+        <Link href="/test-form" className={isActive('/test-form') ? 'nav-link nav-active' : 'nav-link'}>Live Demo</Link>
         <Link href="/compare" className={isActive('/compare') ? 'nav-link nav-active' : 'nav-link'}>Compare</Link>
         <Link href="/start-trial" className={isActive('/start-trial') ? 'nav-link nav-active' : 'nav-link'}>Start Trial</Link>
+        <Link href="/calculator" className={isActive('/calculator') ? 'nav-link nav-active' : 'nav-link'}>ROI Calculator</Link>
         <Link href="/login" className="nav-login">Login</Link>
       </div>
 
@@ -40,7 +41,7 @@ export default function MobileNav() {
           <Link href="/about">About</Link>
           <Link href="/blog">Insights</Link>
           <Link href="/pricing">Pricing</Link>
-          <Link href="/test-form">Demo</Link>
+          <Link href="/test-form">Live Demo</Link>
           <Link href="/compare">Compare</Link>
           <Link href="/login">Login</Link>
           <Link href="/start-trial" className="nav-mobile-cta">Start Free Trial</Link>
