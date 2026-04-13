@@ -199,7 +199,11 @@ export async function GET(req: NextRequest) {
     const essentialsCount = allClientsList.filter(c => c.active && c.plan === 'essentials').length
 
     // MRR calculation
-    const mrr = (proCount * 200) + (essentialsCount * 150)
+    const compedEmails = ['david.mann@esdhealth.net', 'richardhughes@clearph.com', 'asherton.c@me.com']
+    const payingClients = allClientsList.filter(c => c.active && !compedEmails.includes(c.email?.toLowerCase() || ''))
+    const payingPro = payingClients.filter(c => c.plan !== 'essentials').length
+    const payingEssentials = payingClients.filter(c => c.plan === 'essentials').length
+    const mrr = (payingPro * 200) + (payingEssentials * 150)
 
     // New signups this week
     const newSignups = allClientsList.filter(c => {
