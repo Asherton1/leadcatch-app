@@ -21,7 +21,7 @@ const steps = [
 ]
 
 export default function StepsAccordion() {
-  const [openIdx, setOpenIdx] = useState<number | null>(0)
+  const [openIdx, setOpenIdx] = useState<number | null>(null)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
