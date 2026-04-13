@@ -184,6 +184,7 @@ export default function LandingPage() {
             <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Learn more &rarr;</span>
           </a>
         </div>
+        <IndustriesAccordion />
       </section>
 
 
