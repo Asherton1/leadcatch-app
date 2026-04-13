@@ -97,13 +97,15 @@ export default function AdminPage() {
   function closePanel() { setSelectedDemo(null); setSelectedClient(null) }
   const panelOpen = selectedDemo !== null || selectedClient !== null
 
+  const compedEmails = ['david.mann@esdhealth.net', 'richardhughes@clearph.com', 'asherton.c@me.com']
   const activeClients = clients.filter(c => c.active)
+  const payingClients = activeClients.filter(c => !compedEmails.includes(c.email?.toLowerCase() || ''))
   const trialsExpiringSoon = clients.filter(c => {
     const d = daysUntil(c.trial_ends_at)
     return d !== null && d >= 0 && d <= 3
   })
   const conversionRate = demos.length > 0 ? Math.round((clients.length / demos.length) * 100) : 0
-  const mrr = activeClients.length * 200
+  const mrr = payingClients.length * 200
 
   const filteredDemos = demos.filter(d =>
     !search || (d.name?.toLowerCase().includes(search.toLowerCase()) || d.email?.toLowerCase().includes(search.toLowerCase()))

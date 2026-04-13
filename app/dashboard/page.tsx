@@ -444,6 +444,7 @@ export default function Dashboard() {
   const router = useRouter()
 
   const [authed, setAuthed]                     = useState<boolean | null>(null)
+  const [userEmail, setUserEmail]               = useState('')
   const [loggingOut, setLoggingOut]             = useState(false)
   const [allClients, setAllClients]             = useState<Client[]>([])
   const [selectedClient, setSelectedClient]     = useState<Client | null>(null)
@@ -460,6 +461,7 @@ export default function Dashboard() {
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (!session) { router.replace('/login'); return }
       await ensureClient(session.user.id, session.user.email ?? '')
+      setUserEmail(session.user.email ?? '')
       setAuthed(true)
     })
     const { data: { subscription } } = supabase.auth.onAuthStateChange(event => {
@@ -569,7 +571,7 @@ export default function Dashboard() {
               <circle className="logo-dg" cx="18" cy="18" r="8" fill="#ff6b35"/>
               <circle className="logo-dp" cx="18" cy="18" r="5" fill="#ff6b35"/>
             </svg><span><span style={{ color: '#fff', fontWeight: 700 }}>Re</span><span style={{ color: '#ff6b35', fontWeight: 700 }}>Capture</span></span></span>
-          <span className="admin-badge">Admin</span>
+          {userEmail === 'asherton.c@me.com' && <a href="/admin" style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.12em', color: '#ff6b35', background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.3)', borderRadius: '4px', padding: '2px 6px', textDecoration: 'none' }}>ADMIN</a>}
         </div>
         <div className="header-right">
           {selectedClient && <span className="client-name">{displayName(selectedClient)}</span>}
