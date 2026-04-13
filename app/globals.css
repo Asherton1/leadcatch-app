@@ -214,3 +214,11 @@ input, textarea, select, button {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Compare page: desktop table / mobile cards */
+.compare-mobile { display: none; }
+.compare-desktop { display: block; }
+@media (max-width: 768px) {
+  .compare-mobile { display: flex !important; }
+  .compare-desktop { display: none !important; }
+}
