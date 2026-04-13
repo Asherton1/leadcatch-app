@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import DashboardMockup from '../components/DashboardMockup'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
 import '../blog/blog.css'
@@ -58,6 +59,20 @@ export default function ForMedSpas() {
 
         <h2>Built for Multi-Location Med Spas</h2>
         <p>If you operate 5, 10, or 50+ locations, ReCapture gives you a single enterprise dashboard that shows abandoned leads across every property. See which locations are leaking the most revenue, compare recovery rates, and send automated follow-ups from each location&apos;s branded email. No extra setup per location — one script tag per site, one dashboard for everything.</p>
+
+        
+        <DashboardMockup
+          abandoned={47}
+          revenueAtRisk={131600}
+          recovered={7}
+          recoveredRevenue={19600}
+          leads={[
+            { name: 'Sarah M.', initials: 'SM', email: 'sarah.m@gmail.com', service: 'Botox Consultation', value: 2800, status: 'Open' },
+            { name: 'Jessica L.', initials: 'JL', email: 'jess.l@icloud.com', service: 'Laser Hair Removal', value: 3200, status: 'Contacted' },
+            { name: 'Amanda R.', initials: 'AR', email: 'amanda.r@yahoo.com', service: 'Chemical Peel', value: 1800, status: 'Recovered' },
+            { name: 'Rachel K.', initials: 'RK', email: 'rachel.k@gmail.com', service: 'Body Contouring', value: 4500, status: 'Open' },
+          ]}
+        />
 
         <h2>What You Get</h2>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '1.5rem 0 2.5rem' }}>

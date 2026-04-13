@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import DashboardMockup from '../components/DashboardMockup'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
 import '../blog/blog.css'
@@ -49,6 +50,20 @@ export default function ForPlasticSurgery() {
         </div>
         <h2>Built for Multi-Location Practices</h2>
         <p>If your practice operates across multiple offices or has multiple surgeons, ReCapture gives you a single dashboard showing abandoned consultations across every location. Route recovered patients to the right office or surgeon. Compare abandonment rates between locations. Deploy personalized recovery emails from each office&apos;s branded address.</p>
+        
+        <DashboardMockup
+          abandoned={51}
+          revenueAtRisk={331500}
+          recovered={5}
+          recoveredRevenue={32500}
+          leads={[
+            { name: 'Lauren M.', initials: 'LM', email: 'lauren.m@gmail.com', service: 'Rhinoplasty Consult', value: 7500, status: 'Open' },
+            { name: 'Christine A.', initials: 'CA', email: 'christine.a@me.com', service: 'Breast Augmentation', value: 8200, status: 'Contacted' },
+            { name: 'Jennifer T.', initials: 'JT', email: 'jennifer.t@yahoo.com', service: 'Tummy Tuck Consult', value: 9000, status: 'Recovered' },
+            { name: 'Nicole F.', initials: 'NF', email: 'nicole.f@gmail.com', service: 'Facelift Consultation', value: 12000, status: 'Open' },
+          ]}
+        />
+
         <h2>What You Get</h2>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '1.5rem 0 2.5rem' }}>
           {[

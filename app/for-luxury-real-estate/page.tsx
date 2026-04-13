@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import DashboardMockup from '../components/DashboardMockup'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
 import '../blog/blog.css'
@@ -49,6 +50,20 @@ export default function ForLuxuryRealEstate() {
         </div>
         <h2>Built for Multi-Agent Brokerages</h2>
         <p>If your brokerage has multiple agents, teams, or office locations, ReCapture gives you one dashboard showing abandoned leads across every listing page. Route recovered leads to the right agent automatically. See which property pages have the highest abandonment rates. Track which agents follow up fastest and close the most recovered leads.</p>
+        
+        <DashboardMockup
+          abandoned={49}
+          revenueAtRisk={588000}
+          recovered={4}
+          recoveredRevenue={48000}
+          leads={[
+            { name: 'Richard B.', initials: 'RB', email: 'richard.b@gmail.com', service: '3BR Penthouse — Uptown', value: 18000, status: 'Open' },
+            { name: 'Catherine L.', initials: 'CL', email: 'catherine.l@me.com', service: 'Waterfront Estate', value: 24000, status: 'Contacted' },
+            { name: 'David H.', initials: 'DH', email: 'david.h@outlook.com', service: 'New Construction Villa', value: 15000, status: 'Recovered' },
+            { name: 'Sophia M.', initials: 'SM', email: 'sophia.m@icloud.com', service: 'Luxury Condo — Knox', value: 9500, status: 'Open' },
+          ]}
+        />
+
         <h2>What You Get</h2>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '1.5rem 0 2.5rem' }}>
           {[

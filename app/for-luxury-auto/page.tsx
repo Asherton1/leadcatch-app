@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import DashboardMockup from '../components/DashboardMockup'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
 import '../blog/blog.css'
@@ -47,6 +48,20 @@ export default function ForLuxuryAuto() {
         <div style={{ background: 'rgba(255,107,53,0.04)', border: '1px solid rgba(255,107,53,0.12)', borderRadius: 12, padding: '1.5rem 2rem', margin: '2.5rem 0' }}>
           <p style={{ color: '#bbb', fontSize: '0.95rem', lineHeight: 1.8, margin: 0 }}><strong style={{ color: '#ff6b35' }}>The math:</strong> A luxury dealership getting 20 form submissions per month is actually seeing ~77 form starts. That is ~57 serious buyers who disappeared. At $8,500 per deal, recovering just 1 per month more than pays for ReCapture for the entire year.</p>
         </div>
+        
+        <DashboardMockup
+          abandoned={57}
+          revenueAtRisk={484500}
+          recovered={5}
+          recoveredRevenue={42500}
+          leads={[
+            { name: 'Michael R.', initials: 'MR', email: 'michael.r@gmail.com', service: '2025 Porsche Cayenne', value: 9800, status: 'Open' },
+            { name: 'Jonathan K.', initials: 'JK', email: 'jon.k@icloud.com', service: '2026 Range Rover Sport', value: 11200, status: 'Contacted' },
+            { name: 'Diana P.', initials: 'DP', email: 'diana.p@outlook.com', service: '2025 Mercedes GLE', value: 7800, status: 'Recovered' },
+            { name: 'Andrew S.', initials: 'AS', email: 'andrew.s@gmail.com', service: '2026 BMW X7', value: 8500, status: 'Open' },
+          ]}
+        />
+
         <h2>What You Get</h2>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '1.5rem 0 2.5rem' }}>
           {[

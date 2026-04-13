@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import DashboardMockup from '../components/DashboardMockup'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
 import '../blog/blog.css'
@@ -58,6 +59,20 @@ export default function ForDental() {
 
         <h2>Built for Multi-Location Dental Groups</h2>
         <p>MINT Dentistry has 50+ locations. Thrive Dental has 6. Aspen Dental has hundreds. If you manage multiple practices, ReCapture gives you one enterprise dashboard showing abandoned leads, revenue at risk, and recovery rates across every location. See which offices are leaking the most patients. Deploy automated recovery from each location&apos;s branded email. One script tag per site, one dashboard for the entire group.</p>
+
+        
+        <DashboardMockup
+          abandoned={56}
+          revenueAtRisk={106400}
+          recovered={8}
+          recoveredRevenue={15200}
+          leads={[
+            { name: 'James T.', initials: 'JT', email: 'james.t@gmail.com', service: 'New Patient Exam', value: 1900, status: 'Open' },
+            { name: 'Maria G.', initials: 'MG', email: 'maria.g@outlook.com', service: 'Invisalign Consult', value: 5500, status: 'Contacted' },
+            { name: 'Kevin P.', initials: 'KP', email: 'kevin.p@yahoo.com', service: 'Emergency Dental', value: 1200, status: 'Recovered' },
+            { name: 'Linda W.', initials: 'LW', email: 'linda.w@gmail.com', service: 'Teeth Whitening', value: 800, status: 'Open' },
+          ]}
+        />
 
         <h2>What You Get</h2>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '1.5rem 0 2.5rem' }}>

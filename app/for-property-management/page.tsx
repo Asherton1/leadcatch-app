@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import DashboardMockup from '../components/DashboardMockup'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
 import '../blog/blog.css'
@@ -58,6 +59,20 @@ export default function ForPropertyManagement() {
         <h2>The Enterprise Multi-Location Advantage</h2>
         <p>This is where ReCapture was built to shine. One enterprise dashboard shows abandoned leads, revenue at risk, and recovery rates across every property in your portfolio. Your regional managers see their communities. Your corporate team sees the big picture. Every property sends recovery emails from its own branded address. No extra setup per community — one script tag per site, one dashboard for the entire portfolio.</p>
         <p>Companies managing 10, 50, or 500+ properties get the same visibility into every leasing form on every website. Compare which properties are losing the most prospects. Identify which form layouts are causing the highest abandonment. Route recovered leads directly to each property&apos;s leasing office.</p>
+
+        
+        <DashboardMockup
+          abandoned={83}
+          revenueAtRisk={265600}
+          recovered={12}
+          recoveredRevenue={38400}
+          leads={[
+            { name: 'Tyler W.', initials: 'TW', email: 'tyler.w@gmail.com', service: '2BR Unit — The Vue', value: 3200, status: 'Open' },
+            { name: 'Priya S.', initials: 'PS', email: 'priya.s@outlook.com', service: 'Studio — Park West', value: 2400, status: 'Contacted' },
+            { name: 'Marcus J.', initials: 'MJ', email: 'marcus.j@icloud.com', service: '1BR Unit — Skyline', value: 2800, status: 'Recovered' },
+            { name: 'Ashley C.', initials: 'AC', email: 'ashley.c@gmail.com', service: '3BR Townhome', value: 4200, status: 'Open' },
+          ]}
+        />
 
         <h2>What You Get</h2>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '1.5rem 0 2.5rem' }}>
