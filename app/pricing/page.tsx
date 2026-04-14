@@ -1,6 +1,7 @@
 'use client'
 
 import BlogNav from '../components/BlogNav'
+import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import PricingSection from '../components/PricingSection'
 import '../blog/blog.css'
@@ -10,6 +11,7 @@ export default function PricingPage() {
   return (
     <div className="landing" style={{ minHeight: '100vh', background: '#0a0a0a' }}>
       <BlogNav />
+      <ScrollReveal />
 
       <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 4rem' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>

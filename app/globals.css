@@ -288,3 +288,61 @@ input, textarea, select, button {
     margin-top: 0.5rem !important;
   }
 }
+
+/* ========= Universal scroll reveal ========= */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal:nth-child(2) { transition-delay: 0.1s; }
+.reveal:nth-child(3) { transition-delay: 0.2s; }
+.reveal:nth-child(4) { transition-delay: 0.3s; }
+
+/* ========= Universal mobile grid fixes ========= */
+@media (max-width: 768px) {
+  /* Any 3-column grid inside blog-post-body → single column */
+  .blog-post-body > div[style*="gridTemplateColumns"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+  /* Stat cards with 3 columns */
+  .blog-post-body > div > div[style*="1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Feature grids with 2 columns */
+  .blog-post-body > div > div[style*="1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Any flex row with buttons inside blog-post-body */
+  .blog-post-body > div[style*="display: 'flex'"] {
+    flex-direction: column !important;
+  }
+  /* Dashboard mockup stats grid */
+  .blog-post-body div[style*="repeat(4"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* Industry pages mobile grid fixes */
+@media (max-width: 768px) {
+  .ind-stats {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+  .ind-features {
+    grid-template-columns: 1fr !important;
+  }
+  .ind-ctas {
+    flex-direction: column !important;
+  }
+  .ind-ctas a {
+    width: 100% !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+}

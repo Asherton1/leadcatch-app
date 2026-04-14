@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
+import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import '../blog/blog.css'
 
@@ -75,6 +76,7 @@ export default function CalculatorPage() {
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Inter', -apple-system, sans-serif" }}>
       <BlogNav />
+      <ScrollReveal />
 
       <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 4rem' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>

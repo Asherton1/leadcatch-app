@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import BlogNav from '../components/BlogNav'
+import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import './blog.css'
 
@@ -13,6 +14,7 @@ export default function BlogIndex() {
   return (
     <div className="blog-page">
       <BlogNav />
+      <ScrollReveal />
 
       <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 4rem' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>

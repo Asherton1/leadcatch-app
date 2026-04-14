@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
+import ScrollReveal from '../components/ScrollReveal'
 import '../blog/blog.css'
 import Footer from '../components/Footer'
 
@@ -37,6 +38,7 @@ export default function ComparePage() {
   return (
     <div className="blog-post">
       <BlogNav />
+      <ScrollReveal />
 
       <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 4rem' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>

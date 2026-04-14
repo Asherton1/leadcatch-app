@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
+import ScrollReveal from '../components/ScrollReveal'
 import Image from 'next/image'
 import '../blog/blog.css'
 import Footer from '../components/Footer'
@@ -14,6 +15,7 @@ export default function AboutPage() {
   return (
     <div className="about-page">
       <BlogNav />
+      <ScrollReveal />
 
       <div className="about-hero">
         <div className="about-hero-content">
@@ -24,14 +26,14 @@ export default function AboutPage() {
       </div>
 
       <div className="about-story">
-        <div className="about-story-section">
+        <div className="about-story-section reveal">
           <h2>The Problem We Kept Seeing</h2>
           <p>We’ve managed over $100K in monthly ad spend across 38+ clients. Med spas, dental practices, luxury real estate, high-end service businesses — the kind of companies where a single lead is worth $1,500 to $10,000.</p>
           <p>The playbook was always the same: build the funnel, run the ads, optimize the landing page, watch the leads come in. And the leads did come in. But something always nagged at us.</p>
           <p>Google Analytics showed the traffic. The CRM showed the submissions. But neither one showed us the people in between — the ones who clicked the form, started typing their name, got distracted, and disappeared. Those people were invisible. And there were a LOT of them.</p>
         </div>
 
-        <div className="about-story-section">
+        <div className="about-story-section reveal">
           <h2>The Moment It Clicked</h2>
           <p>We were reviewing a client’s campaign performance and the numbers didn’t add up. We were driving solid traffic. The landing page was converting. But the gap between page views and form submissions was massive — way bigger than it should have been.</p>
           <p>That’s when we realized: every analytics platform on the market tracks what happens before the form and what happens after. Nobody tracks what happens during. The form itself was a complete blind spot.</p>
@@ -39,7 +41,7 @@ export default function AboutPage() {
           <p>None of them were built for the businesses we work with. So we built one.</p>
         </div>
 
-        <div className="about-story-section">
+        <div className="about-story-section reveal">
           <h2>What ReCapture Is</h2>
           <p>ReCapture is a form abandonment recovery platform built specifically for high-ticket service businesses. One script tag on your website. No form migration. No complex setup. The moment someone starts typing into your contact form, we capture it — even if they never hit submit.</p>
           <p>You see every lead in a clean dashboard with their name, email, phone number, and the estimated dollar value they represent. Follow up manually, or let ReCapture send automated recovery emails on your behalf.</p>
@@ -47,7 +49,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="about-founder">
+      <div className="about-founder reveal">
         <div className="about-founder-inner">
         <div className="about-founder-image">
           <Image src="/founder.png" alt="Asherton C. — Founder of ReCapture" width={400} height={400} style={{ objectFit: 'cover', filter: 'grayscale(100%)', borderRadius: '10px', width: '100%', height: 'auto' }} />
@@ -66,7 +68,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="about-values">
+      <div className="about-values reveal">
         <h2>What We Believe</h2>
         <div className="about-values-grid">
           <div className="about-value">
@@ -84,7 +86,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="about-cta">
+      <div className="about-cta reveal">
         <h2>See what your forms are missing</h2>
         <p>Try the live demo and watch ReCapture capture a lead in real time.</p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
