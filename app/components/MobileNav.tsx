@@ -36,18 +36,27 @@ export default function MobileNav() {
         <span style={{ display: 'block', width: '20px', height: '2px', background: open ? '#ff6b35' : '#888', transition: 'all 0.3s', transform: open ? 'rotate(-45deg) translate(4px, -4px)' : 'none' }} />
       </button>
 
-      {open && (
-        <div className="nav-mobile-menu" onClick={() => setOpen(false)}>
-          <Link href="/about">About</Link>
-          <Link href="/blog">Insights</Link>
-          <Link href="/pricing">Pricing</Link>
-          <Link href="/test-form">Live Demo</Link>
-          <Link href="/compare">Compare</Link>
-          <Link href="/calculator">ROI Estimator</Link>
-          <Link href="/login">Login</Link>
+      <div
+        className="nav-mobile-menu"
+        style={{
+          maxHeight: open ? '500px' : '0',
+          opacity: open ? 1 : 0,
+          overflow: 'hidden',
+          transition: 'max-height 0.4s ease, opacity 0.3s ease',
+          pointerEvents: open ? 'auto' : 'none',
+        }}
+      >
+        <div style={{ padding: '1rem 0' }} onClick={() => setOpen(false)}>
+          <Link href="/about" className={isActive('/about') ? 'mobile-link-active' : ''}>About</Link>
+          <Link href="/blog" className={isActive('/blog') ? 'mobile-link-active' : ''}>Insights</Link>
+          <Link href="/pricing" className={isActive('/pricing') ? 'mobile-link-active' : ''}>Pricing</Link>
+          <Link href="/test-form" className={isActive('/test-form') ? 'mobile-link-active' : ''}>Live Demo</Link>
+          <Link href="/compare" className={isActive('/compare') ? 'mobile-link-active' : ''}>Compare</Link>
+          <Link href="/calculator" className={isActive('/calculator') ? 'mobile-link-active' : ''}>ROI Estimator</Link>
+          <Link href="/login" className={isActive('/login') ? 'mobile-link-active' : ''}>Login</Link>
           <Link href="/start-trial" className="nav-mobile-cta">Start Free Trial</Link>
         </div>
-      )}
+      </div>
     </>
   )
 }
