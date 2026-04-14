@@ -1,4 +1,5 @@
 import './globals.css'
+import Script from 'next/script'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -44,17 +45,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-132TK8H7D9" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: \`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-132TK8H7D9');
-            \`,
-          }}
-        />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-132TK8H7D9" strategy="afterInteractive" />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-132TK8H7D9');`}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
