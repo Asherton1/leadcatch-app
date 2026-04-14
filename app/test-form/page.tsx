@@ -106,10 +106,10 @@ export default function TestForm() {
         </div>
 
         {/* Main Content — Form + Live Dashboard */}
-        <div className="demo-split" style={{ maxWidth: '1140px', margin: '0 auto', padding: '3rem 2rem 2rem' }}>
+        <div className="demo-split revealed" style={{ maxWidth: '1140px', margin: '0 auto', padding: '3rem 2rem 2rem' }}>
 
           {/* LEFT: Form */}
-          <div className="demo-form-col">
+          <div className="demo-form-col reveal">
             {!submitted ? (
               <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 16, padding: '2.5rem' }}>
                 <h2 style={{ fontSize: '1.375rem', fontWeight: 700, color: '#fff', marginBottom: '0.375rem', letterSpacing: '-0.02em' }}>Try It Yourself</h2>
@@ -189,7 +189,7 @@ export default function TestForm() {
           </div>
 
           {/* RIGHT: Live Dashboard */}
-          <div className="demo-dash-col">
+          <div className="demo-dash-col reveal">
             <div style={{
               background: '#111',
               border: dashActive ? '1px solid rgba(255,107,53,0.3)' : '1px solid #1e1e1e',
@@ -364,7 +364,7 @@ export default function TestForm() {
         </div>
 
         {/* Bottom CTA */}
-        <div style={{ maxWidth: '720px', margin: '0 auto', padding: '2rem 2rem 4rem', textAlign: 'center' }}>
+        <div className="reveal" style={{ maxWidth: '720px', margin: '0 auto', padding: '2rem 2rem 4rem', textAlign: 'center' }}>
           <div style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a1a 100%)', border: '1px solid #1e1e1e', borderRadius: 12, padding: '2.5rem' }}>
             <h3 style={{ color: '#ff6b35', fontSize: '1.5rem', margin: '0 0 0.75rem 0', fontWeight: 700 }}>How many leads are your forms losing?</h3>
             <p style={{ color: '#888', margin: '0 0 1.5rem 0', fontSize: '0.95rem', lineHeight: 1.7 }}>One script tag. 60-second setup. See your first captured lead within 48 hours.</p>

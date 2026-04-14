@@ -10,6 +10,7 @@ import FeaturesAccordion from './components/FeaturesAccordion'
 import ProblemAccordion from './components/ProblemAccordion'
 import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
+import ScrollReveal from './components/ScrollReveal'
 
 export const metadata = {
   title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
@@ -21,6 +22,7 @@ export default function LandingPage() {
     <div className="landing">
       <div className="ambient-bg" />
       <GSAPAnimations />
+      <ScrollReveal />
 
       <nav className="lc-nav">
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
@@ -85,7 +87,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <div className="stats-bridge">
+      <div className="stats-bridge reveal">
         <StatsBar />
       </div>
 
@@ -210,7 +212,7 @@ export default function LandingPage() {
 
       <section className="lc-section">
         <h2 className="section-title">What Our Clients Say</h2>
-        <div className="testimonials-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }}>
+        <div className="testimonials-grid reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }}>
           <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem' }}>
             <p style={{ color: '#bbb', lineHeight: 1.8, fontSize: '0.95rem', margin: '0 0 1.5rem 0', fontStyle: 'italic' }}>&quot;We had no idea how many leads were starting our consultation form and dropping off. Within the first week, ReCapture surfaced 14 leads we never would have known about. Three of them booked. That alone paid for the year.&quot;</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -254,7 +256,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="final-cta">
+      <section className="final-cta reveal">
         <div className="final-cta-glow" />
         <h2>Stop Losing Revenue.<br />Start Recovering Leads.</h2>
         <p>7-day free trial. Cancel anytime. If you&apos;re losing leads, you&apos;ll know within 48 hours.</p>

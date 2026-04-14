@@ -87,7 +87,7 @@ export default function CalculatorPage() {
       </div>
 
       <div style={{ maxWidth: '880px', margin: '0 auto', padding: '3rem 2rem' }}>
-        <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 16, padding: '2.5rem', marginBottom: '2rem' }}>
+        <div className="reveal" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 16, padding: '2.5rem', marginBottom: '2rem' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>Your Business Numbers</h2>
           <p style={{ fontSize: '0.85rem', color: '#555', marginBottom: '2rem' }}>The more accurate your inputs, the more precise your results. Ad spend is optional but unlocks cost-per-lead insights.</p>
 
@@ -122,7 +122,7 @@ export default function CalculatorPage() {
         </div>
 
         {showResults && submissions > 0 && (
-          <div style={{ animation: 'fadeInUp 0.5s ease' }}>
+          <div className="revealed" style={{ animation: 'fadeInUp 0.5s ease' }}>
 
             <h3 style={{ fontSize: '0.8rem', color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: '1rem' }}>The Problem: What You Cannot See</h3>
 

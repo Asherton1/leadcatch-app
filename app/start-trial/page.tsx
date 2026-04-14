@@ -22,7 +22,7 @@ export default function StartTrial() {
       </div>
 
       <div style={{ marginTop: "-7rem" }}>
-        <PricingSection />
+        <div className="reveal"><PricingSection /></div>
       </div>
       <Footer />
     </div>
