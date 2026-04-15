@@ -1,11 +1,6 @@
-import twilio from 'twilio'
-
-const client = twilio(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN
-)
-
-const FROM = process.env.TWILIO_PHONE_NUMBER ?? ''
+const TWILIO_SID = process.env.TWILIO_ACCOUNT_SID ?? ''
+const TWILIO_TOKEN = process.env.TWILIO_AUTH_TOKEN ?? ''
+const TWILIO_FROM = process.env.TWILIO_PHONE_NUMBER ?? ''
 
 interface SmsAlertPayload {
   businessPhone: string
@@ -20,19 +15,17 @@ interface SmsAlertPayload {
 export async function sendSmsAlert(payload: SmsAlertPayload) {
   const { businessPhone, leadName, leadEmail, leadPhone, formData, fieldsCompleted, totalFields } = payload
 
-  if (!businessPhone || !FROM) {
-    console.error('SMS alert skipped — missing businessPhone or TWILIO_PHONE_NUMBER')
+  if (!businessPhone || !TWILIO_SID || !TWILIO_TOKEN || !TWILIO_FROM) {
+    console.error('SMS alert skipped — missing config:', { businessPhone: !!businessPhone, sid: !!TWILIO_SID, token: !!TWILIO_TOKEN, from: !!TWILIO_FROM })
     return
   }
 
-  // Build a concise, high-value message
   const parts: string[] = ['🔥 ReCapture Lead Alert']
 
   if (leadName) parts.push(`Name: ${leadName}`)
   if (leadEmail) parts.push(`Email: ${leadEmail}`)
   if (leadPhone) parts.push(`Phone: ${leadPhone}`)
 
-  // Pull interesting fields from form_data (treatment, service, vehicle, etc.)
   if (formData && typeof formData === 'object') {
     const skipKeys = new Set(['name', 'email', 'phone', 'tel', 'telephone'])
     const extras: string[] = []
@@ -51,14 +44,30 @@ export async function sendSmsAlert(payload: SmsAlertPayload) {
 
   const body = parts.join('\n')
 
+  const url = `https://api.twilio.com/2010-04-01/Accounts/${TWILIO_SID}/Messages.json`
+  const auth = Buffer.from(`${TWILIO_SID}:${TWILIO_TOKEN}`).toString('base64')
+
   try {
-    await client.messages.create({
-      body,
-      from: FROM,
-      to: businessPhone,
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Basic ${auth}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        To: businessPhone,
+        From: TWILIO_FROM,
+        Body: body,
+      }),
     })
-    console.log('SMS alert sent to', businessPhone)
+
+    if (res.ok) {
+      console.log('SMS alert sent to', businessPhone)
+    } else {
+      const err = await res.text()
+      console.error('SMS alert failed:', res.status, err)
+    }
   } catch (err) {
-    console.error('SMS alert failed:', err)
+    console.error('SMS alert error:', err)
   }
 }
