@@ -82,9 +82,9 @@ function formatDuration(seconds: number) {
 function deviceLabel(type: string | null) {
   if (!type) return '— Unknown'
   const t = type.toLowerCase()
-  if (t.includes('mobile') || t.includes('phone')) return '📱 Mobile'
-  if (t.includes('tablet')) return '📱 Tablet'
-  return '💻 Desktop'
+  if (t.includes('mobile') || t.includes('phone')) return 'Mobile'
+  if (t.includes('tablet')) return 'Tablet'
+  return 'Desktop'
 }
 
 function filterByDate(leads: Lead[], filter: Filter): Lead[] {
@@ -701,7 +701,7 @@ export default function Dashboard() {
         <div className="stat-card">
           <div className="stat-header">
             <div className="stat-label">Estimated Lost Revenue</div>
-            <div className="stat-icon">💰</div>
+            <div className="stat-icon">$</div>
           </div>
           <div className="stat-value">{isLoading ? '—' : formatCurrency(stats.total_revenue_lost)}</div>
         </div>
@@ -806,7 +806,7 @@ export default function Dashboard() {
                 <div>
                   <div className="est-value">{formatCurrency(lead.estimated_value)}</div>
                   {lead.email_sent && (
-                    <div className="email-sent-badge">✉ sent</div>
+                    <div className="email-sent-badge">sent</div>
                   )}
                 </div>
 

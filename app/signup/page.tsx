@@ -144,7 +144,7 @@ function SignupForm() {
           </div>
           <div style={s.trialBox}>
             <div style={s.trialBoxTop}>
-              <span style={s.trialIcon}>🔒</span>
+              <span style={s.trialIcon}>Secure</span>
               <span style={s.trialTitle}>Free Trial — No Charge Today</span>
             </div>
             <p style={s.trialSub}>

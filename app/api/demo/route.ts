@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
   await resend.emails.send({
     from: 'ReCapture <hello@userecapture.com>',
     to: 'asherton.c@me.com',
-    subject: `🔥 New Demo Request — ${name}`,
+    subject: `New Demo Request — ${name}`,
     html: `
       <h2>New Demo Request</h2>
       <p><strong>Name:</strong> ${name}</p>
