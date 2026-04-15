@@ -106,39 +106,38 @@ export async function POST(request: NextRequest) {
   }
 
   // --- SMS ALERT (Pro plan only) ---
-  // Fire when: sms_enabled, Pro plan, business has a phone on file, and lead has at least a name or email
-  // Only send once per session — check if we already sent for this session
   if (
     client.sms_enabled &&
     client.sms_phone &&
     client.plan !== 'essentials' &&
     (name || email || phone)
   ) {
-    // Check if SMS was already sent for this session
     const { data: existing } = await supabase
       .from('leads')
       .select('sms_sent')
       .eq('id', lead.id)
       .single()
 
+    console.log('SMS CHECK:', { existing_sms_sent: existing?.sms_sent, lead_id: lead.id })
+
     if (!existing?.sms_sent) {
-      sendSmsAlert({
-        businessPhone: client.sms_phone,
-        leadName: (name as string) ?? null,
-        leadEmail: (email as string) ?? null,
-        leadPhone: (phone as string) ?? null,
-        formData: (form_data as Record<string, unknown>) ?? null,
-        fieldsCompleted: Number(fields_completed ?? 0),
-        totalFields: Number(total_fields ?? 0),
-      }).then(() => {
-        supabase
+      try {
+        await sendSmsAlert({
+          businessPhone: client.sms_phone,
+          leadName: (name as string) ?? null,
+          leadEmail: (email as string) ?? null,
+          leadPhone: (phone as string) ?? null,
+          formData: (form_data as Record<string, unknown>) ?? null,
+          fieldsCompleted: Number(fields_completed ?? 0),
+          totalFields: Number(total_fields ?? 0),
+        })
+        await supabase
           .from('leads')
           .update({ sms_sent: true, sms_sent_at: new Date().toISOString() })
           .eq('id', lead.id)
-          .then(({ error }) => {
-            if (error) console.error('Failed to mark sms_sent for lead', lead.id, error.message)
-          })
-      }).catch(err => console.error('SMS alert failed for lead', lead.id, err))
+      } catch (err) {
+        console.error('SMS alert failed for lead', lead.id, err)
+      }
     }
   }
 
