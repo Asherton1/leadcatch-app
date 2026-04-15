@@ -693,7 +693,7 @@ export default function Dashboard() {
         <div className="stat-card">
           <div className="stat-header">
             <div className="stat-label">Completion Rate</div>
-            <div className="stat-icon">✓</div>
+            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
           </div>
           <div className="stat-value">{isLoading ? '—' : `${stats.avg_completion_rate}%`}</div>
         </div>
@@ -701,7 +701,7 @@ export default function Dashboard() {
         <div className="stat-card">
           <div className="stat-header">
             <div className="stat-label">Estimated Lost Revenue</div>
-            <div className="stat-icon">$</div>
+            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
           </div>
           <div className="stat-value">{isLoading ? '—' : formatCurrency(stats.total_revenue_lost)}</div>
         </div>
@@ -709,7 +709,7 @@ export default function Dashboard() {
         <div className="stat-card">
           <div className="stat-header">
             <div className="stat-label">Avg. Time on Form</div>
-            <div className="stat-icon">⏱️</div>
+            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
           </div>
           <div className="stat-value">{isLoading ? '—' : formatDuration(stats.avg_time_on_form)}</div>
         </div>
@@ -718,9 +718,9 @@ export default function Dashboard() {
           <div className="stat-header">
             <div className="stat-label">Emails Deployed</div>
             <div className="stat-icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.5">
-                <path d="M3 4h14c.6 0 1 .4 1 1v10c0 .6-.4 1-1 1H3c-.6 0-1-.4-1-1V5c0-.6.4-1 1-1z"/>
-                <polyline points="18,5 10,11 2,5"/>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
               </svg>
             </div>
           </div>
