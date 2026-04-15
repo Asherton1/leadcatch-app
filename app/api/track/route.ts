@@ -58,6 +58,7 @@ export async function POST(request: NextRequest) {
     )
   }
 
+  console.log("CLIENT DATA:", JSON.stringify({ sms_enabled: client.sms_enabled, sms_phone: client.sms_phone, plan: client.plan }))
   if (!client.active) {
     return NextResponse.json({ error: 'Account inactive' }, { status: 403 })
   }
