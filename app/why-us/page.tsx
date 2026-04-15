@@ -12,6 +12,8 @@ export const metadata = {
 
 const rows: [string, string | boolean, string | boolean, string | boolean][] = [
   ['Partial form capture', true, true, true],
+  ['Instant SMS lead alerts', 'Pro plan', false, false],
+  ['Lead scoring (hot/warm/cold)', true, false, false],
   ['Auto-recovery emails', true, true, true],
   ['Revenue-at-risk dashboard', true, false, false],
   ['ROI Estimator tool', true, false, false],
@@ -22,19 +24,35 @@ const rows: [string, string | boolean, string | boolean, string | boolean][] = [
   ['Industry-specific focus', 'High-ticket services', 'Generic SaaS / B2B', 'Generic / all industries'],
   ['Flat monthly pricing', true, false, '?'],
   ['Transparent pricing', '$150-200/mo', 'Session-based (unclear)', 'Contact for pricing'],
-  ['Free trial', '7 days', '$7 paid trial', '7 days'],
+  ['Free trial', '14 days', '$7 paid trial', '7 days'],
   ['Setup complexity', '1 script tag', '1 script tag', '1 script tag'],
   ['White-label option', 'Coming soon', false, 'Paid add-on'],
   ['Location', 'Dallas, TX', 'Phoenix, AZ', 'Not disclosed'],
 ]
 
+function Check() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+  )
+}
+
+function Cross() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  )
+}
+
 function Val({ v }: { v: string | boolean }) {
-  if (v === true) return <span style={{ color: '#22c55e', fontSize: '1.1rem' }}>✓</span>
-  if (v === false) return <span style={{ color: '#444', fontSize: '1.1rem' }}>✗</span>
+  if (v === true) return <Check />
+  if (v === false) return <Cross />
   return <span style={{ fontSize: '0.825rem' }}>{v}</span>
 }
 
-export default function ComparePage() {
+export default function WhyUsPage() {
   return (
     <div className="blog-post">
       <BlogNav />
@@ -101,6 +119,52 @@ export default function ComparePage() {
           ))}
         </div>
 
+        {/* ── What Sets Us Apart ──────────────────────────────────────── */}
+        <h2 className="reveal">What Sets Us Apart</h2>
+        <p className="reveal">Every competitor in this space tells you <em>where</em> people drop off. None of them give you <em>who</em> dropped off with their actual contact data — and none of them do what comes next.</p>
+
+        {/* Feature 1: Instant SMS Alerts */}
+        <div className="reveal" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '2rem', margin: '2rem 0' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '1rem' }}>
+            <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(255,107,53,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 style={{ margin: 0, color: '#fff', fontSize: '1.15rem' }}>Instant SMS Lead Alerts</h3>
+              <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Coming Soon — Pro Plan</span>
+            </div>
+          </div>
+          <p style={{ color: '#999', lineHeight: 1.8, margin: 0 }}>Your phone buzzes within 60 seconds of someone abandoning your form. Not an email you check later. A text message with their name, their email, and what they were looking for. Research shows that calling a lead within 5 minutes makes you 21x more likely to convert them. No other form abandonment tool offers real-time SMS alerts.</p>
+        </div>
+
+        {/* Feature 2: Lead Scoring */}
+        <div className="reveal" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '2rem', margin: '2rem 0' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '1rem' }}>
+            <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(255,107,53,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+            </div>
+            <h3 style={{ margin: 0, color: '#fff', fontSize: '1.15rem' }}>Lead Scoring</h3>
+          </div>
+          <p style={{ color: '#999', lineHeight: 1.8, margin: 0 }}>Not every abandoned lead is worth the same follow-up. Someone who typed their name, email, phone number, and selected &quot;$15,000 tummy tuck&quot; is not the same as someone who typed one letter and bounced. ReCapture scores every lead as hot, warm, or cold based on fields completed, contact data provided, time on form, and form detail richness. Your team sees instantly who to call first. No other form abandonment tool does lead scoring on partial form data.</p>
+        </div>
+
+        {/* Feature 3: Auto-Recovery Emails */}
+        <div className="reveal" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '2rem', margin: '2rem 0' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '1rem' }}>
+            <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(255,107,53,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <h3 style={{ margin: 0, color: '#fff', fontSize: '1.15rem' }}>Auto-Recovery Emails</h3>
+          </div>
+          <p style={{ color: '#999', lineHeight: 1.8, margin: 0 }}>When someone abandons your form and they entered an email, ReCapture automatically sends a branded recovery email on your behalf. Not from us — from your business, with your name and your booking link. The lead gets a message saying &quot;Looks like you didn&apos;t finish — want to pick up where you left off?&quot; and a direct link back to your form. This closes the loop without your team lifting a finger.</p>
+        </div>
+
         <h2 className="reveal">Pricing</h2>
         <p>Insiteful&apos;s pricing is based on session volume and data retention. Their trial starts at $7, and plans scale based on traffic. For a high-traffic multi-location business, costs can escalate quickly and unpredictably.</p>
         <p>ReCapture uses simple flat-rate pricing. Essentials is $150/mo. Pro is $200/mo. Enterprise is custom. No session caps, no surprise charges, no calculator needed to figure out your bill. You know exactly what you&apos;re paying before you sign up.</p>
@@ -115,7 +179,7 @@ export default function ComparePage() {
 
         <h2 className="reveal">The Bottom Line</h2>
         <div className="reveal" style={{ borderLeft: '3px solid #ff6b35', background: '#111', borderRadius: '0 10px 10px 0', padding: '1.5rem 2rem', margin: '2rem 0' }}>
-          <p style={{ color: '#bbb', lineHeight: 1.8, margin: 0 }}>Insiteful helps you understand <em>why</em> people abandon your forms. ReCapture helps you <em>recover</em> the people who do. If you need both, start with recovery — because understanding why someone left doesn&apos;t pay the bills. Getting them back does.</p>
+          <p style={{ color: '#bbb', lineHeight: 1.8, margin: 0 }}>Other tools help you understand <em>why</em> people abandon your forms. ReCapture captures <em>who</em> they are, scores how serious they were, alerts you in real time, and automatically tries to bring them back. That&apos;s the difference between analytics and revenue.</p>
         </div>
 
         <div className="reveal" style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a1a 100%)', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2.5rem', margin: '3rem 0', textAlign: 'center' }}>
