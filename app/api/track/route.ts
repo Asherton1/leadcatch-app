@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 import { sendEmailForLead } from '@/lib/email'
+import { sendSmsAlert } from '@/lib/sms'
 
 // Handle CORS preflight from tracking script on client sites
 export async function OPTIONS() {
@@ -42,12 +43,11 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone')
     .eq('api_key', api_key)
     .single()
 
   if (clientError) {
-    // PGRST116 = no rows found → bad API key. Anything else is a real DB error.
     if (clientError.code === 'PGRST116') {
       return NextResponse.json({ error: 'Invalid API key' }, { status: 401 })
     }
@@ -64,7 +64,6 @@ export async function POST(request: NextRequest) {
 
   const estimated_value = client.avg_lead_value ?? 0
 
-  // Coerce numeric fields — JSON body values may arrive as strings
   const payload = {
     client_id: client.id,
     session_id,
@@ -80,8 +79,6 @@ export async function POST(request: NextRequest) {
     form_data: form_data ?? null,
   }
 
-  // Upsert lead — same session updates the existing row.
-  // Requires a UNIQUE constraint on leads.session_id in Supabase.
   const { data: lead, error: leadError } = await supabase
     .from('leads')
     .upsert(payload, { onConflict: 'session_id' })
@@ -107,13 +104,48 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  // Schedule or immediately send recovery email if enabled and lead has an email.
+  // --- SMS ALERT (Pro plan only) ---
+  // Fire when: sms_enabled, Pro plan, business has a phone on file, and lead has at least a name or email
+  // Only send once per session — check if we already sent for this session
+  if (
+    client.sms_enabled &&
+    client.sms_phone &&
+    client.plan !== 'essentials' &&
+    (name || email || phone)
+  ) {
+    // Check if SMS was already sent for this session
+    const { data: existing } = await supabase
+      .from('leads')
+      .select('sms_sent')
+      .eq('id', lead.id)
+      .single()
+
+    if (!existing?.sms_sent) {
+      sendSmsAlert({
+        businessPhone: client.sms_phone,
+        leadName: (name as string) ?? null,
+        leadEmail: (email as string) ?? null,
+        leadPhone: (phone as string) ?? null,
+        formData: (form_data as Record<string, unknown>) ?? null,
+        fieldsCompleted: Number(fields_completed ?? 0),
+        totalFields: Number(total_fields ?? 0),
+      }).then(() => {
+        supabase
+          .from('leads')
+          .update({ sms_sent: true, sms_sent_at: new Date().toISOString() })
+          .eq('id', lead.id)
+          .then(({ error }) => {
+            if (error) console.error('Failed to mark sms_sent for lead', lead.id, error.message)
+          })
+      }).catch(err => console.error('SMS alert failed for lead', lead.id, err))
+    }
+  }
+
+  // --- AUTO-RECOVERY EMAIL ---
   if (client.auto_email_enabled && email && client.plan !== 'essentials') {
     const delayMinutes = client.email_delay_minutes ?? 0
 
     if (delayMinutes > 0) {
-      // Store when the email should be sent. Only set this once — the .is('email_send_after', null)
-      // filter prevents the 15s heartbeat upserts from resetting an already-scheduled time.
       const sendAfter = new Date(Date.now() + delayMinutes * 60 * 1000).toISOString()
       supabase
         .from('leads')
@@ -124,7 +156,6 @@ export async function POST(request: NextRequest) {
           if (error) console.error('Failed to schedule email for lead', lead.id, error.message)
         })
     } else {
-      // delay = 0: send immediately
       console.log('Sending immediate email to:', email, 'for lead:', lead.id)
       sendEmailForLead(lead.id).catch(err =>
         console.error('Auto email failed for lead', lead.id, err)
