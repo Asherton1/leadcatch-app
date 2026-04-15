@@ -111,44 +111,66 @@ function statusColor(status: string): string {
 
 // ── Lead Scoring ──────────────────────────────────────────────────────────────
 
+interface ScoreBreakdownItem {
+  label: string
+  points: number
+  maxPoints: number
+}
+
 interface LeadScore {
   score: number
   label: string
   color: string
   bg: string
+  breakdown: ScoreBreakdownItem[]
 }
 
 function scoreLead(lead: Lead): LeadScore {
+  const breakdown: ScoreBreakdownItem[] = []
   let score = 0
 
   // Contact info (up to 40 points)
-  if (lead.email) score += 20
-  if (lead.name) score += 10
-  if (lead.phone) score += 10
+  const emailPts = lead.email ? 20 : 0
+  const namePts = lead.name ? 10 : 0
+  const phonePts = lead.phone ? 10 : 0
+  score += emailPts + namePts + phonePts
+  breakdown.push({ label: 'Email provided', points: emailPts, maxPoints: 20 })
+  breakdown.push({ label: 'Name provided', points: namePts, maxPoints: 10 })
+  breakdown.push({ label: 'Phone provided', points: phonePts, maxPoints: 10 })
 
   // Field completion (up to 30 points)
+  let fieldPts = 0
   if (lead.total_fields > 0) {
     const pct = lead.fields_completed / lead.total_fields
-    score += Math.round(pct * 30)
+    fieldPts = Math.round(pct * 30)
   }
+  score += fieldPts
+  breakdown.push({ label: 'Fields completed', points: fieldPts, maxPoints: 30 })
 
-  // Time on form — more time = more intent (up to 15 points)
-  if (lead.time_on_form >= 60) score += 15
-  else if (lead.time_on_form >= 30) score += 10
-  else if (lead.time_on_form >= 10) score += 5
+  // Time on form (up to 15 points)
+  let timePts = 0
+  if (lead.time_on_form >= 60) timePts = 15
+  else if (lead.time_on_form >= 30) timePts = 10
+  else if (lead.time_on_form >= 10) timePts = 5
+  score += timePts
+  breakdown.push({ label: 'Time on form', points: timePts, maxPoints: 15 })
 
-  // Form data richness — typed into extra fields like service, message (up to 15 points)
-  if (lead.form_data && typeof lead.form_data === "object") {
+  // Form data richness (up to 15 points)
+  let dataPts = 0
+  if (lead.form_data && typeof lead.form_data === 'object') {
     const filled = Object.values(lead.form_data).filter(v => v && String(v).trim().length > 0).length
-    if (filled >= 3) score += 15
-    else if (filled >= 2) score += 10
-    else if (filled >= 1) score += 5
+    if (filled >= 3) dataPts = 15
+    else if (filled >= 2) dataPts = 10
+    else if (filled >= 1) dataPts = 5
   }
+  score += dataPts
+  breakdown.push({ label: 'Form detail richness', points: dataPts, maxPoints: 15 })
 
-  if (score >= 70) return { score, label: "Hot", color: "#ef4444", bg: "rgba(239,68,68,0.12)" }
-  if (score >= 40) return { score, label: "Warm", color: "#f59e0b", bg: "rgba(245,158,11,0.12)" }
-  return { score, label: "Cold", color: "#6b7280", bg: "rgba(107,114,128,0.12)" }
+  if (score >= 70) return { score, label: 'Hot', color: '#ef4444', bg: 'rgba(239,68,68,0.12)', breakdown }
+  if (score >= 40) return { score, label: 'Warm', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)', breakdown }
+  return { score, label: 'Cold', color: '#6b7280', bg: 'rgba(107,114,128,0.12)', breakdown }
 }
+
 
 // ── Lead Detail Modal ─────────────────────────────────────────────────────────
 
@@ -278,6 +300,34 @@ function LeadModal({
             </div>
           </div>
 
+
+          {/* Lead Score */}
+          {(() => {
+            const s = scoreLead(lead)
+            return (
+              <div className="modal-section">
+                <div className="modal-section-label">Lead Score</div>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "4px 12px", borderRadius: "9999px", fontSize: "0.85rem", fontWeight: 700, border: "1px solid", color: s.color, borderColor: s.color + "40", background: s.bg }}>
+                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: s.color, display: "inline-block" }} />
+                    {s.label}
+                  </div>
+                  <span style={{ fontSize: "0.85rem", color: "#888" }}>{s.score} / 100</span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  {s.breakdown.map((item, idx) => (
+                    <div key={idx} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <span style={{ fontSize: "0.75rem", color: "#888", width: "120px", flexShrink: 0 }}>{item.label}</span>
+                      <div style={{ flex: 1, height: 4, background: "#1e1e1e", borderRadius: 2, overflow: "hidden" }}>
+                        <div style={{ width: item.maxPoints > 0 ? (item.points / item.maxPoints * 100) + "%" : "0%", height: "100%", background: s.color, borderRadius: 2 }} />
+                      </div>
+                      <span style={{ fontSize: "0.7rem", color: "#666", width: "40px", textAlign: "right", flexShrink: 0 }}>{item.points}/{item.maxPoints}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          })()}
           {/* Captured form fields */}
           {formFields.length > 0 && (
             <div className="modal-section">
