@@ -50,7 +50,7 @@ function AccordionItem({ item }: { item: FeatureItem }) {
       </button>
 
       <div style={{
-        maxHeight: open ? '800px' : '0',
+        maxHeight: open ? '1200px' : '0',
         overflow: 'hidden',
         transition: 'max-height 0.4s ease',
       }}>
@@ -69,93 +69,94 @@ function AccordionItem({ item }: { item: FeatureItem }) {
 
 function SmsMockup() {
   return (
-    <div style={{ background: '#0a0a0a', padding: '1.5rem', fontFamily: '-apple-system, sans-serif' }}>
-      <div style={{ maxWidth: 320, margin: '0 auto' }}>
-        {/* Phone frame */}
-        <div style={{ background: '#1a1a1a', borderRadius: 16, padding: '1.25rem', border: '1px solid #222' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: '1rem' }}>
-            <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e' }} />
-            <span style={{ fontSize: '0.75rem', color: '#888' }}>Text Message</span>
-            <span style={{ fontSize: '0.65rem', color: '#555', marginLeft: 'auto' }}>Just now</span>
-          </div>
-          <div style={{ background: '#111', borderRadius: 12, padding: '1rem', border: '1px solid #1e1e1e' }}>
-            <div style={{ fontSize: '0.7rem', color: '#ff6b35', fontWeight: 600, marginBottom: '0.75rem', letterSpacing: '0.05em' }}>ReCapture Lead Alert</div>
-            <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.4rem' }}>
-              <div style={{ fontSize: '0.8rem', color: '#ccc' }}><span style={{ color: '#666' }}>Name:</span> Sarah Martinez</div>
-              <div style={{ fontSize: '0.8rem', color: '#ccc' }}><span style={{ color: '#666' }}>Email:</span> sarah@gmail.com</div>
-              <div style={{ fontSize: '0.8rem', color: '#ccc' }}><span style={{ color: '#666' }}>Phone:</span> (214) 555-9876</div>
-              <div style={{ fontSize: '0.8rem', color: '#ccc' }}><span style={{ color: '#666' }}>Service:</span> Botox + Filler</div>
-              <div style={{ fontSize: '0.8rem', color: '#ccc' }}><span style={{ color: '#666' }}>Fields:</span> 4/5</div>
-            </div>
-            <div style={{ marginTop: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid #1e1e1e', fontSize: '0.75rem', color: '#ff6b35', fontWeight: 600 }}>Form abandoned — follow up now</div>
-          </div>
+    <div style={{ background: '#0a0a0a', padding: '1.25rem', fontFamily: '-apple-system, sans-serif' }}>
+      {/* Phone frame */}
+      <div style={{ background: '#1a1a1a', borderRadius: 16, padding: '1.25rem', border: '1px solid #222' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: '1rem' }}>
+          <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e' }} />
+          <span style={{ fontSize: '0.875rem', color: '#888' }}>Text Message</span>
+          <span style={{ fontSize: '0.75rem', color: '#555', marginLeft: 'auto' }}>Just now</span>
         </div>
-        <div style={{ textAlign: 'center', marginTop: '0.75rem', fontSize: '0.7rem', color: '#444' }}>Delivered within 60 seconds of form abandonment</div>
+        <div style={{ background: '#111', borderRadius: 12, padding: '1.25rem', border: '1px solid #1e1e1e' }}>
+          <div style={{ fontSize: '0.8rem', color: '#ff6b35', fontWeight: 600, marginBottom: '1rem', letterSpacing: '0.05em' }}>ReCapture Lead Alert</div>
+          <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.6rem' }}>
+            <div style={{ fontSize: '0.9rem', color: '#ccc' }}><span style={{ color: '#666' }}>Name: </span>Sarah Martinez</div>
+            <div style={{ fontSize: '0.9rem', color: '#ccc' }}><span style={{ color: '#666' }}>Email: </span>sarah@gmail.com</div>
+            <div style={{ fontSize: '0.9rem', color: '#ccc' }}><span style={{ color: '#666' }}>Phone: </span>(214) 555-9876</div>
+            <div style={{ fontSize: '0.9rem', color: '#ccc' }}><span style={{ color: '#666' }}>Service: </span>Botox + Filler</div>
+            <div style={{ fontSize: '0.9rem', color: '#ccc' }}><span style={{ color: '#666' }}>Fields: </span>4/5</div>
+          </div>
+          <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #1e1e1e', fontSize: '0.85rem', color: '#ff6b35', fontWeight: 600 }}>Form abandoned — follow up now</div>
+        </div>
       </div>
+      <div style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.8rem', color: '#555' }}>Delivered within 60 seconds of form abandonment</div>
     </div>
   )
 }
 
 function LeadScoringMockup() {
   const leads = [
-    { name: 'Sarah Martinez', email: 'sarah@gmail.com', phone: '(214) 555-9876', score: 82, label: 'Hot', color: '#ef4444', service: 'Botox + Filler', fields: '4/5', time: '0:38s' },
-    { name: 'James Cooper', email: 'jcooper@yahoo.com', phone: '—', score: 55, label: 'Warm', color: '#f59e0b', service: 'Consultation', fields: '3/5', time: '0:22s' },
-    { name: 'Unknown', email: '—', phone: '—', score: 15, label: 'Cold', color: '#6b7280', service: '—', fields: '1/5', time: '0:04s' },
+    { name: 'Sarah Martinez', email: 'sarah@gmail.com', score: 82, label: 'Hot', color: '#ef4444', service: 'Botox + Filler', fields: '4/5', time: '0:38s' },
+    { name: 'James Cooper', email: 'jcooper@yahoo.com', score: 55, label: 'Warm', color: '#f59e0b', service: 'Consultation', fields: '3/5', time: '0:22s' },
+    { name: 'Unknown', email: 'No contact info', score: 15, label: 'Cold', color: '#6b7280', service: '—', fields: '1/5', time: '0:04s' },
   ]
 
   return (
-    <div style={{ background: '#0a0a0a', padding: '1rem', fontFamily: '-apple-system, sans-serif' }}>
-      <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.5rem' }}>
+    <div style={{ background: '#0a0a0a', padding: '1.25rem', fontFamily: '-apple-system, sans-serif' }}>
+      <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.75rem' }}>
         {leads.map((lead, i) => (
-          <div key={i} style={{ background: '#111', borderRadius: 10, padding: '1rem 1.25rem', border: '1px solid #1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' as const, gap: '0.75rem' }}>
-            <div style={{ minWidth: 140 }}>
-              <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fff' }}>{lead.name}</div>
-              <div style={{ fontSize: '0.7rem', color: '#666', marginTop: 2 }}>{lead.email}</div>
+          <div key={i} style={{ background: '#111', borderRadius: 10, padding: '1.25rem', border: '1px solid #1e1e1e' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+              <div>
+                <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#fff' }}>{lead.name}</div>
+                <div style={{ fontSize: '0.8rem', color: '#666', marginTop: 3 }}>{lead.email}</div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+                <span style={{ width: 7, height: 7, borderRadius: '50%', background: lead.color, display: 'inline-block' }} />
+                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: lead.color }}>{lead.label} ({lead.score})</span>
+              </div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: lead.color, display: 'inline-block' }} />
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: lead.color }}>{lead.label} ({lead.score})</span>
+            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' as const }}>
+              <div style={{ fontSize: '0.8rem', color: '#555' }}><span style={{ color: '#777' }}>Service:</span> {lead.service}</div>
+              <div style={{ fontSize: '0.8rem', color: '#555' }}><span style={{ color: '#777' }}>Fields:</span> {lead.fields}</div>
+              <div style={{ fontSize: '0.8rem', color: '#555' }}><span style={{ color: '#777' }}>Time:</span> {lead.time}</div>
             </div>
-            <div style={{ fontSize: '0.7rem', color: '#555' }}>{lead.fields} fields</div>
-            <div style={{ fontSize: '0.7rem', color: '#555' }}>{lead.time}</div>
           </div>
         ))}
       </div>
-      <div style={{ textAlign: 'center', marginTop: '0.75rem', fontSize: '0.7rem', color: '#444' }}>Every lead scored automatically — your team knows who to call first</div>
+      <div style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.8rem', color: '#555' }}>Every lead scored automatically — your team knows who to call first</div>
     </div>
   )
 }
 
 function AutoRecoveryMockup() {
   return (
-    <div style={{ background: '#0a0a0a', padding: '1.5rem', fontFamily: '-apple-system, sans-serif' }}>
-      <div style={{ maxWidth: 380, margin: '0 auto' }}>
-        {/* Email preview */}
-        <div style={{ background: '#1a1a1a', borderRadius: 12, overflow: 'hidden', border: '1px solid #222' }}>
-          {/* Email header */}
-          <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #1e1e1e' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#fff' }}>From: Luxe MedSpa</span>
-              <span style={{ fontSize: '0.6rem', color: '#555' }}>1 hour ago</span>
-            </div>
-            <div style={{ fontSize: '0.7rem', color: '#666' }}>To: sarah@gmail.com</div>
-            <div style={{ fontSize: '0.8rem', color: '#ccc', fontWeight: 600, marginTop: '0.5rem' }}>Still interested? Pick up where you left off</div>
+    <div style={{ background: '#0a0a0a', padding: '1.25rem', fontFamily: '-apple-system, sans-serif' }}>
+      {/* Email preview */}
+      <div style={{ background: '#1a1a1a', borderRadius: 12, overflow: 'hidden', border: '1px solid #222' }}>
+        {/* Email header */}
+        <div style={{ padding: '1.25rem', borderBottom: '1px solid #1e1e1e' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+            <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#fff' }}>From: Luxe MedSpa</span>
+            <span style={{ fontSize: '0.75rem', color: '#555' }}>1 hour ago</span>
           </div>
-          {/* Email body */}
-          <div style={{ padding: '1.25rem' }}>
-            <p style={{ fontSize: '0.8rem', color: '#999', lineHeight: 1.7, margin: '0 0 1rem 0' }}>Hi Sarah,</p>
-            <p style={{ fontSize: '0.8rem', color: '#999', lineHeight: 1.7, margin: '0 0 1rem 0' }}>We noticed you started booking a consultation but didn&apos;t get to finish. No worries — your information is saved and ready whenever you are.</p>
-            <div style={{ textAlign: 'center' as const, margin: '1.25rem 0' }}>
-              <div style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.6rem 1.5rem', borderRadius: 8, fontSize: '0.8rem' }}>Complete Your Booking</div>
-            </div>
-            <p style={{ fontSize: '0.7rem', color: '#555', lineHeight: 1.6, margin: '1rem 0 0 0', textAlign: 'center' as const }}>Luxe MedSpa — Dallas, TX<br/>Questions? Call us at (214) 555-1200</p>
+          <div style={{ fontSize: '0.8rem', color: '#666' }}>To: sarah@gmail.com</div>
+          <div style={{ fontSize: '0.9rem', color: '#ccc', fontWeight: 600, marginTop: '0.5rem' }}>Still interested? Pick up where you left off</div>
+        </div>
+        {/* Email body */}
+        <div style={{ padding: '1.5rem 1.25rem' }}>
+          <p style={{ fontSize: '0.9rem', color: '#999', lineHeight: 1.7, margin: '0 0 1rem 0' }}>Hi Sarah,</p>
+          <p style={{ fontSize: '0.9rem', color: '#999', lineHeight: 1.7, margin: '0 0 1.25rem 0' }}>We noticed you started booking a consultation but didn&apos;t get to finish. No worries — your information is saved and ready whenever you are.</p>
+          <div style={{ textAlign: 'center' as const, margin: '1.5rem 0' }}>
+            <div style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.75rem 2rem', borderRadius: 8, fontSize: '0.9rem' }}>Complete Your Booking</div>
           </div>
+          <p style={{ fontSize: '0.8rem', color: '#555', lineHeight: 1.6, margin: '1.25rem 0 0 0', textAlign: 'center' as const }}>Luxe MedSpa — Dallas, TX<br/>Questions? Call us at (214) 555-1200</p>
         </div>
-        {/* Status badge */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: '0.75rem' }}>
-          <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 7L5.5 10L11.5 4"/></svg>
-          <span style={{ fontSize: '0.7rem', color: '#444' }}>Sent automatically — branded to your business, not ours</span>
-        </div>
+      </div>
+      {/* Status badge */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: '1rem' }}>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 7L5.5 10L11.5 4"/></svg>
+        <span style={{ fontSize: '0.8rem', color: '#555' }}>Sent automatically — branded to your business, not ours</span>
       </div>
     </div>
   )
