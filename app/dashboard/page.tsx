@@ -109,6 +109,47 @@ function statusColor(status: string): string {
   return STATUS_OPTIONS.find(o => o.value === status)?.color ?? '#6b7280'
 }
 
+// ── Lead Scoring ──────────────────────────────────────────────────────────────
+
+interface LeadScore {
+  score: number
+  label: string
+  color: string
+  bg: string
+}
+
+function scoreLead(lead: Lead): LeadScore {
+  let score = 0
+
+  // Contact info (up to 40 points)
+  if (lead.email) score += 20
+  if (lead.name) score += 10
+  if (lead.phone) score += 10
+
+  // Field completion (up to 30 points)
+  if (lead.total_fields > 0) {
+    const pct = lead.fields_completed / lead.total_fields
+    score += Math.round(pct * 30)
+  }
+
+  // Time on form — more time = more intent (up to 15 points)
+  if (lead.time_on_form >= 60) score += 15
+  else if (lead.time_on_form >= 30) score += 10
+  else if (lead.time_on_form >= 10) score += 5
+
+  // Form data richness — typed into extra fields like service, message (up to 15 points)
+  if (lead.form_data && typeof lead.form_data === "object") {
+    const filled = Object.values(lead.form_data).filter(v => v && String(v).trim().length > 0).length
+    if (filled >= 3) score += 15
+    else if (filled >= 2) score += 10
+    else if (filled >= 1) score += 5
+  }
+
+  if (score >= 70) return { score, label: "Hot", color: "#ef4444", bg: "rgba(239,68,68,0.12)" }
+  if (score >= 40) return { score, label: "Warm", color: "#f59e0b", bg: "rgba(245,158,11,0.12)" }
+  return { score, label: "Cold", color: "#6b7280", bg: "rgba(107,114,128,0.12)" }
+}
+
 // ── Lead Detail Modal ─────────────────────────────────────────────────────────
 
 function LeadModal({
@@ -688,7 +729,13 @@ export default function Dashboard() {
                   <div className="lead-status-pill" style={{ color: statusColor(lead.status), borderColor: `${statusColor(lead.status)}40`, background: `${statusColor(lead.status)}12` }}>
                     {(lead.status ?? 'open').charAt(0).toUpperCase() + (lead.status ?? 'open').slice(1)}
                   </div>
-                </div>
+                  {/* Lead score badge */}
+                  {(() => { const s = scoreLead(lead); return (
+                    <div className="lead-score-pill" style={{ color: s.color, borderColor: s.color + "40", background: s.bg, display: "inline-flex", alignItems: "center", gap: "4px", padding: "2px 8px", borderRadius: "9999px", fontSize: "0.7rem", fontWeight: 700, border: "1px solid", marginTop: "4px" }}>
+                      <span style={{ width: 6, height: 6, borderRadius: "50%", background: s.color, display: "inline-block" }} /> {s.label} ({s.score})
+                    </div>
+                  ); })()}
+                  </div>
 
                 <div className="field-progress">
                   <div className="progress-header">
