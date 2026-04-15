@@ -5,9 +5,9 @@ import '../blog/blog.css'
 import Footer from '../components/Footer'
 
 export const metadata = {
-  title: 'ReCapture vs the Competition — Form Abandonment Recovery Comparison',
+  title: 'Why ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
   description: 'How does ReCapture compare to Insiteful and FormTracks for form abandonment tracking? See the differences in pricing, features, and focus for high-ticket service businesses.',
-  keywords: 'ReCapture vs the Competition, form abandonment tracking comparison, Insiteful alternative, form abandonment tool, lead recovery software',
+  keywords: 'ReCapture vs the Competition, form abandonment tracking why ReCapture, Insiteful alternative, form abandonment tool, lead recovery software',
 }
 
 const rows: [string, string | boolean, string | boolean, string | boolean][] = [
@@ -42,9 +42,9 @@ export default function ComparePage() {
 
       <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 4rem' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Comparison</p>
+          <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Why Us</p>
           <h1 style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>ReCapture vs the Competition</h1>
-          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Not all form abandonment tools are created equal. Most were built for SaaS companies and eCommerce checkouts — not for the high-ticket service businesses that need them most. We built ReCapture specifically for med spas, dental practices, luxury real estate, and property management companies where a single recovered lead can mean $1,500 to $10,000 in revenue. Here&apos;s how we compare to the alternatives.</p>
+          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Not all form abandonment tools are created equal. Most were built for SaaS companies and eCommerce checkouts — not for the high-ticket service businesses that need them most. We built ReCapture specifically for med spas, dental practices, luxury real estate, and property management companies where a single recovered lead can mean $1,500 to $10,000 in revenue. Here&apos;s why businesses choose us over the alternatives.</p>
         </div>
       </div>
 
