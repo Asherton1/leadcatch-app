@@ -3,6 +3,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import '../blog/blog.css'
 import Footer from '../components/Footer'
+import WhyUsAccordion from "../components/WhyUsAccordion"
 
 export const metadata = {
   title: 'Why ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
@@ -119,51 +120,12 @@ export default function WhyUsPage() {
           ))}
         </div>
 
+
         {/* ── What Sets Us Apart ──────────────────────────────────────── */}
         <h2 className="reveal">What Sets Us Apart</h2>
         <p className="reveal">Every competitor in this space tells you <em>where</em> people drop off. None of them give you <em>who</em> dropped off with their actual contact data — and none of them do what comes next.</p>
 
-        {/* Feature 1: Instant SMS Alerts */}
-        <div className="reveal" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '2rem', margin: '2rem 0' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '1rem' }}>
-            <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(255,107,53,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </div>
-            <div>
-              <h3 style={{ margin: 0, color: '#fff', fontSize: '1.15rem' }}>Instant SMS Lead Alerts</h3>
-              <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Coming Soon — Pro Plan</span>
-            </div>
-          </div>
-          <p style={{ color: '#999', lineHeight: 1.8, margin: 0 }}>Your phone buzzes within 60 seconds of someone abandoning your form. Not an email you check later. A text message with their name, their email, and what they were looking for. Research shows that calling a lead within 5 minutes makes you 21x more likely to convert them. No other form abandonment tool offers real-time SMS alerts.</p>
-        </div>
-
-        {/* Feature 2: Lead Scoring */}
-        <div className="reveal" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '2rem', margin: '2rem 0' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '1rem' }}>
-            <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(255,107,53,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
-              </svg>
-            </div>
-            <h3 style={{ margin: 0, color: '#fff', fontSize: '1.15rem' }}>Lead Scoring</h3>
-          </div>
-          <p style={{ color: '#999', lineHeight: 1.8, margin: 0 }}>Not every abandoned lead is worth the same follow-up. Someone who typed their name, email, phone number, and selected &quot;$15,000 tummy tuck&quot; is not the same as someone who typed one letter and bounced. ReCapture scores every lead as hot, warm, or cold based on fields completed, contact data provided, time on form, and form detail richness. Your team sees instantly who to call first. No other form abandonment tool does lead scoring on partial form data.</p>
-        </div>
-
-        {/* Feature 3: Auto-Recovery Emails */}
-        <div className="reveal" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '2rem', margin: '2rem 0' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '1rem' }}>
-            <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(255,107,53,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-              </svg>
-            </div>
-            <h3 style={{ margin: 0, color: '#fff', fontSize: '1.15rem' }}>Auto-Recovery Emails</h3>
-          </div>
-          <p style={{ color: '#999', lineHeight: 1.8, margin: 0 }}>When someone abandons your form and they entered an email, ReCapture automatically sends a branded recovery email on your behalf. Not from us — from your business, with your name and your booking link. The lead gets a message saying &quot;Looks like you didn&apos;t finish — want to pick up where you left off?&quot; and a direct link back to your form. This closes the loop without your team lifting a finger.</p>
-        </div>
+        <WhyUsAccordion />
 
         <h2 className="reveal">Pricing</h2>
         <p>Insiteful&apos;s pricing is based on session volume and data retention. Their trial starts at $7, and plans scale based on traffic. For a high-traffic multi-location business, costs can escalate quickly and unpredictably.</p>
