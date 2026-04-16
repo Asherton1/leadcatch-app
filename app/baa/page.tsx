@@ -84,9 +84,9 @@ export default function BAAPage() {
           <a href="mailto:hello@userecapture.com" style={{ color: '#ff6b35', fontSize: '0.875rem', fontWeight: 600, textDecoration: 'none' }}>hello@userecapture.com →</a>
         </div>
 
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <Link href="/signup?plan=pro" style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem' }}>Start Pro Trial</Link>
-          <Link href="/pricing" style={{ display: 'inline-block', background: 'transparent', color: '#888', fontWeight: 600, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', border: '1px solid #1e1e1e' }}>Back to Pricing</Link>
+        <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
+          <Link href="/signup?plan=pro" style={{ display: 'block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', textAlign: 'center' }}>Start Pro Trial</Link>
+          <Link href="/pricing" style={{ display: 'block', background: 'transparent', color: '#888', fontWeight: 600, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', border: '1px solid #1e1e1e', textAlign: 'center' }}>Back to Pricing</Link>
         </div>
 
       </div>
