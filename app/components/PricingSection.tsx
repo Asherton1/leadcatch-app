@@ -64,6 +64,7 @@ export default function PricingSection() {
       desc: "Automated recovery. Leads come back without lifting a finger.",
       featured: true,
       badge: 'Most Popular',
+      hipaa: true,
       features: [
         'Everything in Essentials',
         'Automated lead recovery emails',
@@ -80,6 +81,7 @@ export default function PricingSection() {
     {
       name: 'Enterprise',
       price: 'Custom',
+      hipaa: true,
       period: '',
       desc: 'Multiple locations. One powerful dashboard. Volume pricing built for scale.',
       featured: false,
@@ -106,6 +108,12 @@ export default function PricingSection() {
       {tiers.map((t, i) => (
         <div className={`pricing-card${t.featured ? ' pricing-card-featured' : ''}${i === 2 ? ' pricing-card-enterprise' : ''}`} key={i}>
           {t.badge && <div className="pricing-badge">{t.badge}</div>}
+          {'hipaa' in t && (t as {hipaa?: boolean}).hipaa && (
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: '6px', padding: '0.25rem 0.6rem', marginBottom: '0.75rem', fontSize: '0.7rem', fontWeight: 600, color: '#22c55e', letterSpacing: '0.05em' }}>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="#22c55e"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"/></svg>
+              HIPAA Ready
+            </div>
+          )}
           <div className="pricing-tier">{t.name}</div>
           <div className="pricing-price">
             {t.name !== 'Enterprise' ? (
@@ -151,6 +159,7 @@ export default function PricingSection() {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               {t.badge && <span style={{ fontSize: '0.65rem', background: 'rgba(255,107,53,0.15)', color: '#ff6b35', padding: '0.2rem 0.5rem', borderRadius: '4px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>★</span>}
+              {'hipaa' in t && (t as {hipaa?: boolean}).hipaa && <span style={{ fontSize: '0.65rem', background: 'rgba(34,197,94,0.1)', color: '#22c55e', padding: '0.2rem 0.5rem', borderRadius: '4px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '3px' }}><svg width="9" height="9" viewBox="0 0 24 24" fill="#22c55e"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"/></svg>HIPAA</span>}
               <span style={{ fontSize: '1.1rem', fontWeight: 700, color: openTier === i ? '#ff6b35' : '#fff', transition: 'color 0.3s' }}>{t.name}</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
