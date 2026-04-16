@@ -24,7 +24,7 @@ const rows: [string, string | boolean, string | boolean, string | boolean][] = [
   ['Dedicated account support', true, false, false],
   ['Industry-specific focus', 'High-ticket services', 'Generic SaaS / B2B', 'Generic / all industries'],
   ['Flat monthly pricing', true, false, '?'],
-  ['Transparent pricing', '$150-200/mo', 'Session-based (unclear)', 'Contact for pricing'],
+  ['Transparent pricing', '$197-397/mo', 'Session-based (unclear)', 'Contact for pricing'],
   ['Free trial', '14 days', '$7 paid trial', '7 days'],
   ['Setup complexity', '1 script tag', '1 script tag', '1 script tag'],
   ['White-label option', 'Coming soon', false, 'Paid add-on'],
@@ -127,7 +127,7 @@ export default function WhyUsPage() {
 
         <h2 className="reveal">Pricing</h2>
         <p>Insiteful&apos;s pricing is based on session volume and data retention. Their trial starts at $7, and plans scale based on traffic. For a high-traffic multi-location business, costs can escalate quickly and unpredictably.</p>
-        <p>ReCapture uses simple flat-rate pricing. Essentials is $150/mo. Pro is $200/mo. Enterprise is custom. No session caps, no surprise charges, no calculator needed to figure out your bill. You know exactly what you&apos;re paying before you sign up.</p>
+        <p>ReCapture uses simple flat-rate pricing. Essentials is $197/mo. Pro is $397/mo. Enterprise is custom. No session caps, no surprise charges, no calculator needed to figure out your bill. You know exactly what you&apos;re paying before you sign up.</p>
 
         <h2 className="reveal">Who ReCapture Is Built For</h2>
         <p>ReCapture was built by a digital marketing consultant who spent 10+ years managing $100K+ in monthly ad spend for med spas, dental practices, luxury real estate, and property management companies. Every feature was designed around one question: <em>what would these businesses actually need to recover lost leads and see ROI in the first week?</em></p>

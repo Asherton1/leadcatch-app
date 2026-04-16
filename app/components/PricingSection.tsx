@@ -11,8 +11,8 @@ export default function PricingSection() {
   const [openTier, setOpenTier] = useState<number | null>(1)
   const [isMobile, setIsMobile] = useState(false)
 
-  const essentials = annual ? 127 : 150
-  const pro = annual ? 167 : 200
+  const essentials = annual ? 167 : 197
+  const pro = annual ? 337 : 397
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth <= 768)

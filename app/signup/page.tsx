@@ -123,13 +123,13 @@ function SignupForm() {
           <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.25rem' }}>
             <button type="button" onClick={() => setPlan('essentials')} style={{ flex: 1, padding: '1rem', background: plan === 'essentials' ? '#1a1a1a' : '#0d0d0d', border: plan === 'essentials' ? '2px solid #ff6b35' : '1px solid #2a2a2a', borderRadius: '10px', cursor: 'pointer', textAlign: 'center' as const }}>
               <div style={{ fontSize: '0.75rem', fontWeight: 700, color: plan === 'essentials' ? '#ff6b35' : '#666', textTransform: 'uppercase' as const, letterSpacing: '0.08em', marginBottom: '0.25rem' }}>Essentials</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff' }}>$150<span style={{ fontSize: '0.75rem', color: '#555', fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff' }}>$197<span style={{ fontSize: '0.75rem', color: '#555', fontWeight: 400 }}>/mo</span></div>
               <div style={{ fontSize: '0.6875rem', color: '#555', marginTop: '0.25rem' }}>See your lost leads</div>
             </button>
             <button type="button" onClick={() => setPlan('pro')} style={{ flex: 1, padding: '1rem', background: plan === 'pro' ? '#1a1a1a' : '#0d0d0d', border: plan === 'pro' ? '2px solid #ff6b35' : '1px solid #2a2a2a', borderRadius: '10px', cursor: 'pointer', textAlign: 'center' as const, position: 'relative' as const }}>
               {plan === 'pro' && <div style={{ position: 'absolute' as const, top: '-8px', right: '12px', background: '#ff6b35', color: '#000', fontSize: '0.5625rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px', textTransform: 'uppercase' as const, letterSpacing: '0.05em' }}>Popular</div>}
               <div style={{ fontSize: '0.75rem', fontWeight: 700, color: plan === 'pro' ? '#ff6b35' : '#666', textTransform: 'uppercase' as const, letterSpacing: '0.08em', marginBottom: '0.25rem' }}>Pro</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff' }}>$200<span style={{ fontSize: '0.75rem', color: '#555', fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff' }}>$397<span style={{ fontSize: '0.75rem', color: '#555', fontWeight: 400 }}>/mo</span></div>
               <div style={{ fontSize: '0.6875rem', color: '#555', marginTop: '0.25rem' }}>Auto-recover your leads</div>
             </button>
           </div>
