@@ -118,8 +118,6 @@ export async function POST(request: NextRequest) {
       .eq('id', lead.id)
       .single()
 
-    console.log('SMS CHECK:', { existing_sms_sent: existing?.sms_sent, lead_id: lead.id })
-
     if (!existing?.sms_sent) {
       try {
         await sendSmsAlert({
