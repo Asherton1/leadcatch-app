@@ -168,7 +168,6 @@ export default function TestForm() {
                   <div style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }} aria-hidden="true" tabIndex={-1}>
                     <input type="text" name="website" autoComplete="off" value={fields.website} onChange={e => handleChange('website', e.target.value)} />
                   </div>
-                  <p style={{ fontSize: "0.75rem", color: "#666", textAlign: "center", margin: "0 0 0.5rem 0", lineHeight: 1.5 }}>This is a live form. Enter your real info and we'll reach out within 24 hours.</p>
                   <p style={{ fontSize: "0.75rem", color: "#666", textAlign: "center" as const, margin: "0 0 0.5rem 0", lineHeight: 1.5 }}>This is a live form — enter your real info and we will reach out within 24 hours.</p>
                   <button type="submit" disabled={loading} style={{ padding: '0.875rem', background: '#ff6b35', color: '#fff', border: 'none', borderRadius: 8, fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 12px rgba(255,107,53,0.25)', fontFamily: 'inherit', opacity: loading ? 0.6 : 1 }}>
                     {loading ? 'Submitting…' : 'Request a Demo'}
@@ -194,6 +193,9 @@ export default function TestForm() {
           <div className="demo-dash-col reveal">
             <div style={{
               background: '#111',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
               border: dashActive ? '1px solid rgba(255,107,53,0.3)' : '1px solid #1e1e1e',
               borderRadius: 16,
               overflow: 'hidden',
@@ -388,8 +390,9 @@ export default function TestForm() {
           align-items: stretch;
         }
         .demo-dash-col {
-          position: sticky;
-          top: 100px;
+          display: flex;
+          flex-direction: column;
+          align-self: stretch;
         }
         @keyframes dashPulse {
           0% { box-shadow: 0 0 0 0 rgba(255,107,53,0.3); }
