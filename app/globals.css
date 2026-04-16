@@ -283,9 +283,16 @@ input, textarea, select, button {
     font-weight: 600 !important;
   }
   .nav-mobile-menu .nav-mobile-cta {
-    color: #ff6b35 !important;
+    display: block !important;
+    background: #ff6b35 !important;
+    color: #fff !important;
     font-weight: 700 !important;
-    margin-top: 0.5rem !important;
+    font-size: 0.95rem !important;
+    text-align: center !important;
+    padding: 0.875rem 1.5rem !important;
+    border-radius: 8px !important;
+    margin-top: 1rem !important;
+    text-decoration: none !important;
   }
 }
 
