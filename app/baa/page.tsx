@@ -18,6 +18,7 @@ export default function BAAPage() {
       <BlogNav />
 
       <style>{`@media (max-width: 640px) { .baa-grid { grid-template-columns: repeat(2, 1fr) !important; } }`}</style>
+      <style>{`.baa-btns a { display: block !important; width: 100% !important; text-align: center !important; box-sizing: border-box !important; }`}</style>
       <div className="blog-post-header">
         <Link href="/pricing" className="blog-post-back">← Back to Pricing</Link>
         <div className="blog-post-tag">Legal</div>
@@ -87,7 +88,7 @@ export default function BAAPage() {
           <a href="mailto:hello@userecapture.com" style={{ color: '#ff6b35', fontSize: '0.875rem', fontWeight: 600, textDecoration: 'none' }}>hello@userecapture.com →</a>
         </div>
 
-        <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
+        <div className="baa-btns" style={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
           <Link href="/signup?plan=pro" style={{ display: 'block', width: '100%', maxWidth: '100%', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', textAlign: 'center', boxSizing: 'border-box' as const }}>Start Pro Trial</Link>
           <Link href="/pricing" style={{ display: 'block', width: '100%', maxWidth: '100%', background: 'transparent', color: '#888', fontWeight: 600, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', border: '1px solid #1e1e1e', textAlign: 'center', boxSizing: 'border-box' as const }}>Back to Pricing</Link>
         </div>
