@@ -204,7 +204,7 @@ const s: Record<string, React.CSSProperties> = {
   fieldErr: { fontSize: '0.75rem', color: '#f87171', marginTop: '0.125rem' },
   trialBox: { background: '#161616', borderLeft: '3px solid #ff6b35', borderRadius: '0 8px 8px 0', padding: '1rem 1.25rem' },
   trialBoxTop: { display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' },
-  trialIcon: { fontSize: '0.9375rem', lineHeight: 1 },
+  trialIcon: { fontSize: '0.9375rem', lineHeight: 1, color: '#ff6b35', fontWeight: 600 },
   trialTitle: { fontSize: '0.9375rem', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' },
   trialSub: { fontSize: '0.8125rem', color: '#666', lineHeight: 1.6 },
   trialAmount: { color: '#ccc', fontWeight: 600 },
