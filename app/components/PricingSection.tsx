@@ -70,6 +70,7 @@ export default function PricingSection() {
         'Custom sender name & branding',
         'Configurable send delay timing',
         'Weekly reports with trend analytics',
+        'HIPAA-ready data handling + BAA available',
         'Priority support',
       ],
       orangeFrom: 1,
@@ -85,6 +86,7 @@ export default function PricingSection() {
       badge: null,
       features: [
         'Everything in Pro',
+        'HIPAA BAA included',
         'Unlimited websites & locations',
         'Centralized multi-location dashboard',
         'Per-location reporting & analytics',
@@ -183,7 +185,7 @@ export default function PricingSection() {
   return (
     <section className="lc-section pricing-section" id="pricing">
       <h2 className="section-title">Simple, Transparent Pricing</h2>
-      <p className="section-subtitle">No setup fees. No long-term contracts. Cancel anytime.</p>
+      <p className="section-subtitle">No setup fees. No long-term contracts. Cancel anytime. HIPAA-ready for healthcare and medical practices.</p>
 
       <div className="pricing-toggle">
         <span className={!annual ? 'toggle-active' : ''}>Monthly</span>
