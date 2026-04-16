@@ -28,14 +28,17 @@ export default function BAAPage() {
 
       <div className="blog-post-body">
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0', margin: '0 0 2.5rem 0', background: '#111', borderRadius: '12px', border: '1px solid #1e1e1e', overflow: 'hidden' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0', margin: '0 0 2.5rem 0', background: '#111', borderRadius: '12px', border: '1px solid #1e1e1e', overflow: 'hidden' }}>
           {[
             { label: 'Effective Date', value: 'April 17, 2026', color: '#bbb' },
             { label: 'Applies To', value: 'Pro & Enterprise', color: '#bbb' },
+            { label: 'Status', value: 'Active', color: '#22c55e' },
             { label: 'Governing Law', value: 'State of Texas', color: '#bbb' },
             { label: 'Standard', value: 'HIPAA / HITECH', color: '#bbb' },
             { label: 'Data Retention', value: 'Deleted on cancel', color: '#bbb' },
-            { label: 'Status', value: 'Active', color: '#22c55e' },
+            { label: 'Amendment Notice', value: '30 days written', color: '#bbb' },
+            { label: 'Breach Notification', value: 'Within 60 days', color: '#bbb' },
+            { label: 'PHI Sales', value: 'Never', color: '#ff6b35' },
           ].map((item, i) => (
             <div key={i} style={{ padding: '1.25rem 1.5rem', borderRight: '1px solid #1e1e1e', borderBottom: '1px solid #1e1e1e' }}>
               <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.4rem' }}>{item.label}</div>
