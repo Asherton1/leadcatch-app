@@ -69,9 +69,14 @@ export default function WhyUsPage() {
 
       <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '1rem 2rem 3rem' }}>
 
-        <h2 className="reveal">The Short Version</h2>
-        <p>Insiteful is a solid form analytics and optimization tool built for marketers running A/B tests and conversion rate experiments across many form types. ReCapture is built specifically for high-ticket service businesses — med spas, dental practices, luxury real estate, property management — where a single recovered lead can be worth $1,500 to $10,000+.</p>
-        <p>If you&apos;re a performance marketer optimizing e-commerce funnels, Insiteful might be the right fit. If you run a business where every lead matters and you need to see names, emails, and phone numbers from people who started your form but never submitted — ReCapture was built for you.</p>
+        {/* ── What Sets Us Apart ──────────────────────────────────────── */}
+        <h2 className="reveal">What Sets Us Apart</h2>
+        <p className="reveal">Every competitor in this space tells you <em>where</em> people drop off. None of them give you <em>who</em> dropped off with their actual contact data — and none of them do what comes next.</p>
+
+        <WhyUsAccordion />
+
+        <h2 className="reveal">ReCapture vs the Competition</h2>
+        <p className="reveal">Here&apos;s how we stack up against the alternatives.</p>
 
         {/* Desktop Table */}
         <div className="compare-desktop reveal" style={{ margin: '3rem 0' }}>
@@ -119,13 +124,6 @@ export default function WhyUsPage() {
             </div>
           ))}
         </div>
-
-
-        {/* ── What Sets Us Apart ──────────────────────────────────────── */}
-        <h2 className="reveal">What Sets Us Apart</h2>
-        <p className="reveal">Every competitor in this space tells you <em>where</em> people drop off. None of them give you <em>who</em> dropped off with their actual contact data — and none of them do what comes next.</p>
-
-        <WhyUsAccordion />
 
         <h2 className="reveal">Pricing</h2>
         <p>Insiteful&apos;s pricing is based on session volume and data retention. Their trial starts at $7, and plans scale based on traffic. For a high-traffic multi-location business, costs can escalate quickly and unpredictably.</p>
