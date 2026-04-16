@@ -14,6 +14,7 @@ export default function BAAPage() {
     <div className="blog-post">
       <BlogNav />
 
+      <style>{`@media (max-width: 640px) { .baa-grid { grid-template-columns: repeat(2, 1fr) !important; } }`}</style>
       <div className="blog-post-header">
         <Link href="/pricing" className="blog-post-back">← Back to Pricing</Link>
         <div className="blog-post-tag">Legal</div>
@@ -28,7 +29,7 @@ export default function BAAPage() {
 
       <div className="blog-post-body">
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0', margin: '0 0 2.5rem 0', background: '#111', borderRadius: '12px', border: '1px solid #1e1e1e', overflow: 'hidden' }}>
+        <div className="baa-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0', margin: '0 0 2.5rem 0', background: '#111', borderRadius: '12px', border: '1px solid #1e1e1e', overflow: 'hidden' }}>
           {[
             { label: 'Effective Date', value: 'April 17, 2026', color: '#bbb' },
             { label: 'Applies To', value: 'Pro & Enterprise', color: '#bbb' },
