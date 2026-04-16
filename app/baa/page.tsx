@@ -31,18 +31,18 @@ export default function BAAPage() {
 
         <div className="baa-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0', margin: '0 0 2.5rem 0', background: '#111', borderRadius: '12px', border: '1px solid #1e1e1e', overflow: 'hidden' }}>
           {[
-            { label: 'Effective Date', value: 'April 17, 2026', color: '#bbb' },
-            { label: 'Applies To', value: 'Pro & Enterprise', color: '#bbb' },
-            { label: 'Status', value: 'Active', color: '#22c55e' },
-            { label: 'Governing Law', value: 'State of Texas', color: '#bbb' },
-            { label: 'Standard', value: 'HIPAA / HITECH', color: '#bbb' },
-            { label: 'Data Retention', value: 'Deleted on cancel', color: '#bbb' },
-            { label: 'Amendment Notice', value: '30 days written', color: '#bbb' },
-            { label: 'Breach Notification', value: 'Within 60 days', color: '#bbb' },
-            { label: 'PHI Sales', value: 'Never', color: '#ff6b35' },
-            { label: 'Subcontractors', value: 'BAA required', color: '#bbb' },
+            { label: 'Effective Date', value: 'April 17, 2026', color: '#bbb', span: false },
+            { label: 'Applies To', value: 'Pro & Enterprise', color: '#bbb', span: false },
+            { label: 'Status', value: 'Active', color: '#22c55e', span: false },
+            { label: 'Governing Law', value: 'State of Texas', color: '#bbb', span: false },
+            { label: 'Standard', value: 'HIPAA / HITECH', color: '#bbb', span: false },
+            { label: 'Data Retention', value: 'Deleted on cancel', color: '#bbb', span: false },
+            { label: 'Amendment Notice', value: '30 days written', color: '#bbb', span: false },
+            { label: 'Breach Notification', value: 'Within 60 days', color: '#bbb', span: false },
+            { label: 'PHI Sales', value: 'Never', color: '#ff6b35', span: false },
+            { label: 'Subcontractors', value: 'BAA required', color: '#bbb', span: true },
           ].map((item, i) => (
-            <div key={i} style={{ padding: '1.25rem 1.5rem', borderRight: '1px solid #1e1e1e', borderBottom: '1px solid #1e1e1e' }}>
+            <div key={i} style={{ padding: '1.25rem 1.5rem', borderRight: '1px solid #1e1e1e', borderBottom: '1px solid #1e1e1e', gridColumn: item.span ? '1 / -1' : 'auto', textAlign: item.span ? 'center' as const : 'left' as const }}>
               <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.4rem' }}>{item.label}</div>
               <div style={{ fontSize: '0.875rem', color: item.color, fontWeight: 500, lineHeight: 1.4 }}>{item.value}</div>
             </div>
