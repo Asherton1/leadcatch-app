@@ -30,6 +30,8 @@ export default function Post() {
         <Image src="/blog-speed-to-lead.webp" alt="Speed to lead follow up" fill style={{ objectFit: 'cover' }} />
       </div>
 
+      <div className="blog-post-divider"><hr /></div>
+
       <div className="blog-post-body">
 
         <h2>The Stat That Changes Everything</h2>
