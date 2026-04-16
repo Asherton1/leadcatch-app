@@ -5,6 +5,7 @@ import '../blog/blog.css'
 
 export const dynamic = 'force-dynamic'
 
+
 export const metadata = {
   title: 'Business Associate Agreement — ReCapture',
   description: 'ReCapture Business Associate Agreement for HIPAA-compliant data handling on Pro and Enterprise plans.',
