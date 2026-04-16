@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Footer from '../../components/Footer'
 import BlogNav from '../../components/BlogNav'
 import '../blog.css'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'The 5-Minute Follow-Up Rule: Why Speed to Lead Wins Every Time — ReCapture Blog',
