@@ -39,8 +39,8 @@ export default function BAAPage() {
             { label: 'Data Retention', value: 'Deleted on cancel', color: '#bbb', span: false },
             { label: 'Amendment Notice', value: '30 days written', color: '#bbb', span: false },
             { label: 'Breach Notification', value: 'Within 60 days', color: '#bbb', span: false },
+            { label: 'Subcontractors', value: 'BAA required', color: '#bbb', span: false },
             { label: 'PHI Sales', value: 'Never', color: '#ff6b35', span: false },
-            { label: 'Subcontractors', value: 'BAA required', color: '#bbb', span: true },
           ].map((item, i) => (
             <div key={i} style={{ padding: '1.25rem 1.5rem', borderRight: '1px solid #1e1e1e', borderBottom: '1px solid #1e1e1e', gridColumn: item.span ? '1 / -1' : 'auto', textAlign: item.span ? 'center' as const : 'left' as const }}>
               <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.4rem' }}>{item.label}</div>
