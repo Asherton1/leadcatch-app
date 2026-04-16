@@ -77,7 +77,7 @@ export default function BAAPage() {
         {sections.map((s, i) => (
           <div key={i} style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: '2rem', padding: '2.5rem 0', borderBottom: i < sections.length - 1 ? '1px solid #1a1a1a' : 'none' }}>
             <div style={{ paddingTop: '0.2rem' }}>
-              <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: 'monospace' }}>{s.number}</div>
+              <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: 'inherit' }}>{s.number}</div>
             </div>
             <div>
               <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', margin: '0 0 1rem 0', letterSpacing: '-0.01em' }}>{s.title}</h2>
