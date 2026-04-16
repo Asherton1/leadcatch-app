@@ -11,6 +11,10 @@
     {
       "path": "/api/cron/monday-outreach",
       "schedule": "30 14 19 4 *"
+    },
+    {
+      "path": "/api/cron/monday-ghl-outreach",
+      "schedule": "45 14 19 4 *"
     }
   ]
 }
