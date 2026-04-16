@@ -25,6 +25,7 @@ export default function Footer() {
         <a href="mailto:hello@userecapture.com" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Contact</a>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '20px', flexWrap: 'wrap' }}>
+        <Link href="/for-gohighlevel" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>GoHighLevel</Link>
         <Link href="/for-luxury-real-estate" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>Real Estate</Link>
         <Link href="/for-luxury-auto" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>Luxury Auto</Link>
         <Link href="/for-plastic-surgery" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>Plastic Surgery</Link>
