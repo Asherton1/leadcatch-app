@@ -44,7 +44,7 @@ function SignupForm() {
     if (p === 'essentials' || p === 'pro') setPlan(p)
   }, [searchParams])
 
-  const planPrice = plan === 'essentials' ? 150 : 200
+  const planPrice = plan === 'essentials' ? 197 : 397
   const planName = plan === 'essentials' ? 'Essentials' : 'Pro'
 
   async function handleSubmit(e: React.FormEvent) {

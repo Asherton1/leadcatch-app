@@ -151,7 +151,7 @@ export async function POST(req: NextRequest) {
           <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;">
             <tr><td style="padding:20px;">
               <p style="font-size:11px;font-weight:700;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px 0;">Your Plan</p>
-              <p style="font-size:20px;font-weight:700;color:#fff;margin:0 0 4px 0;">${plan === 'essentials' ? 'Essentials' : 'Pro'} — $${plan === 'essentials' ? '150' : '200'}/mo</p>
+              <p style="font-size:20px;font-weight:700;color:#fff;margin:0 0 4px 0;">${plan === 'essentials' ? 'Essentials' : 'Pro'} — $${plan === 'essentials' ? '197' : '397'}/mo</p>
               <p style="font-size:13px;color:#666;margin:0;">7-day free trial active. Your card won't be charged until <strong style="color:#ccc;">${trialEndDate}</strong>.</p>
             </td></tr>
           </table>

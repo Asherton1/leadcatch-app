@@ -205,7 +205,7 @@ export async function GET(req: NextRequest) {
     const payingClients = allClientsList.filter(c => c.active && !compedEmails.includes(c.email?.toLowerCase() || ''))
     const payingPro = payingClients.filter(c => c.plan !== 'essentials').length
     const payingEssentials = payingClients.filter(c => c.plan === 'essentials').length
-    const mrr = (payingPro * 200) + (payingEssentials * 150)
+    const mrr = (payingPro * 397) + (payingEssentials * 197)
 
     // New signups this week
     const newSignups = allClientsList.filter(c => {
