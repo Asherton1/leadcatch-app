@@ -36,6 +36,7 @@ function SignupForm() {
   const [cardError, setCardError] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [baaAccepted, setBaaAccepted] = useState(false)
   const searchParams = useSearchParams()
   const [plan, setPlan] = useState<'essentials' | 'pro'>('pro')
 
@@ -50,6 +51,7 @@ function SignupForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!stripe || !elements) return
+    if (plan === 'pro' && !baaAccepted) { setError('Please accept the Business Associate Agreement to continue.'); return }
     setError(''); setCardError(''); setLoading(true)
     const { data, error: authErr } = await supabase.auth.signUp({
       email, password,
@@ -151,6 +153,22 @@ function SignupForm() {
               Plan: <strong style={s.trialAmount}>{planName}</strong> · Your card will be charged <strong style={s.trialAmount}>${planPrice}/month</strong> on <strong style={s.trialAmount}>{trialEndDate}</strong>. Cancel anytime before then and you won&apos;t be billed.
             </p>
           </div>
+          {plan === 'pro' && (
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', padding: '1rem', background: 'rgba(34,197,94,0.05)', border: '1px solid rgba(34,197,94,0.15)', borderRadius: '8px', marginBottom: '1rem' }}>
+              <input
+                type="checkbox"
+                id="baa"
+                checked={baaAccepted}
+                onChange={e => setBaaAccepted(e.target.checked)}
+                style={{ width: 16, height: 16, accentColor: '#22c55e', marginTop: '2px', flexShrink: 0, cursor: 'pointer' }}
+              />
+              <label htmlFor="baa" style={{ fontSize: '0.8rem', color: '#888', lineHeight: 1.6, cursor: 'pointer' }}>
+                I agree to ReCapture&apos;s{' '}
+                <a href="/baa" target="_blank" style={{ color: '#22c55e', textDecoration: 'underline' }}>Business Associate Agreement</a>
+                {' '}(BAA). This is required for HIPAA-compliant data handling on the Pro plan.
+              </label>
+            </div>
+          )}
           {error && <p style={s.errorMsg}>{error}</p>}
           <button type="submit" style={{ ...s.submitBtn, opacity: loading ? 0.65 : 1 }} disabled={loading}>
             {loading ? 'Creating account…' : 'Create Account →'}
