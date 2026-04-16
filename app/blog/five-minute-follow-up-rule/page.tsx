@@ -26,6 +26,10 @@ export default function Post() {
         <p className="post-subtitle">A lead that fills out your contact form is at peak interest the moment they hit submit. Every minute you wait, that interest cools. Here is what the data says — and what you can do about it.</p>
       </div>
 
+      <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
+        <Image src="/blog-speed-to-lead.webp" alt="Speed to lead follow up" fill style={{ objectFit: 'cover' }} />
+      </div>
+
       <div className="blog-post-body">
 
         <h2>The Stat That Changes Everything</h2>
