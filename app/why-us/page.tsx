@@ -6,29 +6,28 @@ import Footer from '../components/Footer'
 import WhyUsAccordion from "../components/WhyUsAccordion"
 
 export const metadata = {
-  title: 'Why ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
-  description: 'How does ReCapture compare to Insiteful and FormTracks for form abandonment tracking? See the differences in pricing, features, and focus for high-ticket service businesses.',
-  keywords: 'ReCapture vs the Competition, form abandonment tracking why ReCapture, Insiteful alternative, form abandonment tool, lead recovery software',
+  title: 'Why ReCapture — Form Abandonment Recovery for Multi-Location Businesses',
+  description: 'How ReCapture compares to Podium, GoHighLevel, and Insiteful for form abandonment recovery. Built for multi-location businesses where a single recovered lead is worth $1,500 to $10,000.',
+  keywords: 'ReCapture vs Podium, ReCapture vs GoHighLevel, form abandonment recovery, multi-location lead recovery, enterprise form tracking',
 }
 
 const rows: [string, string | boolean, string | boolean, string | boolean][] = [
-  ['Partial form capture', true, true, true],
+  ['Partial form capture', true, 'Surveys only', true],
+  ['Exit-intent capture', true, false, false],
+  ['Mid-field data capture', true, false, false],
   ['Instant SMS lead alerts', 'Pro plan', false, false],
   ['Lead scoring (hot/warm/cold)', true, false, false],
-  ['Auto-recovery emails', true, true, true],
+  ['Auto-recovery emails', true, false, true],
   ['Revenue-at-risk dashboard', true, false, false],
   ['ROI Estimator tool', true, false, false],
-  ['Interactive live demo', true, false, false],
-  ['Enterprise multi-location', true, false, false],
+  ['Multi-location dashboard', true, false, false],
   ['Weekly client reports', true, false, false],
-  ['Dedicated account support', true, false, false],
-  ['Industry-specific focus', 'High-ticket services', 'Generic SaaS / B2B', 'Generic / all industries'],
-  ['Flat monthly pricing', true, false, '?'],
-  ['Transparent pricing', '$197-397/mo', 'Session-based (unclear)', 'Contact for pricing'],
-  ['Free trial', '14 days', '$7 paid trial', '7 days'],
-  ['Setup complexity', '1 script tag', '1 script tag', '1 script tag'],
-  ['White-label option', 'Coming soon', false, 'Paid add-on'],
-  ['Location', 'Dallas, TX', 'Phoenix, AZ', 'Not disclosed'],
+  ['HIPAA-ready + BAA', 'Pro & Enterprise', '$297/mo add-on', false],
+  ['Transparent pricing', '$197-397/mo', 'Quote only', '$150/mo'],
+  ['Free trial', '7 days', 'None listed', '$7 paid trial'],
+  ['Setup complexity', '1 script tag', 'Full platform setup', '1 script tag'],
+  ['Primary focus', 'Form abandonment + lead recovery', 'Messaging + reviews', 'Form analytics'],
+  ['Best for', 'Multi-location, high-ticket', 'Single location SMB', 'SaaS / eCommerce'],
 ]
 
 function Check() {
@@ -62,8 +61,8 @@ export default function WhyUsPage() {
       <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 4rem' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
           <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Why Us</p>
-          <h1 style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>ReCapture vs the Competition</h1>
-          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Not all form abandonment tools are created equal. Most were built for SaaS companies and eCommerce checkouts — not for the high-ticket service businesses that need them most. We built ReCapture specifically for med spas, dental practices, luxury real estate, and property management companies where a single recovered lead can mean $1,500 to $10,000 in revenue. Here&apos;s why businesses choose us over the alternatives.</p>
+          <h1 style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>Built for Multi-Location Businesses. Nothing Else Comes Close.</h1>
+          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Podium charges $399+/mo to manage reviews and messaging. GoHighLevel charges $297/mo just to add HIPAA. Neither one recovers the leads your forms are losing every single day. ReCapture does — across every location, every form, every industry.</p>
         </div>
       </div>
 
@@ -71,12 +70,12 @@ export default function WhyUsPage() {
 
         {/* ── What Sets Us Apart ──────────────────────────────────────── */}
         <h2 className="reveal">What Sets Us Apart</h2>
-        <p className="reveal">Every competitor in this space tells you <em>where</em> people drop off. None of them give you <em>who</em> dropped off with their actual contact data — and none of them do what comes next.</p>
+        <p className="reveal">Every competitor in this space tells you <em>where</em> people drop off. None of them give you <em>who</em> dropped off — with their name, email, phone number, and what they were looking for. And none of them do what comes next.</p>
 
         <WhyUsAccordion />
 
         <h2 className="reveal">ReCapture vs the Competition</h2>
-        <p className="reveal">Here&apos;s how we stack up against the alternatives.</p>
+        <p className="reveal">Here&apos;s how we stack up against the tools your enterprise clients are already evaluating.</p>
 
         {/* Desktop Table */}
         <div className="compare-desktop reveal" style={{ margin: '3rem 0' }}>
@@ -85,8 +84,8 @@ export default function WhyUsPage() {
               <tr>
                 <th style={{ textAlign: 'left', padding: '1rem 0.75rem', color: '#555', fontWeight: 600, borderBottom: '1px solid #1a1a1a', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', width: '28%' }}>Feature</th>
                 <th style={{ textAlign: 'center', padding: '1.25rem 0.75rem', color: '#ff6b35', fontWeight: 700, fontSize: '0.95rem', background: 'rgba(255, 107, 53, 0.06)', borderBottom: '1px solid #1a1a1a', width: '24%' }}>ReCapture</th>
-                <th style={{ textAlign: 'center', padding: '1rem 0.75rem', color: '#888', fontWeight: 600, borderBottom: '1px solid #1a1a1a', width: '24%' }}>Insiteful</th>
-                <th style={{ textAlign: 'center', padding: '1rem 0.75rem', color: '#888', fontWeight: 600, borderBottom: '1px solid #1a1a1a', width: '24%' }}>FormTracks</th>
+                <th style={{ textAlign: 'center', padding: '1rem 0.75rem', color: '#888', fontWeight: 600, borderBottom: '1px solid #1a1a1a', width: '24%' }}>Podium</th>
+                <th style={{ textAlign: 'center', padding: '1rem 0.75rem', color: '#888', fontWeight: 600, borderBottom: '1px solid #1a1a1a', width: '24%' }}>GoHighLevel</th>
               </tr>
             </thead>
             <tbody>
@@ -113,11 +112,11 @@ export default function WhyUsPage() {
                   <span style={{ color: row[1] === true ? '#22c55e' : row[1] === false ? '#444' : '#aaa', fontSize: '0.8rem' }}><Val v={row[1]} /></span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.35rem 0.75rem' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#666' }}>Insiteful</span>
+                  <span style={{ fontSize: '0.75rem', color: '#666' }}>Podium</span>
                   <span style={{ color: '#888', fontSize: '0.8rem' }}><Val v={row[2]} /></span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.35rem 0.75rem' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#666' }}>FormTracks</span>
+                  <span style={{ fontSize: '0.75rem', color: '#666' }}>GoHighLevel</span>
                   <span style={{ color: '#888', fontSize: '0.8rem' }}><Val v={row[3]} /></span>
                 </div>
               </div>
@@ -125,26 +124,26 @@ export default function WhyUsPage() {
           ))}
         </div>
 
-        <h2 className="reveal">Pricing</h2>
-        <p>Insiteful&apos;s pricing is based on session volume and data retention. Their trial starts at $7, and plans scale based on traffic. For a high-traffic multi-location business, costs can escalate quickly and unpredictably.</p>
-        <p>ReCapture uses simple flat-rate pricing. Essentials is $197/mo. Pro is $397/mo. Enterprise is custom. No session caps, no surprise charges, no calculator needed to figure out your bill. You know exactly what you&apos;re paying before you sign up.</p>
+        <h2 className="reveal">The Honest Breakdown</h2>
+
+        <p><strong style={{ color: '#fff' }}>Podium ($399-599/mo)</strong> is a strong tool for messaging, reviews, and payments — things multi-location businesses already pay for. What it doesn&apos;t do: capture partial form data, score abandoned leads, send recovery emails, or tell you who almost booked. Businesses that use Podium and ReCapture together get the full picture. Those that only use Podium are leaving invisible pipeline on the table.</p>
+
+        <p><strong style={{ color: '#fff' }}>GoHighLevel ($97-497/mo)</strong> is an all-in-one agency platform with CRM, funnels, and automation built for marketing agencies reselling to clients. It added partial survey capture in 2025 — but only for multi-step surveys where email is collected on page 1. No exit-intent. No mid-field capture. No recovery UX. HIPAA compliance is a $297/mo add-on. For agencies who need form abandonment on top of GHL, ReCapture is the purpose-built upgrade.</p>
+
+        <p><strong style={{ color: '#fff' }}>Insiteful ($150/mo)</strong> is ReCapture&apos;s closest direct competitor — a form analytics and abandonment tool built for performance marketers. Strong for CRO and A/B testing. Not built for high-ticket local service businesses, multi-location enterprise, or real-time lead recovery. No SMS alerts. No lead scoring. No revenue-at-risk dashboard. Priced for horizontal SMB, not enterprise.</p>
 
         <h2 className="reveal">Who ReCapture Is Built For</h2>
-        <p>ReCapture was built by a digital marketing consultant who spent 10+ years managing $100K+ in monthly ad spend for med spas, dental practices, luxury real estate, and property management companies. Every feature was designed around one question: <em>what would these businesses actually need to recover lost leads and see ROI in the first week?</em></p>
-        <p>That&apos;s why ReCapture includes a revenue-at-risk dashboard that shows the dollar value of every abandoned lead, plus an ROI Estimator that lets prospects see exactly how much their forms are costing them before they even sign up. It&apos;s why we built a multi-location dashboard for enterprise clients managing 10, 20, or 50+ properties. And it&apos;s why our automated recovery emails are branded to your business — not ours.</p>
-
-        <h2 className="reveal">Who Insiteful Is Built For</h2>
-        <p>Insiteful is a strong tool for performance marketers and CRO specialists who want detailed form field analytics, funnel visualizations, and A/B testing insights. If you&apos;re optimizing checkout flows or running multivariate tests on lead gen forms, Insiteful has features ReCapture doesn&apos;t — like save-and-continue-later and field-level confusion detection.</p>
-        <p>But if you&apos;re a business owner who just wants to see the leads you&apos;re losing and get them back — without learning a new analytics platform — ReCapture is the simpler, more direct path to recovered revenue.</p>
+        <p>Any business with a contact form and more than one location losing leads every day. A dental group with 8 offices. A med spa franchise with 15 locations. A property management company with 200 units. A luxury real estate team covering three markets. The common thread: high-ticket services where a single recovered lead is worth $1,500 to $10,000 — and where 60-70% of people who start a form never finish it.</p>
+        <p>ReCapture captures every partial submission, scores each lead by intent, alerts your team in real time, and automatically sends a branded recovery email — across every location, under one dashboard. No other tool does all four. Not Podium. Not GoHighLevel. Not Insiteful.</p>
 
         <h2 className="reveal">The Bottom Line</h2>
         <div className="reveal" style={{ borderLeft: '3px solid #ff6b35', background: '#111', borderRadius: '0 10px 10px 0', padding: '1.5rem 2rem', margin: '2rem 0' }}>
-          <p style={{ color: '#bbb', lineHeight: 1.8, margin: 0 }}>Other tools help you understand <em>why</em> people abandon your forms. ReCapture captures <em>who</em> they are, scores how serious they were, alerts you in real time, and automatically tries to bring them back. That&apos;s the difference between analytics and revenue.</p>
+          <p style={{ color: '#bbb', lineHeight: 1.8, margin: 0 }}>Podium tells you who messaged you. GoHighLevel helps you follow up with submitted leads. Insiteful shows you where people dropped off. ReCapture captures <em>who</em> dropped off, scores how serious they were, alerts you in real time, and automatically brings them back. That&apos;s not analytics. That&apos;s recovered revenue.</p>
         </div>
 
         <div className="reveal" style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a1a 100%)', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2.5rem', margin: '3rem 0', textAlign: 'center' }}>
           <h3 style={{ color: '#ff6b35', fontSize: '1.5rem', margin: '0 0 0.75rem 0' }}>Ready to recover your lost leads?</h3>
-          <p style={{ color: '#888', margin: '0 0 1.5rem 0' }}>Start your free trial — full access from day one.</p>
+          <p style={{ color: '#888', margin: '0 0 1.5rem 0' }}>Start your free trial — full access from day one. No setup fees. Cancel anytime.</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/test-form" style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>Try the Live Demo</Link>
             <Link href="/start-trial" style={{ display: 'inline-block', background: 'transparent', color: '#ff6b35', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem', border: '1px solid rgba(255,107,53,0.4)' }}>Start Free Trial</Link>
