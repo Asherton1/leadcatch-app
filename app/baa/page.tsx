@@ -40,6 +40,7 @@ export default function BAAPage() {
             { label: 'Amendment Notice', value: '30 days written', color: '#bbb' },
             { label: 'Breach Notification', value: 'Within 60 days', color: '#bbb' },
             { label: 'PHI Sales', value: 'Never', color: '#ff6b35' },
+            { label: 'Subcontractors', value: 'BAA required', color: '#bbb' },
           ].map((item, i) => (
             <div key={i} style={{ padding: '1.25rem 1.5rem', borderRight: '1px solid #1e1e1e', borderBottom: '1px solid #1e1e1e' }}>
               <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.4rem' }}>{item.label}</div>
