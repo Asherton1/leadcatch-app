@@ -94,3 +94,5 @@ export default function BAAPage() {
     </div>
   )
 }
+
+// mobile button fix
