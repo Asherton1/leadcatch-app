@@ -26,30 +26,22 @@ export default function BAAPage() {
         <p className="post-subtitle">This BAA is entered into between ReCapture and the customer upon acceptance during the Pro or Enterprise signup process. It governs the handling of Protected Health Information in compliance with HIPAA.</p>
       </div>
 
-      <div className="blog-post-divider"><hr /></div>
-
       <div className="blog-post-body">
 
-        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', margin: '0 0 2.5rem 0', padding: '1.5rem', background: '#111', borderRadius: '12px', border: '1px solid #1e1e1e' }}>
-          <div>
-            <div style={{ fontSize: '0.65rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600, marginBottom: '0.35rem' }}>Effective Date</div>
-            <div style={{ fontSize: '0.9rem', color: '#bbb', fontWeight: 500 }}>April 17, 2026</div>
-          </div>
-          <div>
-            <div style={{ fontSize: '0.65rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600, marginBottom: '0.35rem' }}>Applies To</div>
-            <div style={{ fontSize: '0.9rem', color: '#bbb', fontWeight: 500 }}>Pro & Enterprise Plans</div>
-          </div>
-          <div>
-            <div style={{ fontSize: '0.65rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600, marginBottom: '0.35rem' }}>Governing Law</div>
-            <div style={{ fontSize: '0.9rem', color: '#bbb', fontWeight: 500 }}>State of Texas</div>
-          </div>
-          <div>
-            <div style={{ fontSize: '0.65rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600, marginBottom: '0.35rem' }}>Compliance</div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="#22c55e"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"/></svg>
-              <span style={{ fontSize: '0.9rem', color: '#22c55e', fontWeight: 500 }}>HIPAA Ready</span>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0', margin: '0 0 2.5rem 0', background: '#111', borderRadius: '12px', border: '1px solid #1e1e1e', overflow: 'hidden' }}>
+          {[
+            { label: 'Effective Date', value: 'April 17, 2026', color: '#bbb' },
+            { label: 'Applies To', value: 'Pro & Enterprise', color: '#bbb' },
+            { label: 'Governing Law', value: 'State of Texas', color: '#bbb' },
+            { label: 'Standard', value: 'HIPAA / HITECH', color: '#bbb' },
+            { label: 'Data Retention', value: 'Deleted on cancel', color: '#bbb' },
+            { label: 'Status', value: 'Active', color: '#22c55e' },
+          ].map((item, i) => (
+            <div key={i} style={{ padding: '1.25rem 1.5rem', borderRight: '1px solid #1e1e1e', borderBottom: '1px solid #1e1e1e' }}>
+              <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.4rem' }}>{item.label}</div>
+              <div style={{ fontSize: '0.875rem', color: item.color, fontWeight: 500, lineHeight: 1.4 }}>{item.value}</div>
             </div>
-          </div>
+          ))}
         </div>
 
         <h2>1. Definitions</h2>
