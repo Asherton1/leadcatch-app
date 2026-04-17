@@ -92,18 +92,18 @@ export default function LandingPage() {
       </div>
 
       <section className="lc-section">
-        <h2 className="section-title">The Invisible Revenue Leak</h2>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>The Invisible Revenue Leak</h2>
         <ProblemAccordion />
       </section>
 
       <section className="lc-section how-it-works-section">
-        <h2 className="section-title">Three Steps to Recovered Revenue</h2>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Three Steps to Recovered Revenue</h2>
         <p className="section-subtitle">No complex setup. No dev team required. Just results.</p>
         <StepsAccordion />
       </section>
 
       <section className="lc-section screenshot-section">
-        <h2 className="section-title">Every Lost Lead. Right In Front of You.</h2>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Every Lost Lead. Right In Front of You.</h2>
         <p className="section-subtitle">Names. Emails. Phone numbers. Dollar amounts. Every lead that slipped away — now right in front of you.</p>
         <div className="screenshot-glow-wrap">
           <div className="screenshot-glow" />
@@ -136,7 +136,7 @@ export default function LandingPage() {
       </section>
 
       <section className="lc-section">
-        <h2 className="section-title">Built to Recover Revenue</h2>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Built to Recover Revenue</h2>
         <p className="section-subtitle">One script tag. Full automation. Every feature designed to bring leads back.</p>
         <FeaturesAccordion />
       </section>
@@ -147,7 +147,7 @@ export default function LandingPage() {
 
 
       <section className="lc-section">
-        <h2 className="section-title">Purpose-Built for High-Ticket Industries</h2>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Purpose-Built for High-Ticket Industries</h2>
         <p className="section-subtitle">ReCapture is not a generic form tool. Every feature was designed for businesses where a single recovered lead pays for the entire year.</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }} className="industries-grid">
           <a href="/for-luxury-real-estate" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem', textDecoration: 'none', transition: 'border-color 0.2s' }}>
@@ -211,7 +211,7 @@ export default function LandingPage() {
 
 
       <section className="lc-section">
-        <h2 className="section-title">What Our Clients Say</h2>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>What Our Clients Say</h2>
         <div className="testimonials-grid reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }}>
           <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem' }}>
             <p style={{ color: '#bbb', lineHeight: 1.8, fontSize: '0.95rem', margin: '0 0 1.5rem 0', fontStyle: 'italic' }}>&quot;We had no idea how many leads were starting our consultation form and dropping off. Within the first week, ReCapture surfaced 14 leads we never would have known about. Three of them booked. That alone paid for the year.&quot;</p>
