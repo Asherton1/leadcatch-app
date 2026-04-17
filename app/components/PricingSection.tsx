@@ -107,13 +107,13 @@ export default function PricingSection() {
     <div className="pricing-grid pricing-grid-3">
       {tiers.map((t, i) => (
         <div className={`pricing-card${t.featured ? ' pricing-card-featured' : ''}${i === 2 ? ' pricing-card-enterprise' : ''}`} key={i}>
-          {t.badge && <div className="pricing-badge">{t.badge}</div>}
-          {'hipaa' in t && (t as {hipaa?: boolean}).hipaa && (
+          {t.badge ? <div className="pricing-badge">{t.badge}</div> : <div style={{ height: '28px' }}></div>}
+          {'hipaa' in t && (t as {hipaa?: boolean}).hipaa ? (
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: '6px', padding: '0.25rem 0.6rem', marginBottom: '0.75rem', fontSize: '0.7rem', fontWeight: 600, color: '#22c55e', letterSpacing: '0.05em' }}>
               <svg width="11" height="11" viewBox="0 0 24 24" fill="#22c55e"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"/></svg>
               HIPAA Ready
             </div>
-          )}
+          ) : <div style={{ height: '26px' }}></div>}
           <div className="pricing-tier">{t.name}</div>
           <div className="pricing-price">
             {t.name !== 'Enterprise' ? (
