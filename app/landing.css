@@ -1441,19 +1441,7 @@
   }
 }
 
-/* ─── Alternating section backgrounds ──────────────────────────────── */
-.lc-section:nth-child(even) {
-  background: #0d0d0d;
-  max-width: 100%;
-  padding: 4rem 0 3rem;
-}
-
-.lc-section:nth-child(even) > * {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 6rem;
-}
+/* alternating backgrounds removed for mobile fix */
 
 /* ─── Step cards orange top accent ─────────────────────────────────── */
 .steps-grid .step-card,
