@@ -221,8 +221,8 @@
 /* ─── Stats bridge (between hero CTAs and problem section) ──────────── */
 .stats-bridge {
   max-width: 1100px;
-  margin: 0 auto 4rem;
-  padding: 5rem 6rem 2rem;
+  margin: 0 auto 2rem;
+  padding: 2rem 6rem 0;
   display: flex;
   justify-content: center;
 }
@@ -277,7 +277,7 @@
 .lc-section {
   position: relative;
   max-width: 1200px;
-  margin: 10rem auto;
+  margin: 5rem auto;
   padding: 0 6rem;
 }
 
@@ -313,6 +313,19 @@
   margin-right: auto;
 }
 
+.alt-section {
+  background: #0d0d0d;
+  padding: 5rem 0;
+  margin: 0 !important;
+  max-width: 100% !important;
+}
+
+.alt-section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 6rem;
+}
+
 /* ─── Problem cards ──────────────────────────────────────────────────── */
 .problem-grid {
   display: grid;
@@ -340,6 +353,10 @@
   background: linear-gradient(90deg, transparent, var(--orange), transparent);
   opacity: 0;
   transition: opacity 0.4s;
+}
+
+.step-card {
+  border-top: 2px solid rgba(255, 107, 53, 0.3);
 }
 
 .problem-card:hover {
@@ -1415,4 +1432,35 @@
   .pricing-section {
     margin-bottom: 2rem !important;
   }
+}
+
+/* ─── Alternating section backgrounds ──────────────────────────────── */
+.lc-section:nth-child(even) {
+  background: #0d0d0d;
+  max-width: 100%;
+  padding: 5rem 0;
+}
+
+.lc-section:nth-child(even) > * {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 6rem;
+}
+
+/* ─── Step cards orange top accent ─────────────────────────────────── */
+.steps-grid .step-card,
+.how-it-works-section .problem-card {
+  border-top: 2px solid rgba(255, 107, 53, 0.25);
+}
+
+/* ─── Feature cards stronger visual ────────────────────────────────── */
+.feature-card {
+  background: #0f0f0f;
+  border: 1px solid #1e1e1e;
+}
+
+.feature-card:hover {
+  border-color: rgba(255, 107, 53, 0.4);
+  background: #111;
 }
