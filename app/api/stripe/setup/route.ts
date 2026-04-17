@@ -128,132 +128,159 @@ export async function POST(req: NextRequest) {
     to: user.email!,
     subject: `Welcome to ReCapture — Let's Get You Set Up`,
     html: `
-      <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;font-family:'Inter',-apple-system,sans-serif;">
-      <tr><td align="center" style="padding:20px 10px;">
-      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#0a0a0a;color:#fff;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;font-family:'Helvetica Neue',Arial,sans-serif;">
+<tr><td align="center" style="padding:40px 20px;">
+<table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#0a0a0a;color:#fff;">
 
-        <!-- Header -->
-        <tr><td style="padding:0 0 8px 0;">
-          <img src="https://userecapture.com/logo-email.svg" alt="ReCapture" width="140" height="32" style="display:block;" />
-        </td></tr>
+  <tr><td style="padding:0 0 32px 0;">
+    <table cellpadding="0" cellspacing="0"><tr>
+      <td style="font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.5px;">
+        <span style="color:#ff6b35;font-weight:800;">[</span><span style="color:#ff6b35;">&#8226;</span><span style="color:#ff6b35;font-weight:800;">]</span>&nbsp;&nbsp;<span style="color:#fff;">Re</span><span style="color:#ff6b35;">Capture</span>
+      </td>
+    </tr></table>
+  </td></tr>
 
-        <!-- Welcome -->
-        <tr><td style="padding:160px 0 8px 0;">
-          <h1 style="font-size:26px;font-weight:700;color:#ff6b35;margin:0 0 12px 0;">Welcome aboard, ${first || 'there'}.</h1>
-          <p style="font-size:15px;color:#888;line-height:1.7;margin:0;">Your account is live. Here's everything you need to start capturing the leads your website has been losing.</p>
-        </td></tr>
+  <tr><td style="padding:0 0 12px 0;">
+    <h1 style="font-size:28px;font-weight:700;color:#ff6b35;margin:0;letter-spacing:-0.5px;">Welcome aboard, ${first || 'there'}.</h1>
+  </td></tr>
+  <tr><td style="padding:0 0 32px 0;">
+    <p style="font-size:16px;color:#999;line-height:1.75;margin:0;">Your account is live and ready to start capturing the leads your website has been losing. Below is everything you need to get set up.</p>
+  </td></tr>
 
-        <!-- Divider -->
-        <tr><td style="padding:24px 0;"><hr style="border:none;height:1px;background:#1e1e1e;margin:0;" /></td></tr>
+  <tr><td style="padding:0 0 32px 0;"><div style="height:1px;background:#1e1e1e;"></div></td></tr>
 
-        <!-- Step 1: Your Plan -->
-        <tr><td style="padding:0 0 24px 0;">
-          <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;">
-            <tr><td style="padding:20px;">
-              <p style="font-size:11px;font-weight:700;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px 0;">Your Plan</p>
-              <p style="font-size:20px;font-weight:700;color:#fff;margin:0 0 4px 0;">${plan === 'essentials' ? 'Essentials' : 'Pro'} — $${plan === 'essentials' ? '197' : '397'}/mo</p>
-              <p style="font-size:13px;color:#666;margin:0;">7-day free trial active. Your card won't be charged until <strong style="color:#ccc;">${trialEndDate}</strong>.</p>
-            </td></tr>
-          </table>
-        </td></tr>
-
-        <!-- Step 2: Install -->
-        <tr><td style="padding:0 0 8px 0;">
-          <p style="font-size:11px;font-weight:700;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;margin:0 0 12px 0;">Step 1 — Install the tracker</p>
-          <p style="font-size:14px;color:#aaa;line-height:1.7;margin:0 0 12px 0;">Paste this code into your website. Works on WordPress, Wix, Webflow, Squarespace, or any custom site. Your web developer will know exactly where it goes.</p>
-        </td></tr>
-        <tr><td style="padding:0 0 24px 0;">
-          <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #1e1e1e;border-radius:8px;">
-            <tr><td style="padding:14px 16px;font-family:monospace;font-size:12px;color:#fff;word-break:break-all;">
-              &lt;script src="https://userecapture.com/track.js?key=${apiKey}"&gt;&lt;/script&gt;
-            </td></tr>
-          </table>
-        </td></tr>
-
-        <!-- Step 3: What to expect -->
-        <tr><td style="padding:0 0 8px 0;">
-          <p style="font-size:11px;font-weight:700;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;margin:0 0 16px 0;">Step 2 — What to expect</p>
-        </td></tr>
-        <tr><td style="padding:0 0 24px 0;">
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:16px;vertical-align:top;">
-                <p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 4px 0;">Within minutes</p>
-                <p style="font-size:12px;color:#666;margin:0;line-height:1.6;">The tracker starts capturing partial form submissions as soon as it's installed.</p>
-              </td>
-              <td width="4%"></td>
-              <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:16px;vertical-align:top;">
-                <p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 4px 0;">Within 48 hours</p>
-                <p style="font-size:12px;color:#666;margin:0;line-height:1.6;">You'll see real leads in your dashboard — names, emails, and phone numbers of people who abandoned your form.</p>
-              </td>
-            </tr>
-          </table>
-        </td></tr>
-        <tr><td style="padding:0 0 24px 0;">
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:16px;vertical-align:top;">
-                <p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 4px 0;">Every Monday</p>
-                <p style="font-size:12px;color:#666;margin:0;line-height:1.6;">You'll receive a weekly report with leads captured, revenue at risk, and recovery metrics.</p>
-              </td>
-              <td width="4%"></td>
-              <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:16px;vertical-align:top;">
-                <p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 4px 0;">${plan !== 'essentials' ? 'Automated recovery' : 'Manual follow-up'}</p>
-                <p style="font-size:12px;color:#666;margin:0;line-height:1.6;">${plan !== 'essentials' ? 'ReCapture will automatically email abandoned leads on your behalf to bring them back.' : 'Use your dashboard to follow up with every lead via email or phone call.'}</p>
-              </td>
-            </tr>
-          </table>
-        </td></tr>
-
-        <!-- Your API Key -->
-        <tr><td style="padding:0 0 8px 0;">
-          <p style="font-size:11px;font-weight:700;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;margin:0 0 12px 0;">Your API Key</p>
-        </td></tr>
-        <tr><td style="padding:0 0 24px 0;">
-          <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #1e1e1e;border-radius:8px;">
-            <tr><td style="padding:14px 16px;font-family:monospace;font-size:14px;color:#fff;word-break:break-all;">
-              ${apiKey}
-            </td></tr>
-          </table>
-        </td></tr>
-
-        <!-- Login credentials -->
-        <tr><td style="padding:0 0 8px 0;">
-          <p style="font-size:11px;font-weight:700;color:#ff6b35;text-transform:uppercase;letter-spacing:1px;margin:0 0 12px 0;">Your Login</p>
-        </td></tr>
-        <tr><td style="padding:0 0 24px 0;">
-          <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #1e1e1e;border-radius:8px;">
-            <tr><td style="padding:14px 16px;">
-              <p style="font-size:13px;color:#888;margin:0 0 4px 0;">Dashboard: <a href="https://userecapture.com/login" style="color:#4a9eff;text-decoration:none;">userecapture.com/login</a></p>
-              <p style="font-size:13px;color:#888;margin:0;">Email: <span style="color:#fff;">${user.email}</span></p>
-            </td></tr>
-          </table>
-        </td></tr>
-
-        <!-- CTA -->
-        <tr><td style="text-align:center;padding:8px 0 24px 0;">
-          <a href="https://userecapture.com/dashboard" style="display:inline-block;background:#ff6b35;color:#000;font-weight:700;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:15px;">Open Your Dashboard</a>
-        </td></tr>
-
-        <!-- Support -->
-        <tr><td style="padding:0 0 24px 0;">
-          <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border-left:3px solid #ff6b35;border-radius:0 8px 8px 0;">
-            <tr><td style="padding:16px 20px;">
-              <p style="font-size:14px;font-weight:700;color:#fff;margin:0 0 4px 0;">Need help getting set up?</p>
-              <p style="font-size:13px;color:#666;margin:0;line-height:1.6;">Reply to this email or reach us at <a href="mailto:hello@userecapture.com" style="color:#ff6b35;text-decoration:none;">hello@userecapture.com</a>. We'll walk you through the installation personally.</p>
-            </td></tr>
-          </table>
-        </td></tr>
-
-        <!-- Footer -->
-        <tr><td style="border-top:1px solid #1e1e1e;padding:20px 0 0 0;text-align:center;">
-          <span style="color:#444;font-size:12px;">ReCapture · Born & Built in Dallas, Texas</span>
-        </td></tr>
-
-      </table>
+  <tr><td style="padding:0 0 32px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #1e1e1e;border-radius:12px;">
+      <tr><td style="padding:24px;">
+        <p style="font-size:11px;font-weight:700;color:#ff6b35;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px 0;">Your plan</p>
+        <p style="font-size:24px;font-weight:700;color:#fff;margin:0 0 6px 0;">${plan === 'essentials' ? 'Essentials' : 'Pro'} — $${plan === 'essentials' ? '197' : '397'}/mo</p>
+        <p style="font-size:14px;color:#666;margin:0;line-height:1.6;">7-day free trial active. Your card will not be charged until <strong style="color:#bbb;">${trialEndDate}</strong>.</p>
       </td></tr>
-      </table>
-    `,
+    </table>
+  </td></tr>
+
+  <tr><td style="padding:0 0 12px 0;">
+    <table cellpadding="0" cellspacing="0"><tr>
+      <td style="background:#ff6b35;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;letter-spacing:0.5px;">STEP 1</td>
+      <td style="padding-left:12px;font-size:15px;font-weight:700;color:#fff;">Install the tracking script</td>
+    </tr></table>
+  </td></tr>
+  <tr><td style="padding:0 0 16px 0;">
+    <p style="font-size:14px;color:#888;line-height:1.7;margin:0;">Copy and paste this single line of code into your website. Works on WordPress, Wix, Webflow, Squarespace, or any custom site.</p>
+  </td></tr>
+  <tr><td style="padding:0 0 32px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #1e1e1e;border-radius:8px;">
+      <tr><td style="padding:16px 20px;font-family:'Courier New',monospace;font-size:13px;color:#22c55e;word-break:break-all;line-height:1.6;">
+        &lt;script src=&quot;https://userecapture.com/track.js?key=${apiKey}&quot;&gt;&lt;/script&gt;
+      </td></tr>
+    </table>
+  </td></tr>
+
+  <tr><td style="padding:0 0 12px 0;">
+    <table cellpadding="0" cellspacing="0"><tr>
+      <td style="background:#ff6b35;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;letter-spacing:0.5px;">STEP 2</td>
+      <td style="padding-left:12px;font-size:15px;font-weight:700;color:#fff;">Access your dashboard</td>
+    </tr></table>
+  </td></tr>
+  <tr><td style="padding:0 0 16px 0;">
+    <p style="font-size:14px;color:#888;line-height:1.7;margin:0;">Your dashboard shows every abandoned lead, their contact info, revenue at risk, and recovery status.</p>
+  </td></tr>
+  <tr><td style="padding:0 0 32px 0;">
+    <table cellpadding="0" cellspacing="0"><tr>
+      <td style="background:#ff6b35;color:#fff;font-size:14px;font-weight:700;padding:14px 32px;border-radius:8px;text-align:center;">
+        <a href="https://userecapture.com/dashboard" style="color:#fff;text-decoration:none;">Open Your Dashboard</a>
+      </td>
+    </tr></table>
+  </td></tr>
+
+  <tr><td style="padding:0 0 12px 0;">
+    <table cellpadding="0" cellspacing="0"><tr>
+      <td style="background:#ff6b35;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;letter-spacing:0.5px;">STEP 3</td>
+      <td style="padding-left:12px;font-size:15px;font-weight:700;color:#fff;">What to expect</td>
+    </tr></table>
+  </td></tr>
+  <tr><td style="padding:0 0 32px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:20px;vertical-align:top;">
+          <p style="font-size:13px;font-weight:700;color:#ff6b35;margin:0 0 6px 0;">Within minutes</p>
+          <p style="font-size:13px;color:#888;margin:0;line-height:1.6;">The tracker begins capturing partial form submissions the moment it is installed.</p>
+        </td>
+        <td width="4%"></td>
+        <td width="48%" style="background:#111;border:1px solid #1e1e1e;border-radius:10px;padding:20px;vertical-align:top;">
+          <p style="font-size:13px;font-weight:700;color:#ff6b35;margin:0 0 6px 0;">Within 48 hours</p>
+          <p style="font-size:13px;color:#888;margin:0;line-height:1.6;">You will see real leads in your dashboard with names, emails, phone numbers, and dollar values.</p>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+
+  <tr><td style="padding:0 0 32px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #1e1e1e;border-radius:12px;">
+      <tr><td style="padding:24px;">
+        <p style="font-size:11px;font-weight:700;color:#ff6b35;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 16px 0;">Included in your plan</p>
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> Real-time partial form capture</td></tr>
+          <tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> Exit-intent detection</td></tr>
+          <tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> Lead scoring — hot, warm, cold</td></tr>
+          <tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> Automated branded recovery emails</td></tr>
+          <tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> Revenue-at-risk dashboard</td></tr>
+          <tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> Weekly performance reports</td></tr>
+          ${plan !== 'essentials' ? '<tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> Instant SMS alerts</td></tr><tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> HIPAA-ready with BAA included</td></tr>' : ''}
+        </table>
+      </td></tr>
+    </table>
+  </td></tr>
+
+  <tr><td style="padding:0 0 32px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #1e1e1e;border-radius:12px;">
+      <tr><td style="padding:24px;">
+        <p style="font-size:15px;font-weight:700;color:#fff;margin:0 0 8px 0;">Need help getting set up?</p>
+        <p style="font-size:14px;color:#888;line-height:1.7;margin:0;">Reply to this email or reach out at <a href="mailto:hello@userecapture.com" style="color:#ff6b35;text-decoration:none;font-weight:600;">hello@userecapture.com</a>. We are based in Dallas and typically respond within a few hours.</p>
+      </td></tr>
+    </table>
+  </td></tr>
+
+  <tr><td style="padding:0 0 24px 0;"><div style="height:1px;background:#1e1e1e;"></div></td></tr>
+
+  <tr><td style="padding:0 0 8px 0;text-align:center;">
+    <table cellpadding="0" cellspacing="0" style="margin:0 auto;"><tr>
+      <td style="font-size:18px;font-weight:700;color:#fff;letter-spacing:-0.5px;">
+        <span style="color:#ff6b35;font-weight:800;">[</span><span style="color:#ff6b35;">&#8226;</span><span style="color:#ff6b35;font-weight:800;">]</span>&nbsp;&nbsp;<span style="color:#fff;">Re</span><span style="color:#ff6b35;">Capture</span>
+      </td>
+    </tr></table>
+  </td></tr>
+  <tr><td style="text-align:center;padding:8px 0;">
+    <a href="https://userecapture.com" style="color:#666;text-decoration:none;font-size:12px;margin:0 6px;">Website</a>
+    <span style="color:#333;">|</span>
+    <a href="https://userecapture.com/pricing" style="color:#666;text-decoration:none;font-size:12px;margin:0 6px;">Pricing</a>
+    <span style="color:#333;">|</span>
+    <a href="https://userecapture.com/why-us" style="color:#666;text-decoration:none;font-size:12px;margin:0 6px;">Why Us</a>
+    <span style="color:#333;">|</span>
+    <a href="https://userecapture.com/baa" style="color:#666;text-decoration:none;font-size:12px;margin:0 6px;">BAA</a>
+    <span style="color:#333;">|</span>
+    <a href="https://userecapture.com/blog" style="color:#666;text-decoration:none;font-size:12px;margin:0 6px;">Insights</a>
+  </td></tr>
+  <tr><td style="text-align:center;padding:12px 0 4px;">
+    <span style="font-size:11px;color:#444;">HIPAA Compliant</span>
+    <span style="color:#2a2a2a;font-size:11px;margin:0 4px;">|</span>
+    <span style="font-size:11px;color:#444;">SSL Secured</span>
+    <span style="color:#2a2a2a;font-size:11px;margin:0 4px;">|</span>
+    <span style="font-size:11px;color:#444;">Payments by Stripe</span>
+    <span style="color:#2a2a2a;font-size:11px;margin:0 4px;">|</span>
+    <span style="font-size:11px;color:#444;">Dallas, TX</span>
+  </td></tr>
+  <tr><td style="text-align:center;padding:4px 0;">
+    <p style="font-size:11px;color:#444;margin:0;">Born and Built in Dallas, Texas</p>
+  </td></tr>
+  <tr><td style="text-align:center;padding:4px 0 0;">
+    <p style="font-size:11px;color:#444;margin:0;">hello@userecapture.com</p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+`
   })
 
   // ── Notify Ash of new signup ──
