@@ -215,7 +215,8 @@ export default function HowItWorksPage() {
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 </div>
                 <h3>SMS Alert</h3>
-                <p>Your team gets an instant text message with the lead's name, contact info, and what they were looking for. <span style={{ fontSize: "0.7rem", background: "rgba(255,107,53,0.1)", border: "1px solid rgba(255,107,53,0.2)", color: "#ff6b35", padding: "2px 8px", borderRadius: "4px", marginLeft: "4px", fontWeight: 600 }}>Pro</span></p>
+                <p>Your team gets an instant text message with the lead's name, contact info, and what they were looking for.</p>
+                <p style={{ fontSize: '0.8rem', color: '#ff6b35', fontWeight: 600, marginTop: '0.5rem' }}>Pro plan</p>
               </div>
               <div className="hiw-parallel-card">
                 <div className="hiw-parallel-icon">
