@@ -57,7 +57,7 @@ export default function ParticleNetwork() {
 
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(210, 210, 220, ${p.opacity * 0.85})`
+        ctx.fillStyle = `rgba(220, 220, 230, ${isMobile ? p.opacity * 0.6 : p.opacity * 1.2})`
         ctx.fill()
       }
 
