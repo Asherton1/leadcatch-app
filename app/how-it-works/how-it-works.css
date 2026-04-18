@@ -727,18 +727,42 @@
 /* ─── Mobile ─── */
 @media (max-width: 768px) {
   .hiw-hero { padding: 7rem 1.25rem 3rem; }
-  .hiw-hero-sub { font-size: 0.95rem; }
-  .hiw-flow { padding: 1rem 1.25rem 3rem; }
+  .hiw-hero-title { font-size: 1.6rem; }
+  .hiw-hero-sub { font-size: 0.9rem; line-height: 1.7; }
+  .hiw-flow { padding: 1rem 1rem 3rem; }
   .hiw-step { flex-direction: column; gap: 0; }
-  .hiw-step-number { font-size: 1.75rem; margin-bottom: 0.5rem; min-width: auto; }
-  .hiw-step-content { padding: 1.5rem; }
-  .hiw-step-content h2 { font-size: 1.15rem; }
-  .hiw-connector { padding: 0 0 0 0; align-items: center; }
-  .hiw-parallel { grid-template-columns: 1fr; }
+  .hiw-step-number { font-size: 1.5rem; margin-bottom: 0.5rem; min-width: auto; }
+  .hiw-step-content { padding: 1.25rem; }
+  .hiw-step-content h2 { font-size: 1.1rem; }
+  .hiw-step-content p { font-size: 0.875rem; line-height: 1.7; }
+  .hiw-connector { padding: 0; align-items: center; }
+  .hiw-connector-line { height: 28px !important; }
+  .hiw-connector.revealed .hiw-connector-line { height: 28px; }
+  .hiw-parallel { grid-template-columns: 1fr; gap: 0.75rem; }
+  .hiw-parallel-card { padding: 1rem; }
+  .hiw-parallel-card h3 { font-size: 0.875rem; }
   .hiw-detail-items { gap: 0.375rem; }
   .hiw-detail-items span { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
-  .hiw-abandon-stat { flex-direction: column; gap: 0.25rem; }
-  .hiw-cta-buttons { flex-direction: column; align-items: center; }
+  .hiw-abandon-stat { flex-direction: row; gap: 0.5rem; align-items: baseline; }
+  .hiw-abandon-number { font-size: 1.5rem; }
+  .hiw-roi-card { padding: 1rem; }
+  .hiw-roi-line { flex-direction: row; gap: 0.5rem; }
+  .hiw-roi-label { font-size: 0.8rem; }
+  .hiw-roi-value { font-size: 0.85rem; white-space: nowrap; }
+  .hiw-roi-total .hiw-roi-value { font-size: 1rem; }
+  .hiw-scores { gap: 0.5rem; }
+  .hiw-score strong { font-size: 0.8rem; }
+  .hiw-score p { font-size: 0.75rem !important; }
+  .hiw-triggers { gap: 0.75rem; }
+  .hiw-trigger strong { font-size: 0.8rem; }
+  .hiw-trigger p { font-size: 0.75rem !important; }
+  .hiw-cta-buttons { flex-direction: column; align-items: center; gap: 0.75rem; }
+  .hiw-cta h2 { font-size: 1.4rem; }
+  .hiw-cta p { font-size: 0.9rem; }
   .hiw-setup { padding: 3rem 1.25rem; }
+  .hiw-setup-title { font-size: 1.4rem; }
+  .hiw-setup-sub { font-size: 0.9rem; }
+  .hiw-code-block code { font-size: 0.7rem; }
   .hiw-cta { padding: 3rem 1.25rem 5rem; }
+  .hiw-step-icon { width: 40px; height: 40px; }
 }
