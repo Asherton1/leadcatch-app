@@ -139,6 +139,53 @@ export async function POST(request: NextRequest) {
     }
   }
 
+
+  // --- SLACK ALERT ---
+  if (name || email || phone) {
+    try {
+      const { data: clientFull } = await supabase
+        .from('clients')
+        .select('slack_webhook_url, business_name')
+        .eq('id', client.id)
+        .single()
+
+      if (clientFull?.slack_webhook_url) {
+        const score = Number(fields_completed ?? 0) >= 3 ? 'Hot' : Number(fields_completed ?? 0) >= 2 ? 'Warm' : 'Cold'
+        const slackMsg = {
+          blocks: [
+            {
+              type: 'header',
+              text: { type: 'plain_text', text: `New Abandoned Lead - ${score}`, emoji: true }
+            },
+            {
+              type: 'section',
+              fields: [
+                { type: 'mrkdwn', text: `*Name:*\n${name || 'N/A'}` },
+                { type: 'mrkdwn', text: `*Email:*\n${email || 'N/A'}` },
+                { type: 'mrkdwn', text: `*Phone:*\n${phone || 'N/A'}` },
+                { type: 'mrkdwn', text: `*Fields:*\n${fields_completed || 0}/${total_fields || 0}` },
+              ]
+            },
+            {
+              type: 'context',
+              elements: [
+                { type: 'mrkdwn', text: `Captured by ReCapture | ${new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' })}` }
+              ]
+            }
+          ]
+        }
+
+        await fetch(clientFull.slack_webhook_url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(slackMsg),
+        })
+      }
+    } catch (err) {
+      console.error('Slack alert failed for lead', lead.id, err)
+    }
+  }
+
   // --- AUTO-RECOVERY EMAIL ---
   if (client.auto_email_enabled && email && client.plan !== 'essentials') {
     const delayMinutes = client.email_delay_minutes ?? 0
