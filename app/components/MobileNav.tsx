@@ -23,6 +23,7 @@ export default function MobileNav() {
         <Link href="/why-us" className={isActive('/why-us') ? 'nav-link nav-active' : 'nav-link'}>Why Us</Link>
         <Link href="/how-it-works" className={isActive('/how-it-works') ? 'nav-link nav-active' : 'nav-link'}>How It Works</Link>
         <Link href="/integrations" className={isActive('/integrations') ? 'nav-link nav-active' : 'nav-link'}>Integrations</Link>
+        <Link href="/form-audit" className={isActive('/form-audit') ? 'nav-link nav-active' : 'nav-link'}>Free Audit</Link>
         <Link href="/calculator" className={isActive('/calculator') ? 'nav-link nav-active' : 'nav-link'}>ROI Estimator</Link>
 
         <Link href="/login" className="nav-login">Login</Link>
@@ -41,7 +42,7 @@ export default function MobileNav() {
       <div
         className="nav-mobile-menu"
         style={{
-          maxHeight: open ? '700px' : '0',
+          maxHeight: open ? '800px' : '0',
           opacity: open ? 1 : 0,
           overflow: 'hidden',
           transition: 'max-height 0.4s ease, opacity 0.3s ease',
@@ -56,6 +57,7 @@ export default function MobileNav() {
           <Link href="/why-us" className={isActive('/why-us') ? 'mobile-link-active' : ''}>Why Us</Link>
           <Link href="/how-it-works" className={isActive('/how-it-works') ? 'mobile-link-active' : ''}>How It Works</Link>
           <Link href="/integrations" className={isActive('/integrations') ? 'mobile-link-active' : ''}>Integrations</Link>
+          <Link href="/form-audit" className={isActive('/form-audit') ? 'mobile-link-active' : ''}>Free Audit</Link>
           <Link href="/calculator" className={isActive('/calculator') ? 'mobile-link-active' : ''}>ROI Estimator</Link>
           <Link href="/login" className={isActive('/login') ? 'mobile-link-active' : ''}>Login</Link>
           <Link href="/start-trial" className="nav-mobile-cta">Start Free Trial</Link>
