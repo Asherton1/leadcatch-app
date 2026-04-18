@@ -34,8 +34,8 @@ export default function ParticleNetwork() {
         particles.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.35,
-          vy: (Math.random() - 0.5) * 0.35,
+          vx: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.5),
+          vy: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.5),
           size: Math.random() * 1.5 + 0.5,
           opacity: Math.random() * 0.5 + 0.15,
         })
