@@ -53,6 +53,7 @@ export default function MobileNav() {
           <Link href="/pricing" className={isActive('/pricing') ? 'mobile-link-active' : ''}>Pricing</Link>
           <Link href="/test-form" className={isActive('/test-form') ? 'mobile-link-active' : ''}>Live Demo</Link>
           <Link href="/why-us" className={isActive('/why-us') ? 'mobile-link-active' : ''}>Why Us</Link>
+          <Link href="/how-it-works" className={isActive('/how-it-works') ? 'mobile-link-active' : ''}>How It Works</Link>
           <Link href="/calculator" className={isActive('/calculator') ? 'mobile-link-active' : ''}>ROI Estimator</Link>
           <Link href="/login" className={isActive('/login') ? 'mobile-link-active' : ''}>Login</Link>
           <Link href="/start-trial" className="nav-mobile-cta">Start Free Trial</Link>
