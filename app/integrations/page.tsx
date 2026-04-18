@@ -10,37 +10,67 @@ export const metadata = {
   description: 'ReCapture integrates with Slack, HubSpot, Salesforce, Google Ads, Zapier, and 3,000+ apps. Connect your lead recovery pipeline to the tools your team already uses.',
 }
 
+function Icon({ type }: { type: string }) {
+  const s = { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: '#ff6b35', strokeWidth: '1.5', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const }
+  switch(type) {
+    case 'slack': return <svg {...s}><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19v-1.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M14 20.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5z"/><path d="M10 9.5C10 10.33 9.33 11 8.5 11h-5C2.67 11 2 10.33 2 9.5S2.67 8 3.5 8h5c.83 0 1.5.67 1.5 1.5z"/><path d="M10 3.5C10 4.33 9.33 5 8.5 5S7 4.33 7 3.5 7.67 2 8.5 2s1.5.67 1.5 1.5z"/></svg>
+    case 'sms': return <svg {...s}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
+    case 'email': return <svg {...s}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    case 'teams': return <svg {...s}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    case 'whatsapp': return <svg {...s}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    case 'hubspot': return <svg {...s}><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="M6 12h12"/></svg>
+    case 'salesforce': return <svg {...s}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+    case 'ghl': return <svg {...s}><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    case 'fub': return <svg {...s}><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    case 'calendly': return <svg {...s}><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M10 14l2 2 4-4"/></svg>
+    case 'cal': return <svg {...s}><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+    case 'google': return <svg {...s}><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+    case 'meta': return <svg {...s}><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+    case 'callrail': return <svg {...s}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94"/><path d="M14.05 6A5 5 0 0 1 18 10"/></svg>
+    case 'boulevard': return <svg {...s}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    case 'dental': return <svg {...s}><path d="M12 22c-4.97 0-9-2.24-9-5v-1c0-.37.07-.73.2-1.08C4.3 12.55 7.82 11 12 11s7.7 1.55 8.8 3.92c.13.35.2.71.2 1.08v1c0 2.76-4.03 5-9 5z"/><path d="M12 11V2"/><path d="M8 6l4-4 4 4"/></svg>
+    case 'dentrix': return <svg {...s}><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 9h6"/><path d="M12 6v6"/><path d="M9 15h6"/></svg>
+    case 'appfolio': return <svg {...s}><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+    case 'nextech': return <svg {...s}><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    case 'zapier': return <svg {...s}><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    case 'make': return <svg {...s}><polyline points="16 3 21 3 21 8"/><line x1="4" x2="21" y1="20" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" x2="21" y1="15" y2="21"/><line x1="4" x2="9" y1="4" y2="9"/></svg>
+    case 'webhook': return <svg {...s}><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+    case 'api': return <svg {...s}><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" x2="10" y1="4" y2="20"/></svg>
+    default: return <svg {...s}><circle cx="12" cy="12" r="10"/></svg>
+  }
+}
+
 const integrations = [
   {
     category: 'Alerts & Notifications',
     items: [
-      { name: 'Slack', desc: 'Instant lead alerts in your team channels with one-click actions', status: 'live', icon: 'chat' },
-      { name: 'SMS (Twilio)', desc: 'Text alerts the moment a high-value lead abandons', status: 'live', icon: 'phone' },
-      { name: 'Email (Resend)', desc: 'Automated branded recovery emails on your behalf', status: 'live', icon: 'mail' },
+      { name: 'Slack', desc: 'Instant lead alerts in your team channels with one-click actions', status: 'live', icon: 'slack' },
+      { name: 'SMS (Twilio)', desc: 'Text alerts the moment a high-value lead abandons', status: 'live', icon: 'sms' },
+      { name: 'Email (Resend)', desc: 'Automated branded recovery emails on your behalf', status: 'live', icon: 'email' },
       { name: 'Microsoft Teams', desc: 'Lead alerts with action buttons for your front desk', status: 'coming', icon: 'teams' },
-      { name: 'WhatsApp Business', desc: 'Recovery messages for international luxury buyers', status: 'coming', icon: 'chat' },
+      { name: 'WhatsApp Business', desc: 'Recovery messages for international luxury buyers', status: 'coming', icon: 'whatsapp' },
     ]
   },
   {
     category: 'CRM & Sales',
     items: [
-      { name: 'HubSpot', desc: 'Sync recovered leads directly into your HubSpot pipeline', status: 'coming', icon: 'hub' },
-      { name: 'Salesforce', desc: 'Push leads to Salesforce with custom field mapping', status: 'coming', icon: 'cloud' },
-      { name: 'GoHighLevel', desc: 'Native integration for GHL agency clients', status: 'coming', icon: 'bolt' },
-      { name: 'Follow Up Boss', desc: 'Auto-create contacts for luxury real estate teams', status: 'coming', icon: 'home' },
+      { name: 'HubSpot', desc: 'Sync recovered leads directly into your HubSpot pipeline', status: 'coming', icon: 'hubspot' },
+      { name: 'Salesforce', desc: 'Push leads to Salesforce with custom field mapping', status: 'coming', icon: 'salesforce' },
+      { name: 'GoHighLevel', desc: 'Native integration for GHL agency clients', status: 'coming', icon: 'ghl' },
+      { name: 'Follow Up Boss', desc: 'Auto-create contacts for luxury real estate teams', status: 'coming', icon: 'fub' },
     ]
   },
   {
     category: 'Scheduling & Booking',
     items: [
-      { name: 'Calendly', desc: 'Auto-book recovered leads into available slots', status: 'coming', icon: 'cal' },
+      { name: 'Calendly', desc: 'Auto-book recovered leads into available slots', status: 'coming', icon: 'calendly' },
       { name: 'Cal.com', desc: 'Open-source scheduling integration', status: 'coming', icon: 'cal' },
     ]
   },
   {
     category: 'Ad Platforms',
     items: [
-      { name: 'Google Ads', desc: 'Feed recovered leads back as offline conversions for smarter bidding', status: 'coming', icon: 'chart' },
+      { name: 'Google Ads', desc: 'Feed recovered leads back as offline conversions for smarter bidding', status: 'coming', icon: 'google' },
       { name: 'Meta Ads', desc: 'Conversions API integration for optimized ad spend', status: 'coming', icon: 'meta' },
       { name: 'CallRail', desc: 'Track calls from recovered leads back to campaigns', status: 'coming', icon: 'callrail' },
     ]
@@ -48,19 +78,19 @@ const integrations = [
   {
     category: 'Practice Management',
     items: [
-      { name: 'Boulevard', desc: 'Sync leads to your med spa booking system', status: 'coming', icon: 'spa' },
+      { name: 'Boulevard', desc: 'Sync leads to your med spa booking system', status: 'coming', icon: 'boulevard' },
       { name: 'Open Dental', desc: 'Push recovered patients into your dental PMS', status: 'coming', icon: 'dental' },
-      { name: 'Dentrix', desc: 'Enterprise dental practice management integration', status: 'coming', icon: 'dental' },
-      { name: 'AppFolio', desc: 'Leasing lead sync for property management', status: 'coming', icon: 'building' },
-      { name: 'Nextech', desc: 'Plastic surgery and LASIK practice management', status: 'coming', icon: 'eye' },
+      { name: 'Dentrix', desc: 'Enterprise dental practice management integration', status: 'coming', icon: 'dentrix' },
+      { name: 'AppFolio', desc: 'Leasing lead sync for property management', status: 'coming', icon: 'appfolio' },
+      { name: 'Nextech', desc: 'Plastic surgery and LASIK practice management', status: 'coming', icon: 'nextech' },
     ]
   },
   {
     category: 'Automation',
     items: [
-      { name: 'Zapier', desc: 'Connect ReCapture to 6,000+ apps with no code', status: 'coming', icon: 'bolt' },
-      { name: 'Make (Integromat)', desc: 'Advanced workflow automation', status: 'coming', icon: 'sync' },
-      { name: 'Webhooks', desc: 'Send lead data to any endpoint in real time', status: 'live', icon: 'link' },
+      { name: 'Zapier', desc: 'Connect ReCapture to 6,000+ apps with no code', status: 'coming', icon: 'zapier' },
+      { name: 'Make (Integromat)', desc: 'Advanced workflow automation', status: 'coming', icon: 'make' },
+      { name: 'Webhooks', desc: 'Send lead data to any endpoint in real time', status: 'live', icon: 'webhook' },
       { name: 'REST API', desc: 'Full API access for custom integrations', status: 'live', icon: 'api' },
     ]
   },
@@ -75,7 +105,7 @@ export default function IntegrationsPage() {
       <section style={{ maxWidth: 900, margin: '0 auto', padding: '10rem 2rem 4rem', textAlign: 'center' }}>
         <p style={{ fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.2em', color: '#ff6b35', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Integrations</p>
         <h1 style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem' }}>
-          Connect <span style={{ color: '#ff6b35' }}>ReCapture</span> to Everything
+          Connect <span style={{ color: '#fff' }}>Re</span><span style={{ color: '#ff6b35' }}>Capture</span> to Everything
         </h1>
         <p style={{ fontSize: '1.1rem', color: '#888', lineHeight: 1.75, maxWidth: 640, margin: '0 auto 3rem' }}>
           Your recovered leads flow directly into the tools your team already uses. No copy-pasting. No manual imports. Real-time sync from the moment a lead is captured.
@@ -90,16 +120,19 @@ export default function IntegrationsPage() {
               {group.items.map((item, ii) => (
                 <div key={ii} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '0.75rem', padding: '1.25rem', transition: 'border-color 0.2s', position: 'relative' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><circle cx="12" cy="12" r="10" /><path d="M12 8v4l2 2" /></svg>
-                    <span style={{ fontWeight: 700, fontSize: '0.9375rem' }}>{item.name}</span>
+                    <div style={{ width: 32, height: 32, background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.15)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <Icon type={item.icon} />
+                    </div>
+                    <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: '#fff' }}>{item.name}</span>
                     <span style={{
                       marginLeft: 'auto',
-                      fontSize: '0.625rem',
+                      fontSize: '0.5625rem',
                       fontWeight: 600,
                       letterSpacing: '0.1em',
                       textTransform: 'uppercase',
-                      padding: '2px 8px',
+                      padding: '3px 8px',
                       borderRadius: '4px',
+                      whiteSpace: 'nowrap',
                       background: item.status === 'live' ? 'rgba(34,197,94,0.1)' : 'rgba(255,107,53,0.1)',
                       color: item.status === 'live' ? '#22c55e' : '#ff6b35',
                       border: `1px solid ${item.status === 'live' ? 'rgba(34,197,94,0.2)' : 'rgba(255,107,53,0.2)'}`,
