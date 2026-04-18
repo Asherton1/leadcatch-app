@@ -534,6 +534,196 @@
   color: #ff6b35;
 }
 
+
+/* ─── Scroll Animations ─── */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes growDown {
+  from { height: 0; }
+  to { height: 40px; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 4px rgba(255, 107, 53, 0.3); transform: scale(1); }
+  50% { box-shadow: 0 0 16px rgba(255, 107, 53, 0.7); transform: scale(1.4); }
+}
+
+@keyframes pulseGlowGreen {
+  0%, 100% { box-shadow: 0 0 4px rgba(34, 197, 94, 0.3); transform: scale(1); }
+  50% { box-shadow: 0 0 16px rgba(34, 197, 94, 0.7); transform: scale(1.4); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(255, 107, 53, 0.2); }
+  50% { border-color: rgba(255, 107, 53, 0.5); }
+}
+
+/* Steps slide in from left */
+.hiw-step.revealed {
+  animation: slideInLeft 0.6s ease forwards;
+}
+
+.hiw-step:nth-child(1).revealed { animation-delay: 0s; }
+.hiw-step:nth-child(3).revealed { animation-delay: 0.1s; }
+.hiw-step:nth-child(5).revealed { animation-delay: 0.1s; }
+.hiw-step:nth-child(7).revealed { animation-delay: 0.1s; }
+.hiw-step:nth-child(9).revealed { animation-delay: 0.1s; }
+.hiw-step:nth-child(11).revealed { animation-delay: 0.1s; }
+.hiw-step:nth-child(13).revealed { animation-delay: 0.1s; }
+
+/* Connector lines grow */
+.hiw-connector-line {
+  height: 0;
+  transition: height 0.5s ease;
+}
+
+.hiw-connector.revealed .hiw-connector-line {
+  height: 40px;
+}
+
+/* Dots pulse when visible */
+.hiw-connector.revealed .hiw-connector-dot-orange {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.hiw-connector.revealed .hiw-connector-dot-green {
+  animation: pulseGlowGreen 2s ease-in-out infinite;
+}
+
+/* Step capture card glows */
+.hiw-step-capture.revealed .hiw-step-content {
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+/* Parallel cards stagger in */
+.hiw-parallel-card {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.4s ease;
+}
+
+.hiw-step.revealed .hiw-parallel-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hiw-step.revealed .hiw-parallel-card:nth-child(1) { transition-delay: 0.1s; }
+.hiw-step.revealed .hiw-parallel-card:nth-child(2) { transition-delay: 0.25s; }
+.hiw-step.revealed .hiw-parallel-card:nth-child(3) { transition-delay: 0.4s; }
+
+/* Score dots animate in */
+.hiw-score {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.hiw-step.revealed .hiw-score {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hiw-step.revealed .hiw-score:nth-child(1) { transition-delay: 0.1s; }
+.hiw-step.revealed .hiw-score:nth-child(2) { transition-delay: 0.2s; }
+.hiw-step.revealed .hiw-score:nth-child(3) { transition-delay: 0.3s; }
+
+/* Trigger items stagger */
+.hiw-trigger {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.hiw-step.revealed .hiw-trigger {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hiw-step.revealed .hiw-trigger:nth-child(1) { transition-delay: 0.1s; }
+.hiw-step.revealed .hiw-trigger:nth-child(2) { transition-delay: 0.2s; }
+.hiw-step.revealed .hiw-trigger:nth-child(3) { transition-delay: 0.3s; }
+
+/* Detail tags stagger */
+.hiw-detail-items span {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.2s ease;
+}
+
+.hiw-step.revealed .hiw-detail-items span {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hiw-step.revealed .hiw-detail-items span:nth-child(1) { transition-delay: 0.05s; }
+.hiw-step.revealed .hiw-detail-items span:nth-child(2) { transition-delay: 0.1s; }
+.hiw-step.revealed .hiw-detail-items span:nth-child(3) { transition-delay: 0.15s; }
+.hiw-step.revealed .hiw-detail-items span:nth-child(4) { transition-delay: 0.2s; }
+.hiw-step.revealed .hiw-detail-items span:nth-child(5) { transition-delay: 0.25s; }
+.hiw-step.revealed .hiw-detail-items span:nth-child(6) { transition-delay: 0.3s; }
+
+/* ROI card lines stagger */
+.hiw-roi-line {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.hiw-step.revealed .hiw-roi-line {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hiw-step.revealed .hiw-roi-line:nth-child(1) { transition-delay: 0.1s; }
+.hiw-step.revealed .hiw-roi-line:nth-child(2) { transition-delay: 0.2s; }
+.hiw-step.revealed .hiw-roi-line:nth-child(3) { transition-delay: 0.3s; }
+
+/* Code block fade in */
+.hiw-code-block.revealed {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Abandon stat number pulse */
+.hiw-abandon-number {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.hiw-step.revealed .hiw-abandon-number {
+  opacity: 1;
+}
+
+/* Icon hover effects */
+.hiw-step-icon {
+  transition: all 0.3s ease;
+}
+
+.hiw-step:hover .hiw-step-icon {
+  transform: scale(1.1);
+  border-color: #ff6b35;
+}
+
+.hiw-step:hover .hiw-icon-green-bg {
+  border-color: #22c55e;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ─── Mobile ─── */
 @media (max-width: 768px) {
   .hiw-hero { padding: 7rem 1.25rem 3rem; }

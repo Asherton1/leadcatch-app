@@ -43,7 +43,7 @@ export default function HowItWorksPage() {
           </div>
         </div>
 
-        <div className="hiw-connector">
+        <div className="hiw-connector reveal">
           <div className="hiw-connector-line"></div>
           <div className="hiw-connector-dot"></div>
         </div>
@@ -73,7 +73,7 @@ export default function HowItWorksPage() {
           </div>
         </div>
 
-        <div className="hiw-connector">
+        <div className="hiw-connector reveal">
           <div className="hiw-connector-line"></div>
           <div className="hiw-connector-dot"></div>
         </div>
@@ -96,7 +96,7 @@ export default function HowItWorksPage() {
           </div>
         </div>
 
-        <div className="hiw-connector">
+        <div className="hiw-connector reveal">
           <div className="hiw-connector-line hiw-connector-orange"></div>
           <div className="hiw-connector-dot hiw-connector-dot-orange"></div>
         </div>
@@ -144,7 +144,7 @@ export default function HowItWorksPage() {
           </div>
         </div>
 
-        <div className="hiw-connector">
+        <div className="hiw-connector reveal">
           <div className="hiw-connector-line hiw-connector-orange"></div>
           <div className="hiw-connector-dot hiw-connector-dot-orange"></div>
         </div>
@@ -186,7 +186,7 @@ export default function HowItWorksPage() {
           </div>
         </div>
 
-        <div className="hiw-connector">
+        <div className="hiw-connector reveal">
           <div className="hiw-connector-line hiw-connector-orange"></div>
           <div className="hiw-connector-dot hiw-connector-dot-orange"></div>
         </div>
@@ -228,7 +228,7 @@ export default function HowItWorksPage() {
           </div>
         </div>
 
-        <div className="hiw-connector">
+        <div className="hiw-connector reveal">
           <div className="hiw-connector-line hiw-connector-green"></div>
           <div className="hiw-connector-dot hiw-connector-dot-green"></div>
         </div>
