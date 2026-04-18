@@ -133,9 +133,9 @@ export default function IntegrationsPage() {
                       padding: '3px 8px',
                       borderRadius: '4px',
                       whiteSpace: 'nowrap',
-                      background: item.status === 'live' ? 'rgba(34,197,94,0.1)' : 'rgba(255,107,53,0.1)',
-                      color: item.status === 'live' ? '#22c55e' : '#ff6b35',
-                      border: `1px solid ${item.status === 'live' ? 'rgba(34,197,94,0.2)' : 'rgba(255,107,53,0.2)'}`,
+                      background: item.status === 'live' ? 'rgba(34,197,94,0.1)' : 'transparent',
+                      color: item.status === 'live' ? '#22c55e' : '#555',
+                      border: item.status === 'live' ? '1px solid rgba(34,197,94,0.2)' : '1px solid #333',
                     }}>{item.status === 'live' ? 'Live' : 'Coming Soon'}</span>
                   </div>
                   <p style={{ fontSize: '0.8125rem', color: '#666', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
