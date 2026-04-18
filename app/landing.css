@@ -1351,7 +1351,7 @@
 }
 
 @media (max-width: 480px) {
-  .hero { padding: 6rem 1.25rem 2.5rem !important; }
+  .hero { padding: 6rem 1.25rem 2.5rem !important; background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.92)), url('/hero-bg.jpg') center/cover no-repeat !important; }
   .hero h1 { font-size: 2rem !important; }
   .section-title { font-size: 1.75rem !important; }
   .section-subtitle { font-size: 0.9rem !important; padding: 0 0.5rem; }
