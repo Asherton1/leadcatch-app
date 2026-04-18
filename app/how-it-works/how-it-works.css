@@ -744,7 +744,7 @@
   .hiw-detail-items { gap: 0.375rem; }
   .hiw-detail-items span { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
   .hiw-abandon-stat { flex-direction: row; gap: 0.5rem; align-items: baseline; }
-  .hiw-abandon-number { font-size: 1.5rem; }
+  .hiw-abandon-number { font-size: 1.25rem; }
   .hiw-roi-card { padding: 1rem; }
   .hiw-roi-line { flex-direction: row; gap: 0.5rem; }
   .hiw-roi-label { font-size: 0.8rem; }
