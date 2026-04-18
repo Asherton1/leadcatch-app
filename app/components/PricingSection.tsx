@@ -73,6 +73,7 @@ export default function PricingSection() {
         'Weekly reports with trend analytics',
         'HIPAA-ready data handling + BAA available',
         'Priority support',
+        'Instant Slack lead alerts',
       ],
       orangeFrom: 1,
       cta: <Link href="/signup?plan=pro" className="pricing-cta pricing-cta-primary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem' }}>Start Free Trial</Link>,

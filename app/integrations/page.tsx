@@ -45,7 +45,7 @@ const integrations = [
     category: 'Alerts & Notifications',
     items: [
       { name: 'Slack', desc: 'Instant lead alerts in your team channels with one-click actions', status: 'live', icon: 'slack' },
-      { name: 'SMS (Twilio)', desc: 'Text alerts the moment a high-value lead abandons', status: 'live', icon: 'sms' },
+      { name: 'SMS Alerts', desc: 'Text alerts the moment a high-value lead abandons', status: 'live', icon: 'sms' },
       { name: 'Email (Resend)', desc: 'Automated branded recovery emails on your behalf', status: 'live', icon: 'email' },
       { name: 'Microsoft Teams', desc: 'Lead alerts with action buttons for your front desk', status: 'coming', icon: 'teams' },
       { name: 'WhatsApp Business', desc: 'Recovery messages for international luxury buyers', status: 'coming', icon: 'whatsapp' },

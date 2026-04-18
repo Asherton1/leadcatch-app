@@ -16,6 +16,7 @@ const rows: [string, string | boolean, string | boolean, string | boolean][] = [
   ['Exit-intent capture', true, false, false],
   ['Mid-field data capture', true, false, false],
   ['Instant SMS lead alerts', 'Pro plan', false, false],
+  ['Slack lead alerts', 'Pro plan', false, false],
   ['Lead scoring (hot/warm/cold)', true, false, false],
   ['Auto-recovery emails', true, false, true],
   ['Revenue-at-risk dashboard', true, false, false],
