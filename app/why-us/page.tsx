@@ -152,6 +152,39 @@ export default function WhyUsPage() {
         </div>
 
       </div>
+      
+      <div className="reveal" style={{ maxWidth: 800, margin: '4rem auto 0', padding: '0 2rem' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#ff6b35', letterSpacing: '-0.03em', marginBottom: '2rem', textAlign: 'center' }}>What They Don't Tell You</h2>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '1rem', padding: '2rem' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem', color: '#fff' }}>Podium</h3>
+            <p style={{ color: '#ff6b35', fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem' }}>$399-$599/mo + $50 per extra location</p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>No form abandonment capture — messaging only</li>
+              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>Quote-gated pricing — no transparency</li>
+              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>8+ month implementation timelines reported</li>
+              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>No revenue-at-risk dashboard or lead scoring</li>
+            </ul>
+          </div>
+
+          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '1rem', padding: '2rem' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem', color: '#fff' }}>GoHighLevel</h3>
+            <p style={{ color: '#ff6b35', fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem' }}>$297/mo + $297 HIPAA add-on = $594/mo</p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>HIPAA add-on is irrevocable — cannot be canceled, refunded, or removed once enabled</li>
+              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>No real partial form capture — surveys only</li>
+              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>Steep DIY learning curve for non-technical teams</li>
+              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>No native integrations with Dentrix, Boulevard, AppFolio, or Nextech</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <p style={{ color: '#888', fontSize: '1rem', lineHeight: 1.7 }}>ReCapture starts at <span style={{ color: '#ff6b35', fontWeight: 700 }}>$197/mo</span> with transparent pricing, HIPAA included on Pro with no lock-in, and a one-day install. Purpose-built for form abandonment recovery.</p>
+        </div>
+      </div>
+
       <Footer />
     </div>
   )

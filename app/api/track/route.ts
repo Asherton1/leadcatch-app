@@ -186,6 +186,45 @@ export async function POST(request: NextRequest) {
     }
   }
 
+
+  // --- OUTBOUND WEBHOOK ---
+  if (name || email || phone) {
+    try {
+      const { data: clientWebhook } = await supabase
+        .from('clients')
+        .select('webhook_url')
+        .eq('id', client.id)
+        .single()
+
+      if (clientWebhook?.webhook_url) {
+        const webhookPayload = {
+          event: 'lead.abandoned',
+          timestamp: new Date().toISOString(),
+          lead: {
+            name: name || null,
+            email: email || null,
+            phone: phone || null,
+            fields_completed: Number(fields_completed ?? 0),
+            total_fields: Number(total_fields ?? 0),
+            time_on_form: Number(time_on_form ?? 0),
+            device_type: device_type || null,
+            score: Number(fields_completed ?? 0) >= 3 ? 'hot' : Number(fields_completed ?? 0) >= 2 ? 'warm' : 'cold',
+            estimated_value: estimated_value,
+            form_data: form_data || null,
+          }
+        }
+
+        await fetch(clientWebhook.webhook_url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(webhookPayload),
+        })
+      }
+    } catch (err) {
+      console.error('Outbound webhook failed for lead', lead.id, err)
+    }
+  }
+
   // --- AUTO-RECOVERY EMAIL ---
   if (client.auto_email_enabled && email && client.plan !== 'essentials') {
     const delayMinutes = client.email_delay_minutes ?? 0
