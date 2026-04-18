@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import ParticleNetwork from './components/ParticleNetwork'
 import Image from 'next/image'
 import './landing.css'
 import StatsBar from './components/StatsBar'
@@ -32,8 +33,9 @@ export default function LandingPage() {
       </nav>
 
       <section className="hero">
+        <ParticleNetwork />
         
-        <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '2rem' }}>Born &amp; Built in Dallas, Texas</p>
+        <p style={{ fontSize: '0.65rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Born &amp; Built in Dallas, Texas</p>
         <h1 className="hero-animate">
           You&apos;re Losing<br />
           <span className="hero-highlight">60% of Your Leads</span><br />
