@@ -14,54 +14,54 @@ const integrations = [
   {
     category: 'Alerts & Notifications',
     items: [
-      { name: 'Slack', desc: 'Instant lead alerts in your team channels with one-click actions', status: 'live', icon: '💬' },
-      { name: 'SMS (Twilio)', desc: 'Text alerts the moment a high-value lead abandons', status: 'live', icon: '📱' },
-      { name: 'Email (Resend)', desc: 'Automated branded recovery emails on your behalf', status: 'live', icon: '✉️' },
-      { name: 'Microsoft Teams', desc: 'Lead alerts with action buttons for your front desk', status: 'coming', icon: '🟦' },
-      { name: 'WhatsApp Business', desc: 'Recovery messages for international luxury buyers', status: 'coming', icon: '💬' },
+      { name: 'Slack', desc: 'Instant lead alerts in your team channels with one-click actions', status: 'live', icon: 'chat' },
+      { name: 'SMS (Twilio)', desc: 'Text alerts the moment a high-value lead abandons', status: 'live', icon: 'phone' },
+      { name: 'Email (Resend)', desc: 'Automated branded recovery emails on your behalf', status: 'live', icon: 'mail' },
+      { name: 'Microsoft Teams', desc: 'Lead alerts with action buttons for your front desk', status: 'coming', icon: 'teams' },
+      { name: 'WhatsApp Business', desc: 'Recovery messages for international luxury buyers', status: 'coming', icon: 'chat' },
     ]
   },
   {
     category: 'CRM & Sales',
     items: [
-      { name: 'HubSpot', desc: 'Sync recovered leads directly into your HubSpot pipeline', status: 'coming', icon: '🟠' },
-      { name: 'Salesforce', desc: 'Push leads to Salesforce with custom field mapping', status: 'coming', icon: '☁️' },
-      { name: 'GoHighLevel', desc: 'Native integration for GHL agency clients', status: 'coming', icon: '⚡' },
-      { name: 'Follow Up Boss', desc: 'Auto-create contacts for luxury real estate teams', status: 'coming', icon: '🏠' },
+      { name: 'HubSpot', desc: 'Sync recovered leads directly into your HubSpot pipeline', status: 'coming', icon: 'hub' },
+      { name: 'Salesforce', desc: 'Push leads to Salesforce with custom field mapping', status: 'coming', icon: 'cloud' },
+      { name: 'GoHighLevel', desc: 'Native integration for GHL agency clients', status: 'coming', icon: 'bolt' },
+      { name: 'Follow Up Boss', desc: 'Auto-create contacts for luxury real estate teams', status: 'coming', icon: 'home' },
     ]
   },
   {
     category: 'Scheduling & Booking',
     items: [
-      { name: 'Calendly', desc: 'Auto-book recovered leads into available slots', status: 'coming', icon: '📅' },
-      { name: 'Cal.com', desc: 'Open-source scheduling integration', status: 'coming', icon: '📅' },
+      { name: 'Calendly', desc: 'Auto-book recovered leads into available slots', status: 'coming', icon: 'cal' },
+      { name: 'Cal.com', desc: 'Open-source scheduling integration', status: 'coming', icon: 'cal' },
     ]
   },
   {
     category: 'Ad Platforms',
     items: [
-      { name: 'Google Ads', desc: 'Feed recovered leads back as offline conversions for smarter bidding', status: 'coming', icon: '📊' },
-      { name: 'Meta Ads', desc: 'Conversions API integration for optimized ad spend', status: 'coming', icon: '📘' },
-      { name: 'CallRail', desc: 'Track calls from recovered leads back to campaigns', status: 'coming', icon: '📞' },
+      { name: 'Google Ads', desc: 'Feed recovered leads back as offline conversions for smarter bidding', status: 'coming', icon: 'chart' },
+      { name: 'Meta Ads', desc: 'Conversions API integration for optimized ad spend', status: 'coming', icon: 'meta' },
+      { name: 'CallRail', desc: 'Track calls from recovered leads back to campaigns', status: 'coming', icon: 'callrail' },
     ]
   },
   {
     category: 'Practice Management',
     items: [
-      { name: 'Boulevard', desc: 'Sync leads to your med spa booking system', status: 'coming', icon: '💆' },
-      { name: 'Open Dental', desc: 'Push recovered patients into your dental PMS', status: 'coming', icon: '🦷' },
-      { name: 'Dentrix', desc: 'Enterprise dental practice management integration', status: 'coming', icon: '🦷' },
-      { name: 'AppFolio', desc: 'Leasing lead sync for property management', status: 'coming', icon: '🏢' },
-      { name: 'Nextech', desc: 'Plastic surgery and LASIK practice management', status: 'coming', icon: '👁️' },
+      { name: 'Boulevard', desc: 'Sync leads to your med spa booking system', status: 'coming', icon: 'spa' },
+      { name: 'Open Dental', desc: 'Push recovered patients into your dental PMS', status: 'coming', icon: 'dental' },
+      { name: 'Dentrix', desc: 'Enterprise dental practice management integration', status: 'coming', icon: 'dental' },
+      { name: 'AppFolio', desc: 'Leasing lead sync for property management', status: 'coming', icon: 'building' },
+      { name: 'Nextech', desc: 'Plastic surgery and LASIK practice management', status: 'coming', icon: 'eye' },
     ]
   },
   {
     category: 'Automation',
     items: [
-      { name: 'Zapier', desc: 'Connect ReCapture to 6,000+ apps with no code', status: 'coming', icon: '⚡' },
-      { name: 'Make (Integromat)', desc: 'Advanced workflow automation', status: 'coming', icon: '🔄' },
-      { name: 'Webhooks', desc: 'Send lead data to any endpoint in real time', status: 'live', icon: '🔗' },
-      { name: 'REST API', desc: 'Full API access for custom integrations', status: 'live', icon: '🛠️' },
+      { name: 'Zapier', desc: 'Connect ReCapture to 6,000+ apps with no code', status: 'coming', icon: 'bolt' },
+      { name: 'Make (Integromat)', desc: 'Advanced workflow automation', status: 'coming', icon: 'sync' },
+      { name: 'Webhooks', desc: 'Send lead data to any endpoint in real time', status: 'live', icon: 'link' },
+      { name: 'REST API', desc: 'Full API access for custom integrations', status: 'live', icon: 'api' },
     ]
   },
 ]
@@ -90,7 +90,7 @@ export default function IntegrationsPage() {
               {group.items.map((item, ii) => (
                 <div key={ii} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '0.75rem', padding: '1.25rem', transition: 'border-color 0.2s', position: 'relative' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                    <span style={{ fontSize: '1.25rem' }}>{item.icon}</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><circle cx="12" cy="12" r="10" /><path d="M12 8v4l2 2" /></svg>
                     <span style={{ fontWeight: 700, fontSize: '0.9375rem' }}>{item.name}</span>
                     <span style={{
                       marginLeft: 'auto',
