@@ -40,7 +40,7 @@ export default function MobileNav() {
       <div
         className="nav-mobile-menu"
         style={{
-          maxHeight: open ? '500px' : '0',
+          maxHeight: open ? '700px' : '0',
           opacity: open ? 1 : 0,
           overflow: 'hidden',
           transition: 'max-height 0.4s ease, opacity 0.3s ease',
