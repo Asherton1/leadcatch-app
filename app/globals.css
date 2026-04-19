@@ -288,6 +288,9 @@ input, textarea, select, button {
     color: #ff6b35 !important;
     padding-left: 2.5rem !important;
   }
+  .nav-mobile-menu .mobile-login {
+    color: #ff6b35 !important;
+  }
   .nav-mobile-menu .mobile-link-active {
     color: #ff6b35 !important;
     font-weight: 600 !important;
