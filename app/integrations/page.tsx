@@ -1,14 +1,12 @@
+'use client'
+
+import { useState } from 'react'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
 import ScrollReveal from '../components/ScrollReveal'
 import Link from 'next/link'
 import '../blog/blog.css'
 import '../landing.css'
-
-export const metadata = {
-  title: 'Integrations — Connect ReCapture to Your Existing Tools',
-  description: 'ReCapture integrates with Slack, HubSpot, Salesforce, Google Ads, Zapier, and 3,000+ apps. Connect your lead recovery pipeline to the tools your team already uses.',
-}
 
 function Icon({ type }: { type: string }) {
   const s = { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: '#ff6b35', strokeWidth: '1.5', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const }
@@ -38,6 +36,15 @@ function Icon({ type }: { type: string }) {
     case 'api': return <svg {...s}><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" x2="10" y1="4" y2="20"/></svg>
     default: return <svg {...s}><circle cx="12" cy="12" r="10"/></svg>
   }
+}
+
+const categoryDescriptions: Record<string, string> = {
+  'Alerts & Notifications': 'Speed to lead is everything. Research shows responding within 60 seconds makes you 391% more likely to convert. When someone abandons your form, your front desk gets an instant alert with their name, email, phone, and lead score. They pick up the phone while the prospect is still thinking about you — before they book with your competitor down the street.',
+  'CRM & Sales': 'Recovered leads flow directly into your existing sales pipeline. No copy-pasting, no CSV imports, no manual data entry. Your team works from the tools they already know — the lead just appears, ready to follow up.',
+  'Scheduling & Booking': 'The fastest path from recovered lead to revenue is getting them on the calendar. Auto-booking eliminates the back-and-forth and captures the appointment while intent is still high.',
+  'Ad Platforms': 'Most businesses waste ad spend because Google and Meta never learn which leads actually converted. Feeding recovered leads back as offline conversions means your campaigns optimize for real revenue — not just form clicks.',
+  'Practice Management': 'Your PMS is where patients and clients actually live. Native integrations mean recovered leads appear directly in your booking system, not in a separate dashboard your team has to check.',
+  'Automation': 'Connect ReCapture to any tool in your stack. Webhooks fire in real time, APIs give you full control, and platforms like Zapier let you build any workflow without writing code.',
 }
 
 const integrations = [
@@ -88,13 +95,59 @@ const integrations = [
   {
     category: 'Automation',
     items: [
-      { name: 'Zapier', desc: 'Connect ReCapture to 6,000+ apps with no code', status: 'coming', icon: 'zapier' },
+      { name: 'Zapier', desc: 'Connect ReCapture to 6,000+ apps with no code', status: 'live', icon: 'zapier' },
       { name: 'Make (Integromat)', desc: 'Advanced workflow automation', status: 'coming', icon: 'make' },
       { name: 'Webhooks', desc: 'Send lead data to any endpoint in real time', status: 'live', icon: 'webhook' },
       { name: 'REST API', desc: 'Full API access for custom integrations', status: 'live', icon: 'api' },
     ]
   },
 ]
+
+function CategorySection({ group }: { group: typeof integrations[0] }) {
+  const [expanded, setExpanded] = useState(false)
+  return (
+    <div className="reveal" style={{ marginBottom: '3rem' }}>
+      <div
+        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid #1e1e1e', cursor: 'pointer', marginBottom: expanded ? '0' : '1.25rem' }}
+        onClick={() => setExpanded(!expanded)}
+      >
+        <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '-0.01em', margin: 0 }}>{group.category}</h2>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease', flexShrink: 0 }}><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      {expanded && (
+        <div style={{ background: 'rgba(255,107,53,0.03)', border: '1px solid rgba(255,107,53,0.08)', borderRadius: '0.75rem', padding: '1.25rem', margin: '0.75rem 0 1.25rem' }}>
+          <p style={{ color: '#999', fontSize: '0.875rem', lineHeight: 1.8, margin: 0 }}>{categoryDescriptions[group.category]}</p>
+        </div>
+      )}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
+        {group.items.map((item, ii) => (
+          <div key={ii} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '0.75rem', padding: '1.25rem', transition: 'border-color 0.2s' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+              <div style={{ width: 32, height: 32, background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.15)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <Icon type={item.icon} />
+              </div>
+              <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: '#fff' }}>{item.name}</span>
+              <span style={{
+                marginLeft: 'auto',
+                fontSize: '0.5625rem',
+                fontWeight: 600,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase' as const,
+                padding: '3px 8px',
+                borderRadius: '4px',
+                whiteSpace: 'nowrap' as const,
+                background: item.status === 'live' ? 'rgba(34,197,94,0.1)' : 'transparent',
+                color: item.status === 'live' ? '#22c55e' : '#555',
+                border: item.status === 'live' ? '1px solid rgba(34,197,94,0.2)' : '1px solid #333',
+              }}>{item.status === 'live' ? 'Live' : 'Coming Soon'}</span>
+            </div>
+            <p style={{ fontSize: '0.8125rem', color: '#666', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export default function IntegrationsPage() {
   return (
@@ -114,35 +167,7 @@ export default function IntegrationsPage() {
 
       <section style={{ maxWidth: 900, margin: '0 auto', padding: '0 2rem 4rem' }}>
         {integrations.map((group, gi) => (
-          <div key={gi} className="reveal" style={{ marginBottom: '3rem' }}>
-            <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '-0.01em', marginBottom: '1.25rem', paddingBottom: '0.75rem', borderBottom: '1px solid #1e1e1e' }}>{group.category}</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
-              {group.items.map((item, ii) => (
-                <div key={ii} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '0.75rem', padding: '1.25rem', transition: 'border-color 0.2s', position: 'relative' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                    <div style={{ width: 32, height: 32, background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.15)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <Icon type={item.icon} />
-                    </div>
-                    <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: '#fff' }}>{item.name}</span>
-                    <span style={{
-                      marginLeft: 'auto',
-                      fontSize: '0.5625rem',
-                      fontWeight: 600,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      padding: '3px 8px',
-                      borderRadius: '4px',
-                      whiteSpace: 'nowrap',
-                      background: item.status === 'live' ? 'rgba(34,197,94,0.1)' : 'transparent',
-                      color: item.status === 'live' ? '#22c55e' : '#555',
-                      border: item.status === 'live' ? '1px solid rgba(34,197,94,0.2)' : '1px solid #333',
-                    }}>{item.status === 'live' ? 'Live' : 'Coming Soon'}</span>
-                  </div>
-                  <p style={{ fontSize: '0.8125rem', color: '#666', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <CategorySection key={gi} group={group} />
         ))}
       </section>
 
