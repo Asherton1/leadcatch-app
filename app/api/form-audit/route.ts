@@ -56,8 +56,47 @@ export async function POST(request: NextRequest) {
     else if (totalFields <= 10) estAbandonment = 72
     else estAbandonment = 80
 
-    const avgLeadValue = 1500
-    const monthlyVisitors = 500
+
+    // Auto-detect industry from site content
+    const htmlLower = html.toLowerCase()
+    let detectedIndustry = 'General Business'
+    let industryLeadValue = 1500
+    if (/med\s?spa|medspa|botox|filler|aesthetic|laser\s?hair|skin\s?care|hydrafacial|coolsculpt/i.test(html)) {
+      detectedIndustry = 'Med Spa'
+      industryLeadValue = 2800
+    } else if (/dental|dentist|orthodont|invisalign|implant|veneer|crown|root\s?canal|teeth\s?whiten/i.test(html)) {
+      detectedIndustry = 'Dental'
+      industryLeadValue = 3500
+    } else if (/plastic\s?surg|rhinoplast|breast\s?augment|facelift|liposuction|tummy\s?tuck|cosmetic\s?surg/i.test(html)) {
+      detectedIndustry = 'Plastic Surgery'
+      industryLeadValue = 8500
+    } else if (/lasik|ophthalmolog|eye\s?care|cataract|vision\s?correct|prk|refractive/i.test(html)) {
+      detectedIndustry = 'LASIK / Eye Care'
+      industryLeadValue = 4200
+    } else if (/property\s?manage|leasing|apartment|multifamily|tenant|rent|floor\s?plan|move.in/i.test(html)) {
+      detectedIndustry = 'Property Management'
+      industryLeadValue = 1800
+    } else if (/real\s?estate|luxury\s?home|listing|mortgage|realtor|mls|open\s?house|condo/i.test(html)) {
+      detectedIndustry = 'Luxury Real Estate'
+      industryLeadValue = 15000
+    } else if (/fertility|ivf|reproductive|egg\s?freez|embryo|obgyn|ob.gyn/i.test(html)) {
+      detectedIndustry = 'Fertility'
+      industryLeadValue = 12000
+    } else if (/dermatolog|skin\s?cancer|acne|eczema|psoriasis|mohs/i.test(html)) {
+      detectedIndustry = 'Dermatology'
+      industryLeadValue = 2200
+    } else if (/chiropractic|chiropractor|spinal|adjustment|back\s?pain/i.test(html)) {
+      detectedIndustry = 'Chiropractic'
+      industryLeadValue = 1200
+    } else if (/attorney|lawyer|law\s?firm|legal|injury|accident/i.test(html)) {
+      detectedIndustry = 'Legal'
+      industryLeadValue = 5000
+    }
+
+
+
+    const avgLeadValue = industryLeadValue
+        const monthlyVisitors = 500
     const formStarts = Math.round(monthlyVisitors * 0.15)
     const abandonedLeads = Math.round(formStarts * (estAbandonment / 100))
     const monthlyRevenueLost = abandonedLeads * avgLeadValue
@@ -135,7 +174,7 @@ export async function POST(request: NextRequest) {
       '<div style="padding:40px 32px;border-bottom:2px solid #ff6b35;">' +
         '<div style="margin-bottom:24px;"><span style="color:#ff6b35;font-weight:800;font-size:18px;">[</span><span style="color:#ff6b35;font-size:8px;vertical-align:middle;">&#9679;</span><span style="color:#ff6b35;font-weight:800;font-size:18px;">]</span><span style="color:#fff;font-weight:700;font-size:16px;margin-left:6px;">Re</span><span style="color:#ff6b35;font-weight:700;font-size:16px;">Capture</span></div>' +
         '<h1 style="font-size:24px;font-weight:800;margin:0 0 8px;line-height:1.3;">Your Form Audit Report</h1>' +
-        '<p style="color:#888;font-size:14px;margin:0;">Prepared for <strong style="color:#ff6b35;">' + url + '</strong></p>' +
+        '<p style="color:#888;font-size:14px;margin:0;">Prepared for <strong style="color:#ff6b35;text-decoration:none;">' + url + '</strong></p>' +
       '</div>' +
       '<div style="padding:32px;">' +
         '<div style="background:#111;border:1px solid ' + gradeColor + ';border-radius:12px;padding:24px;margin-bottom:24px;text-align:center;">' +
@@ -146,6 +185,8 @@ export async function POST(request: NextRequest) {
         '<div style="background:#111;border:1px solid #1e1e1e;border-radius:12px;padding:24px;margin-bottom:24px;">' +
           '<h2 style="color:#ff6b35;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 16px;">Overview</h2>' +
           '<table style="width:100%;border-collapse:collapse;">' +
+            '<tr><td style="color:#888;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;">Detected Industry</td><td style="color:#ff6b35;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;text-align:right;font-weight:600;">' + detectedIndustry + '</td></tr>' +
+            '<tr><td style="color:#888;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;">Avg. Lead Value (' + detectedIndustry + ')</td><td style="color:#22c55e;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;text-align:right;font-weight:600;">$' + industryLeadValue.toLocaleString() + '</td></tr>' +
             '<tr><td style="color:#888;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;">Forms Detected</td><td style="color:#fff;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;text-align:right;font-weight:600;">' + formCount + '</td></tr>' +
             '<tr><td style="color:#888;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;">Total Form Fields</td><td style="color:#fff;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;text-align:right;font-weight:600;">' + totalFields + '</td></tr>' +
             '<tr><td style="color:#888;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;">Form Builder</td><td style="color:#fff;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;text-align:right;font-weight:600;">' + formBuilder + '</td></tr>' +
@@ -162,7 +203,7 @@ export async function POST(request: NextRequest) {
             '<tr><td style="color:#888;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;">Est. Monthly Revenue Lost</td><td style="color:#ef4444;font-size:16px;padding:8px 0;border-bottom:1px solid #1e1e1e;text-align:right;font-weight:800;">$' + monthlyRevenueLost.toLocaleString() + '</td></tr>' +
             '<tr><td style="color:#888;font-size:13px;padding:8px 0;">Est. Annual Revenue Lost</td><td style="color:#ef4444;font-size:16px;padding:8px 0;text-align:right;font-weight:800;">$' + yearlyRevenueLost.toLocaleString() + '</td></tr>' +
           '</table>' +
-          '<p style="color:#666;font-size:11px;margin:12px 0 0;line-height:1.5;">Based on 500 monthly visitors, 15% form start rate, and $1,500 avg. client value. Your actual numbers may be higher.</p>' +
+          '<p style="color:#666;font-size:11px;margin:12px 0 0;line-height:1.5;">Based on 500 monthly visitors, 15% form start rate, and $' + industryLeadValue.toLocaleString() + ' avg. ' + detectedIndustry + ' client value. Your actual numbers may be higher.</p>' +
         '</div>' +
         '<div style="background:#111;border:1px solid #1e1e1e;border-radius:12px;padding:24px;margin-bottom:24px;">' +
           '<h2 style="color:#ff6b35;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 16px;">Findings</h2>' +
@@ -195,7 +236,7 @@ export async function POST(request: NextRequest) {
         '</div>' +
       '</div>' +
       '<div style="padding:24px 32px;border-top:1px solid #1e1e1e;text-align:center;">' +
-        '<p style="color:#444;font-size:11px;margin:0;">ReCapture | userecapture.com | hello@userecapture.com | Dallas, Texas</p>' +
+        '<p style="color:#555;font-size:11px;margin:0;">ReCapture &nbsp;|&nbsp; userecapture.com &nbsp;|&nbsp; hello@userecapture.com &nbsp;|&nbsp; Dallas, Texas</p>' +
       '</div>' +
     '</div>'
 
@@ -217,7 +258,7 @@ export async function POST(request: NextRequest) {
         from: 'ReCapture <hello@userecapture.com>',
         to: 'asherton.c@me.com',
         subject: 'New Form Audit Request — ' + url,
-        html: '<p><strong>URL:</strong> ' + url + '</p><p><strong>Email:</strong> ' + email + '</p><p><strong>Fields:</strong> ' + totalFields + '</p><p><strong>Est. abandonment:</strong> ' + estAbandonment + '%</p><p><strong>Monthly revenue at risk:</strong> $' + monthlyRevenueLost.toLocaleString() + '</p>',
+        html: '<p><strong>URL:</strong> ' + url + '</p><p><strong>Email:</strong> ' + email + '</p><p><strong>Industry:</strong> ' + detectedIndustry + '</p><p><strong>Fields:</strong> ' + totalFields + '</p><p><strong>Est. abandonment:</strong> ' + estAbandonment + '%</p><p><strong>Monthly revenue at risk:</strong> $' + monthlyRevenueLost.toLocaleString() + '</p>',
       }),
     })
 
