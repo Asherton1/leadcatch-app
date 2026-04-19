@@ -2,6 +2,12 @@
 
 html, body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0a; }
+
+.lc-section {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 /* Logo icon animations */
 @keyframes bracketLeft {
   0%, 100% { transform: translateX(0); }
