@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, webhook_url')
     .eq('api_key', api_key)
     .single()
 
@@ -143,14 +143,8 @@ export async function POST(request: NextRequest) {
   // --- SLACK ALERT ---
   if (name || email || phone) {
     try {
-      const { data: clientFull } = await supabase
-        .from('clients')
-        .select('slack_webhook_url, business_name')
-        .eq('id', client.id)
-        .single()
-
-      console.log('SLACK DEBUG:', { hasUrl: !!clientFull?.slack_webhook_url, url: clientFull?.slack_webhook_url?.substring(0, 30) })
-      if (clientFull?.slack_webhook_url) {
+      console.log('SLACK DEBUG:', { hasUrl: !!client.slack_webhook_url, url: client.slack_webhook_url?.substring(0, 30) })
+      if (client.slack_webhook_url) {
         const score = Number(fields_completed ?? 0) >= 3 ? 'Hot' : Number(fields_completed ?? 0) >= 2 ? 'Warm' : 'Cold'
         const slackMsg = {
           blocks: [
@@ -176,7 +170,7 @@ export async function POST(request: NextRequest) {
           ]
         }
 
-        const slackRes = await fetch(clientFull.slack_webhook_url, {
+        const slackRes = await fetch(client.slack_webhook_url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(slackMsg),
@@ -193,13 +187,7 @@ export async function POST(request: NextRequest) {
   // --- OUTBOUND WEBHOOK ---
   if (name || email || phone) {
     try {
-      const { data: clientWebhook } = await supabase
-        .from('clients')
-        .select('webhook_url')
-        .eq('id', client.id)
-        .single()
-
-      if (clientWebhook?.webhook_url) {
+      if (client.webhook_url) {
         const webhookPayload = {
           event: 'lead.abandoned',
           timestamp: new Date().toISOString(),
@@ -217,7 +205,7 @@ export async function POST(request: NextRequest) {
           }
         }
 
-        await fetch(clientWebhook.webhook_url, {
+        await fetch(client.webhook_url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(webhookPayload),
