@@ -161,7 +161,7 @@ const features: FeatureItem[] = [
       </svg>
     ),
     title: 'Instant SMS Lead Alerts',
-    badge: 'Coming Soon — Pro Plan',
+    badge: 'Pro Plan',
     description: 'Your phone buzzes within 60 seconds of someone abandoning your form. Not an email you check later. A text message with their name, their email, and what they were looking for. Research shows that calling a lead within 5 minutes makes you 21x more likely to convert them. No other form abandonment tool offers real-time SMS alerts.',
     visual: <SmsMockup />,
   },
