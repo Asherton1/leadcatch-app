@@ -8,19 +8,20 @@ import '../landing.css'
 
 export default function FormAuditPage() {
   const [url, setUrl] = useState('')
+  const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = async () => {
-    if (!url) return
+    if (!url || !email) return
     try {
       await fetch('/api/demo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: 'Form Audit Request',
-          email: '',
+          email: email,
           website: url,
-          message: 'Free Form Audit requested for: ' + url,
+          message: 'Free Form Audit requested for: ' + url + ' — send report to: ' + email,
         }),
       })
     } catch {}
@@ -42,14 +43,13 @@ export default function FormAuditPage() {
 
         {!submitted ? (
           <div style={{ maxWidth: 480, margin: '0 auto' }}>
-            <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1rem' }}>
               <input
                 type="url"
                 placeholder="https://yourwebsite.com"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 style={{
-                  flex: 1,
                   background: '#111',
                   border: '1px solid #333',
                   borderRadius: '0.5rem',
@@ -58,6 +58,24 @@ export default function FormAuditPage() {
                   fontSize: '0.9375rem',
                   fontFamily: "'Inter', sans-serif",
                   outline: 'none',
+                  width: '100%',
+                }}
+              />
+              <input
+                type="email"
+                placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                style={{
+                  background: '#111',
+                  border: '1px solid #333',
+                  borderRadius: '0.5rem',
+                  padding: '0.875rem 1rem',
+                  color: '#fff',
+                  fontSize: '0.9375rem',
+                  fontFamily: "'Inter', sans-serif",
+                  outline: 'none',
+                  width: '100%',
                 }}
               />
               <button
@@ -73,6 +91,7 @@ export default function FormAuditPage() {
                   cursor: 'pointer',
                   fontFamily: "'Inter', sans-serif",
                   whiteSpace: 'nowrap',
+                  width: '100%',
                 }}
               >
                 Audit My Forms

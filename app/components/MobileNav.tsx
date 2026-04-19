@@ -23,7 +23,7 @@ export default function MobileNav() {
         <Link href="/why-us" className={isActive('/why-us') ? 'nav-link nav-active' : 'nav-link'}>Why Us</Link>
         <Link href="/how-it-works" className={isActive('/how-it-works') ? 'nav-link nav-active' : 'nav-link'}>How It Works</Link>
         <Link href="/integrations" className={isActive('/integrations') ? 'nav-link nav-active' : 'nav-link'}>Integrations</Link>
-        <Link href="/form-audit" className={isActive('/form-audit') ? 'nav-link nav-active' : 'nav-link'}>Free Audit</Link>
+        
         <Link href="/calculator" className={isActive('/calculator') ? 'nav-link nav-active' : 'nav-link'}>ROI Estimator</Link>
 
         <Link href="/login" className="nav-login">Login</Link>

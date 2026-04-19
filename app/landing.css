@@ -1559,3 +1559,58 @@
     margin-top: 0 !important;
   }
 }
+
+/* Tools Dropdown */
+.nav-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-dropdown-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  color: #888;
+  padding: 0.5rem 0;
+  transition: color 0.2s;
+}
+
+.nav-dropdown-trigger:hover {
+  color: #ff6b35;
+}
+
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+  min-width: 180px;
+  z-index: 1000;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+.nav-dropdown-wrapper:hover .nav-dropdown-menu {
+  display: block;
+}
+
+.nav-dropdown-item {
+  display: block;
+  padding: 0.625rem 1.25rem;
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.8125rem;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+
+.nav-dropdown-item:hover {
+  color: #ff6b35;
+  background: rgba(255, 107, 53, 0.05);
+}
