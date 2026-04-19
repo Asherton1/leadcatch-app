@@ -57,12 +57,15 @@ export default function MobileNav() {
           <Link href="/about" className={isActive('/about') ? 'mobile-link-active' : ''}>About</Link>
           <Link href="/blog" className={isActive('/blog') ? 'mobile-link-active' : ''}>Insights</Link>
           <Link href="/pricing" className={isActive('/pricing') ? 'mobile-link-active' : ''}>Pricing</Link>
-          <Link href="/test-form" className={isActive('/test-form') ? 'mobile-link-active' : ''}>Live Demo</Link>
           <Link href="/why-us" className={isActive('/why-us') ? 'mobile-link-active' : ''}>Why Us</Link>
           <Link href="/how-it-works" className={isActive('/how-it-works') ? 'mobile-link-active' : ''}>How It Works</Link>
           <Link href="/integrations" className={isActive('/integrations') ? 'mobile-link-active' : ''}>Integrations</Link>
-          <Link href="/form-audit" className={isActive('/form-audit') ? 'mobile-link-active' : ''}>Free Audit</Link>
-          <Link href="/calculator" className={isActive('/calculator') ? 'mobile-link-active' : ''}>ROI Estimator</Link>
+          <div style={{ borderTop: '1px solid #1e1e1e', paddingTop: '0.5rem', marginTop: '0.25rem' }}>
+            <p style={{ color: '#ff6b35', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', padding: '0.5rem 1.5rem 0.25rem', margin: 0 }}>Tools</p>
+            <Link href="/test-form" className={isActive('/test-form') ? 'mobile-link-active' : ''}>Live Demo</Link>
+            <Link href="/calculator" className={isActive('/calculator') ? 'mobile-link-active' : ''}>ROI Estimator</Link>
+            <Link href="/form-audit" className={isActive('/form-audit') ? 'mobile-link-active' : ''}>Free Form Audit</Link>
+          </div>
           <Link href="/login" className={isActive('/login') ? 'mobile-link-active' : ''}>Login</Link>
           <Link href="/start-trial" className="nav-mobile-cta">Start Free Trial</Link>
         </div>

@@ -114,11 +114,17 @@ function CategorySection({ group }: { group: typeof integrations[0] }) {
         <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '-0.01em', margin: 0 }}>{group.category}</h2>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease', flexShrink: 0 }}><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      {expanded && (
-        <div style={{ background: 'rgba(255,107,53,0.03)', border: '1px solid rgba(255,107,53,0.08)', borderRadius: '0.75rem', padding: '1.25rem', margin: '0.75rem 0 1.25rem' }}>
+      <div style={{
+        maxHeight: expanded ? '300px' : '0',
+        opacity: expanded ? 1 : 0,
+        overflow: 'hidden',
+        transition: 'max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease, padding 0.3s ease',
+        margin: expanded ? '0.75rem 0 1.25rem' : '0',
+      }}>
+        <div style={{ background: 'rgba(255,107,53,0.03)', border: '1px solid rgba(255,107,53,0.08)', borderRadius: '0.75rem', padding: '1.25rem' }}>
           <p style={{ color: '#999', fontSize: '0.875rem', lineHeight: 1.8, margin: 0 }}>{categoryDescriptions[group.category]}</p>
         </div>
-      )}
+      </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
         {group.items.map((item, ii) => (
           <div key={ii} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '0.75rem', padding: '1.25rem', transition: 'border-color 0.2s' }}>
