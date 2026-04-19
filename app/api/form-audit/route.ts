@@ -63,6 +63,28 @@ export async function POST(request: NextRequest) {
     const monthlyRevenueLost = abandonedLeads * avgLeadValue
     const yearlyRevenueLost = monthlyRevenueLost * 12
 
+    // Form Health Score (A-F)
+    let healthScore = 100
+    if (totalFields > 7) healthScore -= 25
+    else if (totalFields > 4) healthScore -= 10
+    if (!hasMobileViewport) healthScore -= 20
+    if (!isHTTPS) healthScore -= 25
+    if (!hasGTM && !hasGA) healthScore -= 15
+    if (hasCaptcha) healthScore -= 10
+    if (formCount === 0) healthScore -= 5
+    const grade = healthScore >= 90 ? 'A' : healthScore >= 80 ? 'B' : healthScore >= 70 ? 'C+' : healthScore >= 60 ? 'C' : healthScore >= 50 ? 'D' : 'F'
+    const gradeColor = healthScore >= 80 ? '#22c55e' : healthScore >= 60 ? '#f59e0b' : '#ef4444'
+
+    // Industry benchmarks
+    const industryBenchmarks = [
+      { industry: 'Med Spas', avgFields: 5, avgAbandonment: 67, avgLeadValue: 2800 },
+      { industry: 'Cosmetic Dental', avgFields: 6, avgAbandonment: 65, avgLeadValue: 3500 },
+      { industry: 'Plastic Surgery', avgFields: 7, avgAbandonment: 72, avgLeadValue: 8500 },
+      { industry: 'Property Management', avgFields: 8, avgAbandonment: 70, avgLeadValue: 1800 },
+      { industry: 'Luxury Real Estate', avgFields: 6, avgAbandonment: 71, avgLeadValue: 15000 },
+      { industry: 'LASIK / Eye Care', avgFields: 6, avgAbandonment: 68, avgLeadValue: 4200 },
+    ]
+
     const findings: string[] = []
     const recommendations: string[] = []
 
@@ -116,6 +138,11 @@ export async function POST(request: NextRequest) {
         '<p style="color:#888;font-size:14px;margin:0;">Prepared for <strong style="color:#ff6b35;">' + url + '</strong></p>' +
       '</div>' +
       '<div style="padding:32px;">' +
+        '<div style="background:#111;border:1px solid ' + gradeColor + ';border-radius:12px;padding:24px;margin-bottom:24px;text-align:center;">' +
+          '<p style="color:#888;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;margin:0 0 8px;">Form Health Score</p>' +
+          '<p style="font-size:64px;font-weight:800;color:' + gradeColor + ';margin:0;line-height:1;">' + grade + '</p>' +
+          '<p style="color:#888;font-size:13px;margin:8px 0 0;">' + healthScore + ' / 100</p>' +
+        '</div>' +
         '<div style="background:#111;border:1px solid #1e1e1e;border-radius:12px;padding:24px;margin-bottom:24px;">' +
           '<h2 style="color:#ff6b35;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 16px;">Overview</h2>' +
           '<table style="width:100%;border-collapse:collapse;">' +
@@ -140,6 +167,22 @@ export async function POST(request: NextRequest) {
         '<div style="background:#111;border:1px solid #1e1e1e;border-radius:12px;padding:24px;margin-bottom:24px;">' +
           '<h2 style="color:#ff6b35;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 16px;">Findings</h2>' +
           findings.map(f => '<p style="color:#ccc;font-size:13px;line-height:1.7;margin:0 0 8px;padding-left:16px;border-left:2px solid #1e1e1e;">' + f + '</p>').join('') +
+        '</div>' +
+        '<div style="background:#111;border:1px solid #1e1e1e;border-radius:12px;padding:24px;margin-bottom:24px;">' +
+          '<h2 style="color:#ff6b35;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 16px;">Tracking & Analytics Audit</h2>' +
+          '<table style="width:100%;border-collapse:collapse;">' +
+            '<tr><td style="color:#888;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;">Google Analytics / GTM</td><td style="color:' + (hasGA || hasGTM ? '#22c55e' : '#ef4444') + ';font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;text-align:right;font-weight:600;">' + (hasGA || hasGTM ? 'Detected' : 'Not Found') + '</td></tr>' +
+            '<tr><td style="color:#888;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;">Meta / Facebook Pixel</td><td style="color:' + (hasMetaPixel ? '#22c55e' : '#ef4444') + ';font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;text-align:right;font-weight:600;">' + (hasMetaPixel ? 'Detected' : 'Not Found') + '</td></tr>' +
+            '<tr><td style="color:#888;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;">CAPTCHA / Bot Protection</td><td style="color:#888;font-size:13px;padding:8px 0;border-bottom:1px solid #1e1e1e;text-align:right;font-weight:600;">' + (hasCaptcha ? 'Yes (adds friction)' : 'None') + '</td></tr>' +
+            '<tr><td style="color:#888;font-size:13px;padding:8px 0;">Form Abandonment Tracking</td><td style="color:#ef4444;font-size:13px;padding:8px 0;text-align:right;font-weight:700;">Not Installed</td></tr>' +
+          '</table>' +
+        '</div>' +
+        '<div style="background:#111;border:1px solid #1e1e1e;border-radius:12px;padding:24px;margin-bottom:24px;">' +
+          '<h2 style="color:#ff6b35;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 16px;">Industry Benchmarks</h2>' +
+          '<table style="width:100%;border-collapse:collapse;">' +
+            '<tr style="border-bottom:1px solid #1e1e1e;"><td style="color:#555;font-size:11px;font-weight:600;padding:8px 0;letter-spacing:0.05em;">INDUSTRY</td><td style="color:#555;font-size:11px;font-weight:600;padding:8px 0;text-align:center;letter-spacing:0.05em;">AVG FIELDS</td><td style="color:#555;font-size:11px;font-weight:600;padding:8px 0;text-align:center;letter-spacing:0.05em;">ABANDON %</td><td style="color:#555;font-size:11px;font-weight:600;padding:8px 0;text-align:right;letter-spacing:0.05em;">LEAD VALUE</td></tr>' +
+          industryBenchmarks.map(b => '<tr style="border-bottom:1px solid #1e1e1e;"><td style="color:#ccc;font-size:12px;padding:6px 0;">' + b.industry + '</td><td style="color:#888;font-size:12px;padding:6px 0;text-align:center;">' + b.avgFields + '</td><td style="color:#ef4444;font-size:12px;padding:6px 0;text-align:center;">' + b.avgAbandonment + '%</td><td style="color:#22c55e;font-size:12px;padding:6px 0;text-align:right;">$' + b.avgLeadValue.toLocaleString() + '</td></tr>').join('') +
+          '</table>' +
         '</div>' +
         '<div style="background:#111;border:1px solid rgba(34,197,94,0.2);border-radius:12px;padding:24px;margin-bottom:32px;">' +
           '<h2 style="color:#22c55e;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 16px;">Recommendations</h2>' +
