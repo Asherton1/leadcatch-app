@@ -21,13 +21,13 @@ export default function MobileNav() {
         <Link href="/why-us" className={isActive('/why-us') ? 'nav-link nav-active' : 'nav-link'}>Why Us</Link>
         <Link href="/how-it-works" className={isActive('/how-it-works') ? 'nav-link nav-active' : 'nav-link'}>How It Works</Link>
         <Link href="/integrations" className={isActive('/integrations') ? 'nav-link nav-active' : 'nav-link'}>Integrations</Link>
+        <Link href="/blog" className={isActive('/blog') ? 'nav-link nav-active' : 'nav-link'}>Insights</Link>
         <div className="nav-dropdown-wrapper">
-          <span className="nav-link" style={{ cursor: 'pointer' }}>Tools</span>
+          <span className="nav-link" style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>Tools <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           <div className="nav-dropdown-menu">
             <Link href="/test-form" className="nav-dropdown-item">Live Demo</Link>
             <Link href="/calculator" className="nav-dropdown-item">ROI Estimator</Link>
             <Link href="/form-audit" className="nav-dropdown-item">Free Form Audit</Link>
-            <Link href="/blog" className="nav-dropdown-item">Insights</Link>
           </div>
         </div>
         <Link href="/login" className="nav-login">Login</Link>
