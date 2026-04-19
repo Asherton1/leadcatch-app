@@ -17,15 +17,19 @@ export default function MobileNav() {
     <>
       <div className="nav-desktop">
         <Link href="/about" className={isActive('/about') ? 'nav-link nav-active' : 'nav-link'}>About</Link>
-        <Link href="/blog" className={isActive('/blog') ? 'nav-link nav-active' : 'nav-link'}>Insights</Link>
         <Link href="/pricing" className={isActive('/pricing') ? 'nav-link nav-active' : 'nav-link'}>Pricing</Link>
-        <Link href="/test-form" className={isActive('/test-form') ? 'nav-link nav-active' : 'nav-link'}>Live Demo</Link>
         <Link href="/why-us" className={isActive('/why-us') ? 'nav-link nav-active' : 'nav-link'}>Why Us</Link>
         <Link href="/how-it-works" className={isActive('/how-it-works') ? 'nav-link nav-active' : 'nav-link'}>How It Works</Link>
         <Link href="/integrations" className={isActive('/integrations') ? 'nav-link nav-active' : 'nav-link'}>Integrations</Link>
-        
-        <Link href="/calculator" className={isActive('/calculator') ? 'nav-link nav-active' : 'nav-link'}>ROI Estimator</Link>
-
+        <div className="nav-dropdown-wrapper">
+          <span className="nav-link" style={{ cursor: 'pointer' }}>Tools</span>
+          <div className="nav-dropdown-menu">
+            <Link href="/test-form" className="nav-dropdown-item">Live Demo</Link>
+            <Link href="/calculator" className="nav-dropdown-item">ROI Estimator</Link>
+            <Link href="/form-audit" className="nav-dropdown-item">Free Form Audit</Link>
+            <Link href="/blog" className="nav-dropdown-item">Insights</Link>
+          </div>
+        </div>
         <Link href="/login" className="nav-login">Login</Link>
       </div>
 
