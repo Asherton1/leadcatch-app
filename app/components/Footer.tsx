@@ -10,7 +10,7 @@ export default function Footer() {
         </Link>
       </div>
       <p style={{ color: '#7a7f8e', fontSize: '14px', marginBottom: '20px', maxWidth: '400px', margin: '12px auto 20px' }}>
-        Form abandonment recovery for high-ticket service businesses.<br />Capture every lead.<br />Recover lost revenue.
+        Form abandonment recovery for high-ticket service businesses.<br />Capture every lead. Recover lost revenue.
       </p>
       <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '16px', flexWrap: 'wrap' }}>
         <Link href="/about" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>About</Link>
@@ -27,18 +27,20 @@ export default function Footer() {
         <Link href="/login" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Login</Link>
         <a href="mailto:hello@userecapture.com" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Contact</a>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '20px', flexWrap: 'wrap' }}>
-        <Link href="/for-gohighlevel" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>GoHighLevel</Link>
-        <Link href="/for-luxury-real-estate" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>Real Estate</Link>
-        <Link href="/for-luxury-auto" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>Luxury Auto</Link>
-        <Link href="/for-plastic-surgery" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>Plastic Surgery</Link>
-        <Link href="/for-property-management" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>Property Mgmt</Link>
-        <Link href="/for-med-spas" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>Med Spas</Link>
-        <Link href="/for-dental" style={{ color: '#666', textDecoration: 'none', fontSize: '12px' }}>Dental</Link>
+      <div style={{ borderTop: '1px solid #1e1e1e', maxWidth: '500px', margin: '0 auto' }} />
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', margin: '20px auto', flexWrap: 'wrap', maxWidth: '400px' }}>
+        <Link href="/for-gohighlevel" style={{ color: '#555', textDecoration: 'none', fontSize: '11px' }}>GoHighLevel</Link>
+        <Link href="/for-luxury-real-estate" style={{ color: '#555', textDecoration: 'none', fontSize: '11px' }}>Real Estate</Link>
+        <Link href="/for-luxury-auto" style={{ color: '#555', textDecoration: 'none', fontSize: '11px' }}>Luxury Auto</Link>
+        <Link href="/for-plastic-surgery" style={{ color: '#555', textDecoration: 'none', fontSize: '11px' }}>Plastic Surgery</Link>
+        <Link href="/for-property-management" style={{ color: '#555', textDecoration: 'none', fontSize: '11px' }}>Property Mgmt</Link>
+        <Link href="/for-med-spas" style={{ color: '#555', textDecoration: 'none', fontSize: '11px' }}>Med Spas</Link>
+        <Link href="/for-dental" style={{ color: '#555', textDecoration: 'none', fontSize: '11px' }}>Dental</Link>
       </div>
+      <div style={{ borderTop: '1px solid #1e1e1e', maxWidth: '500px', margin: '0 auto' }} />
 
       {/* Trust Badges */}
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', margin: '16px 0', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', margin: '24px 0', flexWrap: 'wrap' }}>
         {/* HIPAA */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="#22c55e"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"/></svg>
