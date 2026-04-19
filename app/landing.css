@@ -1583,22 +1583,26 @@
 }
 
 .nav-dropdown-menu {
-  display: none;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 4px);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(8px);
   background: #111;
   border: 1px solid #1e1e1e;
   border-radius: 0.5rem;
   padding: 0.5rem 0;
   min-width: 180px;
   z-index: 1000;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
 }
 
 .nav-dropdown-wrapper:hover .nav-dropdown-menu {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 .nav-dropdown-item {
