@@ -185,6 +185,26 @@ const features: FeatureItem[] = [
     description: 'When someone abandons your form and they entered an email, ReCapture automatically sends a branded recovery email on your behalf. Not from us — from your business, with your name and your booking link. This closes the loop without your team lifting a finger.',
     visual: <AutoRecoveryMockup />,
   },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19v-1.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/>
+      </svg>
+    ),
+    title: 'Real-Time Slack Alerts',
+    description: 'The moment someone abandons your form, your entire team sees it in Slack. Name, email, phone, lead score, timestamp. No checking dashboards, no waiting for reports. Your front desk picks up the phone and calls the lead back while they are still thinking about you. Speed to lead is everything — responding within 60 seconds makes you 391% more likely to convert.',
+    visual: null,
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+      </svg>
+    ),
+    title: 'Free Form Audit Report',
+    description: 'Before you even become a client, we scan your website and send you a detailed audit report — form field count, mobile UX issues, tracking gaps, industry-specific abandonment benchmarks, and exactly how much revenue your forms are leaking every month. It is the most thorough form analysis in the industry and it is completely free. No other competitor offers anything like it.',
+    visual: null,
+  },
 ]
 
 export default function WhyUsAccordion() {

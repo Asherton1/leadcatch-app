@@ -21,7 +21,7 @@ export default function PricingPage() {
         </div>
       </div>
 
-      <div style={{ marginTop: "-7rem" }}>
+      <div style={{ marginTop: "-4rem" }}>
         <div className="reveal"><PricingSection /></div>
       </div>
       <Footer />
