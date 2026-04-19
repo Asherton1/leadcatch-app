@@ -246,6 +246,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         from: 'ReCapture <hello@userecapture.com>',
         to: email,
+        scheduledAt: new Date(Date.now() + (Math.floor(Math.random() * 60 + 120) * 60 * 1000)).toISOString(),
         subject: 'Your ReCapture Form Audit Report — ' + url,
         html: reportHTML,
       }),
