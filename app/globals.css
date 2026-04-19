@@ -382,3 +382,9 @@ footer a:hover {
     box-sizing: border-box !important;
   }
 }
+
+@media (max-width: 768px) {
+  .footer-nav-links {
+    display: none !important;
+  }
+}
