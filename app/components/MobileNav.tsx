@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false)
+  const [toolsOpen, setToolsOpen] = useState(false)
   const path = usePathname()
 
   const isActive = (href: string) => {
@@ -60,11 +61,34 @@ export default function MobileNav() {
           <Link href="/why-us" className={isActive('/why-us') ? 'mobile-link-active' : ''}>Why Us</Link>
           <Link href="/how-it-works" className={isActive('/how-it-works') ? 'mobile-link-active' : ''}>How It Works</Link>
           <Link href="/integrations" className={isActive('/integrations') ? 'mobile-link-active' : ''}>Integrations</Link>
-          <div style={{ borderTop: '1px solid #1e1e1e', paddingTop: '0.5rem', marginTop: '0.25rem' }}>
-            <p style={{ color: '#ff6b35', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', padding: '0.5rem 1.5rem 0.25rem', margin: 0 }}>Tools</p>
-            <Link href="/test-form" className={isActive('/test-form') ? 'mobile-link-active' : ''}>Live Demo</Link>
-            <Link href="/calculator" className={isActive('/calculator') ? 'mobile-link-active' : ''}>ROI Estimator</Link>
-            <Link href="/form-audit" className={isActive('/form-audit') ? 'mobile-link-active' : ''}>Free Form Audit</Link>
+          <div style={{ borderTop: '1px solid #1e1e1e', marginTop: '0.25rem' }}>
+            <button
+              onClick={(e) => { e.stopPropagation(); setToolsOpen(!toolsOpen) }}
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '0.75rem 1.5rem',
+                margin: 0,
+              }}
+            >
+              <span style={{ color: toolsOpen ? '#ff6b35' : '#ccc', fontSize: '0.95rem', fontWeight: 500, transition: 'color 0.3s' }}>Tools</span>
+              <span style={{ color: toolsOpen ? '#ff6b35' : '#555', fontSize: '1.1rem', transition: 'transform 0.3s, color 0.3s', transform: toolsOpen ? 'rotate(45deg)' : 'none' }}>+</span>
+            </button>
+            <div style={{
+              maxHeight: toolsOpen ? '200px' : '0',
+              opacity: toolsOpen ? 1 : 0,
+              overflow: 'hidden',
+              transition: 'max-height 0.3s ease, opacity 0.2s ease',
+            }}>
+              <Link href="/test-form" className={isActive('/test-form') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Live Demo</Link>
+              <Link href="/calculator" className={isActive('/calculator') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>ROI Estimator</Link>
+              <Link href="/form-audit" className={isActive('/form-audit') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Free Form Audit</Link>
+            </div>
           </div>
           <Link href="/login" className={isActive('/login') ? 'mobile-link-active' : ''}>Login</Link>
           <Link href="/start-trial" className="nav-mobile-cta">Start Free Trial</Link>
