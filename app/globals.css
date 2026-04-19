@@ -3,6 +3,14 @@
 html, body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0a; }
 
+.nav-desktop a:hover,
+.nav-dropdown-wrapper:hover > .nav-link {
+  color: #ff6b35 !important;
+}
+footer a:hover {
+  color: #ff6b35 !important;
+}
+
 .lc-section {
   padding: 5rem 2rem;
   max-width: 1200px;
@@ -249,7 +257,15 @@ input, textarea, select, button {
   .how-it-works-section .section-subtitle {
     text-align: center !important;
   }
-  .lc-section {
+  .nav-desktop a:hover,
+.nav-dropdown-wrapper:hover > .nav-link {
+  color: #ff6b35 !important;
+}
+footer a:hover {
+  color: #ff6b35 !important;
+}
+
+.lc-section {
     margin: 4rem auto !important;
   }
   .section-subtitle {
