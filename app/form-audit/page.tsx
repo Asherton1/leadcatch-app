@@ -14,15 +14,10 @@ export default function FormAuditPage() {
   const handleSubmit = async () => {
     if (!url || !email) return
     try {
-      await fetch('/api/demo', {
+      await fetch('/api/form-audit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: 'Form Audit Request',
-          email: email,
-          website: url,
-          message: 'Free Form Audit requested for: ' + url + ' — send report to: ' + email,
-        }),
+        body: JSON.stringify({ url, email }),
       })
     } catch {}
     setSubmitted(true)
