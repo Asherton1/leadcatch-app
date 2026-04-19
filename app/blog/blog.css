@@ -237,15 +237,16 @@
 .blog-post-header h1 {
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 3rem;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
   margin-bottom: 1.5rem;
 }
 .blog-post-header .post-subtitle {
-  font-size: 1.1875rem;
-  color: #666;
-  line-height: 1.7;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.0625rem;
+  color: #777;
+  line-height: 1.8;
   max-width: 600px;
 }
 .blog-post-divider {
