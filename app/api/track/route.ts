@@ -149,6 +149,7 @@ export async function POST(request: NextRequest) {
         .eq('id', client.id)
         .single()
 
+      console.log('SLACK DEBUG:', { hasUrl: !!clientFull?.slack_webhook_url, url: clientFull?.slack_webhook_url?.substring(0, 30) })
       if (clientFull?.slack_webhook_url) {
         const score = Number(fields_completed ?? 0) >= 3 ? 'Hot' : Number(fields_completed ?? 0) >= 2 ? 'Warm' : 'Cold'
         const slackMsg = {
@@ -175,11 +176,13 @@ export async function POST(request: NextRequest) {
           ]
         }
 
-        await fetch(clientFull.slack_webhook_url, {
+        const slackRes = await fetch(clientFull.slack_webhook_url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(slackMsg),
         })
+        const slackText = await slackRes.text()
+        console.log('SLACK RESPONSE:', slackRes.status, slackText)
       }
     } catch (err) {
       console.error('Slack alert failed for lead', lead.id, err)
