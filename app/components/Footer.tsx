@@ -10,7 +10,7 @@ export default function Footer() {
         </Link>
       </div>
       <p style={{ color: '#7a7f8e', fontSize: '14px', marginBottom: '20px', maxWidth: '400px', margin: '12px auto 20px' }}>
-        Form abandonment recovery for high-ticket service businesses. Capture every lead. Recover lost revenue.
+        Form abandonment recovery for high-ticket service businesses.<br />Capture every lead.<br />Recover lost revenue.
       </p>
       <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '16px', flexWrap: 'wrap' }}>
         <Link href="/about" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>About</Link>
