@@ -25,7 +25,6 @@ export default function Footer() {
         <Link href="/form-audit" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Free Form Audit</Link>
         <Link href="/calculator" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>ROI Estimator</Link>
         <Link href="/start-trial" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Start Trial</Link>
-        <Link href="/baa" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>BAA</Link>
         <Link href="/login" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Login</Link>
         <a href="mailto:hello@userecapture.com" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Contact</a>
       </div>
