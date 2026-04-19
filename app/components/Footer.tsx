@@ -50,7 +50,7 @@ export default function Footer() {
           <span style={{ color: '#444', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em' }}>HIPAA Compliant</span>
         </div>
         <span style={{ color: '#2a2a2a', fontSize: '11px' }}>|</span>
-        <Link href="/baa" style={{ color: '#444', textDecoration: 'none', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em' }}>BAA</Link>
+        <Link href="/baa" style={{ color: '#444', textDecoration: 'none', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', display: 'inline-flex', alignItems: 'center', gap: '5px' }}><svg width="11" height="13" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>BAA</Link>
         <span style={{ color: '#2a2a2a', fontSize: '11px' }}>|</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
           <svg width="11" height="13" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
