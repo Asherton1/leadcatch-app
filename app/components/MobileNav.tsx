@@ -90,7 +90,7 @@ export default function MobileNav() {
               <Link href="/form-audit" className={isActive('/form-audit') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Free Form Audit</Link>
             </div>
           </div>
-          <Link href="/login" style={{ color: '#ff6b35', textDecoration: 'none' }}>Login</Link>
+          <Link href="/login" className={isActive('/login') ? 'mobile-link-active' : ''} style={{ color: '#ff6b35' }}>Login</Link>
           <Link href="/start-trial" className="nav-mobile-cta">Start Free Trial</Link>
         </div>
       </div>
