@@ -58,7 +58,6 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  console.log("CLIENT DATA:", JSON.stringify({ sms_enabled: client.sms_enabled, sms_phone: client.sms_phone, plan: client.plan }))
   if (!client.active) {
     return NextResponse.json({ error: 'Account inactive' }, { status: 403 })
   }
@@ -143,7 +142,6 @@ export async function POST(request: NextRequest) {
   // --- SLACK ALERT ---
   if (name || email || phone) {
     try {
-      console.log('SLACK DEBUG:', { hasUrl: !!client.slack_webhook_url, url: client.slack_webhook_url?.substring(0, 30) })
       if (client.slack_webhook_url) {
         const score = Number(fields_completed ?? 0) >= 3 ? 'Hot' : Number(fields_completed ?? 0) >= 2 ? 'Warm' : 'Cold'
         const slackMsg = {
@@ -176,7 +174,6 @@ export async function POST(request: NextRequest) {
           body: JSON.stringify(slackMsg),
         })
         const slackText = await slackRes.text()
-        console.log('SLACK RESPONSE:', slackRes.status, slackText)
       }
     } catch (err) {
       console.error('Slack alert failed for lead', lead.id, err)
@@ -231,7 +228,6 @@ export async function POST(request: NextRequest) {
           if (error) console.error('Failed to schedule email for lead', lead.id, error.message)
         })
     } else {
-      console.log('Sending immediate email to:', email, 'for lead:', lead.id)
       sendEmailForLead(lead.id).catch(err =>
         console.error('Auto email failed for lead', lead.id, err)
       )
