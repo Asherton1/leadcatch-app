@@ -21,13 +21,14 @@ export default function BAAPage() {
       <style>{`.baa-btns a { display: block !important; width: 100% !important; text-align: center !important; box-sizing: border-box !important; }`}</style>
       <div className="blog-post-header">
         <Link href="/pricing" className="blog-post-back">← Back to Pricing</Link>
-        <div className="blog-post-tag">Legal</div>
+        <p style={{ fontSize: "1rem", fontWeight: 600, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1.5rem" }}>Legal</p>
         <div className="blog-post-meta">
           <span className="blog-post-date">Effective: April 17, 2026</span>
           <span className="blog-post-dot" />
           <span className="blog-post-readtime">Pro & Enterprise Plans</span>
         </div>
         <h1>Business Associate Agreement</h1>
+        <div style={{ width: "60px", height: "3px", background: "#ff6b35", margin: "0 auto 1.5rem", borderRadius: "2px" }} />
         <p className="post-subtitle">This BAA is entered into between ReCapture and the customer upon acceptance during the Pro or Enterprise signup process. It governs the handling of Protected Health Information in compliance with HIPAA.</p>
       </div>
 
