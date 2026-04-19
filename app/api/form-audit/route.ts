@@ -205,7 +205,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         from: 'ReCapture <hello@userecapture.com>',
         to: email,
-        subject: 'Your Form Audit Report — ' + url,
+        subject: 'Your ReCapture Form Audit Report — ' + url,
         html: reportHTML,
       }),
     })
