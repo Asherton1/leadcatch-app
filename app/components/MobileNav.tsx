@@ -72,7 +72,7 @@ export default function MobileNav() {
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                padding: '0.75rem 1.5rem',
+                padding: '0.875rem 2rem',
                 margin: 0,
               }}
             >
