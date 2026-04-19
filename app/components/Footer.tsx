@@ -50,6 +50,8 @@ export default function Footer() {
           <span style={{ color: '#444', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em' }}>HIPAA Compliant</span>
         </div>
         <span style={{ color: '#2a2a2a', fontSize: '11px' }}>|</span>
+        <Link href="/baa" style={{ color: '#444', textDecoration: 'none', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em' }}>BAA</Link>
+        <span style={{ color: '#2a2a2a', fontSize: '11px' }}>|</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
           <svg width="11" height="13" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           <span style={{ color: '#444', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em' }}>SSL Secured</span>
