@@ -57,9 +57,8 @@ export default function AboutPage() {
         <div className="about-founder-info">
           <p className="about-founder-label">Founder</p>
           <h2>Asherton C.</h2>
-          <p className="about-founder-bio">Holds a Bachelor&apos;s degree in Art & Design with a minor in Marketing and Business. Over 10 years deep in digital marketing and advertising, managing $100K+ in monthly ad spend across 38+ long-term clients spanning med spas, dental practices, luxury real estate, and high-end service businesses.</p>
+          <p className="about-founder-bio">Bachelor&apos;s degree in Art & Design with a minor in Marketing and Business. Over a decade in digital marketing and advertising — managing $100K+ in monthly ad spend across 38+ long-term clients spanning med spas, dental practices, luxury real estate, and high-end service businesses.</p>
           <p className="about-founder-bio">Equal parts creative and analytical — the kind of person who reverse-engineers why people do what they do online and builds systems around it. Fascinated by the intersection of technology, behavioral science, and design. Outside of work, you&apos;ll find him somewhere in Dallas he hasn&apos;t been yet — a new restaurant, a good conversation, or just enjoying what this city continues to surprise him with.</p>
-          <p className="about-founder-bio">That same obsession with performance and precision is what led to ReCapture — born and built in Dallas, TX, from a decade of watching the same problem play out across every client, and finally deciding to build the solution.</p>
           <div className="about-founder-location">
             <span className="about-founder-dot"></span>
             Dallas, Texas
