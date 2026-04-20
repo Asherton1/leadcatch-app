@@ -685,7 +685,7 @@
 
 .pricing-cta-primary {
   background: var(--orange);
-  border: none;
+  border: 1px solid var(--orange);
   color: #000000;
   box-shadow: 0 4px 20px var(--orange-glow);
 }
