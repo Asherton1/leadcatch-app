@@ -7,6 +7,10 @@
     {
       "path": "/api/cron/monday-outreach",
       "schedule": "30 13 21 4 *"
+    },
+    {
+      "path": "/api/cron/follow-up-sequence",
+      "schedule": "0 15 * * *"
     }
   ]
 }
