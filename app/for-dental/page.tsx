@@ -85,7 +85,7 @@ export default function ForDental() {
             ['Multi-location dashboard', 'Enterprise view across all your dental offices'],
             ['Weekly performance reports', 'Leads captured, revenue at risk, and recovery stats every Monday'],
             ['60-second setup', 'One script tag. No form changes. No developer needed'],
-            ['AI voice callback', 'When a lead abandons your form with a phone number, our AI calls them back within 60 seconds on behalf of your practice'],
+            ['Ai voice callback', 'When a lead abandons your form with a phone number, our Ai calls them back within 60 seconds on behalf of your practice'],
           ].map(([title, desc], i) => (
             <div key={i} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 10, padding: '1.25rem' }}>
               <p style={{ color: '#ff6b35', fontWeight: 600, fontSize: '0.85rem', margin: '0 0 0.35rem 0' }}>{title}</p>

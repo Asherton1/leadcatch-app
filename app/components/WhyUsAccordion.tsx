@@ -160,6 +160,17 @@ const features: FeatureItem[] = [
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
       </svg>
     ),
+    title: 'Ai Voice Callback in 60 Seconds',
+    description: 'This is the feature nobody else has. When someone abandons your form and leaves a phone number, ReCapture\'s Ai calls them back within 60 seconds. Not an email. Not a text. A real phone call with a warm, natural-sounding voice that introduces itself as your front desk, offers to help, and collects their booking preferences. Responding within one minute makes you 391% more likely to convert. No other form recovery tool on the market does this.',
+    visual: null,
+    badge: 'Pro Plan',
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+    ),
     title: 'Instant SMS Lead Alerts',
     badge: 'Pro Plan',
     description: 'Your phone buzzes within 60 seconds of someone abandoning your form. Not an email you check later. A text message with their name, their email, and what they were looking for. Research shows that calling a lead within 5 minutes makes you 21x more likely to convert them. No other form abandonment tool offers real-time SMS alerts.',
