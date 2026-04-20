@@ -70,10 +70,10 @@ export default function WhyUsPage() {
         </div>
       </div>
 
-      <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '1rem 2rem 3rem' }}>
+      <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '0 2rem 3rem' }}>
 
         {/* ── What Sets Us Apart ──────────────────────────────────────── */}
-        <h2 className="reveal" style={{ marginBottom: "0.5rem" }}>What Sets Us Apart</h2>
+        <h2 className="reveal">What Sets Us Apart</h2>
         <p className="reveal">Every competitor in this space tells you <em>where</em> people drop off. None of them give you <em>who</em> dropped off — with their name, email, phone number, and what they were looking for. And none of them do what comes next.</p>
 
         <WhyUsAccordion />
