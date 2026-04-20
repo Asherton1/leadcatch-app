@@ -78,7 +78,7 @@ export default function WhyUsPage() {
 
         <WhyUsAccordion />
 
-        <h2 className="reveal">ReCapture vs the Competition</h2>
+        <h2 className="reveal" style={{ marginTop: '4rem' }}>ReCapture vs the Competition</h2>
         <p className="reveal">Here&apos;s how we stack up against the tools your enterprise clients are already evaluating.</p>
 
         {/* Desktop Table */}
