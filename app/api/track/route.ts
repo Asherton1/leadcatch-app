@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, webhook_url')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, business_name, name')
     .eq('api_key', api_key)
     .single()
 
@@ -214,6 +214,36 @@ export async function POST(request: NextRequest) {
   }
 
   // --- AUTO-RECOVERY EMAIL ---
+
+    // AI Voice Callback (Retell)
+    if (client.ai_callback_enabled && phone && process.env.RETELL_API_KEY) {
+      try {
+        const agentId = client.retell_agent_id || 'agent_f0c3170df59b32221bfebd7c7f'
+        const phoneClean = String(phone).replace(/[^+\d]/g, '')
+        const toNumber = phoneClean.startsWith('+') ? phoneClean : '+1' + String(phone).replace(/[^\d]/g, '')
+        const retellRes = await fetch('https://api.retellai.com/v2/create-phone-call', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + process.env.RETELL_API_KEY,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from_number: '+18886060630',
+            to_number: toNumber,
+            agent_id: agentId,
+            retell_llm_dynamic_variables: {
+              business_name: client.business_name || client.name || 'our office',
+              lead_name: (name as string) || 'there',
+            },
+          }),
+        })
+        const retellResult = await retellRes.json()
+        console.error('Retell call triggered for lead', lead.id, retellResult.call_id || 'no-id')
+      } catch (err) {
+        console.error('Retell callback failed for lead', lead.id, err)
+      }
+    }
+
   if (client.auto_email_enabled && email && client.plan !== 'essentials') {
     const delayMinutes = client.email_delay_minutes ?? 0
 
