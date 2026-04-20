@@ -25,9 +25,10 @@ const rows: [string, string | boolean, string | boolean, string | boolean][] = [
   ['Multi-location dashboard', true, false, false],
   ['Weekly client reports', true, false, false],
   ['Free Form Audit tool', true, false, false],
+  ['Ai voice callback (60 seconds)', 'Pro plan', false, false],
   ['HIPAA-ready + BAA', 'Pro & Enterprise', '$297/mo add-on', false],
   ['Transparent pricing', '$197-397/mo', 'Quote only', '$150/mo'],
-  ['Free trial', '7 days', 'None listed', '$7 paid trial'],
+  ['Free trial', '14 days', 'None listed', '$7 paid trial'],
   ['Setup complexity', '1 script tag', 'Full platform setup', '1 script tag'],
   ['Primary focus', 'Form abandonment + lead recovery', 'Messaging + reviews', 'Form analytics'],
   ['Best for', 'Multi-location, high-ticket', 'Single location SMB', 'SaaS / eCommerce'],
@@ -141,7 +142,7 @@ export default function WhyUsPage() {
 
         <h2 className="reveal">The Bottom Line</h2>
         <div className="reveal" style={{ borderLeft: '3px solid #ff6b35', background: '#111', borderRadius: '0 10px 10px 0', padding: '1.5rem 2rem', margin: '2rem 0' }}>
-          <p style={{ color: '#bbb', lineHeight: 1.8, margin: 0 }}>Podium tells you who messaged you. GoHighLevel helps you follow up with submitted leads. Insiteful shows you where people dropped off. ReCapture captures <em>who</em> dropped off, scores how serious they were, alerts you in real time, and automatically brings them back. That&apos;s not analytics. That&apos;s recovered revenue.</p>
+          <p style={{ color: '#bbb', lineHeight: 1.8, margin: 0 }}>Podium tells you who messaged you. GoHighLevel helps you follow up with submitted leads. Insiteful shows you where people dropped off. ReCapture captures <em>who</em> dropped off, scores how serious they were, alerts you in real time, calls them back with Ai within 60 seconds, and automatically brings them back. That&apos;s not analytics. That&apos;s recovered revenue.</p>
         </div>
 
         <div className="reveal" style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a1a 100%)', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2.5rem', margin: '3rem 0', textAlign: 'center' }}>
