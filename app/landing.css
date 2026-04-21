@@ -1929,8 +1929,7 @@
 /* ── Page transition effect ────────────────────────────────────────────── */
 .page-transitioning {
   opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 /* ── See Pricing link hover ────────────────────────────────────────────── */

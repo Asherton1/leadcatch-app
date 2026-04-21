@@ -40,13 +40,13 @@ export default function PageTransitions() {
     const container = (landing || blogPost || document.body) as HTMLElement
     
     container.style.opacity = '0'
-    container.style.transform = 'translateY(8px)'
-    container.style.transition = 'opacity 0.4s ease, transform 0.4s ease'
+    
+    container.style.transition = 'opacity 0.4s ease'
     
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         container.style.opacity = '1'
-        container.style.transform = 'translateY(0)'
+        
       })
     })
   }, [])
