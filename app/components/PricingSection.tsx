@@ -81,7 +81,7 @@ export default function PricingSection() {
       ],
       orangeFrom: 1,
       cta: <Link href="/signup?plan=pro" className="pricing-cta pricing-cta-primary">Start Your 7-Day Free Trial</Link>,
-      extra: <div style={{ height: '3.25rem' }}></div>,
+      extra: <div style={{ height: '3.5rem' }}></div>,
     },
     {
       name: 'Enterprise',
@@ -106,7 +106,7 @@ export default function PricingSection() {
       ],
       orangeFrom: 0,
       cta: <button onClick={() => setShowEnterprise(true)} className="pricing-cta pricing-cta-primary">Contact Us</button>,
-      extra: <div style={{ height: '3.25rem' }}></div>,
+      extra: <div style={{ height: '3.5rem' }}></div>,
     },
   ]
 
