@@ -15,6 +15,32 @@ export async function OPTIONS() {
   })
 }
 
+
+// Check if current time is within quiet hours
+function isQuietHours(start: string | null, end: string | null): boolean {
+  if (!start || !end) return false
+  const now = new Date()
+  const cst = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }))
+  const currentHour = cst.getHours()
+  const startHour = parseInt(start.split(':')[0])
+  const endHour = parseInt(end.split(':')[0])
+  if (startHour > endHour) {
+    return currentHour >= startHour || currentHour < endHour
+  }
+  return currentHour >= startHour && currentHour < endHour
+}
+
+// Check if current time is within call hours
+function isWithinCallHours(start: string | null, end: string | null): boolean {
+  if (!start || !end) return true // no restriction = always allowed
+  const now = new Date()
+  const cst = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }))
+  const currentHour = cst.getHours()
+  const startHour = parseInt(start.split(':')[0])
+  const endHour = parseInt(end.split(':')[0])
+  return currentHour >= startHour && currentHour < endHour
+}
+
 export async function POST(request: NextRequest) {
   let body: Record<string, unknown>
   try {
@@ -43,7 +69,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, business_name, name')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, business_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email')
     .eq('api_key', api_key)
     .single()
 
@@ -216,7 +242,7 @@ export async function POST(request: NextRequest) {
   // --- AUTO-RECOVERY EMAIL ---
 
     // AI Voice Callback (Retell)
-    if (client.ai_callback_enabled && phone && process.env.RETELL_API_KEY) {
+    if (client.ai_callback_enabled && phone && process.env.RETELL_API_KEY && !isQuietHours(client.quiet_hours_start, client.quiet_hours_end) && isWithinCallHours(client.ai_call_hours_start, client.ai_call_hours_end)) {
       try {
         const agentId = client.retell_agent_id || 'agent_f0c3170df59b32221bfebd7c7f'
         const phoneClean = String(phone).replace(/[^+\d]/g, '')
@@ -234,6 +260,8 @@ export async function POST(request: NextRequest) {
             retell_llm_dynamic_variables: {
               business_name: client.business_name || client.name || 'our office',
               lead_name: (name as string) || 'there',
+              agent_name: client.ai_agent_name || 'Sarah',
+              services: client.ai_services_list || '',
             },
           }),
         })

@@ -18,7 +18,7 @@ function fill(template: string, vars: Record<string, string>): string {
 // Wraps any body content in a clean, professional HTML email shell.
 // Always called — message_template is content *inside* this, never a replacement for it.
 function buildHtml(bodyContent: string, vars: Record<string, string>): string {
-  const { business_name, booking_url } = vars
+  const { business_name, booking_url, brand_color } = vars
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -32,7 +32,7 @@ function buildHtml(bodyContent: string, vars: Record<string, string>): string {
   <div style="max-width:580px;margin:40px auto 60px;background:#ffffff;border-radius:8px;overflow:hidden;border:1px solid #e4e4e7;">
 
     <!-- Top accent bar -->
-    <div style="height:4px;background:#ff6b35;"></div>
+    <div style="height:4px;background:${brand_color || '#ff6b35'};"></div>
 
     <!-- Header -->
     <div style="padding:32px 40px 24px;border-bottom:1px solid #f0f0f0;">
@@ -47,7 +47,7 @@ function buildHtml(bodyContent: string, vars: Record<string, string>): string {
     <!-- CTA -->
     <div style="padding:0 40px 36px;">
       <a href="${booking_url}"
-         style="display:inline-block;background:#ff6b35;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:6px;font-size:14px;font-weight:600;">
+         style="display:inline-block;background:${brand_color || '#ff6b35'};color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:6px;font-size:14px;font-weight:600;">
         Complete My Request
       </a>
     </div>
@@ -59,7 +59,9 @@ function buildHtml(bodyContent: string, vars: Record<string, string>): string {
     <div style="padding:24px 40px;font-size:12px;color:#a1a1aa;line-height:1.6;">
       ${(vars.contact_phone || vars.contact_email) ? `<p style="margin:0 0 8px;">Questions? ${vars.contact_phone ? `Call us at <a href="tel:${vars.contact_phone}" style="color:#71717a;text-decoration:none;">${vars.contact_phone}</a>` : ''}${vars.contact_phone && vars.contact_email ? ' or email ' : ''}${vars.contact_email ? `<a href="mailto:${vars.contact_email}" style="color:#ff6b35;text-decoration:none;">${vars.contact_email}</a>` : ''}</p>` : ''}
       <p style="margin:0 0 4px;">You received this email because you started a form on <strong style="color:#71717a;">${business_name}</strong>.</p>
-      <p style="margin:0;">Powered by <a href="https://leadcatch.app" style="color:#ff6b35;text-decoration:none;">LeadCatch</a></p>
+      ${vars.email_footer ? `<p style="margin:0 0 4px;">${vars.email_footer}</p>` : ''}
+      ${vars.company_tagline ? `<p style="margin:0 0 4px;font-style:italic;">${vars.company_tagline}</p>` : ''}
+      <p style="margin:0;">Powered by <a href="https://userecapture.com" style="color:${brand_color || '#ff6b35'};text-decoration:none;">ReCapture</a></p>
     </div>
 
   </div>
@@ -97,7 +99,7 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
   // ── 2. Fetch client ────────────────────────────────────────────────────────
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, name, message_template, booking_url, from_email, email_header, sender_name, contact_phone, contact_email')
+    .select('id, name, message_template, booking_url, from_email, email_header, sender_name, contact_phone, contact_email, reply_to_email, email_footer, brand_color, company_tagline, auto_mark_contacted')
     .eq('id', lead.client_id)
     .single()
 
@@ -131,6 +133,9 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
     booking_url:    client.booking_url    ?? '#',
     contact_phone:  (client as any).contact_phone  ?? '',
     contact_email:  (client as any).contact_email  ?? '',
+    brand_color:    (client as any).brand_color     ?? '#ff6b35',
+    email_footer:   (client as any).email_footer    ?? '',
+    company_tagline:(client as any).company_tagline ?? '',
   }
 
   const subject = fill(DEFAULT_SUBJECT, vars)
@@ -152,11 +157,13 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
   let emailId: string
   try {
     const resend = getResend()
+    const replyTo = (client as any).reply_to_email || undefined
     const { data, error } = await resend.emails.send({
       from,
       to:      lead.email,
       subject,
       html,
+      ...(replyTo ? { reply_to: replyTo } : {}),
     })
     if (error || !data) {
       const detail = error?.message ?? 'Resend returned no data'
@@ -172,9 +179,13 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
   }
 
   // ── 5. Mark lead as emailed ────────────────────────────────────────────────
+  const updateFields: Record<string, unknown> = { email_sent: true, email_sent_at: new Date().toISOString() }
+  if ((client as any).auto_mark_contacted) {
+    updateFields.status = 'contacted'
+  }
   const { error: updateError } = await supabase
     .from('leads')
-    .update({ email_sent: true, email_sent_at: new Date().toISOString() })
+    .update(updateFields)
     .eq('id', leadId)
 
   if (updateError) {
