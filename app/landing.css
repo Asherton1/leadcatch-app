@@ -1708,7 +1708,7 @@
   right: 0;
   height: 3px;
   background: linear-gradient(90deg, transparent, #ff6b35, transparent);
-  transform: scaleX(0);
+  transform: scaleX(0.01);
   transition: transform 0.4s ease;
 }
 
@@ -1966,7 +1966,7 @@
   z-index: 10001;
   pointer-events: none;
   transform-origin: left;
-  transform: scaleX(0);
+  transform: scaleX(0.01);
   transition: none;
   box-shadow: 0 0 8px rgba(255,107,53,0.5);
 }

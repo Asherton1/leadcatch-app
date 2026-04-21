@@ -7,6 +7,8 @@ export default function PremiumEffects() {
 
   useEffect(() => {
 
+    console.log('PremiumEffects mounted')
+
     // ── Scroll Progress Bar ──────────────────────────────────────────────
     function updateProgress() {
       if (!progressRef.current) return
