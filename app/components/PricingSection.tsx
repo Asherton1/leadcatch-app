@@ -55,7 +55,7 @@ export default function PricingSection() {
         'Manual follow-up (email & call)',
       ],
       orangeFrom: 99,
-      cta: <Link href="/signup?plan=essentials" className="pricing-cta pricing-cta-secondary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem' }}>Start Your 7-Day Free Trial</Link>,
+      cta: <Link href="/signup?plan=essentials" className="pricing-cta pricing-cta-secondary">Start Your 7-Day Free Trial</Link>,
       extra: <div className="pricing-upgrade-hint"><p>Want automated recovery?</p><p><Link href="/signup?plan=pro">Upgrade to Pro</Link> anytime.</p></div>,
     },
     {
@@ -80,7 +80,7 @@ export default function PricingSection() {
         'Priority support',
       ],
       orangeFrom: 1,
-      cta: <Link href="/signup?plan=pro" className="pricing-cta pricing-cta-primary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem' }}>Start Your 7-Day Free Trial</Link>,
+      cta: <Link href="/signup?plan=pro" className="pricing-cta pricing-cta-primary">Start Your 7-Day Free Trial</Link>,
       extra: null,
     },
     {
@@ -105,7 +105,7 @@ export default function PricingSection() {
         'Dedicated account manager',
       ],
       orangeFrom: 0,
-      cta: <button onClick={() => setShowEnterprise(true)} className="pricing-cta pricing-cta-primary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem', width: '100%' }}>Contact Us</button>,
+      cta: <button onClick={() => setShowEnterprise(true)} className="pricing-cta pricing-cta-primary">Contact Us</button>,
       extra: null,
     },
   ]
@@ -113,7 +113,7 @@ export default function PricingSection() {
   const renderDesktop = () => (
     <div className="pricing-grid pricing-grid-3">
       {tiers.map((t, i) => (
-        <div className={`pricing-card${t.featured ? ' pricing-card-featured' : ''}${i === 2 ? ' pricing-card-enterprise' : ''}`} key={i} style={{ display: 'flex', flexDirection: 'column' as const }}>
+        <div className={`pricing-card${t.featured ? ' pricing-card-featured' : ''}${i === 2 ? ' pricing-card-enterprise' : ''}`} key={i}>
           {t.badge ? <div className="pricing-badge">{t.badge}</div> : <div style={{ height: '28px' }}></div>}
           {'hipaa' in t && (t as {hipaa?: boolean}).hipaa ? (
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: '6px', padding: '0.25rem 0.6rem', marginBottom: '0.75rem', fontSize: '0.7rem', fontWeight: 600, color: '#22c55e', letterSpacing: '0.05em' }}>
@@ -134,7 +134,7 @@ export default function PricingSection() {
             )}
           </div>
           <p className="pricing-desc">{t.desc}</p>
-          <ul className="pricing-features" style={{ flex: 1 }}>
+          <ul className="pricing-features">
             {t.features.map((f, fi) => (
               <li key={fi}><span className={`check-icon${fi >= t.orangeFrom ? ' check-orange' : ''}`}>✓</span>{f}</li>
             ))}
