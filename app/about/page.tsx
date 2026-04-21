@@ -92,7 +92,7 @@ export default function AboutPage() {
         <p>Try the live demo and watch ReCapture capture a lead in real time.</p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link href="/test-form" className="about-cta-btn">Try the Live Demo</Link>
-          <Link href="/signup" className="about-cta-btn-outline">Start Free Trial</Link>
+          <Link href="/signup" className="about-cta-btn-outline">Start Your 7-Day Free Trial</Link>
         </div>
       </div>
 

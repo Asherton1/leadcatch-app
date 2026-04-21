@@ -186,7 +186,7 @@ export default function IntegrationsPage() {
             Our API and webhook system can connect ReCapture to any platform. Enterprise clients get white-glove integration support.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/start-trial" style={{ background: '#ff6b35', color: '#fff', fontWeight: 700, fontSize: '0.9375rem', padding: '0.875rem 2rem', borderRadius: '0.5rem', textDecoration: 'none', border: '1px solid #ff6b35' }}>Start Free Trial</Link>
+            <Link href="/start-trial" style={{ background: '#ff6b35', color: '#fff', fontWeight: 700, fontSize: '0.9375rem', padding: '0.875rem 2rem', borderRadius: '0.5rem', textDecoration: 'none', border: '1px solid #ff6b35' }}>Start Your 7-Day Free Trial</Link>
             <a href="mailto:hello@userecapture.com" style={{ background: 'transparent', color: '#fff', fontWeight: 600, fontSize: '0.9375rem', padding: '0.875rem 2rem', borderRadius: '0.5rem', textDecoration: 'none', border: '1px solid #333' }}>Contact Us</a>
           </div>
         </div>

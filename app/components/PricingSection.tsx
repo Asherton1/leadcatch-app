@@ -55,7 +55,7 @@ export default function PricingSection() {
         'Manual follow-up (email & call)',
       ],
       orangeFrom: 99,
-      cta: <Link href="/signup?plan=essentials" className="pricing-cta pricing-cta-secondary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem' }}>Start Free Trial</Link>,
+      cta: <Link href="/signup?plan=essentials" className="pricing-cta pricing-cta-secondary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem' }}>Start Your 7-Day Free Trial</Link>,
       extra: <div className="pricing-upgrade-hint"><p>Want automated recovery?</p><p><Link href="/signup?plan=pro">Upgrade to Pro</Link> anytime.</p></div>,
     },
     {
@@ -80,7 +80,7 @@ export default function PricingSection() {
         'Priority support',
       ],
       orangeFrom: 1,
-      cta: <Link href="/signup?plan=pro" className="pricing-cta pricing-cta-primary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem' }}>Start Free Trial</Link>,
+      cta: <Link href="/signup?plan=pro" className="pricing-cta pricing-cta-primary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem' }}>Start Your 7-Day Free Trial</Link>,
       extra: null,
     },
     {
