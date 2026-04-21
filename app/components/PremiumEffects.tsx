@@ -67,61 +67,6 @@ export default function PremiumEffects() {
       tiltHandlers.push({ el, move, leave })
     })
 
-    // ── Stat Counter Animation ───────────────────────────────────────────
-    function animateCounters() {
-      const statValues = document.querySelectorAll('.stat-number')
-      statValues.forEach(el => {
-        const text = el.textContent ?? ''
-        
-        // Only animate numbers
-        const match = text.match(/^([\$]?)(\d[\d,]*)(.*)$/)
-        if (!match) return
-        
-        const prefix = match[1]
-        const targetNum = parseInt(match[2].replace(/,/g, ''))
-        const suffix = match[3]
-        
-        if (isNaN(targetNum) || targetNum === 0) return
-        if ((el as HTMLElement).dataset.counted === 'true') return
-        ;(el as HTMLElement).dataset.counted = 'true'
-        
-        let start = 0
-        const duration = 1500
-        const startTime = performance.now()
-        
-        function tick(now: number) {
-          const elapsed = now - startTime
-          const progress = Math.min(elapsed / duration, 1)
-          const eased = 1 - Math.pow(1 - progress, 3) // ease-out cubic
-          const current = Math.round(eased * targetNum)
-          
-          if (current !== start) {
-            start = current
-            el.textContent = prefix + current.toLocaleString() + suffix
-          }
-          
-          if (progress < 1) requestAnimationFrame(tick)
-        }
-        
-        requestAnimationFrame(tick)
-      })
-    }
-
-    const statsObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setTimeout(animateCounters, 200)
-            statsObserver.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.3 }
-    )
-
-    const statsGrid = document.querySelector('.stats-bridge')
-    if (statsGrid) statsObserver.observe(statsGrid)
-
     // ── Parallax on scroll ───────────────────────────────────────────────
     function updateParallax() {
       const scrollY = window.scrollY
@@ -156,7 +101,6 @@ export default function PremiumEffects() {
         el.removeEventListener('mousemove', move as EventListener)
         el.removeEventListener('mouseleave', leave as EventListener)
       })
-      if (statsGrid) statsObserver.unobserve(statsGrid)
     }
   }, [])
 
