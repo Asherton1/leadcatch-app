@@ -1583,7 +1583,6 @@
 }
 
 .nav-dropdown-menu {
-  display: none;
   position: absolute;
   top: calc(100% + 4px);
   left: 50%;
@@ -1602,7 +1601,6 @@
 }
 
 .nav-dropdown-wrapper:hover .nav-dropdown-menu {
-  display: block;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
