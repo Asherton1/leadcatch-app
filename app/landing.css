@@ -1952,8 +1952,8 @@
   background-repeat: repeat;
   background-size: 256px 256px;
   pointer-events: none;
-  z-index: 9999;
-  opacity: 0.4;
+  z-index: 1;
+  opacity: 0.3;
   mix-blend-mode: overlay;
 }
 
@@ -1965,6 +1965,7 @@
   height: 2px;
   background: linear-gradient(90deg, #ff6b35, #ff8659);
   z-index: 10001;
+  pointer-events: none;
   transform-origin: left;
   transform: scaleX(0);
   transition: none;

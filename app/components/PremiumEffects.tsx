@@ -69,7 +69,7 @@ export default function PremiumEffects() {
 
     // ── Stat Counter Animation ───────────────────────────────────────────
     function animateCounters() {
-      const statValues = document.querySelectorAll('.stat-value')
+      const statValues = document.querySelectorAll('.stat-number')
       statValues.forEach(el => {
         const text = el.textContent ?? ''
         
@@ -132,10 +132,10 @@ export default function PremiumEffects() {
       const heroOrb = document.querySelector('.hero-glow-orb') as HTMLElement
       
       if (heroTitle && scrollY < 800) {
-        heroTitle.style.transform = `translateY(${scrollY * 0.15}px)`
+        heroTitle.style.transform = `translateY(${scrollY * 0.3}px)`
       }
       if (heroSub && scrollY < 800) {
-        heroSub.style.transform = `translateY(${scrollY * 0.1}px)`
+        heroSub.style.transform = `translateY(${scrollY * 0.2}px)`
       }
       if (heroOrb && scrollY < 800) {
         heroOrb.style.transform = `translate(-50%, -50%) scale(${1 + scrollY * 0.0003})`
