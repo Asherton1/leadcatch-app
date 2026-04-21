@@ -4,6 +4,7 @@ import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import DashboardMockup from '../components/DashboardMockup'
 import '../blog/blog.css'
+import '../landing.css'
 
 export const metadata = {
   title: 'ReCapture for GoHighLevel Agencies — Form Abandonment Recovery Add-On',

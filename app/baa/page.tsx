@@ -2,6 +2,7 @@ import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
 import '../blog/blog.css'
+import '../landing.css'
 
 export const dynamic = 'force-dynamic'
 

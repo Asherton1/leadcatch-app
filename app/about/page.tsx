@@ -3,6 +3,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Image from 'next/image'
 import '../blog/blog.css'
+import '../landing.css'
 import Footer from '../components/Footer'
 import './about.css'
 
