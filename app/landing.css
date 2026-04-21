@@ -1621,3 +1621,13 @@
   color: #ff6b35;
   background: rgba(255, 107, 53, 0.05);
 }
+
+/* Force pricing button alignment */
+.pricing-grid-3 .pricing-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+}
+.pricing-grid-3 .pricing-card > div:last-child {
+  margin-top: auto !important;
+}
