@@ -139,8 +139,10 @@ export default function PricingSection() {
               <li key={fi}><span className={`check-icon${fi >= t.orangeFrom ? ' check-orange' : ''}`}>✓</span>{f}</li>
             ))}
           </ul>
-          {t.cta}
-          {t.extra}
+          <div style={{ marginTop: 'auto' }}>
+            {t.cta}
+            {t.extra}
+          </div>
         </div>
       ))}
     </div>
