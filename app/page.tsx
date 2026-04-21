@@ -4,10 +4,8 @@ import Image from 'next/image'
 import './landing.css'
 import StatsBar from './components/StatsBar'
 import GSAPAnimations from './components/GSAPAnimations'
-import PricingSection from './components/PricingSection'
 import MobileNav from './components/MobileNav'
 import Footer from './components/Footer'
-import FeaturesAccordion from './components/FeaturesAccordion'
 import ProblemAccordion from './components/ProblemAccordion'
 import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
@@ -140,13 +138,40 @@ export default function LandingPage() {
       <section className="lc-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Built to Recover Revenue</h2>
         <p className="section-subtitle">One script tag. Full automation. Every feature designed to bring leads back.</p>
-        <FeaturesAccordion />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }}>
+          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem' }}>
+            <div style={{ width: 48, height: 48, borderRadius: '12px', background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Ai Voice Callback</h3>
+            <p style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>Lead abandons your form with a phone number? Our Ai calls them back within 60 seconds on behalf of your business. Natural voice, real conversation, 391% higher conversion.</p>
+          </div>
+          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem' }}>
+            <div style={{ width: 48, height: 48, borderRadius: '12px', background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+            </div>
+            <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Real-Time Capture</h3>
+            <p style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>The instant a visitor types into your form, their name, email, and phone are captured. Before they hit submit. Before they leave. Before you lose them.</p>
+          </div>
+          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem' }}>
+            <div style={{ width: 48, height: 48, borderRadius: '12px', background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+            </div>
+            <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Automated Recovery</h3>
+            <p style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>ReCapture emails abandoned leads on your behalf automatically with your branding, your name, and timing you control. They come back without you lifting a finger.</p>
+          </div>
+          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem' }}>
+            <div style={{ width: 48, height: 48, borderRadius: '12px', background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+            </div>
+            <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>The Invisible Pipeline</h3>
+            <p style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>These leads don&apos;t exist in your CRM. They never hit submit. But they were there, ready to book. We make them visible.</p>
+          </div>
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+          <Link href="/why-us" style={{ color: '#ff6b35', fontSize: '0.9375rem', fontWeight: 600, textDecoration: 'none' }}>See all features &rarr;</Link>
+        </div>
       </section>
-
-      <PricingSection />
-
-
-
 
       <section className="lc-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Purpose-Built for High-Ticket Industries</h2>
@@ -265,6 +290,7 @@ export default function LandingPage() {
         <div className="cta-group" style={{ justifyContent: 'center' }}>
           <Link href="/test-form" className="cta-primary">Try the Live Demo</Link>
           <Link href="/start-trial" className="cta-secondary">Start Your 7-Day Free Trial</Link>
+          <Link href="/pricing" style={{ color: '#888', fontSize: '0.9375rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}>See Pricing &rarr;</Link>
         </div>
       </section>
 
