@@ -1937,3 +1937,87 @@
 .final-cta a[href="/pricing"]:hover {
   color: #ff6b35 !important;
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* PREMIUM POLISH — Details that separate $50K builds from templates         */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Noise texture overlay ─────────────────────────────────────────────── */
+.landing::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
+
+/* ── Scroll progress bar ───────────────────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff6b35, #ff8659);
+  z-index: 10001;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: none;
+  box-shadow: 0 0 8px rgba(255,107,53,0.5);
+}
+
+/* ── Magnetic button base ──────────────────────────────────────────────── */
+.magnetic-btn {
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+/* ── 3D card tilt ──────────────────────────────────────────────────────── */
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
+.tilt-card-inner {
+  transform: translateZ(0);
+  transition: transform 0.15s ease-out;
+}
+
+/* ── Word reveal animation ─────────────────────────────────────────────── */
+.word-reveal {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.word-reveal .word {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+.word-reveal.revealed .word {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ── Counter animation ─────────────────────────────────────────────────── */
+.stat-counter {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Parallax layers ───────────────────────────────────────────────────── */
+.parallax-slow {
+  will-change: transform;
+}
+
+.parallax-fast {
+  will-change: transform;
+}

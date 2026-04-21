@@ -11,6 +11,7 @@ import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
 import PageTransitions from './components/PageTransitions'
+import PremiumEffects from './components/PremiumEffects'
 
 export const metadata = {
   title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
@@ -24,6 +25,7 @@ export default function LandingPage() {
       <GSAPAnimations />
       <ScrollReveal />
       <PageTransitions />
+      <PremiumEffects />
 
       <nav className="lc-nav">
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
