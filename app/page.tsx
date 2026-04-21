@@ -10,6 +10,7 @@ import ProblemAccordion from './components/ProblemAccordion'
 import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
+import PageTransitions from './components/PageTransitions'
 
 export const metadata = {
   title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
@@ -22,6 +23,7 @@ export default function LandingPage() {
       <div className="ambient-bg" />
       <GSAPAnimations />
       <ScrollReveal />
+      <PageTransitions />
 
       <nav className="lc-nav">
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
@@ -137,7 +139,7 @@ export default function LandingPage() {
       <section className="lc-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Built to Recover Revenue</h2>
         <p className="section-subtitle">One script tag. Full automation. Every feature designed to bring leads back.</p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }}>
+        <div className="top-features-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }}>
           <div className="wow-card" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem' }}>
             <div style={{ width: 48, height: 48, borderRadius: '12px', background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -162,7 +164,7 @@ export default function LandingPage() {
 
         </div>
         <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-          <Link href="/why-us" className="explore-features-link">
+          <Link href="/why-us" className="explore-features-link page-transition-link">
             Explore all features
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
           </Link>
@@ -286,7 +288,9 @@ export default function LandingPage() {
         <div className="cta-group" style={{ justifyContent: 'center' }}>
           <Link href="/test-form" className="cta-primary">Try the Live Demo</Link>
           <Link href="/start-trial" className="cta-secondary">Start Your 7-Day Free Trial</Link>
-          <Link href="/pricing" style={{ color: '#888', fontSize: '0.9375rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}>See Pricing &rarr;</Link>
+        </div>
+        <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+          <Link href="/pricing" className="page-transition-link" style={{ color: '#666', fontSize: '0.9375rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}>See Pricing &rarr;</Link>
         </div>
       </section>
 

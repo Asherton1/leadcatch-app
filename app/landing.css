@@ -1904,3 +1904,36 @@
   .dashboard-video-wrap { animation: none; }
   .hero-highlight { animation: none; -webkit-text-fill-color: #ff6b35; }
 }
+
+/* ── Top features grid mobile fix ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .top-features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    padding: 0 1.25rem !important;
+  }
+}
+
+/* ── CTA glow orb mobile fix ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .final-cta::before {
+    width: 250px;
+    height: 250px;
+  }
+  .hero-glow-orb {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* ── Page transition effect ────────────────────────────────────────────── */
+.page-transitioning {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* ── See Pricing link hover ────────────────────────────────────────────── */
+.final-cta a[href="/pricing"]:hover {
+  color: #ff6b35 !important;
+}
