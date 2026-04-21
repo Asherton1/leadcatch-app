@@ -388,3 +388,18 @@ footer a:hover {
     display: none !important;
   }
 }
+
+/* ── Scroll progress bar (global) ──────────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6b35, #ff8659);
+  z-index: 99999;
+  pointer-events: none;
+  transform-origin: left;
+  transform: scaleX(0);
+  box-shadow: 0 0 8px rgba(255,107,53,0.5);
+}
