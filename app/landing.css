@@ -1958,16 +1958,15 @@
 /* ── Scroll progress bar ───────────────────────────────────────────────── */
 .scroll-progress {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   height: 3px;
   background: linear-gradient(90deg, #ff6b35, #ff8659);
-  z-index: 10001;
+  z-index: 99999;
   pointer-events: none;
   transform-origin: left;
   transform: scaleX(0);
-  transition: none;
   box-shadow: 0 0 8px rgba(255,107,53,0.5);
 }
 

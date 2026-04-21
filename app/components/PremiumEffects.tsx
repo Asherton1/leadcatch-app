@@ -67,32 +67,9 @@ export default function PremiumEffects() {
       tiltHandlers.push({ el, move, leave })
     })
 
-    // ── Parallax on scroll ───────────────────────────────────────────────
-    function updateParallax() {
-      const scrollY = window.scrollY
-      
-      // Hero elements move slower
-      const heroTitle = document.querySelector('.hero h1') as HTMLElement
-      const heroSub = document.querySelector('.hero-subtitle') as HTMLElement
-      const heroOrb = document.querySelector('.hero-glow-orb') as HTMLElement
-      
-      if (heroTitle && scrollY < 800) {
-        heroTitle.style.transform = `translateY(${scrollY * 0.3}px)`
-      }
-      if (heroSub && scrollY < 800) {
-        heroSub.style.transform = `translateY(${scrollY * 0.2}px)`
-      }
-      if (heroOrb && scrollY < 800) {
-        heroOrb.style.transform = `translate(-50%, -50%) scale(${1 + scrollY * 0.0003})`
-      }
-    }
-    
-    window.addEventListener('scroll', updateParallax, { passive: true })
-
     // ── Cleanup ──────────────────────────────────────────────────────────
     return () => {
       window.removeEventListener('scroll', updateProgress)
-      window.removeEventListener('scroll', updateParallax)
       magneticHandlers.forEach(({ el, move, leave }) => {
         el.removeEventListener('mousemove', move as EventListener)
         el.removeEventListener('mouseleave', leave as EventListener)
