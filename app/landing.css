@@ -1308,19 +1308,6 @@
 
 
 /* ── Pricing card alignment ── */
-.pricing-grid-3 {
-  align-items: stretch !important;
-}
-.pricing-grid-3 .pricing-card {
-  display: flex !important;
-  flex-direction: column !important;
-}
-.pricing-grid-3 .pricing-features {
-  flex: 1 !important;
-}
-.pricing-grid-3 .pricing-cta {
-  margin-top: auto !important;
-}
 .pricing-grid-3 .pricing-upgrade-hint {
   position: relative;
   bottom: auto;
@@ -1339,10 +1326,6 @@
   color: #ff6b35;
   text-decoration: none;
   font-weight: 600;
-}
-.pricing-grid-3 .pricing-card {
-  position: relative;
-  margin-bottom: 0;
 }
 
 @media (max-width: 768px) {
@@ -1622,12 +1605,3 @@
   background: rgba(255, 107, 53, 0.05);
 }
 
-/* Force pricing button alignment */
-.pricing-grid-3 .pricing-card {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-}
-.pricing-grid-3 .pricing-card > div:last-child {
-  margin-top: auto !important;
-}
