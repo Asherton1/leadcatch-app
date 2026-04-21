@@ -68,13 +68,13 @@ export default function PricingSection() {
       hipaa: true,
       features: [
         'Everything in Essentials',
+        'Ai voice callback within 60 seconds',
         'Automated lead recovery emails',
         'Instant SMS lead alerts',
         'Instant Slack lead alerts',
         'Custom sender name & branding',
         'Configurable send delay timing',
         'Outbound webhooks (Zapier, Make)',
-        'Ai voice callback within 60 seconds',
         'Weekly reports with trend analytics',
         'HIPAA-ready data handling + BAA available',
         'Priority support',
@@ -93,6 +93,7 @@ export default function PricingSection() {
       badge: null,
       features: [
         'Everything in Pro',
+        'Ai voice callback with custom agent per location',
         'HIPAA BAA included',
         'Unlimited websites & locations',
         'Centralized multi-location dashboard',
@@ -100,7 +101,6 @@ export default function PricingSection() {
         'White-glove onboarding & installation',
         'Custom-branded recovery emails per site',
         'Free Form Audit reports for your clients',
-        'Ai voice callback with custom agent per location',
         'Executive roll-up reports',
         'Dedicated account manager',
       ],
@@ -113,7 +113,7 @@ export default function PricingSection() {
   const renderDesktop = () => (
     <div className="pricing-grid pricing-grid-3">
       {tiers.map((t, i) => (
-        <div className={`pricing-card${t.featured ? ' pricing-card-featured' : ''}${i === 2 ? ' pricing-card-enterprise' : ''}`} key={i}>
+        <div className={`pricing-card${t.featured ? ' pricing-card-featured' : ''}${i === 2 ? ' pricing-card-enterprise' : ''}`} key={i} style={{ display: 'flex', flexDirection: 'column' as const }}>
           {t.badge ? <div className="pricing-badge">{t.badge}</div> : <div style={{ height: '28px' }}></div>}
           {'hipaa' in t && (t as {hipaa?: boolean}).hipaa ? (
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: '6px', padding: '0.25rem 0.6rem', marginBottom: '0.75rem', fontSize: '0.7rem', fontWeight: 600, color: '#22c55e', letterSpacing: '0.05em' }}>
@@ -134,7 +134,7 @@ export default function PricingSection() {
             )}
           </div>
           <p className="pricing-desc">{t.desc}</p>
-          <ul className="pricing-features">
+          <ul className="pricing-features" style={{ flex: 1 }}>
             {t.features.map((f, fi) => (
               <li key={fi}><span className={`check-icon${fi >= t.orangeFrom ? ' check-orange' : ''}`}>✓</span>{f}</li>
             ))}
