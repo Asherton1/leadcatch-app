@@ -2,6 +2,7 @@ import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import '../blog/blog.css'
+import '../landing.css'
 import Footer from '../components/Footer'
 import WhyUsAccordion from "../components/WhyUsAccordion"
 
