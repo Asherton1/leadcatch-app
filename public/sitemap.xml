@@ -19,4 +19,10 @@
   <url><loc>https://www.userecapture.com/for-luxury-auto</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.userecapture.com/for-gohighlevel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.userecapture.com/for-plastic-surgery</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url>
+    <loc>https://www.userecapture.com/blog/ai-voice-callbacks-form-abandonment</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

@@ -26,7 +26,19 @@ export default function BlogIndex() {
       </div>
 
       <div className="blog-featured reveal">
-        <Link href="/blog/hidden-cost-of-form-abandonment" className="blog-featured-card">
+        <Link href="/blog/ai-voice-callbacks-form-abandonment" style={{ textDecoration: 'none' }}>
+              <div className="blog-card">
+                <div className="blog-card-tag">Ai Voice Technology</div>
+                <h3>Why Ai Voice Callbacks Convert 391% More Abandoned Leads</h3>
+                <p>Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts.</p>
+                <div className="blog-card-meta">
+                  <span>April 22, 2026</span>
+                  <span className="blog-card-dot" />
+                  <span>6 min read</span>
+                </div>
+              </div>
+            </Link>
+            <Link href="/blog/hidden-cost-of-form-abandonment" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
             <Image src="/blog-form-abandonment.webp" alt="Form abandonment visualization" fill style={{ objectFit: 'cover' }} />
           </div>
