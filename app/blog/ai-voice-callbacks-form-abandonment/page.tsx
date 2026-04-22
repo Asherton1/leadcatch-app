@@ -28,8 +28,10 @@ export default function Post() {
       </div>
 
       <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
-        <Image src="/blog-ai-voice-callbacks.webp" alt="Ai voice callback — phone ringing on desk" fill style={{ objectFit: 'cover' }} />
+        <Image src="/blog-ai-voice-callbacks.webp" alt="Ai voice callback — phone ringing on desk" fill style={{ objectFit: 'cover', objectPosition: 'center 60%' }} />
       </div>
+
+      <div className="blog-post-divider"><hr /></div>
 
       <article className="blog-post-body">
         <h2>The Follow-Up Window Is Smaller Than You Think</h2>
