@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
+import Retell from 'retell-sdk'
 
 export const dynamic = 'force-dynamic'
 
 const resend = new Resend(process.env.RESEND_API_KEY!)
+const retellClient = process.env.RETELL_API_KEY ? new Retell({ apiKey: process.env.RETELL_API_KEY }) : null
 
 export async function GET(req: NextRequest) {
   // Verify cron secret to prevent unauthorized access
@@ -48,7 +50,31 @@ export async function GET(req: NextRequest) {
       .order('created_at', { ascending: false })
 
     const weekLeads = leads ?? []
-    if (weekLeads.length === 0) continue // Skip clients with no activity
+
+    // Fetch Ai Voice Callback metrics from Retell
+    let callMetrics = { total: 0, answered: 0, voicemail: 0, avgDuration: 0, positive: 0, neutral: 0, negative: 0, summaries: [] as string[] }
+    if (retellClient && client.plan !== 'essentials') {
+      try {
+        const calls = await retellClient.call.list({ limit: 100 })
+        const clientCalls = calls.filter((c: any) => {
+          const callTime = new Date(c.start_timestamp).getTime()
+          return callTime >= new Date(weekAgo).getTime()
+        })
+        callMetrics.total = clientCalls.length
+        callMetrics.answered = clientCalls.filter((c: any) => c.call_analysis?.call_successful).length
+        callMetrics.voicemail = clientCalls.filter((c: any) => !c.call_analysis?.call_successful).length
+        const durations = clientCalls.map((c: any) => c.end_timestamp && c.start_timestamp ? Math.round((c.end_timestamp - c.start_timestamp) / 1000) : 0).filter((d: number) => d > 0)
+        callMetrics.avgDuration = durations.length > 0 ? Math.round(durations.reduce((a: number, b: number) => a + b, 0) / durations.length) : 0
+        callMetrics.positive = clientCalls.filter((c: any) => c.call_analysis?.user_sentiment === 'Positive').length
+        callMetrics.neutral = clientCalls.filter((c: any) => c.call_analysis?.user_sentiment === 'Neutral').length
+        callMetrics.negative = clientCalls.filter((c: any) => c.call_analysis?.user_sentiment === 'Negative').length
+        callMetrics.summaries = clientCalls.slice(0, 3).map((c: any) => c.call_analysis?.call_summary || '').filter((s: string) => s)
+      } catch (err) {
+        console.error('[weekly-report] Retell fetch failed:', err)
+      }
+    }
+
+    if (weekLeads.length === 0 && callMetrics.total === 0) continue // Skip clients with no activity
 
     // Get leads from the PREVIOUS week (for comparison)
     const twoWeeksAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString()
@@ -148,6 +174,45 @@ export async function GET(req: NextRequest) {
           <div style="font-size: 36px; font-weight: 700; color: ${recoveryRate > 20 ? '#22c55e' : '#fbbf24'};">${recoveryRate}%${rateArrow}</div>
           <div style="font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;">Recovery Rate</div>
         </div>
+
+        ${callMetrics.total > 0 ? `
+        <div style="background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 24px; margin-bottom: 32px;">
+          <div style="font-size: 11px; color: #ff6b35; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 16px;">Ai Voice Callback Performance</div>
+          <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+            <div style="flex: 1; text-align: center;">
+              <div style="font-size: 24px; font-weight: 700; color: #fff;">${callMetrics.total}</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase;">Calls Made</div>
+            </div>
+            <div style="flex: 1; text-align: center;">
+              <div style="font-size: 24px; font-weight: 700; color: #22c55e;">${callMetrics.answered}</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase;">Answered</div>
+            </div>
+            <div style="flex: 1; text-align: center;">
+              <div style="font-size: 24px; font-weight: 700; color: #fff;">${callMetrics.avgDuration}s</div>
+              <div style="font-size: 10px; color: #666; text-transform: uppercase;">Avg Duration</div>
+            </div>
+          </div>
+          <div style="margin-bottom: 12px;">
+            <div style="font-size: 11px; color: #888; margin-bottom: 8px;">Caller Sentiment</div>
+            <div style="display: flex; gap: 8px;">
+              <div style="flex: ${callMetrics.positive || 1}; height: 6px; background: #22c55e; border-radius: 3px;"></div>
+              <div style="flex: ${callMetrics.neutral || 1}; height: 6px; background: #fbbf24; border-radius: 3px;"></div>
+              <div style="flex: ${callMetrics.negative || 1}; height: 6px; background: #f87171; border-radius: 3px;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 6px;">
+              <span style="font-size: 10px; color: #22c55e;">${callMetrics.positive} Positive</span>
+              <span style="font-size: 10px; color: #fbbf24;">${callMetrics.neutral} Neutral</span>
+              <span style="font-size: 10px; color: #f87171;">${callMetrics.negative} Negative</span>
+            </div>
+          </div>
+          ${callMetrics.summaries.length > 0 ? `
+          <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #1e1e1e;">
+            <div style="font-size: 11px; color: #888; margin-bottom: 8px;">Recent Call Summaries</div>
+            ${callMetrics.summaries.map((s: string) => `<div style="font-size: 12px; color: #aaa; margin-bottom: 8px; padding-left: 10px; border-left: 2px solid #ff6b35;">${s.substring(0, 150)}${s.length > 150 ? '...' : ''}</div>`).join('')}
+          </div>
+          ` : ''}
+        </div>
+        ` : ''}
 
         ${weekLeads.length > 0 ? `
         <h3 style="font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">Recent Leads</h3>
