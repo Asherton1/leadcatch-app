@@ -26,19 +26,19 @@ export default function BlogIndex() {
       </div>
 
       <div className="blog-featured reveal">
-        <Link href="/blog/hidden-cost-of-form-abandonment" className="blog-featured-card">
+        <Link href="/blog/ai-voice-callbacks-form-abandonment" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
-            <Image src="/blog-form-abandonment.webp" alt="Form abandonment visualization" fill style={{ objectFit: 'cover' }} />
+            <Image src="/blog-ai-voice-callbacks.webp" alt="Ai voice callback technology" fill style={{ objectFit: 'cover' }} />
           </div>
           <div className="blog-featured-content">
-            <div className="blog-featured-tag">Revenue Recovery</div>
+            <div className="blog-featured-tag">Ai Voice Technology</div>
             <div className="blog-featured-meta">
-              <span className="blog-featured-date">April 7, 2026</span>
+              <span className="blog-featured-date">April 22, 2026</span>
               <span className="blog-featured-dot" />
-              <span className="blog-featured-readtime">7 min read</span>
+              <span className="blog-featured-readtime">6 min read</span>
             </div>
-            <div className="blog-featured-title">The Hidden Cost of Form Abandonment (And What It&apos;s Really Costing Your Business)</div>
-            <div className="blog-featured-excerpt">Most businesses obsess over traffic and ad spend. Almost none of them track the leads that start filling out a form and never finish.</div>
+            <div className="blog-featured-title">Why Ai Voice Callbacks Convert 391% More Abandoned Leads</div>
+            <div className="blog-featured-excerpt">Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts.</div>
             <span className="blog-featured-cta">Read article <span>→</span></span>
           </div>
         </Link>
@@ -49,7 +49,7 @@ export default function BlogIndex() {
         <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
           <Link href="/blog/hidden-cost-of-form-abandonment" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
             <div style={{ position: 'relative', width: '100%', height: '200px' }}>
-              <Image src="/blog-form-abandonment.webp" alt="Form abandonment visualization" fill style={{ objectFit: 'cover' }} />
+              <Image src="/blog-ai-voice-callbacks.webp" alt="Ai voice callback technology" fill style={{ objectFit: 'cover' }} />
             </div>
             <div style={{ padding: '1.5rem 2rem 2rem' }}>
               <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Revenue Recovery</div>
@@ -58,8 +58,8 @@ export default function BlogIndex() {
                 <span style={{ margin: '0 0.5rem' }}>&middot;</span>
                 <span>7 min read</span>
               </div>
-              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>The Hidden Cost of Form Abandonment (And What It&apos;s Really Costing Your Business)</div>
-              <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: 1.6, marginBottom: '1rem' }}>Most businesses obsess over traffic and ad spend. Almost none of them track the leads that start filling out a form and never finish.</div>
+              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>Why Ai Voice Callbacks Convert 391% More Abandoned Leads</div>
+              <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: 1.6, marginBottom: '1rem' }}>Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts.</div>
               <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Read article <span>&rarr;</span></span>
             </div>
           </Link>
