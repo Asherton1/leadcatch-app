@@ -36,9 +36,8 @@ export default function LandingPage() {
         
         <p style={{ fontSize: '0.65rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Born &amp; Built in Dallas, Texas</p>
         <h1 className="hero-animate">
-          You&apos;re Losing<br />
-          <span className="hero-highlight">60% of Your Leads</span><br />
-          Here&apos;s the Proof.
+          Your Best Leads<br />
+          <span className="hero-highlight">Never Hit Submit.</span>
         </h1>
         <p className="hero-subtitle hero-animate-delay">
           Every day, high-value prospects start filling out your contact form — then vanish before hitting submit.
