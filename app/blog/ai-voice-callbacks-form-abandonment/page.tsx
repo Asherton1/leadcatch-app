@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import Footer from '../../components/Footer'
 import BlogNav from '../../components/BlogNav'
 import '../blog.css'
@@ -24,6 +25,10 @@ export default function Post() {
         </div>
         <h1>Why Ai Voice Callbacks Convert 391% More Abandoned Leads</h1>
         <p className="post-subtitle">Your leads are abandoning forms right now. By the time your team follows up, they have already booked with someone else. What if you could call them back in 60 seconds&mdash;automatically?</p>
+      </div>
+
+      <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
+        <Image src="/blog-ai-voice-callbacks.webp" alt="Ai voice callback — phone ringing on desk" fill style={{ objectFit: 'cover' }} />
       </div>
 
       <article className="blog-post-body">
