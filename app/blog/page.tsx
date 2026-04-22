@@ -26,19 +26,7 @@ export default function BlogIndex() {
       </div>
 
       <div className="blog-featured reveal">
-        <Link href="/blog/ai-voice-callbacks-form-abandonment" style={{ textDecoration: 'none' }}>
-              <div className="blog-card">
-                <div className="blog-card-tag">Ai Voice Technology</div>
-                <h3>Why Ai Voice Callbacks Convert 391% More Abandoned Leads</h3>
-                <p>Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts.</p>
-                <div className="blog-card-meta">
-                  <span>April 22, 2026</span>
-                  <span className="blog-card-dot" />
-                  <span>6 min read</span>
-                </div>
-              </div>
-            </Link>
-            <Link href="/blog/hidden-cost-of-form-abandonment" className="blog-featured-card">
+        <Link href="/blog/hidden-cost-of-form-abandonment" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
             <Image src="/blog-form-abandonment.webp" alt="Form abandonment visualization" fill style={{ objectFit: 'cover' }} />
           </div>
@@ -59,6 +47,22 @@ export default function BlogIndex() {
       <div className="blog-more reveal" style={{ maxWidth: '960px', margin: '0 auto', padding: '0 2rem 5rem' }}>
         <h2 style={{ color: '#ff6b35', fontSize: '1.5rem', fontWeight: 700, margin: '0 0 2rem 0' }}>More Insights</h2>
         <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
+          <Link href="/blog/hidden-cost-of-form-abandonment" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+              <Image src="/blog-form-abandonment.webp" alt="Form abandonment visualization" fill style={{ objectFit: 'cover' }} />
+            </div>
+            <div style={{ padding: '1.5rem 2rem 2rem' }}>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Revenue Recovery</div>
+              <div style={{ fontSize: '0.8rem', color: '#666', marginBottom: '0.75rem' }}>
+                <span>April 7, 2026</span>
+                <span style={{ margin: '0 0.5rem' }}>&middot;</span>
+                <span>7 min read</span>
+              </div>
+              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>The Hidden Cost of Form Abandonment (And What It&apos;s Really Costing Your Business)</div>
+              <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: 1.6, marginBottom: '1rem' }}>Most businesses obsess over traffic and ad spend. Almost none of them track the leads that start filling out a form and never finish.</div>
+              <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Read article <span>&rarr;</span></span>
+            </div>
+          </Link>
           <Link href="/blog/google-analytics-form-conversions" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
             <div style={{ position: 'relative', width: '100%', height: '200px' }}>
               <Image src="/blog-ga-lying.webp" alt="Broken analytics dashboard" fill style={{ objectFit: 'cover' }} />
