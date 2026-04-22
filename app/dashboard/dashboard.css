@@ -1184,17 +1184,74 @@ body {
 }
 
 @media (max-width: 768px) {
-  .dashboard  { padding: 1.25rem; }
-  .header { padding: 1rem 0 1.5rem; flex-wrap: wrap; gap: 0.75rem; }
-  .logo { font-size: 1.25rem; }
-  .header-right { gap: 0.5rem; }
-  .client-name { font-size: 0.75rem; }
-  .logout-btn { font-size: 0.75rem; padding: 0.4rem 0.75rem; }
+  .dashboard { padding: 1rem; }
 
-  .stats-grid { grid-template-columns: 1fr; }
-  .controls   { flex-direction: column; align-items: stretch; }
-  .filters    { overflow-x: auto; padding-bottom: 0.5rem; }
+  /* ── Header ── */
+  .header {
+    padding: 0.75rem 0 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .logo { font-size: 1.25rem; }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .client-name {
+    font-size: 0.75rem;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .logout-btn { font-size: 0.7rem; padding: 0.375rem 0.75rem; }
+
+  /* ── Client Selector Bar ── */
+  .client-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .client-bar-label { font-size: 0.625rem; }
+  .cs-btn {
+    min-width: unset;
+    width: 100%;
+    font-size: 0.875rem;
+  }
+  .cs-meta {
+    margin-left: 0;
+    font-size: 0.6875rem;
+    word-break: break-all;
+  }
+  .cs-meta code { font-size: 0.6rem; }
+
+  /* ── Stats Grid ── */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .stat-card { padding: 1rem; }
+  .stat-value { font-size: 1.5rem; }
+  .stat-label { font-size: 0.625rem; }
+
+  /* ── Controls ── */
+  .controls { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+  .filters { overflow-x: auto; padding-bottom: 0.5rem; }
   .search-input { width: 100%; }
+
+  /* ── Lead Cards ── */
+  .lead-card { padding: 1rem; }
+  .lead-main { gap: 0.5rem; }
+  .lead-name { font-size: 0.9375rem; }
+  .lead-email { font-size: 0.75rem; }
+  .lead-phone { font-size: 0.75rem; }
+  .lead-meta { gap: 0.375rem; }
+
+  /* ── Modal ── */
   .modal-mini-metrics { grid-template-columns: repeat(2, 1fr); }
   .modal-card { border-radius: 1rem; }
 }
