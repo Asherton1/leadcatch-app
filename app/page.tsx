@@ -10,6 +10,7 @@ import ProblemAccordion from './components/ProblemAccordion'
 import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
+import GhostLeadDemo from './components/GhostLeadDemo'
 
 export const metadata = {
   title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
@@ -87,7 +88,7 @@ export default function LandingPage() {
 
       <section className="lc-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>The Invisible Revenue Leak</h2>
-        <ProblemAccordion />
+        <section style={{padding:"80px 20px 40px",maxWidth:"1200px",margin:"0 auto"}}><p style={{textAlign:"center",fontSize:"0.7rem",fontWeight:700,color:"#ff6b35",letterSpacing:"0.2em",textTransform:"uppercase",marginBottom:"1rem"}}>See It Live</p><h2 style={{textAlign:"center",fontSize:"clamp(1.75rem,4vw,2.5rem)",fontWeight:800,letterSpacing:"-0.02em",color:"#fff",marginBottom:"3rem",lineHeight:1.15}}>Every Abandoned Form.<br/><span style={{color:"#ff6b35"}}>Recovered in Seconds.</span></h2><GhostLeadDemo /></section><ProblemAccordion />
       </section>
 
       <div className="section-divider" />
