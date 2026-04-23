@@ -2324,3 +2324,236 @@
     padding: 20px 18px;
   }
 }
+
+/* ===== EDITORIAL REFINEMENT ===== */
+
+/* Eyebrow labels */
+.hero-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ff6b35;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.section-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ff6b35;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.section-inner-narrow {
+  max-width: 900px;
+  margin: 0 auto 3.5rem;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* New editorial section titles */
+.section-title-editorial {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: clamp(2rem, 5.5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: #fff;
+  margin: 0;
+}
+
+.section-title-muted {
+  color: #6a6a6a;
+  font-weight: 400;
+  font-style: italic;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  letter-spacing: -0.02em;
+}
+
+/* Hero video spacing */
+.hero-video-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 80px auto 0;
+  padding: 0 10px;
+}
+
+.hero-video-caption {
+  text-align: center;
+  font-size: 13px;
+  color: #7a7f8e;
+  margin-top: 16px;
+  letter-spacing: 0.3px;
+}
+
+/* Problem section emphasis */
+.section-problem {
+  padding: 100px 20px 60px !important;
+}
+
+/* Inline CTA below sections */
+.section-cta-inline {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.cta-secondary-minimal {
+  display: inline-block;
+  color: #ff6b35;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+  padding: 0.5rem 0;
+}
+
+.cta-secondary-minimal:hover {
+  border-bottom-color: #ff6b35;
+}
+
+/* Refined feature grid */
+.feature-grid-refined {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.feature-card-refined {
+  background: #0f0f0f;
+  border: 1px solid #1e1e1e;
+  border-radius: 14px;
+  padding: 2.25rem 2rem;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card-refined::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #ff6b35 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.feature-card-refined:hover {
+  border-color: rgba(255, 107, 53, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 60px rgba(255, 107, 53, 0.08);
+}
+
+.feature-card-refined:hover::before {
+  opacity: 1;
+}
+
+.feature-icon-refined {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(255, 107, 53, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 107, 53, 0.15);
+}
+
+.feature-card-refined h3 {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.feature-card-refined p {
+  color: #888;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Refined final CTA */
+.final-cta {
+  position: relative;
+  text-align: center;
+  padding: 120px 20px 100px;
+  overflow: hidden;
+}
+
+.final-cta-orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  animation: pulse-orb 4s ease-in-out infinite;
+}
+
+@keyframes pulse-orb {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+
+.final-cta > * {
+  position: relative;
+  z-index: 1;
+}
+
+.final-cta h2 {
+  font-size: clamp(2rem, 5.5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: #fff;
+  margin: 0 0 1.5rem;
+}
+
+.final-cta-sub {
+  font-size: 1.05rem;
+  color: #999;
+  max-width: 580px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.65;
+}
+
+/* Mobile refinements */
+@media (max-width: 768px) {
+  .feature-grid-refined {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .feature-card-refined {
+    padding: 1.75rem 1.5rem;
+  }
+  .section-inner-narrow {
+    margin-bottom: 2.5rem;
+  }
+  .section-problem {
+    padding: 60px 20px 40px !important;
+  }
+  .final-cta {
+    padding: 80px 20px 60px;
+  }
+  .final-cta-orb {
+    width: 400px;
+    height: 400px;
+  }
+  .hero-video-wrap {
+    margin-top: 50px;
+  }
+}
