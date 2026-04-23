@@ -2356,19 +2356,24 @@
 
 /* New editorial section titles */
 .section-title-editorial {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: clamp(2rem, 5.5vw, 3.75rem);
+  font-family: "Inter", -apple-system, sans-serif;
+  font-size: clamp(1.35rem, 5vw, 3.25rem);
   font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
   color: #fff;
   margin: 0;
 }
 
 .section-title-muted {
-  color: #6a6a6a;
+  color: #888;
+  font-family: "Inter", -apple-system, sans-serif;
   font-weight: 400;
-  letter-spacing: -0.035em;
+  font-size: 1.1rem;
+  letter-spacing: 0;
+  display: block;
+  margin-top: 0.75rem;
+  line-height: 1.6;
 }
 
 /* Hero video spacing */
