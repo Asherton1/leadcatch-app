@@ -2285,16 +2285,42 @@
 @media (max-width: 900px) {
   .ghost-demo-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 16px;
   }
   .ghost-arrow {
-    transform: rotate(90deg);
+    flex-direction: row;
     margin: 0 auto;
+  }
+  .ghost-arrow-line {
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(180deg, transparent 0%, #ff6b35 50%, transparent 100%);
+    animation: flow-vertical 2s infinite linear;
+  }
+  @keyframes flow-vertical {
+    0% { background-position: 0 -60px; }
+    100% { background-position: 0 60px; }
+  }
+  .ghost-arrow-line::after {
+    right: auto;
+    left: -4px;
+    top: auto;
+    bottom: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid #ff6b35;
+    border-bottom: none;
+  }
+  .ghost-arrow-label {
+    display: none;
   }
   .ghost-capture {
     transform: translateY(20px);
   }
   .ghost-capture-visible {
     transform: translateY(0);
+  }
+  .ghost-form-body {
+    padding: 20px 18px;
   }
 }
