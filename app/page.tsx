@@ -144,7 +144,7 @@ export default function LandingPage() {
 
       {/* FINAL CTA */}
       <section className="final-cta reveal">
-        <div className="final-cta-orb" />
+        
         <p className="section-eyebrow">Ready to Stop Losing Leads</p>
         <h2>
           Every abandoned form is<br />
