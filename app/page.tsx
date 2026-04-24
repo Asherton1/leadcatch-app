@@ -87,6 +87,7 @@ export default function LandingPage() {
 
       <section className="lc-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>The Invisible Revenue Leak</h2>
+        <p className="section-subtitle">60–70% of form visitors start typing and never hit submit. Until now, you had no way to see them.</p>
         <ProblemAccordion />
       </section>
 
