@@ -6,6 +6,7 @@ import StatsBar from './components/StatsBar'
 import GSAPAnimations from './components/GSAPAnimations'
 import MobileNav from './components/MobileNav'
 import Footer from './components/Footer'
+import ProblemAccordion from './components/ProblemAccordion'
 import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
@@ -13,7 +14,7 @@ import GhostLeadDemo from './components/GhostLeadDemo'
 
 export const metadata = {
   title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
-  description: 'Capture partial form submissions and auto-recover lost leads. Born & Built in Dallas, Texas.',
+  description: 'Capture partial form submissions and auto-recover lost leads. Born &amp; Built in Dallas, Texas.',
 }
 
 export default function LandingPage() {
@@ -25,16 +26,16 @@ export default function LandingPage() {
 
       <nav className="lc-nav">
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" priority />
-        </Link>
+            <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" priority />
+          </Link>
         <MobileNav />
       </nav>
 
-      {/* HERO */}
       <section className="hero">
         <ParticleNetwork />
         <div className="hero-glow-orb" />
-        <p className="hero-eyebrow">Born & Built in Dallas, Texas</p>
+        
+        <p style={{ fontSize: '0.65rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Born &amp; Built in Dallas, Texas</p>
         <h1 className="hero-animate">
           Your Best Leads<br />
           <span className="hero-highlight">Never Hit Submit.</span>
@@ -48,96 +49,139 @@ export default function LandingPage() {
           <Link href="/start-trial" className="cta-secondary">Start Your 7-Day Free Trial</Link>
         </div>
 
-        <div className="hero-video-wrap">
+        {/* Dashboard Demo GIF */}
+        <div style={{
+          width: '100%',
+          maxWidth: '1200px',
+          margin: '80px auto 60px',
+          padding: '0 10px',
+        }}>
           <div className="dashboard-video-wrap">
-            <video src="/dashboard-demo.mp4" autoPlay loop muted playsInline style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <video
+              src="/dashboard-demo.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+              }}
+            />
           </div>
-          <p className="hero-video-caption">Live dashboard — leads captured the moment they start typing</p>
+          <p style={{
+            textAlign: 'center',
+            fontSize: '13px',
+            color: '#7a7f8e',
+            marginTop: '16px',
+            letterSpacing: '0.3px',
+          }}>
+            Live dashboard — leads captured the moment they start typing
+          </p>
         </div>
       </section>
 
-      <StatsBar />
+      <div className="stats-bridge reveal">
+        <StatsBar />
+      </div>
 
-      {/* THE PROBLEM — ghost demo IS the problem visualization */}
-      <section className="lc-section section-problem">
-        <div className="section-inner-narrow">
-          <p className="section-eyebrow">The Invisible Revenue Leak</p>
-          <h2 className="section-title-editorial">
-            60–70% of form visitors start typing.<br />
-            <span className="section-title-muted">Most businesses never know they existed.</span>
-          </h2>
-        </div>
-        <GhostLeadDemo />
-        <div className="section-cta-inline">
-          <Link href="/test-form" className="cta-primary">Try It Yourself</Link>
-        </div>
+      <section className="lc-section">
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>The Invisible Revenue Leak</h2>
+        <section style={{ padding: '60px 20px 40px', maxWidth: '1200px', margin: '0 auto' }}>
+          <p style={{ textAlign: 'center', fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1rem' }}>See It Live</p>
+          <h2 className="section-title" style={{ fontSize: 'clamp(1.35rem, 5vw, 3.25rem)', lineHeight: 1.2, marginBottom: '0.75rem', marginTop: '1.5rem' }}>Every Abandoned Form. <span style={{ color: '#ff6b35' }}>Recovered in Seconds.</span></h2>
+          <p className="section-subtitle">Watch what happens when a visitor starts filling out a form — then leaves without submitting.</p>
+          <GhostLeadDemo />
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <a href="/test-form" className="cta-primary">Try It Yourself</a>
+          </div>
+        </section>
+        <div className="section-divider" />
+        <ProblemAccordion />
       </section>
 
       <div className="section-divider" />
 
-      {/* HOW IT WORKS — steps */}
-      <section className="lc-section">
-        <div className="section-inner-narrow">
-          <p className="section-eyebrow">How It Works</p>
-          <h2 className="section-title-editorial">
-            Three steps.<br />
-            <span className="section-title-muted">Recovered revenue on autopilot.</span>
-          </h2>
-        </div>
+      <section className="lc-section how-it-works-section">
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Three Steps to Recovered Revenue</h2>
+        <p className="section-subtitle">No complex setup. No dev team required. Just results.</p>
         <StepsAccordion />
       </section>
 
       <div className="section-divider" />
 
-      {/* FEATURES — unified */}
-      <section className="lc-section">
-        <div className="section-inner-narrow">
-          <p className="section-eyebrow">Built for Recovery</p>
-          <h2 className="section-title-editorial">
-            Every feature.<br />
-            <span className="section-title-muted">Designed to bring leads back.</span>
-          </h2>
-        </div>
-        <div className="feature-grid-refined">
-          <div className="feature-card-refined reveal">
-            <div className="feature-icon-refined">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <section className="lc-section screenshot-section">
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Every Lost Lead. Right In Front of You.</h2>
+        <p className="section-subtitle">Names. Emails. Phone numbers. Dollar amounts. Every lead that slipped away — now right in front of you.</p>
+        <div className="screenshot-glow-wrap">
+          <div className="screenshot-glow" />
+          <div className="screenshot-mock">
+            <div className="mock-bar">
+              <span /><span /><span />
             </div>
-            <h3>Ai Voice Callback</h3>
-            <p>An Ai assistant calls back your abandoned leads within 60 seconds — sounds like your front desk, books appointments, answers questions.</p>
-          </div>
-          <div className="feature-card-refined reveal">
-            <div className="feature-icon-refined">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div className="mock-content">
+              <div className="mock-stat"><div className="mock-num">47</div><div className="mock-label">Abandoned Leads</div></div>
+              <div className="mock-stat"><div className="mock-num orange">$51,700</div><div className="mock-label">Revenue at Risk</div></div>
+              <div className="mock-stat"><div className="mock-num">12</div><div className="mock-label">Recovered</div></div>
+              <div className="mock-stat"><div className="mock-num">$13,200</div><div className="mock-label">Recovered Revenue</div></div>
             </div>
-            <h3>Real-Time Capture</h3>
-            <p>Captures name, email, and phone the moment a visitor starts typing — before they leave the page. No submit button required.</p>
-          </div>
-          <div className="feature-card-refined reveal">
-            <div className="feature-icon-refined">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div className="mock-rows">
+              {['Sarah M.', 'James R.', 'Kelsey T.', 'David L.'].map((name, i) => (
+                <div className="mock-row" key={i}>
+                  <div className="mock-avatar">{name[0]}</div>
+                  <div className="mock-info">
+                    <div className="mock-name">{name}</div>
+                    <div className="mock-email">{name.toLowerCase().replace(' ', '.')}@gmail.com</div>
+                  </div>
+                  <div className={`mock-status ${i === 0 ? 'status-converted' : i === 1 ? 'status-contacted' : 'status-open'}`}>
+                    {i === 0 ? 'Converted' : i === 1 ? 'Contacted' : 'Open'}
+                  </div>
+                </div>
+              ))}
             </div>
-            <h3>Automated Recovery</h3>
-            <p>Personalized recovery emails fire automatically with your branding, your voice, and your offer — all tied to each client's settings.</p>
           </div>
-        </div>
-        <div className="section-cta-inline">
-          <Link href="/how-it-works" className="cta-secondary-minimal">Explore all features &nbsp;→</Link>
         </div>
       </section>
 
-      <div className="section-divider" />
-
-      {/* INDUSTRIES */}
       <section className="lc-section">
-        <div className="section-inner-narrow">
-          <p className="section-eyebrow">Who It's For</p>
-          <h2 className="section-title-editorial">
-            Purpose-built.<br />
-            <span className="section-title-muted">For high-ticket businesses.</span>
-          </h2>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Built to Recover Revenue</h2>
+        <p className="section-subtitle">One script tag. Full automation. Every feature designed to bring leads back.</p>
+        <div className="top-features-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }}>
+          <div className="wow-card" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem' }}>
+            <div style={{ width: 48, height: 48, borderRadius: '12px', background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Ai Voice Callback</h3>
+            <p style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>Lead abandons your form with a phone number? Our Ai calls them back within 60 seconds on behalf of your business. Natural voice, real conversation, 391% higher conversion.</p>
+          </div>
+          <div className="wow-card" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem' }}>
+            <div style={{ width: 48, height: 48, borderRadius: '12px', background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+            </div>
+            <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Real-Time Capture</h3>
+            <p style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>The instant a visitor types into your form, their name, email, and phone are captured. Before they hit submit. Before they leave. Before you lose them.</p>
+          </div>
+          <div className="wow-card" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem' }}>
+            <div style={{ width: 48, height: 48, borderRadius: '12px', background: 'rgba(255,107,53,0.08)', border: '1px solid rgba(255,107,53,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+            </div>
+            <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Automated Recovery</h3>
+            <p style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>ReCapture emails abandoned leads on your behalf automatically with your branding, your name, and timing you control. They come back without you lifting a finger.</p>
+          </div>
+
         </div>
-        <IndustriesAccordion />
+        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+          <Link href="/why-us" className="explore-features-link page-transition-link">
+            Explore all features
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+          </Link>
+        </div>
+      </section>
+
+      <section className="lc-section">
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Purpose-Built for High-Ticket Industries</h2>
+        <p className="section-subtitle">ReCapture is not a generic form tool. Every feature was designed for businesses where a single recovered lead pays for the entire year.</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }} className="industries-grid">
           <a href="/for-luxury-real-estate" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem', textDecoration: 'none', transition: 'border-color 0.2s' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
@@ -254,9 +298,9 @@ export default function LandingPage() {
           <Link href="/start-trial" className="cta-secondary">Start Your 7-Day Free Trial</Link>
         </div>
         <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-          <Link href="/pricing" className="page-transition-link" style={{ color: '#666', fontSize: '0.9375rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}>See Pricing &rarr;</Link></div>
+          <Link href="/pricing" className="page-transition-link" style={{ color: '#666', fontSize: '0.9375rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}>See Pricing &rarr;</Link>
+        </div>
       </section>
-
 
       <Footer />
     </div>
