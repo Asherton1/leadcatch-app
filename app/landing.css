@@ -201,6 +201,7 @@
   -webkit-text-fill-color: unset;
 }
 
+
 .hero-subtitle {
   font-size: 1.25rem;
   color: var(--text-secondary);
@@ -764,6 +765,8 @@
   text-align: center;
 }
 
+
+
 .final-cta-glow {
   position: absolute;
   top: 50%;
@@ -928,13 +931,7 @@
 /* ── Screenshot Mock ── */
 .screenshot-section { text-align: center; }
 .screenshot-glow-wrap { position: relative; max-width: 780px; margin: 48px auto 0; }
-.screenshot-glow {
-  position: absolute;
-  inset: -40px;
-  background: radial-gradient(ellipse at center, rgba(255,107,53,0.18) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
+
 .screenshot-mock {
   position: relative;
   z-index: 1;
@@ -1794,14 +1791,7 @@
 }
 
 /* ── Hero text enhancements ────────────────────────────────────────────── */
-.hero-highlight {
-  background: linear-gradient(135deg, #ff6b35, #ff8659, #ff6b35);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 3s ease-in-out infinite;
-}
+
 
 @keyframes gradientShift {
   0%, 100% { background-position: 0% center; }
@@ -2247,4 +2237,13 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .gc-cursor, .gc-pulse { animation: none; }
+}
+
+
+/* ========================================
+   SECTION TONE VARIANCE (De-Claudify pass)
+   ======================================== */
+.features-tone,
+.testimonials-tone {
+  background: #0c0c0c;
 }
