@@ -144,66 +144,141 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="lc-section">
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Purpose-Built for High-Ticket Industries</h2>
-        <p className="section-subtitle">ReCapture is not a generic form tool. Every feature was designed for businesses where a single recovered lead pays for the entire year.</p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }} className="industries-grid">
-          <a href="/for-luxury-real-estate" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem', textDecoration: 'none', transition: 'border-color 0.2s' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Luxury Real Estate</span>
+      <section className="industries-v2">
+        <p className="iv2-eyebrow">§ Who it&apos;s for</p>
+        <h2 className="iv2-headline">
+          <span className="iv2-headline-primary">Purpose-built for industries</span>{' '}
+          <span className="iv2-headline-muted">where one recovered lead pays for the entire year.</span>
+        </h2>
+
+        <div className="iv2-grid">
+          <a href="/for-luxury-real-estate" className="iv2-cell">
+            <div className="iv2-cell-top">
+              <span className="iv2-fig">FIG 01</span>
+              <svg className="iv2-wireframe" viewBox="0 0 56 56" fill="none" stroke="#ff6b35" strokeWidth="1" strokeLinecap="round">
+                <line x1="8" y1="48" x2="48" y2="48"/>
+                <line x1="12" y1="16" x2="12" y2="48"/>
+                <line x1="22" y1="16" x2="22" y2="48"/>
+                <line x1="34" y1="16" x2="34" y2="48"/>
+                <line x1="44" y1="16" x2="44" y2="48"/>
+                <polyline points="10,16 28,6 46,16"/>
+                <line x1="16" y1="26" x2="18" y2="26"/>
+                <line x1="26" y1="26" x2="30" y2="26"/>
+                <line x1="38" y1="26" x2="40" y2="26"/>
+                <line x1="16" y1="36" x2="18" y2="36"/>
+                <line x1="26" y1="36" x2="30" y2="36"/>
+                <line x1="38" y1="36" x2="40" y2="36"/>
+              </svg>
             </div>
-            <p style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', margin: '0 0 0.5rem 0', lineHeight: 1.3 }}>71% of property inquiries are abandoned</p>
-            <p style={{ color: '#666', fontSize: '0.85rem', margin: '0 0 1rem 0', lineHeight: 1.6 }}>Avg. deal: $12,000. One recovered buyer pays for the entire year.</p>
-            <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Learn more &rarr;</span>
+            <h3 className="iv2-stat">71%</h3>
+            <p className="iv2-stat-caption">of property inquiries are abandoned</p>
+            <div className="iv2-cell-bottom">
+              <h4 className="iv2-industry">Luxury Real Estate</h4>
+              <p className="iv2-description">Avg. deal $12,000. One recovered buyer pays for the entire year.</p>
+              <span className="iv2-link">Learn more <span className="iv2-arrow">&rarr;</span></span>
+            </div>
           </a>
-          <a href="/for-luxury-auto" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem', textDecoration: 'none', transition: 'border-color 0.2s' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 17h14M5 17a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1l2-4h8l2 4h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M5 17a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>
-              <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Luxury Auto</span>
+
+          <a href="/for-luxury-auto" className="iv2-cell">
+            <div className="iv2-cell-top">
+              <span className="iv2-fig">FIG 02</span>
+              <svg className="iv2-wireframe" viewBox="0 0 56 56" fill="none" stroke="#ff6b35" strokeWidth="1" strokeLinecap="round">
+                <path d="M6 36 L12 22 L44 22 L50 36 Z"/>
+                <line x1="6" y1="36" x2="50" y2="36"/>
+                <circle cx="16" cy="42" r="4"/>
+                <circle cx="40" cy="42" r="4"/>
+                <line x1="18" y1="28" x2="38" y2="28"/>
+              </svg>
             </div>
-            <p style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', margin: '0 0 0.5rem 0', lineHeight: 1.3 }}>74% of vehicle inquiries never get submitted</p>
-            <p style={{ color: '#666', fontSize: '0.85rem', margin: '0 0 1rem 0', lineHeight: 1.6 }}>Avg. deal: $8,500. Capture buyers before they drive to the next lot.</p>
-            <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Learn more &rarr;</span>
+            <h3 className="iv2-stat">74%</h3>
+            <p className="iv2-stat-caption">of vehicle inquiries never get submitted</p>
+            <div className="iv2-cell-bottom">
+              <h4 className="iv2-industry">Luxury Auto</h4>
+              <p className="iv2-description">Avg. deal $8,500. Capture buyers before they drive to the next lot.</p>
+              <span className="iv2-link">Learn more <span className="iv2-arrow">&rarr;</span></span>
+            </div>
           </a>
-          <a href="/for-plastic-surgery" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem', textDecoration: 'none', transition: 'border-color 0.2s' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-              <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Plastic Surgery</span>
+
+          <a href="/for-plastic-surgery" className="iv2-cell">
+            <div className="iv2-cell-top">
+              <span className="iv2-fig">FIG 03</span>
+              <svg className="iv2-wireframe" viewBox="0 0 56 56" fill="none" stroke="#ff6b35" strokeWidth="1" strokeLinecap="round">
+                <circle cx="28" cy="28" r="18"/>
+                <circle cx="28" cy="28" r="10"/>
+                <circle cx="28" cy="28" r="1.5" fill="#ff6b35"/>
+                <line x1="28" y1="4" x2="28" y2="14"/>
+                <line x1="28" y1="42" x2="28" y2="52"/>
+                <line x1="4" y1="28" x2="14" y2="28"/>
+                <line x1="42" y1="28" x2="52" y2="28"/>
+              </svg>
             </div>
-            <p style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', margin: '0 0 0.5rem 0', lineHeight: 1.3 }}>72% of consultation forms are abandoned</p>
-            <p style={{ color: '#666', fontSize: '0.85rem', margin: '0 0 1rem 0', lineHeight: 1.6 }}>Avg. procedure: $6,500. Recover patients who got cold feet.</p>
-            <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Learn more &rarr;</span>
+            <h3 className="iv2-stat">72%</h3>
+            <p className="iv2-stat-caption">of consultation forms are abandoned</p>
+            <div className="iv2-cell-bottom">
+              <h4 className="iv2-industry">Plastic Surgery</h4>
+              <p className="iv2-description">Avg. procedure $6,500. Recover patients who got cold feet.</p>
+              <span className="iv2-link">Learn more <span className="iv2-arrow">&rarr;</span></span>
+            </div>
           </a>
-          <a href="/for-property-management" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem', textDecoration: 'none', transition: 'border-color 0.2s' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/></svg>
-              <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Property Management</span>
+
+          <a href="/for-property-management" className="iv2-cell">
+            <div className="iv2-cell-top">
+              <span className="iv2-fig">FIG 04</span>
+              <svg className="iv2-wireframe" viewBox="0 0 56 56" fill="none" stroke="#ff6b35" strokeWidth="1" strokeLinecap="round">
+                <rect x="8" y="8" width="40" height="40"/>
+                <line x1="22" y1="8" x2="22" y2="48"/>
+                <line x1="34" y1="8" x2="34" y2="48"/>
+                <line x1="8" y1="22" x2="48" y2="22"/>
+                <line x1="8" y1="34" x2="48" y2="34"/>
+              </svg>
             </div>
-            <p style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', margin: '0 0 0.5rem 0', lineHeight: 1.3 }}>70% of leasing inquiries are abandoned</p>
-            <p style={{ color: '#666', fontSize: '0.85rem', margin: '0 0 1rem 0', lineHeight: 1.6 }}>Avg. lease: $3,200/yr. Enterprise dashboard for 10 to 500+ properties.</p>
-            <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Learn more &rarr;</span>
+            <h3 className="iv2-stat">70%</h3>
+            <p className="iv2-stat-caption">of leasing inquiries are abandoned</p>
+            <div className="iv2-cell-bottom">
+              <h4 className="iv2-industry">Property Management</h4>
+              <p className="iv2-description">Avg. lease $3,200/yr. Enterprise dashboard for 10 to 500+ properties.</p>
+              <span className="iv2-link">Learn more <span className="iv2-arrow">&rarr;</span></span>
+            </div>
           </a>
-          <a href="/for-med-spas" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem', textDecoration: 'none', transition: 'border-color 0.2s' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></svg>
-              <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Med Spas</span>
+
+          <a href="/for-med-spas" className="iv2-cell">
+            <div className="iv2-cell-top">
+              <span className="iv2-fig">FIG 05</span>
+              <svg className="iv2-wireframe" viewBox="0 0 56 56" fill="none" stroke="#ff6b35" strokeWidth="1" strokeLinecap="round">
+                <polygon points="28,6 50,28 28,50 6,28"/>
+                <polygon points="28,16 40,28 28,40 16,28"/>
+                <circle cx="28" cy="28" r="2"/>
+              </svg>
             </div>
-            <p style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', margin: '0 0 0.5rem 0', lineHeight: 1.3 }}>67% of consultation forms are abandoned</p>
-            <p style={{ color: '#666', fontSize: '0.85rem', margin: '0 0 1rem 0', lineHeight: 1.6 }}>Avg. client: $2,800. Recover leads your ads already paid for.</p>
-            <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Learn more &rarr;</span>
+            <h3 className="iv2-stat">67%</h3>
+            <p className="iv2-stat-caption">of consultation forms are abandoned</p>
+            <div className="iv2-cell-bottom">
+              <h4 className="iv2-industry">Med Spas</h4>
+              <p className="iv2-description">Avg. client $2,800. Recover leads your ads already paid for.</p>
+              <span className="iv2-link">Learn more <span className="iv2-arrow">&rarr;</span></span>
+            </div>
           </a>
-          <a href="/for-dental" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2rem', textDecoration: 'none', transition: 'border-color 0.2s' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 2C4 2 2 5 2 8c0 3 1 5 2 7s2 5 3 7c.5 1 1.5 1 2 0 .5-1.5 1-3 3-3s2.5 1.5 3 3c.5 1 1.5 1 2 0 1-2 2-5 3-7s2-4 2-7c0-3-2-6-5-6-1.5 0-2.5.5-3 2-.5-1.5-1.5-2-3-2z"/></svg>
-              <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Dental Practices</span>
+
+          <a href="/for-dental" className="iv2-cell">
+            <div className="iv2-cell-top">
+              <span className="iv2-fig">FIG 06</span>
+              <svg className="iv2-wireframe" viewBox="0 0 56 56" fill="none" stroke="#ff6b35" strokeWidth="1" strokeLinecap="round">
+                <polyline points="8,42 14,18 22,32 28,14 34,32 42,18 48,42"/>
+                <line x1="8" y1="42" x2="48" y2="42"/>
+                <circle cx="14" cy="18" r="1.5" fill="#ff6b35"/>
+                <circle cx="28" cy="14" r="1.5" fill="#ff6b35"/>
+                <circle cx="42" cy="18" r="1.5" fill="#ff6b35"/>
+              </svg>
             </div>
-            <p style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', margin: '0 0 0.5rem 0', lineHeight: 1.3 }}>65% of appointment forms never get submitted</p>
-            <p style={{ color: '#666', fontSize: '0.85rem', margin: '0 0 1rem 0', lineHeight: 1.6 }}>Avg. patient: $1,900. Built for groups with 5 to 50+ offices.</p>
-            <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Learn more &rarr;</span>
+            <h3 className="iv2-stat">65%</h3>
+            <p className="iv2-stat-caption">of appointment forms never get submitted</p>
+            <div className="iv2-cell-bottom">
+              <h4 className="iv2-industry">Dental Practices</h4>
+              <p className="iv2-description">Avg. patient $1,900. Built for groups with 5 to 50+ offices.</p>
+              <span className="iv2-link">Learn more <span className="iv2-arrow">&rarr;</span></span>
+            </div>
           </a>
         </div>
-        <IndustriesAccordion />
       </section>
 
 
