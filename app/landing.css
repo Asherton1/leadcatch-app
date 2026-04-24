@@ -2067,3 +2067,7 @@
   .ambient-bg { display: none !important; }
   .hero-glow-orb { display: none !important; }
 }
+
+@media (max-width: 900px) {
+  .ghost-demo-wrap { display: none; }
+}
