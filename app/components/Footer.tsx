@@ -26,8 +26,7 @@ export default function Footer() {
         <Link href="/calculator" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>ROI Estimator</Link>
         <Link href="/start-trial" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Start Trial</Link>
         <Link href="/login" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Login</Link>
-        <a href="mailto:hello@userecapture.com" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Contact</a>
-      </div>
+        <a href="mailto:hello@userecapture.com" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Contact</a>      </div>
       <div style={{ borderTop: '1px solid #1e1e1e', maxWidth: '500px', margin: '0 auto' }} className="footer-nav-links" />
 
       {/* Vertical pages — hidden on mobile */}
@@ -69,6 +68,7 @@ export default function Footer() {
       <p style={{ color: '#555', fontSize: '12px' }}>&copy; 2026 ReCapture</p>
       <p style={{ color: '#555', fontSize: '12px' }}>Born &amp; Built in Dallas, Texas</p>
       <p style={{ color: '#555', fontSize: '12px', marginTop: '8px' }}>hello@userecapture.com</p>
+      <p style={{ color: '#555', fontSize: '12px' }}><a href="tel:+18886060630" style={{ color: '#555', textDecoration: 'none' }}>(888) 606-0630</a></p>
     </footer>
   )
 }
