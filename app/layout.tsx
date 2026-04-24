@@ -1,6 +1,6 @@
 import './globals.css'
 import PremiumEffects from './components/PremiumEffects'
-import PageTransitions from './components/PageTransitions'
+// import PageTransitions from './components/PageTransitions'
 import Script from 'next/script'
 import type { Metadata } from 'next'
 
@@ -91,7 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <PremiumEffects />
-        <PageTransitions />
+        
         {children}
       </body>
     </html>
