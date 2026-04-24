@@ -49,7 +49,11 @@ export default function GhostLeadDemoCompact() {
       timeouts.push(setTimeout(() => setStage(4), abandonTime))
       timeouts.push(setTimeout(() => setCaptured(true), abandonTime + 600))
 
-      timeouts.push(setTimeout(runSequence, abandonTime + 5000))
+      // Only loop on desktop — mobile runs once and stays on captured state
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 900
+      if (!isMobile) {
+        timeouts.push(setTimeout(runSequence, abandonTime + 5000))
+      }
     }
 
     runSequence()
