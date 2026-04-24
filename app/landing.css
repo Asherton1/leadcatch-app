@@ -2393,9 +2393,7 @@
 }
 
 /* Problem section emphasis */
-.section-problem {
-  padding: 100px 20px 60px !important;
-}
+.section-problem { padding: 60px 20px 40px; }
 
 /* Inline CTA below sections */
 .section-cta-inline {

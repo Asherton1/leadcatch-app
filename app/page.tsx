@@ -257,22 +257,6 @@ export default function LandingPage() {
           <Link href="/pricing" className="page-transition-link" style={{ color: '#666', fontSize: '0.9375rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}>See Pricing &rarr;</Link></div>
       </section>
 
-      <div className="section-divider" />
-
-      {/* FINAL CTA */}
-      <section className="final-cta reveal">
-        
-        <p className="section-eyebrow">Ready to Stop Losing Leads</p>
-        <h2>
-          Every abandoned form is<br />
-          <span className="hero-highlight">money on the table.</span>
-        </h2>
-        <p className="final-cta-sub">Start your 7-day free trial. No credit card required. One line of code. Leads recovered from day one.</p>
-        <div className="cta-group">
-          <Link href="/start-trial" className="cta-primary">Start Your Free Trial</Link>
-          <Link href="/test-form" className="cta-secondary">Try the Live Demo</Link>
-        </div>
-      </section>
 
       <Footer />
     </div>
