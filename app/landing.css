@@ -1809,9 +1809,9 @@
 }
 
 /* ── Scroll reveal enhancements ────────────────────────────────────────── */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
+.reveal { 
+  opacity: 1;
+  transform: none;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
@@ -2060,4 +2060,10 @@
   .ghost-capture { transform: translateY(20px); }
   .ghost-capture-visible { transform: translateY(0); }
   .ghost-form-body { padding: 20px 18px; }
+}
+
+
+@media (max-width: 900px) {
+  .ambient-bg { display: none !important; }
+  .hero-glow-orb { display: none !important; }
 }
