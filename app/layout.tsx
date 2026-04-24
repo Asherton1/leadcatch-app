@@ -1,6 +1,6 @@
 import './globals.css'
 import PremiumEffects from './components/PremiumEffects'
-// import PageTransitions from './components/PageTransitions'
+
 import Script from 'next/script'
 import type { Metadata } from 'next'
 

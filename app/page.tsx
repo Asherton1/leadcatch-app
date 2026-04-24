@@ -87,7 +87,7 @@ export default function LandingPage() {
       </div>
 
       <section className="lc-section">
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}></h2>
+        
         <section style={{ padding: '60px 20px 40px', maxWidth: '1200px', margin: '0 auto' }}>
           <p style={{ textAlign: 'center', fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1rem' }}>See It Live</p>
           <h2 className="section-title" style={{ fontSize: 'clamp(1.35rem, 5vw, 3.25rem)', lineHeight: 1.2, marginBottom: '0.75rem', marginTop: '1.5rem' }}>Every Abandoned Form.<br /><span style={{ color: '#ff6b35' }}>Recovered in Seconds.</span></h2>

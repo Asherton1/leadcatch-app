@@ -1927,10 +1927,7 @@
 }
 
 /* ── Page transition effect ────────────────────────────────────────────── */
-.page-transitioning {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
+
 
 /* ── See Pricing link hover ────────────────────────────────────────────── */
 .final-cta a[href="/pricing"]:hover {
