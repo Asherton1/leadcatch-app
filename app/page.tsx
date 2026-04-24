@@ -10,7 +10,7 @@ import ProblemAccordion from './components/ProblemAccordion'
 import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
-import GhostLeadDemo from './components/GhostLeadDemo'
+import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
 
 export const metadata = {
   title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
@@ -34,51 +34,25 @@ export default function LandingPage() {
       <section className="hero">
         <ParticleNetwork />
         <div className="hero-glow-orb" />
-        
-        <p style={{ fontSize: '0.65rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Born &amp; Built in Dallas, Texas</p>
-        <h1 className="hero-animate">
-          Your Best Leads<br />
-          <span className="hero-highlight">Never Hit Submit.</span>
-        </h1>
-        <p className="hero-subtitle hero-animate-delay">
-          Every day, high-value prospects start filling out your contact form — then vanish before hitting submit.
-          ReCapture captures their info the moment they start typing and gives you a second chance to close the deal.
-        </p>
-        <div className="cta-group hero-animate-delay2">
-          <Link href="/test-form" className="cta-primary">Try the Live Demo</Link>
-          <Link href="/start-trial" className="cta-secondary">Start Your 7-Day Free Trial</Link>
-        </div>
 
-        {/* Dashboard Demo GIF */}
-        <div style={{
-          width: '100%',
-          maxWidth: '1200px',
-          margin: '80px auto 60px',
-          padding: '0 10px',
-        }}>
-          <div className="dashboard-video-wrap">
-            <video
-              src="/dashboard-demo.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              style={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-              }}
-            />
+        <div className="hero-split">
+          <div className="hero-left">
+            <p style={{ fontSize: '0.65rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Born &amp; Built in Dallas, Texas</p>
+            <h1 className="hero-animate">
+              Your Best Leads<br />
+              <span className="hero-highlight">Never Hit Submit.</span>
+            </h1>
+            <p className="hero-subtitle hero-animate-delay">
+              Every day, high-value prospects start filling out your contact form — then vanish before hitting submit.
+              ReCapture captures their info the moment they start typing and gives you a second chance to close the deal.
+            </p>
+            <div className="cta-group hero-animate-delay2">
+              <Link href="/start-trial" className="cta-primary">Start Your 7-Day Free Trial</Link>
+            </div>
           </div>
-          <p style={{
-            textAlign: 'center',
-            fontSize: '13px',
-            color: '#7a7f8e',
-            marginTop: '16px',
-            letterSpacing: '0.3px',
-          }}>
-            Live dashboard — leads captured the moment they start typing
-          </p>
+          <div className="hero-right hero-animate-delay2">
+            <GhostLeadDemoCompact />
+          </div>
         </div>
       </section>
 
@@ -88,15 +62,6 @@ export default function LandingPage() {
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>The Invisible Revenue Leak</h2>
         <p className="section-subtitle">60–70% of form visitors start typing and never hit submit. Until now, you had no way to see them.</p>
         <StatsBar />
-        <section className="ghost-demo-section" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-          <p className="section-eyebrow" style={{ textAlign: 'center', fontSize: '0.65rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1rem' }}>See It Live</p>
-          <h2 className="section-title" style={{ fontSize: 'clamp(1.35rem, 5vw, 3.25rem)', lineHeight: 1.2, marginBottom: '0.75rem' }}>Every Abandoned Form.<br /><span style={{ color: '#ff6b35' }}>Recovered in Seconds.</span></h2>
-          <p className="section-subtitle">Watch what happens when a visitor starts filling out a form — then leaves without submitting.</p>
-          <GhostLeadDemo />
-          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <a href="/test-form" className="cta-primary">Try It Yourself</a>
-          </div>
-        </section>
         <div className="section-divider" />
         <ProblemAccordion />
       </section>
