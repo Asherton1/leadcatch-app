@@ -1336,7 +1336,7 @@
   .hero { padding: 6rem 1.25rem 2.5rem !important; background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.92)), url('/hero-bg.jpg') center/cover no-repeat !important; }
   .hero h1 { font-size: 2rem !important; }
   .section-title { font-size: 1.75rem !important; }
-  .section-subtitle { font-size: 0.9rem !important; padding: 0 0.5rem; }
+  .section-subtitle { font-size: 0.9rem !important; }
   .lc-section { padding: 0 1.25rem !important; }
   .final-cta { padding: 3rem 1.25rem !important; }
   .final-cta h2 { font-size: 1.75rem !important; }
@@ -2246,4 +2246,52 @@
 .features-tone,
 .testimonials-tone {
   background: #0c0c0c;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+@media (max-width: 768px) {
+  .features-tone,
+  .testimonials-tone {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+
+/* ========================================
+   STATSBAR MOBILE — horizontal ticker row
+   (De-Claudify pass, April 24)
+   ======================================== */
+@media (max-width: 768px) {
+  .stats-bar {
+    grid-template-columns: repeat(3, 1fr) !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    border-top: 1px solid var(--border-subtle) !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+    padding: 1.5rem 0 !important;
+    margin: 0 auto !important;
+    gap: 0 !important;
+  }
+  .stats-bar .stat-item {
+    padding: 0.5rem 0.5rem !important;
+    border-right: 1px solid var(--border-subtle) !important;
+    border-bottom: none !important;
+    text-align: center !important;
+  }
+  .stats-bar .stat-item:last-child {
+    border-right: none !important;
+  }
+  .stats-bar .stat-number {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+  .stats-bar .stat-label {
+    font-size: 0.55rem !important;
+    letter-spacing: 0.08em !important;
+    line-height: 1.3 !important;
+    display: block !important;
+  }
 }
