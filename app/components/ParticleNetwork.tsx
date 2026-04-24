@@ -6,7 +6,6 @@ export default function ParticleNetwork() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.innerWidth < 900) return;
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')

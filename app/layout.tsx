@@ -1,14 +1,10 @@
 import './globals.css'
 import PremiumEffects from './components/PremiumEffects'
-
+import PageTransitions from './components/PageTransitions'
 import Script from 'next/script'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  icons: {
-    icon: [{ url: '/favicon.png', type: 'image/png' }, { url: '/favicon.ico' }],
-    apple: '/apple-touch-icon.png',
-  },
   title: 'ReCapture — Form Abandonment Recovery for Med Spas, Dental & Luxury Services',
   description: 'Stop losing 60% of your leads. ReCapture tracks partial form submissions in real-time and auto-recovers abandoned leads for med spas, dental practices, plastic surgery, and luxury service businesses. 7-day free trial.',
   metadataBase: new URL('https://www.userecapture.com'),
@@ -91,7 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <PremiumEffects />
-        
+        <PageTransitions />
         {children}
       </body>
     </html>
