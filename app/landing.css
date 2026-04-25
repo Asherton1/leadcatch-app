@@ -2299,11 +2299,11 @@
    NAV PHONE NUMBER (desktop only)
    ======================================== */
 .nav-phone {
-  font-family: 'SF Mono', Menlo, Consolas, monospace;
-  font-size: 0.8125rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
   font-weight: 500;
   color: #ff6b35;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   text-decoration: none;
   transition: opacity 0.2s ease;
   white-space: nowrap;
