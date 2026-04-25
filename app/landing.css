@@ -2638,10 +2638,6 @@
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.15em;
-  color: #ffffff;
-}
-
-.pricing-row-pro .pricing-row-name {
   color: #ff6b35;
 }
 
@@ -2652,6 +2648,18 @@
   letter-spacing: 0.18em;
   color: #16a34a;
   opacity: 0.85;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.pricing-row-hipaa::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 6px rgba(22, 163, 74, 0.5);
 }
 
 .pricing-row-price {
@@ -2670,9 +2678,9 @@
 .pricing-row-price-amount {
   font-family: 'Inter', sans-serif;
   font-size: 1.75rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: #ff6b35;
   line-height: 1;
 }
 
@@ -2686,7 +2694,7 @@
 
 .pricing-row-divider {
   height: 1px;
-  background: rgba(255, 107, 53, 0.18);
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.25) 20%, rgba(255, 107, 53, 0.25) 80%, transparent 100%);
   margin-bottom: 1.5rem;
 }
 
@@ -2694,7 +2702,7 @@
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.5;
   color: #999;
   margin: 0 0 1.25rem 0;
   max-width: 720px;
@@ -2733,7 +2741,7 @@
 }
 
 .pricing-row-cta:hover {
-  opacity: 0.8;
+  color: rgba(255, 107, 53, 0.85);
 }
 
 .pricing-row-cta-arrow {
