@@ -52,36 +52,20 @@ export default function StatsBar() {
     return () => observer.disconnect()
   }, [])
 
-  // Stat 1: 60–80%  (two simultaneous count-ups)
-  const lo = useCountUp(60,   1600, visible)
-  const hi = useCountUp(80,   1600, visible)
-
-  // Stat 2: $18.8k  (animate 0 → 188, display as X.Xk)
-  const rev = useCountUp(188, 1800, visible)
-
-  // Stat 3: 2 minutes
-  const mins = useCountUp(2,  1400, visible)
-
   return (
     <div ref={wrapRef} className="stats-bar">
       <div className="stat-item">
-        <span className="stat-number">
-          {lo}–{hi}%
-        </span>
+        <span className="stat-number">60–80%</span>
         <span className="stat-label">Form Abandonment Rate</span>
       </div>
 
       <div className="stat-item">
-        <span className="stat-number">
-          ${(rev / 10).toFixed(1)}k
-        </span>
+        <span className="stat-number">$18.8k</span>
         <span className="stat-label">Avg. Lost Per Month</span>
       </div>
 
       <div className="stat-item">
-        <span className="stat-number">
-          {mins}&nbsp;min
-        </span>
+        <span className="stat-number">2&nbsp;min</span>
         <span className="stat-label">Installation Time</span>
       </div>
     </div>

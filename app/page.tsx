@@ -11,6 +11,7 @@ import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
 import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
+import LedgerStats from './components/LedgerStats'
 
 export const metadata = {
   title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
@@ -83,24 +84,7 @@ export default function LandingPage() {
           <span className="ledger-headline-muted">Right in front of you, every morning.</span>
         </h2>
 
-        <div className="ledger-stats">
-          <div className="ledger-stat">
-            <div className="ledger-stat-num">47</div>
-            <div className="ledger-stat-label">Abandoned leads</div>
-          </div>
-          <div className="ledger-stat">
-            <div className="ledger-stat-num ledger-stat-orange">$51,700</div>
-            <div className="ledger-stat-label">Revenue at risk</div>
-          </div>
-          <div className="ledger-stat">
-            <div className="ledger-stat-num">12</div>
-            <div className="ledger-stat-label">Recovered</div>
-          </div>
-          <div className="ledger-stat">
-            <div className="ledger-stat-num ledger-stat-orange">$13,200</div>
-            <div className="ledger-stat-label">Recovered revenue</div>
-          </div>
-        </div>
+        <LedgerStats />
 
         <div className="ledger-divider" />
 
