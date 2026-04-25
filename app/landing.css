@@ -2311,3 +2311,168 @@
 .nav-phone:hover {
   opacity: 0.75;
 }
+
+
+/* ========================================
+   EDITORIAL LEDGER (replaces fake browser chrome)
+   April 25 polish pass
+   ======================================== */
+.ledger-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 6rem 2rem 5rem;
+}
+
+.ledger-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem 0;
+  opacity: 0.75;
+}
+
+.ledger-headline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 4rem 0;
+  max-width: 900px;
+  text-align: left;
+}
+.ledger-headline-primary { color: #ffffff; }
+.ledger-headline-muted { color: #555555; }
+
+/* Stats row — 4 numbers floating without containers */
+.ledger-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+.ledger-stat {
+  text-align: left;
+}
+.ledger-stat-num {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+.ledger-stat-orange { color: #ff6b35; }
+.ledger-stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Thin orange spine between stats and rows */
+.ledger-divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,107,53,0.3) 0%, rgba(255,107,53,0.3) 100%);
+  margin: 0 0 1rem 0;
+}
+
+/* Lead rows — pure black, hairline-separated */
+.ledger-rows {
+  display: flex;
+  flex-direction: column;
+}
+.ledger-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.5fr 0.8fr 0.8fr;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.2s ease;
+}
+.ledger-row:last-child {
+  border-bottom: none;
+}
+.ledger-row:hover {
+  background: rgba(255,255,255,0.015);
+}
+.ledger-row-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+.ledger-row-email {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #777;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ledger-row-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+.ledger-row-status {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-align: right;
+}
+.ledger-status-converted { color: #16a34a; }
+.ledger-status-contacted { color: #ca8a04; }
+.ledger-status-open { color: #6b7280; }
+
+/* Mobile — collapse stats to 2x2, tighten rows */
+@media (max-width: 768px) {
+  .ledger-section {
+    padding: 4rem 1.25rem 3rem;
+  }
+  .ledger-headline {
+    margin-bottom: 2.5rem;
+  }
+  .ledger-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+    margin-bottom: 2rem;
+  }
+  .ledger-row {
+    grid-template-columns: 1fr 0.7fr;
+    grid-template-rows: auto auto;
+    gap: 0.5rem 1rem;
+    padding: 1rem 0;
+  }
+  .ledger-row-name {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .ledger-row-status {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .ledger-row-email {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 0.8rem;
+  }
+  .ledger-row-value {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: right;
+    font-size: 0.85rem;
+  }
+}

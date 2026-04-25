@@ -76,35 +76,48 @@ export default function LandingPage() {
 
       <div className="section-divider" />
 
-      <section className="lc-section screenshot-section">
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Every Lost Lead. Right In Front of You.</h2>
-        <p className="section-subtitle">Names. Emails. Phone numbers. Dollar amounts. Every lead that slipped away — now right in front of you.</p>
-        <div className="screenshot-glow-wrap">
-          <div className="screenshot-mock">
-            <div className="mock-bar">
-              <span /><span /><span />
-            </div>
-            <div className="mock-content">
-              <div className="mock-stat"><div className="mock-num">47</div><div className="mock-label">Abandoned Leads</div></div>
-              <div className="mock-stat"><div className="mock-num orange">$51,700</div><div className="mock-label">Revenue at Risk</div></div>
-              <div className="mock-stat"><div className="mock-num">12</div><div className="mock-label">Recovered</div></div>
-              <div className="mock-stat"><div className="mock-num">$13,200</div><div className="mock-label">Recovered Revenue</div></div>
-            </div>
-            <div className="mock-rows">
-              {['Sarah M.', 'James R.', 'Kelsey T.', 'David L.'].map((name, i) => (
-                <div className="mock-row" key={i}>
-                  <div className="mock-avatar">{name[0]}</div>
-                  <div className="mock-info">
-                    <div className="mock-name">{name}</div>
-                    <div className="mock-email">{name.toLowerCase().replace(' ', '.')}@gmail.com</div>
-                  </div>
-                  <div className={`mock-status ${i === 0 ? 'status-converted' : i === 1 ? 'status-contacted' : 'status-open'}`}>
-                    {i === 0 ? 'Converted' : i === 1 ? 'Contacted' : 'Open'}
-                  </div>
-                </div>
-              ))}
-            </div>
+      <section className="lc-section ledger-section">
+        <p className="ledger-eyebrow">§ The proof</p>
+        <h2 className="ledger-headline">
+          <span className="ledger-headline-primary">Every lost lead. Every dollar.</span>{' '}
+          <span className="ledger-headline-muted">Right in front of you, every morning.</span>
+        </h2>
+
+        <div className="ledger-stats">
+          <div className="ledger-stat">
+            <div className="ledger-stat-num">47</div>
+            <div className="ledger-stat-label">Abandoned leads</div>
           </div>
+          <div className="ledger-stat">
+            <div className="ledger-stat-num ledger-stat-orange">$51,700</div>
+            <div className="ledger-stat-label">Revenue at risk</div>
+          </div>
+          <div className="ledger-stat">
+            <div className="ledger-stat-num">12</div>
+            <div className="ledger-stat-label">Recovered</div>
+          </div>
+          <div className="ledger-stat">
+            <div className="ledger-stat-num ledger-stat-orange">$13,200</div>
+            <div className="ledger-stat-label">Recovered revenue</div>
+          </div>
+        </div>
+
+        <div className="ledger-divider" />
+
+        <div className="ledger-rows">
+          {[
+            { name: 'Sarah Mitchell', email: 'sarah.m@gmail.com', value: '$1,100', status: 'CONVERTED', statusClass: 'ledger-status-converted' },
+            { name: 'James Nguyen', email: 'james.n@gmail.com', value: '$1,100', status: 'CONTACTED', statusClass: 'ledger-status-contacted' },
+            { name: 'Kelsey Thomas', email: 'kelsey.t@gmail.com', value: '$1,100', status: 'OPEN', statusClass: 'ledger-status-open' },
+            { name: 'David Lin', email: 'david.l@gmail.com', value: '$1,100', status: 'OPEN', statusClass: 'ledger-status-open' },
+          ].map((lead, i) => (
+            <div className="ledger-row" key={i}>
+              <div className="ledger-row-name">{lead.name}</div>
+              <div className="ledger-row-email">{lead.email}</div>
+              <div className="ledger-row-value">{lead.value}</div>
+              <div className={`ledger-row-status ${lead.statusClass}`}>{lead.status}</div>
+            </div>
+          ))}
         </div>
       </section>
 
