@@ -52,30 +52,47 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* STORY SECTIONS — kept as-is for Commit 1, will rewrite in Commit 2 */}
-      <div className="about-story">
-        <div className="about-story-section reveal">
-          <h2>The Problem We Kept Seeing</h2>
-          <p>We&apos;ve managed over $100K in monthly ad spend across 38+ clients. Med spas, dental practices, luxury real estate, high-end service businesses &mdash; the kind of companies where a single lead is worth $1,500 to $10,000.</p>
-          <p>The playbook was always the same: build the funnel, run the ads, optimize the landing page, watch the leads come in. And the leads did come in. But something always nagged at us.</p>
-          <p>Google Analytics showed the traffic. The CRM showed the submissions. But neither one showed us the people in between &mdash; the ones who clicked the form, started typing their name, got distracted, and disappeared. Those people were invisible. And there were a LOT of them.</p>
-        </div>
+      {/* STORY V2 — first-person, numbered eyebrows, hairline dividers */}
+      <section className="about-story-v2">
+        <div className="about-story-v2-inner">
 
-        <div className="about-story-section reveal">
-          <h2>The Moment It Clicked</h2>
-          <p>We were reviewing a client&apos;s campaign performance and the numbers didn&apos;t add up. We were driving solid traffic. The landing page was converting. But the gap between page views and form submissions was massive &mdash; way bigger than it should have been.</p>
-          <p>That&apos;s when we realized: every analytics platform on the market tracks what happens before the form and what happens after. Nobody tracks what happens during. The form itself was a complete blind spot.</p>
-          <p>We went looking for a tool that could capture partial form data &mdash; names, emails, phone numbers typed but never submitted. The options were either built for e-commerce cart abandonment, required you to replace your forms entirely, or had dashboards that looked like they were built in 2014.</p>
-          <p>None of them were built for the businesses we work with. So we built one.</p>
-        </div>
+          <div className="about-story-v2-section reveal">
+            <p className="about-story-v2-eyebrow">§ 01 — The problem</p>
+            <h2 className="about-story-v2-headline">The thing that kept nagging me.</h2>
+            <div className="about-story-v2-body">
+              <p>I&apos;ve managed over $100K in monthly ad spend across 38+ clients. Med spas, dental practices, luxury real estate, high-end service businesses &mdash; the kind of companies where a single lead is worth $1,500 to $10,000.</p>
+              <p>The playbook was always the same: build the funnel, run the ads, optimize the landing page, watch the leads come in. And the leads did come in. But something always nagged at me.</p>
+              <p>Google Analytics showed the traffic. The CRM showed the submissions. But neither one showed me the people in between &mdash; the ones who clicked the form, started typing their name, got distracted, and disappeared. Those people were invisible. And there were a LOT of them.</p>
+            </div>
+          </div>
 
-        <div className="about-story-section reveal">
-          <h2>What ReCapture Is</h2>
-          <p>ReCapture is a form abandonment recovery platform built specifically for high-ticket service businesses. One script tag on your website. No form migration. No complex setup. The moment someone starts typing into your contact form, we capture it &mdash; even if they never hit submit.</p>
-          <p>You see every lead in a clean dashboard with their name, email, phone number, and the estimated dollar value they represent. Follow up manually, or let ReCapture send automated recovery emails on your behalf.</p>
-          <p>It&apos;s the tool we wished existed for the last ten years. Now it does.</p>
+          <div className="about-story-v2-divider" />
+
+          <div className="about-story-v2-section reveal">
+            <p className="about-story-v2-eyebrow">§ 02 — The turning point</p>
+            <h2 className="about-story-v2-headline">The moment it clicked.</h2>
+            <div className="about-story-v2-body">
+              <p>I was reviewing a client&apos;s campaign performance and the numbers didn&apos;t add up. We were driving solid traffic. The landing page was converting. But the gap between page views and form submissions was massive &mdash; way bigger than it should have been.</p>
+              <p>That&apos;s when I realized: every analytics platform on the market tracks what happens <em>before</em> the form and what happens <em>after</em>. Nobody tracks what happens <em>during</em>. The form itself was a complete blind spot.</p>
+              <p>I went looking for a tool that could capture partial form data &mdash; names, emails, phone numbers typed but never submitted. The options were either built for e-commerce cart abandonment, required you to replace your forms entirely, or had dashboards that looked like they were built in 2014.</p>
+              <p>None of them were built for the businesses I work with. So I built one.</p>
+            </div>
+          </div>
+
+          <div className="about-story-v2-divider" />
+
+          <div className="about-story-v2-section reveal">
+            <p className="about-story-v2-eyebrow">§ 03 — Why ReCapture</p>
+            <h2 className="about-story-v2-headline">The tool I wished existed.</h2>
+            <div className="about-story-v2-body">
+              <p>ReCapture is a form abandonment recovery platform built specifically for high-ticket service businesses. One script tag on your website. No form migration. No complex setup. The moment someone starts typing into your contact form, ReCapture captures it &mdash; even if they never hit submit.</p>
+              <p>You see every lead in a clean dashboard with their name, email, phone number, and the estimated dollar value they represent. Follow up manually, or let ReCapture send automated recovery emails on your behalf.</p>
+              <p>It&apos;s the tool I wished existed for the last ten years. Now it does.</p>
+            </div>
+          </div>
+
         </div>
-      </div>
+      </section>
 
       {/* VALUES + CTA — kept for Commit 1, will rebuild in Commit 3 */}
       <div className="about-values reveal">
