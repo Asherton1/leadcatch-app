@@ -3036,10 +3036,10 @@
 }
 
 /* Punchline block — sits BELOW spine wrapper, contains the final dot.
-   Dot is absolutely positioned at top-center, aligned with first text line */
+   Dot is absolutely positioned at top, touching bottom of spine line */
 .pricing-math-punchline-block {
   text-align: center;
-  margin-top: 1.25rem;
+  margin-top: -5px;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -3050,7 +3050,7 @@
   position: absolute;
   left: 50%;
   top: 0;
-  transform: translateX(-5.5px);
+  transform: translateX(-5.5px) translateY(-1px);
 }
 
 .pricing-math-row {
