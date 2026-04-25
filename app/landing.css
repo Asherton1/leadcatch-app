@@ -2567,7 +2567,9 @@
   .pricing-section .pricing-toggle {
     justify-content: center !important;
     padding: 0 1.25rem !important;
-    margin-bottom: 2rem !important;
+    margin: 2rem auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 
@@ -3200,13 +3202,13 @@
   .pricing-math-row-left .pricing-math-dot,
   .pricing-math-row-right .pricing-math-dot {
     position: absolute !important;
-    left: -2rem !important;
+    left: calc(-2rem - 4px) !important;
     top: 1.5rem !important;
     grid-column: auto !important;
     margin: 0 !important;
-    transform: translateX(-3px) !important;
+    transform: none !important;
   }
-  /* Final dot row: same absolute-positioning pattern */
+  /* Final dot row: centered on the spine line like the others */
   .pricing-math-final-dot-row {
     display: block !important;
     padding: 0.5rem 0 !important;
@@ -3216,9 +3218,9 @@
   }
   .pricing-math-final-dot-row .pricing-math-dot-final {
     position: absolute !important;
-    left: -2rem !important;
+    left: calc(-2rem - 5px) !important;
     top: 0 !important;
-    transform: translateX(-3px) !important;
+    transform: none !important;
   }
   /* Punchline block: left-aligned on mobile, aligned with spine */
   .pricing-math-punchline-block {

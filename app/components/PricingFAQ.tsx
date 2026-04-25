@@ -48,7 +48,7 @@ export default function PricingFAQ() {
     <section className="pricing-faq">
       <div className="pricing-faq-inner">
         <p className="pricing-faq-eyebrow">§ FAQ</p>
-        <h2 className="pricing-faq-headline">Frequently Asked Questions</h2>
+        <h2 className="pricing-faq-headline">The Common Questions</h2>
 
         <div className="pricing-faq-list">
           {faqs.map((faq, i) => (
