@@ -2580,3 +2580,213 @@
     padding-top: 3.5rem;
   }
 }
+
+
+/* ========================================
+   PRICING MENU (April 25 — restaurant menu format)
+   Editorial row layout, no cards, no badges
+   ======================================== */
+
+.pricing-menu {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.pricing-row {
+  width: 100%;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.pricing-menu-visible .pricing-row:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+.pricing-menu-visible .pricing-row:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 200ms;
+}
+.pricing-menu-visible .pricing-row:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 400ms;
+}
+
+.pricing-row-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 0.875rem;
+}
+
+.pricing-row-name-group {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.pricing-row-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #ffffff;
+}
+
+.pricing-row-pro .pricing-row-name {
+  color: #ff6b35;
+}
+
+.pricing-row-hipaa {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #16a34a;
+  opacity: 0.85;
+}
+
+.pricing-row-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.pricing-row-price-currency {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #777;
+}
+
+.pricing-row-price-amount {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.pricing-row-price-period {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #777;
+  margin-left: 0.25rem;
+}
+
+.pricing-row-divider {
+  height: 1px;
+  background: rgba(255, 107, 53, 0.18);
+  margin-bottom: 1.5rem;
+}
+
+.pricing-row-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #999;
+  margin: 0 0 1.25rem 0;
+  max-width: 720px;
+}
+
+.pricing-row-features {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.85;
+  color: #888;
+  margin: 0 0 1.75rem 0;
+  max-width: 100%;
+}
+
+.pricing-row-cta-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pricing-row-cta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #ff6b35;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.pricing-row-cta:hover {
+  opacity: 0.8;
+}
+
+.pricing-row-cta-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.pricing-row-cta:hover .pricing-row-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* MOBILE — same row format, price stacks below tier name */
+@media (max-width: 768px) {
+  .pricing-menu {
+    padding: 0 1.25rem;
+    gap: 3.5rem;
+  }
+  .pricing-row-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.625rem;
+  }
+  .pricing-row-name-group {
+    gap: 0.75rem;
+  }
+  .pricing-row-name {
+    font-size: 0.9375rem;
+  }
+  .pricing-row-hipaa {
+    font-size: 0.6rem;
+  }
+  .pricing-row-price-amount {
+    font-size: 1.5rem;
+  }
+  .pricing-row-divider {
+    margin-bottom: 1.25rem;
+  }
+  .pricing-row-desc {
+    font-size: 0.9375rem;
+    margin-bottom: 1rem;
+  }
+  .pricing-row-features {
+    font-size: 0.8125rem;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-row {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
