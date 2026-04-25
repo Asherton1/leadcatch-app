@@ -5,6 +5,7 @@ import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import PricingSection from '../components/PricingSection'
 import MathSection from '../components/MathSection'
+import PricingFAQ from '../components/PricingFAQ'
 import '../blog/blog.css'
 import '../landing.css'
 
@@ -68,6 +69,7 @@ export default function PricingPage() {
         </div>
       </section>
 
+      <PricingFAQ />
       <Footer />
     </div>
   )
