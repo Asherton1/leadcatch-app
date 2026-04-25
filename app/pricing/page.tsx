@@ -31,7 +31,7 @@ export default function PricingPage() {
           <div className="pricing-baseline-grid">
             <div className="pricing-baseline-cell">
               <div className="pricing-baseline-title">7-day free trial</div>
-              <div className="pricing-baseline-desc">Full access. No card required.</div>
+              <div className="pricing-baseline-desc">Full access for 7 days.</div>
             </div>
             <div className="pricing-baseline-cell">
               <div className="pricing-baseline-title">No setup fees</div>

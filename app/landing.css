@@ -2806,12 +2806,13 @@
    ======================================== */
 .pricing-baseline {
   width: 100%;
-  padding: 5rem 2rem 4rem;
+  padding: 5rem 0 4rem;
   background: #0c0c0c;
 }
 .pricing-baseline-inner {
   max-width: 1100px;
   margin: 0 auto;
+  padding: 0 2rem;
   text-align: center;
 }
 .pricing-baseline-eyebrow {
@@ -2864,7 +2865,7 @@
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #ff6b35;
   margin-bottom: 0.5rem;
   letter-spacing: -0.01em;
 }
@@ -2877,22 +2878,34 @@
 }
 
 @media (max-width: 900px) {
+  .pricing-baseline-inner {
+    padding: 0 1.25rem;
+  }
   .pricing-baseline-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 600px) {
   .pricing-baseline {
-    padding: 3.5rem 1.25rem 2.5rem;
+    padding: 3.5rem 0 2.5rem;
   }
   .pricing-baseline-headline {
     margin-bottom: 2.5rem;
-  }
-  .pricing-baseline-grid {
-    grid-template-columns: 1fr;
+    font-size: 1.125rem;
   }
   .pricing-baseline-cell {
-    padding: 1.5rem 1.25rem;
+    padding: 1.5rem 1rem;
+  }
+  .pricing-baseline-title {
+    font-size: 0.875rem;
+  }
+  .pricing-baseline-desc {
+    font-size: 0.75rem;
+  }
+}
+@media (max-width: 380px) {
+  .pricing-baseline-grid {
+    grid-template-columns: 1fr;
   }
 }
 
