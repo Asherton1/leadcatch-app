@@ -3025,9 +3025,9 @@
   left: 50%;
   top: 0;
   bottom: 0;
-  width: 1px;
-  background: rgba(255, 107, 53, 0.5);
-  transform: translateX(-0.5px) scaleY(0);
+  width: 2px;
+  background: rgba(255, 107, 53, 0.7);
+  transform: translateX(-1px) scaleY(0);
   transform-origin: top;
   transition: transform 1.6s ease-out;
 }
@@ -3157,7 +3157,7 @@
 /* MOBILE — spine moves to left side, dots absolute-positioned on the line */
 @media (max-width: 768px) {
   .pricing-math {
-    padding: 4rem 0 3rem;
+    padding: 4rem 0 1.5rem;
   }
   .pricing-math-inner {
     padding: 0 1.25rem;
@@ -3202,7 +3202,7 @@
   .pricing-math-row-left .pricing-math-dot,
   .pricing-math-row-right .pricing-math-dot {
     position: absolute !important;
-    left: calc(-2rem - 4px) !important;
+    left: calc(-2rem - 3.5px) !important;
     top: 1.5rem !important;
     grid-column: auto !important;
     margin: 0 !important;
@@ -3211,14 +3211,14 @@
   /* Final dot row: centered on the spine line like the others */
   .pricing-math-final-dot-row {
     display: block !important;
-    padding: 0.5rem 0 !important;
+    padding: 0.5rem 0 0 !important;
     position: relative;
     height: 1rem;
     justify-content: initial !important;
   }
   .pricing-math-final-dot-row .pricing-math-dot-final {
     position: absolute !important;
-    left: calc(-2rem - 5px) !important;
+    left: calc(-2rem - 4.5px) !important;
     top: 0 !important;
     transform: none !important;
   }
