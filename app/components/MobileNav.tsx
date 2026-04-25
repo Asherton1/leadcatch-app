@@ -31,6 +31,7 @@ export default function MobileNav() {
             <Link href="/form-audit" className="nav-dropdown-item">Free Form Audit</Link>
           </div>
         </div>
+        <a href="tel:+18886060630" className="nav-phone">(888) 606-0630</a>
         <Link href="/login" className="nav-login">Login</Link>
       </div>
 

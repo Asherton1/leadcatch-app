@@ -2293,3 +2293,21 @@
     display: block !important;
   }
 }
+
+
+/* ========================================
+   NAV PHONE NUMBER (desktop only)
+   ======================================== */
+.nav-phone {
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+.nav-phone:hover {
+  opacity: 0.75;
+}
