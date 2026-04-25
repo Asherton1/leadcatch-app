@@ -2321,6 +2321,7 @@
   max-width: 1100px;
   margin: 0 auto;
   padding: 6rem 2rem 5rem;
+  text-align: center;
 }
 
 .ledger-eyebrow {
@@ -2332,6 +2333,7 @@
   text-transform: uppercase;
   margin: 0 0 1.5rem 0;
   opacity: 0.75;
+  text-align: center;
 }
 
 .ledger-headline {
@@ -2340,9 +2342,9 @@
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
-  margin: 0 0 4rem 0;
+  margin: 0 auto 4rem;
   max-width: 900px;
-  text-align: left;
+  text-align: center;
 }
 .ledger-headline-primary { color: #ffffff; }
 .ledger-headline-muted { color: #555555; }
@@ -2355,7 +2357,7 @@
   margin-bottom: 3rem;
 }
 .ledger-stat {
-  text-align: left;
+  text-align: center;
 }
 .ledger-stat-num {
   font-family: 'Inter', sans-serif;
@@ -2566,5 +2568,15 @@
     justify-content: center !important;
     padding: 0 1.25rem !important;
     margin-bottom: 2rem !important;
+  }
+}
+
+
+/* ========================================
+   PRICING PAGE — mobile spacing after hero
+   ======================================== */
+@media (max-width: 768px) {
+  .landing .pricing-section {
+    padding-top: 2rem;
   }
 }
