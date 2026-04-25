@@ -12,6 +12,7 @@ import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
 import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
 import LedgerStats from './components/LedgerStats'
+import LedgerRows from './components/LedgerRows'
 
 export const metadata = {
   title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
@@ -88,21 +89,7 @@ export default function LandingPage() {
 
         <div className="ledger-divider" />
 
-        <div className="ledger-rows">
-          {[
-            { name: 'Sarah Mitchell', email: 'sarah.m@gmail.com', value: '$1,100', status: 'CONVERTED', statusClass: 'ledger-status-converted' },
-            { name: 'James Nguyen', email: 'james.n@gmail.com', value: '$1,100', status: 'CONTACTED', statusClass: 'ledger-status-contacted' },
-            { name: 'Kelsey Thomas', email: 'kelsey.t@gmail.com', value: '$1,100', status: 'OPEN', statusClass: 'ledger-status-open' },
-            { name: 'David Lin', email: 'david.l@gmail.com', value: '$1,100', status: 'OPEN', statusClass: 'ledger-status-open' },
-          ].map((lead, i) => (
-            <div className="ledger-row" key={i}>
-              <div className="ledger-row-name">{lead.name}</div>
-              <div className="ledger-row-email">{lead.email}</div>
-              <div className="ledger-row-value">{lead.value}</div>
-              <div className={`ledger-row-status ${lead.statusClass}`}>{lead.status}</div>
-            </div>
-          ))}
-        </div>
+        <LedgerRows />
       </section>
 
       <section className="lc-section features-tone">

@@ -2476,3 +2476,30 @@
     font-size: 0.85rem;
   }
 }
+
+
+/* ========================================
+   LEDGER ROW ANIMATIONS (fade-in + status progression)
+   ======================================== */
+.ledger-row {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.ledger-row.ledger-row-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ledger-row-status {
+  transition: color 0.4s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ledger-row {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .ledger-row-status {
+    transition: none;
+  }
+}
