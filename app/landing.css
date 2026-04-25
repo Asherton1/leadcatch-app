@@ -3017,7 +3017,7 @@
   position: absolute;
   left: 50%;
   top: 0;
-  bottom: 5rem;
+  bottom: 9rem;
   width: 1px;
   background: rgba(255, 107, 53, 0.5);
   transform: translateX(-0.5px) scaleY(0);
@@ -3028,7 +3028,7 @@
 /* Mobile: also stop the line above the punchline content */
 @media (max-width: 768px) {
   .pricing-math-line {
-    bottom: 4rem;
+    bottom: 6rem;
   }
 }
 .pricing-math-visible .pricing-math-line {
