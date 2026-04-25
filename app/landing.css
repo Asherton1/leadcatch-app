@@ -2976,7 +2976,7 @@
    ======================================== */
 .pricing-math {
   width: 100%;
-  padding: 6rem 2rem 5rem;
+  padding: 6rem 2rem 3.5rem;
   background: #0a0a0a;
 }
 .pricing-math-inner {
@@ -3012,27 +3012,43 @@
   padding: 1rem 0;
 }
 
-/* The vertical line down the center */
+.pricing-math-spine-inner {
+  position: relative;
+}
+
+/* The vertical line — inside the wrapper that contains all dots,
+   so it terminates exactly at the bottom of the wrapper (the final dot row) */
 .pricing-math-line {
   position: absolute;
   left: 50%;
   top: 0;
-  bottom: 6.5rem;
+  bottom: 0;
   width: 1px;
   background: rgba(255, 107, 53, 0.5);
   transform: translateX(-0.5px) scaleY(0);
   transform-origin: top;
   transition: transform 1.6s ease-out;
 }
-
-/* Mobile: also stop the line above the punchline content */
-@media (max-width: 768px) {
-  .pricing-math-line {
-    bottom: 4.5rem;
-  }
-}
 .pricing-math-visible .pricing-math-line {
   transform: translateX(-0.5px) scaleY(1);
+}
+
+/* Final dot row — sits at the bottom of the spine wrapper,
+   line naturally ends here */
+.pricing-math-final-dot-row {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0 0;
+  position: relative;
+}
+
+/* Punchline block sits BELOW the spine wrapper, line never reaches it */
+.pricing-math-punchline-block {
+  text-align: center;
+  margin-top: 1.25rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pricing-math-row {
@@ -3060,25 +3076,7 @@
   text-align: left;
 }
 
-.pricing-math-row-punchline {
-  grid-template-columns: 1fr auto 1fr;
-  justify-content: center;
-  text-align: center;
-  margin-top: 1rem;
-}
-.pricing-math-row-punchline .pricing-math-dot {
-  grid-column: 2;
-  margin: 0;
-}
-.pricing-math-row-punchline .pricing-math-content-final {
-  grid-column: 1 / span 3;
-  grid-row: 2;
-  text-align: center;
-  margin-top: 0.625rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
+/* Old .pricing-math-row-punchline rules removed — punchline now lives outside spine wrapper */
 
 .pricing-math-dot {
   width: 9px;
@@ -3186,15 +3184,17 @@
   }
   .pricing-math-row-left .pricing-math-content,
   .pricing-math-row-right .pricing-math-content,
-  .pricing-math-row-punchline .pricing-math-content-final {
-    grid-column: 2 !important;
-    text-align: left !important;
-  }
   .pricing-math-row-left .pricing-math-dot,
-  .pricing-math-row-right .pricing-math-dot,
-  .pricing-math-row-punchline .pricing-math-dot {
+  .pricing-math-row-right .pricing-math-dot {
     grid-column: 1 !important;
     margin: 0 !important;
+    transform: translateX(-3px);
+  }
+  .pricing-math-final-dot-row {
+    justify-content: flex-start !important;
+    padding-left: 0 !important;
+  }
+  .pricing-math-final-dot-row .pricing-math-dot-final {
     transform: translateX(-3px);
   }
   .pricing-math-num {
