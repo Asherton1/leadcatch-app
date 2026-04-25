@@ -4,6 +4,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import PricingSection from '../components/PricingSection'
+import MathSection from '../components/MathSection'
 import '../blog/blog.css'
 import '../landing.css'
 
@@ -60,6 +61,7 @@ export default function PricingPage() {
       <div style={{ marginTop: "0" }}>
         <div className="reveal"><PricingSection /></div>
       </div>
+      <MathSection />
       <Footer />
     </div>
   )
