@@ -24,6 +24,16 @@ export default function PricingPage() {
         </div>
       </div>
 
+
+
+
+
+      <MathSection />
+
+      <div style={{ marginTop: "0" }}>
+        <div className="reveal"><PricingSection /></div>
+      </div>
+
       <section className="pricing-baseline reveal">
         <div className="pricing-baseline-inner">
           <p className="pricing-baseline-eyebrow">§ Included in every plan</p>
@@ -58,10 +68,6 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <div style={{ marginTop: "0" }}>
-        <div className="reveal"><PricingSection /></div>
-      </div>
-      <MathSection />
       <Footer />
     </div>
   )
