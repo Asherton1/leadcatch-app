@@ -109,12 +109,10 @@ export default function MathSection() {
               </div>
             </div>
 
-            <div className="pricing-math-final-dot-row">
-              <div className="pricing-math-dot pricing-math-dot-final" data-step="5" />
-            </div>
           </div>
 
           <div className="pricing-math-punchline-block">
+            <div className="pricing-math-dot pricing-math-dot-final" data-step="5" />
             <div className="pricing-math-punchline">One recovered lead pays for the year.</div>
             <div className="pricing-math-punchline-sub">Most clients break even in week one.</div>
           </div>
