@@ -3017,12 +3017,19 @@
   position: absolute;
   left: 50%;
   top: 0;
-  bottom: 0;
+  bottom: 5rem;
   width: 1px;
   background: rgba(255, 107, 53, 0.5);
   transform: translateX(-0.5px) scaleY(0);
   transform-origin: top;
   transition: transform 1.6s ease-out;
+}
+
+/* Mobile: also stop the line above the punchline content */
+@media (max-width: 768px) {
+  .pricing-math-line {
+    bottom: 4rem;
+  }
 }
 .pricing-math-visible .pricing-math-line {
   transform: translateX(-0.5px) scaleY(1);
