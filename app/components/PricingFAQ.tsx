@@ -47,8 +47,8 @@ export default function PricingFAQ() {
   return (
     <section className="pricing-faq">
       <div className="pricing-faq-inner">
-        <p className="pricing-faq-eyebrow">§ Questions</p>
-        <h2 className="pricing-faq-headline">Things people ask before signing up.</h2>
+        <p className="pricing-faq-eyebrow">§ FAQ</p>
+        <h2 className="pricing-faq-headline">Frequently Asked Questions</h2>
 
         <div className="pricing-faq-list">
           {faqs.map((faq, i) => (

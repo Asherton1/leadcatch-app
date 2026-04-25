@@ -3152,7 +3152,7 @@
   line-height: 1.5;
 }
 
-/* MOBILE — spine moves to left, single column */
+/* MOBILE — spine moves to left side, dots absolute-positioned on the line */
 @media (max-width: 768px) {
   .pricing-math {
     padding: 4rem 0 3rem;
@@ -3165,37 +3165,69 @@
     font-size: 1.5rem;
   }
   .pricing-math-spine {
-    padding-left: 2rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    padding: 0;
+    margin: 0 1rem;
   }
+  .pricing-math-spine-inner {
+    padding-left: 2rem;
+    position: relative;
+  }
+  /* Line moves from center to left edge */
   .pricing-math-line {
-    left: 0;
-    transform: translateX(0) scaleY(0);
+    left: 0 !important;
+    transform: translateX(0) scaleY(0) !important;
   }
   .pricing-math-visible .pricing-math-line {
-    transform: translateX(0) scaleY(1);
+    transform: translateX(0) scaleY(1) !important;
   }
+  /* Each row becomes a left-aligned single column with a relative parent
+     so the dot can absolutely position on the spine line */
   .pricing-math-row {
-    grid-template-columns: auto 1fr !important;
-    gap: 1.25rem !important;
-    padding: 1.5rem 0 !important;
+    display: block !important;
+    padding: 1.25rem 0 !important;
     text-align: left !important;
+    position: relative;
   }
+  /* Content takes full width, no grid columns */
   .pricing-math-row-left .pricing-math-content,
-  .pricing-math-row-right .pricing-math-content,
+  .pricing-math-row-right .pricing-math-content {
+    grid-column: auto !important;
+    text-align: left !important;
+    width: 100%;
+    margin: 0 !important;
+  }
+  /* Dots: absolute-positioned on the spine line at left: -2rem from row content */
   .pricing-math-row-left .pricing-math-dot,
   .pricing-math-row-right .pricing-math-dot {
-    grid-column: 1 !important;
+    position: absolute !important;
+    left: -2rem !important;
+    top: 1.5rem !important;
+    grid-column: auto !important;
     margin: 0 !important;
-    transform: translateX(-3px);
+    transform: translateX(-3px) !important;
   }
+  /* Final dot row: same absolute-positioning pattern */
   .pricing-math-final-dot-row {
-    justify-content: flex-start !important;
-    padding-left: 0 !important;
+    display: block !important;
+    padding: 0.5rem 0 !important;
+    position: relative;
+    height: 1rem;
+    justify-content: initial !important;
   }
   .pricing-math-final-dot-row .pricing-math-dot-final {
-    transform: translateX(-3px);
+    position: absolute !important;
+    left: -2rem !important;
+    top: 0 !important;
+    transform: translateX(-3px) !important;
+  }
+  /* Punchline block: left-aligned on mobile, aligned with spine */
+  .pricing-math-punchline-block {
+    text-align: left !important;
+    padding-left: 2rem !important;
+    margin-top: 0.75rem !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
   .pricing-math-num {
     font-size: 1.75rem;
