@@ -3211,7 +3211,7 @@
   /* Final dot row: centered on the spine line like the others */
   .pricing-math-final-dot-row {
     display: block !important;
-    padding: 0.5rem 0 0 !important;
+    padding: 2.25rem 0 0 !important;
     position: relative;
     height: 1rem;
     justify-content: initial !important;
@@ -3226,7 +3226,7 @@
   .pricing-math-punchline-block {
     text-align: left !important;
     padding-left: 2rem !important;
-    margin-top: 0.75rem !important;
+    margin-top: -0.5rem !important;
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
