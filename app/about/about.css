@@ -423,3 +423,260 @@
     margin: 2.5rem auto;
   }
 }
+
+
+/* ========================================
+   ABOUT V3 — April 25 unification commit
+   New sections + standardized horizontal axis
+   ======================================== */
+
+/* WHO I WORK WITH — client list */
+.about-clients {
+  width: 100%;
+  padding: 6rem 2rem 5rem;
+  background: #0a0a0a;
+}
+.about-clients-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-clients-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem 0;
+  opacity: 0.75;
+}
+.about-clients-headline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0 auto 4rem;
+  max-width: 720px;
+}
+.about-clients-list {
+  max-width: 820px;
+  margin: 0 auto 3.5rem;
+  text-align: left;
+  border-top: 1px solid rgba(255, 107, 53, 0.18);
+}
+.about-clients-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.5rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 107, 53, 0.18);
+}
+.about-clients-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.about-clients-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #888;
+  text-align: right;
+}
+.about-clients-closer {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #aaa;
+  margin: 0 auto;
+  max-width: 600px;
+}
+.about-clients-closer-accent {
+  color: #ff6b35;
+  font-weight: 500;
+}
+
+/* VALUES V2 — matches pricing baseline architectural language */
+.about-values-v2 {
+  width: 100%;
+  padding: 6rem 2rem 5rem;
+  background: #0c0c0c;
+}
+.about-values-v2-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+.about-values-v2-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem 0;
+  opacity: 0.75;
+}
+.about-values-v2-headline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0 auto 4rem;
+  max-width: 640px;
+}
+.about-values-v2-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid #1a1a1a;
+  border-left: 1px solid #1a1a1a;
+}
+.about-values-v2-cell {
+  padding: 2rem 1.75rem;
+  border-right: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+  text-align: left;
+}
+.about-values-v2-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ff6b35;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+.about-values-v2-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #888;
+  line-height: 1.6;
+}
+
+/* FINAL CTA — editorial, quiet */
+.about-final-cta {
+  width: 100%;
+  padding: 7rem 2rem 6rem;
+  background: #0a0a0a;
+}
+.about-final-cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-final-cta-headline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0 auto 1.25rem;
+  max-width: 720px;
+}
+.about-final-cta-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #888;
+  margin: 0 auto 2.5rem;
+  max-width: 480px;
+}
+.about-final-cta-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #ff6b35;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  transition: color 0.2s ease;
+}
+.about-final-cta-link:hover {
+  color: rgba(255, 107, 53, 0.85);
+}
+.about-final-cta-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+.about-final-cta-link:hover .about-final-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .about-values-v2-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about-clients {
+    padding: 4rem 1.25rem 3rem;
+  }
+  .about-clients-headline {
+    margin-bottom: 2.5rem;
+    font-size: 1.375rem;
+  }
+  .about-clients-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+    padding: 1.25rem 0.25rem;
+  }
+  .about-clients-name {
+    font-size: 0.9375rem;
+  }
+  .about-clients-desc {
+    text-align: left;
+    font-size: 0.8125rem;
+  }
+  .about-clients-closer {
+    font-size: 0.9375rem;
+  }
+  .about-values-v2 {
+    padding: 4rem 1.25rem 3rem;
+  }
+  .about-values-v2-headline {
+    margin-bottom: 2.5rem;
+    font-size: 1.375rem;
+  }
+  .about-values-v2-cell {
+    padding: 1.5rem 1rem;
+  }
+  .about-values-v2-title {
+    font-size: 0.9375rem;
+  }
+  .about-values-v2-desc {
+    font-size: 0.8125rem;
+  }
+  .about-final-cta {
+    padding: 5rem 1.25rem 4rem;
+  }
+  .about-final-cta-headline {
+    font-size: 1.5rem;
+  }
+  .about-final-cta-sub {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-values-v2-grid {
+    grid-template-columns: 1fr;
+  }
+}

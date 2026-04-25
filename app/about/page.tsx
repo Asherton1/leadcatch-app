@@ -94,33 +94,86 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* VALUES + CTA — kept for Commit 1, will rebuild in Commit 3 */}
-      <div className="about-values reveal">
-        <h2>What We Believe</h2>
-        <div className="about-values-grid">
-          <div className="about-value">
-            <h3>Every lead matters</h3>
-            <p>You paid for that click. If someone starts your form, you deserve to know about it &mdash; whether they finish or not.</p>
-          </div>
-          <div className="about-value">
-            <h3>Simple beats complicated</h3>
-            <p>One script tag. No migration. No developer needed. If it takes more than 60 seconds to install, it&apos;s too complicated.</p>
-          </div>
-          <div className="about-value">
-            <h3>Built for real businesses</h3>
-            <p>Not for startups chasing vanity metrics. For businesses where a single recovered lead pays for the entire year of service.</p>
-          </div>
-        </div>
-      </div>
+      {/* WHO I WORK WITH — editorial client list */}
+      <section className="about-clients reveal">
+        <div className="about-clients-inner">
+          <p className="about-clients-eyebrow">§ The work</p>
+          <h2 className="about-clients-headline">I&apos;ve built campaigns and lead systems for:</h2>
 
-      <div className="about-cta reveal">
-        <h2>See what your forms are missing</h2>
-        <p>Try the live demo and watch ReCapture capture a lead in real time.</p>
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/test-form" className="about-cta-btn">Try the Live Demo</Link>
-          <Link href="/signup" className="about-cta-btn-outline">Start Your 7-Day Free Trial</Link>
+          <div className="about-clients-list">
+            <div className="about-clients-row">
+              <span className="about-clients-name">BTI Partners</span>
+              <span className="about-clients-desc">Luxury real estate development</span>
+            </div>
+            <div className="about-clients-row">
+              <span className="about-clients-name">Marina Pointe</span>
+              <span className="about-clients-desc">Florida luxury development</span>
+            </div>
+            <div className="about-clients-row">
+              <span className="about-clients-name">Michael Saunders &amp; Co</span>
+              <span className="about-clients-desc">Florida real estate</span>
+            </div>
+            <div className="about-clients-row">
+              <span className="about-clients-name">ESD Health</span>
+              <span className="about-clients-desc">Pilot sleep diagnostics</span>
+            </div>
+            <div className="about-clients-row">
+              <span className="about-clients-name">HerScan</span>
+              <span className="about-clients-desc">Mobile breast ultrasound screening</span>
+            </div>
+            <div className="about-clients-row">
+              <span className="about-clients-name">DECA Dental</span>
+              <span className="about-clients-desc">Multi-location dental</span>
+            </div>
+            <div className="about-clients-row">
+              <span className="about-clients-name">Ideal Dental</span>
+              <span className="about-clients-desc">Multi-location dental</span>
+            </div>
+            <div className="about-clients-row">
+              <span className="about-clients-name">Clear PH Design</span>
+              <span className="about-clients-desc">Brand &amp; creative agency</span>
+            </div>
+          </div>
+
+          <p className="about-clients-closer">
+            Eight figures in ad spend. <span className="about-clients-closer-accent">38+ long-term client relationships.</span>{' '}
+            One ReCapture, born out of all of it.
+          </p>
         </div>
-      </div>
+      </section>
+
+      {/* VALUES — rebuilt to match pricing baseline language */}
+      <section className="about-values-v2 reveal">
+        <div className="about-values-v2-inner">
+          <p className="about-values-v2-eyebrow">§ The principles</p>
+          <h2 className="about-values-v2-headline">What I believe.</h2>
+          <div className="about-values-v2-grid">
+            <div className="about-values-v2-cell">
+              <div className="about-values-v2-title">Every lead matters</div>
+              <div className="about-values-v2-desc">You paid for that click. If someone starts your form, you deserve to know about it &mdash; whether they finish or not.</div>
+            </div>
+            <div className="about-values-v2-cell">
+              <div className="about-values-v2-title">Simple beats complicated</div>
+              <div className="about-values-v2-desc">One script tag. No migration. No developer needed. If it takes more than 60 seconds to install, it&apos;s too complicated.</div>
+            </div>
+            <div className="about-values-v2-cell">
+              <div className="about-values-v2-title">Built for real businesses</div>
+              <div className="about-values-v2-desc">Not for startups chasing vanity metrics. For businesses where a single recovered lead pays for the entire year of service.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA — editorial, text + arrow */}
+      <section className="about-final-cta reveal">
+        <div className="about-final-cta-inner">
+          <h2 className="about-final-cta-headline">See it work on your forms.</h2>
+          <p className="about-final-cta-sub">7-day trial. About 5 minutes to set up. No card gymnastics.</p>
+          <Link href="/signup" className="about-final-cta-link">
+            Begin your trial <span className="about-final-cta-arrow">&rarr;</span>
+          </Link>
+        </div>
+      </section>
 
       <Footer />
     </div>
