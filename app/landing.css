@@ -2473,6 +2473,7 @@
   .ledger-row-name {
     grid-column: 1;
     grid-row: 1;
+    text-align: left;
   }
   .ledger-row-status {
     grid-column: 2;
@@ -2482,6 +2483,7 @@
     grid-column: 1;
     grid-row: 2;
     font-size: 0.8rem;
+    text-align: left;
   }
   .ledger-row-value {
     grid-column: 2;

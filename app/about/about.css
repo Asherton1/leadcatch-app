@@ -499,12 +499,14 @@
 }
 .about-clients-closer {
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.7;
-  color: #aaa;
-  margin: 0 auto;
-  max-width: 600px;
+  font-size: 1.0625rem;
+  font-weight: 300;
+  line-height: 1.75;
+  letter-spacing: -0.005em;
+  color: #c4c4c4;
+  margin: 4rem auto 0;
+  max-width: 640px;
+  text-align: center;
 }
 .about-clients-closer-accent {
   color: #ff6b35;
@@ -566,6 +568,7 @@
   color: #ff6b35;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  white-space: nowrap;
   margin: 0;
 }
 .about-values-v2-desc {
@@ -686,4 +689,17 @@
   }
 }
 
-
+/* MOBILE: kill all hairlines/borders on about page (cleaner) */
+@media (max-width: 768px) {
+  .about-story-v2-divider {
+    display: none !important;
+  }
+  .about-clients-row {
+    border-top: none !important;
+    border-bottom: none !important;
+  }
+  .about-values-v2-row {
+    border-top: none !important;
+    border-bottom: none !important;
+  }
+}
