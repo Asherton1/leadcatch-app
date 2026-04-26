@@ -2442,7 +2442,8 @@
 /* Mobile — collapse stats to 2x2, tighten rows */
 @media (max-width: 768px) {
   .ledger-section {
-    padding: 4rem 1.25rem 4rem;
+    padding: 0 !important;
+    max-width: 100% !important;
   }
   .ledger-headline {
     margin-bottom: 2.5rem;
@@ -2451,8 +2452,6 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1.75rem;
     margin-bottom: 2rem;
-    max-width: 100%;
-    justify-items: center;
   }
   .ledger-row {
     grid-template-columns: 1fr 0.7fr;

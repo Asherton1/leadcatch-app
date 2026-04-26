@@ -16,8 +16,8 @@ export default function ScrollReveal() {
       { threshold: 0.05, rootMargin: '0px 0px 100px 0px' }
     )
 
-    // Initial pass: anything already in viewport at mount gets revealed immediately
-    const elements = document.querySelectorAll('.reveal')
+    // Observe both .reveal and .word-reveal elements
+    const elements = document.querySelectorAll('.reveal, .word-reveal')
     elements.forEach(el => {
       const rect = el.getBoundingClientRect()
       const inViewport = rect.top < window.innerHeight && rect.bottom > 0
