@@ -1335,7 +1335,7 @@
   .hero h1 { font-size: 2rem !important; }
   .section-title { font-size: 1.75rem !important; }
   .section-subtitle { font-size: 0.9rem !important; }
-  .lc-section { padding: 0 1.25rem !important; }
+  .lc-section { padding: 2.5rem 1.25rem !important; }
   .final-cta { padding: 3rem 1.25rem !important; }
   .final-cta h2 { font-size: 1.75rem !important; }
   .lc-footer { padding: 2rem 1.25rem !important; }
@@ -1501,7 +1501,7 @@
   }
   .lc-section {
     margin: 3rem auto !important;
-    padding: 0 1.25rem !important;
+    padding: 2.5rem 1.25rem !important;
   }
   .stats-bridge {
     margin: 0 auto 1.5rem !important;
@@ -2451,6 +2451,8 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1.75rem;
     margin-bottom: 2rem;
+    max-width: 100%;
+    justify-items: center;
   }
   .ledger-row {
     grid-template-columns: 1fr 0.7fr;
