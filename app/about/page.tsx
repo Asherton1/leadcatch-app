@@ -91,6 +91,8 @@ export default function AboutPage() {
             </div>
           </div>
 
+          <div className="about-story-v2-divider" />
+
         </div>
       </section>
 

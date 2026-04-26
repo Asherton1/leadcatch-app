@@ -13,10 +13,20 @@ export default function ScrollReveal() {
           }
         })
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px 100px 0px' }
     )
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+    // Initial pass: anything already in viewport at mount gets revealed immediately
+    const elements = document.querySelectorAll('.reveal')
+    elements.forEach(el => {
+      const rect = el.getBoundingClientRect()
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0
+      if (inViewport) {
+        el.classList.add('revealed')
+      } else {
+        observer.observe(el)
+      }
+    })
 
     return () => observer.disconnect()
   }, [])
