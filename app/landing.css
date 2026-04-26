@@ -1535,8 +1535,11 @@
     margin-top: 1.5rem !important;
   }
   .lc-footer {
-    padding: 2rem 1.25rem !important;
+    padding: 1.5rem 1.25rem !important;
     margin-top: 0 !important;
+  }
+  .final-cta {
+    margin-bottom: 0 !important;
   }
 }
 
