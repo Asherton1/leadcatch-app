@@ -416,7 +416,7 @@
 
 @media (max-width: 768px) {
   .about-story-v2 {
-    padding: 4rem 1.25rem 3rem;
+    padding: 4rem 1.25rem 1rem;
   }
   .about-story-v2-headline {
     font-size: 1.375rem;
@@ -427,7 +427,7 @@
     line-height: 1.7;
   }
   .about-story-v2-divider {
-    margin: 3rem auto;
+    margin: 2rem auto;
   }
 }
 
@@ -635,7 +635,7 @@
 
 @media (max-width: 768px) {
   .about-clients {
-    padding: 4rem 1.25rem 3rem;
+    padding: 2rem 1.25rem 3rem;
   }
   .about-clients-headline {
     margin-bottom: 2.5rem;
