@@ -517,7 +517,7 @@
 /* VALUES V2 — matches pricing baseline architectural language */
 .about-values-v2 {
   width: 100%;
-  padding: 6rem 2rem 6rem;
+  padding: 9rem 2rem 6rem;
   background: #0c0c0c;
 }
 .about-values-v2-inner {
@@ -639,7 +639,7 @@
 
 @media (max-width: 768px) {
   .about-clients {
-    padding: 2rem 1.25rem 3rem;
+    padding: 5rem 1.25rem 3rem;
   }
   .about-clients-headline {
     margin-bottom: 2.5rem;
@@ -662,7 +662,7 @@
     font-size: 0.9375rem;
   }
   .about-values-v2 {
-    padding: 4rem 1.25rem 3rem;
+    padding: 6rem 1.25rem 3rem;
   }
   .about-values-v2-headline {
     margin-bottom: 2.5rem;
@@ -680,7 +680,7 @@
     font-size: 0.875rem;
   }
   .about-final-cta {
-    padding: 5rem 1.25rem 4rem;
+    padding: 8rem 1.25rem 4rem;
   }
   .about-final-cta-headline {
     font-size: 1.5rem;
