@@ -2442,7 +2442,7 @@
 /* Mobile — collapse stats to 2x2, tighten rows */
 @media (max-width: 768px) {
   .ledger-section {
-    padding: 4rem 1.25rem 3rem;
+    padding: 4rem 1.25rem 4rem;
   }
   .ledger-headline {
     margin-bottom: 2.5rem;
