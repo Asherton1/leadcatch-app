@@ -20,30 +20,28 @@ async function sendEmail(to: string, subject: string, html: string, apiKey: stri
   return res.json()
 }
 
-function followUp1Html(name: string, company: string) {
+function followUp1Html(name: string) {
   const firstName = name ? name.split(' ')[0] : null
-  const greeting = firstName ? 'Hi ' + firstName + ',' : 'Hi there,'
-  const companyLine = company ? ' at ' + company : ''
+  const greeting = firstName ? 'Hi ' + firstName + ',' : 'Hi,'
   return '<div style="font-family:Inter,-apple-system,sans-serif;color:#333;max-width:600px;line-height:1.7;font-size:15px">' +
     '<p>' + greeting + '</p>' +
-    '<p>Just wanted to make sure my note about ReCapture didn\u2019t get buried \u2014 I know how busy things get' + companyLine + '.</p>' +
-    '<p>The short version: we show you every person who starts your online forms but never submits. Names, emails, phone numbers \u2014 captured the moment they start typing. One script tag, no form changes, 60 seconds to install.</p>' +
-    '<p>If you have 5 minutes this week, I\u2019d love to show you a quick demo. And if the timing isn\u2019t right, no worries at all.</p>' +
-    '<p>Best,<br/>Asherton Chraibi<br/>Founder, ReCapture<br/>(813) 245-5956<br/>hello@userecapture.com</p>' +
+    '<p>Following up on your demo request — wanted to make sure my last note didn\'t get buried.</p>' +
+    '<p>If you\'re still curious about ReCapture, I\'d love to walk you through it on a quick 15-min call. We can pull up your site live, install the script in 60 seconds, and you\'ll see your first abandoned lead come through before we hang up.</p>' +
+    '<p>If now isn\'t the right time, no problem at all — just let me know and I\'ll stop pinging you.</p>' +
+    '<p>Best,<br/>Ash<br/>Founder, ReCapture<br/><a href="https://userecapture.com" style="color:#ff6b35;text-decoration:none">userecapture.com</a></p>' +
     '</div>'
 }
 
-function followUp2Html(name: string, company: string) {
+function followUp2Html(name: string) {
   const firstName = name ? name.split(' ')[0] : null
-  const greeting = firstName ? 'Hi ' + firstName + ',' : 'Hi there,'
-  const companyLine = company ? ' ' + company : ' yours'
+  const greeting = firstName ? 'Hi ' + firstName + ',' : 'Hi,'
   return '<div style="font-family:Inter,-apple-system,sans-serif;color:#333;max-width:600px;line-height:1.7;font-size:15px">' +
     '<p>' + greeting + '</p>' +
-    '<p>Last note from me \u2014 I don\u2019t want to be the person who fills your inbox.</p>' +
-    '<p>I built ReCapture because I spent 10 years managing ad campaigns for businesses like' + companyLine + ' and kept watching the same problem: great traffic, solid landing pages, and a massive gap between form views and form submissions. Nobody was tracking what happened <em>during</em> the form.</p>' +
-    '<p>If you\u2019re curious, I\u2019d love to run a free Form Audit on your website \u2014 it takes about 2 minutes, and we\u2019ll send you a report showing your form field count, mobile UX issues, tracking gaps, and an estimate of how much revenue your forms are leaking monthly. Completely free, no strings.</p>' +
-    '<p>Just reply \u201caudit\u201d and I\u2019ll send it over.</p>' +
-    '<p>Best,<br/>Asherton Chraibi<br/>Founder, ReCapture<br/>(813) 245-5956<br/>hello@userecapture.com</p>' +
+    '<p>Last note on this — I don\'t want to be the person who fills your inbox.</p>' +
+    '<p>You signed up for a demo a couple weeks back and I haven\'t heard from you since. If timing or priorities shifted, totally understand.</p>' +
+    '<p>If you ever want to revisit, the door\'s open — 14-day trial is still available, no card required to start. Just reply to this email or head to <a href="https://userecapture.com" style="color:#ff6b35;text-decoration:none">userecapture.com</a>.</p>' +
+    '<p>Wishing you a strong quarter.</p>' +
+    '<p>Ash<br/>Founder, ReCapture</p>' +
     '</div>'
 }
 
@@ -64,58 +62,62 @@ export async function GET(req: Request) {
   const day4Cutoff = new Date(now.getTime() - 4 * 24 * 60 * 60 * 1000)
   const day10Cutoff = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000)
 
-  const { data: fu1Contacts } = await supabase
-    .from('outreach_contacts')
+  // Day 4 follow-ups: created 4+ days ago, no fu1 sent, no reply, no trial
+  const { data: fu1Demos } = await supabase
+    .from('demo_requests')
     .select('*')
     .eq('followup_1_sent', false)
     .eq('replied', false)
-    .lte('initial_sent_at', day4Cutoff.toISOString())
+    .eq('trial_started', false)
+    .lte('created_at', day4Cutoff.toISOString())
 
-  const { data: fu2Contacts } = await supabase
-    .from('outreach_contacts')
+  // Day 10 follow-ups: fu1 already sent, no fu2 sent, no reply, no trial
+  const { data: fu2Demos } = await supabase
+    .from('demo_requests')
     .select('*')
     .eq('followup_1_sent', true)
     .eq('followup_2_sent', false)
     .eq('replied', false)
-    .lte('initial_sent_at', day10Cutoff.toISOString())
+    .eq('trial_started', false)
+    .lte('created_at', day10Cutoff.toISOString())
 
   const results: string[] = []
 
-  if (fu1Contacts) {
-    for (const c of fu1Contacts) {
-      const subject = 'Following up \u2014 ' + (c.company || 'your online forms')
-      const html = followUp1Html(c.name, c.company)
-      const res = await sendEmail(c.email, subject, html, RESEND_KEY)
+  if (fu1Demos) {
+    for (const d of fu1Demos) {
+      const subject = 'Following up on your ReCapture demo'
+      const html = followUp1Html(d.name)
+      const res = await sendEmail(d.email, subject, html, RESEND_KEY)
       await supabase
-        .from('outreach_contacts')
+        .from('demo_requests')
         .update({ followup_1_sent: true, followup_1_sent_at: new Date().toISOString() })
-        .eq('id', c.id)
-      results.push('FU1: ' + c.email + ' - ' + (res.id || 'sent'))
+        .eq('id', d.id)
+      results.push('Day 4: ' + d.email + ' (' + (d.name || 'no name') + ') - ' + (res.id || 'sent'))
     }
   }
 
-  if (fu2Contacts) {
-    for (const c of fu2Contacts) {
-      const subject = 'Last note \u2014 free Form Audit for ' + (c.company || 'your website')
-      const html = followUp2Html(c.name, c.company)
-      const res = await sendEmail(c.email, subject, html, RESEND_KEY)
+  if (fu2Demos) {
+    for (const d of fu2Demos) {
+      const subject = 'Last note — your ReCapture demo'
+      const html = followUp2Html(d.name)
+      const res = await sendEmail(d.email, subject, html, RESEND_KEY)
       await supabase
-        .from('outreach_contacts')
+        .from('demo_requests')
         .update({ followup_2_sent: true, followup_2_sent_at: new Date().toISOString() })
-        .eq('id', c.id)
-      results.push('FU2: ' + c.email + ' - ' + (res.id || 'sent'))
+        .eq('id', d.id)
+      results.push('Day 10: ' + d.email + ' (' + (d.name || 'no name') + ') - ' + (res.id || 'sent'))
     }
   }
 
   if (results.length > 0) {
-    const notifyHtml = '<div style="font-family:Inter,sans-serif;color:#333;font-size:14px"><p><strong>' + results.length + ' follow-up emails sent:</strong></p>' + results.map(r => '<p>' + r + '</p>').join('') + '</div>'
-    await sendEmail('asherton.c@me.com', 'ReCapture follow-up sequence \u2014 ' + results.length + ' sent', notifyHtml, RESEND_KEY)
+    const notifyHtml = '<div style="font-family:Inter,sans-serif;color:#333;font-size:14px"><p><strong>' + results.length + ' demo follow-ups sent:</strong></p>' + results.map(r => '<p>' + r + '</p>').join('') + '</div>'
+    await sendEmail('asherton.c@me.com', 'ReCapture demo follow-ups — ' + results.length + ' sent', notifyHtml, RESEND_KEY)
   }
 
   return NextResponse.json({
-    message: 'Follow-up sequence complete',
-    followup1: fu1Contacts?.length || 0,
-    followup2: fu2Contacts?.length || 0,
+    message: 'Demo follow-up sequence complete',
+    day4: fu1Demos?.length || 0,
+    day10: fu2Demos?.length || 0,
     details: results
   })
 }
