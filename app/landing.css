@@ -171,7 +171,7 @@
   color: var(--text-secondary);
   margin-bottom: 2.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   font-weight: 500;
 }
 
@@ -2032,7 +2032,7 @@
 .ghost-arrow { display: flex; flex-direction: column; align-items: center; gap: 12px; position: relative; }
 .ghost-arrow-line { width: 80px; height: 2px; background: linear-gradient(90deg, transparent 0%, #ff6b35 50%, transparent 100%); position: relative; }
 .ghost-arrow-line::after { content: ''; position: absolute; right: 0; top: -4px; width: 0; height: 0; border-left: 8px solid #ff6b35; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
-.ghost-arrow-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: #ff6b35; font-weight: 700; white-space: nowrap; }
+.ghost-arrow-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #ff6b35; font-weight: 700; white-space: nowrap; }
 .ghost-capture { background: #0f0f0f; border: 1px solid #1e1e1e; border-radius: 12px; padding: 24px; opacity: 0; transform: translateX(20px); transition: all 0.6s ease; box-shadow: 0 20px 60px rgba(255,107,53,0.1); }
 .ghost-capture-visible { opacity: 1; transform: translateX(0); border-color: rgba(255,107,53,0.3); }
 .ghost-capture-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #1e1e1e; }
@@ -2170,7 +2170,7 @@
 .gc-arrow-label {
   font-size: 9px;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   color: #ff6b35;
   font-weight: 700;
 }
@@ -2639,7 +2639,7 @@
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   color: #ff6b35;
 }
 
@@ -2647,7 +2647,7 @@
   font-family: 'Inter', sans-serif;
   font-size: 0.65rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   color: #16a34a;
   opacity: 0.85;
   display: inline-flex;
