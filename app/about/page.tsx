@@ -91,8 +91,6 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="about-story-v2-divider" />
-
         </div>
       </section>
 
@@ -138,7 +136,8 @@ export default function AboutPage() {
           </div>
 
           <p className="about-clients-closer">
-            Eight figures in ad spend. <span className="about-clients-closer-accent">38+ long-term client relationships.</span>{' '}
+            Eight figures in ad spend. <span className="about-clients-closer-accent">38+ long-term client relationships.</span>
+            <br />
             One ReCapture, born out of all of it.
           </p>
         </div>
