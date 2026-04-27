@@ -119,7 +119,7 @@ export async function POST(req: NextRequest) {
     .single()
 
   const apiKey = clientRow?.api_key ?? 'Check your dashboard'
-  const trialEndDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+  const trialEndDate = new Date(trialEndsAt)
     .toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 
   // ── Send onboarding email ──
@@ -285,7 +285,7 @@ export async function POST(req: NextRequest) {
 
   // ── Notify Ash of new signup ──
   await resend.emails.send({
-    from: 'ReCapture <onboarding@resend.dev>',
+    from: 'ReCapture <hello@userecapture.com>',
     to: 'asherton.c@me.com',
     subject: `New Signup — ${displayName}`,
     html: `
