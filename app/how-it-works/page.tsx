@@ -285,7 +285,7 @@ export default function HowItWorksPage() {
         <h2>Ready to See What You're Missing?</h2>
         <p>Start your 7-day free trial. If you're losing leads, you'll know within 48 hours.</p>
         <div className="hiw-cta-buttons">
-          <Link href="/test-form" className="hiw-cta-primary">Try the Live Demo</Link>
+          <Link href="/demo" className="hiw-cta-primary">Try the Live Demo</Link>
           <Link href="/start-trial" className="hiw-cta-secondary">Start Your 7-Day Free Trial</Link>
         </div>
       </section>

@@ -148,7 +148,7 @@ export default function Post() {
         <div className="blog-cta-box" style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a1a 100%)', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2.5rem', margin: '3rem 0', textAlign: 'center' }}>
           <h3 style={{ color: '#ff6b35', fontSize: '1.5rem', margin: '0 0 0.75rem 0' }}>See what your forms are missing</h3>
           <p style={{ color: '#888', margin: '0 0 1.5rem 0' }}>Try the live demo and watch ReCapture capture your data in real time.</p>
-          <Link href="/test-form" style={{ display: 'inline-block', background: '#ff6b35', color: '#000', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>Try the Live Demo</Link>
+          <Link href="/demo" style={{ display: 'inline-block', background: '#ff6b35', color: '#000', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>Try the Live Demo</Link>
         </div>
 
         <div className="blog-author" style={{ display: 'flex', alignItems: 'center', gap: '1rem', borderTop: '1px solid #1e1e1e', paddingTop: '2rem', marginTop: '3rem' }}>

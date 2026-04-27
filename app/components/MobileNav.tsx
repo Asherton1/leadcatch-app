@@ -26,7 +26,7 @@ export default function MobileNav() {
         <div className="nav-dropdown-wrapper">
           <span className="nav-link" style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>Tools <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           <div className="nav-dropdown-menu">
-            <Link href="/test-form" className="nav-dropdown-item">Live Demo</Link>
+            <Link href="/demo" className="nav-dropdown-item">Live Demo</Link>
             <Link href="/calculator" className="nav-dropdown-item">ROI Estimator</Link>
             <Link href="/form-audit" className="nav-dropdown-item">Free Form Audit</Link>
           </div>
@@ -86,7 +86,7 @@ export default function MobileNav() {
               overflow: 'hidden',
               transition: 'max-height 0.3s ease, opacity 0.2s ease',
             }}>
-              <Link href="/test-form" className={isActive('/test-form') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Live Demo</Link>
+              <Link href="/demo" className={isActive('/demo') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Live Demo</Link>
               <Link href="/calculator" className={isActive('/calculator') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>ROI Estimator</Link>
               <Link href="/form-audit" className={isActive('/form-audit') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Free Form Audit</Link>
             </div>

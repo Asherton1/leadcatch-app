@@ -13,6 +13,15 @@ const nextConfig = {
       },
     ]
   },
+  async redirects() {
+    return [
+      {
+        source: '/test-form',
+        destination: '/demo',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

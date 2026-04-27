@@ -107,7 +107,7 @@ export default function Post() {
         <div className="blog-post-cta-box">
           <h3>See how much revenue your forms are leaking</h3>
           <p>ReCapture shows you every lead that starts your form but never submits — with names, emails, phone numbers, and the dollar value at stake. One script tag. Results within 48 hours.</p>
-          <Link href="/test-form">Try the Live Demo →</Link>
+          <Link href="/demo">Try the Live Demo →</Link>
         </div>
       </div>
       <Footer />

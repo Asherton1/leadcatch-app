@@ -116,7 +116,7 @@ export default function Post() {
         <div style={{ margin: '3rem 0', padding: '2rem', background: '#111', borderRadius: '12px', border: '1px solid rgba(255,107,53,0.2)', textAlign: 'center' }}>
           <p style={{ color: '#fff', fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.5rem' }}>Ready to hear it for yourself?</p>
           <p style={{ color: '#888', fontSize: '0.9375rem', marginBottom: '1.5rem' }}>Try the live demo and watch ReCapture capture a lead in real time.</p>
-          <Link href="/test-form" style={{ display: 'inline-block', background: '#ff6b35', color: '#000', fontWeight: 700, fontSize: '0.9375rem', padding: '0.75rem 2rem', borderRadius: '0.5rem', textDecoration: 'none' }}>Try the Live Demo</Link>
+          <Link href="/demo" style={{ display: 'inline-block', background: '#ff6b35', color: '#000', fontWeight: 700, fontSize: '0.9375rem', padding: '0.75rem 2rem', borderRadius: '0.5rem', textDecoration: 'none' }}>Try the Live Demo</Link>
         </div>
       </article>
 

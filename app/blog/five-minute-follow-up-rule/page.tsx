@@ -77,7 +77,7 @@ export default function Post() {
         <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '2rem', margin: '3rem 0' }}>
           <p style={{ fontSize: '0.8rem', fontWeight: 600, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 0.75rem 0' }}>How ReCapture Closes the Gap</p>
           <p style={{ color: '#bbb', lineHeight: 1.8, margin: '0 0 1rem 0' }}>ReCapture captures partial form submissions the moment someone starts typing — before they hit submit, before they leave. When a lead abandons your form, your team gets an instant alert with the lead&apos;s name, email, phone number, and what they were looking for. ReCapture also sends the prospect an automated recovery email on your behalf, giving them a direct path back to your form. The entire cycle — capture, alert, recover — happens without your team lifting a finger.</p>
-          <Link href="/test-form" style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.75rem 1.75rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.9rem' }}>See It in Action</Link>
+          <Link href="/demo" style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.75rem 1.75rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.9rem' }}>See It in Action</Link>
         </div>
 
       </div>

@@ -18,7 +18,7 @@ export default function Footer() {
         <Link href="/about" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>About</Link>
         <Link href="/blog" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Insights</Link>
         <Link href="/pricing" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Pricing</Link>
-        <Link href="/test-form" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Live Demo</Link>
+        <Link href="/demo" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Live Demo</Link>
         <Link href="/why-us" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Why Us</Link>
         <Link href="/how-it-works" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>How It Works</Link>
         <Link href="/integrations" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Integrations</Link>
