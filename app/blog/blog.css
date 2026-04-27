@@ -690,3 +690,19 @@
   color: #ff6b35;
   background: rgba(255, 107, 53, 0.05);
 }
+
+
+/* ── Nav Phone — copied from landing.css for blog-styled pages ── */
+.nav-phone {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+.nav-phone:hover {
+  opacity: 0.75;
+}
