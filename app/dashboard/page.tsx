@@ -561,22 +561,58 @@ export default function Dashboard() {
     return () => subscription.unsubscribe()
   }, [router])
 
-  // ── Fetch all clients ──────────────────────────────────────────────────────
+  // ── Fetch clients (admin sees all, customers see only their own) ──────────
+  const [isAdmin, setIsAdmin] = useState(false)
+
   useEffect(() => {
     if (!authed) return
     setClientsLoading(true)
-    supabase
-      .from('clients')
-      .select('id, name, first_name, last_name, company_name, api_key, active')
-      .order('name')
-      .then(({ data, error }) => {
+
+    ;(async () => {
+      // Get current user
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) {
+        setClientsLoading(false)
+        return
+      }
+
+      // Check if this user is an admin
+      const { data: meRow } = await supabase
+        .from('clients')
+        .select('is_admin')
+        .eq('user_id', user.id)
+        .single()
+
+      const adminFlag = meRow?.is_admin === true
+      setIsAdmin(adminFlag)
+
+      if (adminFlag) {
+        // Admin: fetch all clients
+        const { data, error } = await supabase
+          .from('clients')
+          .select('id, name, first_name, last_name, company_name, api_key, active')
+          .order('name')
         if (!error && data) {
           const rows = data as Client[]
           setAllClients(rows)
           if (rows.length > 0) setSelectedClient(rows[0])
         }
-        setClientsLoading(false)
-      })
+      } else {
+        // Customer: fetch ONLY their own client
+        const { data, error } = await supabase
+          .from('clients')
+          .select('id, name, first_name, last_name, company_name, api_key, active')
+          .eq('user_id', user.id)
+          .single()
+        if (!error && data) {
+          const row = data as Client
+          setAllClients([row])
+          setSelectedClient(row)
+        }
+      }
+
+      setClientsLoading(false)
+    })()
   }, [authed])
 
   // ── Fetch leads for selected client ───────────────────────────────────────
@@ -676,13 +712,15 @@ export default function Dashboard() {
         </div>
       </header>
 
-      {/* ── Client Selector Bar ─────────────────────────────────────────────── */}
-      <ClientSelector
-        clients={allClients}
-        selected={selectedClient}
-        onSelect={c => { setSelectedClient(c); setFilter('all') }}
-        loading={clientsLoading}
-      />
+      {/* ── Client Selector Bar (admin-only) ─────────────────────────────── */}
+      {isAdmin && (
+        <ClientSelector
+          clients={allClients}
+          selected={selectedClient}
+          onSelect={c => { setSelectedClient(c); setFilter('all') }}
+          loading={clientsLoading}
+        />
+      )}
 
       {/* ── Stats (5 cards) ─────────────────────────────────────────────────── */}
       <div className="stats-grid">
