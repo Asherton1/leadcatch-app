@@ -1811,12 +1811,20 @@
   .reveal,
   .reveal-stagger,
   .reveal-stagger > *,
+  .reveal-stagger>*,
   .word-reveal,
-  .word-reveal .word {
+  .word-reveal .word,
+  .page-transitioning {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+    visibility: visible !important;
   }
+}
+
+/* Page transition: never hide content during route change */
+.page-transitioning {
+  opacity: 1 !important;
 }
 
 /* Desktop only: animate from hidden state if JS adds class */
