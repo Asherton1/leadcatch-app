@@ -1449,3 +1449,162 @@ body {
     flex-shrink: 0;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* Empty State — Branded "Tracking Active" Block                            */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  min-height: 380px;
+}
+
+.empty-pulse {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  margin-bottom: 1.75rem;
+}
+
+.empty-pulse-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff6b35;
+  box-shadow: 0 0 12px rgba(255, 107, 53, 0.5);
+  z-index: 2;
+}
+
+.empty-pulse-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff6b35;
+  opacity: 0.4;
+  animation: empty-pulse-ring 2s ease-out infinite;
+  z-index: 1;
+}
+
+@keyframes empty-pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.empty-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #ff6b35;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.empty-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 0.75rem 0;
+}
+
+.empty-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: #aaa;
+  line-height: 1.6;
+  margin: 0 0 0.5rem 0;
+  max-width: 480px;
+}
+
+.empty-body-muted {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 480px;
+}
+
+.empty-divider {
+  width: 60px;
+  height: 1px;
+  background: #1e1e1e;
+  margin: 2rem 0;
+}
+
+.empty-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  align-items: flex-start;
+}
+
+.empty-check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.empty-check-icon {
+  flex-shrink: 0;
+}
+
+.empty-check-icon.done {
+  color: #10b981;
+}
+
+.empty-check-item:has(.empty-check-icon.done) span {
+  color: #aaa;
+}
+
+.empty-check-icon.waiting {
+  color: #ff6b35;
+}
+
+.empty-check-item:has(.empty-check-icon.waiting) span {
+  color: #fff;
+}
+
+.empty-check-icon.pending {
+  color: #444;
+}
+
+.empty-check-item:has(.empty-check-icon.pending) span {
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .empty-state {
+    padding: 3rem 1.5rem;
+    min-height: 320px;
+  }
+  .empty-title {
+    font-size: 1.5rem;
+  }
+}

@@ -918,11 +918,46 @@ export default function Dashboard() {
           {isLoading && <div className="state-row">Loading leads…</div>}
           {leadsError && <div className="state-row" style={{ color: '#f87171' }}>Error: {leadsError}</div>}
           {!isLoading && !leadsError && filteredLeads.length === 0 && (
-            <div className="state-row">
-              {search
-                ? 'No leads match your search.'
-                : `No leads yet for ${selectedClient ? displayName(selectedClient) : 'this client'}.`}
-            </div>
+            search ? (
+              <div className="state-row">No leads match your search.</div>
+            ) : (
+              <div className="empty-state">
+                <div className="empty-pulse">
+                  <span className="empty-pulse-dot" />
+                  <span className="empty-pulse-ring" />
+                </div>
+                <div className="empty-eyebrow">§ TRACKING ACTIVE</div>
+                <h3 className="empty-title">Quiet right now.</h3>
+                <p className="empty-body">
+                  Your tracker is live and listening{selectedClient?.website_url ? ` on ${selectedClient.website_url.replace(/^https?:\/\//, '').replace(/\/$/, '')}` : ''}.
+                </p>
+                <p className="empty-body-muted">
+                  The first lead usually arrives within 48 hours of installation.
+                </p>
+                <div className="empty-divider" />
+                <div className="empty-checklist">
+                  <div className="empty-check-item">
+                    <svg className="empty-check-icon done" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span>Tracker installed</span>
+                  </div>
+                  <div className="empty-check-item">
+                    <svg className="empty-check-icon waiting" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    <span>Awaiting first capture</span>
+                  </div>
+                  <div className="empty-check-item">
+                    <svg className="empty-check-icon pending" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                    </svg>
+                    <span>Recovery email fires automatically</span>
+                  </div>
+                </div>
+              </div>
+            )
           )}
 
           {!isLoading && filteredLeads.map((lead, i) => {
