@@ -698,7 +698,7 @@ export default function Dashboard() {
               <circle className="logo-dg" cx="18" cy="18" r="8" fill="#ff6b35"/>
               <circle className="logo-dp" cx="18" cy="18" r="5" fill="#ff6b35"/>
             </svg><span><span style={{ color: '#fff', fontWeight: 700 }}>Re</span><span style={{ color: '#ff6b35', fontWeight: 700 }}>Capture</span></span></span>
-          {userEmail === 'asherton.c@me.com' && <a href="/admin" style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.12em', color: '#ff6b35', background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.3)', borderRadius: '4px', padding: '2px 6px', textDecoration: 'none' }}>ADMIN</a>}
+          {isAdmin && <a href="/admin" style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.12em', color: '#ff6b35', background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.3)', borderRadius: '4px', padding: '2px 6px', textDecoration: 'none' }}>ADMIN</a>}
         </div>
         <div className="header-right">
           {selectedClient && <span className="client-name">{displayName(selectedClient)}</span>}

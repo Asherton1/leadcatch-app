@@ -40,7 +40,14 @@ export default function AdminPage() {
   useEffect(() => {
     async function load() {
       const { data: { session } } = await supabase.auth.getSession()
-      if (!session || session.user.email !== 'asherton.c@me.com') { router.replace('/'); return }
+      if (!session) { router.replace('/'); return }
+      // Check is_admin flag in clients table
+      const { data: meRow } = await supabase
+        .from('clients')
+        .select('is_admin')
+        .eq('user_id', session.user.id)
+        .single()
+      if (!meRow?.is_admin) { router.replace('/'); return }
       setAuthorized(true)
       const { data: demoData } = await supabase.from('demo_requests').select('*').order('created_at', { ascending: false })
       const { data: clientData } = await supabase.from('clients').select('*').order('created_at', { ascending: false })
