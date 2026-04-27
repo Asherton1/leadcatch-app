@@ -929,7 +929,7 @@ export default function Dashboard() {
                 <div className="empty-eyebrow">§ TRACKING ACTIVE</div>
                 <h3 className="empty-title">Quiet right now.</h3>
                 <p className="empty-body">
-                  Your tracker is live and listening{selectedClient?.website_url ? ` on ${selectedClient.website_url.replace(/^https?:\/\//, '').replace(/\/$/, '')}` : ''}.
+                  Your tracker is live and listening for partial form submissions.
                 </p>
                 <p className="empty-body-muted">
                   The first lead usually arrives within 48 hours of installation.
