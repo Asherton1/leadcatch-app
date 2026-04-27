@@ -54,6 +54,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('js', new Date());
           gtag('config', 'G-132TK8H7D9');`}
         </Script>
+        {/* ReCapture tracker — dogfooding our own product on userecapture.com */}
+        <Script
+          src="https://www.userecapture.com/track.js?key=admin_252bcf7523b0e813f2b470d2e0f61fd9"
+          strategy="afterInteractive"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
