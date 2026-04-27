@@ -1380,3 +1380,72 @@ body {
     text-align: center;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* Status Filter Chips                                                       */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.status-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.chip {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #888;
+  background: transparent;
+  border: 1px solid #1e1e1e;
+  border-radius: 6px;
+  padding: 0.5rem 0.875rem;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  color: #fff;
+  border-color: #2a2a2a;
+}
+
+.chip.active {
+  background: rgba(255, 107, 53, 0.08);
+  border-color: rgba(255, 107, 53, 0.3);
+  color: #ff6b35;
+}
+
+.chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Search icon SVG color */
+.search-icon {
+  display: inline-flex;
+  align-items: center;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .status-chips {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 1.25rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .chip {
+    flex-shrink: 0;
+  }
+}
