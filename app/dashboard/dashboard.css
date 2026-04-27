@@ -1255,3 +1255,128 @@ body {
   .modal-mini-metrics { grid-template-columns: repeat(2, 1fr); }
   .modal-card { border-radius: 1rem; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* ROI Hero — Recovered Revenue                                              */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.roi-hero {
+  margin-bottom: 1.5rem;
+  background: linear-gradient(180deg, #0f0f0f 0%, #0a0a0a 100%);
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.roi-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,107,53,0.4) 50%, transparent 100%);
+}
+
+.roi-hero-inner {
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.roi-hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.roi-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #ff6b35;
+  text-transform: uppercase;
+}
+
+.roi-amount {
+  font-family: 'Inter', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #fff;
+  line-height: 1;
+  margin-top: 0.25rem;
+}
+
+.roi-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #777;
+  letter-spacing: 0;
+  margin-top: 0.5rem;
+}
+
+.roi-hero-right {
+  display: flex;
+  align-items: center;
+}
+
+.roi-window-selector {
+  display: flex;
+  gap: 0.25rem;
+  background: #0a0a0a;
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+  padding: 0.25rem;
+}
+
+.roi-window-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #888;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.875rem;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.roi-window-btn:hover {
+  color: #fff;
+}
+
+.roi-window-btn.active {
+  background: rgba(255, 107, 53, 0.12);
+  color: #ff6b35;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .roi-hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+    gap: 1.25rem;
+  }
+  .roi-amount {
+    font-size: 2.5rem;
+  }
+  .roi-window-selector {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .roi-window-btn {
+    flex: 1;
+    text-align: center;
+  }
+}

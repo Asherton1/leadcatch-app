@@ -538,6 +538,9 @@ export default function Dashboard() {
   const [userEmail, setUserEmail]               = useState('')
   const [loggingOut, setLoggingOut]             = useState(false)
   const [allClients, setAllClients]             = useState<Client[]>([])
+  const [recoveredRevenue, setRecoveredRevenue] = useState<number>(0)
+  const [recoveredCount, setRecoveredCount]     = useState<number>(0)
+  const [recoveredWindow, setRecoveredWindow]   = useState<'month' | '30days' | 'all'>('month')
   const [selectedClient, setSelectedClient]     = useState<Client | null>(null)
   const [clientsLoading, setClientsLoading]     = useState(true)
   const [leads, setLeads]                       = useState<Lead[]>([])
@@ -614,6 +617,40 @@ export default function Dashboard() {
       setClientsLoading(false)
     })()
   }, [authed])
+
+  // ── Fetch recovered revenue (Recovered = email_sent + status in [contacted, converted]) ──
+  useEffect(() => {
+    if (!selectedClient) return
+
+    const now = new Date()
+    let startDate: string | null = null
+    if (recoveredWindow === 'month') {
+      startDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
+    } else if (recoveredWindow === '30days') {
+      startDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString()
+    }
+    // 'all' → no date filter
+
+    let query = supabase
+      .from('leads')
+      .select('estimated_value', { count: 'exact' })
+      .eq('client_id', selectedClient.id)
+      .eq('email_sent', true)
+      .in('status', ['contacted', 'converted'])
+
+    if (startDate) query = query.gte('created_at', startDate)
+
+    query.then(({ data, error, count }) => {
+      if (error) {
+        setRecoveredRevenue(0)
+        setRecoveredCount(0)
+        return
+      }
+      const total = (data || []).reduce((sum, l) => sum + (Number(l.estimated_value) || 0), 0)
+      setRecoveredRevenue(total)
+      setRecoveredCount(count || 0)
+    })
+  }, [selectedClient, recoveredWindow])
 
   // ── Fetch leads for selected client ───────────────────────────────────────
   useEffect(() => {
@@ -721,6 +758,46 @@ export default function Dashboard() {
           loading={clientsLoading}
         />
       )}
+
+      {/* ── Recovered Revenue Hero Block ────────────────────────────────────── */}
+      <div className="roi-hero">
+        <div className="roi-hero-inner">
+          <div className="roi-hero-left">
+            <div className="roi-eyebrow">§ RECOVERED REVENUE</div>
+            <div className="roi-amount">
+              ${recoveredRevenue.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+            </div>
+            <div className="roi-subtitle">
+              Across {recoveredCount} recovered lead{recoveredCount === 1 ? '' : 's'}
+            </div>
+          </div>
+          <div className="roi-hero-right">
+            <div className="roi-window-selector">
+              <button
+                className={`roi-window-btn ${recoveredWindow === 'month' ? 'active' : ''}`}
+                onClick={() => setRecoveredWindow('month')}
+                type="button"
+              >
+                This Month
+              </button>
+              <button
+                className={`roi-window-btn ${recoveredWindow === '30days' ? 'active' : ''}`}
+                onClick={() => setRecoveredWindow('30days')}
+                type="button"
+              >
+                30 Days
+              </button>
+              <button
+                className={`roi-window-btn ${recoveredWindow === 'all' ? 'active' : ''}`}
+                onClick={() => setRecoveredWindow('all')}
+                type="button"
+              >
+                All Time
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* ── Stats (5 cards) ─────────────────────────────────────────────────── */}
       <div className="stats-grid">
