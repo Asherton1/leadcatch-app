@@ -20,6 +20,11 @@ export const metadata: Metadata = {
     },
   },
   keywords: ['form abandonment recovery', 'lead recovery software', 'partial form capture', 'med spa lead generation', 'dental practice leads', 'form tracking', 'abandoned form recovery', 'lead capture SaaS', 'high-ticket lead recovery'],
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
   openGraph: {
     title: 'ReCapture — Stop Losing 60% of Your Leads',
     description: 'Capture partial form submissions and auto-recover lost leads. Built for med spas, dental practices, and luxury service businesses.',
