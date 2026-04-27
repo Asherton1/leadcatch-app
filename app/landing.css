@@ -1806,6 +1806,19 @@
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
+/* Mobile: ALWAYS visible, no animation, no JS dependency */
+@media (max-width: 768px) {
+  .reveal,
+  .reveal-stagger,
+  .reveal-stagger > *,
+  .word-reveal,
+  .word-reveal .word {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* Desktop only: animate from hidden state if JS adds class */
 @media (min-width: 769px) {
   .reveal:not(.revealed) {
