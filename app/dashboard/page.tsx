@@ -538,6 +538,7 @@ export default function Dashboard() {
   const [userEmail, setUserEmail]               = useState('')
   const [loggingOut, setLoggingOut]             = useState(false)
   const [allClients, setAllClients]             = useState<Client[]>([])
+  const [statusFilter, setStatusFilter]         = useState<'all' | 'hot' | 'warm' | 'cold' | 'contacted' | 'converted'>('all')
   const [recoveredRevenue, setRecoveredRevenue] = useState<number>(0)
   const [recoveredCount, setRecoveredCount]     = useState<number>(0)
   const [recoveredWindow, setRecoveredWindow]   = useState<'month' | '30days' | 'all'>('month')
@@ -695,8 +696,20 @@ export default function Dashboard() {
         l.phone?.toLowerCase().includes(q)
       )
     }
+    // Status filter chips: hot/warm/cold use score thresholds, contacted/converted match status field
+    if (statusFilter === 'hot') {
+      rows = rows.filter(l => scoreLead(l).score >= 75)
+    } else if (statusFilter === 'warm') {
+      rows = rows.filter(l => { const s = scoreLead(l).score; return s >= 50 && s < 75 })
+    } else if (statusFilter === 'cold') {
+      rows = rows.filter(l => scoreLead(l).score < 50)
+    } else if (statusFilter === 'contacted') {
+      rows = rows.filter(l => l.status === 'contacted')
+    } else if (statusFilter === 'converted') {
+      rows = rows.filter(l => l.status === 'converted')
+    }
     return rows
-  }, [leads, filter, search])
+  }, [leads, filter, search, statusFilter])
 
   const stats = useMemo(() => {
     const total_leads        = filteredLeads.length
@@ -847,6 +860,28 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* ── Status filter chips ─────────────────────────────────────────────── */}
+      <div className="status-chips">
+        {([
+          { v: 'all', label: 'All Leads' },
+          { v: 'hot', label: 'Hot', dot: '#ef4444' },
+          { v: 'warm', label: 'Warm', dot: '#f59e0b' },
+          { v: 'cold', label: 'Cold', dot: '#6b7280' },
+          { v: 'contacted', label: 'Contacted', dot: '#f59e0b' },
+          { v: 'converted', label: 'Converted', dot: '#10b981' },
+        ] as const).map(c => (
+          <button
+            key={c.v}
+            className={`chip${statusFilter === c.v ? ' active' : ''}`}
+            onClick={() => setStatusFilter(c.v)}
+            type="button"
+          >
+            {'dot' in c && <span className="chip-dot" style={{ background: c.dot }} />}
+            {c.label}
+          </button>
+        ))}
+      </div>
+
       {/* ── Controls ────────────────────────────────────────────────────────── */}
       <div className="controls">
         <div className="filters">
@@ -857,7 +892,12 @@ export default function Dashboard() {
           ))}
         </div>
         <div className="search-box">
-          <span className="search-icon">🔍</span>
+          <span className="search-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </span>
           <input type="text" className="search-input" placeholder="Search leads..."
             value={search} onChange={e => setSearch(e.target.value)} />
         </div>
