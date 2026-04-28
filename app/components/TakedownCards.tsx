@@ -38,15 +38,17 @@ const takedowns: Takedown[] = [
   },
 ]
 
-function Card({ data }: { data: Takedown }) {
+function Card({ data, index }: { data: Takedown; index: number }) {
   const [open, setOpen] = useState(false)
+  const num = String(index + 1).padStart(2, '0')
 
   return (
-    <div className="td-card">
+    <div className="td-card wow-card">
       <button onClick={() => setOpen(!open)} className="td-trigger" type="button" aria-expanded={open}>
         <div className="td-meta">
+          <div className="td-num">{num}</div>
           <h3>{data.name}</h3>
-          <p>{data.price}</p>
+          <p className="td-price">{data.price}</p>
         </div>
         <div className={`td-icon ${open ? 'td-icon-open' : ''}`}>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -65,16 +67,15 @@ function Card({ data }: { data: Takedown }) {
 
       <style jsx>{`
         .td-card {
-          background: #111;
-          border: 1px solid #1e1e1e;
-          border-radius: 1rem;
-          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          padding: 2rem 1.5rem;
         }
         .td-trigger {
           width: 100%;
           background: none;
           border: none;
-          padding: 1.75rem 1.75rem 1rem;
+          padding: 0;
           text-align: left;
           display: flex;
           align-items: flex-start;
@@ -85,36 +86,44 @@ function Card({ data }: { data: Takedown }) {
           cursor: default;
         }
         .td-meta { flex: 1; min-width: 0; }
+        .td-num {
+          width: 40px;
+          padding-bottom: 1rem;
+          margin-bottom: 1.25rem;
+          border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+          font-family: 'SF Mono', Menlo, Consolas, monospace;
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: #ff6b35;
+          letter-spacing: 0.1em;
+        }
         .td-meta h3 {
-          font-size: 1.25rem;
+          font-size: 1.1rem;
           font-weight: 700;
           margin: 0 0 0.5rem;
           color: #fff;
         }
-        .td-meta p {
+        .td-price {
           color: #ff6b35;
-          font-size: 0.95rem;
+          font-size: 0.875rem;
           font-weight: 700;
-          margin: 0;
+          margin: 0 0 1.25rem;
           line-height: 1.4;
         }
         .td-icon { display: none; }
 
-        .td-content {
-          padding: 0 1.75rem 1.75rem;
-        }
         .td-content ul {
           list-style: none;
           padding: 0;
           margin: 0;
           display: flex;
           flex-direction: column;
-          gap: 0.875rem;
+          gap: 0.75rem;
         }
         .td-content li {
           color: #888;
           font-size: 0.875rem;
-          line-height: 1.55;
+          line-height: 1.6;
           padding-left: 1.5rem;
           position: relative;
         }
@@ -126,20 +135,25 @@ function Card({ data }: { data: Takedown }) {
         }
         .td-content li.lead {
           color: #bbb;
-          font-size: 0.9rem;
         }
         .td-content li.lead::before {
           font-weight: 700;
         }
 
         @media (max-width: 760px) {
+          .td-card {
+            padding: 0;
+          }
           .td-trigger {
             cursor: pointer;
             padding: 1.25rem 1.5rem;
             align-items: center;
           }
+          .td-num {
+            display: none;
+          }
           .td-meta h3 { font-size: 1.05rem; margin: 0 0 0.25rem; }
-          .td-meta p { font-size: 0.85rem; }
+          .td-price { font-size: 0.85rem; margin: 0; }
           .td-icon {
             display: flex;
             align-items: center;
@@ -175,26 +189,68 @@ function Card({ data }: { data: Takedown }) {
 
 export default function TakedownCards() {
   return (
-    <>
-      <div className="td-grid reveal">
-        {takedowns.map((t, i) => <Card key={i} data={t} />)}
+    <section className="lc-section reveal">
+      <h2 className="section-title" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.5rem)', lineHeight: 1.2, marginBottom: '0.75rem', textAlign: 'center' }}>
+        What They Don&apos;t Tell You
+      </h2>
+      <p className="section-subtitle" style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto' }}>
+        Three tools your clients are evaluating right now. Here&apos;s what their sales reps won&apos;t mention on the demo call.
+      </p>
+
+      <div className="td-grid">
+        {takedowns.map((t, i) => <Card key={i} data={t} index={i} />)}
+      </div>
+
+      <div className="td-summary">
+        <p>
+          ReCapture starts at <strong>$197/mo</strong>. Transparent pricing, no add-ons, HIPAA included on Pro with no lock-in, one-day install. Built specifically for high-ticket service businesses — the buyers these tools weren&apos;t designed for.
+        </p>
       </div>
 
       <style jsx>{`
         .td-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 1.25rem;
-          margin: 2rem 0 3rem;
+          gap: 1.5rem;
+          max-width: 1100px;
+          margin: 3rem auto 0;
+          padding: 0 2rem;
+        }
+        .td-summary {
+          max-width: 1100px;
+          margin: 2.5rem auto 0;
+          padding: 0 2rem;
+        }
+        .td-summary p {
+          border-left: 3px solid #ff6b35;
+          background: #0d0d0d;
+          border-radius: 0 10px 10px 0;
+          padding: 1.5rem 2rem;
+          margin: 0;
+          color: #ccc;
+          line-height: 1.75;
+          font-size: 0.95rem;
+        }
+        .td-summary strong {
+          color: #ff6b35;
         }
         @media (max-width: 760px) {
           .td-grid {
             grid-template-columns: 1fr;
             gap: 0.75rem;
-            margin: 1.5rem 0 2rem;
+            margin: 2rem auto 0;
+            padding: 0 1.25rem;
+          }
+          .td-summary {
+            margin: 2rem auto 0;
+            padding: 0 1.25rem;
+          }
+          .td-summary p {
+            padding: 1.25rem 1.5rem;
+            font-size: 0.875rem;
           }
         }
       `}</style>
-    </>
+    </section>
   )
 }
