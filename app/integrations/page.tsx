@@ -62,10 +62,11 @@ const integrations = [
   {
     category: 'CRM & Sales',
     items: [
-      { name: 'HubSpot', desc: 'Sync recovered leads directly into your HubSpot pipeline', status: 'coming', icon: 'hubspot' },
-      { name: 'Salesforce', desc: 'Push leads to Salesforce with custom field mapping', status: 'coming', icon: 'salesforce' },
+      { name: 'Any CRM via Webhook', desc: 'Push leads to any CRM in real time using Zapier, Make, or your own endpoint', status: 'live', icon: 'webhook' },
+      { name: 'HubSpot', desc: 'Native sync into your HubSpot pipeline', status: 'coming', icon: 'hubspot' },
+      { name: 'Salesforce', desc: 'Native push to Salesforce with custom field mapping', status: 'coming', icon: 'salesforce' },
       { name: 'GoHighLevel', desc: 'Native integration for GHL agency clients', status: 'coming', icon: 'ghl' },
-      { name: 'Follow Up Boss', desc: 'Auto-create contacts for luxury real estate teams', status: 'coming', icon: 'fub' },
+      { name: 'Follow Up Boss', desc: 'Native auto-create contacts for luxury real estate teams', status: 'coming', icon: 'fub' },
     ]
   },
   {
