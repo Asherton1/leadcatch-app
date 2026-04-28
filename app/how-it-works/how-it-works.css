@@ -813,10 +813,10 @@
 
 .hiw-channel-tier {
   font-family: 'Inter', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-transform: none;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
