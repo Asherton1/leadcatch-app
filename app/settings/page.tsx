@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supabase"
 import "../dashboard/dashboard.css"
 import "./settings.css"
 import Footer from '../components/Footer'
+import '../landing.css'
 
 interface ClientSettings {
   id: string

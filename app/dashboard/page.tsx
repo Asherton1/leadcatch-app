@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase'
 import { ensureClient } from '@/lib/provision'
 import './dashboard.css'
 import Footer from '../components/Footer'
+import '../landing.css'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import { ensureClient } from '@/lib/provision'
 import Footer from '../components/Footer'
+import '../landing.css'
 
 export default function LoginPage() {
   const router = useRouter()
