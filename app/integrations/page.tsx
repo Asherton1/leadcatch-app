@@ -98,7 +98,7 @@ const integrations = [
     category: 'Automation',
     items: [
       { name: 'Zapier', desc: 'Connect ReCapture to 6,000+ apps with no code', status: 'live', icon: 'zapier' },
-      { name: 'Make (Integromat)', desc: 'Advanced workflow automation', status: 'coming', icon: 'make' },
+      { name: 'Make (Integromat)', desc: 'Advanced workflow automation via webhooks — fires in real time', status: 'live', icon: 'make' },
       { name: 'Webhooks', desc: 'Send lead data to any endpoint in real time', status: 'live', icon: 'webhook' },
       { name: 'REST API', desc: 'Full API access for custom integrations', status: 'live', icon: 'api' },
       { name: 'Ai Voice Callback', desc: 'Trigger automated Ai callbacks via API when leads abandon forms', status: 'live', icon: 'callrail' },
