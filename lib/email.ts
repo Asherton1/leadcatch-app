@@ -45,12 +45,14 @@ function buildHtml(bodyContent: string, vars: Record<string, string>): string {
     </div>
 
     <!-- CTA -->
+    ${booking_url && booking_url !== '#' ? `
     <div style="padding:0 40px 36px;">
       <a href="${booking_url}"
          style="display:inline-block;background:${brand_color || '#ff6b35'};color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:6px;font-size:14px;font-weight:600;">
-        Complete My Request
+        Book Your Appointment
       </a>
     </div>
+    ` : ''}
 
     <!-- Divider -->
     <div style="margin:0 40px;border-top:1px solid #f0f0f0;"></div>
