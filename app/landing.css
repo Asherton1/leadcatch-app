@@ -927,11 +927,15 @@
 
 /* Mobile — 2 columns at 720px, 1 column at 480px */
 @media (max-width: 720px) {
-  .lc-footer { padding: 3rem 1.5rem 2rem; }
+  .lc-footer { padding: 3rem 1.5rem 2rem; text-align: center; }
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2.25rem 1.5rem;
     margin: 2.25rem auto;
+    text-align: center;
+  }
+  .footer-col {
+    align-items: center;
   }
   .footer-trust { gap: 0.625rem; }
   .footer-trust-sep { display: none; }
@@ -941,6 +945,11 @@
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 1.875rem;
+    text-align: center;
+  }
+  .footer-col {
+    align-items: center;
+    gap: 0.625rem;
   }
   .footer-col-label {
     margin-bottom: 0.25rem;
