@@ -587,9 +587,23 @@ export default function SettingsPage() {
           </div>
           <div className="settings-fields">
             <div className="settings-field">
-              <label className="settings-label">Outbound Webhook URL</label>
-              <input type="url" className="settings-input" value={settings.webhook_url ?? ""} onChange={e => update("webhook_url", e.target.value)} placeholder="https://hooks.zapier.com/..." />
-              <span className="settings-hint">Sends lead data to Zapier, Make, or any endpoint in real time</span>
+              <label className="settings-label">
+                Outbound Webhook URL
+                <span className="settings-badge-pro" style={{ marginLeft: "8px" }}>Pro</span>
+              </label>
+              <input
+                type="url"
+                className="settings-input"
+                value={settings.webhook_url ?? ""}
+                onChange={e => update("webhook_url", e.target.value)}
+                placeholder="https://hooks.zapier.com/..."
+                disabled={!isPro}
+              />
+              <span className="settings-hint">
+                {isPro
+                  ? "Sends lead data to Zapier, Make, or any endpoint in real time"
+                  : "Upgrade to Pro to unlock real-time webhook delivery to Zapier, Make, or any endpoint"}
+              </span>
             </div>
             <div className="settings-field">
               <label className="settings-label">API Key</label>
