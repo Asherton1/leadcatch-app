@@ -144,7 +144,7 @@ export default function SettingsPage() {
 
       if (!error && data) {
         setSettings(data as ClientSettings)
-        setIsPro(data.plan === "pro" || data.plan === "enterprise")
+        setIsPro(data.plan === "pro" || data.plan === "enterprise" || data.plan === "admin" || data.is_admin === true)
       }
       setLoading(false)
     })
