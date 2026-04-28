@@ -926,11 +926,13 @@
   color: #999;
 }
 
-/* Mobile — 2x2 grid at all sizes below 720px */
+/* Mobile — 2 columns, column-flow (Product+Industries left, Company+Legal right) */
 @media (max-width: 720px) {
   .lc-footer { padding: 3rem 1.5rem 2rem; text-align: center; }
   .footer-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-auto-flow: column;
     justify-content: center;
     gap: 2.25rem 1.5rem;
     margin: 2.25rem auto;
