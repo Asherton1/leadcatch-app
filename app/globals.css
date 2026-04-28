@@ -383,12 +383,6 @@ footer a:hover {
   }
 }
 
-@media (max-width: 768px) {
-  .footer-nav-links {
-    display: none !important;
-  }
-}
-
 /* ── Scroll progress bar (global) ──────────────────────────────────────── */
 .scroll-progress {
   position: fixed;
