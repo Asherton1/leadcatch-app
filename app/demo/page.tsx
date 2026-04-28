@@ -6,6 +6,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import '../blog/blog.css'
+import '../landing.css'
 
 const TOTAL_FIELDS = 5
 type FormFields = { name: string; email: string; phone: string; service: string; message: string; website: string }

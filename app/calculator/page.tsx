@@ -6,6 +6,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import '../blog/blog.css'
+import '../landing.css'
 
 const INDUSTRIES: { value: string; label: string; avgDeal: number; abandonmentRate: number; avgCloseRate: number; mobileTraffic: number }[] = [
   { value: 'medspa', label: 'Med Spa', avgDeal: 2800, abandonmentRate: 67, avgCloseRate: 35, mobileTraffic: 72 },
