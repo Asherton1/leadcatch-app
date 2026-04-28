@@ -539,6 +539,7 @@ export default function Dashboard() {
   const [loggingOut, setLoggingOut]             = useState(false)
   const [allClients, setAllClients]             = useState<Client[]>([])
   const [statusFilter, setStatusFilter]         = useState<'all' | 'hot' | 'warm' | 'cold' | 'contacted' | 'converted'>('all')
+  const [cardFilter, setCardFilter]             = useState<'none' | 'completion-desc' | 'value-desc' | 'emails-only'>('none')
   const [recoveredRevenue, setRecoveredRevenue] = useState<number>(0)
   const [recoveredCount, setRecoveredCount]     = useState<number>(0)
   const [recoveredWindow, setRecoveredWindow]   = useState<'month' | '30days' | 'all'>('month')
@@ -708,8 +709,20 @@ export default function Dashboard() {
     } else if (statusFilter === 'converted') {
       rows = rows.filter(l => l.status === 'converted')
     }
+    // Stat card click-throughs
+    if (cardFilter === 'completion-desc') {
+      rows = [...rows].sort((a, b) => {
+        const aPct = a.total_fields > 0 ? a.fields_completed / a.total_fields : 0
+        const bPct = b.total_fields > 0 ? b.fields_completed / b.total_fields : 0
+        return bPct - aPct
+      })
+    } else if (cardFilter === 'value-desc') {
+      rows = [...rows].sort((a, b) => (b.estimated_value ?? 0) - (a.estimated_value ?? 0))
+    } else if (cardFilter === 'emails-only') {
+      rows = rows.filter(l => l.email_sent === true)
+    }
     return rows
-  }, [leads, filter, search, statusFilter])
+  }, [leads, filter, search, statusFilter, cardFilter])
 
   const stats = useMemo(() => {
     const total_leads        = filteredLeads.length
@@ -812,31 +825,46 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* ── Stats (5 cards) ─────────────────────────────────────────────────── */}
+      {/* ── Stats (5 cards) — 4 are clickable filter shortcuts ─────────────── */}
       <div className="stats-grid">
-        <div className="stat-card">
+        <button
+          className={`stat-card stat-card-clickable${cardFilter === 'none' && statusFilter === 'all' ? ' active' : ''}`}
+          onClick={() => { setCardFilter('none'); setStatusFilter('all') }}
+          type="button"
+          aria-label="Show all leads"
+        >
           <div className="stat-header">
             <div className="stat-label">Partial Submissions</div>
             <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg></div>
           </div>
           <div className="stat-value">{isLoading ? '—' : stats.total_leads}</div>
-        </div>
+        </button>
 
-        <div className="stat-card">
+        <button
+          className={`stat-card stat-card-clickable${cardFilter === 'completion-desc' ? ' active' : ''}`}
+          onClick={() => setCardFilter(cardFilter === 'completion-desc' ? 'none' : 'completion-desc')}
+          type="button"
+          aria-label="Sort leads by highest completion rate"
+        >
           <div className="stat-header">
             <div className="stat-label">Completion Rate</div>
             <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
           </div>
           <div className="stat-value">{isLoading ? '—' : `${stats.avg_completion_rate}%`}</div>
-        </div>
+        </button>
 
-        <div className="stat-card">
+        <button
+          className={`stat-card stat-card-clickable${cardFilter === 'value-desc' ? ' active' : ''}`}
+          onClick={() => setCardFilter(cardFilter === 'value-desc' ? 'none' : 'value-desc')}
+          type="button"
+          aria-label="Sort leads by highest estimated value"
+        >
           <div className="stat-header">
             <div className="stat-label">Estimated Lost Revenue</div>
             <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
           </div>
           <div className="stat-value">{isLoading ? '—' : formatCurrency(stats.total_revenue_lost)}</div>
-        </div>
+        </button>
 
         <div className="stat-card">
           <div className="stat-header">
@@ -846,7 +874,12 @@ export default function Dashboard() {
           <div className="stat-value">{isLoading ? '—' : formatDuration(stats.avg_time_on_form)}</div>
         </div>
 
-        <div className="stat-card">
+        <button
+          className={`stat-card stat-card-clickable${cardFilter === 'emails-only' ? ' active' : ''}`}
+          onClick={() => setCardFilter(cardFilter === 'emails-only' ? 'none' : 'emails-only')}
+          type="button"
+          aria-label="Filter to leads with emails deployed"
+        >
           <div className="stat-header">
             <div className="stat-label">Emails Deployed</div>
             <div className="stat-icon">
@@ -857,7 +890,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="stat-value">{isLoading ? '—' : stats.emails_deployed}</div>
-        </div>
+        </button>
       </div>
 
       {/* ── Status filter chips ─────────────────────────────────────────────── */}

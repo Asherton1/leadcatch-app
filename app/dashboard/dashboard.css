@@ -1608,3 +1608,39 @@ body {
     font-size: 1.5rem;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* Clickable Stat Cards — filter shortcuts                                   */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.stat-card-clickable {
+  /* Reset native button styling */
+  background: inherit;
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+  /* Add interactivity */
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.stat-card-clickable:hover {
+  border-color: #2a2a2a;
+  transform: translateY(-1px);
+}
+
+.stat-card-clickable.active {
+  border-color: rgba(255, 107, 53, 0.5);
+  box-shadow: 0 0 0 1px rgba(255, 107, 53, 0.2), 0 4px 16px rgba(255, 107, 53, 0.08);
+}
+
+.stat-card-clickable.active .stat-icon svg {
+  stroke: #ff6b35;
+  filter: drop-shadow(0 0 4px rgba(255, 107, 53, 0.4));
+}
+
+.stat-card-clickable:focus-visible {
+  outline: 2px solid rgba(255, 107, 53, 0.4);
+  outline-offset: 2px;
+}
