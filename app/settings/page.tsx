@@ -616,7 +616,8 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* ── Plan & Billing ───────────────────────────────────────────── */}
+        {/* ── Plan & Billing (hidden for admin/founder) ─────────────────── */}
+        {settings.plan !== "admin" && (
         <div className="settings-section">
           <div className="settings-section-header">
             <div className="settings-section-icon">
@@ -646,6 +647,7 @@ export default function SettingsPage() {
             </div>
           </div>
         </div>
+        )}
 
         {/* ── Tracking Script ──────────────────────────────────────────── */}
         <div className="settings-section">

@@ -600,7 +600,11 @@ export default function Dashboard() {
         if (!error && data) {
           const rows = data as Client[]
           setAllClients(rows)
-          if (rows.length > 0) setSelectedClient(rows[0])
+          if (rows.length > 0) {
+            // Default to ReCapture admin row when logged in as founder
+            const recaptureRow = rows.find(r => r.name === 'ReCapture' || r.company_name === 'ReCapture')
+            setSelectedClient(recaptureRow ?? rows[0])
+          }
         }
       } else {
         // Customer: fetch ONLY their own client
