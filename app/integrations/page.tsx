@@ -41,7 +41,7 @@ function Icon({ type }: { type: string }) {
 const categoryDescriptions: Record<string, string> = {
   'Alerts & Notifications': 'Speed to lead is everything. Research shows responding within 60 seconds makes you 391% more likely to convert. When someone abandons your form, your front desk gets an instant alert with their name, email, phone, and lead score. They pick up the phone while the prospect is still thinking about you — before they book with your competitor down the street.',
   'CRM & Sales': 'Recovered leads flow directly into your existing sales pipeline. No copy-pasting, no CSV imports, no manual data entry. Your team works from the tools they already know — the lead just appears, ready to follow up.',
-  'Scheduling & Booking': 'The fastest path from recovered lead to revenue is getting them on the calendar. Auto-booking eliminates the back-and-forth and captures the appointment while intent is still high.',
+  'Scheduling & Booking': 'Drop your booking link into ReCapture once. Every recovery email becomes a direct path to a booked appointment — no back-and-forth, no scheduling tag.',
   'Ad Platforms': 'Most businesses waste ad spend because Google and Meta never learn which leads actually converted. Feeding recovered leads back as offline conversions means your campaigns optimize for real revenue — not just form clicks.',
   'Practice Management': 'Your PMS is where patients and clients actually live. Native integrations mean recovered leads appear directly in your booking system, not in a separate dashboard your team has to check.',
   'Automation': 'Connect ReCapture to any tool in your stack. Webhooks fire in real time, APIs give you full control, and platforms like Zapier let you build any workflow without writing code.',
@@ -71,8 +71,8 @@ const integrations = [
   {
     category: 'Scheduling & Booking',
     items: [
-      { name: 'Calendly', desc: 'Auto-book recovered leads into available slots', status: 'coming', icon: 'calendly' },
-      { name: 'Cal.com', desc: 'Open-source scheduling integration', status: 'coming', icon: 'cal' },
+      { name: 'Calendly', desc: 'Recovery emails link straight to your Calendly booking page', status: 'live', icon: 'calendly' },
+      { name: 'Cal.com', desc: 'Recovery emails link straight to your Cal.com booking page', status: 'live', icon: 'cal' },
     ]
   },
   {
