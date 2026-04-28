@@ -206,7 +206,7 @@ export default function HowItWorksPage() {
               <div className="hiw-channel-row">
                 <div className="hiw-channel-head">
                   <span className="hiw-channel-name">RECOVERY EMAIL</span>
-                  <span className="hiw-channel-tier hiw-tier-essentials">ESSENTIALS &amp; PRO</span>
+                  <span className="hiw-channel-tier hiw-tier-essentials">Included on all plans</span>
                 </div>
                 <p className="hiw-channel-desc">A branded email sends automatically on your behalf, inviting the lead back to complete their request.</p>
                 <p className="hiw-channel-control">Set the timing. Customize the message.</p>
@@ -214,7 +214,7 @@ export default function HowItWorksPage() {
               <div className="hiw-channel-row">
                 <div className="hiw-channel-head">
                   <span className="hiw-channel-name">AI VOICE CALLBACK</span>
-                  <span className="hiw-channel-tier hiw-tier-pro">PRO</span>
+                  <span className="hiw-channel-tier hiw-tier-pro">Pro &amp; Enterprise</span>
                 </div>
                 <p className="hiw-channel-desc">An AI agent calls the lead within 60 seconds, references what they were looking at, and books them straight onto your calendar.</p>
                 <p className="hiw-channel-control">Set quiet hours. Choose which leads qualify.</p>
@@ -222,7 +222,7 @@ export default function HowItWorksPage() {
               <div className="hiw-channel-row">
                 <div className="hiw-channel-head">
                   <span className="hiw-channel-name">SMS ALERT</span>
-                  <span className="hiw-channel-tier hiw-tier-pro">PRO</span>
+                  <span className="hiw-channel-tier hiw-tier-pro">Pro &amp; Enterprise</span>
                 </div>
                 <p className="hiw-channel-desc">Your team gets an instant text message with the lead's name, contact info, and what they were looking for.</p>
                 <p className="hiw-channel-control">Choose your team's number. Filter by lead score.</p>
@@ -230,7 +230,7 @@ export default function HowItWorksPage() {
               <div className="hiw-channel-row">
                 <div className="hiw-channel-head">
                   <span className="hiw-channel-name">DASHBOARD UPDATE</span>
-                  <span className="hiw-channel-tier hiw-tier-essentials">ESSENTIALS &amp; PRO</span>
+                  <span className="hiw-channel-tier hiw-tier-essentials">Included on all plans</span>
                 </div>
                 <p className="hiw-channel-desc">The lead appears in your dashboard with full contact details, revenue-at-risk estimate, and recovery status.</p>
                 <p className="hiw-channel-control">Always on. Real-time.</p>
