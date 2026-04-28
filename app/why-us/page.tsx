@@ -94,6 +94,48 @@ export default function WhyUsPage() {
         <h2 className="reveal">What Sets Us Apart</h2>
         <p className="reveal">Every competitor in this space tells you <em>where</em> people drop off. None of them give you <em>who</em> dropped off — with their name, email, phone number, and what they were looking for. And none of them do what comes next.</p>
 
+        <h2 className="reveal" style={{ marginTop: '3rem' }}>What They Don&apos;t Tell You</h2>
+        <p className="reveal">Three tools your clients are evaluating right now. Here&apos;s what their sales reps won&apos;t mention on the demo call.</p>
+
+        <div className="reveal takedown-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', margin: '2rem 0 3rem' }}>
+          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '1rem', padding: '2rem' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', color: '#fff' }}>Podium</h3>
+            <p style={{ color: '#ff6b35', fontSize: '1rem', fontWeight: 700, marginBottom: '1.25rem' }}>$399-599/mo + $50 per extra location</p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+              <li style={{ color: '#bbb', fontSize: '0.9rem', lineHeight: 1.55, paddingLeft: '1.5rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444', fontWeight: 700 }}>×</span>Reported 8+ month implementation timelines — slowest in this comparison</li>
+              <li style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.55, paddingLeft: '1.5rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>×</span>No form abandonment capture at all — messaging and reviews only</li>
+              <li style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.55, paddingLeft: '1.5rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>×</span>Quote-gated pricing — you can&apos;t see what you&apos;ll pay until you book a sales call</li>
+              <li style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.55, paddingLeft: '1.5rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>×</span>No revenue-at-risk dashboard, no lead scoring, no recovery emails</li>
+            </ul>
+          </div>
+
+          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '1rem', padding: '2rem' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', color: '#fff' }}>GoHighLevel</h3>
+            <p style={{ color: '#ff6b35', fontSize: '1rem', fontWeight: 700, marginBottom: '1.25rem' }}>$297/mo + $297 HIPAA = $594/mo</p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+              <li style={{ color: '#bbb', fontSize: '0.9rem', lineHeight: 1.55, paddingLeft: '1.5rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444', fontWeight: 700 }}>×</span>HIPAA add-on is irrevocable — once enabled, it cannot be canceled, refunded, or removed</li>
+              <li style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.55, paddingLeft: '1.5rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>×</span>No native integrations with Dentrix, Boulevard, AppFolio, or Nextech</li>
+              <li style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.55, paddingLeft: '1.5rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>×</span>Partial capture only on multi-step surveys where email is collected on page 1</li>
+              <li style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.55, paddingLeft: '1.5rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>×</span>Built for agencies — steep DIY learning curve for in-house teams</li>
+            </ul>
+          </div>
+
+          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '1rem', padding: '2rem' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', color: '#fff' }}>CartStack</h3>
+            <p style={{ color: '#ff6b35', fontSize: '1rem', fontWeight: 700, marginBottom: '1.25rem' }}>$39-169/mo</p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+              <li style={{ color: '#bbb', fontSize: '0.9rem', lineHeight: 1.55, paddingLeft: '1.5rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444', fontWeight: 700 }}>×</span>Built for Shopify carts and hotel bookings — not high-ticket service forms</li>
+              <li style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.55, paddingLeft: '1.5rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>×</span>No HIPAA, no BAA — disqualified for any healthcare practice</li>
+              <li style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.55, paddingLeft: '1.5rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>×</span>SMS goes to the abandoner — your staff never finds out</li>
+              <li style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.55, paddingLeft: '1.5rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>×</span>No multi-location dashboard, no AI voice callback, no service-intent scoring</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="reveal" style={{ borderLeft: '3px solid #ff6b35', background: '#0d0d0d', borderRadius: '0 10px 10px 0', padding: '1.5rem 2rem', margin: '2rem 0 3rem' }}>
+          <p style={{ color: '#ccc', lineHeight: 1.75, margin: 0, fontSize: '0.95rem' }}>ReCapture starts at <strong style={{ color: '#ff6b35' }}>$197/mo</strong>. Transparent pricing, no add-ons, HIPAA included on Pro with no lock-in, one-day install. Built specifically for high-ticket service businesses — the buyers these tools weren&apos;t designed for.</p>
+        </div>
+
         <WhyUsAccordion />
 
         <h2 className="reveal">ReCapture vs the Competition</h2>
@@ -196,38 +238,6 @@ export default function WhyUsPage() {
 
       </div>
       
-      <div className="reveal" style={{ maxWidth: 800, margin: '4rem auto 0', padding: '0 2rem' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#ff6b35', letterSpacing: '-0.03em', marginBottom: '2rem', textAlign: 'center' }}>What They Don't Tell You</h2>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
-          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '1rem', padding: '2rem' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem', color: '#fff' }}>Podium</h3>
-            <p style={{ color: '#ff6b35', fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem' }}>$399-$599/mo + $50 per extra location</p>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>No form abandonment capture — messaging only</li>
-              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>Quote-gated pricing — no transparency</li>
-              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>8+ month implementation timelines reported</li>
-              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>No revenue-at-risk dashboard or lead scoring</li>
-            </ul>
-          </div>
-
-          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '1rem', padding: '2rem' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem', color: '#fff' }}>GoHighLevel</h3>
-            <p style={{ color: '#ff6b35', fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem' }}>$297/mo + $297 HIPAA add-on = $594/mo</p>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>HIPAA add-on is irrevocable — cannot be canceled, refunded, or removed once enabled</li>
-              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>No real partial form capture — surveys only</li>
-              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>Steep DIY learning curve for non-technical teams</li>
-              <li style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.6, paddingLeft: '1.25rem', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#ef4444' }}>x</span>No native integrations with Dentrix, Boulevard, AppFolio, or Nextech</li>
-            </ul>
-          </div>
-        </div>
-
-        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-          <p style={{ color: '#888', fontSize: '1rem', lineHeight: 1.7 }}>ReCapture starts at <span style={{ color: '#ff6b35', fontWeight: 700 }}>$197/mo</span> with transparent pricing, HIPAA included on Pro with no lock-in, and a one-day install. Purpose-built for form abandonment recovery.</p>
-        </div>
-      </div>
-
       <Footer />
     </div>
   )
