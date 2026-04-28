@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import { ensureClient } from '@/lib/provision'
 import './dashboard.css'
+import Footer from '../components/Footer'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -1059,6 +1060,7 @@ export default function Dashboard() {
         />
       )}
 
+      <Footer />
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 import "../dashboard/dashboard.css"
 import "./settings.css"
+import Footer from '../components/Footer'
 
 interface ClientSettings {
   id: string
@@ -680,6 +681,7 @@ export default function SettingsPage() {
           {saving ? "Saving..." : saved ? "Saved" : "Save Changes"}
         </button>
       </div>
+      <Footer />
     </div>
   )
 }

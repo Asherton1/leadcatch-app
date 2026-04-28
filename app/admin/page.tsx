@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import Image from 'next/image'
+import Footer from '../components/Footer'
 
 interface DemoRequest { id: string; name: string; email: string; phone: string; service: string; message: string; created_at: string }
 interface Client { id: string; name: string | null; email: string | null; first_name: string | null; last_name: string | null; company_name: string | null; api_key: string; active: boolean; trial_ends_at: string | null; stripe_customer_id: string | null; created_at: string }
@@ -269,6 +270,7 @@ export default function AdminPage() {
           .admin-actions { flex-wrap: wrap; }
         }
       `}</style>
+      <Footer />
     </div>
   )
 }

@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { supabase } from '@/lib/supabase'
+import Footer from '../components/Footer'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? '')
 
@@ -179,6 +180,7 @@ function SignupForm() {
           <Link href="/login" style={s.footerLink}>Sign in</Link>
         </p>
       </div>
+      <Footer />
     </div>
   )
 }

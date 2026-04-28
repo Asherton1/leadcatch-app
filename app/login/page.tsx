@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import { ensureClient } from '@/lib/provision'
+import Footer from '../components/Footer'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -62,6 +63,7 @@ export default function LoginPage() {
           <Link href="/signup" style={s.footerLink}>Create one free</Link>
         </p>
       </div>
+      <Footer />
     </div>
   )
 }
