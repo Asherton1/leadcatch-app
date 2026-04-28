@@ -22,6 +22,7 @@ export default function Footer() {
         <Link href="/why-us" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Why Us</Link>
         <Link href="/how-it-works" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>How It Works</Link>
         <Link href="/integrations" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Integrations</Link>
+        <Link href="/docs/api" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>API Docs</Link>
         <Link href="/form-audit" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Free Form Audit</Link>
         <Link href="/calculator" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>ROI Estimator</Link>
         <Link href="/start-trial" style={{ color: '#aaa', textDecoration: 'none', fontSize: '13px' }}>Start Trial</Link>
