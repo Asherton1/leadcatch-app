@@ -34,6 +34,12 @@ function Icon({ type }: { type: string }) {
     case 'make': return <svg {...s}><polyline points="16 3 21 3 21 8"/><line x1="4" x2="21" y1="20" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" x2="21" y1="15" y2="21"/><line x1="4" x2="9" y1="4" y2="9"/></svg>
     case 'webhook': return <svg {...s}><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
     case 'api': return <svg {...s}><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" x2="10" y1="4" y2="20"/></svg>
+    case 'mindbody': return <svg {...s}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" y2="6" x2="12"/><line x1="12" y1="18" y2="22" x2="12"/></svg>
+    case 'vagaro': return <svg {...s}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/></svg>
+    case 'phreesia': return <svg {...s}><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    case 'telegram': return <svg {...s}><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
+    case 'pipedrive': return <svg {...s}><path d="M3 3v18l9-7 9 7V3z"/></svg>
+    case 'zoho': return <svg {...s}><circle cx="12" cy="12" r="10"/><path d="M8 8h8v8H8z"/></svg>
     default: return <svg {...s}><circle cx="12" cy="12" r="10"/></svg>
   }
 }
@@ -57,6 +63,7 @@ const integrations = [
       { name: 'Ai Voice Callback', desc: 'Ai calls abandoned leads back within 60 seconds on your behalf', status: 'live', icon: 'callrail' },
       { name: 'Microsoft Teams', desc: 'Lead alerts with action buttons for your front desk', status: 'coming', icon: 'teams' },
       { name: 'WhatsApp Business', desc: 'Recovery messages for international luxury buyers', status: 'coming', icon: 'whatsapp' },
+      { name: 'Telegram', desc: 'Direct alerts for international and high-net-worth client base', status: 'coming', icon: 'telegram' },
     ]
   },
   {
@@ -67,6 +74,8 @@ const integrations = [
       { name: 'Salesforce', desc: 'Native push to Salesforce with custom field mapping', status: 'coming', icon: 'salesforce' },
       { name: 'GoHighLevel', desc: 'Native integration for GHL agency clients', status: 'coming', icon: 'ghl' },
       { name: 'Follow Up Boss', desc: 'Native auto-create contacts for luxury real estate teams', status: 'coming', icon: 'fub' },
+      { name: 'Pipedrive', desc: 'Native push to your Pipedrive sales pipeline', status: 'coming', icon: 'pipedrive' },
+      { name: 'Zoho CRM', desc: 'Native sync for international and multi-region sales teams', status: 'coming', icon: 'zoho' },
     ]
   },
   {
@@ -92,6 +101,9 @@ const integrations = [
       { name: 'Dentrix', desc: 'Enterprise dental practice management integration', status: 'coming', icon: 'dentrix' },
       { name: 'AppFolio', desc: 'Leasing lead sync for property management', status: 'coming', icon: 'appfolio' },
       { name: 'Nextech', desc: 'Plastic surgery and LASIK practice management', status: 'coming', icon: 'nextech' },
+      { name: 'Mindbody', desc: 'The standard for med spa, fitness, and wellness booking', status: 'coming', icon: 'mindbody' },
+      { name: 'Vagaro', desc: 'Salon, spa, and beauty booking platform integration', status: 'coming', icon: 'vagaro' },
+      { name: 'Phreesia', desc: 'Patient intake and engagement for healthcare practices', status: 'coming', icon: 'phreesia' },
     ]
   },
   {
