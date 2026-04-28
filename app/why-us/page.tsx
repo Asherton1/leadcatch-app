@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
@@ -8,31 +9,47 @@ import WhyUsAccordion from "../components/WhyUsAccordion"
 
 export const metadata = {
   title: 'Why ReCapture — Form Abandonment Recovery for Multi-Location Businesses',
-  description: 'How ReCapture compares to Podium, GoHighLevel, and Insiteful for form abandonment recovery. Built for multi-location businesses where a single recovered lead is worth $1,500 to $10,000.',
+  description: 'How ReCapture compares to Podium, GoHighLevel, and CartStack for form abandonment recovery. Built for multi-location businesses where a single recovered lead is worth $1,500 to $10,000.',
   keywords: 'ReCapture vs Podium, ReCapture vs GoHighLevel, form abandonment recovery, multi-location lead recovery, enterprise form tracking',
 }
 
-const rows: [string, string | boolean, string | boolean, string | boolean][] = [
-  ['Partial form capture', true, 'Surveys only', true],
-  ['Exit-intent capture', true, false, false],
-  ['Mid-field data capture', true, false, false],
-  ['Instant SMS lead alerts', 'Pro plan', false, false],
-  ['Slack lead alerts', 'Pro plan', false, false],
-  ['Outbound webhooks (Zapier/Make)', 'Pro plan', false, false],
-  ['Lead scoring (hot/warm/cold)', true, false, false],
-  ['Auto-recovery emails', true, false, true],
-  ['Revenue-at-risk dashboard', true, false, false],
-  ['ROI Estimator tool', true, false, false],
-  ['Multi-location dashboard', true, false, false],
-  ['Weekly client reports', true, false, false],
-  ['Free Form Audit tool', true, false, false],
-  ['Ai voice callback (60 seconds)', 'Pro plan', false, false],
-  ['HIPAA-ready + BAA', 'Pro & Enterprise', '$297/mo add-on', false],
-  ['Transparent pricing', '$197-397/mo', 'Quote only', '$150/mo'],
-  ['Free trial', '14 days', 'None listed', '$7 paid trial'],
-  ['Setup complexity', '1 script tag', 'Full platform setup', '1 script tag'],
-  ['Primary focus', 'Form abandonment + lead recovery', 'Messaging + reviews', 'Form analytics'],
-  ['Best for', 'Multi-location, high-ticket', 'Single location SMB', 'SaaS / eCommerce'],
+type Cell = string | boolean
+type Row = { label: string; recapture: Cell; podium: Cell; ghl: Cell; cartstack: Cell }
+type Section = { category: string; rows: Row[] }
+
+const sections: Section[] = [
+  {
+    category: 'Capture',
+    rows: [
+      { label: 'Partial form capture', recapture: true, podium: 'Surveys only', ghl: true, cartstack: 'Cart fields only' },
+      { label: 'Exit-intent capture', recapture: true, podium: false, ghl: false, cartstack: true },
+      { label: 'Mid-field data capture', recapture: true, podium: false, ghl: false, cartstack: false },
+      { label: 'Lead scoring (hot/warm/cold)', recapture: true, podium: false, ghl: false, cartstack: false },
+    ],
+  },
+  {
+    category: 'Recovery & Alerts',
+    rows: [
+      { label: 'Auto-recovery emails', recapture: true, podium: false, ghl: true, cartstack: true },
+      { label: 'Instant SMS lead alerts (to staff)', recapture: 'Pro plan', podium: false, ghl: false, cartstack: false },
+      { label: 'AI voice callback (60 seconds)', recapture: 'Pro plan', podium: false, ghl: false, cartstack: false },
+    ],
+  },
+  {
+    category: 'Built for Service Business',
+    rows: [
+      { label: 'Multi-location dashboard', recapture: true, podium: false, ghl: false, cartstack: false },
+      { label: 'HIPAA-ready + BAA', recapture: 'Pro & Enterprise', podium: '$297/mo add-on', ghl: false, cartstack: false },
+      { label: 'Weekly client reports', recapture: true, podium: false, ghl: false, cartstack: false },
+    ],
+  },
+  {
+    category: 'Pricing & Setup',
+    rows: [
+      { label: 'Transparent pricing', recapture: '$197-397/mo', podium: 'Quote only', ghl: '$150/mo', cartstack: '$39-169/mo' },
+      { label: 'Free trial', recapture: '14 days', podium: 'None listed', ghl: '$7 paid trial', cartstack: '14 days' },
+    ],
+  },
 ]
 
 function Check() {
@@ -84,46 +101,68 @@ export default function WhyUsPage() {
 
         {/* Desktop Table */}
         <div className="compare-desktop reveal" style={{ margin: '3rem 0' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem', background: '#0d0d0d', borderRadius: '12px', overflow: 'hidden' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem', background: '#0d0d0d', borderRadius: '12px', overflow: 'hidden' }}>
             <thead>
               <tr>
-                <th style={{ textAlign: 'left', padding: '1rem 0.75rem', color: '#555', fontWeight: 600, borderBottom: '1px solid #1a1a1a', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', width: '28%' }}>Feature</th>
-                <th style={{ textAlign: 'center', padding: '1.25rem 0.75rem', color: '#ff6b35', fontWeight: 700, fontSize: '0.95rem', background: 'rgba(255, 107, 53, 0.06)', borderBottom: '1px solid #1a1a1a', width: '24%' }}>ReCapture</th>
-                <th style={{ textAlign: 'center', padding: '1rem 0.75rem', color: '#888', fontWeight: 600, borderBottom: '1px solid #1a1a1a', width: '24%' }}>Podium</th>
-                <th style={{ textAlign: 'center', padding: '1rem 0.75rem', color: '#888', fontWeight: 600, borderBottom: '1px solid #1a1a1a', width: '24%' }}>GoHighLevel</th>
+                <th style={{ textAlign: 'left', padding: '1rem 0.75rem', color: '#555', fontWeight: 600, borderBottom: '1px solid #1a1a1a', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', width: '24%' }}>Feature</th>
+                <th style={{ textAlign: 'center', padding: '1.25rem 0.5rem', color: '#ff6b35', fontWeight: 700, fontSize: '0.9rem', background: 'rgba(255, 107, 53, 0.06)', borderBottom: '1px solid #1a1a1a', width: '19%' }}>ReCapture</th>
+                <th style={{ textAlign: 'center', padding: '1rem 0.5rem', color: '#888', fontWeight: 600, borderBottom: '1px solid #1a1a1a', width: '19%' }}>Podium</th>
+                <th style={{ textAlign: 'center', padding: '1rem 0.5rem', color: '#888', fontWeight: 600, borderBottom: '1px solid #1a1a1a', width: '19%' }}>GoHighLevel</th>
+                <th style={{ textAlign: 'center', padding: '1rem 0.5rem', color: '#888', fontWeight: 600, borderBottom: '1px solid #1a1a1a', width: '19%' }}>CartStack</th>
               </tr>
             </thead>
             <tbody>
-              {rows.map((row, i) => (
-                <tr key={i}>
-                  <td style={{ textAlign: 'left', padding: '0.875rem 0.75rem', color: '#ccc', borderBottom: '1px solid #111' }}>{row[0]}</td>
-                  <td style={{ textAlign: 'center', padding: '0.875rem 0.75rem', borderBottom: '1px solid #111', background: 'rgba(255, 107, 53, 0.03)' }}><Val v={row[1]} /></td>
-                  <td style={{ textAlign: 'center', padding: '0.875rem 0.75rem', color: '#888', borderBottom: '1px solid #111' }}><Val v={row[2]} /></td>
-                  <td style={{ textAlign: 'center', padding: '0.875rem 0.75rem', color: '#888', borderBottom: '1px solid #111' }}><Val v={row[3]} /></td>
-                </tr>
+              {sections.map((section, sIdx) => (
+                <Fragment key={sIdx}>
+                  <tr>
+                    <td colSpan={5} style={{ padding: '1.5rem 0.75rem 0.5rem', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.18em', color: '#ff6b35', textTransform: 'uppercase', borderBottom: '1px solid #1a1a1a' }}>
+                      {section.category}
+                    </td>
+                  </tr>
+                  {section.rows.map((row, rIdx) => (
+                    <tr key={rIdx}>
+                      <td style={{ textAlign: 'left', padding: '0.875rem 0.75rem', color: '#ccc', borderBottom: '1px solid #111' }}>{row.label}</td>
+                      <td style={{ textAlign: 'center', padding: '0.875rem 0.5rem', borderBottom: '1px solid #111', background: 'rgba(255, 107, 53, 0.03)' }}><Val v={row.recapture} /></td>
+                      <td style={{ textAlign: 'center', padding: '0.875rem 0.5rem', color: '#888', borderBottom: '1px solid #111' }}><Val v={row.podium} /></td>
+                      <td style={{ textAlign: 'center', padding: '0.875rem 0.5rem', color: '#888', borderBottom: '1px solid #111' }}><Val v={row.ghl} /></td>
+                      <td style={{ textAlign: 'center', padding: '0.875rem 0.5rem', color: '#888', borderBottom: '1px solid #111' }}><Val v={row.cartstack} /></td>
+                    </tr>
+                  ))}
+                </Fragment>
               ))}
             </tbody>
           </table>
         </div>
 
         {/* Mobile Cards */}
-        <div className="compare-mobile reveal" style={{ margin: '3rem 0', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          {rows.map((row, i) => (
-            <div key={i} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 10, padding: '1rem 1.25rem' }}>
-              <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fff', marginBottom: '0.75rem' }}>{row[0]}</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.35rem 0.75rem', background: 'rgba(255,107,53,0.04)', borderRadius: 6 }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#ff6b35' }}>ReCapture</span>
-                  <span style={{ color: row[1] === true ? '#22c55e' : row[1] === false ? '#444' : '#aaa', fontSize: '0.8rem' }}><Val v={row[1]} /></span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.35rem 0.75rem' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#666' }}>Podium</span>
-                  <span style={{ color: '#888', fontSize: '0.8rem' }}><Val v={row[2]} /></span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.35rem 0.75rem' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#666' }}>GoHighLevel</span>
-                  <span style={{ color: '#888', fontSize: '0.8rem' }}><Val v={row[3]} /></span>
-                </div>
+        <div className="compare-mobile reveal" style={{ margin: '3rem 0', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          {sections.map((section, sIdx) => (
+            <div key={sIdx}>
+              <p style={{ fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.18em', color: '#ff6b35', textTransform: 'uppercase', margin: '0 0 0.625rem 0.25rem' }}>{section.category}</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+                {section.rows.map((row, rIdx) => (
+                  <div key={rIdx} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 10, padding: '1rem 1.25rem' }}>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fff', marginBottom: '0.75rem' }}>{row.label}</div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.35rem 0.75rem', background: 'rgba(255,107,53,0.04)', borderRadius: 6 }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#ff6b35' }}>ReCapture</span>
+                        <span style={{ color: row.recapture === true ? '#22c55e' : row.recapture === false ? '#444' : '#aaa', fontSize: '0.8rem' }}><Val v={row.recapture} /></span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.35rem 0.75rem' }}>
+                        <span style={{ fontSize: '0.75rem', color: '#666' }}>Podium</span>
+                        <span style={{ color: '#888', fontSize: '0.8rem' }}><Val v={row.podium} /></span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.35rem 0.75rem' }}>
+                        <span style={{ fontSize: '0.75rem', color: '#666' }}>GoHighLevel</span>
+                        <span style={{ color: '#888', fontSize: '0.8rem' }}><Val v={row.ghl} /></span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.35rem 0.75rem' }}>
+                        <span style={{ fontSize: '0.75rem', color: '#666' }}>CartStack</span>
+                        <span style={{ color: '#888', fontSize: '0.8rem' }}><Val v={row.cartstack} /></span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
@@ -135,15 +174,15 @@ export default function WhyUsPage() {
 
         <p><strong style={{ color: '#fff' }}>GoHighLevel ($97-497/mo)</strong> is an all-in-one agency platform with CRM, funnels, and automation built for marketing agencies reselling to clients. It added partial survey capture in 2025 — but only for multi-step surveys where email is collected on page 1. No exit-intent. No mid-field capture. No recovery UX. HIPAA compliance is a $297/mo add-on. For agencies who need form abandonment on top of GHL, ReCapture is the purpose-built upgrade.</p>
 
-        <p><strong style={{ color: '#fff' }}>Insiteful ($150/mo)</strong> is ReCapture&apos;s closest direct competitor — a form analytics and abandonment tool built for performance marketers. Strong for CRO and A/B testing. Not built for high-ticket local service businesses, multi-location enterprise, or real-time lead recovery. No SMS alerts. No lead scoring. No revenue-at-risk dashboard. Priced for horizontal SMB, not enterprise.</p>
+        <p><strong style={{ color: '#fff' }}>CartStack ($39-169/mo)</strong> is the closest form-abandonment tool to ReCapture — but built for e-commerce carts and hotel bookings, not high-ticket service forms. It recovers ~20% of abandoned shopping carts via email, SMS, and push notifications. What it doesn&apos;t do: instant SMS alerts to your staff, AI voice callback, lead scoring for service intent, multi-location dashboards across franchises, or HIPAA compliance. CartStack converts cart abandoners. ReCapture recovers $5,000 dental consults and $50,000 luxury condo leads.</p>
 
         <h2 className="reveal">Who ReCapture Is Built For</h2>
         <p>Any business with a contact form and more than one location losing leads every day. A dental group with 8 offices. A med spa franchise with 15 locations. A property management company with 200 units. A luxury real estate team covering three markets. The common thread: high-ticket services where a single recovered lead is worth $1,500 to $10,000 — and where 60-70% of people who start a form never finish it.</p>
-        <p>ReCapture captures every partial submission, scores each lead by intent, alerts your team in real time, and automatically sends a branded recovery email — across every location, under one dashboard. No other tool does all four. Not Podium. Not GoHighLevel. Not Insiteful.</p>
+        <p>ReCapture captures every partial submission, scores each lead by intent, alerts your team in real time, and automatically sends a branded recovery email — across every location, under one dashboard. No other tool does all four. Not Podium. Not GoHighLevel. Not CartStack.</p>
 
         <h2 className="reveal">The Bottom Line</h2>
         <div className="reveal" style={{ borderLeft: '3px solid #ff6b35', background: '#111', borderRadius: '0 10px 10px 0', padding: '1.5rem 2rem', margin: '2rem 0' }}>
-          <p style={{ color: '#bbb', lineHeight: 1.8, margin: 0 }}>Podium tells you who messaged you. GoHighLevel helps you follow up with submitted leads. Insiteful shows you where people dropped off. ReCapture captures <em>who</em> dropped off, scores how serious they were, alerts you in real time, calls them back with Ai within 60 seconds, and automatically brings them back. That&apos;s not analytics. That&apos;s recovered revenue.</p>
+          <p style={{ color: '#bbb', lineHeight: 1.8, margin: 0 }}>Podium tells you who messaged you. GoHighLevel helps you follow up with submitted leads. CartStack recovers e-commerce carts. ReCapture captures <em>who</em> dropped off, scores how serious they were, alerts you in real time, calls them back with Ai within 60 seconds, and automatically brings them back. That&apos;s not analytics. That&apos;s recovered revenue.</p>
         </div>
 
         <div className="reveal" style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a1a 100%)', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2.5rem', margin: '3rem 0', textAlign: 'center' }}>
