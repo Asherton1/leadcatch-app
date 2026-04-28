@@ -202,42 +202,38 @@ export default function HowItWorksPage() {
             </div>
             <h2>Four Recovery Channels. You Decide Which Fire.</h2>
             <p>The moment a lead is captured, ReCapture triggers the channels you have enabled — automatically. Configure each one to match your workflow.</p>
-            <div className="hiw-parallel">
-              <div className="hiw-parallel-card">
-                <div className="hiw-parallel-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5"><rect width="18" height="14" x="3" y="5" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <div className="hiw-channels">
+              <div className="hiw-channel-row">
+                <div className="hiw-channel-head">
+                  <span className="hiw-channel-name">RECOVERY EMAIL</span>
+                  <span className="hiw-channel-tier hiw-tier-essentials">ESSENTIALS &amp; PRO</span>
                 </div>
-                <h3>Recovery Email</h3>
-                <p>A branded email sends automatically on your behalf, inviting the lead back to complete their request.</p>
-                <p style={{ fontSize: '0.8rem', color: '#888', fontWeight: 500, marginTop: '0.5rem' }}>Set the timing. Customize the message.</p>
-                <p style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: 600, marginTop: '0.25rem', letterSpacing: '0.05em' }}>ESSENTIALS &amp; PRO</p>
+                <p className="hiw-channel-desc">A branded email sends automatically on your behalf, inviting the lead back to complete their request.</p>
+                <p className="hiw-channel-control">Set the timing. Customize the message.</p>
               </div>
-              <div className="hiw-parallel-card">
-                <div className="hiw-parallel-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <div className="hiw-channel-row">
+                <div className="hiw-channel-head">
+                  <span className="hiw-channel-name">AI VOICE CALLBACK</span>
+                  <span className="hiw-channel-tier hiw-tier-pro">PRO</span>
                 </div>
-                <h3>AI Voice Callback</h3>
-                <p>An AI agent calls the lead within 60 seconds, references what they were looking at, and books them straight onto your calendar.</p>
-                <p style={{ fontSize: '0.8rem', color: '#888', fontWeight: 500, marginTop: '0.5rem' }}>Set quiet hours. Choose which leads qualify.</p>
-                <p style={{ fontSize: '0.75rem', color: '#ff6b35', fontWeight: 600, marginTop: '0.25rem', letterSpacing: '0.05em' }}>PRO</p>
+                <p className="hiw-channel-desc">An AI agent calls the lead within 60 seconds, references what they were looking at, and books them straight onto your calendar.</p>
+                <p className="hiw-channel-control">Set quiet hours. Choose which leads qualify.</p>
               </div>
-              <div className="hiw-parallel-card">
-                <div className="hiw-parallel-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <div className="hiw-channel-row">
+                <div className="hiw-channel-head">
+                  <span className="hiw-channel-name">SMS ALERT</span>
+                  <span className="hiw-channel-tier hiw-tier-pro">PRO</span>
                 </div>
-                <h3>SMS Alert</h3>
-                <p>Your team gets an instant text message with the lead's name, contact info, and what they were looking for.</p>
-                <p style={{ fontSize: '0.8rem', color: '#888', fontWeight: 500, marginTop: '0.5rem' }}>Choose your team's number. Filter by lead score.</p>
-                <p style={{ fontSize: '0.75rem', color: '#ff6b35', fontWeight: 600, marginTop: '0.25rem', letterSpacing: '0.05em' }}>PRO</p>
+                <p className="hiw-channel-desc">Your team gets an instant text message with the lead's name, contact info, and what they were looking for.</p>
+                <p className="hiw-channel-control">Choose your team's number. Filter by lead score.</p>
               </div>
-              <div className="hiw-parallel-card">
-                <div className="hiw-parallel-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              <div className="hiw-channel-row">
+                <div className="hiw-channel-head">
+                  <span className="hiw-channel-name">DASHBOARD UPDATE</span>
+                  <span className="hiw-channel-tier hiw-tier-essentials">ESSENTIALS &amp; PRO</span>
                 </div>
-                <h3>Dashboard Update</h3>
-                <p>The lead appears in your dashboard with full contact details, revenue-at-risk estimate, and recovery status.</p>
-                <p style={{ fontSize: '0.8rem', color: '#888', fontWeight: 500, marginTop: '0.5rem' }}>Always on. Real-time.</p>
-                <p style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: 600, marginTop: '0.25rem', letterSpacing: '0.05em' }}>ESSENTIALS &amp; PRO</p>
+                <p className="hiw-channel-desc">The lead appears in your dashboard with full contact details, revenue-at-risk estimate, and recovery status.</p>
+                <p className="hiw-channel-control">Always on. Real-time.</p>
               </div>
             </div>
           </div>

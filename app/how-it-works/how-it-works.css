@@ -769,3 +769,121 @@
   .hiw-cta { padding: 3rem 1.25rem 5rem; }
   .hiw-step-icon { width: 40px; height: 40px; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* Step 06 — Editorial Channel List (replaces card grid)                     */
+/* Same design language as pricing menu rows                                  */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.hiw-channels {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  border-top: 1px solid #1a1a1a;
+}
+
+.hiw-channel-row {
+  padding: 1.75rem 0;
+  border-bottom: 1px solid #1a1a1a;
+  transition: padding-left 0.3s ease;
+}
+
+.hiw-channel-row:hover {
+  padding-left: 0.5rem;
+}
+
+.hiw-channel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.hiw-channel-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #ff6b35;
+  text-transform: uppercase;
+}
+
+.hiw-channel-tier {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.hiw-channel-tier::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.hiw-tier-essentials {
+  color: #16a34a;
+  opacity: 0.85;
+}
+.hiw-tier-essentials::before {
+  background: #16a34a;
+  box-shadow: 0 0 6px rgba(22, 163, 74, 0.5);
+}
+
+.hiw-tier-pro {
+  color: #ff6b35;
+  opacity: 0.9;
+}
+.hiw-tier-pro::before {
+  background: #ff6b35;
+  box-shadow: 0 0 6px rgba(255, 107, 53, 0.5);
+}
+
+.hiw-channel-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  color: #aaa;
+  line-height: 1.65;
+  margin: 0 0 0.5rem 0;
+  max-width: 720px;
+}
+
+.hiw-channel-control {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  color: #666;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 0.005em;
+}
+
+@media (max-width: 768px) {
+  .hiw-channel-row {
+    padding: 1.25rem 0;
+  }
+  .hiw-channel-row:hover {
+    padding-left: 0;
+  }
+  .hiw-channel-head {
+    gap: 0.5rem;
+  }
+  .hiw-channel-name {
+    font-size: 0.8125rem;
+  }
+  .hiw-channel-tier {
+    font-size: 0.6rem;
+  }
+  .hiw-channel-desc {
+    font-size: 0.875rem;
+  }
+}
