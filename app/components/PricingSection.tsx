@@ -115,7 +115,7 @@ export default function PricingSection() {
         'Executive roll-up reports',
         'Dedicated account manager',
       ],
-      cta: { label: 'Contact us', href: '', isModal: true },
+      cta: { label: 'Contact Sales', href: '', isModal: true },
       isPro: false,
     },
   ]
@@ -146,7 +146,10 @@ export default function PricingSection() {
                     <span className="pricing-row-price-period">{t.period}</span>
                   </>
                 ) : (
-                  <span className="pricing-row-price-amount">Custom</span>
+                  <>
+                    <span className="pricing-row-price-amount">{t.priceDisplay}</span>
+                    <span className="pricing-row-price-period">{t.period}</span>
+                  </>
                 )}
               </div>
             </div>
