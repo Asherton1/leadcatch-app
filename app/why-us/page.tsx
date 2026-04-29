@@ -81,13 +81,15 @@ export default function WhyUsPage() {
       <BlogNav />
       <ScrollReveal />
 
-      <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 2rem' }}>
-        <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ fontSize: '0.6875rem', fontWeight: 500, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Why Us</p>
-          <h1 style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>Built for Multi-Location Businesses. Nothing Else Comes Close.</h1>
-          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Podium charges $399+/mo to manage reviews and messaging. GoHighLevel charges $297/mo just to add HIPAA. Neither one recovers the leads your forms are losing every single day. ReCapture does — across every location, every form, every industry.</p>
+      <section className="canon-hero">
+        <div className="canon-hero-inner">
+          <p className="canon-hero-eyebrow">Why Us</p>
+          <h1 className="canon-hero-headline">
+            <span className="canon-hero-headline-primary">Built for multi-location businesses.</span>{' '}
+            <span className="canon-hero-headline-muted">Podium and GoHighLevel charge hundreds per month and still don&apos;t recover the leads your forms are losing. ReCapture does &mdash; across every location, every form, every industry.</span>
+          </h1>
         </div>
-      </div>
+      </section>
 
       <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '0 2rem 3rem' }}>
 

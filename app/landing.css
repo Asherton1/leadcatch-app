@@ -3585,3 +3585,48 @@
     padding: 0 0.25rem 1.25rem;
   }
 }
+
+/* === Canonical hero (extracted from .about-hero-v2 + .pricing-hero-v2) === */
+.canon-hero {
+  width: 100%;
+  padding: 9rem 2rem 5rem;
+  background: linear-gradient(rgba(10, 10, 10, 0.78), rgba(10, 10, 10, 0.88)), url("/hero-bg.jpg") center/cover no-repeat;
+}
+.canon-hero-inner {
+  max-width: 950px;
+  margin: 0 auto;
+  text-align: center;
+}
+.canon-hero-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem 0;
+  opacity: 0.75;
+}
+.canon-hero-headline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.875rem, 4.2vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 auto 1.75rem;
+  max-width: 950px;
+}
+.canon-hero-headline-primary { color: #ffffff; }
+.canon-hero-headline-muted   { color: #555555; }
+.canon-hero-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #888;
+  max-width: 640px;
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .canon-hero { padding: 6rem 1.25rem 3.5rem; }
+}
