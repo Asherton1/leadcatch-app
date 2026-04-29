@@ -115,7 +115,7 @@ export default function FormAuditPage() {
             { title: 'Revenue Impact', desc: 'Estimated monthly revenue you are losing to form abandonment.' },
           ].map((item, i) => (
             <div key={i} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '0.75rem', padding: '1.25rem' }}>
-              <h3 style={{ fontSize: '0.9375rem', fontWeight: 700, marginBottom: '0.5rem', color: '#fff' }}>{item.title}</h3>
+              <h3 style={{ fontSize: '0.9375rem', fontWeight: 700, marginBottom: '0.5rem', color: '#ff6b35' }}>{item.title}</h3>
               <p style={{ fontSize: '0.8125rem', color: '#666', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
             </div>
           ))}
