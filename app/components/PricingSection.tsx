@@ -96,8 +96,8 @@ export default function PricingSection() {
     {
       name: 'ENTERPRISE',
       price: null,
-      priceDisplay: '$1,997+',
-      period: '/ mo starting',
+      priceDisplay: 'Starting at $1,997',
+      period: '/ mo',
       desc: 'For multi-location groups, franchise systems, and high-volume practices. Custom-priced based on locations and integrations.',
       hipaa: true,
       features: [
