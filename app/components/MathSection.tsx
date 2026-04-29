@@ -70,7 +70,7 @@ export default function MathSection() {
   return (
     <section ref={wrapRef} className={`pricing-math ${visible ? 'pricing-math-visible' : ''}`}>
       <div className="pricing-math-inner">
-        <p className="pricing-math-eyebrow">§ The math</p>
+        <p className="pricing-math-eyebrow">The math</p>
         <h2 className="pricing-math-headline">Plans pay for themselves. Here&apos;s how.</h2>
 
         <div className="pricing-math-spine">

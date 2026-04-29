@@ -21,7 +21,7 @@ export default function AboutPage() {
       {/* HERO — editorial treatment matching pricing/ledger */}
       <section className="about-hero-v2">
         <div className="about-hero-v2-inner">
-          <p className="about-hero-v2-eyebrow">§ About</p>
+          <p className="about-hero-v2-eyebrow">About</p>
           <h1 className="about-hero-v2-headline">
             <span className="about-hero-v2-headline-primary">The leads were always there.</span>{' '}
             <span className="about-hero-v2-headline-muted">Nobody was watching.</span>
@@ -33,7 +33,7 @@ export default function AboutPage() {
       {/* FOUNDER — moved up to position 2, redesigned */}
       <section className="about-founder-v2 reveal">
         <div className="about-founder-v2-inner">
-          <p className="about-founder-v2-eyebrow">§ Founder</p>
+          <p className="about-founder-v2-eyebrow">Founder</p>
           <div className="about-founder-v2-grid">
             <div className="about-founder-v2-image">
               <Image src="/founder.png" alt="Asherton Chraibi — Founder of ReCapture" width={400} height={400} style={{ objectFit: 'cover', filter: 'grayscale(100%)', borderRadius: '4px', width: '100%', height: 'auto' }} />
@@ -57,7 +57,7 @@ export default function AboutPage() {
         <div className="about-story-v2-inner">
 
           <div className="about-story-v2-section reveal">
-            <p className="about-story-v2-eyebrow">§ 01 — The problem</p>
+            <p className="about-story-v2-eyebrow">01 — The problem</p>
             <h2 className="about-story-v2-headline">The thing that kept nagging me.</h2>
             <div className="about-story-v2-body">
               <p>I&apos;ve managed over $100K in monthly ad spend across 38+ clients. Med spas, dental practices, luxury real estate, high-end service businesses &mdash; the kind of companies where a single lead is worth $1,500 to $10,000.</p>
@@ -69,7 +69,7 @@ export default function AboutPage() {
           <div className="about-story-v2-divider" />
 
           <div className="about-story-v2-section reveal">
-            <p className="about-story-v2-eyebrow">§ 02 — The turning point</p>
+            <p className="about-story-v2-eyebrow">02 — The turning point</p>
             <div className="about-story-v2-body">
               <p>I was reviewing a client&apos;s campaign performance and the numbers didn&apos;t add up. We were driving solid traffic. The landing page was converting. But the gap between page views and form submissions was massive &mdash; way bigger than it should have been.</p>
               <p>That&apos;s when I realized: every analytics platform on the market tracks what happens <em>before</em> the form and what happens <em>after</em>. Nobody tracks what happens <em>during</em>. The form itself was a complete blind spot.</p>
@@ -81,7 +81,7 @@ export default function AboutPage() {
           <div className="about-story-v2-divider" />
 
           <div className="about-story-v2-section reveal">
-            <p className="about-story-v2-eyebrow">§ 03 — Why ReCapture</p>
+            <p className="about-story-v2-eyebrow">03 — Why ReCapture</p>
             <div className="about-story-v2-body">
               <p>ReCapture is a form abandonment recovery platform built specifically for high-ticket service businesses. One script tag on your website. No form migration. No complex setup. The moment someone starts typing into your contact form, ReCapture captures it &mdash; even if they never hit submit.</p>
               <p>You see every lead in a clean dashboard with their name, email, phone number, and the estimated dollar value they represent. Follow up manually, or let ReCapture send automated recovery emails on your behalf.</p>
@@ -95,7 +95,7 @@ export default function AboutPage() {
       {/* WHO I WORK WITH — editorial client list */}
       <section className="about-clients reveal">
         <div className="about-clients-inner">
-          <p className="about-clients-eyebrow">§ The work</p>
+          <p className="about-clients-eyebrow">The work</p>
           <h2 className="about-clients-headline">I&apos;ve built campaigns and lead systems for:</h2>
 
           <div className="about-clients-list">
@@ -144,7 +144,7 @@ export default function AboutPage() {
       {/* VALUES — rebuilt to match pricing baseline language */}
       <section className="about-values-v2 reveal">
         <div className="about-values-v2-inner">
-          <p className="about-values-v2-eyebrow">§ The principles</p>
+          <p className="about-values-v2-eyebrow">The principles</p>
           <h2 className="about-values-v2-headline">What I believe.</h2>
           <div className="about-values-v2-grid">
             <div className="about-values-v2-cell">

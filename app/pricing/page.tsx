@@ -17,7 +17,7 @@ export default function PricingPage() {
 
       <div className="pricing-hero-v2">
         <div className="pricing-hero-v2-inner">
-          <p className="pricing-hero-v2-eyebrow">§ Pricing</p>
+          <p className="pricing-hero-v2-eyebrow">Pricing</p>
           <h1 className="pricing-hero-v2-headline">
             <span className="pricing-hero-v2-headline-primary">Plans that pay for themselves.</span>{' '}
             <span className="pricing-hero-v2-headline-muted">A single recovered lead from a med spa, dental practice, or property management company can be worth $1,500 to $10,000.</span>
@@ -37,7 +37,7 @@ export default function PricingPage() {
 
       <section className="pricing-baseline reveal">
         <div className="pricing-baseline-inner">
-          <p className="pricing-baseline-eyebrow">§ Included in every plan</p>
+          <p className="pricing-baseline-eyebrow">Included in every plan</p>
           <h2 className="pricing-baseline-headline">Real things, in writing. No asterisks. No hidden fees.</h2>
 
           <div className="pricing-baseline-grid">

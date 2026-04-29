@@ -79,7 +79,7 @@ export default function LandingPage() {
       <div className="section-divider" />
 
       <section className="lc-section ledger-section">
-        <p className="ledger-eyebrow">§ The proof</p>
+        <p className="ledger-eyebrow">The proof</p>
         <h2 className="ledger-headline">
           <span className="ledger-headline-primary">Every lost lead. Every dollar.</span>{' '}
           <span className="ledger-headline-muted">Right in front of you, every morning.</span>

@@ -28,7 +28,7 @@ export default function FormAuditPage() {
       <BlogNav />
 
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '10rem 2rem 4rem', textAlign: 'center' }}>
-        <p style={{ fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.2em', color: '#ff6b35', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Free Tool</p>
+        <p style={{ fontSize: '0.6875rem', fontWeight: 500, letterSpacing: '0.2em', color: '#ff6b35', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Form Audit</p>
         <h1 style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem' }}>
           How Many Leads Is Your Form <span style={{ color: '#ff6b35' }}>Losing</span>?
         </h1>

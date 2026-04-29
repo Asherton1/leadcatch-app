@@ -795,7 +795,7 @@ export default function Dashboard() {
       <div className="roi-hero">
         <div className="roi-hero-inner">
           <div className="roi-hero-left">
-            <div className="roi-eyebrow">§ RECOVERED REVENUE</div>
+            <div className="roi-eyebrow">RECOVERED REVENUE</div>
             <div className="roi-amount">
               ${recoveredRevenue.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
             </div>
@@ -965,7 +965,7 @@ export default function Dashboard() {
                   <span className="empty-pulse-dot" />
                   <span className="empty-pulse-ring" />
                 </div>
-                <div className="empty-eyebrow">§ TRACKING ACTIVE</div>
+                <div className="empty-eyebrow">TRACKING ACTIVE</div>
                 <h3 className="empty-title">Quiet right now.</h3>
                 <p className="empty-body">
                   Your tracker is live and listening for partial form submissions.
