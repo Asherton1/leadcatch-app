@@ -96,7 +96,8 @@ export default function PricingSection() {
     {
       name: 'ENTERPRISE',
       price: null,
-      priceDisplay: 'Starting at $1,997',
+      priceLeader: 'from',
+      priceDisplay: '$1,997',
       period: '/ mo',
       desc: 'For multi-location groups, franchise systems, and high-volume practices. Custom-priced based on locations and integrations.',
       hipaa: true,
@@ -147,6 +148,9 @@ export default function PricingSection() {
                   </>
                 ) : (
                   <>
+                    {('priceLeader' in t) && (t as { priceLeader?: string }).priceLeader && (
+                      <span className="pricing-row-price-period" style={{ marginRight: '0.4rem' }}>{(t as { priceLeader?: string }).priceLeader}</span>
+                    )}
                     <span className="pricing-row-price-amount">{t.priceDisplay}</span>
                     <span className="pricing-row-price-period">{t.period}</span>
                   </>
