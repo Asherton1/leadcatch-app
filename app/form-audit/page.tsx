@@ -31,13 +31,10 @@ export default function FormAuditPage() {
         <div className="canon-hero-inner">
           <p className="canon-hero-eyebrow">Form Audit</p>
           <h1 className="canon-hero-headline">
-            <span className="canon-hero-headline-primary">How many leads is your form</span>{' '}
-            <span style={{ color: '#ff6b35' }}>losing</span><span className="canon-hero-headline-primary">?</span>
+            <span className="canon-hero-headline-primary">How many leads is your form losing?</span>{' '}
+            <span className="canon-hero-headline-muted">Enter your website URL and we will audit your forms for abandonment risk, mobile UX issues, field count optimization, and projected revenue loss. Free, no obligation.</span>
           </h1>
         </div>
-        <p style={{ fontSize: '1.1rem', color: '#888', lineHeight: 1.75, maxWidth: 560, margin: '0 auto 3rem', textAlign: 'center' }}>
-          Enter your website URL and we will audit your forms for abandonment risk, mobile UX issues, field count optimization, and projected revenue loss. Free, no obligation.
-        </p>
 
         {!submitted ? (
           <div style={{ maxWidth: 480, margin: '0 auto' }}>

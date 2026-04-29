@@ -98,13 +98,15 @@ export default function TestForm() {
       <ScrollReveal />
 
         {/* Hero */}
-        <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 4rem' }}>
-          <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
-            <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Live Demo</p>
-            <h1 style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>See <span style={{ color: '#fff' }}>Re</span><span style={{ color: '#ff6b35' }}>Capture</span> Live in Action</h1>
-            <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>Every day, potential clients start filling out your contact form and leave before hitting submit. You never know they were there. Start typing in the form below and watch the dashboard update with your information in real time — name, email, phone, even the estimated value of the lead. This is exactly what happens inside your ReCapture dashboard when someone abandons your form. The difference is, now you see them.</p>
+        <section className="canon-hero">
+          <div className="canon-hero-inner">
+            <p className="canon-hero-eyebrow">Live Demo</p>
+            <h1 className="canon-hero-headline">
+              <span className="canon-hero-headline-primary">See ReCapture live in action.</span>{' '}
+              <span className="canon-hero-headline-muted">Start typing in the form below and watch the dashboard update with your information in real time. This is exactly what happens inside your ReCapture dashboard when someone abandons your form. The difference is, now you see them.</span>
+            </h1>
           </div>
-        </div>
+        </section>
 
         {/* Main Content — Form + Live Dashboard */}
         <div className="demo-split revealed" style={{ maxWidth: '1140px', margin: '0 auto', padding: '3rem 2rem 2rem' }}>

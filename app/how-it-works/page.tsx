@@ -18,10 +18,14 @@ export default function HowItWorksPage() {
       <ScrollReveal />
 
       {/* Hero */}
-      <section className="hiw-hero">
-        <p className="hiw-label">How It Works</p>
-        <h1 className="hiw-hero-title">From <span className="hiw-orange">Abandoned Form</span> to <span className="hiw-orange">Recovered Revenue</span></h1>
-        <p className="hiw-hero-sub">Most form tools only see completed submissions. ReCapture sees everything — the moment a visitor starts typing, we capture their data, score the lead, alert your team, and send recovery emails automatically.</p>
+      <section className="canon-hero">
+        <div className="canon-hero-inner">
+          <p className="canon-hero-eyebrow">How It Works</p>
+          <h1 className="canon-hero-headline">
+            <span className="canon-hero-headline-primary">From abandoned form to recovered revenue.</span>{' '}
+            <span className="canon-hero-headline-muted">Most form tools only see completed submissions. ReCapture sees everything &mdash; the moment a visitor starts typing, we capture their data, score the lead, alert your team, and send recovery emails automatically.</span>
+          </h1>
+        </div>
       </section>
 
       {/* Visual Flow */}
