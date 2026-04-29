@@ -23,6 +23,40 @@
   --orange-light: #ff8659;
   --orange-glow:  rgba(255, 107, 53, 0.2);
   --orange-faint: rgba(255, 107, 53, 0.06);
+
+  /* === Section rhythm tokens (canonical spacing) === */
+  --section-py:           5rem;     /* desktop vertical (top + bottom) */
+  --section-py-mobile:    3.5rem;
+  --section-px:           2rem;     /* desktop horizontal */
+  --section-px-mobile:    1.25rem;
+  --section-hero-py-top:  7rem;     /* hero top — clears the nav */
+  --section-hero-py-bot:  4rem;     /* hero bottom — slightly tighter than mid sections */
+  --section-divider:      1px solid #1a1a1a;
+  --section-max-width:    1200px;
+}
+
+/* === Canonical section rhythm — the ONE source of truth === */
+.section-rhythm {
+  width: 100%;
+  padding: var(--section-py) var(--section-px);
+  background: var(--bg-secondary);
+}
+.section-rhythm-hero {
+  width: 100%;
+  padding: var(--section-hero-py-top) var(--section-px) var(--section-hero-py-bot);
+  background: var(--bg-secondary);
+}
+.section-rhythm-inner {
+  max-width: var(--section-max-width);
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .section-rhythm {
+    padding: var(--section-py-mobile) var(--section-px-mobile);
+  }
+  .section-rhythm-hero {
+    padding: 5rem var(--section-px-mobile) var(--section-py-mobile);
+  }
 }
 
 .landing {
