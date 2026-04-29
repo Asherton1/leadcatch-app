@@ -176,14 +176,14 @@ export default function IntegrationsPage() {
       <BlogNav />
       <ScrollReveal />
 
-      <section style={{ maxWidth: 900, margin: '0 auto', padding: '10rem 2rem 4rem', textAlign: 'center' }}>
-        <p style={{ fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.2em', color: '#ff6b35', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Integrations</p>
-        <h1 style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem' }}>
-          Connect <span style={{ color: '#fff' }}>Re</span><span style={{ color: '#ff6b35' }}>Capture</span> to Everything
-        </h1>
-        <p style={{ fontSize: '1.1rem', color: '#888', lineHeight: 1.75, maxWidth: 640, margin: '0 auto 3rem' }}>
-          Your recovered leads flow directly into the tools your team already uses. No copy-pasting. No manual imports. Real-time sync from the moment a lead is captured.
-        </p>
+      <section className="canon-hero">
+        <div className="canon-hero-inner">
+          <p className="canon-hero-eyebrow">Integrations</p>
+          <h1 className="canon-hero-headline">
+            <span className="canon-hero-headline-primary">Connect ReCapture to everything.</span>{' '}
+            <span className="canon-hero-headline-muted">Your recovered leads flow directly into the tools your team already uses. No copy-pasting. No manual imports. Real-time sync from the moment a lead is captured.</span>
+          </h1>
+        </div>
       </section>
 
       <section style={{ maxWidth: 900, margin: '0 auto', padding: '0 2rem 4rem' }}>

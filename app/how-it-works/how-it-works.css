@@ -11,10 +11,12 @@
 
 /* ─── Hero ─── */
 .hiw-hero {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 10rem 2rem 4rem;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 9rem 2rem 5rem;
   text-align: center;
+  background: linear-gradient(rgba(10, 10, 10, 0.78), rgba(10, 10, 10, 0.88)), url("/hero-bg.jpg") center/cover no-repeat;
 }
 
 .hiw-label {
@@ -28,17 +30,22 @@
 
 .hiw-hero-title {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(1.75rem, 5vw, 3rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-size: clamp(1.875rem, 4.2vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1.15;
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 1.5rem;
 }
 
 .hiw-hero-sub {
-  font-size: 1.1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
   color: #888;
-  line-height: 1.75;
+  line-height: 1.7;
   max-width: 640px;
   margin: 0 auto;
 }
