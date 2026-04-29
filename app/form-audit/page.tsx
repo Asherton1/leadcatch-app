@@ -34,7 +34,8 @@ export default function FormAuditPage() {
             <span className="canon-hero-headline-primary">How many leads is your form</span>{' '}
             <span style={{ color: '#ff6b35' }}>losing</span><span className="canon-hero-headline-primary">?</span>
           </h1>
-        <p style={{ fontSize: '1.1rem', color: '#888', lineHeight: 1.75, maxWidth: 560, margin: '0 auto 3rem' }}>
+        </div>
+        <p style={{ fontSize: '1.1rem', color: '#888', lineHeight: 1.75, maxWidth: 560, margin: '0 auto 3rem', textAlign: 'center' }}>
           Enter your website URL and we will audit your forms for abandonment risk, mobile UX issues, field count optimization, and projected revenue loss. Free, no obligation.
         </p>
 
