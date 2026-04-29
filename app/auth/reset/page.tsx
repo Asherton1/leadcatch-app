@@ -84,6 +84,7 @@ export default function ResetPasswordPage() {
         </span>
       </div>
 
+      <div style={s.cardWrap}>
       <div style={s.card}>
         <button style={s.closeBtn} onClick={() => router.push('/login')}>X</button>
 
@@ -144,14 +145,16 @@ export default function ResetPasswordPage() {
           <Link href="/login" style={s.footerLink}>Back to sign in</Link>
         </p>
       </div>
+      </div>
       <Footer />
     </div>
   )
 }
 
 const s: Record<string, React.CSSProperties> = {
-  page: { minHeight: '100vh', background: '#0a0a0a', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", WebkitFontSmoothing: 'antialiased' },
+  page: { minHeight: '100vh', background: '#0a0a0a', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '4rem 1rem 2rem', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", WebkitFontSmoothing: 'antialiased' },
   logoWrap: { marginBottom: '1.75rem' },
+  cardWrap: { width: '100%', display: 'flex', justifyContent: 'center', flex: 1, alignItems: 'flex-start' },
   logoText: { fontSize: '1.5rem', fontWeight: 700, letterSpacing: '-0.03em' },
   card: { position: 'relative', background: '#141414', border: '1px solid #222222', borderRadius: '16px', padding: '2.5rem', width: '100%', maxWidth: '440px' },
   closeBtn: { position: 'absolute', top: '1.25rem', right: '1.25rem', background: 'transparent', border: '1px solid #2a2a2a', borderRadius: '6px', color: '#666', fontSize: '1rem', width: '32px', height: '32px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'inherit' },
