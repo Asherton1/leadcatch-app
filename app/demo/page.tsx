@@ -167,7 +167,7 @@ export default function TestForm() {
                       {[
                         { value: 'essentials', label: 'Essentials', price: '$197/mo', desc: 'Solo practice, single location' },
                         { value: 'pro', label: 'Pro', price: '$397/mo', desc: 'HIPAA + AI voice + multi-location' },
-                        { value: 'enterprise', label: 'Enterprise', price: 'Custom pricing', desc: '10+ locations or HIPAA+SSO required \u2014 contact us' },
+                        { value: 'enterprise', label: 'Enterprise', price: 'From $1,997/mo', desc: 'Multi-location groups, franchise systems, high-volume practices' },
                       ].map(tier => {
                         const selected = fields.plan_tier === tier.value
                         return (

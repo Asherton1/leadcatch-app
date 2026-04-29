@@ -96,9 +96,9 @@ export default function PricingSection() {
     {
       name: 'ENTERPRISE',
       price: null,
-      priceDisplay: 'Custom',
-      period: '',
-      desc: 'Multiple locations. One powerful dashboard. Volume pricing built for scale.',
+      priceDisplay: '$1,997+',
+      period: '/ mo starting',
+      desc: 'For multi-location groups, franchise systems, and high-volume practices. Custom-priced based on locations and integrations.',
       hipaa: true,
       features: [
         'Everything in Pro',

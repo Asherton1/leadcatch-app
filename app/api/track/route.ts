@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
   const TIER_VALUES: Record<string, number> = {
     essentials: 197,
     pro: 397,
-    enterprise: 997,
+    enterprise: 1997,
   }
   const planTier = (form_data && typeof form_data === 'object' && 'plan_tier' in form_data)
     ? String((form_data as Record<string, unknown>).plan_tier || '').toLowerCase()
