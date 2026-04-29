@@ -165,9 +165,9 @@ export default function TestForm() {
                     <label style={{ fontSize: '0.75rem', fontWeight: 600, color: '#888', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '0.5rem' }}>Plan Interest</label>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.625rem' }}>
                       {[
-                        { value: 'essentials', label: 'Essentials', price: '$150/mo', desc: 'Solo practice, single location' },
+                        { value: 'essentials', label: 'Essentials', price: '$197/mo', desc: 'Solo practice, single location' },
                         { value: 'pro', label: 'Pro', price: '$397/mo', desc: 'HIPAA + AI voice + multi-location' },
-                        { value: 'enterprise', label: 'Enterprise', price: '$397+/mo', desc: 'Custom pricing, 10+ locations, SSO' },
+                        { value: 'enterprise', label: 'Enterprise', price: 'Custom pricing', desc: '10+ locations or HIPAA+SSO required \u2014 contact us' },
                       ].map(tier => {
                         const selected = fields.plan_tier === tier.value
                         return (

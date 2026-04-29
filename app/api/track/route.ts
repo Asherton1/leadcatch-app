@@ -92,9 +92,9 @@ export async function POST(request: NextRequest) {
   // use it as the est_value so the dashboard reflects what the lead is worth
   // to ReCapture, not just the client's generic avg_lead_value.
   const TIER_VALUES: Record<string, number> = {
-    essentials: 150,
+    essentials: 197,
     pro: 397,
-    enterprise: 1000,
+    enterprise: 997,
   }
   const planTier = (form_data && typeof form_data === 'object' && 'plan_tier' in form_data)
     ? String((form_data as Record<string, unknown>).plan_tier || '').toLowerCase()
