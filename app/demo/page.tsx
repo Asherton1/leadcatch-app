@@ -8,9 +8,9 @@ import Footer from '../components/Footer'
 import '../blog/blog.css'
 import '../landing.css'
 
-const TOTAL_FIELDS = 5
-type FormFields = { name: string; email: string; phone: string; service: string; message: string; website: string }
-const EMPTY: FormFields = { name: '', email: '', phone: '', service: '', message: '', website: '' }
+const TOTAL_FIELDS = 6
+type FormFields = { name: string; email: string; phone: string; service: string; plan_tier: string; message: string; website: string }
+const EMPTY: FormFields = { name: '', email: '', phone: '', service: '', plan_tier: '', message: '', website: '' }
 function countCompleted(f: FormFields) { const { website, ...real } = f; return Object.values(real).filter(v => v.trim().length > 0).length }
 
 const REVENUE_MAP: Record<string, number> = {
@@ -159,6 +159,59 @@ export default function TestForm() {
                         <option value="legal">Legal Services</option>
                         <option value="other">Other</option>
                       </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label style={{ fontSize: '0.75rem', fontWeight: 600, color: '#888', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '0.5rem' }}>Plan Interest</label>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.625rem' }}>
+                      {[
+                        { value: 'essentials', label: 'Essentials', price: '$150/mo', desc: 'Solo practice, single location' },
+                        { value: 'pro', label: 'Pro', price: '$397/mo', desc: 'HIPAA + AI voice + multi-location' },
+                        { value: 'enterprise', label: 'Enterprise', price: '$397+/mo', desc: 'Custom pricing, 10+ locations, SSO' },
+                      ].map(tier => {
+                        const selected = fields.plan_tier === tier.value
+                        return (
+                          <button
+                            key={tier.value}
+                            type="button"
+                            onClick={() => handleChange('plan_tier', tier.value)}
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              padding: '0.875rem 1rem',
+                              background: selected ? 'rgba(255,107,53,0.06)' : '#0a0a0a',
+                              border: selected ? '1px solid #ff6b35' : '1px solid #1e1e1e',
+                              borderRadius: 8,
+                              cursor: 'pointer',
+                              textAlign: 'left' as const,
+                              fontFamily: 'inherit',
+                              transition: 'all 0.15s',
+                            }}
+                          >
+                            <div>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', marginBottom: '0.125rem' }}>
+                                <span style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#fff' }}>{tier.label}</span>
+                                <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: '#ff6b35' }}>{tier.price}</span>
+                              </div>
+                              <div style={{ fontSize: '0.75rem', color: '#666' }}>{tier.desc}</div>
+                            </div>
+                            <div style={{
+                              width: 18, height: 18, borderRadius: '50%',
+                              border: selected ? '2px solid #ff6b35' : '1px solid #2a2a2a',
+                              background: selected ? '#ff6b35' : 'transparent',
+                              flexShrink: 0,
+                              display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            }}>
+                              {selected && (
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                  <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                              )}
+                            </div>
+                          </button>
+                        )
+                      })}
                     </div>
                   </div>
                   <div>

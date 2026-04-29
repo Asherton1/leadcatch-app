@@ -88,7 +88,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Account inactive' }, { status: 403 })
   }
 
-  const estimated_value = client.avg_lead_value ?? 0
+  // Plan-tier-driven valuation: if the form captured a plan_tier (from /demo),
+  // use it as the est_value so the dashboard reflects what the lead is worth
+  // to ReCapture, not just the client's generic avg_lead_value.
+  const TIER_VALUES: Record<string, number> = {
+    essentials: 150,
+    pro: 397,
+    enterprise: 1000,
+  }
+  const planTier = (form_data && typeof form_data === 'object' && 'plan_tier' in form_data)
+    ? String((form_data as Record<string, unknown>).plan_tier || '').toLowerCase()
+    : ''
+  const estimated_value = TIER_VALUES[planTier] ?? client.avg_lead_value ?? 0
 
   const payload = {
     client_id: client.id,
