@@ -51,7 +51,10 @@ export default function LoginPage() {
             <input style={s.input} type="email" placeholder="you@company.com" value={email} onChange={e => setEmail(e.target.value)} required autoFocus />
           </div>
           <div style={s.field}>
-            <label style={s.label}>Password</label>
+            <div style={s.labelRow}>
+              <label style={s.label}>Password</label>
+              <Link href="/forgot-password" style={s.forgotLink}>Forgot password?</Link>
+            </div>
             <input style={s.input} type="password" placeholder="Your password" value={password} onChange={e => setPassword(e.target.value)} required />
           </div>
           {error && <p style={s.errorMsg}>{error}</p>}
@@ -80,6 +83,8 @@ const s: Record<string, React.CSSProperties> = {
   subtitle: { fontSize: '0.875rem', color: '#555555', lineHeight: 1.5 },
   form: { display: 'flex', flexDirection: 'column', gap: '1.25rem' },
   field: { display: 'flex', flexDirection: 'column', gap: '0.375rem' },
+  labelRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+  forgotLink: { fontSize: '0.75rem', color: '#888', textDecoration: 'none', fontWeight: 500 },
   label: { fontSize: '0.75rem', fontWeight: 600, color: '#888888', textTransform: 'uppercase', letterSpacing: '0.08em' },
   input: { padding: '0.75rem 1rem', background: '#0d0d0d', border: '1px solid #2a2a2a', borderRadius: '8px', fontSize: '0.9375rem', color: '#ffffff', outline: 'none', fontFamily: 'inherit' },
   errorMsg: { fontSize: '0.8125rem', color: '#f87171', background: 'rgba(248, 113, 113, 0.08)', border: '1px solid rgba(248, 113, 113, 0.2)', borderRadius: '6px', padding: '0.625rem 0.875rem', lineHeight: 1.5 },
