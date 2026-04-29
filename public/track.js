@@ -13,25 +13,44 @@
   }
   if (!scriptEl) return;
 
-  // Skip ReCapture's own admin/auth pages — staff typing into login/dashboard forms
-  // should never be captured as leads. This guard runs only when track.js is loaded
-  // on userecapture.com itself; client sites are unaffected.
-  try {
-    var hostname = win.location.hostname || '';
-    var pathname = win.location.pathname || '';
-    var isOwnSite = /(^|\.)userecapture\.com$/i.test(hostname);
-    var EXCLUDED_PATHS = [
-      '/login', '/signup', '/admin', '/dashboard',
-      '/settings', '/get-started'
-    ];
-    if (isOwnSite) {
+  // Re-evaluated on EVERY send (not just at script load) so that Next.js
+  // client-side route changes can't bypass the guard. Staff on /login,
+  // /admin, /dashboard etc. should never be captured as leads.
+  var EXCLUDED_PATHS = [
+    '/login', '/signup', '/admin', '/dashboard',
+    '/settings', '/get-started'
+  ];
+
+  function isExcludedPath() {
+    try {
+      var hostname = win.location.hostname || '';
+      var pathname = win.location.pathname || '';
+      var isOwnSite = /(^|\.)userecapture\.com$/i.test(hostname);
+      if (!isOwnSite) return false;
       for (var p = 0; p < EXCLUDED_PATHS.length; p++) {
         if (pathname === EXCLUDED_PATHS[p] || pathname.indexOf(EXCLUDED_PATHS[p] + '/') === 0) {
-          return;
+          return true;
         }
       }
-    }
-  } catch (e) { /* if URL parsing fails, allow tracking */ }
+      return false;
+    } catch (e) { return false; }
+  }
+
+  // Field types we never want to capture or transmit, even if the customer's
+  // form includes them. Defense in depth — guard might fail, customer sites
+  // might have password fields, etc.
+  var SENSITIVE_FIELD_TYPES = ['password'];
+  var SENSITIVE_FIELD_RE = /password|passwd|pwd|secret|ssn|credit[\-_\s]?card|cvv|cvc/i;
+
+  function isSensitiveField(el) {
+    if (!el) return false;
+    if (SENSITIVE_FIELD_TYPES.indexOf((el.type || '').toLowerCase()) !== -1) return true;
+    var hay = ((el.name || '') + ' ' + (el.id || '') + ' ' + (el.placeholder || '') + ' ' + (el.getAttribute('autocomplete') || ''));
+    return SENSITIVE_FIELD_RE.test(hay);
+  }
+
+  // Bail at init if currently on excluded path. (Still re-checked per-send below.)
+  if (isExcludedPath()) return;
 
   var scriptUrl, apiKey, baseUrl;
   try {
@@ -127,6 +146,7 @@
     function onInput(e) {
       var el = e.target;
       if (!el || !el.matches || !el.matches(FIELD_SELECTOR)) return;
+      if (isSensitiveField(el)) return; // never capture passwords, SSN, CVV, etc.
       if (!self.touched) {
         self.touched   = true;
         self.startTime = Date.now();
@@ -166,6 +186,7 @@
 
   FormTracker.prototype.send = function (useBeacon) {
     if (!this.touched) return;
+    if (isExcludedPath()) return; // re-check on every send (Next.js route changes)
     var data = this.payload();
     if (useBeacon) {
       sendBeacon(TRACK_URL, data);
@@ -213,6 +234,7 @@
   var exitIntentFired = false;
   doc.addEventListener('mousemove', function (e) {
     if (exitIntentFired) return;
+    if (isExcludedPath()) return;
     if (e.clientY < 20) {
       exitIntentFired = true;
       sendAll(false);
