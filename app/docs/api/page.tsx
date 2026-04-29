@@ -41,8 +41,7 @@ export default function ApiDocsPage() {
 
             <div className="api-code-block">
               <div className="api-code-label">Paste before the closing &lt;/body&gt; tag</div>
-              <pre className="api-code"><code>{`<script src="https://userecapture.com/tracker.js"
-        data-key="YOUR_API_KEY"
+              <pre className="api-code"><code>{`<script src="https://userecapture.com/track.js?key=YOUR_API_KEY"
         async></script>`}</code></pre>
             </div>
 

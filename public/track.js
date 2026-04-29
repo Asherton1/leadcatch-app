@@ -13,6 +13,26 @@
   }
   if (!scriptEl) return;
 
+  // Skip ReCapture's own admin/auth pages — staff typing into login/dashboard forms
+  // should never be captured as leads. This guard runs only when track.js is loaded
+  // on userecapture.com itself; client sites are unaffected.
+  try {
+    var hostname = win.location.hostname || '';
+    var pathname = win.location.pathname || '';
+    var isOwnSite = /(^|\.)userecapture\.com$/i.test(hostname);
+    var EXCLUDED_PATHS = [
+      '/login', '/signup', '/admin', '/dashboard',
+      '/settings', '/get-started'
+    ];
+    if (isOwnSite) {
+      for (var p = 0; p < EXCLUDED_PATHS.length; p++) {
+        if (pathname === EXCLUDED_PATHS[p] || pathname.indexOf(EXCLUDED_PATHS[p] + '/') === 0) {
+          return;
+        }
+      }
+    }
+  } catch (e) { /* if URL parsing fails, allow tracking */ }
+
   var scriptUrl, apiKey, baseUrl;
   try {
     scriptUrl = new URL(scriptEl.src);

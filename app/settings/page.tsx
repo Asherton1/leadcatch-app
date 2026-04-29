@@ -666,9 +666,9 @@ export default function SettingsPage() {
             <div className="settings-code-block">
               <div className="settings-code-header">
                 <span>HTML</span>
-                <CopyButton text={'<script src="https://userecapture.com/tracker.js" data-key="' + settings.api_key + '"></script>'} />
+                <CopyButton text={'<script src="https://userecapture.com/track.js?key=' + settings.api_key + '"></script>'} />
               </div>
-              <pre className="settings-code">{'<script\n  src="https://userecapture.com/tracker.js"\n  data-key="' + settings.api_key + '"\n></script>'}</pre>
+              <pre className="settings-code">{'<script\n  src="https://userecapture.com/track.js?key=' + settings.api_key + '"\n></script>'}</pre>
             </div>
             <span className="settings-hint">Paste this before the closing &lt;/body&gt; tag on every page with a form</span>
           </div>
