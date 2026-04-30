@@ -146,7 +146,7 @@ export async function POST(request: NextRequest) {
     client.sms_enabled &&
     client.sms_phone &&
     client.plan !== 'essentials' &&
-    (name || email || phone)
+    (email || phone)
   ) {
     const { data: existing } = await supabase
       .from('leads')
