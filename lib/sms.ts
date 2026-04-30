@@ -20,6 +20,18 @@ export async function sendSmsAlert(payload: SmsAlertPayload) {
     return
   }
 
+  // Normalize phone to E.164 — Twilio requires +countrycode prefix
+  // 10 digits -> assume US, prepend +1
+  // 11 digits starting with 1 -> prepend +
+  // already starts with + -> leave alone
+  let normalizedPhone = businessPhone.trim().replace(/[\s\-\(\)\.]/g, '')
+  if (!normalizedPhone.startsWith('+')) {
+    const digits = normalizedPhone.replace(/\D/g, '')
+    if (digits.length === 10) normalizedPhone = '+1' + digits
+    else if (digits.length === 11 && digits.startsWith('1')) normalizedPhone = '+' + digits
+    else normalizedPhone = '+' + digits
+  }
+
   const parts: string[] = ['🔥 ReCapture Lead Alert']
 
   if (leadName) parts.push(`Name: ${leadName}`)
@@ -55,14 +67,14 @@ export async function sendSmsAlert(payload: SmsAlertPayload) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        To: businessPhone,
+        To: normalizedPhone,
         From: TWILIO_FROM,
         Body: body,
       }),
     })
 
     if (res.ok) {
-      console.log('SMS alert sent to', businessPhone)
+      console.log('SMS alert sent to', normalizedPhone)
     } else {
       const err = await res.text()
       console.error('SMS alert failed:', res.status, err)
