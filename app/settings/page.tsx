@@ -39,6 +39,17 @@ interface ClientSettings {
   quiet_hours_start: string | null
   quiet_hours_end: string | null
   webhook_url: string | null
+  meta_pixel_id: string | null
+  meta_access_token: string | null
+  meta_test_event_code: string | null
+  meta_capi_enabled: boolean
+  google_ads_conversion_id: string | null
+  google_ads_conversion_label: string | null
+  google_ads_developer_token: string | null
+  google_ads_enabled: boolean
+  google_ads_customer_id: string | null
+  google_ads_oauth_connected: boolean
+  google_ads_oauth_connected_at: string | null
   api_key: string
   plan: string | null
   trial_ends_at: string | null
@@ -187,6 +198,15 @@ export default function SettingsPage() {
         quiet_hours_start: settings.quiet_hours_start,
         quiet_hours_end: settings.quiet_hours_end,
         webhook_url: settings.webhook_url,
+        meta_pixel_id: settings.meta_pixel_id,
+        meta_access_token: settings.meta_access_token,
+        meta_test_event_code: settings.meta_test_event_code,
+        meta_capi_enabled: settings.meta_capi_enabled,
+        google_ads_conversion_id: settings.google_ads_conversion_id,
+        google_ads_conversion_label: settings.google_ads_conversion_label,
+        google_ads_developer_token: settings.google_ads_developer_token,
+        google_ads_enabled: settings.google_ads_enabled,
+        google_ads_customer_id: settings.google_ads_customer_id,
         min_lead_score: settings.min_lead_score,
         auto_mark_contacted: settings.auto_mark_contacted,
         lead_notification_email: settings.lead_notification_email,
@@ -490,6 +510,93 @@ export default function SettingsPage() {
                 SMS, Slack, and Ai Voice Callback require the <a href="/pricing">Pro plan</a>
               </div>
             )}
+          </div>
+        </div>
+
+        {/* ── Ad Platform Integrations ────────────────────────────────────────── */}
+        <div className="settings-section">
+          <div className="settings-section-header">
+            <div className="settings-section-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="M7 12l4-4 4 4 5-5"/></svg>
+            </div>
+            <div>
+              <h2 className="settings-section-title">Ad Platform Integrations</h2>
+              <p className="settings-section-desc">Send server-side conversion events to Meta and Google when leads are captured</p>
+            </div>
+          </div>
+          <div className="settings-fields">
+
+            {/* Meta CAPI */}
+            <div className="settings-toggle-row">
+              <div className="settings-toggle-info">
+                <div className="settings-toggle-label">Meta Conversions API</div>
+                <div className="settings-toggle-desc">Fire server-side Lead events to your Meta Pixel for accurate ad attribution</div>
+              </div>
+              <Toggle on={settings.meta_capi_enabled} onChange={v => update("meta_capi_enabled", v)} />
+            </div>
+            {settings.meta_capi_enabled && (
+              <div className="settings-indent">
+                <div className="settings-field">
+                  <label className="settings-label">Pixel ID</label>
+                  <input type="text" className="settings-input" value={settings.meta_pixel_id ?? ""} onChange={e => update("meta_pixel_id", e.target.value)} placeholder="1234567890123456" />
+                  <span className="settings-hint">Find in Meta Events Manager → Data Sources → your Pixel</span>
+                </div>
+                <div className="settings-field">
+                  <label className="settings-label">Access Token</label>
+                  <input type="password" className="settings-input" value={settings.meta_access_token ?? ""} onChange={e => update("meta_access_token", e.target.value)} placeholder="EAAxxxxxxxxxxxxxxxxxxxxxx" />
+                  <span className="settings-hint">Generate in Events Manager → Settings → Conversions API → Generate Access Token</span>
+                </div>
+                <div className="settings-field">
+                  <label className="settings-label">Test Event Code <span style={{ color: "#666", fontWeight: 400 }}>(optional)</span></label>
+                  <input type="text" className="settings-input" value={settings.meta_test_event_code ?? ""} onChange={e => update("meta_test_event_code", e.target.value)} placeholder="TEST12345" />
+                  <span className="settings-hint">Use only while testing — leave blank in production</span>
+                </div>
+              </div>
+            )}
+
+            {/* Google Ads */}
+            <div className="settings-toggle-row" style={{ borderBottom: "none" }}>
+              <div className="settings-toggle-info">
+                <div className="settings-toggle-label">Google Ads Conversions</div>
+                <div className="settings-toggle-desc">Send conversion events to Google Ads for offline conversion tracking</div>
+              </div>
+              <Toggle on={settings.google_ads_enabled} onChange={v => update("google_ads_enabled", v)} />
+            </div>
+            {settings.google_ads_enabled && (
+              <div className="settings-indent">
+                <div className="settings-field">
+                  <label className="settings-label">Customer ID</label>
+                  <input type="text" className="settings-input" value={settings.google_ads_customer_id ?? ""} onChange={e => update("google_ads_customer_id", e.target.value)} placeholder="1234567890" />
+                  <span className="settings-hint">Your 10-digit Google Ads account ID, no dashes (top-right of Google Ads)</span>
+                </div>
+                <div className="settings-field">
+                  <label className="settings-label">Conversion ID</label>
+                  <input type="text" className="settings-input" value={settings.google_ads_conversion_id ?? ""} onChange={e => update("google_ads_conversion_id", e.target.value)} placeholder="AW-12345678" />
+                  <span className="settings-hint">Format: AW-XXXXXXXXX (from Google Ads → Tools → Conversions)</span>
+                </div>
+                <div className="settings-field">
+                  <label className="settings-label">Conversion Label</label>
+                  <input type="text" className="settings-input" value={settings.google_ads_conversion_label ?? ""} onChange={e => update("google_ads_conversion_label", e.target.value)} placeholder="abc-DEFGhij_kLmN" />
+                  <span className="settings-hint">From the same conversion action page in Google Ads</span>
+                </div>
+                <div className="settings-field">
+                  <label className="settings-label">Authorization</label>
+                  {settings.google_ads_oauth_connected ? (
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.75rem 1rem", background: "rgba(34, 197, 94, 0.08)", border: "1px solid rgba(34, 197, 94, 0.2)", borderRadius: "0.375rem" }}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      <span style={{ color: "#22c55e", fontSize: "0.875rem", fontWeight: 500 }}>Connected to Google Ads</span>
+                      <a href="/api/auth/google-ads/start" style={{ marginLeft: "auto", color: "#888", fontSize: "0.8125rem", textDecoration: "underline" }}>Reconnect</a>
+                    </div>
+                  ) : (
+                    <a href="/api/auth/google-ads/start" className="settings-button-primary" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.625rem 1rem", background: "#ff6b35", color: "#fff", textDecoration: "none", borderRadius: "0.375rem", fontSize: "0.875rem", fontWeight: 500, width: "fit-content" }}>
+                      Connect with Google
+                    </a>
+                  )}
+                  <span className="settings-hint">Authorize ReCapture to send conversion events on your behalf (one-time)</span>
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
 

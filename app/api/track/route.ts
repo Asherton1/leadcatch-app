@@ -3,6 +3,7 @@ import { supabaseAdmin as supabase } from '@/lib/supabase-admin'
 import { sendEmailForLead } from '@/lib/email'
 import { sendSmsAlert } from '@/lib/sms'
 import { sendEmailAlert } from '@/lib/email-alert'
+import { sendMetaConversion, sendGoogleConversion } from '@/lib/ad-conversions'
 
 // Handle CORS preflight from tracking script on client sites
 export async function OPTIONS() {
@@ -70,7 +71,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token')
     .eq('api_key', api_key)
     .single()
 
@@ -285,6 +286,57 @@ export async function POST(request: NextRequest) {
       console.error('Outbound webhook failed for lead', lead.id, err)
     }
   }
+
+  // --- AD PLATFORM CONVERSIONS (Meta + Google) ---
+  // Non-blocking: failures don't stop the recovery email. Both fire in
+  // parallel for speed. Only triggers when lead has email or phone.
+  if (email || phone) {
+    const conversionPromises: Promise<unknown>[] = []
+
+    if (client.meta_capi_enabled && client.meta_pixel_id && client.meta_access_token) {
+      conversionPromises.push(
+        sendMetaConversion({
+          pixelId: client.meta_pixel_id,
+          accessToken: client.meta_access_token,
+          testEventCode: client.meta_test_event_code,
+          leadEmail: (email as string) ?? null,
+          leadPhone: (phone as string) ?? null,
+          leadName: (name as string) ?? null,
+          estimatedValue: estimated_value,
+          eventSourceUrl: request.headers.get('referer') ?? undefined,
+          ipAddress: request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? undefined,
+          userAgent: request.headers.get('user-agent') ?? undefined,
+        }).catch(err => console.error('Meta CAPI dispatch error for lead', lead.id, err))
+      )
+    }
+
+    if (
+      client.google_ads_enabled &&
+      client.google_ads_customer_id &&
+      client.google_ads_conversion_id &&
+      client.google_ads_conversion_label &&
+      client.google_ads_refresh_token
+    ) {
+      conversionPromises.push(
+        sendGoogleConversion({
+          customerId: client.google_ads_customer_id,
+          refreshToken: client.google_ads_refresh_token,
+          conversionId: client.google_ads_conversion_id,
+          conversionLabel: client.google_ads_conversion_label,
+          leadEmail: (email as string) ?? null,
+          leadPhone: (phone as string) ?? null,
+          estimatedValue: estimated_value,
+        }).catch(err => console.error('Google Ads dispatch error for lead', lead.id, err))
+      )
+    }
+
+    // Fire and continue — don't await individual results, but await the
+    // batch so logs appear in this request's runtime
+    if (conversionPromises.length > 0) {
+      await Promise.allSettled(conversionPromises)
+    }
+  }
+
 
   // --- AUTO-RECOVERY EMAIL ---
 
