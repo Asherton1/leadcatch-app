@@ -177,7 +177,7 @@ export async function POST(request: NextRequest) {
 
 
   // --- SLACK ALERT ---
-  if (name || email || phone) {
+  if (email || phone) {
     try {
       if (client.slack_webhook_url) {
         const score = Number(fields_completed ?? 0) >= 3 ? 'Hot' : Number(fields_completed ?? 0) >= 2 ? 'Warm' : 'Cold'
