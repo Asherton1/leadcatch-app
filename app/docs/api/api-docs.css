@@ -44,6 +44,8 @@
   margin: 1.25rem 0 1.5rem;
   border: 1px solid #1a1a1a;
   background: #050505;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .api-code-label {
@@ -64,6 +66,10 @@
   color: #d4d4d4;
   padding: 1.25rem;
   margin: 0;
+  overflow-x: auto;
+  white-space: pre;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
   overflow-x: auto;
   white-space: pre;
 }
@@ -195,6 +201,12 @@
 
 /* ─── Mobile (390px) ─── */
 @media (max-width: 640px) {
+  .hiw-step-content {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
   .api-detail-row {
     flex-direction: column;
     align-items: flex-start;
