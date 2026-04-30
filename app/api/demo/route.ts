@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
   // Notify Ash
   await resend.emails.send({
     from: 'ReCapture <hello@userecapture.com>',
-    to: 'asherton.c@me.com',
+    to: 'hello@userecapture.com',
     subject: `New Demo Request — ${name}`,
     html: `
       <h2>New Demo Request</h2>
@@ -123,7 +123,7 @@ export async function POST(req: NextRequest) {
     to: email,
     subject: 'Your ReCapture demo — start your trial today',
     html: prospectConfirmationHtml(name),
-    replyTo: 'asherton.c@me.com',
+    replyTo: 'hello@userecapture.com',
   })
 
   return NextResponse.json({ ok: true })

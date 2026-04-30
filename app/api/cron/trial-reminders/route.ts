@@ -15,7 +15,7 @@ async function sendEmail(to: string, subject: string, html: string, apiKey: stri
       to: [to],
       subject,
       html,
-      reply_to: 'asherton.c@me.com',
+      reply_to: 'hello@userecapture.com',
     }),
   })
   return res.json()
@@ -201,7 +201,7 @@ export async function GET(req: Request) {
 
   if (results.length > 0) {
     const notifyHtml = '<div style="font-family:Inter,sans-serif;color:#333;font-size:14px"><p><strong>' + results.length + ' trial reminders sent:</strong></p>' + results.map(r => '<p>' + r + '</p>').join('') + '</div>'
-    await sendEmail('asherton.c@me.com', 'ReCapture trial reminders — ' + results.length + ' sent', notifyHtml, RESEND_KEY)
+    await sendEmail('hello@userecapture.com', 'ReCapture trial reminders — ' + results.length + ' sent', notifyHtml, RESEND_KEY)
   }
 
   return NextResponse.json({

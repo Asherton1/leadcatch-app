@@ -32,7 +32,7 @@ export async function sendSmsAlert(payload: SmsAlertPayload) {
     else normalizedPhone = '+' + digits
   }
 
-  const parts: string[] = ['🔥 ReCapture Lead Alert']
+  const parts: string[] = ['New lead from ReCapture']
 
   if (leadName) parts.push(`Name: ${leadName}`)
   if (leadEmail) parts.push(`Email: ${leadEmail}`)
@@ -51,8 +51,8 @@ export async function sendSmsAlert(payload: SmsAlertPayload) {
     if (extras.length > 0) parts.push(extras.join(', '))
   }
 
-  parts.push(`Fields: ${fieldsCompleted}/${totalFields}`)
-  parts.push('Form abandoned — follow up now')
+  parts.push(`${fieldsCompleted} of ${totalFields} fields completed`)
+  parts.push('Follow up while the intent is fresh.')
 
   const body = parts.join('\n')
 

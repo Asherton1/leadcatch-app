@@ -257,7 +257,7 @@ export async function POST(request: NextRequest) {
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + RESEND_KEY },
       body: JSON.stringify({
         from: 'ReCapture <hello@userecapture.com>',
-        to: 'asherton.c@me.com',
+        to: 'hello@userecapture.com',
         subject: 'New Form Audit Request — ' + url,
         html: '<p><strong>URL:</strong> ' + url + '</p><p><strong>Email:</strong> ' + email + '</p><p><strong>Industry:</strong> ' + detectedIndustry + '</p><p><strong>Fields:</strong> ' + totalFields + '</p><p><strong>Est. abandonment:</strong> ' + estAbandonment + '%</p><p><strong>Monthly revenue at risk:</strong> $' + monthlyRevenueLost.toLocaleString() + '</p>',
       }),

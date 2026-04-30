@@ -339,7 +339,7 @@ export async function GET(req: NextRequest) {
 
     await resend.emails.send({
       from: 'ReCapture <onboarding@resend.dev>',
-      to: 'asherton.c@me.com',
+      to: 'hello@userecapture.com',
       subject: `Monday Briefing — $${mrr}/mo MRR · ${activeCount} clients · ${totalLeadsAll} leads · $${totalAtRisk.toLocaleString()} at risk`,
       html: `
         <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;font-family:'Inter',-apple-system,sans-serif;">

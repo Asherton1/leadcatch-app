@@ -111,7 +111,7 @@ export async function GET(req: Request) {
 
   if (results.length > 0) {
     const notifyHtml = '<div style="font-family:Inter,sans-serif;color:#333;font-size:14px"><p><strong>' + results.length + ' demo follow-ups sent:</strong></p>' + results.map(r => '<p>' + r + '</p>').join('') + '</div>'
-    await sendEmail('asherton.c@me.com', 'ReCapture demo follow-ups — ' + results.length + ' sent', notifyHtml, RESEND_KEY)
+    await sendEmail('hello@userecapture.com', 'ReCapture demo follow-ups — ' + results.length + ' sent', notifyHtml, RESEND_KEY)
   }
 
   return NextResponse.json({
