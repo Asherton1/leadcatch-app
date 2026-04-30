@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin as supabase } from '@/lib/supabase-admin'
 import { sendEmailForLead } from '@/lib/email'
 import { sendSmsAlert } from '@/lib/sms'
+import { sendEmailAlert } from '@/lib/email-alert'
 
 // Handle CORS preflight from tracking script on client sites
 export async function OPTIONS() {
@@ -171,6 +172,41 @@ export async function POST(request: NextRequest) {
           .eq('id', lead.id)
       } catch (err) {
         console.error('SMS alert failed for lead', lead.id, err)
+      }
+    }
+  }
+
+
+  // --- EMAIL ALERT (any plan, opt-in) ---
+  if (
+    client.email_alert_enabled &&
+    client.email_alert_address &&
+    (email || phone)
+  ) {
+    const { data: existing } = await supabase
+      .from('leads')
+      .select('email_alert_sent')
+      .eq('id', lead.id)
+      .single()
+
+    if (!existing?.email_alert_sent) {
+      try {
+        await sendEmailAlert({
+          toEmail: client.email_alert_address,
+          leadName: (name as string) ?? null,
+          leadEmail: (email as string) ?? null,
+          leadPhone: (phone as string) ?? null,
+          formData: (form_data as Record<string, unknown>) ?? null,
+          fieldsCompleted: Number(fields_completed ?? 0),
+          totalFields: Number(total_fields ?? 0),
+          clientCompanyName: client.company_name ?? client.name ?? null,
+        })
+        await supabase
+          .from('leads')
+          .update({ email_alert_sent: true, email_alert_sent_at: new Date().toISOString() })
+          .eq('id', lead.id)
+      } catch (err) {
+        console.error('Email alert failed for lead', lead.id, err)
       }
     }
   }
