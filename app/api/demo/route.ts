@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
+import { isSpam } from '@/lib/form-security'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -9,27 +10,7 @@ const supabase = createClient(
 
 const resend = new Resend(process.env.RESEND_API_KEY!)
 
-function isSpam(data: Record<string, string>): string | null {
-  if (data.website && data.website.trim().length > 0) return 'honeypot'
-  if (!data.name || data.name.trim().length < 3) return 'name too short'
-  if (/^(.)\1+$/.test(data.name.trim())) return 'name is repeated chars'
-  if (/^test/i.test(data.name.trim())) return 'test submission'
-  if (!data.email || !data.email.includes('@') || !data.email.includes('.')) return 'invalid email'
-  const throwaway = ['mailinator.com', 'guerrillamail.com', 'tempmail.com', 'throwaway.email', 'yopmail.com', 'sharklasers.com', 'trashmail.com']
-  const domain = data.email.split('@')[1]?.toLowerCase()
-  if (throwaway.includes(domain)) return 'throwaway email'
-  if (data.phone) {
-    const digits = data.phone.replace(/\D/g, '')
-    if (digits.length > 0 && digits.length < 7) return 'phone too short'
-    if (/^(\d)\1+$/.test(digits)) return 'phone is repeated digits'
-  }
-  if (data.message) {
-    const msg = data.message.toLowerCase()
-    if (/\b(viagra|casino|crypto|bitcoin|lottery|prize|winner|click here|buy now)\b/.test(msg)) return 'spam keywords'
-    if (/^(.)\1{5,}$/.test(data.message.trim())) return 'message is repeated chars'
-  }
-  return null
-}
+// isSpam now lives in lib/form-security.ts (shared with enterprise-inquiry)
 
 function prospectConfirmationHtml(name: string) {
   const firstName = name ? name.split(' ')[0] : 'there'
