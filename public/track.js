@@ -18,7 +18,9 @@
   // /admin, /dashboard etc. should never be captured as leads.
   var EXCLUDED_PATHS = [
     '/login', '/signup', '/admin', '/dashboard',
-    '/settings', '/get-started'
+    '/settings', '/get-started', '/start-trial',
+    '/forgot-password', '/auth', '/reset-password',
+    '/checkout', '/billing', '/account'
   ];
 
   function isExcludedPath() {

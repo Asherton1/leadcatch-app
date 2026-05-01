@@ -248,6 +248,15 @@ export async function POST(request: NextRequest) {
           body: JSON.stringify(slackMsg),
         })
         const slackText = await slackRes.text()
+        if (!slackRes.ok) {
+          console.error('Slack alert failed for lead', lead.id, 'status:', slackRes.status, 'response:', slackText)
+        } else {
+          console.log('Slack alert sent for lead', lead.id)
+          await supabase
+            .from('leads')
+            .update({ slack_sent: true, slack_sent_at: new Date().toISOString() })
+            .eq('id', lead.id)
+        }
       }
     } catch (err) {
       console.error('Slack alert failed for lead', lead.id, err)
