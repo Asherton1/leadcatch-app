@@ -3,5 +3,6 @@ Allow: /
 Disallow: /admin
 Disallow: /dashboard
 Disallow: /api/
+Disallow: /enterprise
 
 Sitemap: https://userecapture.com/sitemap.xml
