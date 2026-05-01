@@ -201,9 +201,9 @@ function EnterpriseInquirySection() {
             </svg>
           </div>
           <p className="enterprise-contact-eyebrow">Inquiry received</p>
-          <h2 className="enterprise-contact-headline">Thank you. Ash will personally reply within 24 hours.</h2>
+          <h2 className="enterprise-contact-headline">Inquiry received.</h2>
           <p className="enterprise-contact-desc">
-            Keep an eye on your inbox — Ash will send a tailored proposal and schedule a kickoff call. If urgent, you can also call our concierge line.
+            Our enterprise team will respond within 24 hours with a tailored proposal and a kickoff call invitation. Keep an eye on your inbox.
           </p>
           <p className="enterprise-contact-fineprint">
             Concierge line: <a href="tel:+18886060630">(888) 606-0630</a>
@@ -216,10 +216,10 @@ function EnterpriseInquirySection() {
   return (
     <section className="enterprise-contact reveal">
       <div className="enterprise-contact-inner">
-        <p className="enterprise-contact-eyebrow">Talk to the founder</p>
-        <h2 className="enterprise-contact-headline">Every enterprise deployment starts with a conversation.</h2>
+        <p className="enterprise-contact-eyebrow">Start the conversation</p>
+        <h2 className="enterprise-contact-headline">Every enterprise deployment is custom-scoped.</h2>
         <p className="enterprise-contact-desc">
-          Tell us about your operation — number of locations, current tools, what you are trying to recover — and Ash, our founder, will personally reply within 24 hours with a tailored proposal.
+          Share your operational details — number of locations, current tools, integration needs, timeline — and our enterprise team will respond within 24 hours with a tailored proposal.
         </p>
 
         <form onSubmit={handleSubmit} className="enterprise-form">
@@ -296,7 +296,7 @@ function EnterpriseInquirySection() {
           {error && <div className="enterprise-form-error">{error}</div>}
 
           <button type="submit" className="enterprise-form-submit" disabled={submitting}>
-            {submitting ? 'Sending...' : 'Send to Ash'}
+            {submitting ? 'Sending...' : 'Submit inquiry'}
           </button>
 
           <p className="enterprise-form-fineprint">
