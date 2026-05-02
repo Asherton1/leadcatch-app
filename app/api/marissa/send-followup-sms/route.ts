@@ -41,16 +41,28 @@ function topicLabel(topic: string): string {
 
 export async function POST(req: NextRequest) {
   try {
-    const body: Record<string, unknown> = await req.json()
-    console.log('[marissa-sms] raw body:', JSON.stringify(body))
+    const rawBody: Record<string, unknown> = await req.json()
+    console.log('[marissa-sms] raw body:', JSON.stringify(rawBody))
 
-    // Defensive extraction (Retell sometimes capitalizes)
-    const rawPhone = String(body.phone || body.Phone || '')
-    const rawEmail = String(body.email || body.Email || '')
-    const name = String(body.name || body.Name || '').trim()
-    const topic = String(body.topic || body.Topic || 'general').toLowerCase()
-    const notes = String(body.notes || body.Notes || '').trim()
-    const call_id = body.call_id ? String(body.call_id) : undefined
+    // Retell wraps function arguments in an 'args' object, not flat at top level.
+    // Also support flat top-level for direct API calls / Stripe webhook style.
+    const args = (rawBody.args && typeof rawBody.args === 'object'
+      ? rawBody.args
+      : rawBody) as Record<string, unknown>
+
+    // Pull call_id from nested call object if present (Retell sends body.call.call_id)
+    const callObj = (rawBody.call && typeof rawBody.call === 'object'
+      ? rawBody.call
+      : null) as Record<string, unknown> | null
+    const call_id = callObj?.call_id ? String(callObj.call_id) :
+                    rawBody.call_id ? String(rawBody.call_id) : undefined
+
+    // Defensive extraction from args (Retell sometimes capitalizes)
+    const rawPhone = String(args.phone || args.Phone || '')
+    const rawEmail = String(args.email || args.Email || '')
+    const name = String(args.name || args.Name || '').trim()
+    const topic = String(args.topic || args.Topic || 'general').toLowerCase()
+    const notes = String(args.notes || args.Notes || '').trim()
 
     // Normalize phone
     const phone = normalizePhone(rawPhone)
@@ -76,8 +88,13 @@ export async function POST(req: NextRequest) {
 
     // Skip caller_phone if it's the literal template string
     let caller_phone: string | undefined
-    if (body.caller_phone && typeof body.caller_phone === 'string' && !body.caller_phone.includes('{{')) {
-      caller_phone = body.caller_phone
+    const cpRaw = args.caller_phone || rawBody.caller_phone
+    if (cpRaw && typeof cpRaw === 'string' && !cpRaw.includes('{{')) {
+      caller_phone = cpRaw
+    }
+    // Also fall back to from_number on the call object (most accurate — actual caller)
+    if (!caller_phone && callObj?.from_number) {
+      caller_phone = String(callObj.from_number)
     }
 
     // Generate unique token + insert link record
