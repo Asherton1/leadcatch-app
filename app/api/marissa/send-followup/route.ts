@@ -84,13 +84,38 @@ Most clients recover their first lead in week one — usually pays for the entir
 
 export async function POST(req: NextRequest) {
   try {
-    const body: FollowupRequest = await req.json()
-    const { email, name = '', topic = 'general', notes = '', call_id, caller_phone } = body
+    const body: Record<string, unknown> = await req.json()
+    console.log('[marissa-followup] raw body:', JSON.stringify(body))
 
-    // Basic validation
-    if (!email || !email.includes('@')) {
-      return NextResponse.json({ ok: false, error: 'Invalid email' }, { status: 400 })
+    // Defensive extraction — accept Name OR name (Retell sometimes capitalizes)
+    const rawEmail = String(body.email || body.Email || '')
+    const name = String(body.name || body.Name || '')
+    const topic = String(body.topic || body.Topic || 'general')
+    const notes = String(body.notes || body.Notes || '')
+    const call_id = body.call_id ? String(body.call_id) : undefined
+
+    // Strip Markdown link wrappers if Retell injects them
+    // e.g. "[abby@gmail.com](mailto:abby@gmail.com)" -> "abby@gmail.com"
+    let cleanedEmail = rawEmail.trim()
+    const mdMatch = cleanedEmail.match(/\[([^\]]+)\]/)
+    if (mdMatch) cleanedEmail = mdMatch[1]
+    const mailtoMatch = cleanedEmail.match(/mailto:([^\s\)>]+)/)
+    if (mailtoMatch) cleanedEmail = mailtoMatch[1]
+    // Strip surrounding angle brackets / parens / quotes
+    cleanedEmail = cleanedEmail.replace(/^[<\[\(\"']+|[>\]\)\"']+$/g, '').trim()
+
+    // Skip caller_phone if it's the literal template string (Retell didn't substitute)
+    let caller_phone: string | undefined
+    if (body.caller_phone && typeof body.caller_phone === 'string' && !body.caller_phone.includes('{{')) {
+      caller_phone = body.caller_phone
     }
+
+    // Basic validation — must have @ and a dot after it
+    if (!cleanedEmail || !cleanedEmail.includes('@') || !cleanedEmail.split('@')[1]?.includes('.')) {
+      console.error('[marissa-followup] invalid email after cleaning:', { raw: rawEmail, cleaned: cleanedEmail })
+      return NextResponse.json({ ok: false, error: 'Invalid email', raw: rawEmail, cleaned: cleanedEmail }, { status: 400 })
+    }
+    const email = cleanedEmail
     if (!RESEND_KEY) {
       console.error('[marissa-followup] RESEND_API_KEY missing')
       return NextResponse.json({ ok: false, error: 'Email not configured' }, { status: 500 })
