@@ -101,15 +101,12 @@ function detectIndustry(notes: string | null): {
   }
 }
 
-// Format friendly call timestamp
-function formatCallTimestamp(date: Date): string {
-  return date.toLocaleString('en-US', {
+// Format clean date — no timezone confusion, just the day
+function formatCallDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
     day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-    timeZoneName: 'short',
   })
 }
 
@@ -158,23 +155,23 @@ export default async function ShortLinkPage({ params }: PageProps) {
 
   const industry = detectIndustry(link.notes)
   const callTime = link.created_at ? new Date(link.created_at) : new Date()
-  const callTimestamp = formatCallTimestamp(callTime)
+  const callDate = formatCallDate(callTime)
   const firstName = link.name || 'there'
 
   return (
     <div className="landing" style={{ minHeight: '100vh', background: '#0a0a0a' }}>
       <BlogNav />
 
-      {/* PERSONALIZED HERO */}
+      {/* HERO — Editorial split headline */}
       <section className="sl-hero">
         <div className="sl-hero-inner">
-          <div className="sl-hero-meta">
-            <span className="sl-hero-meta-dot"></span>
-            <span className="sl-hero-meta-text">Call summary · {callTimestamp}</span>
-          </div>
-          <h1 className="sl-hero-headline">Hi {firstName}, here&apos;s everything we discussed.</h1>
-          <p className="sl-hero-sub">
-            {link.notes ? `Tailored for your ${industry.label.toLowerCase()} operation.` : `Tailored just for you.`} Everything below was prepared after our call. If anything looks off, just call us back at <a href="tel:+18886060630">(888) 606-0630</a> — Marissa will pick up.
+          <p className="sl-hero-eyebrow">Call summary · {callDate}</p>
+          <h1 className="sl-hero-headline">
+            <span className="sl-hero-headline-primary">Hi {firstName}, here&apos;s everything we discussed.</span>{' '}
+            <span className="sl-hero-headline-muted">{link.notes ? `Tailored for your ${industry.label.toLowerCase()} operation. ` : `Tailored just for you. `}Everything below was prepared after our call.</span>
+          </h1>
+          <p className="sl-hero-fineprint">
+            If anything looks off, just call us back at <a href="tel:+18886060630">(888) 606-0630</a> — Marissa will pick up.
           </p>
         </div>
       </section>
@@ -295,7 +292,6 @@ function PricingContent({ industry }: { firstName: string; industry: ReturnType<
             </div>
 
             <div className="sl-plan-card sl-plan-featured">
-              <div className="sl-plan-badge">Most popular</div>
               <div className="sl-plan-name">Pro</div>
               <div className="sl-plan-price"><span className="sl-plan-amount">$397</span><span className="sl-plan-period">/mo</span></div>
               <p className="sl-plan-tagline">Full automation. AI does the recovery for you.</p>
@@ -440,7 +436,6 @@ function EnterpriseContent({ industry, notes }: { firstName: string; industry: R
 
           <div className="sl-tier-grid">
             <div className={`sl-tier-card ${recommendedTier === 'starter' ? 'sl-tier-recommended' : ''}`}>
-              {recommendedTier === 'starter' && <div className="sl-tier-badge">Recommended for you</div>}
               <div className="sl-tier-name">Starter</div>
               <div className="sl-tier-price"><span>$1,997</span><small>/mo</small></div>
               <div className="sl-tier-locations">5-10 locations</div>
@@ -453,7 +448,6 @@ function EnterpriseContent({ industry, notes }: { firstName: string; industry: R
             </div>
 
             <div className={`sl-tier-card ${recommendedTier === 'growth' ? 'sl-tier-recommended' : ''}`}>
-              {recommendedTier === 'growth' && <div className="sl-tier-badge">Recommended for you</div>}
               <div className="sl-tier-name">Growth</div>
               <div className="sl-tier-price"><span>$3,997</span><small>/mo</small></div>
               <div className="sl-tier-locations">11-25 locations</div>
@@ -466,7 +460,6 @@ function EnterpriseContent({ industry, notes }: { firstName: string; industry: R
             </div>
 
             <div className={`sl-tier-card ${recommendedTier === 'scale' ? 'sl-tier-recommended' : ''}`}>
-              {recommendedTier === 'scale' && <div className="sl-tier-badge">Recommended for you</div>}
               <div className="sl-tier-name">Scale</div>
               <div className="sl-tier-price"><span>$7,997</span><small>/mo</small></div>
               <div className="sl-tier-locations">25-50 locations</div>
@@ -479,7 +472,6 @@ function EnterpriseContent({ industry, notes }: { firstName: string; industry: R
             </div>
 
             <div className={`sl-tier-card ${recommendedTier === 'custom' ? 'sl-tier-recommended' : ''}`}>
-              {recommendedTier === 'custom' && <div className="sl-tier-badge">Recommended for you</div>}
               <div className="sl-tier-name">Custom</div>
               <div className="sl-tier-price"><span>From $15K</span><small>/mo</small></div>
               <div className="sl-tier-locations">50+ locations</div>
