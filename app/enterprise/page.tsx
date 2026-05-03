@@ -396,7 +396,7 @@ export default function EnterprisePage() {
                 <ul className="enterprise-tier-bullets">
                   {tier.bullets.map(b => <li key={b}>{b}</li>)}
                 </ul>
-                <a className="enterprise-tier-cta" href={tier.href} target="_blank" rel="noopener noreferrer">
+                <a className="enterprise-tier-cta" href={tier.href}>
                   Talk to enterprise →
                 </a>
               </div>
