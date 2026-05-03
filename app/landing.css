@@ -3630,3 +3630,51 @@
 @media (max-width: 768px) {
   .canon-hero { padding: 6rem 1.25rem 3.5rem; }
 }
+
+
+/* ── Pricing band (homepage mid-page) ──────────────────────── */
+.pricing-band {
+  width: 100%;
+  padding: 4rem 2rem;
+  background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+  text-align: center;
+}
+.pricing-band-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.pricing-band-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem 0;
+  opacity: 0.75;
+}
+.pricing-band-line {
+  font-size: clamp(1.0625rem, 2.4vw, 1.375rem);
+  color: #fff;
+  line-height: 1.5;
+  margin: 0 0 1.25rem 0;
+  letter-spacing: -0.01em;
+}
+.pricing-band-line strong {
+  color: #ff6b35;
+  font-weight: 700;
+}
+.pricing-band-link {
+  display: inline-block;
+  font-size: 0.9375rem;
+  color: #ff6b35;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+.pricing-band-link:hover { opacity: 0.8; }
+
+@media (max-width: 768px) {
+  .pricing-band { padding: 3rem 1.25rem; }
+}

@@ -58,7 +58,21 @@ export default function LandingPage() {
         </div>
       </section>
 
-      
+      <section className="lc-section ledger-section">
+        <p className="ledger-eyebrow">The proof</p>
+        <h2 className="ledger-headline">
+          <span className="ledger-headline-primary">Every lost lead. Every dollar.</span>{' '}
+          <span className="ledger-headline-muted">Right in front of you, every morning.</span>
+        </h2>
+
+        <LedgerStats />
+
+        <div className="ledger-divider" />
+
+        <LedgerRows />
+      </section>
+
+      <div className="section-divider" />
 
       <section className="lc-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>The Invisible Revenue Leak</h2>
@@ -78,48 +92,7 @@ export default function LandingPage() {
 
       <div className="section-divider" />
 
-      <section className="lc-section ledger-section">
-        <p className="ledger-eyebrow">The proof</p>
-        <h2 className="ledger-headline">
-          <span className="ledger-headline-primary">Every lost lead. Every dollar.</span>{' '}
-          <span className="ledger-headline-muted">Right in front of you, every morning.</span>
-        </h2>
 
-        <LedgerStats />
-
-        <div className="ledger-divider" />
-
-        <LedgerRows />
-      </section>
-
-      <section className="lc-section features-tone">
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Built to Recover Revenue</h2>
-        <p className="section-subtitle">One script tag. Full automation. Every feature designed to bring leads back.</p>
-        <div className="top-features-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }}>
-          <div className="wow-card" style={{ padding: '2rem 1.5rem' }}>
-            <div style={{ width: 40, paddingBottom: '1rem', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,107,53,0.3)', fontFamily: "'SF Mono', Menlo, Consolas, monospace", fontSize: '0.75rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.1em' }}>01</div>
-            <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Ai Voice Callback</h3>
-            <p style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>Lead abandons your form with a phone number? Our Ai calls them back within 60 seconds on behalf of your business. Natural voice, real conversation, 391% higher conversion.</p>
-          </div>
-          <div className="wow-card" style={{ padding: '2rem 1.5rem' }}>
-            <div style={{ width: 40, paddingBottom: '1rem', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,107,53,0.3)', fontFamily: "'SF Mono', Menlo, Consolas, monospace", fontSize: '0.75rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.1em' }}>02</div>
-            <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Real-Time Capture</h3>
-            <p style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>The instant a visitor types into your form, their name, email, and phone are captured. Before they hit submit. Before they leave. Before you lose them.</p>
-          </div>
-          <div className="wow-card" style={{ padding: '2rem 1.5rem' }}>
-            <div style={{ width: 40, paddingBottom: '1rem', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,107,53,0.3)', fontFamily: "'SF Mono', Menlo, Consolas, monospace", fontSize: '0.75rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.1em' }}>03</div>
-            <h3 style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Automated Recovery</h3>
-            <p style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.7, margin: 0 }}>ReCapture emails abandoned leads on your behalf automatically with your branding, your name, and timing you control. They come back without you lifting a finger.</p>
-          </div>
-
-        </div>
-        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-          <Link href="/why-us" className="explore-features-link page-transition-link">
-            Explore all features
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
-          </Link>
-        </div>
-      </section>
 
       <section className="lc-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Purpose-Built for High-Ticket Industries</h2>
@@ -185,6 +158,18 @@ export default function LandingPage() {
 
 
 
+      <section className="pricing-band reveal">
+        <div className="pricing-band-inner">
+          <p className="pricing-band-eyebrow">Simple, transparent pricing</p>
+          <p className="pricing-band-line">
+            Plans start at <strong>$197/mo</strong> · 7-day free trial · Cancel anytime
+          </p>
+          <Link href="/pricing" className="pricing-band-link page-transition-link">
+            See all plans &rarr;
+          </Link>
+        </div>
+      </section>
+
       <section className="lc-section testimonials-tone">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>What Our Clients Say</h2>
         <div className="testimonials-grid reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }}>
@@ -236,11 +221,11 @@ export default function LandingPage() {
         <h2>Stop Losing Revenue.<br />Start Recovering Leads.</h2>
         <p>7-day free trial. Cancel anytime. If you&apos;re losing leads, you&apos;ll know within 48 hours.</p>
         <div className="cta-group" style={{ justifyContent: 'center' }}>
-          <Link href="/demo" className="cta-primary">Try the Live Demo</Link>
-          <Link href="/start-trial" className="cta-secondary">Start Your 7-Day Free Trial</Link>
+          <Link href="/start-trial" className="cta-primary">Start Your 7-Day Free Trial</Link>
         </div>
-        <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-          <Link href="/pricing" className="page-transition-link" style={{ color: '#666', fontSize: '0.9375rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}>See Pricing &rarr;</Link>
+        <div style={{ marginTop: '1.5rem', textAlign: 'center', display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link href="/demo" className="page-transition-link" style={{ color: '#888', fontSize: '0.9375rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}>Try the Live Demo &rarr;</Link>
+          <Link href="/pricing" className="page-transition-link" style={{ color: '#888', fontSize: '0.9375rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}>See Pricing &rarr;</Link>
         </div>
       </section>
 
