@@ -122,9 +122,33 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, error: 'DB error' }, { status: 500 })
     }
 
-    // Build SMS body
-    const greeting = name ? `Hi ${name}!` : 'Hi!'
-    const smsBody = `${greeting} As promised — here's your ${topicLabel(cleanTopic)} from ReCapture: ${shortLink}\n\nReply STOP to opt out.`
+    // Look up SMS template from DB (admin-editable, falls back to hardcoded if missing)
+    let smsBody: string
+    try {
+      const { data: template } = await supabaseAdmin
+        .from('sms_templates')
+        .select('body')
+        .eq('topic', cleanTopic)
+        .single()
+
+      if (template?.body) {
+        // Merge tag substitution
+        smsBody = template.body
+          .replaceAll('{name}', name || 'there')
+          .replaceAll('{topic}', topicLabel(cleanTopic))
+          .replaceAll('{shortlink}', shortLink)
+          .replaceAll('{phone}', phone)
+          .replaceAll('{caller_phone}', caller_phone || phone)
+      } else {
+        // Fallback if template not found
+        const greeting = name ? `Hi ${name}!` : 'Hi!'
+        smsBody = `${greeting} As promised — here's your ${topicLabel(cleanTopic)} from ReCapture: ${shortLink}\n\nReply STOP to opt out.`
+      }
+    } catch (err) {
+      console.error('[marissa-sms] template lookup failed, using fallback:', err)
+      const greeting = name ? `Hi ${name}!` : 'Hi!'
+      smsBody = `${greeting} As promised — here's your ${topicLabel(cleanTopic)} from ReCapture: ${shortLink}\n\nReply STOP to opt out.`
+    }
 
     // Send SMS via Twilio (using existing sms.ts infrastructure adapted)
     let smsId: string | null = null
@@ -172,6 +196,7 @@ export async function POST(req: NextRequest) {
     // Optional: also send email if they gave one
     let emailId: string | null = null
     if (cleanEmail && RESEND_KEY) {
+      const greeting = name ? `Hi ${name}!` : 'Hi!'
       try {
         const resend = new Resend(RESEND_KEY)
         const emailResult = await resend.emails.send({
