@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
+import { useIsAdmin } from '@/lib/use-is-admin'
 import BlogNav from '../../components/BlogNav'
 import Footer from '../../components/Footer'
 import '../../landing.css'
@@ -36,18 +37,10 @@ export default function SmsTemplatesAdminPage() {
   const [savedFlash, setSavedFlash] = useState<string | null>(null)
   const [edits, setEdits] = useState<Record<string, string>>({})
   const [error, setError] = useState<string | null>(null)
-  const [authChecked, setAuthChecked] = useState(false)
-  const [authorized, setAuthorized] = useState(false)
+  const { loading: authLoading, isAdmin } = useIsAdmin()
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user?.email === 'asherton.c@me.com') setAuthorized(true)
-      setAuthChecked(true)
-    })
-  }, [])
-
-  useEffect(() => {
-    if (!authorized) return
+    if (!isAdmin) return
     const load = async () => {
       try {
         const { data, error } = await supabase
@@ -67,7 +60,7 @@ export default function SmsTemplatesAdminPage() {
       }
     }
     load()
-  }, [authorized])
+  }, [isAdmin])
 
   const handleSave = async (topic: string) => {
     setSaving(topic)
@@ -112,7 +105,7 @@ export default function SmsTemplatesAdminPage() {
       .replaceAll('{caller_phone}', '+12145551234')
   }
 
-  if (!authChecked) {
+  if (authLoading) {
     return (
       <div className="landing" style={{ minHeight: '100vh', background: '#0a0a0a' }}>
         <BlogNav />
@@ -122,7 +115,7 @@ export default function SmsTemplatesAdminPage() {
     )
   }
 
-  if (!authorized) {
+  if (!isAdmin) {
     return (
       <div className="landing" style={{ minHeight: '100vh', background: '#0a0a0a' }}>
         <BlogNav />
