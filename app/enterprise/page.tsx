@@ -9,10 +9,10 @@ import '../landing.css'
 import './enterprise.css'
 
 const STRIPE_LINKS = {
-  starter: 'https://buy.stripe.com/fZu3cxa6p1uP6olezvd7q06',
-  growth:  'https://buy.stripe.com/4gM3cx2DX7Td3c9ezvd7q05',
-  scale:   'https://buy.stripe.com/dRm28t1zTehB285fDzd7q04',
-  custom:  'https://buy.stripe.com/3cI4gB5Q9ddx7sp4YVd7q03',
+  starter: '#enterprise-inquiry',
+  growth:  '#enterprise-inquiry',
+  scale:   '#enterprise-inquiry',
+  custom:  '#enterprise-inquiry',
 }
 
 const TIERS = [
@@ -353,6 +353,25 @@ export default function EnterprisePage() {
       </section>
 
       {/* TIER CARDS */}
+      {/* CONCIERGE LINE — Pre-tier authority builder */}
+      <section className="enterprise-concierge-band reveal">
+        <div className="enterprise-concierge-band-inner">
+          <p className="enterprise-concierge-eyebrow">Talk it through directly</p>
+          <h3 className="enterprise-concierge-headline">
+            Want to scope a custom deployment? Call our concierge.
+          </h3>
+          <p className="enterprise-concierge-desc">
+            Marissa, our AI Concierge, picks up 24/7 — she will text you a custom proposal in 60 seconds based on your locations, integrations, and timeline.
+          </p>
+          <a href="tel:+18886060630" className="enterprise-concierge-cta">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '0.5rem', verticalAlign: 'middle' }}>
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            (888) 606-0630
+          </a>
+        </div>
+      </section>
+
       <section className="enterprise-tiers reveal">
         <div className="enterprise-tiers-inner">
           <p className="enterprise-tiers-eyebrow">The four enterprise tiers</p>
@@ -378,10 +397,50 @@ export default function EnterprisePage() {
                   {tier.bullets.map(b => <li key={b}>{b}</li>)}
                 </ul>
                 <a className="enterprise-tier-cta" href={tier.href} target="_blank" rel="noopener noreferrer">
-                  Begin onboarding →
+                  Talk to enterprise →
                 </a>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS — Trust signals before deep-dive matrix */}
+      <section className="enterprise-testimonials reveal">
+        <div className="enterprise-testimonials-inner">
+          <p className="enterprise-testimonials-eyebrow">From operations teams like yours</p>
+          <h2 className="enterprise-testimonials-headline">Trusted by multi-location operations.</h2>
+
+          <div className="enterprise-testimonials-grid">
+            <blockquote className="enterprise-testimonial-card">
+              <p className="enterprise-testimonial-quote">
+                As a healthcare practice, every qualified lead matters. ReCapture showed us exactly who was falling through the cracks on our intake forms. The dashboard is clean, the data is actionable, and the setup took less than two minutes.
+              </p>
+              <footer className="enterprise-testimonial-author">
+                <strong>David M.</strong>
+                <span>ESD Health</span>
+              </footer>
+            </blockquote>
+
+            <blockquote className="enterprise-testimonial-card">
+              <p className="enterprise-testimonial-quote">
+                We had no idea how many leads were starting our consultation form and dropping off. Within the first week, ReCapture surfaced 14 leads we never would have known about. Three of them booked. That alone paid for the year.
+              </p>
+              <footer className="enterprise-testimonial-author">
+                <strong>Richard H.</strong>
+                <span>Clear PH Design</span>
+              </footer>
+            </blockquote>
+
+            <blockquote className="enterprise-testimonial-card">
+              <p className="enterprise-testimonial-quote">
+                We run lead gen across multiple verticals and the drop-off between form views and submissions was always a black box. ReCapture opened that box. Now we see every lead that touches a form — and the ROI data makes reporting to stakeholders effortless.
+              </p>
+              <footer className="enterprise-testimonial-author">
+                <strong>Michael T.</strong>
+                <span>3Con Partners</span>
+              </footer>
+            </blockquote>
           </div>
         </div>
       </section>
@@ -456,6 +515,7 @@ export default function EnterprisePage() {
       </section>
 
       {/* CONTACT CTA — Enterprise Inquiry Form */}
+      <div id="enterprise-inquiry"></div>
       <EnterpriseInquirySection />
 
       <Footer />

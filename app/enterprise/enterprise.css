@@ -562,3 +562,144 @@
   .enterprise-tier-card { padding: 2rem 1.5rem; }
   .enterprise-form-row { grid-template-columns: 1fr; gap: 0.75rem; }
 }
+
+
+/* ── Concierge band (Fix 6 — pre-tier authority) ───────────── */
+.enterprise-concierge-band {
+  width: 100%;
+  padding: 4rem 2rem;
+  background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+  text-align: center;
+}
+.enterprise-concierge-band-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.enterprise-concierge-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem 0;
+  opacity: 0.75;
+}
+.enterprise-concierge-headline {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0 0 1rem 0;
+}
+.enterprise-concierge-desc {
+  font-size: 0.9375rem;
+  color: #aaa;
+  line-height: 1.6;
+  margin: 0 auto 2rem;
+  max-width: 580px;
+}
+.enterprise-concierge-cta {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  color: #ff6b35;
+  border: 1px solid rgba(255,107,53,0.4);
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.5rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.enterprise-concierge-cta:hover {
+  background: rgba(255,107,53,0.08);
+  border-color: #ff6b35;
+}
+
+/* ── Testimonials (Fix 5 — trust signals) ──────────────────── */
+.enterprise-testimonials {
+  width: 100%;
+  padding: 6rem 2rem;
+  background: #0a0a0a;
+  border-top: 1px solid #1a1a1a;
+}
+.enterprise-testimonials-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.enterprise-testimonials-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem 0;
+  opacity: 0.75;
+  text-align: center;
+}
+.enterprise-testimonials-headline {
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 auto 3rem;
+}
+.enterprise-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.enterprise-testimonial-card {
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-left: 3px solid #ff6b35;
+  border-radius: 0.75rem;
+  padding: 2rem 1.75rem;
+  margin: 0;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+.enterprise-testimonial-card:hover {
+  border-color: #1e1e1e;
+  border-left-color: #ff6b35;
+  transform: translateY(-2px);
+}
+.enterprise-testimonial-quote {
+  font-size: 0.9375rem;
+  color: #ddd;
+  line-height: 1.65;
+  margin: 0 0 1.5rem 0;
+  font-style: normal;
+  flex: 1;
+}
+.enterprise-testimonial-author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-style: normal;
+}
+.enterprise-testimonial-author strong {
+  font-size: 0.875rem;
+  color: #fff;
+  font-weight: 600;
+}
+.enterprise-testimonial-author span {
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 900px) {
+  .enterprise-testimonials-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .enterprise-concierge-band { padding: 3rem 1.25rem; }
+  .enterprise-testimonials { padding: 4rem 1.25rem; }
+}
