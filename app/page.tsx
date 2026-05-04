@@ -58,6 +58,15 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section className="concierge-callout reveal">
+        <div className="concierge-callout-inner">
+          <p className="concierge-callout-eyebrow">Want to skip the form?</p>
+          <p className="concierge-callout-line">
+            Call <a href="tel:+18886060630" className="concierge-callout-number">(888) 606-0630</a> — our AI concierge answers your questions and texts you a tailored proposal for your business in 60 seconds.
+          </p>
+        </div>
+      </section>
+
       <section className="lc-section ledger-section">
         <p className="ledger-eyebrow">The proof</p>
         <h2 className="ledger-headline">
