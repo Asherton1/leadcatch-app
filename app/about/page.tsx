@@ -83,9 +83,10 @@ export default function AboutPage() {
           <div className="about-story-v2-section reveal">
             <p className="about-story-v2-eyebrow">03 — Why ReCapture</p>
             <div className="about-story-v2-body">
-              <p>ReCapture is a form abandonment recovery platform built specifically for high-ticket service businesses. One script tag on your website. No form migration. No complex setup. The moment someone starts typing into your contact form, ReCapture captures it &mdash; even if they never hit submit.</p>
+              <p>ReCapture is the recovery layer for high-ticket service businesses. We started with form abandonment because it&apos;s the most tangible problem to solve &mdash; one script tag, capture every visitor who starts typing into your contact form, even if they never hit submit. No form migration. No complex setup.</p>
               <p>You see every lead in a clean dashboard with their name, email, phone number, and the estimated dollar value they represent. Follow up manually, or let ReCapture send automated recovery emails on your behalf.</p>
-              <p>It&apos;s the tool I wished existed for the last ten years. Now it does.</p>
+              <p>But form abandonment is just the entry point. The underlying capability &mdash; capturing intent before it&apos;s lost and acting on it within 60 seconds &mdash; applies across the entire service business stack. Phone abandonment. Booking funnel drop-off. Quote requests. Live chat exits. Every recovery surface high-ticket businesses are losing right now.</p>
+              <p>It&apos;s the platform I wished existed for the last ten years. Now it does.</p>
             </div>
           </div>
 

@@ -48,6 +48,9 @@ export default function LandingPage() {
               Every day, high-value prospects start filling out your contact form — then vanish before hitting submit.
               ReCapture captures their info the moment they start typing and gives you a second chance to close the deal.
             </p>
+            <p className="hero-platform-line hero-animate-delay">
+              Form abandonment is the start. ReCapture is building the recovery layer for high-ticket service businesses.
+            </p>
             <div className="cta-group hero-animate-delay2">
               <Link href="/start-trial" className="cta-primary">Start Your 7-Day Free Trial</Link>
             </div>
