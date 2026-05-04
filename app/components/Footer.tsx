@@ -10,7 +10,7 @@ export default function Footer() {
           <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" />
         </Link>
         <p className="footer-tagline">
-          Form abandonment recovery for high-ticket service businesses.
+          The recovery layer for high-ticket service businesses.
           <br />Capture every lead. Recover lost revenue.
         </p>
       </div>

@@ -73,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               name: 'ReCapture',
               applicationCategory: 'BusinessApplication',
               operatingSystem: 'Web',
-              description: 'Form abandonment recovery platform for high-ticket service businesses. Capture partial form submissions and auto-recover lost leads.',
+              description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
               url: 'https://www.userecapture.com',
               offers: {
                 '@type': 'AggregateOffer',

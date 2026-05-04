@@ -80,7 +80,7 @@ function prospectConfirmationHtml(name: string) {
         <!-- Footer -->
         <tr><td style="padding:24px 0 0 0;">
           <p style="margin:0;font-family:'Inter',sans-serif;font-size:12px;line-height:1.6;color:#555555;">
-            ReCapture &middot; Form abandonment recovery for high-ticket service businesses &middot; Dallas, TX
+            ReCapture &middot; The recovery layer for high-ticket service businesses &middot; Dallas, TX
           </p>
         </td></tr>
 

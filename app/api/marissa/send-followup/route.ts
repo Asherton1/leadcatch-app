@@ -69,7 +69,7 @@ It's the most thorough form analysis in the industry. Completely free. No card r
       subject: 'ReCapture — info as promised',
       body: `Thanks for calling earlier. Here's the overview I promised.
 
-ReCapture is a form abandonment recovery platform built for high-ticket service businesses. We capture the leads that start filling out your contact forms but never hit submit — sixty to seventy percent of high-intent visitors do this every day.
+ReCapture is the recovery layer for high-ticket service businesses. We capture the leads that start filling out your contact forms but never hit submit — sixty to seventy percent of high-intent visitors do this every day.
 
 We capture their name, email, and phone the moment they start typing, score the lead by intent, and reach out automatically through SMS alerts, AI voice callbacks within 60 seconds, branded recovery emails, or Slack notifications.
 
@@ -157,9 +157,9 @@ ${notesHtml}
   <p style="margin:24px 0 0;font-size:14px;color:#aaa;line-height:1.6;">If you have any questions, just reply to this email — someone will personally check every message.</p>
   <p style="margin:16px 0 0 0;font-size:14px;color:#fff;font-weight:600;">Marissa</p>
   <p style="margin:2px 0 0 0;font-size:13px;color:#888;">ReCapture Concierge</p>
-  <p style="margin:2px 0 0 0;font-size:13px;color:#888;">Lost revenue recovery for high-ticket service businesses</p>
+  <p style="margin:2px 0 0 0;font-size:13px;color:#888;">Every prospect that almost got away. Brought back.</p>
   <p style="margin:8px 0 0 0;font-size:13px;color:#888;">(888) 606-0630 · hello@userecapture.com · userecapture.com</p>
-  <p style="margin:24px 0 0;color:#555;font-size:11px;letter-spacing:0.05em;">ReCapture · Form abandonment recovery for high-ticket service businesses · Dallas, TX</p>
+  <p style="margin:24px 0 0;color:#555;font-size:11px;letter-spacing:0.05em;">ReCapture · The recovery layer for high-ticket service businesses · Dallas, TX</p>
 </td></tr>
 </table></td></tr></table>
 </body></html>`
