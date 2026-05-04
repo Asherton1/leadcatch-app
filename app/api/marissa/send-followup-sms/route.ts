@@ -222,8 +222,8 @@ export async function POST(req: NextRequest) {
 </td></tr>
 <tr><td style="padding:32px 0 0;border-top:1px solid #222;">
   <p style="margin:24px 0 0;font-size:14px;color:#aaa;">Questions? Just reply to this email — someone will personally check every message.</p>
-  <p style="margin:16px 0 0 0;font-size:14px;color:#fff;font-weight:600;">Ash</p>
-  <p style="margin:2px 0 0 0;font-size:13px;color:#888;">Founder, ReCapture</p>
+  <p style="margin:16px 0 0 0;font-size:14px;color:#fff;font-weight:600;">Marissa</p>
+  <p style="margin:2px 0 0 0;font-size:13px;color:#888;">ReCapture Concierge</p>
   <p style="margin:2px 0 0 0;font-size:13px;color:#888;">Lost revenue recovery for high-ticket service businesses</p>
   <p style="margin:8px 0 0 0;font-size:13px;color:#888;">(888) 606-0630 · hello@userecapture.com · userecapture.com</p>
 </td></tr>

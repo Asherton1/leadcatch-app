@@ -155,8 +155,8 @@ ${ctaHtml}
 ${notesHtml}
 <tr><td style="padding:32px 0 0;border-top:1px solid #222;margin-top:24px;">
   <p style="margin:24px 0 0;font-size:14px;color:#aaa;line-height:1.6;">If you have any questions, just reply to this email — someone will personally check every message.</p>
-  <p style="margin:16px 0 0 0;font-size:14px;color:#fff;font-weight:600;">Ash</p>
-  <p style="margin:2px 0 0 0;font-size:13px;color:#888;">Founder, ReCapture</p>
+  <p style="margin:16px 0 0 0;font-size:14px;color:#fff;font-weight:600;">Marissa</p>
+  <p style="margin:2px 0 0 0;font-size:13px;color:#888;">ReCapture Concierge</p>
   <p style="margin:2px 0 0 0;font-size:13px;color:#888;">Lost revenue recovery for high-ticket service businesses</p>
   <p style="margin:8px 0 0 0;font-size:13px;color:#888;">(888) 606-0630 · hello@userecapture.com · userecapture.com</p>
   <p style="margin:24px 0 0;color:#555;font-size:11px;letter-spacing:0.05em;">ReCapture · Form abandonment recovery for high-ticket service businesses · Dallas, TX</p>
