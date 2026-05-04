@@ -17,7 +17,6 @@ function useCountUp(end: number, duration = 1800, triggered = false): number {
       if (!startRef.current) startRef.current = ts
       const elapsed  = ts - startRef.current
       const progress = Math.min(elapsed / duration, 1)
-      // ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3)
       setValue(Math.round(end * eased))
       if (progress < 1) frameRef.current = requestAnimationFrame(animate)
@@ -52,21 +51,32 @@ export default function StatsBar() {
     return () => observer.disconnect()
   }, [])
 
+  // Animated $18.8K count-up
+  const dollars = useCountUp(18800, 2000, visible)
+  const formattedDollars = '$' + dollars.toLocaleString()
+
   return (
-    <div ref={wrapRef} className="stats-bar">
-      <div className="stat-item">
-        <span className="stat-number">60–80%</span>
-        <span className="stat-label">Form Abandonment Rate</span>
+    <div ref={wrapRef} className="stats-hero">
+      {/* Dominant featured stat */}
+      <div className="stats-hero-featured">
+        <p className="stats-hero-eyebrow">Estimated revenue lost per month</p>
+        <p className="stats-hero-number">{formattedDollars}</p>
+        <p className="stats-hero-context">
+          Per high-ticket business · From form abandonment alone · Industry average
+        </p>
       </div>
 
-      <div className="stat-item">
-        <span className="stat-number">$18.8k</span>
-        <span className="stat-label">Avg. Lost Per Month</span>
-      </div>
-
-      <div className="stat-item">
-        <span className="stat-number">2&nbsp;min</span>
-        <span className="stat-label">Installation Time</span>
+      {/* Supporting context stats — smaller, side-by-side below */}
+      <div className="stats-hero-supporting">
+        <div className="stats-hero-stat">
+          <span className="stats-hero-stat-num">60–80%</span>
+          <span className="stats-hero-stat-label">of form visitors abandon before submit</span>
+        </div>
+        <div className="stats-hero-divider"></div>
+        <div className="stats-hero-stat">
+          <span className="stats-hero-stat-num">2 min</span>
+          <span className="stats-hero-stat-label">to install one script tag</span>
+        </div>
       </div>
     </div>
   )

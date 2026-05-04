@@ -3722,3 +3722,106 @@
 @media (max-width: 768px) {
   .concierge-callout { padding: 2.5rem 1.25rem; }
 }
+
+
+/* ── Stats Hero (featured $18.8K with supporting stats) ────── */
+.stats-hero {
+  width: 100%;
+  max-width: 900px;
+  margin: 3rem auto 1rem;
+  padding: 0 2rem;
+}
+.stats-hero-featured {
+  text-align: center;
+  padding: 3.5rem 2rem;
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.stats-hero-featured::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,107,53,0.4) 50%, transparent 100%);
+}
+.stats-hero-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem 0;
+  opacity: 0.85;
+}
+.stats-hero-number {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #ff6b35;
+  margin: 0 0 1.25rem 0;
+  font-variant-numeric: tabular-nums;
+}
+.stats-hero-context {
+  font-size: 0.9375rem;
+  color: #888;
+  line-height: 1.6;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.stats-hero-supporting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.5rem 1rem;
+}
+.stats-hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 0 1 auto;
+  max-width: 280px;
+}
+.stats-hero-stat-num {
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+.stats-hero-stat-label {
+  font-size: 0.8125rem;
+  color: #888;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+.stats-hero-divider {
+  width: 1px;
+  height: 40px;
+  background: #1e1e1e;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .stats-hero { padding: 0 1.25rem; }
+  .stats-hero-featured { padding: 2.5rem 1.5rem; }
+  .stats-hero-supporting {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .stats-hero-divider {
+    width: 60px;
+    height: 1px;
+  }
+}
