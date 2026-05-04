@@ -5,8 +5,8 @@ import Script from 'next/script'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'ReCapture — Form Abandonment Recovery for Med Spas, Dental & Luxury Services',
-  description: 'Stop losing 60% of your leads. ReCapture tracks partial form submissions in real-time and auto-recovers abandoned leads for med spas, dental practices, plastic surgery, and luxury service businesses. 7-day free trial.',
+  title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
+  description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
   metadataBase: new URL('https://www.userecapture.com'),
   alternates: {
     canonical: '/',
@@ -19,15 +19,15 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
-  keywords: ['form abandonment recovery', 'lead recovery software', 'partial form capture', 'med spa lead generation', 'dental practice leads', 'form tracking', 'abandoned form recovery', 'lead capture SaaS', 'high-ticket lead recovery'],
+  keywords: ['recovery layer', 'lead recovery platform', 'form abandonment recovery', 'high-ticket lead recovery', 'lead capture SaaS', 'partial form capture', 'med spa lead recovery', 'dental practice leads', 'multi-location lead recovery', 'AI lead recovery', 'enterprise lead recovery'],
   formatDetection: {
     telephone: false,
     email: false,
     address: false,
   },
   openGraph: {
-    title: 'ReCapture — Stop Losing 60% of Your Leads',
-    description: 'Capture partial form submissions and auto-recover lost leads. Built for med spas, dental practices, and luxury service businesses.',
+    title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
+    description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
     url: 'https://www.userecapture.com',
     siteName: 'ReCapture',
     images: [
@@ -35,15 +35,15 @@ export const metadata: Metadata = {
         url: 'https://www.userecapture.com/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'ReCapture — Form Abandonment Recovery',
+        alt: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ReCapture — Stop Losing 60% of Your Leads',
-    description: 'Capture partial form submissions and auto-recover lost leads.',
+    title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
+    description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
     images: ['https://www.userecapture.com/og-image.png'],
   },
 }

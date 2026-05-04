@@ -15,8 +15,8 @@ import LedgerStats from './components/LedgerStats'
 import LedgerRows from './components/LedgerRows'
 
 export const metadata = {
-  title: 'ReCapture — Form Abandonment Recovery for High-Ticket Businesses',
-  description: 'Capture partial form submissions and auto-recover lost leads. Born &amp; Built in Dallas, Texas.',
+  title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
+  description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
 }
 
 export default function LandingPage() {
