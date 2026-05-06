@@ -29,11 +29,13 @@ function fillTemplate(template: string, vars: Record<string, string>): string {
 async function getClientAlertTemplate(clientId: string, topic: string = 'instant'): Promise<string | null> {
   const { data: client } = await supabaseAdmin
     .from('clients')
-    .select('plan')
+    .select('plan, is_admin')
     .eq('id', clientId)
     .maybeSingle()
 
-  if (!client || !PRO_TIERS.includes(client.plan)) return null
+  if (!client) return null
+  const allowed = client.is_admin === true || PRO_TIERS.includes(client.plan)
+  if (!allowed) return null
 
   const { data: tpl } = await supabaseAdmin
     .from('client_sms_templates')
