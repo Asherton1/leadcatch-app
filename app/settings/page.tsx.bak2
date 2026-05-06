@@ -470,7 +470,7 @@ export default function SettingsPage() {
                 </div>
                 <div className="settings-toggle-desc">Personalize the SMS messages you receive when leads abandon your forms</div>
               </div>
-              <a
+              
                 href="/settings/sms-templates"
                 style={{
                   fontSize: "0.85rem",

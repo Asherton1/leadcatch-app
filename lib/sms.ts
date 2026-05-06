@@ -1,6 +1,10 @@
+import { supabaseAdmin } from './supabase-admin'
+
 const TWILIO_SID = process.env.TWILIO_ACCOUNT_SID ?? ''
 const TWILIO_TOKEN = process.env.TWILIO_AUTH_TOKEN ?? ''
 const TWILIO_FROM = process.env.TWILIO_PHONE_NUMBER ?? ''
+
+const PRO_TIERS = ['pro', 'enterprise_starter', 'enterprise_growth', 'enterprise_scale', 'enterprise_custom']
 
 interface SmsAlertPayload {
   businessPhone: string
@@ -10,10 +14,40 @@ interface SmsAlertPayload {
   formData: Record<string, unknown> | null
   fieldsCompleted: number
   totalFields: number
+  clientId?: string
+  siteUrl?: string
 }
 
+function fillTemplate(template: string, vars: Record<string, string>): string {
+  let out = template
+  for (const [key, val] of Object.entries(vars)) {
+    out = out.split('{' + key + '}').join(val)
+  }
+  return out
+}
+
+async function getClientAlertTemplate(clientId: string, topic: string = 'instant'): Promise<string | null> {
+  const { data: client } = await supabaseAdmin
+    .from('clients')
+    .select('plan')
+    .eq('id', clientId)
+    .maybeSingle()
+
+  if (!client || !PRO_TIERS.includes(client.plan)) return null
+
+  const { data: tpl } = await supabaseAdmin
+    .from('client_sms_templates')
+    .select('body')
+    .eq('client_id', clientId)
+    .eq('topic', topic)
+    .maybeSingle()
+
+  return tpl?.body || null
+}
+
+
 export async function sendSmsAlert(payload: SmsAlertPayload) {
-  const { businessPhone, leadName, leadEmail, leadPhone, formData, fieldsCompleted, totalFields } = payload
+  const { businessPhone, leadName, leadEmail, leadPhone, formData, fieldsCompleted, totalFields, clientId, siteUrl } = payload
 
   if (!businessPhone || !TWILIO_SID || !TWILIO_TOKEN || !TWILIO_FROM) {
     console.error('SMS alert skipped — missing config:', { businessPhone: !!businessPhone, sid: !!TWILIO_SID, token: !!TWILIO_TOKEN, from: !!TWILIO_FROM })
@@ -32,12 +66,8 @@ export async function sendSmsAlert(payload: SmsAlertPayload) {
     else normalizedPhone = '+' + digits
   }
 
-  const parts: string[] = ['New lead from ReCapture']
-
-  if (leadName) parts.push(`Name: ${leadName}`)
-  if (leadEmail) parts.push(`Email: ${leadEmail}`)
-  if (leadPhone) parts.push(`Phone: ${leadPhone}`)
-
+  // Build form_data string for merge tag substitution
+  let formDataStr = ''
   if (formData && typeof formData === 'object') {
     const skipKeys = new Set(['name', 'email', 'phone', 'tel', 'telephone'])
     const extras: string[] = []
@@ -48,13 +78,40 @@ export async function sendSmsAlert(payload: SmsAlertPayload) {
         extras.push(`${label}: ${String(val).trim()}`)
       }
     }
-    if (extras.length > 0) parts.push(extras.join(', '))
+    formDataStr = extras.join(', ')
   }
 
-  parts.push(`${fieldsCompleted} of ${totalFields} fields completed`)
-  parts.push('Follow up while the intent is fresh.')
+  // Try to load client custom alert template (Pro+ only); fall back to hardcoded default
+  let body: string
+  let customTemplate: string | null = null
+  if (clientId) {
+    try {
+      customTemplate = await getClientAlertTemplate(clientId, 'instant')
+    } catch (err) {
+      console.error('[sms] custom template lookup failed:', err)
+    }
+  }
 
-  const body = parts.join('\n')
+  if (customTemplate) {
+    body = fillTemplate(customTemplate, {
+      name: leadName || 'Unnamed lead',
+      email: leadEmail || '',
+      phone: leadPhone || '',
+      form_data: formDataStr,
+      fields_completed: String(fieldsCompleted),
+      total_fields: String(totalFields),
+      site_url: siteUrl || '',
+    })
+  } else {
+    const parts: string[] = ['New lead from ReCapture']
+    if (leadName) parts.push(`Name: ${leadName}`)
+    if (leadEmail) parts.push(`Email: ${leadEmail}`)
+    if (leadPhone) parts.push(`Phone: ${leadPhone}`)
+    if (formDataStr) parts.push(formDataStr)
+    parts.push(`${fieldsCompleted} of ${totalFields} fields completed`)
+    parts.push('Follow up while the intent is fresh.')
+    body = parts.join('\n')
+  }
 
   const url = `https://api.twilio.com/2010-04-01/Accounts/${TWILIO_SID}/Messages.json`
   const auth = Buffer.from(`${TWILIO_SID}:${TWILIO_TOKEN}`).toString('base64')

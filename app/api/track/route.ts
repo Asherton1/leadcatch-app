@@ -166,6 +166,7 @@ export async function POST(request: NextRequest) {
           formData: (form_data as Record<string, unknown>) ?? null,
           fieldsCompleted: Number(fields_completed ?? 0),
           totalFields: Number(total_fields ?? 0),
+          clientId: client.id,
         })
         await supabase
           .from('leads')
