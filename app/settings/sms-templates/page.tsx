@@ -8,6 +8,7 @@ import "../settings.css"
 import "./sms-templates.css"
 import Footer from '../../components/Footer'
 import '../../landing.css'
+import { useIsAdmin } from '@/lib/use-is-admin'
 
 interface ClientTemplate {
   topic: string
@@ -31,9 +32,9 @@ const TOPIC_INFO: Record<string, { label: string; description: string }> = {
 }
 
 const MERGE_TAGS = [
-  { tag: '{name}', desc: 'Lead\u2019s name (or "Unnamed lead" if not captured)' },
-  { tag: '{email}', desc: 'Lead\u2019s email address' },
-  { tag: '{phone}', desc: 'Lead\u2019s phone number' },
+  { tag: '{name}', desc: `Lead's name (or "Unnamed lead" if not captured)` },
+  { tag: '{email}', desc: "Lead's email address" },
+  { tag: '{phone}', desc: "Lead's phone number" },
   { tag: '{form_data}', desc: 'Other form fields the lead filled out' },
   { tag: '{fields_completed}', desc: 'Number of fields they completed (e.g. "3")' },
   { tag: '{total_fields}', desc: 'Total fields in the form (e.g. "5")' },
@@ -57,7 +58,8 @@ export default function ClientSmsTemplatesPage() {
   const [error, setError] = useState<string | null>(null)
   const [activeTextarea, setActiveTextarea] = useState<string | null>(null)
 
-  const isProPlus = clientPlan ? PRO_TIERS.includes(clientPlan) : false
+  const { isAdmin } = useIsAdmin()
+  const isProPlus = isAdmin || (clientPlan ? PRO_TIERS.includes(clientPlan) : false)
 
   useEffect(() => {
     const init = async () => {
@@ -218,7 +220,7 @@ export default function ClientSmsTemplatesPage() {
             <div className="sms-tpl-locked-badge">PRO FEATURE</div>
             <h2 className="sms-tpl-locked-title">Custom SMS Templates is a Pro feature</h2>
             <p className="sms-tpl-locked-desc">
-              You\u2019re currently on the {clientPlan === 'essentials' ? 'Essentials' : 'Free'} plan.
+              You're currently on the {clientPlan === 'essentials' ? 'Essentials' : 'Free'} plan.
               Upgrade to Pro ($397/mo) to customize the alert messages you receive when leads abandon your forms.
               Until then, your leads get our proven default templates.
             </p>
