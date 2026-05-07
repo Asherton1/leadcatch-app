@@ -166,6 +166,9 @@ export default function TrustPage() {
             <p>
               California residents may exercise CCPA rights (access, deletion, opt-out of sale) by contacting <a href="mailto:privacy@userecapture.com" style={{ color: "#ff6b35" }}>privacy@userecapture.com</a>. We do not sell visitor data to third parties.
             </p>
+            <p>
+              We do not use visitor data to train AI models or for any purpose other than the recovery actions configured by our customers. Visitor data captured by ReCapture is used exclusively to fulfill the recovery workflow you have configured (email, SMS, voice) and is never used to train, fine-tune, or improve any machine learning model.
+            </p>
           </div>
         </section>
 

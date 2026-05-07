@@ -54,6 +54,7 @@ export default function Footer() {
         <div className="footer-col">
           <p className="footer-col-label">Legal</p>
           <Link href="/trust" className="footer-link">Trust & Compliance</Link>
+          <Link href="/legal/client-privacy-template" className="footer-link">Privacy Template</Link>
           <Link href="/baa" className="footer-link">BAA</Link>
           <Link href="/privacy" className="footer-link">Privacy</Link>
           <Link href="/terms" className="footer-link">Terms</Link>
