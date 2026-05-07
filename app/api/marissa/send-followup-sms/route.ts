@@ -150,6 +150,16 @@ export async function POST(req: NextRequest) {
       smsBody = `${greeting} As promised — here's your ${topicLabel(cleanTopic)} from ReCapture: ${shortLink}\n\nReply STOP to opt out.`
     }
 
+    // CAN-SPAM / TCPA: ensure every visitor SMS includes opt-out language.
+    // Custom client templates may not include it — auto-append if missing.
+    const hasOptOutLanguage =
+      smsBody.toUpperCase().includes('REPLY STOP') ||
+      smsBody.toLowerCase().includes('opt out') ||
+      smsBody.toLowerCase().includes('opt-out')
+    if (!hasOptOutLanguage) {
+      smsBody = `${smsBody}\n\nReply STOP to opt out.`
+    }
+
     // Send SMS via Twilio (using existing sms.ts infrastructure adapted)
     let smsId: string | null = null
     let smsSuccess = false
