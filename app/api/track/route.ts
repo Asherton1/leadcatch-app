@@ -5,6 +5,31 @@ import { sendSmsAlert } from '@/lib/sms'
 import { sendEmailAlert } from '@/lib/email-alert'
 import { sendMetaConversion, sendGoogleConversion } from '@/lib/ad-conversions'
 
+// Check do_not_contact list before firing recovery actions
+async function isOptedOut(clientId: string, phone: string | null, email: string | null): Promise<boolean> {
+  const identifiers: Array<{ type: string; value: string }> = []
+  if (phone) {
+    const cleanPhone = phone.replace(/\D/g, '')
+    if (cleanPhone) identifiers.push({ type: 'phone', value: cleanPhone })
+  }
+  if (email) {
+    identifiers.push({ type: 'email', value: email.toLowerCase().trim() })
+  }
+  if (identifiers.length === 0) return false
+
+  const { data } = await supabase
+    .from('do_not_contact')
+    .select('id')
+    .or(
+      identifiers
+        .map(i => `and(identifier_type.eq.${i.type},identifier_value.eq.${i.value})`)
+        .join(',')
+    )
+    .limit(1)
+
+  return !!(data && data.length > 0)
+}
+
 // Handle CORS preflight from tracking script on client sites
 export async function OPTIONS() {
   return new NextResponse(null, {
@@ -144,11 +169,19 @@ export async function POST(request: NextRequest) {
   }
 
   // --- SMS ALERT (Pro plan only) ---
+  // Check DNC before firing any recovery action that touches the lead
+  const optedOut = await isOptedOut(
+    client.id,
+    (phone as string) ?? null,
+    (email as string) ?? null
+  )
+
   if (
     client.sms_enabled &&
     client.sms_phone &&
     client.plan !== 'essentials' &&
-    (email || phone)
+    (email || phone) &&
+    !optedOut
   ) {
     const { data: existing } = await supabase
       .from('leads')
@@ -351,7 +384,7 @@ export async function POST(request: NextRequest) {
   // --- AUTO-RECOVERY EMAIL ---
 
     // AI Voice Callback (Retell)
-    if (client.ai_callback_enabled && phone && process.env.RETELL_API_KEY && !isQuietHours(client.quiet_hours_start, client.quiet_hours_end) && isWithinCallHours(client.ai_call_hours_start, client.ai_call_hours_end)) {
+    if (client.ai_callback_enabled && phone && process.env.RETELL_API_KEY && !isQuietHours(client.quiet_hours_start, client.quiet_hours_end) && isWithinCallHours(client.ai_call_hours_start, client.ai_call_hours_end) && !optedOut) {
       try {
         const agentId = client.retell_agent_id || 'agent_f0c3170df59b32221bfebd7c7f'
         const phoneClean = String(phone).replace(/[^+\d]/g, '')
@@ -381,7 +414,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-  if (client.auto_email_enabled && email && client.plan !== 'essentials') {
+  if (client.auto_email_enabled && email && client.plan !== 'essentials' && !optedOut) {
     const delayMinutes = client.email_delay_minutes ?? 0
 
     if (delayMinutes > 0) {

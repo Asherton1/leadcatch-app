@@ -66,6 +66,87 @@
     return;
   }
 
+  // --- EU Geo-Block ---
+  // GDPR exposure is real and complex. Until we can afford a full EU compliance
+  // review, we don't track EU/UK/Swiss visitors at all. Detection uses a free
+  // IP geolocation service. If the call fails, we default to NOT tracking
+  // (fail-closed) to be safe.
+  var EU_COUNTRIES = [
+    'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE',
+    'IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE',
+    'GB','UK','CH','IS','LI','NO'  // also block UK, Switzerland, EEA
+  ];
+
+  var euBlocked = null; // null = unknown, true = blocked, false = allowed
+  var euCheckPromise = null;
+
+  function checkEUStatus() {
+    if (euCheckPromise) return euCheckPromise;
+    euCheckPromise = new Promise(function (resolve) {
+      try {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://ipapi.co/country/', true);
+        xhr.timeout = 2000;
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            var country = (xhr.responseText || '').trim().toUpperCase();
+            euBlocked = EU_COUNTRIES.indexOf(country) !== -1;
+          } else {
+            euBlocked = true; // fail-closed
+          }
+          resolve(euBlocked);
+        };
+        xhr.onerror = xhr.ontimeout = function () {
+          euBlocked = true; // fail-closed on network errors
+          resolve(true);
+        };
+        xhr.send();
+      } catch (e) {
+        euBlocked = true;
+        resolve(true);
+      }
+    });
+    return euCheckPromise;
+  }
+
+  // --- Cookie Consent Detection ---
+  // If a recognized consent platform is present and the user has rejected
+  // tracking, we don't capture data. If no platform is detected, we default
+  // to tracking (US visitors only -- EU already blocked above).
+  function hasTrackingConsent() {
+    try {
+      // OneTrust
+      if (win.OneTrust && typeof win.OneTrust.IsAlertBoxClosed === 'function') {
+        if (!win.OneTrust.IsAlertBoxClosed()) return false; // banner still up
+        var groups = '';
+        try { groups = (win.OnetrustActiveGroups || ''); } catch(e) {}
+        // C0004 = targeting/marketing in OneTrust convention
+        return groups.indexOf('C0004') !== -1 || groups.indexOf('C0003') !== -1;
+      }
+      // Cookiebot
+      if (win.Cookiebot && win.Cookiebot.consent) {
+        return !!(win.Cookiebot.consent.marketing || win.Cookiebot.consent.statistics);
+      }
+      // CookieYes
+      if (typeof win.cookieYesCategoryStatus === 'function') {
+        try { return !!win.cookieYesCategoryStatus('functional'); } catch(e) {}
+      }
+      // No consent platform detected -> default to allowed (US visitors)
+      return true;
+    } catch (e) {
+      return true; // on error, don't block US visitors
+    }
+  }
+
+  // Combined gate -- check before EVERY send
+  function complianceAllows(callback) {
+    checkEUStatus().then(function (blocked) {
+      if (blocked) { callback(false); return; }
+      if (!hasTrackingConsent()) { callback(false); return; }
+      callback(true);
+    });
+  }
+
   var TRACK_URL      = baseUrl + '/api/track';
   var HEARTBEAT_MS   = 15000;
   var FIELD_SELECTOR = 'input:not([type=hidden]):not([type=submit]):not([type=button])' +
@@ -208,7 +289,10 @@
   }
 
   function sendAll(useBeacon) {
-    trackers.forEach(function (t) { t.send(useBeacon); });
+    complianceAllows(function (allowed) {
+      if (!allowed) return; // EU visitor, or consent rejected -- do not transmit
+      trackers.forEach(function (t) { t.send(useBeacon); });
+    });
   }
 
   // --- Init existing forms ---
