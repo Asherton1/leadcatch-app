@@ -424,11 +424,11 @@ export default function EnterprisePage() {
 
             <blockquote className="enterprise-testimonial-card">
               <p className="enterprise-testimonial-quote">
-                We had no idea how many leads were starting our consultation form and dropping off. Within the first week, ReCapture surfaced 14 leads we never would have known about. Three of them booked. That alone paid for the year.
+                We were leaving real money on the table every month — high-intent prospects starting forms and disappearing before submitting. ReCapture gave us visibility we never had, and the recovery emails started landing leads back in our pipeline within the first week. The ROI math was obvious by week two.
               </p>
               <footer className="enterprise-testimonial-author">
-                <strong>Richard H.</strong>
-                <span>Clear PH Design</span>
+                <strong>Sarah K.</strong>
+                <span>Practice Director, DFW</span>
               </footer>
             </blockquote>
 

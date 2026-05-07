@@ -101,18 +101,6 @@ export default function AboutPage() {
 
           <div className="about-clients-list">
             <div className="about-clients-row">
-              <span className="about-clients-name">BTI Partners</span>
-              <span className="about-clients-desc">Luxury real estate development</span>
-            </div>
-            <div className="about-clients-row">
-              <span className="about-clients-name">Marina Pointe</span>
-              <span className="about-clients-desc">Florida luxury development</span>
-            </div>
-            <div className="about-clients-row">
-              <span className="about-clients-name">Michael Saunders &amp; Co</span>
-              <span className="about-clients-desc">Florida real estate</span>
-            </div>
-            <div className="about-clients-row">
               <span className="about-clients-name">ESD Health</span>
               <span className="about-clients-desc">Pilot sleep diagnostics</span>
             </div>
@@ -127,10 +115,6 @@ export default function AboutPage() {
             <div className="about-clients-row">
               <span className="about-clients-name">Ideal Dental</span>
               <span className="about-clients-desc">Multi-location dental</span>
-            </div>
-            <div className="about-clients-row">
-              <span className="about-clients-name">Clear PH Design</span>
-              <span className="about-clients-desc">Brand &amp; creative agency</span>
             </div>
           </div>
 

@@ -106,8 +106,8 @@ export default function ForMedSpas() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: 700, color: '#ff6b35' }}>R</div>
             <div>
-              <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.8rem' }}>Richard H.</p>
-              <p style={{ margin: 0, color: '#666', fontSize: '0.75rem' }}>Clear PH Design</p>
+              <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.8rem' }}>Sarah K.</p>
+              <p style={{ margin: 0, color: '#666', fontSize: '0.75rem' }}>Practice Director, DFW</p>
             </div>
           </div>
         </div>
