@@ -45,7 +45,7 @@ export default function TrustPage() {
           </h2>
           <div style={{ color: "#a1a1aa", lineHeight: 1.8, fontSize: "0.95rem" }}>
             <p>
-              When a visitor begins typing into a form on a customer\u2019s website, ReCapture captures: name, email, phone number, free-text fields they have filled in, the time spent on the form, the device type, and the page URL.
+              When a visitor begins typing into a form on a customer’s website, ReCapture captures: name, email, phone number, free-text fields they have filled in, the time spent on the form, the device type, and the page URL.
             </p>
             <p>
               We do not capture: passwords, payment card data, social security numbers, credit card CVVs, or any field marked sensitive by the customer or detected by our defensive filters.
@@ -137,7 +137,7 @@ export default function TrustPage() {
               When AI voice callback is enabled, every call begins with a mandatory AI disclosure within the first 15 seconds, satisfying Texas SB 140 and FCC identification requirements.
             </p>
             <p>
-              Our AI concierge recognizes 14 opt-out trigger phrases (\u201cstop,\u201d \u201cdo not call,\u201d \u201cremove me,\u201d \u201cunsubscribe,\u201d and similar). When detected, the call ends immediately and the phone number is added to our master Do Not Contact list, enforced across all channels (voice, SMS, email) for that visitor going forward.
+              Our AI concierge recognizes 14 opt-out trigger phrases (“stop,” “do not call,” “remove me,” “unsubscribe,” and similar). When detected, the call ends immediately and the phone number is added to our master Do Not Contact list, enforced across all channels (voice, SMS, email) for that visitor going forward.
             </p>
             <p>
               Calls are placed only during the customer-configured call hours window and never during configured quiet hours. We do not place calls to numbers on the National Do Not Call Registry where the customer has indicated registry checking is required.
