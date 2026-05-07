@@ -32,6 +32,8 @@ interface ClientSettings {
   email_alert_address: string | null
   slack_webhook_url: string | null
   ai_callback_enabled: boolean
+  ai_callback_acknowledged_at: string | null
+  ai_callback_acknowledged_terms_version: string | null
   ai_agent_name: string | null
   ai_services_list: string | null
   ai_call_hours_start: string | null
@@ -140,6 +142,8 @@ export default function SettingsPage() {
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [settings, setSettings] = useState<ClientSettings | null>(null)
+  const [showVoiceDisclaimer, setShowVoiceDisclaimer] = useState(false)
+  const [voiceDisclaimerChecked, setVoiceDisclaimerChecked] = useState(false)
   const [userEmail, setUserEmail] = useState("")
   const [isPro, setIsPro] = useState(false)
 
@@ -191,6 +195,8 @@ export default function SettingsPage() {
         email_alert_address: settings.email_alert_address,
         slack_webhook_url: settings.slack_webhook_url,
         ai_callback_enabled: settings.ai_callback_enabled,
+        ai_callback_acknowledged_at: settings.ai_callback_acknowledged_at,
+        ai_callback_acknowledged_terms_version: settings.ai_callback_acknowledged_terms_version,
         ai_agent_name: settings.ai_agent_name,
         ai_services_list: settings.ai_services_list,
         ai_call_hours_start: settings.ai_call_hours_start,
@@ -225,6 +231,45 @@ export default function SettingsPage() {
   function update(field: keyof ClientSettings, value: unknown) {
     if (!settings) return
     setSettings({ ...settings, [field]: value })
+  }
+
+  // === AI Voice Callback opt-in disclaimer ===
+  // When client enables AI Voice Callback for the first time, show TCPA/SB140
+  // disclaimer modal and require explicit acknowledgment before enabling.
+  // Existing acknowledged clients pass through transparently.
+  function handleVoiceCallbackToggle(newValue: boolean) {
+    if (!settings) return
+    if (newValue === false) {
+      // Turning it off is always allowed -- no friction
+      update("ai_callback_enabled", false)
+      return
+    }
+    // Turning it on: check if they've already acknowledged
+    if (settings.ai_callback_acknowledged_at) {
+      // Previously acknowledged -- enable directly
+      update("ai_callback_enabled", true)
+      return
+    }
+    // First-time enable -- show modal
+    setShowVoiceDisclaimer(true)
+  }
+
+  function acceptVoiceDisclaimer() {
+    if (!settings) return
+    if (!voiceDisclaimerChecked) return
+    setSettings({
+      ...settings,
+      ai_callback_enabled: true,
+      ai_callback_acknowledged_at: new Date().toISOString(),
+      ai_callback_acknowledged_terms_version: "v1.0-2026-05",
+    })
+    setShowVoiceDisclaimer(false)
+    setVoiceDisclaimerChecked(false)
+  }
+
+  function cancelVoiceDisclaimer() {
+    setShowVoiceDisclaimer(false)
+    setVoiceDisclaimerChecked(false)
   }
 
   if (authed === null || loading) {
@@ -308,8 +353,26 @@ export default function SettingsPage() {
               </div>
             </div>
             <div className="settings-field">
-              <label className="settings-label">Business Address</label>
-              <input type="text" className="settings-input" value={settings.business_address ?? ""} onChange={e => update("business_address", e.target.value)} placeholder="123 Main St, Dallas, TX 75201" />
+              <label className="settings-label">
+                Business Address
+                <span style={{ color: "#ff6b35", marginLeft: "0.35rem" }}>*</span>
+              </label>
+              <input
+                type="text"
+                className="settings-input"
+                value={settings.business_address ?? ""}
+                onChange={e => update("business_address", e.target.value)}
+                placeholder="123 Main St, Dallas, TX 75201"
+                style={!settings.business_address ? { borderColor: "rgba(255,107,53,0.4)" } : undefined}
+              />
+              <span className="settings-hint">
+                Required by CAN-SPAM Act. This appears in the footer of every recovery email.
+                {!settings.business_address && (
+                  <span style={{ color: "#ff6b35", display: "block", marginTop: "0.35rem", fontWeight: 600 }}>
+                    ⚠ Add a business address before recovery emails will send.
+                  </span>
+                )}
+              </span>
             </div>
             <div className="settings-row">
               <div className="settings-field">
@@ -637,7 +700,7 @@ export default function SettingsPage() {
               <h2 className="settings-section-title">Ai Voice Callback</h2>
               <p className="settings-section-desc">Our Ai calls abandoned leads back within 60 seconds on behalf of your business</p>
             </div>
-            <Toggle on={settings.ai_callback_enabled} onChange={v => update("ai_callback_enabled", v)} disabled={!isPro} />
+            <Toggle on={settings.ai_callback_enabled} onChange={v => handleVoiceCallbackToggle(v)} disabled={!isPro} />
           </div>
           {settings.ai_callback_enabled && (
             <div className="settings-fields">
@@ -817,6 +880,120 @@ export default function SettingsPage() {
         </button>
       </div>
       <Footer />
+
+      {showVoiceDisclaimer && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.85)",
+            zIndex: 1000,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "1rem",
+          }}
+          onClick={cancelVoiceDisclaimer}
+        >
+          <div
+            style={{
+              background: "#0f0f0f",
+              border: "1px solid #1f1f1f",
+              borderRadius: "12px",
+              maxWidth: "540px",
+              width: "100%",
+              padding: "2rem",
+              boxShadow: "0 24px 60px rgba(0,0,0,0.6)",
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.25rem" }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"/>
+              </svg>
+              <h2 style={{ margin: 0, fontSize: "1.15rem", color: "#fff", fontWeight: 700 }}>
+                Enable AI Voice Callback
+              </h2>
+            </div>
+
+            <p style={{ color: "#aaa", fontSize: "0.9rem", lineHeight: 1.65, marginTop: 0, marginBottom: "1rem" }}>
+              AI Voice Callback places automated phone calls to visitors who abandon your forms.
+              Federal and state laws (including TCPA, FCC rules, and Texas SB 140) require that you
+              obtain proper consent before placing automated calls.
+            </p>
+
+            <p style={{ color: "#aaa", fontSize: "0.9rem", lineHeight: 1.65, marginBottom: "1.25rem" }}>
+              By enabling AI Voice Callback, you confirm that:
+            </p>
+
+            <ul style={{ color: "#aaa", fontSize: "0.875rem", lineHeight: 1.7, paddingLeft: "1.25rem", marginBottom: "1.5rem" }}>
+              <li>Your contact form includes consent language authorizing automated calls.</li>
+              <li>Your privacy policy discloses use of AI voice technology.</li>
+              <li>You comply with TCPA, applicable state laws (including Texas SB 140), and the National Do Not Call Registry.</li>
+              <li>You accept responsibility for visitor consent compliance.</li>
+            </ul>
+
+            <label
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "0.65rem",
+                cursor: "pointer",
+                marginBottom: "1.5rem",
+                padding: "0.85rem",
+                background: "#161616",
+                border: "1px solid #242424",
+                borderRadius: "8px",
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={voiceDisclaimerChecked}
+                onChange={e => setVoiceDisclaimerChecked(e.target.checked)}
+                style={{ marginTop: "0.2rem", accentColor: "#ff6b35", cursor: "pointer" }}
+              />
+              <span style={{ color: "#ddd", fontSize: "0.85rem", lineHeight: 1.55 }}>
+                I confirm my forms include consent language and I accept responsibility for visitor consent compliance.
+              </span>
+            </label>
+
+            <div style={{ display: "flex", gap: "0.75rem", justifyContent: "flex-end" }}>
+              <button
+                onClick={cancelVoiceDisclaimer}
+                style={{
+                  background: "transparent",
+                  color: "#999",
+                  border: "1px solid #2a2a2a",
+                  padding: "0.625rem 1.25rem",
+                  borderRadius: "6px",
+                  fontSize: "0.875rem",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={acceptVoiceDisclaimer}
+                disabled={!voiceDisclaimerChecked}
+                style={{
+                  background: voiceDisclaimerChecked ? "#ff6b35" : "#3a2a25",
+                  color: voiceDisclaimerChecked ? "#0a0a0a" : "#666",
+                  border: "none",
+                  padding: "0.625rem 1.25rem",
+                  borderRadius: "6px",
+                  fontSize: "0.875rem",
+                  fontWeight: 700,
+                  cursor: voiceDisclaimerChecked ? "pointer" : "not-allowed",
+                }}
+              >
+                Enable AI Voice Callback
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }

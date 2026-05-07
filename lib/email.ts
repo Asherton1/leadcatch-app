@@ -1,5 +1,14 @@
 import { Resend } from 'resend'
+import { createHmac } from 'crypto'
 import { supabase } from './supabase'
+
+// Sign a lead's email for one-click unsubscribe links.
+// Signature uses UNSUBSCRIBE_SECRET env var. Token format: <leadId>.<sig>
+function signUnsubscribeToken(leadId: string): string {
+  const secret = process.env.UNSUBSCRIBE_SECRET || process.env.CRON_SECRET || 'recapture-fallback-secret-change-me'
+  const sig = createHmac('sha256', secret).update(leadId).digest('hex').slice(0, 16)
+  return `${leadId}.${sig}`
+}
 
 const DEFAULT_SUBJECT = 'Still interested in {service} at {business_name}?'
 
@@ -57,10 +66,11 @@ function buildHtml(bodyContent: string, vars: Record<string, string>): string {
     <!-- Divider -->
     <div style="margin:0 40px;border-top:1px solid #f0f0f0;"></div>
 
-    <!-- Footer -->
+    <!-- Footer (CAN-SPAM compliant) -->
     <div style="padding:24px 40px;font-size:12px;color:#a1a1aa;line-height:1.6;">
       ${(vars.contact_phone || vars.contact_email) ? `<p style="margin:0 0 8px;">Questions? ${vars.contact_phone ? `Call us at <a href="tel:${vars.contact_phone}" style="color:#71717a;text-decoration:none;">${vars.contact_phone}</a>` : ''}${vars.contact_phone && vars.contact_email ? ' or email ' : ''}${vars.contact_email ? `<a href="mailto:${vars.contact_email}" style="color:#ff6b35;text-decoration:none;">${vars.contact_email}</a>` : ''}</p>` : ''}
-      <p style="margin:0 0 4px;">You received this email because you started a form on <strong style="color:#71717a;">${business_name}</strong>.</p>
+      <p style="margin:0 0 4px;">You're receiving this email because you started filling out a form on <strong style="color:#71717a;">${business_name}</strong> and didn't complete it. If you'd prefer not to receive these recovery messages, you can <a href="${vars.unsubscribe_url}" style="color:#71717a;text-decoration:underline;">unsubscribe here</a>.</p>
+      ${vars.business_address ? `<p style="margin:0 0 4px;">${business_name}, ${vars.business_address}</p>` : ''}
       ${vars.email_footer ? `<p style="margin:0 0 4px;">${vars.email_footer}</p>` : ''}
       ${vars.company_tagline ? `<p style="margin:0 0 4px;font-style:italic;">${vars.company_tagline}</p>` : ''}
       <p style="margin:0;">Powered by <a href="https://userecapture.com" style="color:${brand_color || '#ff6b35'};text-decoration:none;">ReCapture</a></p>
@@ -101,7 +111,7 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
   // ── 2. Fetch client ────────────────────────────────────────────────────────
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, name, message_template, booking_url, from_email, email_header, sender_name, contact_phone, contact_email, reply_to_email, email_footer, brand_color, company_tagline, auto_mark_contacted')
+    .select('id, name, message_template, booking_url, from_email, email_header, sender_name, contact_phone, contact_email, reply_to_email, email_footer, brand_color, company_tagline, auto_mark_contacted, business_address')
     .eq('id', lead.client_id)
     .single()
 
@@ -128,6 +138,11 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
   // it can be a tagline (e.g. "Effortless Sleep Diagnostics") rather than a legal name.
   const emailHeader: string = client.email_header ?? client.name
 
+  // Build signed unsubscribe URL -- token is HMAC-signed so it can't be forged
+  const unsubToken = signUnsubscribeToken(lead.id)
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://userecapture.com'
+  const unsubscribeUrl = `${baseUrl}/api/unsubscribe?token=${encodeURIComponent(unsubToken)}`
+
   const vars: Record<string, string> = {
     name:           firstName,
     business_name:  emailHeader,
@@ -138,6 +153,8 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
     brand_color:    (client as any).brand_color     ?? '#ff6b35',
     email_footer:   (client as any).email_footer    ?? '',
     company_tagline:(client as any).company_tagline ?? '',
+    business_address:(client as any).business_address ?? '',
+    unsubscribe_url: unsubscribeUrl,
   }
 
   const subject = fill(DEFAULT_SUBJECT, vars)
