@@ -1,5 +1,6 @@
 import Link from "next/link"
 import BlogNav from "../../components/BlogNav"
+import ScrollReveal from "../../components/ScrollReveal"
 import Footer from "../../components/Footer"
 import CopySection from "./CopySection"
 import "../../blog/blog.css"
@@ -84,8 +85,9 @@ export default function ClientPrivacyTemplate() {
   const fullTemplate = sections.map(s => s.heading + "\n\n" + s.body).join("\n\n---\n\n")
 
   return (
-    <div className="blog-post">
+    <div className="legal-page" style={{ background: "#0a0a0a", minHeight: "100vh", color: "#e4e4e7" }}>
       <BlogNav />
+      <ScrollReveal />
 
       <div className="blog-post-header">
         <Link href="/trust" className="blog-post-back">← Back to Trust & Compliance</Link>
