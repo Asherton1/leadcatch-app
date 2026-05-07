@@ -1,6 +1,4 @@
 import Link from "next/link"
-import Image from "next/image"
-import MobileNav from "@/app/components/MobileNav"
 import ScrollReveal from "@/app/components/ScrollReveal"
 import Footer from "@/app/components/Footer"
 import { Metadata } from "next"
@@ -15,15 +13,8 @@ export default function TrustPage() {
     <div className="trust-page" style={{ background: "#0a0a0a", minHeight: "100vh", color: "#e4e4e7" }}>
       <ScrollReveal />
 
-      <nav className="lc-nav">
-        <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-          <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" priority />
-        </Link>
-        <MobileNav />
-      </nav>
-
       {/* Hero */}
-      <section style={{ maxWidth: "780px", margin: "0 auto", padding: "8rem 2rem 3rem" }}>
+      <section style={{ maxWidth: "780px", margin: "0 auto", padding: "6rem 2rem 3rem" }}>
         <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1.5rem" }}>
           Trust & Compliance
         </p>
@@ -43,7 +34,7 @@ export default function TrustPage() {
         {/* Section: What we capture and when */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            01 \u2014 What we capture
+            01 — What we capture
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             Form abandonment data, captured before submission.
@@ -70,7 +61,7 @@ export default function TrustPage() {
         {/* Section: Client responsibilities */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            02 \u2014 Customer responsibilities
+            02 — Customer responsibilities
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             ReCapture is the infrastructure. You own the relationship with your visitors.
@@ -105,7 +96,7 @@ export default function TrustPage() {
         {/* Section: Security */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            03 \u2014 Security posture
+            03 — Security posture
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             Encryption in transit and at rest. Row-level access controls. Audit logs.
@@ -129,7 +120,7 @@ export default function TrustPage() {
         {/* Section: TCPA */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            04 \u2014 TCPA & voice callback
+            04 — TCPA & voice callback
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             AI voice callback is opt-in, disclosed, and quiet-hours aware.
@@ -153,7 +144,7 @@ export default function TrustPage() {
         {/* Section: Data retention */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            05 \u2014 Data retention
+            05 — Data retention
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             Lead data is retained as long as the customer account is active. Opt-outs are retained indefinitely.
@@ -177,7 +168,7 @@ export default function TrustPage() {
         {/* Section: Subprocessors */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            06 \u2014 Subprocessors
+            06 — Subprocessors
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             Vendors that process customer or visitor data on our behalf.
@@ -233,7 +224,7 @@ export default function TrustPage() {
         {/* Section: HIPAA / BAA */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            07 \u2014 Healthcare & HIPAA
+            07 — Healthcare & HIPAA
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             BAAs available on Pro and Enterprise plans.
@@ -254,7 +245,7 @@ export default function TrustPage() {
         {/* Section: Compliance contact */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            08 \u2014 Contact
+            08 — Contact
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             Questions, security disclosures, data subject requests.
