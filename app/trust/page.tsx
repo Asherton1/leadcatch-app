@@ -1,4 +1,5 @@
 import Link from "next/link"
+import BlogNav from "@/app/components/BlogNav"
 import ScrollReveal from "@/app/components/ScrollReveal"
 import Footer from "@/app/components/Footer"
 import { Metadata } from "next"
@@ -11,10 +12,11 @@ export const metadata: Metadata = {
 export default function TrustPage() {
   return (
     <div className="trust-page" style={{ background: "#0a0a0a", minHeight: "100vh", color: "#e4e4e7" }}>
+      <BlogNav />
       <ScrollReveal />
 
       {/* Hero */}
-      <section style={{ maxWidth: "780px", margin: "0 auto", padding: "6rem 2rem 3rem" }}>
+      <section style={{ maxWidth: "780px", margin: "0 auto", padding: "8rem 2rem 3rem" }}>
         <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1.5rem" }}>
           Trust & Compliance
         </p>
