@@ -8,157 +8,377 @@ import '../landing.css'
 
 export const metadata = {
   title: 'ReCapture for GoHighLevel Agencies — Form Abandonment Recovery Add-On',
-  description: 'GoHighLevel captures submitted leads. ReCapture captures the ones who never submitted. Add form abandonment recovery to any GHL client site with one script tag.',
+  description: 'GoHighLevel captures submitted leads. ReCapture captures the 60-70% who never submit. Add form abandonment recovery to any GHL client site with one script tag.',
   keywords: 'GoHighLevel form abandonment, GHL lead recovery, GoHighLevel add-on, HighLevel partial form capture, GHL agency tools',
 }
 
+const SAMPLE_LEADS = [
+  { name: 'Bella Med Spa', initials: 'BM', email: 'agency-client', service: 'Botox consultation form', value: 2800, status: 'Recovered' as const },
+  { name: 'Westside Dental', initials: 'WD', email: 'agency-client', service: 'Patient intake form', value: 1900, status: 'Contacted' as const },
+  { name: 'Lone Star Realty', initials: 'LS', email: 'agency-client', service: 'Property inquiry', value: 28500, status: 'Open' as const },
+]
+
 export default function ForGoHighLevel() {
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Inter', -apple-system, sans-serif" }}>
+    <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Inter', -apple-system, sans-serif", color: '#e4e4e7' }}>
       <BlogNav />
       <ScrollReveal />
 
-      <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 4rem' }}>
-        <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>For GoHighLevel Agencies</p>
-          <h1 style={{ fontSize: 'clamp(1.75rem, 5vw, 2.75rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>GHL Captures Submitted Leads. ReCapture Gets the Ones Who Never Hit Submit.</h1>
-          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>GoHighLevel is built to nurture and close leads after they submit. But 60-70% of your clients&apos; website visitors start a form and abandon it before submitting. GHL never sees those people. ReCapture does — and brings them back automatically.</p>
+      {/* HERO — two-column editorial. Text left, dashboard mockup right. */}
+      <section className="hero-section" style={{ maxWidth: '1240px', margin: '0 auto', padding: '7rem 2rem 4rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.1fr)', gap: '4rem', alignItems: 'center' }} className="hero-grid">
+          <div>
+            <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
+              For GoHighLevel Agencies
+            </p>
+            <h1 className="hero-h1" style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '1.5rem', color: '#fff' }}>
+              GHL captures submitted leads. We get the 60-70% who never hit submit.
+            </h1>
+            <p className="hero-sub" style={{ fontSize: '1.0625rem', color: '#a1a1aa', lineHeight: 1.7, marginBottom: '2rem' }}>
+              Baymard Institute's research shows 60-70% of website visitors abandon contact forms before submitting. GoHighLevel only sees the 30-40% who finished. ReCapture is the layer that captures the rest — deployable across every GHL client site you manage.
+            </p>
+            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+              <Link href="/signup?plan=pro" style={{ display: 'inline-block', background: '#ff6b35', color: '#0a0a0a', fontWeight: 700, padding: '0.875rem 1.75rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>
+                Start free trial
+              </Link>
+              <Link href="/demo" style={{ display: 'inline-block', background: 'transparent', color: '#a1a1aa', fontWeight: 600, padding: '0.875rem 1.75rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem', border: '1px solid #1e1e1e' }}>
+                See live demo
+              </Link>
+            </div>
+          </div>
+          <div style={{ width: '100%' }}>
+            <DashboardMockup
+              abandoned={142}
+              revenueAtRisk={298400}
+              recovered={38}
+              recoveredRevenue={79800}
+              leads={SAMPLE_LEADS}
+            />
+          </div>
         </div>
+      </section>
+
+      {/* MAIN CONTENT BAND */}
+      <div style={{ maxWidth: '720px', margin: '0 auto', padding: '2rem' }}>
+
+        {/* Section 01 — The problem */}
+        <section className="reveal" style={{ marginBottom: '3rem' }}>
+          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            01 — The problem
+          </p>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
+            GHL is the close. ReCapture is the catch.
+          </h2>
+          <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
+            <p>
+              GoHighLevel is the operating system for hundreds of thousands of agency-managed sites. It runs the CRM, the funnels, the workflows, the SMS, the email automation. It is genuinely excellent at converting leads who submitted a form.
+            </p>
+            <p>
+              The problem: Baymard Institute's 2024 research shows 60-70% of website visitors who start a form never submit it. GHL never sees those people. They show up in your client's analytics as bounce-rate or unattributed traffic. Your client paid for the click. The lead disappeared into a black hole.
+            </p>
+            <p>
+              ReCapture is the layer that captures them — before they leave the site. One script tag per client. The lead lands in their dashboard. Recovery via SMS or AI voice callback fires automatically.
+            </p>
+          </div>
+        </section>
+
       </div>
 
-      <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '1rem 2rem 3rem' }}>
+      {/* SECTION 02 — Full-width architectural stat scene */}
+      <section className="reveal stat-band" style={{ background: '#0d0d0d', borderTop: '1px solid #1a1a1a', borderBottom: '1px solid #1a1a1a', padding: '5rem 2rem', margin: '2rem 0' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            02 — The math
+          </p>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '3rem', lineHeight: 1.25, letterSpacing: '-0.02em', maxWidth: '720px' }}>
+            60-70% of contact form starters never submit. GHL only sees the rest.
+          </h2>
 
-        <div className="ind-stats reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.25rem', margin: '2rem 0 3rem' }}>
-          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '1.5rem', textAlign: 'center' }}>
-            <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ef4444' }}>67%</div>
-            <div style={{ fontSize: '0.75rem', color: '#555', marginTop: '0.35rem' }}>Avg. form abandonment rate</div>
-          </div>
-          <div style={{ background: '#111', border: '1px solid rgba(255,107,53,0.2)', borderRadius: 12, padding: '1.5rem', textAlign: 'center' }}>
-            <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ff6b35' }}>$0</div>
-            <div style={{ fontSize: '0.75rem', color: '#555', marginTop: '0.35rem' }}>GHL revenue from these leads</div>
-          </div>
-          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '1.5rem', textAlign: 'center' }}>
-            <div style={{ fontSize: '2rem', fontWeight: 800, color: '#fff' }}>1</div>
-            <div style={{ fontSize: '0.75rem', color: '#555', marginTop: '0.35rem' }}>Script tag to fix it</div>
-          </div>
-        </div>
-
-        <h2 className="reveal">The Gap in Your GHL Stack</h2>
-        <p>GoHighLevel is one of the most powerful all-in-one platforms for agencies. Funnels, CRM, email automation, SMS follow-up — it handles the entire lead nurture journey. But there is a blind spot at the very top of the funnel that GHL does not solve.</p>
-        <p>When a prospect lands on your client&apos;s contact form, starts typing their name and email, then closes the tab — GoHighLevel never creates a contact. There is no trigger, no workflow, no follow-up sequence. That person does not exist in the system. Your client&apos;s ad spend brought them to the door, and they walked away without a trace.</p>
-        <p>GoHighLevel&apos;s partial survey capture — added in 2025 — only works on multi-step GHL surveys where email is collected on page 1. It does not work on standard HTML forms, WordPress forms, Webflow forms, or any third-party form builder. For most agency clients, it captures almost nothing.</p>
-
-        <h2 className="reveal">What ReCapture Adds to Your GHL Stack</h2>
-        <p>ReCapture installs in 60 seconds with a single script tag on any website — WordPress, Webflow, Wix, Squarespace, or custom HTML. It works alongside GoHighLevel, not instead of it. The moment a visitor starts typing into any contact form, ReCapture captures their data in real time, even if they never submit.</p>
-        <p>Those leads appear in your client&apos;s ReCapture dashboard with their name, email, phone number, and what they were looking for. ReCapture then sends automated recovery emails on the client&apos;s behalf — branded to their business, timed the way they want. Your client gets more leads from the same ad spend. You look like the agency that delivers results nobody else can.</p>
-
-        <div className="reveal" style={{ background: 'rgba(255,107,53,0.04)', border: '1px solid rgba(255,107,53,0.12)', borderRadius: 12, padding: '1.5rem 2rem', margin: '2.5rem 0' }}>
-          <p style={{ color: '#bbb', fontSize: '0.95rem', lineHeight: 1.8, margin: 0 }}><strong style={{ color: '#ff6b35' }}>The math:</strong> A med spa client getting 40 form submissions per month is actually getting ~121 form starts. That means ~81 people typed something and left. At $2,800 per client lifetime value, that is $226,800 in potential revenue your GHL stack is missing every single month — per client.</p>
-        </div>
-
-        <h2 className="reveal">Built for Agencies Managing Multiple Clients</h2>
-        <p>ReCapture&apos;s enterprise dashboard was built with agencies in mind. Each client gets their own API key, their own branded recovery emails, and their own dashboard. You manage everything from a single admin view. Add a new client in minutes, deploy their script tag, and start capturing leads the same day.</p>
-        <p>Every client gets weekly performance reports delivered to their inbox — showing abandoned leads captured, revenue at risk, and recoveries made. That is a deliverable your competitors are not sending. That is your agency looking irreplaceable.</p>
-
-        <DashboardMockup
-          abandoned={34}
-          revenueAtRisk={95200}
-          recovered={6}
-          recoveredRevenue={16800}
-          leads={[
-            { name: 'Marcus T.', initials: 'MT', email: 'marcus.t@gmail.com', service: 'Dental Implant Inquiry', value: 4500, status: 'Open' },
-            { name: 'Priya S.', initials: 'PS', email: 'priya.s@icloud.com', service: 'Med Spa Consultation', value: 2800, status: 'Contacted' },
-            { name: 'James R.', initials: 'JR', email: 'james.r@yahoo.com', service: 'Leasing Inquiry - 2BR', value: 3200, status: 'Recovered' },
-            { name: 'Lauren K.', initials: 'LK', email: 'lauren.k@gmail.com', service: 'Cosmetic Consult', value: 6500, status: 'Open' },
-          ]}
-        />
-
-        <h2 className="reveal">Why Agencies Add ReCapture to Their Stack</h2>
-        <div className="ind-features reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '1.5rem 0 2.5rem' }}>
-          {[
-            ['New revenue from existing traffic', 'Recover leads your clients are already paying for — no extra ad spend required'],
-            ['Works on any website', 'WordPress, Webflow, Wix, Squarespace, custom HTML — one script tag works everywhere'],
-            ['Branded to your client', 'Recovery emails go out under your client\'s name, not ours. White-label ready'],
-            ['Enterprise multi-client dashboard', 'Manage every client from one admin view — leads, revenue, and recovery rates'],
-            ['HIPAA-ready for healthcare clients', 'Dental, med spa, plastic surgery, fertility — BAA available on Enterprise plans, HIPAA-ready architecture across all plans'],
-            ['Measurable ROI every week', 'Automated weekly reports your clients can hold in their hands'],
-          ].map(([title, desc], i) => (
-            <div key={i} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 10, padding: '1.25rem' }}>
-              <p style={{ color: '#ff6b35', fontWeight: 600, fontSize: '0.85rem', margin: '0 0 0.35rem 0' }}>{title}</p>
-              <p style={{ color: '#888', fontSize: '0.8rem', margin: 0, lineHeight: 1.6 }}>{desc}</p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '4rem', alignItems: 'center' }} className="math-grid">
+            <div>
+              <div style={{ fontSize: 'clamp(4rem, 10vw, 7rem)', fontWeight: 800, color: '#ff6b35', letterSpacing: '-0.04em', lineHeight: 0.9, marginBottom: '1rem' }}>
+                60-70%
+              </div>
+              <div style={{ fontSize: '0.85rem', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>
+                Of form starts never submit (Baymard, 2024)
+              </div>
+              <div style={{ height: '1px', background: '#1a1a1a', margin: '2rem 0' }} />
+              <div style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 800, color: '#fff', letterSpacing: '-0.03em', lineHeight: 0.9, marginBottom: '0.75rem' }}>
+                1 line
+              </div>
+              <div style={{ fontSize: '0.85rem', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>
+                Of JavaScript per GHL client site
+              </div>
             </div>
-          ))}
-        </div>
-
-        <h2 className="reveal">ReCapture vs GHL Partial Capture</h2>
-        <div className="reveal" style={{ background: '#0d0d0d', border: '1px solid #1a1a1a', borderRadius: 12, overflow: 'hidden', margin: '1.5rem 0 2.5rem' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
-            <thead>
-              <tr>
-                <th style={{ textAlign: 'left', padding: '1rem 1.25rem', color: '#555', fontWeight: 600, borderBottom: '1px solid #1a1a1a', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Capability</th>
-                <th style={{ textAlign: 'center', padding: '1rem 1.25rem', color: '#ff6b35', fontWeight: 700, borderBottom: '1px solid #1a1a1a', background: 'rgba(255,107,53,0.04)' }}>ReCapture</th>
-                <th style={{ textAlign: 'center', padding: '1rem 1.25rem', color: '#888', fontWeight: 600, borderBottom: '1px solid #1a1a1a' }}>GHL Partial Capture</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                ['Works on any HTML form', true, false],
-                ['Works on GHL surveys', true, true],
-                ['Exit-intent detection', true, false],
-                ['Mid-field real-time capture', true, false],
-                ['Auto-recovery emails', true, false],
-                ['Lead scoring (hot/warm/cold)', true, false],
-                ['Revenue-at-risk dashboard', true, false],
-                ['HIPAA-ready + BAA', true, '$297/mo add-on'],
-                ['Weekly client reports', true, false],
-                ['Multi-client admin dashboard', true, false],
-              ].map(([label, rc, ghl], i) => (
-                <tr key={i}>
-                  <td style={{ padding: '0.875rem 1.25rem', color: '#ccc', borderBottom: '1px solid #111' }}>{label}</td>
-                  <td style={{ textAlign: 'center', padding: '0.875rem 1.25rem', borderBottom: '1px solid #111', background: 'rgba(255,107,53,0.02)' }}>
-                    {rc === true ? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg> : <span style={{ fontSize: '0.8rem', color: '#aaa' }}>{rc}</span>}
-                  </td>
-                  <td style={{ textAlign: 'center', padding: '0.875rem 1.25rem', borderBottom: '1px solid #111' }}>
-                    {ghl === true ? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg> : ghl === false ? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> : <span style={{ fontSize: '0.8rem', color: '#888' }}>{ghl}</span>}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <h2 className="reveal">How to Add ReCapture to a GHL Client</h2>
-        <p>Adding ReCapture to any GoHighLevel client takes under 60 seconds:</p>
-        <div className="reveal" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', margin: '1.5rem 0 2.5rem' }}>
-          {[
-            ['01', 'Create a client account in ReCapture — they get a unique API key instantly'],
-            ['02', 'Drop one script tag into their website header — works in GHL sites, WordPress, Webflow, anywhere'],
-            ['03', 'Configure their recovery email branding and delay timing — takes 2 minutes'],
-            ['04', 'ReCapture starts capturing abandoned leads immediately — no form changes needed'],
-          ].map(([num, step], i) => (
-            <div key={i} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '1rem 1.25rem', background: '#111', border: '1px solid #1e1e1e', borderRadius: 10 }}>
-              <span style={{ fontSize: '0.65rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.1em', flexShrink: 0, marginTop: '2px' }}>{num}</span>
-              <span style={{ color: '#bbb', fontSize: '0.9rem', lineHeight: 1.6 }}>{step}</span>
+            <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
+              <p>
+                For an agency managing 30 client sites averaging 1,000 monthly visitors each, that's roughly <strong style={{ color: '#fff' }}>18,000-21,000 abandoned form starts per month across your portfolio</strong>. Even at a conservative 10% recovery rate, you're generating <strong style={{ color: '#fff' }}>1,800-2,100 additional captured leads monthly</strong> across all your clients combined.
+              </p>
+              <p>
+                ReCapture is white-label-ready and bills directly to your agency or your client (your choice). One install per site, agency-wide dashboard for per-client reporting, and lead routing into the existing GHL workflows your clients already use.
+              </p>
+              <p style={{ fontSize: '0.75rem', color: '#555', marginTop: '1.5rem', fontStyle: 'italic' }}>
+                Source: Baymard Institute 2024 form abandonment research.
+              </p>
             </div>
-          ))}
-        </div>
-
-        <div className="ind-ctas reveal" style={{ display: 'flex', gap: '1rem', margin: '1.5rem 0 2.5rem', flexWrap: 'wrap' }}>
-          <Link href="/start-trial" style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem' }}>Start Your 7-Day Free Trial</Link>
-          <Link href="/demo" style={{ display: 'inline-block', background: 'transparent', color: '#ff6b35', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem', border: '1px solid rgba(255,107,53,0.4)' }}>Try the Live Demo</Link>
-        </div>
-
-        <div className="reveal" style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a1a 100%)', border: '1px solid #1e1e1e', borderRadius: 12, padding: '2.5rem', textAlign: 'center', margin: '3rem 0 0' }}>
-          <h3 style={{ color: '#ff6b35', fontSize: '1.5rem', margin: '0 0 0.75rem 0', fontWeight: 700 }}>Ready to Offer Form Abandonment Recovery to Every Client?</h3>
-          <p style={{ color: '#888', margin: '0 0 1.5rem 0', fontSize: '0.95rem', lineHeight: 1.7 }}>14-day free trial. Full access from day one. Add your first client in under 60 seconds.</p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/start-trial" style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem' }}>Start Your 7-Day Free Trial</Link>
-            <Link href="/pricing" style={{ display: 'inline-block', background: 'transparent', color: '#ff6b35', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem', border: '1px solid rgba(255,107,53,0.4)' }}>View Pricing</Link>
           </div>
         </div>
+      </section>
+
+      {/* MAIN CONTENT BAND continues */}
+      <div style={{ maxWidth: '720px', margin: '0 auto', padding: '2rem' }}>
+
+        {/* Section 03 — The recovery layer */}
+        <section className="reveal" style={{ marginBottom: '3rem', paddingTop: '2rem' }}>
+          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            03 — The recovery layer
+          </p>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
+            Capture every visitor who started typing. Recover them in under five minutes.
+          </h2>
+          <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem', marginBottom: '2.5rem' }}>
+            <p>
+              Drop the ReCapture tracker on any GHL client site (or any other CMS — we don't care). The moment a visitor types into a form on the site, we capture the field. If they leave without submitting, the lead lands in your ReCapture dashboard, an SMS fires to whatever number is configured, and Marissa — our AI voice concierge — places a callback within five minutes.
+            </p>
+            <p>
+              Lead can be webhook-routed into the existing GHL CRM and workflow your client already uses. No re-platforming. No GHL replacement. Pure additive layer.
+            </p>
+          </div>
+
+          {/* The Marissa scene — editorial chat transcript */}
+          <div style={{ background: '#0f0f0f', border: '1px solid #1a1a1a', borderRadius: '12px', overflow: 'hidden' }}>
+            <div style={{ padding: '0.875rem 1.25rem', borderBottom: '1px solid #1a1a1a', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#0a0a0a' }}>
+              <div style={{ fontSize: '0.7rem', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>
+                Recovery scene · 1 min 47 sec
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <div className="recovered-dot-pulse" style={{ width: 7, height: 7, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 8px rgba(16,185,129,0.6)' }} />
+                <span style={{ fontSize: '0.6rem', color: '#10b981', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Recovered</span>
+              </div>
+            </div>
+
+            <div style={{ padding: '1.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                <div style={{ fontSize: '0.7rem', color: '#666', fontFamily: 'Menlo, Monaco, monospace', paddingTop: '0.15rem' }}>2:14 PM</div>
+                <div style={{ color: '#a1a1aa', fontSize: '0.95rem', lineHeight: 1.7 }}>
+                  A visitor on your client's site (Bella Med Spa) starts the Botox consultation form. Types name and email. Closes the tab.
+                </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                <div style={{ fontSize: '0.7rem', color: '#666', fontFamily: 'Menlo, Monaco, monospace', paddingTop: '0.15rem' }}>2:14 PM</div>
+                <div style={{ color: '#a1a1aa', fontSize: '0.95rem', lineHeight: 1.7 }}>
+                  Lead is captured in ReCapture dashboard, webhook fires to the client's GHL workflow. SMS to front desk fires.
+                </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: '0.75rem', marginBottom: '1.25rem', padding: '1rem', background: '#0a0a0a', borderRadius: '8px', border: '1px solid #1a1a1a' }}>
+                <div style={{ fontSize: '0.7rem', color: '#ff6b35', fontFamily: 'Menlo, Monaco, monospace', paddingTop: '0.15rem', fontWeight: 700 }}>2:18 PM</div>
+                <div>
+                  <div style={{ fontSize: '0.7rem', color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.5rem' }}>Marissa, AI voice concierge</div>
+                  <div style={{ color: '#e4e4e7', fontSize: '0.95rem', lineHeight: 1.7, fontStyle: 'italic' }}>
+                    &ldquo;Hi there, this is Marissa, an AI concierge with Bella Med Spa. I saw you were just looking at our Botox consultation. Want me to find a time this week?&rdquo;
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                <div style={{ fontSize: '0.7rem', color: '#666', fontFamily: 'Menlo, Monaco, monospace', paddingTop: '0.15rem' }}>2:21 PM</div>
+                <div style={{ color: '#a1a1aa', fontSize: '0.95rem', lineHeight: 1.7 }}>
+                  Lead books appointment. Recovered status syncs back to GHL contact record. Client never knew the lead almost slipped away.
+                </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: '0.75rem' }}>
+                <div style={{ fontSize: '0.7rem', color: '#10b981', fontFamily: 'Menlo, Monaco, monospace', paddingTop: '0.15rem', fontWeight: 700 }}>2:21 PM</div>
+                <div style={{ color: '#10b981', fontSize: '0.95rem', lineHeight: 1.7, fontWeight: 600 }}>
+                  Lead status: Recovered. Synced to client's GHL CRM.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p style={{ color: '#666', fontSize: '0.85rem', lineHeight: 1.6, marginTop: '1rem', fontStyle: 'italic', textAlign: 'center' }}>
+            No form migration. No platform replacement. Drop the script tag, configure your services and call hours, and the recovery layer activates on top of every contact form on your site.
+          </p>
+        </section>
 
       </div>
+
+      {/* SECTION 04 — Specifics 2x2 grid, full-width band */}
+      <section className="reveal specs-band" style={{ background: '#0d0d0d', borderTop: '1px solid #1a1a1a', borderBottom: '1px solid #1a1a1a', padding: '5rem 2rem', margin: '2rem 0' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            04 — Built for GoHighLevel agencies
+          </p>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '3rem', lineHeight: 1.25, letterSpacing: '-0.02em', maxWidth: '720px' }}>
+            White-label, multi-client, GHL-native.
+          </h2>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0', border: '1px solid #1a1a1a', borderRadius: '12px', overflow: 'hidden' }} className="specs-grid">
+            <div style={{ padding: '2rem', borderRight: '1px solid #1a1a1a', borderBottom: '1px solid #1a1a1a' }}>
+              <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+                White-label ready
+              </p>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#fff', marginBottom: '0.875rem', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
+                Your brand. Our infrastructure.
+              </h3>
+              <p style={{ color: '#a1a1aa', fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
+                Custom domain, custom recovery email branding, custom SMS sender ID. Your clients see your agency's name. We're the engine in the back.
+              </p>
+            </div>
+
+            <div style={{ padding: '2rem', borderBottom: '1px solid #1a1a1a' }}>
+              <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+                Multi-client dashboard
+              </p>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#fff', marginBottom: '0.875rem', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
+                All your clients, one screen.
+              </h3>
+              <p style={{ color: '#a1a1aa', fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
+                Manage 5, 30, or 100+ GHL client sites under one ReCapture agency dashboard. Per-client reporting, per-client billing, per-client alerts.
+              </p>
+            </div>
+
+            <div style={{ padding: '2rem', borderRight: '1px solid #1a1a1a' }}>
+              <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+                GHL webhook integration
+              </p>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#fff', marginBottom: '0.875rem', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
+                Native lead routing into existing GHL workflows.
+              </h3>
+              <p style={{ color: '#a1a1aa', fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
+                Captured leads webhook directly into the client's GHL CRM. Your existing workflows fire as if the lead submitted the form. No automation rebuild required.
+              </p>
+            </div>
+
+            <div style={{ padding: '2rem' }}>
+              <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+                Agency-friendly billing
+              </p>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#fff', marginBottom: '0.875rem', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
+                Resell at your markup or pass through at cost.
+              </h3>
+              <p style={{ color: '#a1a1aa', fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
+                Bill clients directly via Stripe-on-Stripe split, or absorb cost into your agency retainer. Your call. We support both models out of the box.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MAIN CONTENT BAND continues — Pricing + closing */}
+      <div style={{ maxWidth: '720px', margin: '0 auto', padding: '2rem' }}>
+
+        {/* Section 05 — Pricing */}
+        <section className="reveal" style={{ marginTop: '2rem', marginBottom: '3rem' }}>
+          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            05 — Pricing
+          </p>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
+            Plans start at $197/mo. 7-day free trial.
+          </h2>
+          <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
+            <p>
+              <strong style={{ color: '#e4e4e7' }}>Per-client Pro</strong> at $397/mo per managed client site. Includes recovery dashboard, tracker, AI voice callback, SMS alerts.
+            </p>
+            <p>
+              <strong style={{ color: '#e4e4e7' }}>Agency volume</strong> discounts available for 10+ managed client sites. Contact us for custom pricing.
+            </p>
+            <p>
+              <strong style={{ color: '#e4e4e7' }}>Enterprise / White-label</strong> for full agency white-label deployment, custom domain, custom branding, dedicated support. Custom pricing.
+            </p>
+          </div>
+        </section>
+
+        {/* Closing CTA */}
+        <section className="reveal" style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid #1a1a1a', marginBottom: '4rem' }}>
+          <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#fff', marginBottom: '1rem', lineHeight: 1.2, letterSpacing: '-0.03em' }}>
+            Add the recovery layer to every GHL client.
+          </h2>
+          <p style={{ color: '#a1a1aa', lineHeight: 1.7, fontSize: '1rem', marginBottom: '2rem', maxWidth: '560px' }}>
+            Drop the tracker. Watch your first abandoned consultation come through within an hour. 7-day free trial. Card required, not charged until day 8.
+          </p>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <Link href="/signup?plan=pro" style={{ display: 'inline-block', background: '#ff6b35', color: '#0a0a0a', fontWeight: 700, padding: '1rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>
+              Start free trial
+            </Link>
+            <Link href="/pricing" style={{ display: 'inline-block', background: 'transparent', color: '#a1a1aa', fontWeight: 600, padding: '1rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem', border: '1px solid #1e1e1e' }}>
+              See full pricing
+            </Link>
+          </div>
+        </section>
+
+      </div>
+
       <Footer />
+
+      {/* Mobile responsive overrides */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes recovered-pulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+          50% { box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+        }
+        .recovered-dot-pulse {
+          animation: recovered-pulse 2s ease-in-out infinite;
+        }
+        @media (max-width: 900px) {
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2.5rem !important;
+          }
+          .math-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+          }
+          .specs-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .specs-grid > div {
+            border-right: none !important;
+          }
+          .specs-grid > div:last-child {
+            border-bottom: none !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .hero-section {
+            padding: 6rem 1.25rem 2.5rem !important;
+          }
+          .hero-h1 {
+            font-size: 1.75rem !important;
+            line-height: 1.15 !important;
+          }
+          .hero-sub {
+            font-size: 1rem !important;
+          }
+          .content-band {
+            padding: 1.25rem !important;
+          }
+          .stat-band, .specs-band {
+            padding: 3.5rem 1.25rem !important;
+          }
+          .section-h2 {
+            font-size: 1.375rem !important;
+          }
+          .stat-big {
+            font-size: 4rem !important;
+          }
+          .stat-secondary {
+            font-size: 2rem !important;
+          }
+          .closing-h2 {
+            font-size: 1.625rem !important;
+          }
+          .marissa-timeline-row {
+            grid-template-columns: 50px 1fr !important;
+            gap: 0.5rem !important;
+          }
+          .marissa-quote-block {
+            padding: 0.75rem !important;
+          }
+          .specs-cell {
+            padding: 1.5rem !important;
+          }
+        }
+      ` }} />
+
     </div>
   )
 }
