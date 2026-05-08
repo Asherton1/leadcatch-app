@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains')
     .eq('api_key', api_key)
     .single()
 
@@ -110,6 +110,53 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
+
+  // === DOMAIN ALLOWLIST ENFORCEMENT ===
+  // Validates that the request's origin hostname is on this client's allowed_domains list.
+  // Empty allowlist = block all (defensive default — clients must explicitly authorize domains).
+  // Subdomain matching: 'app.example.com' matches 'example.com' in the allowlist.
+  const allowedDomains = ((client as any).allowed_domains as string[] | null) ?? []
+  if (allowedDomains.length > 0) {
+    const originHeader = request.headers.get('origin') || ''
+    const refererHeader = request.headers.get('referer') || ''
+    let requestHostname = ''
+    try {
+      if (originHeader) {
+        requestHostname = new URL(originHeader).hostname.toLowerCase()
+      } else if (refererHeader) {
+        requestHostname = new URL(refererHeader).hostname.toLowerCase()
+      }
+    } catch {
+      requestHostname = ''
+    }
+
+    if (!requestHostname) {
+      console.warn('[track] Domain enforcement: no Origin or Referer header', { clientId: client.id })
+      return NextResponse.json(
+        { error: 'Origin header required' },
+        { status: 403 }
+      )
+    }
+
+    // Match: exact OR is a subdomain of an allowed domain
+    const matches = allowedDomains.some((allowed) => {
+      const a = allowed.toLowerCase().trim().replace(/^https?:\/\//, '').replace(/\/$/, '')
+      return requestHostname === a || requestHostname.endsWith('.' + a)
+    })
+
+    if (!matches) {
+      console.warn('[track] Domain enforcement: hostname not on allowlist', {
+        clientId: client.id,
+        requestHostname,
+        allowedDomains,
+      })
+      return NextResponse.json(
+        { error: 'Domain not authorized for this account' },
+        { status: 403 }
+      )
+    }
+  }
+  // === END DOMAIN ALLOWLIST ENFORCEMENT ===
 
   if (!client.active) {
     return NextResponse.json({ error: 'Account inactive' }, { status: 403 })

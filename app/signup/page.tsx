@@ -33,6 +33,7 @@ function SignupForm() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [companyName, setCompanyName] = useState('')
+  const [websiteDomain, setWebsiteDomain] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [cardError, setCardError] = useState('')
@@ -111,6 +112,21 @@ function SignupForm() {
           <div style={s.field}>
             <label style={s.label}>Company Name <span style={s.optional}>(optional)</span></label>
             <input style={s.input} type="text" placeholder="Acme Med Spa" value={companyName} onChange={e => setCompanyName(e.target.value)} />
+          </div>
+          <div style={s.field}>
+            <label style={s.label}>Website domain *</label>
+            <input
+              style={s.input}
+              type="text"
+              placeholder="acmemedspa.com"
+              value={websiteDomain}
+              onChange={e => setWebsiteDomain(e.target.value)}
+              required
+              autoComplete="url"
+            />
+            <p style={{ fontSize: '0.75rem', color: '#666', margin: '0.4rem 0 0' }}>
+              Where you'll install the ReCapture tracker. Subdomains are covered automatically.
+            </p>
           </div>
           <div style={s.divider} />
           <p style={s.sectionLabel}>Login</p>

@@ -11,6 +11,7 @@ import '../landing.css'
 interface ClientSettings {
   id: string
   company_name: string | null
+  allowed_domains: string[] | null
   website_url: string | null
   contact_email: string | null
   contact_phone: string | null
@@ -174,6 +175,7 @@ export default function SettingsPage() {
       .from("clients")
       .update({
         company_name: settings.company_name,
+        allowed_domains: settings.allowed_domains,
         website_url: settings.website_url,
         contact_email: settings.contact_email,
         contact_phone: settings.contact_phone,
@@ -396,6 +398,114 @@ export default function SettingsPage() {
         </div>
 
         {/* ── Branding ─────────────────────────────────────────────────── */}
+        <div className="settings-section">
+          <div className="settings-section-header">
+            <div className="settings-section-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+            </div>
+            <div>
+              <h2 className="settings-section-title">Authorized Domains</h2>
+              <p className="settings-section-desc">Domains where ReCapture is authorized to capture form data. Required for security.</p>
+            </div>
+          </div>
+          <div className="settings-field">
+            <label className="settings-label">Allowed domains</label>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "0.75rem", minHeight: "2.5rem", padding: "0.75rem", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "6px" }}>
+              {(settings.allowed_domains ?? []).length === 0 && (
+                <span style={{ color: "#666", fontSize: "0.85rem", fontStyle: "italic" }}>
+                  No domains authorized. Add at least one below to enable tracking.
+                </span>
+              )}
+              {(settings.allowed_domains ?? []).map((domain, idx) => (
+                <span key={idx} style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.35rem 0.75rem", background: "rgba(255,107,53,0.12)", border: "1px solid rgba(255,107,53,0.3)", borderRadius: "999px", fontSize: "0.85rem", color: "#ff6b35", fontWeight: 500 }}>
+                  {domain}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const next = (settings.allowed_domains ?? []).filter((_, i) => i !== idx)
+                      update("allowed_domains", next)
+                    }}
+                    style={{ background: "none", border: "none", color: "#ff6b35", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", opacity: 0.7 }}
+                    aria-label={`Remove ${domain}`}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18" />
+                      <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                  </button>
+                </span>
+              ))}
+            </div>
+            <div style={{ display: "flex", gap: "0.5rem" }}>
+              <input
+                type="text"
+                className="settings-input"
+                placeholder="example.com"
+                style={{ flex: 1 }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault()
+                    const input = e.currentTarget
+                    const raw = input.value.trim()
+                    if (!raw) return
+                    const cleaned = raw
+                      .toLowerCase()
+                      .replace(/^https?:\/\//, "")
+                      .replace(/\/.*$/, "")
+                      .replace(/^www\./, "")
+                    if (!cleaned) return
+                    const current = settings.allowed_domains ?? []
+                    if (current.includes(cleaned)) {
+                      input.value = ""
+                      return
+                    }
+                    update("allowed_domains", [...current, cleaned])
+                    input.value = ""
+                  }
+                }}
+              />
+              <button
+                type="button"
+                className="settings-btn"
+                onClick={(e) => {
+                  const input = (e.currentTarget.previousElementSibling as HTMLInputElement)
+                  if (!input) return
+                  const raw = input.value.trim()
+                  if (!raw) return
+                  const cleaned = raw
+                    .toLowerCase()
+                    .replace(/^https?:\/\//, "")
+                    .replace(/\/.*$/, "")
+                    .replace(/^www\./, "")
+                  if (!cleaned) return
+                  const current = settings.allowed_domains ?? []
+                  if (current.includes(cleaned)) {
+                    input.value = ""
+                    return
+                  }
+                  update("allowed_domains", [...current, cleaned])
+                  input.value = ""
+                }}
+                style={{ background: "#ff6b35", color: "#0a0a0a", border: "none", padding: "0 1.25rem", borderRadius: "6px", fontWeight: 600, cursor: "pointer", fontSize: "0.9rem" }}
+              >
+                Add
+              </button>
+            </div>
+            <span className="settings-hint">
+              Press Enter or click Add. Subdomains are matched automatically (e.g., adding <code style={{ color: "#ff6b35" }}>example.com</code> covers <code style={{ color: "#ff6b35" }}>www.example.com</code> and <code style={{ color: "#ff6b35" }}>app.example.com</code>).
+              {(settings.allowed_domains ?? []).length === 0 && (
+                <span style={{ color: "#ff6b35", display: "block", marginTop: "0.35rem", fontWeight: 600 }}>
+                  ⚠ Tracker will reject all requests until at least one domain is added.
+                </span>
+              )}
+            </span>
+          </div>
+        </div>
+
         <div className="settings-section">
           <div className="settings-section-header">
             <div className="settings-section-icon">
