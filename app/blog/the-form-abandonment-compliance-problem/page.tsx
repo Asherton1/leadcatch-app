@@ -27,18 +27,8 @@ export default function Post() {
         <p className="post-subtitle">Most form abandonment tools were built before the laws caught up. Here is what changed in 2025, what it means for your business, and how ReCapture handles compliance differently from the competitors who pretend the problem does not exist.</p>
       </div>
 
-      <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0', background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #1a1a1a' }}>
-        <div style={{ textAlign: 'center', padding: '2rem' }}>
-          <div style={{ display: 'inline-block', padding: '0.4rem 1rem', background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.3)', borderRadius: '999px', fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-            Compliance &middot; Legal &middot; Trust
-          </div>
-          <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.15, margin: '0 0 1rem 0', maxWidth: '520px' }}>
-            TCPA. CAN-SPAM. GDPR. HIPAA.
-          </h2>
-          <p style={{ fontSize: '1rem', color: '#a1a1aa', maxWidth: '480px', margin: '0 auto', lineHeight: 1.6 }}>
-            The four laws every form abandonment vendor needs to understand. Most do not.
-          </p>
-        </div>
+      <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
+        <Image src="/blog-compliance-problem.webp" alt="Compliance and legal infrastructure for form abandonment recovery" fill style={{ objectFit: 'cover' }} />
       </div>
 
       <div className="blog-post-divider"><hr /></div>
@@ -145,17 +135,17 @@ export default function Post() {
 
         <h3>BAA for Healthcare Customers</h3>
         <p>
-          Pro plan and above include a Business Associate Agreement. Our subprocessor stack for healthcare customers is restricted to vendors that themselves offer BAAs. The BAA template is available on our pricing page and on our <Link href="/baa">/baa</Link> page.
+          Pro plan and above include a Business Associate Agreement. Our subprocessor stack for healthcare customers is restricted to vendors that themselves offer BAAs. The BAA template is available on our pricing page and on our <Link href="/baa" style={{ color: '#ff6b35' }}>BAA page</Link>.
         </p>
 
         <h3>Public Trust Page</h3>
         <p>
-          We publish everything publicly. Our <Link href="/trust">trust and compliance page</Link> documents what we capture, what we do not, our subprocessor list, our security posture, our retention policies, and our compliance contacts. Enterprise legal teams can review it without needing to schedule a sales call.
+          We publish everything publicly. Our <Link href="/trust" style={{ color: '#ff6b35' }}>trust and compliance page</Link> documents what we capture, what we do not, our subprocessor list, our security posture, our retention policies, and our compliance contacts. Enterprise legal teams can review it without needing to schedule a sales call.
         </p>
 
         <h3>Customer Privacy Policy Template</h3>
         <p>
-          We provide our customers with copy-paste privacy policy language at <Link href="/legal/client-privacy-template">/legal/client-privacy-template</Link>. Most customers do not have legal counsel on retainer for marketing technology decisions. We give them the language they need to disclose ReCapture in their own privacy policy, with the caveat that they should review with their own counsel before publishing.
+          We provide our customers with copy-paste privacy policy language at <Link href="/legal/client-privacy-template" style={{ color: '#ff6b35' }}>/legal/client-privacy-template</Link>. Most customers do not have legal counsel on retainer for marketing technology decisions. We give them the language they need to disclose ReCapture in their own privacy policy, with the caveat that they should review with their own counsel before publishing.
         </p>
 
         <h2>A Five-Question Checklist for Evaluating Any Vendor</h2>
@@ -188,28 +178,17 @@ export default function Post() {
           Most B2B SaaS vendors handle compliance the same way: market it as a feature, treat it as a cost center, ship the bare minimum required to close enterprise deals, and hope nobody looks too closely. We took the opposite approach. We treated compliance as the foundation, built it before we had paying customers, and published everything publicly so you can verify it yourself.
         </p>
         <p>
-          You should not have to take a vendor&rsquo;s word for any of this. Read our <Link href="/trust">trust page</Link>. Ask us hard questions at <a href="mailto:legal@userecapture.com" style={{ color: '#ff6b35' }}>legal@userecapture.com</a>. Have your legal team run our BAA against the standard you use for vendors. We built ReCapture to be the form abandonment tool that holds up to that scrutiny, because the alternative is shipping a product that creates more problems than it solves.
+          You should not have to take a vendor&rsquo;s word for any of this. Read our <Link href="/trust" style={{ color: '#ff6b35' }}>trust page</Link>. Ask us hard questions at <a href="mailto:legal@userecapture.com" style={{ color: '#ff6b35' }}>legal@userecapture.com</a>. Have your legal team run our BAA against the standard you use for vendors. We built ReCapture to be the form abandonment tool that holds up to that scrutiny, because the alternative is shipping a product that creates more problems than it solves.
         </p>
         <p>
           The leads were always there. Now they can be recovered without bringing the lawyers with them.
         </p>
 
-        <div style={{ marginTop: '3rem', padding: '2rem', background: '#0f0f0f', border: '1px solid #1a1a1a', borderRadius: '12px' }}>
-          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-            Ready to evaluate ReCapture?
-          </p>
-          <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', marginBottom: '1rem', lineHeight: 1.3 }}>
-            Start a 7-day free trial. No credit card commitment until day 8.
-          </h3>
-          <p style={{ color: '#a1a1aa', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-            Or review our compliance posture first. Our <Link href="/trust" style={{ color: '#ff6b35' }}>trust page</Link> documents everything. Our <Link href="/baa" style={{ color: '#ff6b35' }}>BAA</Link> is available for healthcare deployments. Our <Link href="/legal/client-privacy-template" style={{ color: '#ff6b35' }}>customer privacy template</Link> is free to use whether you sign up with us or not.
-          </p>
-          <Link href="/signup" style={{ display: 'inline-block', background: '#ff6b35', color: '#0a0a0a', fontWeight: 700, padding: '14px 28px', borderRadius: '8px', textDecoration: 'none', fontSize: '14px' }}>
-            Start Free Trial
-          </Link>
-          <Link href="/trust" style={{ display: 'inline-block', background: 'transparent', color: '#a1a1aa', fontWeight: 600, padding: '14px 28px', borderRadius: '8px', textDecoration: 'none', fontSize: '14px', border: '1px solid #1e1e1e', marginLeft: '0.5rem' }}>
-            Read Trust Page First
-          </Link>
+        <div style={{ margin: '3rem 0', padding: '2rem', background: '#111', borderRadius: '12px', border: '1px solid rgba(255,107,53,0.2)', textAlign: 'center' }}>
+          <p style={{ color: '#fff', fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.5rem' }}>Ready to evaluate ReCapture?</p>
+          <p style={{ color: '#888', fontSize: '0.9375rem', marginBottom: '1.5rem' }}>Start a 7-day free trial. No charge until day 8. Or read our trust page first.</p>
+          <Link href="/signup" style={{ display: 'inline-block', background: '#ff6b35', color: '#000', fontWeight: 700, fontSize: '0.9375rem', padding: '0.75rem 2rem', borderRadius: '0.5rem', textDecoration: 'none', marginRight: '0.5rem' }}>Start Free Trial</Link>
+          <Link href="/trust" style={{ display: 'inline-block', background: 'transparent', color: '#a1a1aa', fontWeight: 600, fontSize: '0.9375rem', padding: '0.75rem 2rem', borderRadius: '0.5rem', textDecoration: 'none', border: '1px solid #1e1e1e' }}>Read Trust Page</Link>
         </div>
       </article>
 
