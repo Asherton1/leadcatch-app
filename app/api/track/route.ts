@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin as supabase } from '@/lib/supabase-admin'
 import { sendEmailForLead } from '@/lib/email'
 import { sendSmsAlert } from '@/lib/sms'
+import { sendFirstLeadCelebration } from '@/lib/onboarding-emails'
 import { sendEmailAlert } from '@/lib/email-alert'
 import { sendMetaConversion, sendGoogleConversion } from '@/lib/ad-conversions'
 
@@ -96,7 +97,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, first_lead_email_sent, email, first_name')
     .eq('api_key', api_key)
     .single()
 
@@ -213,6 +214,38 @@ export async function POST(request: NextRequest) {
       },
       { status: 500 }
     )
+  }
+
+  // --- FIRST-LEAD CELEBRATION (fire-and-forget, never blocks API) ---
+  // Triggers when a client captures their very first lead.
+  // Uses a flag on clients to prevent duplicate sends across the lifetime of the account.
+  if (!(client as any).first_lead_email_sent && (client as any).email) {
+    // Quick count to confirm this is actually the first lead
+    const { count: leadCount } = await supabase
+      .from('leads')
+      .select('id', { count: 'exact', head: true })
+      .eq('client_id', client.id)
+
+    if ((leadCount ?? 0) === 1) {
+      // Mark BEFORE firing the email to prevent race conditions on rapid double-events
+      await supabase
+        .from('clients')
+        .update({
+          first_lead_email_sent: true,
+          first_lead_email_sent_at: new Date().toISOString(),
+        })
+        .eq('id', client.id)
+
+      // Fire-and-forget — do not await, do not block API response
+      void sendFirstLeadCelebration({
+        to: (client as any).email,
+        firstName: (client as any).first_name ?? null,
+        leadName: (name as string) ?? null,
+        leadEmail: (email as string) ?? null,
+        leadPhone: (phone as string) ?? null,
+        estimatedValue: estimated_value ?? null,
+      })
+    }
   }
 
   // --- SMS ALERT (Pro plan only) ---
