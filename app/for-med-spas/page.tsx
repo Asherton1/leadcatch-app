@@ -1,125 +1,171 @@
 import Link from 'next/link'
-import DashboardMockup from '../components/DashboardMockup'
 import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
-import '../blog/blog.css'
-import '../landing.css'
 
 export const metadata = {
   title: 'Form Abandonment Recovery for Med Spas — ReCapture',
-  description: 'Med spas lose 67% of leads who start a consultation form but never submit. ReCapture captures every partial lead in real time and recovers lost revenue automatically.',
+  description: 'Med spas lose two-thirds of consultation form starters before they submit. ReCapture is the recovery layer for high-ticket service businesses — capture every visitor who started typing, recover them in under five minutes.',
   keywords: 'form abandonment med spa, med spa lead recovery, med spa lead generation, consultation form tracking, med spa marketing',
 }
 
 export default function ForMedSpas() {
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Inter', -apple-system, sans-serif" }}>
+    <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Inter', -apple-system, sans-serif", color: '#e4e4e7' }}>
       <BlogNav />
       <ScrollReveal />
 
-      <div style={{ maxWidth: '100%', background: 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85)), url("/hero-bg.jpg") center/cover no-repeat', padding: '8rem 2rem 4rem' }}>
-        <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ fontSize: '1rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Built for Med Spas</p>
-          <h1 style={{ fontSize: 'clamp(1.75rem, 5vw, 2.75rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.5rem', color: '#fff' }}>Your Botox Leads Are Disappearing Before They Book</h1>
-          <p style={{ fontSize: '1.0625rem', color: '#777', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto' }}>67% of people who start your consultation form never finish it. They typed their name, their email, maybe even their phone number — then got distracted and closed the tab. You never knew they existed. ReCapture changes that.</p>
-        </div>
-      </div>
+      {/* HERO — left-aligned, editorial, no background image, no centered formula */}
+      <section style={{ maxWidth: '720px', margin: '0 auto', padding: '8rem 2rem 3rem' }}>
+        <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
+          Med Spas
+        </p>
+        <h1 style={{ fontSize: 'clamp(2rem, 5vw, 2.75rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '1.5rem', color: '#fff' }}>
+          When the consultation form fails, the patient is gone.
+        </h1>
+        <p style={{ fontSize: '1.125rem', color: '#a1a1aa', lineHeight: 1.7 }}>
+          Two out of every three people who start a consultation form on a med spa website never finish it. They typed their name. They got distracted by a text, a kid, a meeting. They closed the tab. The marketing budget that drove them there does not get a refund.
+        </p>
+      </section>
 
-      <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '1rem 2rem 3rem' }}>
+      {/* MAIN CONTENT BAND */}
+      <div style={{ maxWidth: '720px', margin: '0 auto', padding: '2rem' }}>
 
-        <div className="ind-stats reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.25rem', margin: '2rem 0 3rem' }}>
-          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '1.5rem', textAlign: 'center' }}>
-            <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ef4444' }}>67%</div>
-            <div style={{ fontSize: '0.75rem', color: '#555', marginTop: '0.35rem' }}>Form abandonment rate</div>
+        {/* Section 01 — The problem */}
+        <section className="reveal" style={{ marginBottom: '3rem' }}>
+          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            01 — The problem
+          </p>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.3 }}>
+            Form abandonment is the silent leak in every med spa ad budget.
+          </h2>
+          <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '0.95rem' }}>
+            <p>
+              You spent $4,000 on Meta ads last month. Drove 2,000 visitors to your Botox consultation page. Your analytics dashboard reported 60 form submissions. You felt fine about the spend.
+            </p>
+            <p>
+              The number you did not see: 180 more people started filling out the form. They typed a name. Some typed an email. A handful even typed a phone number. None of them submitted.
+            </p>
+            <p>
+              Your CRM never registered them. Your marketing reports never showed them. Your front desk never called them. They walked out of your funnel completely invisible to the only people in your business equipped to bring them back.
+            </p>
           </div>
-          <div style={{ background: '#111', border: '1px solid rgba(255,107,53,0.2)', borderRadius: 12, padding: '1.5rem', textAlign: 'center' }}>
-            <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ff6b35' }}>$2,800</div>
-            <div style={{ fontSize: '0.75rem', color: '#555', marginTop: '0.35rem' }}>Avg. client lifetime value</div>
+        </section>
+
+        {/* Section 02 — The math */}
+        <section className="reveal" style={{ marginTop: '3rem', paddingTop: '3rem', borderTop: '1px solid #1a1a1a', marginBottom: '3rem' }}>
+          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            02 — The math
+          </p>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.3 }}>
+            $2,800 per recovered patient. Five recoveries pays for the year.
+          </h2>
+          <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '0.95rem' }}>
+            <p>
+              The average med spa client lifetime value is $2,800 across Botox, fillers, laser, and skin care touchpoints. The Pro plan of ReCapture costs $397 per month. Five recovered patients in a year — total — covers the entire annual subscription.
+            </p>
+            <p>
+              The realistic recovery rate for tracked partial submissions sits between 8% and 22% depending on follow-up speed. On 180 monthly form starters, that is between 14 and 40 additional patients per month — patients who already showed buying intent on your site and would otherwise have been forgotten.
+            </p>
           </div>
-          <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '1.5rem', textAlign: 'center' }}>
-            <div style={{ fontSize: '2rem', fontWeight: 800, color: '#fff' }}>72%</div>
-            <div style={{ fontSize: '0.75rem', color: '#555', marginTop: '0.35rem' }}>Traffic from mobile</div>
-          </div>
-        </div>
 
-        <h2 className="reveal">The Problem No Med Spa Talks About</h2>
-        <p>You spend thousands on Google Ads, Instagram campaigns, and SEO to drive traffic to your website. Potential clients land on your consultation request form. They start filling it out — name, email, maybe what treatment they want. Then their phone rings, or their kid screams, or they think &quot;I&apos;ll finish this later.&quot;</p>
-        <p>They never come back. And you never knew they were there.</p>
-        <p>Google Analytics shows you the page view. Your CRM shows you the submission. But neither one shows you the person in between — the one who was 80% through your form and vanished. For a med spa where a single Botox client is worth $2,800+ over their lifetime, that invisible drop-off is costing you real money every single month.</p>
-
-        <h2 className="reveal">Why Med Spas Lose More Leads Than Most</h2>
-        <p>Med spa consultation forms ask for sensitive information — treatment interests, skin concerns, sometimes even photos. That creates hesitation. On top of that, 72% of your traffic is on mobile, where form completion rates are significantly lower than desktop. Small screens, tiny fields, auto-correct nightmares — your potential client was ready to book, but the experience lost them.</p>
-        <p>The med spa industry is projected to reach $49 billion by 2030, growing at 15% annually. Competition is fierce. Every lost lead is a client walking into the practice down the street.</p>
-
-        <h2 className="reveal">How ReCapture Works for Med Spas</h2>
-        <p>One script tag on your website. No form changes. No developer needed. The moment someone starts typing into your consultation form, ReCapture captures their information in real time — name, email, phone number, treatment interest — even if they never hit submit.</p>
-        <p>You see every abandoned lead in a clean dashboard with their contact information and the estimated revenue they represent. Follow up manually with a personal call, or let ReCapture send branded recovery emails on your behalf — automatically, with your practice name and your tone.</p>
-
-        <div className="reveal" style={{ background: 'rgba(255,107,53,0.04)', border: '1px solid rgba(255,107,53,0.12)', borderRadius: 12, padding: '1.5rem 2rem', margin: '2.5rem 0' }}>
-          <p style={{ color: '#bbb', fontSize: '0.95rem', lineHeight: 1.8, margin: 0 }}><strong style={{ color: '#ff6b35' }}>Real example:</strong> A med spa getting 30 form submissions per month is actually getting ~91 form starts. That means ~61 people typed something into the form and left. At $2,800 per client, that is $170,800 in potential revenue walking away every month — invisible to every analytics tool except ReCapture.</p>
-        </div>
-
-        <h2 className="reveal">Built for Multi-Location Med Spas</h2>
-        <p>If you operate 5, 10, or 50+ locations, ReCapture gives you a single enterprise dashboard that shows abandoned leads across every property. See which locations are leaking the most revenue, compare recovery rates, and send automated follow-ups from each location&apos;s branded email. No extra setup per location — one script tag per site, one dashboard for everything.</p>
-
-        
-        <DashboardMockup
-          abandoned={47}
-          revenueAtRisk={131600}
-          recovered={7}
-          recoveredRevenue={19600}
-          leads={[
-            { name: 'Sarah M.', initials: 'SM', email: 'sarah.m@gmail.com', service: 'Botox Consultation', value: 2800, status: 'Open' },
-            { name: 'Jessica L.', initials: 'JL', email: 'jess.l@icloud.com', service: 'Laser Hair Removal', value: 3200, status: 'Contacted' },
-            { name: 'Amanda R.', initials: 'AR', email: 'amanda.r@yahoo.com', service: 'Chemical Peel', value: 1800, status: 'Recovered' },
-            { name: 'Rachel K.', initials: 'RK', email: 'rachel.k@gmail.com', service: 'Body Contouring', value: 4500, status: 'Open' },
-          ]}
-        />
-
-        <h2 className="reveal">What You Get</h2>
-        <div className="ind-features reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '1.5rem 0 2.5rem' }}>
-          {[
-            ['Real-time partial form capture', 'Names, emails, and phone numbers captured the instant they are typed'],
-            ['Revenue-at-risk dashboard', 'See the dollar value of every lead you are losing each month'],
-            ['Automated recovery emails', 'Branded follow-ups sent on your behalf — your name, your tone'],
-            ['Multi-location dashboard', 'One view across all your med spa locations'],
-            ['Weekly performance reports', 'Delivered every Monday with leads captured, revenue at risk, and recoveries'],
-            ['60-second setup', 'One script tag. No form migration. No developer required'],
-          ].map(([title, desc], i) => (
-            <div key={i} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 10, padding: '1.25rem' }}>
-              <p style={{ color: '#ff6b35', fontWeight: 600, fontSize: '0.85rem', margin: '0 0 0.35rem 0' }}>{title}</p>
-              <p style={{ color: '#888', fontSize: '0.8rem', margin: 0, lineHeight: 1.6 }}>{desc}</p>
+          {/* Editorial stat callout — single composite, NOT a triplet card grid */}
+          <div style={{ marginTop: '2rem', padding: '2rem', background: '#0f0f0f', border: '1px solid #1a1a1a', borderRadius: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '2.5rem', fontWeight: 800, color: '#ff6b35', letterSpacing: '-0.02em', lineHeight: 1 }}>67%</span>
+              <span style={{ fontSize: '0.95rem', color: '#888', fontWeight: 500 }}>industry average form abandonment rate</span>
             </div>
-          ))}
-        </div>
-
-        <h2 className="reveal">See How Much Your Med Spa Is Losing</h2>
-        <p>Use our free ROI Estimator to calculate your monthly revenue at risk based on your form traffic, average client value, and industry benchmarks.</p>
-        <div className="ind-ctas reveal" style={{ display: 'flex', gap: '1rem', margin: '1.5rem 0 2.5rem', flexWrap: 'wrap' }}>
-          <Link href="/calculator?industry=medspa" style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem' }}>Run Your ROI Estimate</Link>
-          <Link href="/demo" style={{ display: 'inline-block', background: 'transparent', color: '#ff6b35', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem', border: '1px solid rgba(255,107,53,0.4)' }}>Try the Live Demo</Link>
-        </div>
-
-        <div className="reveal" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '2rem', margin: '2rem 0' }}>
-          <p style={{ color: '#bbb', lineHeight: 1.8, fontSize: '0.95rem', margin: '0 0 1rem 0', fontStyle: 'italic' }}>&quot;We had no idea how many leads were starting our consultation form and dropping off. Within the first week, ReCapture surfaced 14 leads we never would have known about. Three of them booked. That alone paid for the year.&quot;</p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: 700, color: '#ff6b35' }}>R</div>
-            <div>
-              <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.8rem' }}>Sarah K.</p>
-              <p style={{ margin: 0, color: '#666', fontSize: '0.75rem' }}>Practice Director, DFW</p>
-            </div>
+            <div style={{ height: '1px', background: '#1a1a1a', margin: '1rem 0' }} />
+            <p style={{ margin: 0, color: '#a1a1aa', fontSize: '0.9rem', lineHeight: 1.6 }}>
+              On a med spa site driving 2,000 visitors per month, that translates to roughly 180 invisible leads. At a $2,800 average lifetime value and a conservative 12% recovery rate, the unrealized monthly revenue exceeds <strong style={{ color: '#fff' }}>$60,000</strong>.
+            </p>
           </div>
-        </div>
+        </section>
 
-        <div className="reveal" style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a1a 100%)', border: '1px solid #1e1e1e', borderRadius: 12, padding: '2.5rem', textAlign: 'center', margin: '3rem 0 0' }}>
-          <h3 style={{ color: '#ff6b35', fontSize: '1.5rem', margin: '0 0 0.75rem 0', fontWeight: 700 }}>Stop Losing Clients to Form Abandonment</h3>
-          <p style={{ color: '#888', margin: '0 0 1.5rem 0', fontSize: '0.95rem', lineHeight: 1.7 }}>14-day free trial. Full access from day one. See your first captured lead within 48 hours.</p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/start-trial" style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem' }}>Start Your 7-Day Free Trial</Link>
-            <Link href="/pricing" style={{ display: 'inline-block', background: 'transparent', color: '#ff6b35', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem', border: '1px solid rgba(255,107,53,0.4)' }}>View Pricing</Link>
+        {/* Section 03 — The recovery layer */}
+        <section className="reveal" style={{ marginTop: '3rem', paddingTop: '3rem', borderTop: '1px solid #1a1a1a', marginBottom: '3rem' }}>
+          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            03 — The recovery layer
+          </p>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.3 }}>
+            Capture every visitor who started typing. Recover them in under five minutes.
+          </h2>
+          <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '0.95rem' }}>
+            <p>
+              ReCapture is a single line of JavaScript on your site. The moment a visitor types into your form, we capture the field. If they leave without submitting, we send the lead to your dashboard with a value estimate based on the service they were inquiring about.
+            </p>
+            <p>
+              Your front desk gets an SMS within seconds with the lead name, phone, and the service they were on the verge of booking. Your AI voice concierge — Marissa — places a callback within five minutes if the lead is high-value and the prospect provided a phone number. She introduces herself, references the service, and offers to confirm the booking on the call.
+            </p>
+            <p>
+              No form migration. No platform replacement. Drop the script tag, configure your services and call hours, and the recovery layer activates on top of every contact form on your site.
+            </p>
           </div>
-        </div>
+        </section>
+
+        {/* Section 04 — Built for med-spa concerns */}
+        <section className="reveal" style={{ marginTop: '3rem', paddingTop: '3rem', borderTop: '1px solid #1a1a1a', marginBottom: '3rem' }}>
+          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            04 — Built for med spa specifics
+          </p>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.3 }}>
+            Mobile-first, multi-location, healthcare-adjacent.
+          </h2>
+          <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '0.95rem' }}>
+            <p>
+              <strong style={{ color: '#e4e4e7' }}>Mobile-first.</strong> Roughly 65% of med spa traffic comes from mobile devices. Our tracker is built to capture partial form data on touch keyboards where dropoff is highest, including the autocomplete and autofill paths that other recovery tools miss.
+            </p>
+            <p>
+              <strong style={{ color: '#e4e4e7' }}>Multi-location.</strong> If you run a group practice across multiple locations, our dashboard segments leads by site automatically. Each location can have its own front desk SMS recipient and call hours configuration.
+            </p>
+            <p>
+              <strong style={{ color: '#e4e4e7' }}>Healthcare-adjacent compliance.</strong> ReCapture is HIPAA-ready by design. Our architecture, subprocessor stack, and BAA template are in place. For practices that handle Protected Health Information, BAA execution is available on Enterprise plans, activated upon signed contract. See our <Link href="/trust" style={{ color: '#ff6b35' }}>trust page</Link> for the full compliance posture.
+            </p>
+            <p>
+              <strong style={{ color: '#e4e4e7' }}>AI voice callback compliance.</strong> Marissa identifies herself as automated within the first 15 seconds of every call, satisfying TCPA and Texas SB 140 requirements. Voice callback is optional and disabled by default.
+            </p>
+          </div>
+        </section>
+
+        {/* Section 05 — Pricing */}
+        <section className="reveal" style={{ marginTop: '3rem', paddingTop: '3rem', borderTop: '1px solid #1a1a1a', marginBottom: '3rem' }}>
+          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            05 — Pricing
+          </p>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.3 }}>
+            Plans start at $197/mo. 7-day free trial.
+          </h2>
+          <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '0.95rem' }}>
+            <p>
+              <strong style={{ color: '#e4e4e7' }}>Essentials</strong> at $197/mo for single-location med spas with under 1,000 monthly visitors. Includes recovery dashboard, tracker, automated follow-up emails.
+            </p>
+            <p>
+              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for established med spas with consistent ad spend. Adds SMS alerts to front desk, AI voice callback (Marissa), and weekly performance reports.
+            </p>
+            <p>
+              <strong style={{ color: '#e4e4e7' }}>Enterprise</strong> for multi-location groups, BAA-required healthcare practices, and sites with high lead volume. Custom pricing, dedicated account manager.
+            </p>
+          </div>
+        </section>
+
+        {/* Closing CTA — editorial, not centered button-spam */}
+        <section className="reveal" style={{ marginTop: '3rem', paddingTop: '3rem', borderTop: '1px solid #1a1a1a', marginBottom: '4rem' }}>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1rem', lineHeight: 1.3, letterSpacing: '-0.02em' }}>
+            See your invisible leads.
+          </h2>
+          <p style={{ color: '#a1a1aa', lineHeight: 1.7, fontSize: '0.95rem', marginBottom: '2rem', maxWidth: '560px' }}>
+            Drop the tracker. Watch your first abandoned consultation come through within an hour. 7-day free trial. Card required, not charged until day 8.
+          </p>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <Link href="/signup?plan=pro" style={{ display: 'inline-block', background: '#ff6b35', color: '#0a0a0a', fontWeight: 700, padding: '0.875rem 1.75rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>
+              Start free trial
+            </Link>
+            <Link href="/pricing" style={{ display: 'inline-block', background: 'transparent', color: '#a1a1aa', fontWeight: 600, padding: '0.875rem 1.75rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem', border: '1px solid #1e1e1e' }}>
+              See full pricing
+            </Link>
+          </div>
+        </section>
+
       </div>
 
       <Footer />
