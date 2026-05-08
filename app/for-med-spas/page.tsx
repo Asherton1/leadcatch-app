@@ -25,16 +25,16 @@ export default function ForMedSpas() {
       <ScrollReveal />
 
       {/* HERO — two-column editorial. Text left, dashboard mockup right. */}
-      <section style={{ maxWidth: '1240px', margin: '0 auto', padding: '7rem 2rem 4rem' }}>
+      <section className="hero-section" style={{ maxWidth: '1240px', margin: '0 auto', padding: '7rem 2rem 4rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.1fr)', gap: '4rem', alignItems: 'center' }} className="hero-grid">
           <div>
             <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
               Med Spas
             </p>
-            <h1 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '1.5rem', color: '#fff' }}>
+            <h1 className="hero-h1" style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '1.5rem', color: '#fff' }}>
               When the consultation form fails, the patient is gone.
             </h1>
-            <p style={{ fontSize: '1.0625rem', color: '#a1a1aa', lineHeight: 1.7, marginBottom: '2rem' }}>
+            <p className="hero-sub" style={{ fontSize: '1.0625rem', color: '#a1a1aa', lineHeight: 1.7, marginBottom: '2rem' }}>
               Two out of every three people who start a consultation form on a med spa website never finish it. They typed their name. They got distracted by a text, a kid, a meeting. They closed the tab. The marketing budget that drove them there does not get a refund.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
@@ -85,7 +85,7 @@ export default function ForMedSpas() {
       </div>
 
       {/* SECTION 02 — Full-width architectural stat scene */}
-      <section className="reveal" style={{ background: '#0d0d0d', borderTop: '1px solid #1a1a1a', borderBottom: '1px solid #1a1a1a', padding: '5rem 2rem', margin: '2rem 0' }}>
+      <section className="reveal stat-band" style={{ background: '#0d0d0d', borderTop: '1px solid #1a1a1a', borderBottom: '1px solid #1a1a1a', padding: '5rem 2rem', margin: '2rem 0' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
             02 — The math
@@ -199,7 +199,7 @@ export default function ForMedSpas() {
       </div>
 
       {/* SECTION 04 — Specifics 2x2 grid, full-width band */}
-      <section className="reveal" style={{ background: '#0d0d0d', borderTop: '1px solid #1a1a1a', borderBottom: '1px solid #1a1a1a', padding: '5rem 2rem', margin: '2rem 0' }}>
+      <section className="reveal specs-band" style={{ background: '#0d0d0d', borderTop: '1px solid #1a1a1a', borderBottom: '1px solid #1a1a1a', padding: '5rem 2rem', margin: '2rem 0' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
             04 — Built for med spa specifics
@@ -311,11 +311,11 @@ export default function ForMedSpas() {
         @media (max-width: 900px) {
           .hero-grid {
             grid-template-columns: 1fr !important;
-            gap: 3rem !important;
+            gap: 2.5rem !important;
           }
           .math-grid {
             grid-template-columns: 1fr !important;
-            gap: 2rem !important;
+            gap: 1.5rem !important;
           }
           .specs-grid {
             grid-template-columns: 1fr !important;
@@ -325,6 +325,46 @@ export default function ForMedSpas() {
           }
           .specs-grid > div:last-child {
             border-bottom: none !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .hero-section {
+            padding: 6rem 1.25rem 2.5rem !important;
+          }
+          .hero-h1 {
+            font-size: 1.75rem !important;
+            line-height: 1.15 !important;
+          }
+          .hero-sub {
+            font-size: 1rem !important;
+          }
+          .content-band {
+            padding: 1.25rem !important;
+          }
+          .stat-band, .specs-band {
+            padding: 3.5rem 1.25rem !important;
+          }
+          .section-h2 {
+            font-size: 1.375rem !important;
+          }
+          .stat-big {
+            font-size: 4rem !important;
+          }
+          .stat-secondary {
+            font-size: 2rem !important;
+          }
+          .closing-h2 {
+            font-size: 1.625rem !important;
+          }
+          .marissa-timeline-row {
+            grid-template-columns: 50px 1fr !important;
+            gap: 0.5rem !important;
+          }
+          .marissa-quote-block {
+            padding: 0.75rem !important;
+          }
+          .specs-cell {
+            padding: 1.5rem !important;
           }
         }
       ` }} />
