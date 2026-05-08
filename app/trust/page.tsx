@@ -85,7 +85,7 @@ export default function TrustPage() {
                 <strong style={{ color: "#e4e4e7" }}>AI voice callback acknowledgment.</strong> If you enable AI voice callback, you explicitly acknowledge TCPA, FCC, and Texas SB 140 compliance responsibility through the in-app disclaimer.
               </li>
               <li style={{ marginBottom: "0.75rem" }}>
-                <strong style={{ color: "#e4e4e7" }}>BAA execution for healthcare.</strong> If you are a HIPAA-covered entity, you must execute a Business Associate Agreement with ReCapture before deploying. Available on Pro and Enterprise plans.
+                <strong style={{ color: "#e4e4e7" }}>BAA execution for healthcare.</strong> If you are a HIPAA-covered entity, you must execute a Business Associate Agreement with ReCapture before deploying. Available on Enterprise plans; HIPAA-ready architecture is activated upon signed agreement.
               </li>
               <li style={{ marginBottom: "0.75rem" }}>
                 <strong style={{ color: "#e4e4e7" }}>Physical postal address.</strong> Required by CAN-SPAM. Your business address appears in the footer of every recovery email and must be kept accurate.
@@ -234,11 +234,11 @@ export default function TrustPage() {
             07 — Healthcare & HIPAA
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
-            BAAs available on Pro and Enterprise plans.
+            HIPAA-ready architecture. BAAs available on Enterprise plans.
           </h2>
           <div style={{ color: "#a1a1aa", lineHeight: 1.8, fontSize: "0.95rem" }}>
             <p>
-              ReCapture executes Business Associate Agreements with HIPAA-covered customers on the Pro plan and above. Enterprise plans include the BAA by default.
+              ReCapture is built HIPAA-ready across all plans, with our subprocessor stack and architecture designed to support healthcare deployments. Business Associate Agreements are executed with HIPAA-covered customers on Enterprise plans, activated upon signed commitment.
             </p>
             <p>
               We restrict our subprocessor stack for healthcare customers to vendors that themselves offer BAAs. Healthcare deployments may require additional configuration; contact our team to scope.

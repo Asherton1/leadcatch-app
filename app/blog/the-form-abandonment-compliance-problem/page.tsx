@@ -133,9 +133,9 @@ export default function Post() {
           Every recovery email we send includes a complete CAN-SPAM footer: the customer&rsquo;s business name, their physical postal address (which we now require during account setup), a clear reason for receipt explanation, and a one-click unsubscribe link signed with HMAC to prevent forgery. Clicking unsubscribe writes immediately to the master do-not-contact list.
         </p>
 
-        <h3>BAA for Healthcare Customers</h3>
+        <h3>HIPAA-Ready Architecture and BAA on Enterprise</h3>
         <p>
-          Pro plan and above include a Business Associate Agreement. Our subprocessor stack for healthcare customers is restricted to vendors that themselves offer BAAs. The BAA template is available on our pricing page and on our <Link href="/baa" style={{ color: '#ff6b35' }}>BAA page</Link>.
+          ReCapture is built HIPAA-ready by design. Our subprocessor stack is restricted to vendors that themselves offer BAAs — we will only deploy healthcare workloads through HIPAA-eligible infrastructure. Business Associate Agreements are executed with HIPAA-covered customers on Enterprise plans, activated upon signed commitment. The standard agreement terms are published openly on our <Link href="/baa" style={{ color: '#ff6b35' }}>BAA page</Link> for your legal team to review before any conversation.
         </p>
 
         <h3>Public Trust Page</h3>
