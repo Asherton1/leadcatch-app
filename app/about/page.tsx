@@ -70,6 +70,7 @@ export default function AboutPage() {
 
           <div className="about-story-v2-section reveal">
             <p className="about-story-v2-eyebrow">02 — The turning point</p>
+            <h2 className="about-story-v2-headline">The form was the blind spot.</h2>
             <div className="about-story-v2-body">
               <p>I was reviewing a client&apos;s campaign performance and the numbers didn&apos;t add up. We were driving solid traffic. The landing page was converting. But the gap between page views and form submissions was massive &mdash; way bigger than it should have been.</p>
               <p>That&apos;s when I realized: every analytics platform on the market tracks what happens <em>before</em> the form and what happens <em>after</em>. Nobody tracks what happens <em>during</em>. The form itself was a complete blind spot.</p>
@@ -82,6 +83,7 @@ export default function AboutPage() {
 
           <div className="about-story-v2-section reveal">
             <p className="about-story-v2-eyebrow">03 — Why ReCapture</p>
+            <h2 className="about-story-v2-headline">Capture the intent before it&apos;s lost.</h2>
             <div className="about-story-v2-body">
               <p>ReCapture is the recovery layer for high-ticket service businesses. We started with form abandonment because it&apos;s the most tangible problem to solve &mdash; one script tag, capture every visitor who starts typing into your contact form, even if they never hit submit. No form migration. No complex setup.</p>
               <p>You see every lead in a clean dashboard with their name, email, phone number, and the estimated dollar value they represent. Follow up manually, or let ReCapture send automated recovery emails on your behalf.</p>
