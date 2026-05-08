@@ -79,6 +79,10 @@ export default function DashboardMockup({ abandoned, revenueAtRisk, recovered, r
           0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
           50% { box-shadow: 0 0 0 4px rgba(16,185,129,0); }
         }
+        @keyframes status-pulse-live {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,53,0.6); }
+          50% { box-shadow: 0 0 0 6px rgba(255,107,53,0); }
+        }
         .lead-row-anim {
           animation: lead-row-fadein 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
@@ -136,8 +140,8 @@ export default function DashboardMockup({ abandoned, revenueAtRisk, recovered, r
           <span style={{ fontSize: '0.7rem', color: '#555', marginLeft: '0.5rem', fontWeight: 500 }}>ReCapture Dashboard</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 6px rgba(16,185,129,0.5)', animation: 'status-pulse-recovered 2s ease-in-out infinite' }} />
-          <span style={{ fontSize: '0.6rem', color: '#10b981', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Live</span>
+          <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#ff6b35', boxShadow: '0 0 8px rgba(255,107,53,0.6)', animation: 'status-pulse-live 1.6s ease-in-out infinite' }} />
+          <span style={{ fontSize: '0.6rem', color: '#ff6b35', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Live</span>
         </div>
       </div>
 

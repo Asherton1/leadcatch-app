@@ -149,8 +149,8 @@ export default function ForMedSpas() {
                 Recovery scene · 3 min 12 sec
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 6px rgba(16,185,129,0.5)' }} />
-                <span style={{ fontSize: '0.6rem', color: '#10b981', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Recovered</span>
+                <div className="recovered-dot-pulse" style={{ width: 7, height: 7, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 8px rgba(16,185,129,0.6)' }} />
+                <span style={{ fontSize: '0.6rem', color: '#10b981', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Recovered</span>
               </div>
             </div>
 
@@ -308,6 +308,13 @@ export default function ForMedSpas() {
 
       {/* Mobile responsive overrides */}
       <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes recovered-pulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+          50% { box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+        }
+        .recovered-dot-pulse {
+          animation: recovered-pulse 2s ease-in-out infinite;
+        }
         @media (max-width: 900px) {
           .hero-grid {
             grid-template-columns: 1fr !important;
