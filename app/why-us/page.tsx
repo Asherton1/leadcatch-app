@@ -40,7 +40,7 @@ const sections: Section[] = [
     category: 'Built for Service Business',
     rows: [
       { label: 'Multi-location dashboard', recapture: true, podium: false, ghl: false, cartstack: false },
-      { label: 'HIPAA-ready + BAA', recapture: 'Pro & Enterprise', podium: '$297/mo add-on', ghl: false, cartstack: false },
+      { label: 'HIPAA-ready + BAA', recapture: 'Enterprise', podium: '$297/mo add-on', ghl: false, cartstack: false },
       { label: 'Weekly client reports', recapture: true, podium: false, ghl: false, cartstack: false },
     ],
   },

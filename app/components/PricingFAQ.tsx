@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: 'Is my data really HIPAA-compliant?',
-    a: 'Pro and Enterprise are HIPAA-ready. We sign Business Associate Agreements (BAAs) for healthcare practices that need them — email hello@userecapture.com after signing up to start the process. Enterprise includes the BAA by default. Essentials is not HIPAA-ready and shouldn\u2019t be used for protected health information.',
+    a: 'ReCapture is HIPAA-ready by design across all plans — our subprocessor stack and architecture support healthcare deployments. Business Associate Agreements (BAAs) are executed for Enterprise customers upon signed contract. If you handle Protected Health Information, contact hello@userecapture.com to discuss Enterprise deployment.',
   },
   {
     q: 'What if I have multiple websites?',

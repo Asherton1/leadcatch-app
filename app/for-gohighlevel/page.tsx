@@ -80,7 +80,7 @@ export default function ForGoHighLevel() {
             ['Works on any website', 'WordPress, Webflow, Wix, Squarespace, custom HTML — one script tag works everywhere'],
             ['Branded to your client', 'Recovery emails go out under your client\'s name, not ours. White-label ready'],
             ['Enterprise multi-client dashboard', 'Manage every client from one admin view — leads, revenue, and recovery rates'],
-            ['HIPAA-ready for healthcare clients', 'Dental, med spa, plastic surgery, fertility — BAA included on Pro and Enterprise'],
+            ['HIPAA-ready for healthcare clients', 'Dental, med spa, plastic surgery, fertility — BAA available on Enterprise plans, HIPAA-ready architecture across all plans'],
             ['Measurable ROI every week', 'Automated weekly reports your clients can hold in their hands'],
           ].map(([title, desc], i) => (
             <div key={i} style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 10, padding: '1.25rem' }}>

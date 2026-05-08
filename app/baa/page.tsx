@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Business Associate Agreement — ReCapture',
-  description: 'ReCapture Business Associate Agreement for HIPAA-compliant data handling on Pro and Enterprise plans.',
+  description: 'ReCapture Business Associate Agreement for HIPAA-eligible deployments. Executed with Enterprise customers upon signed commitment.',
   robots: 'noindex',
 }
 
@@ -26,11 +26,11 @@ export default function BAAPage() {
         <div className="blog-post-meta">
           <span className="blog-post-date">Effective: April 17, 2026</span>
           <span className="blog-post-dot" />
-          <span className="blog-post-readtime">Pro & Enterprise Plans</span>
+          <span className="blog-post-readtime">Enterprise Plans</span>
         </div>
         <h1>Business Associate Agreement</h1>
         <div style={{ width: "60px", height: "3px", background: "#ff6b35", margin: "0 auto 1.5rem", borderRadius: "2px" }} />
-        <p className="post-subtitle">This BAA is entered into between ReCapture and the customer upon acceptance during the Pro or Enterprise signup process. It governs the handling of Protected Health Information in compliance with HIPAA.</p>
+        <p className="post-subtitle">This BAA is entered into between ReCapture and the customer upon Enterprise contract execution. It governs the handling of Protected Health Information in compliance with HIPAA. Available below for legal review prior to engagement.</p>
       </div>
 
       <div className="blog-post-body">
@@ -38,7 +38,7 @@ export default function BAAPage() {
         <div className="baa-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0', margin: '0 0 2.5rem 0', background: '#111', borderRadius: '12px', border: '1px solid #1e1e1e', overflow: 'hidden' }}>
           {[
             { label: 'Effective Date', value: 'April 17, 2026', color: '#bbb', span: false },
-            { label: 'Applies To', value: 'Pro & Enterprise', color: '#bbb', span: false },
+            { label: 'Applies To', value: 'Enterprise', color: '#bbb', span: false },
             { label: 'Status', value: 'Active', color: '#22c55e', span: false },
             { label: 'Governing Law', value: 'State of Texas', color: '#bbb', span: false },
             { label: 'Standard', value: 'HIPAA / HITECH', color: '#bbb', span: false },
@@ -91,7 +91,7 @@ export default function BAAPage() {
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-          <Link href="/signup?plan=pro" style={{ display: 'block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 1rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', textAlign: 'center' }}>Start Pro Trial</Link>
+          <a href="mailto:hello@userecapture.com?subject=Enterprise%20BAA%20Inquiry" style={{ display: 'block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 1rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', textAlign: 'center' }}>Contact Sales</a>
           <Link href="/pricing" style={{ display: 'block', background: 'transparent', color: '#888', fontWeight: 600, padding: '0.875rem 1rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem', border: '1px solid #1e1e1e', textAlign: 'center' }}>Back to Pricing</Link>
         </div>
 

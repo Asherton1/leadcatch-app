@@ -58,8 +58,8 @@ export default function PricingPage() {
               <div className="pricing-baseline-desc">Compliant from day one.</div>
             </div>
             <div className="pricing-baseline-cell">
-              <div className="pricing-baseline-title">BAA available</div>
-              <div className="pricing-baseline-desc">For practices that need it.</div>
+              <div className="pricing-baseline-title">BAA on Enterprise</div>
+              <div className="pricing-baseline-desc">For healthcare practices.</div>
             </div>
             <div className="pricing-baseline-cell">
               <div className="pricing-baseline-title">US-based support</div>
