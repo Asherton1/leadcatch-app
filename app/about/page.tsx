@@ -90,6 +90,19 @@ export default function AboutPage() {
             </div>
           </div>
 
+          <div className="about-story-v2-divider" />
+
+          <div className="about-story-v2-section reveal">
+            <p className="about-story-v2-eyebrow">04 — Why we built it different</p>
+            <h2 className="about-story-v2-headline">Compliance was the foundation, not the afterthought.</h2>
+            <div className="about-story-v2-body">
+              <p>Most form abandonment tools were built between 2018 and 2023, before TCPA tightened in April 2025, before state privacy laws started enforcing meaningfully, before HIPAA enforcement actions started reaching marketing technology vendors. Most of them bolted compliance on after the fact, if at all.</p>
+              <p>I took the opposite approach. ReCapture has a master do-not-contact list that enforces opt-outs across SMS, email, and voice automatically. Our tracker geo-blocks 32 countries (EU, UK, Switzerland, EEA) at the IP level &mdash; we don&apos;t capture data we shouldn&apos;t have. Our AI voice agent identifies herself as automated within the first 15 seconds of every call. Every recovery email includes a CAN-SPAM-compliant footer with a one-click unsubscribe link signed against forgery. Pro plan and above include a Business Associate Agreement for healthcare customers.</p>
+              <p>I built it that way because I&apos;ve sat across the table from enterprise legal teams. They have the same five questions every time. The vendors who can&apos;t answer those questions credibly don&apos;t close the deal. I wanted to be the vendor who could.</p>
+              <p>Everything is published openly at our <Link href="/trust" style={{ color: '#ff6b35', textDecoration: 'none', fontWeight: 600 }}>trust page</Link> &mdash; what we capture, what we don&apos;t, our subprocessor list, our security posture, our retention policies. No NDAs. No sales calls required. Read it yourself.</p>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -119,7 +132,7 @@ export default function AboutPage() {
           </div>
 
           <p className="about-clients-closer">
-            Eight figures in ad spend. <span className="about-clients-closer-accent">38+ long-term client relationships.</span>
+            $10M+ in managed ad spend. <span className="about-clients-closer-accent">38+ long-term client relationships.</span>
             <br />
             One ReCapture, born out of all of it.
           </p>
@@ -152,7 +165,7 @@ export default function AboutPage() {
       <section className="about-final-cta reveal">
         <div className="about-final-cta-inner">
           <h2 className="about-final-cta-headline">See it work on your forms.</h2>
-          <p className="about-final-cta-sub">7-day trial. About 5 minutes to set up. No card gymnastics.</p>
+          <p className="about-final-cta-sub">7-day free trial. About 5 minutes to set up. Card required, not charged until day 8.</p>
           <Link href="/signup" className="about-final-cta-link">
             Begin your trial <span className="about-final-cta-arrow">&rarr;</span>
           </Link>
