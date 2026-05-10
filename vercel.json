@@ -5,8 +5,8 @@
       "schedule": "0 14 * * 1"
     },
     {
-      "path": "/api/cron/monday-outreach",
-      "schedule": "30 13 21 4 *"
+      "path": "/api/cron/outreach-queue",
+      "schedule": "0 14 * * 1-5"
     },
     {
       "path": "/api/cron/follow-up-sequence",

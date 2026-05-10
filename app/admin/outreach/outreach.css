@@ -1,0 +1,340 @@
+.outreach-admin {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 7rem 2rem 4rem;
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: #e4e4e7;
+}
+
+.outreach-admin-header {
+  margin-bottom: 2.5rem;
+}
+
+.outreach-admin-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.outreach-admin-h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0;
+}
+
+.outreach-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  background: #0d0d0d;
+}
+
+.outreach-stat {
+  padding: 1.5rem;
+  border-right: 1px solid #1a1a1a;
+}
+
+.outreach-stat:last-child {
+  border-right: none;
+}
+
+.outreach-stat-label {
+  font-size: 0.7rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.outreach-stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.outreach-stat-value.orange {
+  color: #ff6b35;
+}
+
+.outreach-stat-value.green {
+  color: #10b981;
+}
+
+.outreach-section {
+  margin-bottom: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #1a1a1a;
+}
+
+.outreach-section-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ff6b35;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.outreach-section-h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.outreach-field {
+  margin-bottom: 1.25rem;
+}
+
+.outreach-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #a1a1aa;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.outreach-input,
+.outreach-textarea,
+.outreach-select {
+  width: 100%;
+  background: #0f0f0f;
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.outreach-textarea {
+  min-height: 120px;
+  font-family: 'Menlo', 'Monaco', monospace;
+  font-size: 0.8rem;
+}
+
+.outreach-textarea.body {
+  min-height: 240px;
+  font-family: inherit;
+  font-size: 0.875rem;
+}
+
+.outreach-input:focus,
+.outreach-textarea:focus,
+.outreach-select:focus {
+  outline: none;
+  border-color: #ff6b35;
+}
+
+.outreach-helper {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.outreach-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.outreach-btn-primary {
+  background: #ff6b35;
+  color: #0a0a0a;
+  font-weight: 700;
+  padding: 0.875rem 1.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.outreach-btn-primary:hover {
+  background: #e85d2c;
+}
+
+.outreach-btn-primary:disabled {
+  background: #333;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.outreach-btn-secondary {
+  background: transparent;
+  color: #a1a1aa;
+  font-weight: 600;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid #1e1e1e;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.outreach-btn-secondary:hover {
+  border-color: #ff6b35;
+  color: #ff6b35;
+}
+
+.outreach-btn-danger {
+  background: transparent;
+  color: #ef4444;
+  font-weight: 600;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid #2a1414;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.outreach-btn-danger:hover {
+  border-color: #ef4444;
+  background: #1a0808;
+}
+
+.outreach-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0d0d0d;
+}
+
+.outreach-table th {
+  text-align: left;
+  padding: 0.875rem 1rem;
+  font-size: 0.7rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  background: #0a0a0a;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.outreach-table td {
+  padding: 0.875rem 1rem;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #141414;
+  color: #a1a1aa;
+}
+
+.outreach-table tr:last-child td {
+  border-bottom: none;
+}
+
+.outreach-table tr:hover td {
+  background: #0f0f0f;
+}
+
+.outreach-status-pill {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.outreach-status-queued {
+  background: rgba(255,107,53,0.12);
+  color: #ff6b35;
+}
+
+.outreach-status-sent {
+  background: rgba(16,185,129,0.12);
+  color: #10b981;
+}
+
+.outreach-status-replied {
+  background: rgba(99,102,241,0.15);
+  color: #818cf8;
+}
+
+.outreach-status-failed {
+  background: rgba(239,68,68,0.15);
+  color: #ef4444;
+}
+
+.outreach-status-paused,
+.outreach-status-opted_out {
+  background: rgba(120,120,120,0.15);
+  color: #888;
+}
+
+.outreach-filter-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.outreach-filter-pill {
+  background: transparent;
+  border: 1px solid #1e1e1e;
+  color: #a1a1aa;
+  padding: 0.4rem 0.875rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.outreach-filter-pill.active {
+  border-color: #ff6b35;
+  color: #ff6b35;
+}
+
+.outreach-flash {
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.outreach-flash.success {
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.3);
+  color: #10b981;
+}
+
+.outreach-flash.error {
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: #ef4444;
+}
+
+@media (max-width: 900px) {
+  .outreach-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .outreach-stat:nth-child(2) {
+    border-right: none;
+  }
+  .outreach-row {
+    grid-template-columns: 1fr;
+  }
+}

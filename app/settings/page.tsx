@@ -32,6 +32,8 @@ interface ClientSettings {
   email_alert_enabled: boolean
   email_alert_address: string | null
   slack_webhook_url: string | null
+  teams_webhook_url: string | null
+  ghl_webhook_url: string | null
   ai_callback_enabled: boolean
   ai_callback_acknowledged_at: string | null
   ai_callback_acknowledged_terms_version: string | null
@@ -196,6 +198,8 @@ export default function SettingsPage() {
         email_alert_enabled: settings.email_alert_enabled,
         email_alert_address: settings.email_alert_address,
         slack_webhook_url: settings.slack_webhook_url,
+        teams_webhook_url: settings.teams_webhook_url,
+        ghl_webhook_url: settings.ghl_webhook_url,
         ai_callback_enabled: settings.ai_callback_enabled,
         ai_callback_acknowledged_at: settings.ai_callback_acknowledged_at,
         ai_callback_acknowledged_terms_version: settings.ai_callback_acknowledged_terms_version,
@@ -676,6 +680,42 @@ export default function SettingsPage() {
               <div className="settings-field settings-indent">
                 <label className="settings-label">Slack Webhook URL</label>
                 <input type="url" className="settings-input" value={settings.slack_webhook_url ?? ""} onChange={e => update("slack_webhook_url", e.target.value)} placeholder="https://hooks.slack.com/services/..." />
+              </div>
+            )}
+
+            {/* Teams */}
+            <div className="settings-toggle-row">
+              <div className="settings-toggle-info">
+                <div className="settings-toggle-label">Microsoft Teams Alerts</div>
+                <div className="settings-toggle-desc">Post lead details to your Teams channel instantly</div>
+              </div>
+              <Toggle on={!!settings.teams_webhook_url} onChange={v => { if (!v) update("teams_webhook_url", null); else update("teams_webhook_url", "") }} disabled={!isPro} />
+            </div>
+            {settings.teams_webhook_url !== null && (
+              <div className="settings-field settings-indent">
+                <label className="settings-label">Teams Incoming Webhook URL</label>
+                <input type="url" className="settings-input" value={settings.teams_webhook_url ?? ""} onChange={e => update("teams_webhook_url", e.target.value)} placeholder="https://outlook.office.com/webhook/..." />
+                <div style={{ fontSize: '0.8125rem', color: '#888', marginTop: '0.5rem' }}>
+                  In Teams, go to your channel → ... → Connectors → Incoming Webhook → Configure → copy the URL.
+                </div>
+              </div>
+            )}
+
+            {/* GoHighLevel */}
+            <div className="settings-toggle-row">
+              <div className="settings-toggle-info">
+                <div className="settings-toggle-label">GoHighLevel Sync</div>
+                <div className="settings-toggle-desc">Push abandoned leads directly into your GHL workflow</div>
+              </div>
+              <Toggle on={!!settings.ghl_webhook_url} onChange={v => { if (!v) update("ghl_webhook_url", null); else update("ghl_webhook_url", "") }} disabled={!isPro} />
+            </div>
+            {settings.ghl_webhook_url !== null && (
+              <div className="settings-field settings-indent">
+                <label className="settings-label">GHL Inbound Webhook URL</label>
+                <input type="url" className="settings-input" value={settings.ghl_webhook_url ?? ""} onChange={e => update("ghl_webhook_url", e.target.value)} placeholder="https://services.leadconnectorhq.com/hooks/..." />
+                <div style={{ fontSize: '0.8125rem', color: '#888', marginTop: '0.5rem' }}>
+                  In GHL, create a workflow → trigger: &ldquo;Inbound Webhook&rdquo; → copy the URL. Lead data fires the workflow with name, email, phone, score, and value fields.
+                </div>
               </div>
             )}
 

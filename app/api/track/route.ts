@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, first_lead_email_sent, email, first_name')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, teams_webhook_url, ghl_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, first_lead_email_sent, email, first_name')
     .eq('api_key', api_key)
     .single()
 
@@ -374,6 +374,97 @@ export async function POST(request: NextRequest) {
       }
     } catch (err) {
       console.error('Slack alert failed for lead', lead.id, err)
+    }
+  }
+
+
+  // --- TEAMS ALERT ---
+  if (email || phone) {
+    try {
+      if (client.teams_webhook_url) {
+        const score = Number(fields_completed ?? 0) >= 3 ? 'Hot' : Number(fields_completed ?? 0) >= 2 ? 'Warm' : 'Cold'
+        const teamsMsg = {
+          '@type': 'MessageCard',
+          '@context': 'https://schema.org/extensions',
+          themeColor: 'FF6B35',
+          summary: `New Abandoned Lead - ${score}`,
+          sections: [
+            {
+              activityTitle: `**New Abandoned Lead - ${score}**`,
+              activitySubtitle: `Captured ${new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' })}`,
+              facts: [
+                { name: 'Name', value: name || 'N/A' },
+                { name: 'Email', value: email || 'N/A' },
+                { name: 'Phone', value: phone || 'N/A' },
+                { name: 'Fields Completed', value: `${fields_completed || 0}/${total_fields || 0}` },
+              ],
+              markdown: true
+            }
+          ]
+        }
+
+        const teamsRes = await fetch(client.teams_webhook_url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(teamsMsg),
+        })
+        const teamsText = await teamsRes.text()
+        if (!teamsRes.ok) {
+          console.error('Teams alert failed for lead', lead.id, 'status:', teamsRes.status, 'response:', teamsText)
+        } else {
+          console.log('Teams alert sent for lead', lead.id)
+          await supabase
+            .from('leads')
+            .update({ teams_sent: true, teams_sent_at: new Date().toISOString() })
+            .eq('id', lead.id)
+        }
+      }
+    } catch (err) {
+      console.error('Teams alert failed for lead', lead.id, err)
+    }
+  }
+
+
+  // --- GOHIGHLEVEL SYNC ---
+  if (name || email || phone) {
+    try {
+      if (client.ghl_webhook_url) {
+        const score = Number(fields_completed ?? 0) >= 3 ? 'hot' : Number(fields_completed ?? 0) >= 2 ? 'warm' : 'cold'
+        const ghlPayload = {
+          source: 'ReCapture',
+          firstName: name ? String(name).split(' ')[0] : null,
+          lastName: name && String(name).split(' ').length > 1 ? String(name).split(' ').slice(1).join(' ') : null,
+          email: email || null,
+          phone: phone || null,
+          tags: ['recapture', 'abandoned-form', 'lead-' + score],
+          customField: {
+            recapture_score: score,
+            recapture_estimated_value: estimated_value,
+            recapture_fields_completed: Number(fields_completed ?? 0),
+            recapture_total_fields: Number(total_fields ?? 0),
+            recapture_lead_id: lead.id,
+            recapture_captured_at: new Date().toISOString(),
+          }
+        }
+
+        const ghlRes = await fetch(client.ghl_webhook_url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(ghlPayload),
+        })
+        const ghlText = await ghlRes.text()
+        if (!ghlRes.ok) {
+          console.error('GHL sync failed for lead', lead.id, 'status:', ghlRes.status, 'response:', ghlText)
+        } else {
+          console.log('GHL sync sent for lead', lead.id)
+          await supabase
+            .from('leads')
+            .update({ ghl_sent: true, ghl_sent_at: new Date().toISOString() })
+            .eq('id', lead.id)
+        }
+      }
+    } catch (err) {
+      console.error('GHL sync failed for lead', lead.id, err)
     }
   }
 

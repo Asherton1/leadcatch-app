@@ -61,7 +61,7 @@ const integrations = [
       { name: 'SMS Alerts', desc: 'Text alerts the moment a high-value lead abandons', status: 'live', icon: 'sms' },
       { name: 'Email (Resend)', desc: 'Automated branded recovery emails on your behalf', status: 'live', icon: 'email' },
       { name: 'Ai Voice Callback', desc: 'Ai calls abandoned leads back within 60 seconds on your behalf', status: 'live', icon: 'callrail' },
-      { name: 'Microsoft Teams', desc: 'Lead alerts with action buttons for your front desk', status: 'coming', icon: 'teams' },
+      { name: 'Microsoft Teams', desc: 'Instant lead alerts in your Teams channels', status: 'live', icon: 'teams' },
       { name: 'WhatsApp Business', desc: 'Recovery messages for international luxury buyers', status: 'coming', icon: 'whatsapp' },
       { name: 'Telegram', desc: 'Direct alerts for international and high-net-worth client base', status: 'coming', icon: 'telegram' },
     ]
@@ -72,7 +72,7 @@ const integrations = [
       { name: 'Any CRM via Webhook', desc: 'Push leads to any CRM in real time using Zapier, Make, or your own endpoint', status: 'live', icon: 'webhook' },
       { name: 'HubSpot', desc: 'Native sync into your HubSpot pipeline', status: 'coming', icon: 'hubspot' },
       { name: 'Salesforce', desc: 'Native push to Salesforce with custom field mapping', status: 'coming', icon: 'salesforce' },
-      { name: 'GoHighLevel', desc: 'Native integration for GHL agency clients', status: 'coming', icon: 'ghl' },
+      { name: 'GoHighLevel', desc: 'Push abandoned leads directly into GHL workflows', status: 'live', icon: 'ghl' },
       { name: 'Follow Up Boss', desc: 'Native auto-create contacts for luxury real estate teams', status: 'coming', icon: 'fub' },
       { name: 'Pipedrive', desc: 'Native push to your Pipedrive sales pipeline', status: 'coming', icon: 'pipedrive' },
       { name: 'Zoho CRM', desc: 'Native sync for international and multi-region sales teams', status: 'coming', icon: 'zoho' },
