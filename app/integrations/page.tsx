@@ -88,8 +88,8 @@ const integrations = [
   {
     category: 'Ad Platforms',
     items: [
-      { name: 'Google Ads', desc: 'Feed recovered leads back as offline conversions for smarter bidding', status: 'coming', icon: 'google' },
-      { name: 'Meta Ads', desc: 'Conversions API integration for optimized ad spend', status: 'coming', icon: 'meta' },
+      { name: 'Google Ads', desc: 'Feed recovered leads back as offline conversions for smarter bidding', status: 'live', icon: 'google' },
+      { name: 'Meta Ads', desc: 'Conversions API integration for optimized ad spend', status: 'live', icon: 'meta' },
       { name: 'CallRail', desc: 'Track calls from recovered leads back to campaigns', status: 'coming', icon: 'callrail' },
     ]
   },
