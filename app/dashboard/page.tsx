@@ -7,6 +7,7 @@ import { ensureClient } from '@/lib/provision'
 import './dashboard.css'
 import Footer from '../components/Footer'
 import '../landing.css'
+import AdminNav from '../components/AdminNav'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -757,6 +758,7 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
 
+      <AdminNav />
       {/* ── Header ──────────────────────────────────────────────────────────── */}
       <header className="header">
         <div className="logo">
@@ -767,8 +769,6 @@ export default function Dashboard() {
               <circle className="logo-dg" cx="18" cy="18" r="8" fill="#ff6b35"/>
               <circle className="logo-dp" cx="18" cy="18" r="5" fill="#ff6b35"/>
             </svg><span><span style={{ color: '#fff', fontWeight: 700 }}>Re</span><span style={{ color: '#ff6b35', fontWeight: 700 }}>Capture</span></span></span>
-          {isAdmin && <a href="/admin" style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.14em', color: '#ff6b35', background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.3)', borderRadius: '6px', padding: '4px 10px', textDecoration: 'none', marginLeft: '14px', transition: 'all 0.2s' }} onMouseOver={e => { (e.target as HTMLElement).style.background = 'rgba(255,107,53,0.18)'; (e.target as HTMLElement).style.borderColor = 'rgba(255,107,53,0.5)' }} onMouseOut={e => { (e.target as HTMLElement).style.background = 'rgba(255,107,53,0.1)'; (e.target as HTMLElement).style.borderColor = 'rgba(255,107,53,0.3)' }}>ADMIN</a>}
-          {isAdmin && <a href="/dashboard/outreach" style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.14em', color: '#ff6b35', background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.3)', borderRadius: '6px', padding: '4px 10px', textDecoration: 'none', marginLeft: '8px', transition: 'all 0.2s' }} onMouseOver={e => { (e.target as HTMLElement).style.background = 'rgba(255,107,53,0.18)'; (e.target as HTMLElement).style.borderColor = 'rgba(255,107,53,0.5)' }} onMouseOut={e => { (e.target as HTMLElement).style.background = 'rgba(255,107,53,0.1)'; (e.target as HTMLElement).style.borderColor = 'rgba(255,107,53,0.3)' }}>OUTREACH</a>}
         </div>
         <div className="header-right">
           {selectedClient && <span className="client-name">{displayName(selectedClient)}</span>}
