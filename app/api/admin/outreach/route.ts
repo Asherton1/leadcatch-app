@@ -40,6 +40,24 @@ function mergeTags(html: string, prospect: {
     .replace(/\{city\}/g, prospect.city || 'Dallas')
 }
 
+// GET — fetch all queue items for admin
+export async function GET(request: NextRequest) {
+  const admin = await isAdmin(request)
+  if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  try {
+    const { data, error } = await supabase
+      .from('outreach_queue')
+      .select('*')
+      .order('scheduled_send_at', { ascending: true })
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ items: data || [] })
+  } catch (err) {
+    return NextResponse.json({ error: String(err) }, { status: 500 })
+  }
+}
+
 // POST — bulk load prospects
 export async function POST(request: NextRequest) {
   const admin = await isAdmin(request)

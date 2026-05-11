@@ -53,15 +53,19 @@ export default function OutreachAdminPage() {
 
   const loadQueue = useCallback(async () => {
     try {
-      const { data, error } = await supabase
-        .from('outreach_queue')
-        .select('*')
-        .order('scheduled_send_at', { ascending: true })
-      if (error) throw error
-      setItems(data || [])
+      const { data: { session } } = await supabase.auth.getSession()
+      const res = await fetch('/api/admin/outreach', {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + (session?.access_token || ''),
+        },
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Failed to load')
+      setItems(data.items || [])
     } catch (err) {
       console.error('Load failed:', err)
-      setFlash({ type: 'error', msg: 'Failed to load queue' })
+      setFlash({ type: 'error', msg: 'Failed to load queue: ' + (err instanceof Error ? err.message : 'unknown') })
     } finally {
       setLoading(false)
     }
