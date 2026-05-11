@@ -108,7 +108,7 @@ export default function SmsTemplatesAdminPage() {
   if (authLoading) {
     return (
       <div className="landing" style={{ minHeight: '100vh', background: '#0a0a0a' }}>
-        <BlogNav />
+        <AdminNav />
         <div style={{ padding: '8rem 2rem', textAlign: 'center', color: '#888' }}>Checking access...</div>
         <Footer />
       </div>
@@ -118,7 +118,7 @@ export default function SmsTemplatesAdminPage() {
   if (!isAdmin) {
     return (
       <div className="landing" style={{ minHeight: '100vh', background: '#0a0a0a' }}>
-        <BlogNav />
+        <AdminNav />
         <div style={{ padding: '8rem 2rem', textAlign: 'center', color: '#fff' }}>
           <h1 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Access denied</h1>
           <p style={{ color: '#888' }}>This page is restricted to admin only.</p>
@@ -130,7 +130,7 @@ export default function SmsTemplatesAdminPage() {
 
   return (
     <div className="landing" style={{ minHeight: '100vh', background: '#0a0a0a' }}>
-      <BlogNav />
+      <AdminNav />
       <section className="smst-hero">
         <div className="smst-hero-inner">
           <p className="smst-eyebrow">Admin · SMS Templates</p>
