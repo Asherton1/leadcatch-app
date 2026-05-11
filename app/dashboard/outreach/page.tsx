@@ -101,6 +101,8 @@ export default function OutreachAdminPage() {
       setProspectsBlock('')
       setSubject('')
       setBodyHtml('')
+      // Force a fresh fetch with a small delay to ensure Supabase row-level consistency
+      await new Promise(resolve => setTimeout(resolve, 500))
       await loadQueue()
     } catch (err) {
       setFlash({ type: 'error', msg: err instanceof Error ? err.message : 'Failed' })
