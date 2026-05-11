@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
 import { useIsAdmin } from '@/lib/use-is-admin'
-import BlogNav from '../../components/BlogNav'
+import AdminNav from '../../components/AdminNav'
 import Footer from '../../components/Footer'
 import '../../landing.css'
 import './sms-templates.css'

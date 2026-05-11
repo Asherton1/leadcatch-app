@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import Image from 'next/image'
+import AdminNav from '../components/AdminNav'
 import Footer from '../components/Footer'
 import '../landing.css'
 
@@ -80,6 +81,7 @@ export default function AdminPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Inter', sans-serif" }}>
+      <AdminNav />
       {/* Header */}
       <div className="admin-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 2rem', borderBottom: '1px solid #1a1a1a', position: 'sticky', top: 0, background: '#0a0a0a', zIndex: 50, flexWrap: 'wrap', gap: '0.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
