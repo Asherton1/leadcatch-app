@@ -82,18 +82,11 @@ export default function AdminPage() {
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Inter', sans-serif" }}>
       <AdminNav />
-      {/* Header */}
-      <div className="admin-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 2rem', borderBottom: '1px solid #1a1a1a', position: 'sticky', top: 0, background: '#0a0a0a', zIndex: 50, flexWrap: 'wrap', gap: '0.5rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <Image src="/logo.png" alt="ReCapture" width={120} height={31} style={{ height: '24px', width: 'auto' }} />
-          <span style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.12em', color: '#ff6b35', background: 'rgba(255,107,53,0.1)', border: '1px solid rgba(255,107,53,0.3)', borderRadius: 4, padding: '2px 6px' }}>ADMIN</span>
-        </div>
-        <div className="admin-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-          <a href="https://userecapture.com" target="_blank" style={{ fontSize: '0.7rem', color: '#555', textDecoration: 'none', padding: '0.35rem 0.6rem', border: '1px solid #2a2a2a', borderRadius: 6 }}>Site</a>
-          <a href="https://resend.com" target="_blank" style={{ fontSize: '0.7rem', color: '#555', textDecoration: 'none', padding: '0.35rem 0.6rem', border: '1px solid #2a2a2a', borderRadius: 6 }}>Resend</a>
-          <a href="https://dashboard.stripe.com" target="_blank" style={{ fontSize: '0.7rem', color: '#555', textDecoration: 'none', padding: '0.35rem 0.6rem', border: '1px solid #2a2a2a', borderRadius: 6 }}>Stripe</a>
-          <button style={{ background: 'transparent', border: '1px solid #2a2a2a', borderRadius: 6, color: '#666', fontSize: '0.7rem', padding: '0.35rem 0.6rem', cursor: 'pointer', fontFamily: 'inherit' }} onClick={() => supabase.auth.signOut().then(() => router.push('/'))}>Sign Out</button>
-        </div>
+      {/* Utility actions — external tools + sign out, no redundant logo or ADMIN badge */}
+      <div className="admin-utility" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '0.625rem 1.5rem', borderBottom: '1px solid #1a1a1a', background: '#0a0a0a', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <a href="https://resend.com" target="_blank" style={{ fontSize: '0.7rem', color: '#555', textDecoration: 'none', padding: '0.3rem 0.6rem', border: '1px solid #1e1e1e', borderRadius: 6 }}>Resend</a>
+        <a href="https://dashboard.stripe.com" target="_blank" style={{ fontSize: '0.7rem', color: '#555', textDecoration: 'none', padding: '0.3rem 0.6rem', border: '1px solid #1e1e1e', borderRadius: 6 }}>Stripe</a>
+        <button style={{ background: 'transparent', border: '1px solid #1e1e1e', borderRadius: 6, color: '#666', fontSize: '0.7rem', padding: '0.3rem 0.6rem', cursor: 'pointer', fontFamily: 'inherit' }} onClick={() => supabase.auth.signOut().then(() => router.push('/'))}>Sign Out</button>
       </div>
 
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '2rem 1.5rem' }}>
