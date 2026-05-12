@@ -25,6 +25,7 @@ export default function Footer() {
           <Link href="/why-us" className="footer-link">Why Us</Link>
           <Link href="/how-it-works" className="footer-link">How It Works</Link>
           <Link href="/integrations" className="footer-link">Integrations</Link>
+          <Link href="/faq" className="footer-link">FAQ</Link>
           <Link href="/demo" className="footer-link">Live Demo</Link>
           <Link href="/form-audit" className="footer-link">Free Form Audit</Link>
           <Link href="/calculator" className="footer-link">ROI Estimator</Link>
