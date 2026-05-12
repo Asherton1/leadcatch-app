@@ -7,18 +7,18 @@ import '../blog/blog.css'
 import '../landing.css'
 
 export const metadata = {
-  title: 'ReCapture for AppFolio — Push Leasing Prospects Into Your Pipeline',
-  description: 'AppFolio tracks submitted leasing inquiries. ReCapture captures the 70% who started an inquiry and never finished. Push abandoned prospects into AppFolio in real-time via webhook.',
-  keywords: 'AppFolio form abandonment, AppFolio lead recovery, AppFolio integration, multifamily lead capture, property management leasing forms, multifamily Zapier',
+  title: 'ReCapture for Boulevard — Capture Consultation Leads Before They Leave',
+  description: 'Boulevard books the consultations that submit. ReCapture captures the 67% of consultation forms that never finish. Push abandoned leads into Boulevard in real-time via webhook.',
+  keywords: 'Boulevard form abandonment, Boulevard lead recovery, Boulevard integration, med spa lead capture, plastic surgery consultation forms, dermatology booking Zapier',
 }
 
 const SAMPLE_LEADS = [
-  { name: 'Sarah K.', initials: 'SK', email: 'sarah.k@gmail.com', service: 'Tour request', value: 36000, status: 'Recovered' as const },
-  { name: 'Mark T.', initials: 'MT', email: 'mark.t@outlook.com', service: '2BR availability', value: 42000, status: 'Contacted' as const },
-  { name: 'Jessica R.', initials: 'JR', email: 'jess.r@gmail.com', service: 'Floor plan inquiry', value: 30000, status: 'Open' as const },
+  { name: 'Sarah K.', initials: 'SK', email: 'sarah.k@gmail.com', service: 'Botox consultation', value: 850, status: 'Recovered' as const },
+  { name: 'Mark T.', initials: 'MT', email: 'mark.t@outlook.com', service: 'Filler treatment inquiry', value: 1200, status: 'Contacted' as const },
+  { name: 'Jessica R.', initials: 'JR', email: 'jess.r@gmail.com', service: 'Laser package quote', value: 2400, status: 'Open' as const },
 ]
 
-export default function ForAppFolio() {
+export default function ForBoulevard() {
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Inter', -apple-system, sans-serif", color: '#e4e4e7' }}>
       <BlogNav />
@@ -29,13 +29,13 @@ export default function ForAppFolio() {
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.1fr)', gap: '4rem', alignItems: 'center' }} className="hero-grid">
           <div>
             <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-              For Multifamily Property Managers on AppFolio
+              For Med Spas, Plastic Surgery & Dermatology on Boulevard
             </p>
             <h1 className="hero-h1" style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '1.5rem', color: '#fff' }}>
-              AppFolio tracks the prospects who hit submit. We capture the 70% of leasing inquiries who didn't.
+              Boulevard books the consultations that submit. We capture the 67% of inquiry forms that don't.
             </h1>
             <p className="hero-sub" style={{ fontSize: '1.0625rem', color: '#a1a1aa', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Baymard Institute's research shows 60-70% of website visitors abandon contact forms before submitting — and multifamily leasing inquiries run as high as 70%. AppFolio tracks the prospects who finish. ReCapture is the layer that captures the rest — and pushes them straight into AppFolio in real-time.
+              Baymard Institute's research shows 60-70% of website visitors abandon contact forms before submitting — and med spa consultation forms run as high as 67%. Boulevard books the consultations that submit. ReCapture is the layer that captures the rest — and pushes them straight into Boulevard in real-time.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
               <Link href="/signup?plan=pro" style={{ display: 'inline-block', background: '#ff6b35', color: '#0a0a0a', fontWeight: 700, padding: '0.875rem 1.75rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>
@@ -67,14 +67,14 @@ export default function ForAppFolio() {
             01 — The problem
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
-            AppFolio is the lease. ReCapture is the catch.
+            Boulevard is the booking. ReCapture is the catch.
           </h2>
           <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
             <p>
-              AppFolio is the operating system for property management companies of every size. It runs the leasing pipeline, the prospect tracking, the application flows, the lease signing, the resident communication, the accounting. It is genuinely excellent at converting prospects who submitted a leasing inquiry.
+              Boulevard is the operating system for the best med spas, plastic surgery practices, and dermatology offices in North America. It runs the booking flow, the front desk, the POS, the client profiles, the memberships, the consultation scheduling. It is genuinely excellent at converting clients who submitted a consultation request.
             </p>
             <p>
-              The problem: Baymard Institute's 2024 research shows 60-70% of website visitors who start a form never submit it — and multifamily leasing inquiries run higher, up to 70%. AppFolio never sees those people. They show up in your site analytics as bounce-rate or unattributed traffic. Your ad budget paid for the click. The prospect disappeared. Your unit stays vacant.
+              The problem: Baymard Institute's 2024 research shows 60-70% of website visitors who start a form never submit it — and med spa consultation forms run as high as 67%. Boulevard never sees those people. They show up in your site analytics as bounce-rate or unattributed traffic. Your Meta or Google ad spend paid for the click. The client disappeared. Your treatment chair sits empty.
             </p>
             <p>
               ReCapture is the layer that captures them — before they leave the site. One script tag per client. The lead lands in their dashboard. Recovery via SMS or AI voice callback fires automatically.
@@ -91,7 +91,7 @@ export default function ForAppFolio() {
             02 — The math
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '3rem', lineHeight: 1.25, letterSpacing: '-0.02em', maxWidth: '720px' }}>
-            70% of leasing inquiries are abandoned. AppFolio only sees the rest.
+            67% of consultation inquiries are abandoned. Boulevard only sees the rest.
           </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '4rem', alignItems: 'center' }} className="math-grid">
@@ -112,10 +112,10 @@ export default function ForAppFolio() {
             </div>
             <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
               <p>
-                For a multifamily portfolio with 200 units and ~800 monthly leasing inquiry starters across your site, that's roughly <strong style={{ color: '#fff' }}>500-560 abandoned inquiries per month</strong>. Even at a conservative 10% recovery rate, you're capturing <strong style={{ color: '#fff' }}>50-56 additional qualified prospects monthly</strong> — feeding the top of your AppFolio leasing pipeline with applicants who would otherwise have disappeared into your bounce rate.
+                For a med spa practice with 3,000 monthly site visitors and 40 consultation form starts per day, that's roughly <strong style={{ color: '#fff' }}>800-900 abandoned consultation inquiries per month</strong>. Even at a conservative 10% recovery rate, you're capturing <strong style={{ color: '#fff' }}>80-90 additional qualified leads monthly</strong> — at an average $2,800 first treatment, that's <strong style={{ color: '#fff' }}>$200K+ in monthly revenue pipeline</strong> that would never have entered Boulevard otherwise.
               </p>
               <p>
-                ReCapture pushes captured prospects directly into AppFolio via webhook. One install on your leasing site, real-time sync, and your existing AppFolio prospect workflows fire as if the inquiry submitted normally. No automation rebuild, no migration, no platform switch.
+                ReCapture pushes captured leads directly into Boulevard via webhook. One install on your practice site, real-time sync, and your existing Boulevard automations fire as if the consultation form submitted normally. No automation rebuild, no migration, no platform switch.
               </p>
               <p style={{ fontSize: '0.75rem', color: '#555', marginTop: '1.5rem', fontStyle: 'italic' }}>
                 Source: Baymard Institute 2024 form abandonment research.
@@ -138,10 +138,10 @@ export default function ForAppFolio() {
           </h2>
           <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem', marginBottom: '2.5rem' }}>
             <p>
-              Drop the ReCapture tracker on your leasing site (works with AppFolio's built-in marketing sites, Knock, Rently, RentCafe, Funnel, or any custom builds). The moment a visitor types into a leasing inquiry form, we capture the field. If they leave without submitting, the prospect lands in your ReCapture dashboard, fires a webhook into AppFolio as a new prospect, an SMS fires to your leasing team, and Marissa — our AI voice concierge — places a callback within five minutes.
+              Drop the ReCapture tracker on your practice site (works with WordPress, Webflow, Squarespace, Boulevard's hosted booking pages, custom builds, anything). The moment a visitor types into a consultation form, we capture the field. If they leave without submitting, the lead lands in your ReCapture dashboard, fires a webhook into Boulevard as a new client, an SMS fires to your front desk, and Marissa — our AI voice concierge — places a callback within five minutes.
             </p>
             <p>
-              Prospect webhook-routes into your existing AppFolio leasing pipeline and triggers your existing workflows. No re-platforming. No AppFolio replacement. Pure additive layer that captures the leases you were already losing to vacant units.
+              Lead webhook-routes into your existing Boulevard client database and triggers your existing automations. No re-platforming. No Boulevard replacement. Pure additive layer that captures the treatments you were already losing to forgotten consultations.
             </p>
           </div>
 
@@ -167,7 +167,7 @@ export default function ForAppFolio() {
               <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
                 <div style={{ fontSize: '0.7rem', color: '#666', fontFamily: 'Menlo, Monaco, monospace', paddingTop: '0.15rem' }}>2:14 PM</div>
                 <div style={{ color: '#a1a1aa', fontSize: '0.95rem', lineHeight: 1.7 }}>
-                  Prospect is captured in ReCapture dashboard, webhook fires to AppFolio creating a new prospect record with source attribution. SMS to your leasing team fires.
+                  Lead is captured in ReCapture dashboard, webhook fires to Boulevard creating a new client record with source attribution. SMS to your front desk fires.
                 </div>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: '0.75rem', marginBottom: '1.25rem', padding: '1rem', background: '#0a0a0a', borderRadius: '8px', border: '1px solid #1a1a1a' }}>
@@ -182,13 +182,13 @@ export default function ForAppFolio() {
               <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
                 <div style={{ fontSize: '0.7rem', color: '#666', fontFamily: 'Menlo, Monaco, monospace', paddingTop: '0.15rem' }}>2:21 PM</div>
                 <div style={{ color: '#a1a1aa', fontSize: '0.95rem', lineHeight: 1.7 }}>
-                  Prospect schedules a tour. Recovered status syncs to AppFolio prospect record. Leasing team sees a new qualified applicant in their pipeline before they tour the competing property down the street.
+                  Client books a consultation. Recovered status syncs to Boulevard client record. Front desk sees a new qualified consultation in the schedule before the client books at the practice across town.
                 </div>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: '0.75rem' }}>
                 <div style={{ fontSize: '0.7rem', color: '#10b981', fontFamily: 'Menlo, Monaco, monospace', paddingTop: '0.15rem', fontWeight: 700 }}>2:21 PM</div>
                 <div style={{ color: '#10b981', fontSize: '0.95rem', lineHeight: 1.7, fontWeight: 600 }}>
-                  Prospect status: Recovered. Synced to AppFolio.
+                  Lead status: Recovered. Synced to Boulevard.
                 </div>
               </div>
             </div>
@@ -205,10 +205,10 @@ export default function ForAppFolio() {
       <section className="reveal specs-band" style={{ background: '#0d0d0d', borderTop: '1px solid #1a1a1a', borderBottom: '1px solid #1a1a1a', padding: '5rem 2rem', margin: '2rem 0' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-            04 — Built for AppFolio property managers
+            04 — Built for Boulevard practices
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '3rem', lineHeight: 1.25, letterSpacing: '-0.02em', maxWidth: '720px' }}>
-            Real-time, AppFolio-native, no rebuild required.
+            Real-time, Boulevard-native, no rebuild required.
           </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0', border: '1px solid #1a1a1a', borderRadius: '12px', overflow: 'hidden' }} className="specs-grid">
@@ -238,25 +238,25 @@ export default function ForAppFolio() {
 
             <div style={{ padding: '2rem', borderRight: '1px solid #1a1a1a' }}>
               <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-                AppFolio webhook integration
+                Boulevard webhook integration
               </p>
               <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#fff', marginBottom: '0.875rem', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
-                Real-time prospect routing into your AppFolio leasing pipeline.
+                Real-time lead routing into your Boulevard client database.
               </h3>
               <p style={{ color: '#a1a1aa', fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
-                Captured prospects webhook directly into AppFolio as new prospect records via Zapier or Make. Your existing prospect workflows, source attribution, and leasing team routing fire as if the inquiry submitted normally. No automation rebuild required.
+                Captured leads webhook directly into Boulevard as new client records via Zapier or Make. Your existing automations, source attribution, and front desk routing fire as if the consultation form submitted normally. No automation rebuild required.
               </p>
             </div>
 
             <div style={{ padding: '2rem' }}>
               <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-                Compatible with any AppFolio plan
+                Compatible with any Boulevard plan
               </p>
               <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#fff', marginBottom: '0.875rem', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
                 Resell at your markup or pass through at cost.
               </h3>
               <p style={{ color: '#a1a1aa', fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
-                Works with AppFolio Core and AppFolio Plus, from single-property managers up to 500+ unit portfolios. No upgrade required to start capturing abandoned inquiries. ReCapture is plan-agnostic.
+                Works with Boulevard Essentials, Premier, and Enterprise — from single-location med spas up to multi-location practice groups. No upgrade required to start capturing abandoned inquiries. ReCapture is plan-agnostic.
               </p>
             </div>
           </div>
@@ -290,7 +290,7 @@ export default function ForAppFolio() {
         {/* Closing CTA */}
         <section className="reveal" style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid #1a1a1a', marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#fff', marginBottom: '1rem', lineHeight: 1.2, letterSpacing: '-0.03em' }}>
-            Add the recovery layer to your AppFolio leasing pipeline.
+            Add the recovery layer to your Boulevard client database.
           </h2>
           <p style={{ color: '#a1a1aa', lineHeight: 1.7, fontSize: '1rem', marginBottom: '2rem', maxWidth: '560px' }}>
             Drop the tracker. Watch your first abandoned consultation come through within an hour. 7-day free trial. Card required, not charged until day 8.
