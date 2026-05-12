@@ -50,6 +50,7 @@ export default function Footer() {
           <Link href="/for-luxury-auto" className="footer-link">Luxury Auto</Link>
           <Link href="/for-gohighlevel" className="footer-link">GoHighLevel</Link>
           <Link href="/for-hubspot" className="footer-link">HubSpot</Link>
+          <Link href="/for-followupboss" className="footer-link">Follow Up Boss</Link>
         </div>
 
         <div className="footer-col">
