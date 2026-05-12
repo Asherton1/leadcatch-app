@@ -96,10 +96,10 @@ const integrations = [
   {
     category: 'Practice Management',
     items: [
-      { name: 'Boulevard', desc: 'Sync leads to your med spa booking system', status: 'coming', icon: 'boulevard' },
+      { name: 'Boulevard', desc: 'Push abandoned leads into your Boulevard client database for med spa, plastic surgery, and dermatology practices', status: 'webhook', icon: 'boulevard' },
       { name: 'Open Dental', desc: 'Push recovered patients into your dental PMS', status: 'coming', icon: 'dental' },
       { name: 'Dentrix', desc: 'Enterprise dental practice management integration', status: 'coming', icon: 'dentrix' },
-      { name: 'AppFolio', desc: 'Leasing lead sync for property management', status: 'coming', icon: 'appfolio' },
+      { name: 'AppFolio', desc: 'Push abandoned leasing inquiries into your AppFolio prospect pipeline for multifamily property managers', status: 'webhook', icon: 'appfolio' },
       { name: 'Nextech', desc: 'Plastic surgery and LASIK practice management', status: 'coming', icon: 'nextech' },
       { name: 'Mindbody', desc: 'The standard for med spa, fitness, and wellness booking', status: 'coming', icon: 'mindbody' },
       { name: 'Vagaro', desc: 'Salon, spa, and beauty booking platform integration', status: 'coming', icon: 'vagaro' },
