@@ -49,6 +49,7 @@ export default function Footer() {
           <Link href="/for-property-management" className="footer-link">Property Mgmt</Link>
           <Link href="/for-luxury-auto" className="footer-link">Luxury Auto</Link>
           <Link href="/for-gohighlevel" className="footer-link">GoHighLevel</Link>
+          <Link href="/for-hubspot" className="footer-link">HubSpot</Link>
         </div>
 
         <div className="footer-col">
