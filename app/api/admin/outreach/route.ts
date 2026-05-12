@@ -221,7 +221,7 @@ export async function PATCH(request: NextRequest) {
       if (!item) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
       const payload: Record<string, unknown> = {
-        from: 'Ash Chraibi <hello@userecapture.com>',
+        from: 'Asherton Chraibi <hello@userecapture.com>',
         to: item.prospect_email,
         subject: item.email_subject,
         html: item.email_body_html,

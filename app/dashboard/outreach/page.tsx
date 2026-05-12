@@ -339,6 +339,9 @@ Available merge tags: {firstName}, {company}, {vertical}, {city}`}
                           {item.status === 'sent' && !item.replied_at && (
                             <button className="outreach-btn-secondary" onClick={() => handleAction(item.id, 'mark_replied')}>Mark replied</button>
                           )}
+                          {item.status === 'failed' && (
+                            <button className="outreach-btn-secondary" onClick={() => handleAction(item.id, 'send_now')}>Retry</button>
+                          )}
                         </div>
                       </td>
                     </tr>
