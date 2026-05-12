@@ -68,7 +68,6 @@ const TIERS = [
       'Custom integration builds',
       'Monthly strategy calls with founder',
       'Multi-region call routing',
-      'Branded mobile dashboard (coming soon)',
     ],
   },
   {
