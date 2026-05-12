@@ -51,6 +51,9 @@ export default function Footer() {
           <Link href="/for-gohighlevel" className="footer-link">GoHighLevel</Link>
           <Link href="/for-hubspot" className="footer-link">HubSpot</Link>
           <Link href="/for-followupboss" className="footer-link">Follow Up Boss</Link>
+          <Link href="/for-appfolio" className="footer-link">AppFolio</Link>
+          <Link href="/for-appfolio" className="footer-link">AppFolio</Link>
+          <Link href="/for-appfolio" className="footer-link">AppFolio</Link>
         </div>
 
         <div className="footer-col">
