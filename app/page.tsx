@@ -45,8 +45,8 @@ export default function LandingPage() {
               <span className="hero-highlight">Never Hit Submit.</span>
             </h1>
             <p className="hero-subtitle hero-animate-delay">
-              Every day, high-value prospects start filling out your contact form — then vanish before hitting submit.
-              ReCapture captures their info the moment they start typing and gives you a second chance to close the deal.
+              High-value prospects start filling out your form, then vanish before submitting.
+              ReCapture captures their info the moment they start typing — giving you a second chance to close.
             </p>
             <p className="hero-platform-line hero-animate-delay" style={{ marginTop: '2rem', marginBottom: '2.5rem' }}>
               Form abandonment is the start. ReCapture is building the recovery layer for high-ticket service businesses.
