@@ -8,6 +8,23 @@ const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
+// Vercel Hobby max function duration. Needed because 300ms delays + Resend latency
+// can push a 50-email run past the default 10s timeout.
+export const maxDuration = 60
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+
+// Locked outreach signature — used in Day 4 + Day 10 follow-ups.
+// Never use 'Ash Chraibi' or personal cell (813) 245-5956 in any outreach.
+const SIGNATURE_HTML = `<p>Best,<br/>
+Asherton Chraibi<br/>
+Founder, ReCapture<br/>
+Lost revenue recovery for high-ticket service businesses</p>
+
+<p>(888) 606-0630 — Concierge line<br/>
+<a href="mailto:hello@userecapture.com" style="color: #ff6b35;">hello@userecapture.com</a><br/>
+<a href="https://userecapture.com" style="color: #ff6b35;">www.userecapture.com</a></p>`
+
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get('authorization')
   if (authHeader !== 'Bearer ' + CRON_SECRET) {
@@ -38,7 +55,7 @@ export async function GET(request: NextRequest) {
   for (const item of dueSends || []) {
     try {
       const payload: Record<string, unknown> = {
-        from: 'Ash Chraibi <hello@userecapture.com>',
+        from: 'Asherton Chraibi <hello@userecapture.com>',
         to: item.prospect_email,
         subject: item.email_subject,
         html: item.email_body_html,
@@ -58,7 +75,6 @@ export async function GET(request: NextRequest) {
       const data = await res.json() as { id?: string; message?: string }
 
       if (res.ok && data.id) {
-        // Schedule day 4 + day 10 follow-ups based on send time
         const sentAt = new Date()
         const day4 = new Date(sentAt.getTime() + 4 * 24 * 60 * 60 * 1000)
         const day10 = new Date(sentAt.getTime() + 10 * 24 * 60 * 60 * 1000)
@@ -99,6 +115,8 @@ export async function GET(request: NextRequest) {
       results.failed++
       results.errors.push(`${item.prospect_email}: ${String(err)}`)
     }
+    // Resend rate limit is 5 req/sec; 300ms delay = ~3.3/sec (safe margin)
+    await sleep(300)
   }
 
   // 2. DAY 4 FOLLOW-UPS — sent items where day 4 is now/past and day 4 hasn't fired and no reply
@@ -122,10 +140,7 @@ export async function GET(request: NextRequest) {
 
 <p>Open to a 15-minute demo this week? I can show you exactly what your invisible leads look like.</p>
 
-<p>Best,<br/>
-Ash Chraibi<br/>
-Founder, <a href="https://userecapture.com" style="color: #ff6b35;">ReCapture</a><br/>
-(813) 245-5956</p>
+${SIGNATURE_HTML}
 </div>`
 
       const res = await fetch('https://api.resend.com/emails', {
@@ -135,7 +150,7 @@ Founder, <a href="https://userecapture.com" style="color: #ff6b35;">ReCapture</a
           'Authorization': 'Bearer ' + RESEND_KEY,
         },
         body: JSON.stringify({
-          from: 'Ash Chraibi <hello@userecapture.com>',
+          from: 'Asherton Chraibi <hello@userecapture.com>',
           to: item.prospect_email,
           subject: 'Re: ' + item.email_subject,
           html: followupHtml,
@@ -155,6 +170,7 @@ Founder, <a href="https://userecapture.com" style="color: #ff6b35;">ReCapture</a
     } catch (err) {
       results.errors.push(`day-4 ${item.prospect_email}: ${String(err)}`)
     }
+    await sleep(300)
   }
 
   // 3. DAY 10 FOLLOW-UPS — same logic, longer fuse, breakup-style
@@ -176,8 +192,7 @@ Founder, <a href="https://userecapture.com" style="color: #ff6b35;">ReCapture</a
 
 <p>If form abandonment isn't a priority right now, totally understand. If it ever becomes one, you know where to find me. Otherwise, wishing you the best with ${item.prospect_company || 'the work'}.</p>
 
-<p>Best,<br/>
-Ash</p>
+${SIGNATURE_HTML}
 </div>`
 
       const res = await fetch('https://api.resend.com/emails', {
@@ -187,7 +202,7 @@ Ash</p>
           'Authorization': 'Bearer ' + RESEND_KEY,
         },
         body: JSON.stringify({
-          from: 'Ash Chraibi <hello@userecapture.com>',
+          from: 'Asherton Chraibi <hello@userecapture.com>',
           to: item.prospect_email,
           subject: 'Re: ' + item.email_subject,
           html: breakupHtml,
@@ -207,6 +222,7 @@ Ash</p>
     } catch (err) {
       results.errors.push(`day-10 ${item.prospect_email}: ${String(err)}`)
     }
+    await sleep(300)
   }
 
   return NextResponse.json(results)
