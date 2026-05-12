@@ -134,7 +134,7 @@ export default async function ShortLinkPage({ params }: PageProps) {
             </h1>
             <div className="canon-hero-ctas" style={{ marginTop: '2rem' }}>
               <a className="canon-cta-primary" href="/pricing">View pricing</a>
-              <a className="canon-cta-secondary" href="/start-trial">Start free trial</a>
+              <a className="canon-cta-secondary" href="/start-trial">Start your 7-day free trial</a>
             </div>
           </div>
         </div>
@@ -364,7 +364,7 @@ function TrialContent({ firstName }: { firstName: string }) {
               <p className="sl-eyebrow">Your trial is ready</p>
               <h2 className="sl-section-headline">Setup takes 60 seconds, {firstName}.</h2>
               <p className="sl-trial-desc">Drop one line of JavaScript on your site. We start capturing form abandonments instantly. First leads usually arrive within the hour.</p>
-              <a href="/start-trial" className="sl-trial-cta">Start free trial →</a>
+              <a href="/start-trial" className="sl-trial-cta">Start your 7-day free trial →</a>
               <p className="sl-trial-meta">No credit card required · Full Pro plan features for 7 days · Cancel anytime</p>
             </div>
             <div className="sl-trial-card">

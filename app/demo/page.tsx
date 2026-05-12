@@ -239,7 +239,7 @@ export default function TestForm() {
                 <p style={{ color: '#888', lineHeight: 1.7, marginBottom: '2rem', fontSize: '0.9rem' }}>We&apos;ll be in touch within 24 hours. In the meantime, look at the dashboard to the right — that&apos;s your data, captured before you ever hit submit.</p>
                 <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                   <Link href="/" style={{ padding: '0.75rem 1.5rem', background: 'transparent', border: '1px solid #1e1e1e', borderRadius: 8, color: '#bbb', textDecoration: 'none', fontSize: '0.875rem' }}>Back to Home</Link>
-                  <Link href="/start-trial" style={{ padding: '0.75rem 1.5rem', background: '#ff6b35', border: 'none', borderRadius: 8, color: '#fff', textDecoration: 'none', fontSize: '0.875rem', fontWeight: 600 }}>Start Free Trial</Link>
+                  <Link href="/start-trial" style={{ padding: '0.75rem 1.5rem', background: '#ff6b35', border: 'none', borderRadius: 8, color: '#fff', textDecoration: 'none', fontSize: '0.875rem', fontWeight: 600 }}>Start your 7-day free trial</Link>
                 </div>
               </div>
             )}
@@ -429,7 +429,7 @@ export default function TestForm() {
             <h3 style={{ color: '#ff6b35', fontSize: '1.5rem', margin: '0 0 0.75rem 0', fontWeight: 700 }}>How many leads are your forms losing?</h3>
             <p style={{ color: '#888', margin: '0 0 1.5rem 0', fontSize: '0.95rem', lineHeight: 1.7 }}>One script tag. 60-second setup. See your first captured lead within 48 hours.</p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/start-trial" style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem' }}>Start Free Trial</Link>
+              <Link href="/start-trial" style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem' }}>Start your 7-day free trial</Link>
               <Link href="/why-us" style={{ display: 'inline-block', background: 'transparent', color: '#ff6b35', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem', border: '1px solid rgba(255,107,53,0.4)' }}>Why Us</Link>
             </div>
           </div>

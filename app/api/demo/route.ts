@@ -52,7 +52,7 @@ function prospectConfirmationHtml(name: string) {
         <!-- CTA -->
         <tr><td style="padding:8px 0 32px 0;">
           <a href="https://www.userecapture.com/signup" style="display:inline-block;background:#ff6b35;color:#0a0a0a;padding:14px 28px;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;text-decoration:none;border-radius:6px;letter-spacing:-0.005em;">
-            Begin your 7-day trial &rarr;
+            Start your 7-day free trial &rarr;
           </a>
         </td></tr>
 

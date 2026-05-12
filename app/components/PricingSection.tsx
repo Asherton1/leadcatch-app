@@ -66,7 +66,7 @@ export default function PricingSection() {
         'Weekly email report',
         'Manual follow-up (email & call)',
       ],
-      cta: { label: 'Begin your 7-day trial', href: '/signup?plan=essentials', isModal: false },
+      cta: { label: 'Start your 7-day free trial', href: '/signup?plan=essentials', isModal: false },
       isPro: false,
     },
     {
@@ -89,7 +89,7 @@ export default function PricingSection() {
         'HIPAA-ready data handling + BAA available',
         'Priority support',
       ],
-      cta: { label: 'Begin your 7-day trial', href: '/signup?plan=pro', isModal: false },
+      cta: { label: 'Start your 7-day free trial', href: '/signup?plan=pro', isModal: false },
       isPro: true,
     },
     {

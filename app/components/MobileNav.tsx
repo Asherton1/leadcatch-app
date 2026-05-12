@@ -92,7 +92,7 @@ export default function MobileNav() {
             </div>
           </div>
           <Link href="/login" className="mobile-login">Login</Link>
-          <Link href="/start-trial" className="nav-mobile-cta">Start Free Trial</Link>
+          <Link href="/start-trial" className="nav-mobile-cta">Start your 7-day free trial</Link>
         </div>
       </div>
     </>

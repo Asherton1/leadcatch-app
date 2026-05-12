@@ -52,7 +52,7 @@ export default function LandingPage() {
               Form abandonment is the start. ReCapture is building the recovery layer for high-ticket service businesses.
             </p>
             <div className="cta-group hero-animate-delay2">
-              <Link href="/start-trial" className="cta-primary">Start Your 7-Day Free Trial</Link>
+              <Link href="/start-trial" className="cta-primary">Start your 7-day free trial</Link>
             </div>
           </div>
           <div className="hero-right hero-animate-delay2">
@@ -233,7 +233,7 @@ export default function LandingPage() {
         <h2>Stop Losing Revenue.<br />Start Recovering Leads.</h2>
         <p>7-day free trial. Cancel anytime. If you&apos;re losing leads, you&apos;ll know within 48 hours.</p>
         <div className="cta-group" style={{ justifyContent: 'center' }}>
-          <Link href="/start-trial" className="cta-primary">Start Your 7-Day Free Trial</Link>
+          <Link href="/start-trial" className="cta-primary">Start your 7-day free trial</Link>
         </div>
         <div style={{ marginTop: '1.5rem', textAlign: 'center', display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link href="/demo" className="page-transition-link" style={{ color: '#888', fontSize: '0.9375rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}>Try the Live Demo &rarr;</Link>

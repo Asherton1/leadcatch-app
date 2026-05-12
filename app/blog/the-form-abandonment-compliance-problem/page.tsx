@@ -187,7 +187,7 @@ export default function Post() {
         <div style={{ margin: '3rem 0', padding: '2rem', background: '#111', borderRadius: '12px', border: '1px solid rgba(255,107,53,0.2)', textAlign: 'center' }}>
           <p style={{ color: '#fff', fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.5rem' }}>Ready to evaluate ReCapture?</p>
           <p style={{ color: '#888', fontSize: '0.9375rem', marginBottom: '1.5rem' }}>Start a 7-day free trial. No charge until day 8. Or read our trust page first.</p>
-          <Link href="/signup" style={{ display: 'inline-block', background: '#ff6b35', color: '#000', fontWeight: 700, fontSize: '0.9375rem', padding: '0.75rem 2rem', borderRadius: '0.5rem', textDecoration: 'none', marginRight: '0.5rem' }}>Start Free Trial</Link>
+          <Link href="/signup" style={{ display: 'inline-block', background: '#ff6b35', color: '#000', fontWeight: 700, fontSize: '0.9375rem', padding: '0.75rem 2rem', borderRadius: '0.5rem', textDecoration: 'none', marginRight: '0.5rem' }}>Start your 7-day free trial</Link>
           <Link href="/trust" style={{ display: 'inline-block', background: 'transparent', color: '#a1a1aa', fontWeight: 600, fontSize: '0.9375rem', padding: '0.75rem 2rem', borderRadius: '0.5rem', textDecoration: 'none', border: '1px solid #1e1e1e' }}>Read Trust Page</Link>
         </div>
       </article>
