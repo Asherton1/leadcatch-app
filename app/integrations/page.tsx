@@ -70,12 +70,12 @@ const integrations = [
     category: 'CRM & Sales',
     items: [
       { name: 'Any CRM via Webhook', desc: 'Push leads to any CRM in real time using Zapier, Make, or your own endpoint', status: 'live', icon: 'webhook' },
-      { name: 'HubSpot', desc: 'Native sync into your HubSpot pipeline', status: 'coming', icon: 'hubspot' },
-      { name: 'Salesforce', desc: 'Native push to Salesforce with custom field mapping', status: 'coming', icon: 'salesforce' },
+      { name: 'HubSpot', desc: 'Push abandoned leads into your HubSpot pipeline', status: 'webhook', icon: 'hubspot' },
+      { name: 'Salesforce', desc: 'Push leads to Salesforce with custom field mapping', status: 'webhook', icon: 'salesforce' },
       { name: 'GoHighLevel', desc: 'Push abandoned leads directly into GHL workflows', status: 'live', icon: 'ghl' },
-      { name: 'Follow Up Boss', desc: 'Native auto-create contacts for luxury real estate teams', status: 'coming', icon: 'fub' },
-      { name: 'Pipedrive', desc: 'Native push to your Pipedrive sales pipeline', status: 'coming', icon: 'pipedrive' },
-      { name: 'Zoho CRM', desc: 'Native sync for international and multi-region sales teams', status: 'coming', icon: 'zoho' },
+      { name: 'Follow Up Boss', desc: 'Auto-create Follow Up Boss contacts for real estate teams', status: 'webhook', icon: 'fub' },
+      { name: 'Pipedrive', desc: 'Push abandoned leads into your Pipedrive sales pipeline', status: 'webhook', icon: 'pipedrive' },
+      { name: 'Zoho CRM', desc: 'Push leads into Zoho CRM for international sales teams', status: 'webhook', icon: 'zoho' },
     ]
   },
   {
@@ -157,10 +157,10 @@ function CategorySection({ group }: { group: typeof integrations[0] }) {
                 padding: '3px 8px',
                 borderRadius: '4px',
                 whiteSpace: 'nowrap' as const,
-                background: item.status === 'live' ? 'rgba(34,197,94,0.1)' : 'transparent',
-                color: item.status === 'live' ? '#22c55e' : '#555',
-                border: item.status === 'live' ? '1px solid rgba(34,197,94,0.2)' : '1px solid #333',
-              }}>{item.status === 'live' ? 'Live' : 'Coming Soon'}</span>
+                background: item.status === 'live' ? 'rgba(34,197,94,0.1)' : item.status === 'webhook' ? 'rgba(255,107,53,0.1)' : 'transparent',
+                color: item.status === 'live' ? '#22c55e' : item.status === 'webhook' ? '#ff6b35' : '#555',
+                border: item.status === 'live' ? '1px solid rgba(34,197,94,0.2)' : item.status === 'webhook' ? '1px solid rgba(255,107,53,0.2)' : '1px solid #333',
+              }}>{item.status === 'live' ? 'Live' : item.status === 'webhook' ? 'Via Webhook' : 'Coming Soon'}</span>
             </div>
             <p style={{ fontSize: '0.8125rem', color: '#666', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
           </div>
