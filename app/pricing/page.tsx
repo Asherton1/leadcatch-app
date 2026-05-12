@@ -5,6 +5,7 @@ import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import PricingSection from '../components/PricingSection'
 import MathSection from '../components/MathSection'
+import Link from 'next/link'
 import PricingFAQ from '../components/PricingFAQ'
 import '../blog/blog.css'
 import '../landing.css'
@@ -69,7 +70,10 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <PricingFAQ />
+      <section style={{ padding: '4rem 1.5rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Have more questions?</p>
+        <Link href="/faq" style={{ color: '#ff6b35', fontWeight: 500, fontSize: '1.0625rem', textDecoration: 'none' }}>View our full FAQ &rarr;</Link>
+      </section>
       <Footer />
     </div>
   )
