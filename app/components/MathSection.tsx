@@ -2,43 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-function useCountUp(end: number, duration: number, delay: number, triggered: boolean): number {
-  const [value, setValue] = useState(0)
-  const frameRef = useRef<number>(0)
-  const startRef = useRef<number>(0)
-  const hasRun = useRef(false)
-
-  useEffect(() => {
-    if (!triggered || hasRun.current) return
-    hasRun.current = true
-
-    const reduce = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce) {
-      setValue(end)
-      return
-    }
-
-    const startTimer = setTimeout(() => {
-      const animate = (ts: number) => {
-        if (!startRef.current) startRef.current = ts
-        const elapsed = ts - startRef.current
-        const progress = Math.min(elapsed / duration, 1)
-        const eased = 1 - Math.pow(1 - progress, 3)
-        setValue(Math.round(end * eased))
-        if (progress < 1) frameRef.current = requestAnimationFrame(animate)
-      }
-      frameRef.current = requestAnimationFrame(animate)
-    }, delay)
-
-    return () => {
-      clearTimeout(startTimer)
-      if (frameRef.current) cancelAnimationFrame(frameRef.current)
-    }
-  }, [triggered, end, duration, delay])
-
-  return value
-}
-
 export default function MathSection() {
   const [visible, setVisible] = useState(false)
   const wrapRef = useRef<HTMLDivElement>(null)
@@ -59,12 +22,6 @@ export default function MathSection() {
     return () => observer.disconnect()
   }, [])
 
-  // Stagger count-ups to match the spine drawing (1.6s) + dot reveals (300ms apart)
-  const cost = useCountUp(397, 1400, 400, visible)
-  const medspa = useCountUp(2800, 1600, 700, visible)
-  const dental = useCountUp(1900, 1400, 1000, visible)
-  const property = useCountUp(3200, 1600, 1300, visible)
-
   const fmt = (n: number) => n.toLocaleString('en-US')
 
   return (
@@ -79,7 +36,7 @@ export default function MathSection() {
 
             <div className="pricing-math-row pricing-math-row-left">
               <div className="pricing-math-content">
-                <div className="pricing-math-num">${fmt(cost)}<span className="pricing-math-num-period"> / mo</span></div>
+                <div className="pricing-math-num">${fmt(397)}<span className="pricing-math-num-period"> / mo</span></div>
                 <div className="pricing-math-desc">Cost of ReCapture Pro.</div>
               </div>
               <div className="pricing-math-dot" data-step="1" />
@@ -88,14 +45,14 @@ export default function MathSection() {
             <div className="pricing-math-row pricing-math-row-right">
               <div className="pricing-math-dot" data-step="2" />
               <div className="pricing-math-content">
-                <div className="pricing-math-num">${fmt(medspa)}</div>
+                <div className="pricing-math-num">${fmt(2800)}</div>
                 <div className="pricing-math-desc">Average med spa client.</div>
               </div>
             </div>
 
             <div className="pricing-math-row pricing-math-row-left">
               <div className="pricing-math-content">
-                <div className="pricing-math-num">${fmt(dental)}</div>
+                <div className="pricing-math-num">${fmt(1900)}</div>
                 <div className="pricing-math-desc">Average dental patient.</div>
               </div>
               <div className="pricing-math-dot" data-step="3" />
@@ -104,7 +61,7 @@ export default function MathSection() {
             <div className="pricing-math-row pricing-math-row-right">
               <div className="pricing-math-dot" data-step="4" />
               <div className="pricing-math-content">
-                <div className="pricing-math-num">${fmt(property)}</div>
+                <div className="pricing-math-num">${fmt(3200)}</div>
                 <div className="pricing-math-desc">Average property management lease per year.</div>
               </div>
             </div>
