@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     siteName: 'ReCapture',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ReCapture Pricing — Plans from $197/mo with 7-Day Free Trial',
+    description: 'Plans starting at $197/mo. Pro at $397/mo includes Ai voice callback. Enterprise from $1,997/mo for HIPAA + BAA, unlimited sites.',
+  },
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

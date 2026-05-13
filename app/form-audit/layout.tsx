@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     siteName: 'ReCapture',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free Form Audit — Find Your Lost Lead Revenue — ReCapture',
+    description: 'Free audit of your website forms. Submission rates, abandonment patterns, missed revenue. Delivered within 24 hours.',
+  },
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

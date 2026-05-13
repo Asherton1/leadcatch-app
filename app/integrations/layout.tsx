@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     siteName: 'ReCapture',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ReCapture Integrations — HubSpot, Boulevard, AppFolio, FUB + More',
+    description: 'Native integrations for HubSpot, Boulevard, AppFolio, Follow Up Boss, GoHighLevel. Webhook + Zapier for any CRM.',
+  },
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

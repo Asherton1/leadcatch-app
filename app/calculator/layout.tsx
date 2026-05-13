@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     siteName: 'ReCapture',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Lead Recovery ROI Calculator — ReCapture',
+    description: 'Calculate how much revenue you are losing to form abandonment. See your monthly recovery potential in seconds.',
+  },
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

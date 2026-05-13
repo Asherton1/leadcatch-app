@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     siteName: 'ReCapture',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ReCapture Enterprise — HIPAA + BAA + White-Glove Setup',
+    description: 'Enterprise from $1,997/mo. Unlimited sites, HIPAA + BAA, dedicated account manager. Built for multi-location healthcare and real estate.',
+  },
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
