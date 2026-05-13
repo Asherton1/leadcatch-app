@@ -1,6 +1,7 @@
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
+import FAQSection from '../components/FAQSection'
 import ScrollReveal from '../components/ScrollReveal'
 import Link from 'next/link'
 import '../blog/blog.css'
@@ -11,6 +12,14 @@ export const metadata = {
   title: 'How ReCapture Works — Form Abandonment Recovery in 3 Steps',
   description: 'See exactly how ReCapture captures abandoned form data, scores leads, and recovers lost revenue — all from one script tag. No dev team required.',
 }
+
+const FAQS: { question: string; answer: string }[] = [
+  { question: "How quickly can I deploy ReCapture on my site?", answer: "Most clients are tracking abandoned leads within 5 minutes. Add one script tag to your site head, paste your form IDs into the dashboard, and ReCapture begins capturing on the next form view." },
+  { question: "How does ReCapture know which leads abandoned vs submitted?", answer: "ReCapture listens for keystroke and field-change events as visitors type. If they fill in identifying fields (name, email, phone) but leave the page without submitting — close the tab, navigate away, or stay idle 3+ minutes — that counts as abandonment and triggers your recovery sequence." },
+  { question: "What channels does ReCapture use to recover leads?", answer: "Three channels stack together: instant email within 60 seconds with personalized recovery copy, SMS within 5 minutes if a phone number was captured, and Ai voice callback within 10 minutes on Pro plans — an Ai concierge calls the lead, qualifies them, and books a callback with your team." },
+  { question: "Do I need to change anything on my existing forms?", answer: "No. ReCapture works with your existing forms exactly as they are — HTML, React, Webflow, WordPress plugins like Gravity Forms or Contact Form 7, or custom builds. No form changes, no validation rewrites, no integration code." },
+  { question: "Does ReCapture integrate with my CRM?", answer: "Yes — native integrations with HubSpot, Salesforce, Boulevard, AppFolio, Follow Up Boss, and GoHighLevel. For any other CRM, ReCapture pushes abandoned leads via webhook or Zapier. Most setups complete in under 10 minutes." },
+]
 
 export default function HowItWorksPage() {
   return (
@@ -305,6 +314,7 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
+      <FAQSection faqs={FAQS} />
       <RelatedPages page="how-it-works" />
       <Footer />
     </div>

@@ -3,6 +3,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
+import FAQSection from '../components/FAQSection'
 import DashboardMockup from '../components/DashboardMockup'
 import '../blog/blog.css'
 import '../landing.css'
@@ -17,6 +18,14 @@ const SAMPLE_LEADS = [
   { name: 'Sarah K.', initials: 'SK', email: 'sarah.k@gmail.com', service: 'Botox consultation', value: 850, status: 'Recovered' as const },
   { name: 'Maria R.', initials: 'MR', email: 'maria.r@outlook.com', service: 'Filler consultation', value: 1200, status: 'Contacted' as const },
   { name: 'Jessica T.', initials: 'JT', email: 'jess.t@yahoo.com', service: 'Laser package', value: 2400, status: 'Open' as const },
+]
+
+const FAQS: { question: string; answer: string }[] = [
+  { question: "Is ReCapture HIPAA compliant for med spas?", answer: "Yes. ReCapture is HIPAA-eligible on Enterprise plans and includes a Business Associate Agreement (BAA). Aesthetic consultation forms often contain PHI (skin concerns, body areas, medication history) — we handle that data with the same standards as your EMR." },
+  { question: "What recovery rate should a med spa expect?", answer: "Average ReCapture clients in the med spa vertical recover 8-12% of abandoned consultation form starters. For a typical Dallas-area med spa seeing roughly 150 form abandonments per month with average procedure value of $2,800, that translates to $33,000-$50,000 in recovered revenue monthly." },
+  { question: "Does ReCapture integrate with Boulevard?", answer: "Yes — Boulevard is a native integration. When a consultation form is abandoned, ReCapture creates a lead in Boulevard with all captured data (name, phone, services of interest, completed fields) and triggers your recovery sequence simultaneously." },
+  { question: "Will my consultation forms still work exactly the same?", answer: "Yes. ReCapture is a passive tracking layer — it does not alter your form UI, validation, or submission flow. Visitors who submit normally still route to your booking system or thank-you page. ReCapture only acts when someone abandons." },
+  { question: "Can I customize recovery emails to match my brand?", answer: "Yes. Every recovery email is fully customizable — your logo, colors, tone, signature, calls-to-action. We provide templates designed for the aesthetic vertical (warm, consultative, photo-rich) that you can edit in the dashboard. No coding required." },
 ]
 
 export default function ForMedSpas() {
@@ -377,6 +386,7 @@ export default function ForMedSpas() {
         }
       ` }} />
 
+      <FAQSection faqs={FAQS} />
       <RelatedPages page="for-med-spas" />
 
     </div>
