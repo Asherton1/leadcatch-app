@@ -2,6 +2,7 @@ import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
+import RelatedPages from '../components/RelatedPages'
 import DashboardMockup from '../components/DashboardMockup'
 import '../blog/blog.css'
 import '../landing.css'
@@ -375,6 +376,8 @@ export default function ForMedSpas() {
           }
         }
       ` }} />
+
+      <RelatedPages page="for-med-spas" />
 
     </div>
   )
