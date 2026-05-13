@@ -3,6 +3,6 @@ Allow: /
 Disallow: /admin
 Disallow: /dashboard
 Disallow: /api/
-Disallow: /enterprise
+Disallow: /enterprise-welcome
 
-Sitemap: https://userecapture.com/sitemap.xml
+Sitemap: https://www.userecapture.com/sitemap.xml
