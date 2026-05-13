@@ -5,7 +5,7 @@ import '../blog.css'
 import Image from 'next/image'
 
 export const metadata = {
-  title: 'The 5-Minute Follow-Up Rule: Why Speed to Lead Wins Every Time — ReCapture Blog',
+  title: 'The 5-Minute Follow-Up Rule: Speed to Lead Wins Every Time',
   description: 'Research shows that calling a lead within 5 minutes makes you 21x more likely to convert. Here is why most businesses miss that window — and how to close it automatically.',
 }
 

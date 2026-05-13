@@ -6,7 +6,7 @@ import '../blog.css'
 import '../../landing.css'
 
 export const metadata = {
-  title: 'Why Ai Voice Callbacks Convert 391% More Abandoned Leads — ReCapture Blog',
+  title: 'Why Ai Voice Callbacks Convert 391% More Abandoned Leads',
   description: 'Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts. Here is why Ai voice callbacks are the future of lead recovery.',
 }
 

@@ -6,7 +6,7 @@ import '../blog.css'
 import '../../landing.css'
 
 export const metadata = {
-  title: 'The Form Abandonment Compliance Problem (and How We Solved It) — ReCapture Blog',
+  title: 'The Form Abandonment Compliance Problem (and How We Solved It)',
   description: 'Most form abandonment tools were built before the laws caught up. TCPA, CAN-SPAM, GDPR, and HIPAA all matter now. Here is what changed and how ReCapture handles compliance differently.',
 }
 

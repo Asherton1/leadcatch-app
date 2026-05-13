@@ -5,7 +5,7 @@ import '../blog.css'
 import Image from 'next/image'
 
 export const metadata = {
-  title: 'Why Your Google Analytics Is Lying to You About Form Conversions — ReCapture Blog',
+  title: 'Why Google Analytics Is Lying About Your Form Conversions',
   description: 'Google Analytics tracks pageviews and submissions. But it completely misses the leads who start your form and never finish. Here is the data gap costing you thousands.',
   keywords: 'form abandonment, Google Analytics form tracking, form conversion rate, partial form data, lead recovery, form analytics',
 }
