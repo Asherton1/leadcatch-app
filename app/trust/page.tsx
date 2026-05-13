@@ -2,6 +2,7 @@ import Link from "next/link"
 import BlogNav from "@/app/components/BlogNav"
 import ScrollReveal from "@/app/components/ScrollReveal"
 import Footer from "@/app/components/Footer"
+import RelatedPages from "@/app/components/RelatedPages"
 import "../blog/blog.css"
 import "../landing.css"
 import { Metadata } from "next"
@@ -275,6 +276,7 @@ export default function TrustPage() {
 
       </div>
 
+      <RelatedPages page="trust" />
       <Footer />
     </div>
   )
