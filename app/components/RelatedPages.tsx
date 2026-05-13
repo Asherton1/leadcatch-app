@@ -256,6 +256,105 @@ const RELATIONS: Record<string, PageRelations> = {
       ],
     },
   },
+  pricing: {
+    worksWith: {
+      title: 'Industries we serve',
+      links: [
+        { name: 'Med Spas', href: '/for-med-spas', description: 'Aesthetic consultation form recovery' },
+        { name: 'Plastic Surgery', href: '/for-plastic-surgery', description: 'Surgical consultation recovery' },
+        { name: 'Luxury Real Estate', href: '/for-luxury-real-estate', description: 'Buyer inquiry recovery' },
+        { name: 'Property Management', href: '/for-property-management', description: 'Leasing inquiry recovery' },
+      ],
+    },
+    relatedTopics: {
+      title: 'Tools and resources',
+      links: [
+        { name: 'How It Works', href: '/how-it-works', description: 'See the recovery layer step-by-step' },
+        { name: 'FAQ', href: '/faq', description: 'Common questions answered' },
+        { name: 'ROI Calculator', href: '/calculator', description: 'Estimate your recovery revenue' },
+        { name: 'Free Form Audit', href: '/form-audit', description: 'See what you are losing right now' },
+      ],
+    },
+  },
+  demo: {
+    worksWith: {
+      title: 'See ReCapture for your industry',
+      links: [
+        { name: 'Med Spas', href: '/for-med-spas', description: 'Aesthetic consultation form recovery' },
+        { name: 'Plastic Surgery', href: '/for-plastic-surgery', description: 'Surgical consultation recovery' },
+        { name: 'Luxury Real Estate', href: '/for-luxury-real-estate', description: 'Buyer inquiry recovery' },
+        { name: 'Property Management', href: '/for-property-management', description: 'Leasing inquiry recovery' },
+      ],
+    },
+    relatedTopics: {
+      title: 'Learn more before you book',
+      links: [
+        { name: 'How It Works', href: '/how-it-works', description: 'See the recovery layer step-by-step' },
+        { name: 'Pricing', href: '/pricing', description: 'Plans starting at $197/mo' },
+        { name: 'FAQ', href: '/faq', description: 'Common questions answered' },
+        { name: 'ROI Calculator', href: '/calculator', description: 'Estimate your recovery revenue' },
+      ],
+    },
+  },
+  calculator: {
+    worksWith: {
+      title: 'ROI estimates by industry',
+      links: [
+        { name: 'Med Spas', href: '/for-med-spas', description: 'Average $2,800 per recovered consultation' },
+        { name: 'Plastic Surgery', href: '/for-plastic-surgery', description: 'Average $15,000 per recovered procedure' },
+        { name: 'Luxury Real Estate', href: '/for-luxury-real-estate', description: 'Six-figure commission per recovered buyer' },
+        { name: 'Property Management', href: '/for-property-management', description: '50+ leases per 200-unit portfolio per month' },
+      ],
+    },
+    relatedTopics: {
+      title: 'After you see the numbers',
+      links: [
+        { name: 'Pricing', href: '/pricing', description: 'Plans starting at $197/mo' },
+        { name: 'Book a demo', href: '/demo', description: '15-min walkthrough with the founder' },
+        { name: 'Free Form Audit', href: '/form-audit', description: 'Live audit of your existing forms' },
+        { name: 'FAQ', href: '/faq', description: 'Common questions answered' },
+      ],
+    },
+  },
+  'form-audit': {
+    worksWith: {
+      title: 'Industries we audit',
+      links: [
+        { name: 'Med Spas', href: '/for-med-spas', description: 'Aesthetic consultation form recovery' },
+        { name: 'Plastic Surgery', href: '/for-plastic-surgery', description: 'Surgical consultation recovery' },
+        { name: 'Luxury Real Estate', href: '/for-luxury-real-estate', description: 'Buyer inquiry recovery' },
+        { name: 'Property Management', href: '/for-property-management', description: 'Leasing inquiry recovery' },
+      ],
+    },
+    relatedTopics: {
+      title: 'After the audit',
+      links: [
+        { name: 'Pricing', href: '/pricing', description: 'Plans starting at $197/mo' },
+        { name: 'Book a demo', href: '/demo', description: '15-min walkthrough with the founder' },
+        { name: 'How It Works', href: '/how-it-works', description: 'See the recovery layer step-by-step' },
+        { name: 'ROI Calculator', href: '/calculator', description: 'Estimate your recovery revenue' },
+      ],
+    },
+  },
+  enterprise: {
+    worksWith: {
+      title: 'Enterprise industries we serve',
+      links: [
+        { name: 'Med Spas', href: '/for-med-spas', description: 'Multi-location chains' },
+        { name: 'Property Management', href: '/for-property-management', description: 'Multi-portfolio operators' },
+        { name: 'Luxury Real Estate', href: '/for-luxury-real-estate', description: 'Multi-office brokerages' },
+      ],
+    },
+    relatedTopics: {
+      title: 'Enterprise resources',
+      links: [
+        { name: 'Pricing', href: '/pricing', description: 'Plans starting at $197/mo' },
+        { name: 'Book a demo', href: '/demo', description: '15-min walkthrough with the founder' },
+        { name: 'BAA & HIPAA', href: '/baa', description: 'Healthcare compliance details' },
+        { name: 'FAQ', href: '/faq', description: 'Common questions answered' },
+      ],
+    },
+  },
 }
 
 export default function RelatedPages({ page }: { page: string }) {

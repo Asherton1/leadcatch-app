@@ -5,6 +5,7 @@ import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
+import RelatedPages from '../components/RelatedPages'
 import '../blog/blog.css'
 import '../landing.css'
 
@@ -266,6 +267,7 @@ export default function CalculatorPage() {
         )}
       </div>
 
+      <RelatedPages page="calculator" />
       <Footer />
 
       <style jsx>{`

@@ -3,6 +3,7 @@
 import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
+import RelatedPages from '../components/RelatedPages'
 import PricingSection from '../components/PricingSection'
 import MathSection from '../components/MathSection'
 import Link from 'next/link'
@@ -74,6 +75,7 @@ export default function PricingPage() {
         <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Have more questions?</p>
         <Link href="/faq" style={{ color: '#ff6b35', fontWeight: 500, fontSize: '1.0625rem', textDecoration: 'none' }}>View our full FAQ &rarr;</Link>
       </section>
+      <RelatedPages page="pricing" />
       <Footer />
     </div>
   )

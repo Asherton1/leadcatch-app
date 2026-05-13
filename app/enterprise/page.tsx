@@ -4,6 +4,7 @@ import { useState } from 'react'
 import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
+import RelatedPages from '../components/RelatedPages'
 import '../blog/blog.css'
 import '../landing.css'
 import './enterprise.css'
@@ -517,6 +518,7 @@ export default function EnterprisePage() {
       <div id="enterprise-inquiry"></div>
       <EnterpriseInquirySection />
 
+      <RelatedPages page="enterprise" />
       <Footer />
     </div>
   )
