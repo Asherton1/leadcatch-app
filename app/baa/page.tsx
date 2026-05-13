@@ -9,8 +9,8 @@ export const dynamic = 'force-dynamic'
 
 
 export const metadata = {
-  title: 'Business Associate Agreement — ReCapture',
-  description: 'ReCapture Business Associate Agreement for HIPAA-eligible deployments. Executed with Enterprise customers upon signed commitment.',
+  title: 'HIPAA Business Associate Agreement (BAA) — ReCapture',
+  description: 'ReCapture HIPAA Business Associate Agreement (BAA) for med spas, dental practices, plastic surgery, and other HIPAA-eligible businesses on Enterprise plans.',
   robots: 'noindex',
 }
 

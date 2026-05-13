@@ -9,8 +9,8 @@ import RelatedPages from '../components/RelatedPages'
 import './about.css'
 
 export const metadata = {
-  title: 'About ReCapture — Born & Built in Dallas, Texas',
-  description: 'The story behind ReCapture. Built by a digital marketing veteran who spent a decade managing ad campaigns and saw firsthand how many leads were slipping through the cracks.',
+  title: 'About ReCapture — Form Abandonment Recovery Built in Dallas, TX',
+  description: 'The story behind ReCapture — built by a digital marketing veteran in Dallas who spent a decade watching high-value leads slip through the cracks.',
 }
 
 export default function AboutPage() {

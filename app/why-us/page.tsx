@@ -10,8 +10,8 @@ import WhyUsAccordion from "../components/WhyUsAccordion"
 import TakedownCards from "../components/TakedownCards"
 
 export const metadata = {
-  title: 'Why ReCapture — Form Abandonment Recovery for Multi-Location Businesses',
-  description: 'How ReCapture compares to Podium, GoHighLevel, and CartStack for form abandonment recovery. Built for multi-location businesses where a single recovered lead is worth $1,500 to $10,000.',
+  title: 'Why ReCapture vs Podium, GoHighLevel & CartStack',
+  description: 'How ReCapture compares to Podium, GoHighLevel, and CartStack for form abandonment recovery. Built for multi-location businesses where a recovered lead is worth $1,500 to $10,000.',
   keywords: 'ReCapture vs Podium, ReCapture vs GoHighLevel, form abandonment recovery, multi-location lead recovery, enterprise form tracking',
 }
 

@@ -7,8 +7,8 @@ import './blog.css'
 import '../landing.css'
 
 export const metadata = {
-  title: 'Insights — ReCapture Blog',
-  description: 'Insights on form abandonment, lead recovery, and revenue optimization for high-ticket service businesses.',
+  title: 'ReCapture Blog — Form Abandonment Recovery, Lead Strategy',
+  description: 'Strategy, data, and tactics on form abandonment recovery, Ai voice callbacks, and lead conversion for high-ticket service businesses.',
 }
 
 export default function BlogIndex() {
