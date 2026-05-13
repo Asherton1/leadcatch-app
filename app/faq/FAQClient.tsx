@@ -2,6 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import BlogNav from '../components/BlogNav'
+import Footer from '../components/Footer'
+import ScrollReveal from '../components/ScrollReveal'
+import '../blog/blog.css'
+import '../landing.css'
 import { faqCategories } from './faqs'
 
 export default function FAQClient() {
@@ -12,7 +17,10 @@ export default function FAQClient() {
   }
 
   return (
-    <main style={{ background: '#0a0a0a', color: '#fff', minHeight: '100vh' }}>
+    <div className="landing" style={{ minHeight: '100vh', background: '#0a0a0a' }}>
+      <BlogNav />
+      <ScrollReveal />
+      <main style={{ color: '#fff' }}>
       {/* Hero */}
       <section
         style={{
@@ -176,5 +184,7 @@ export default function FAQClient() {
         </div>
       </section>
     </main>
+      <Footer />
+    </div>
   )
 }
