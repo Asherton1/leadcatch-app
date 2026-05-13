@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
+import RelatedPages from '../components/RelatedPages'
 import ScrollReveal from '../components/ScrollReveal'
 import '../blog/blog.css'
 import '../landing.css'
@@ -184,6 +185,7 @@ export default function FAQClient() {
         </div>
       </section>
     </main>
+      <RelatedPages page="faq" />
       <Footer />
     </div>
   )

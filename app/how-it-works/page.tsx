@@ -1,5 +1,6 @@
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
+import RelatedPages from '../components/RelatedPages'
 import ScrollReveal from '../components/ScrollReveal'
 import Link from 'next/link'
 import '../blog/blog.css'
@@ -304,6 +305,7 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
+      <RelatedPages page="how-it-works" />
       <Footer />
     </div>
   )
