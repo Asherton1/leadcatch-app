@@ -25,6 +25,216 @@ Lost revenue recovery for high-ticket service businesses</p>
 <a href="mailto:hello@userecapture.com" style="color: #ff6b35;">hello@userecapture.com</a><br/>
 <a href="https://userecapture.com" style="color: #ff6b35;">www.userecapture.com</a></p>`
 
+// Vertical-specific Day 4 follow-up templates. firstName + company injected at runtime.
+// Falls back to generic copy if vertical is unknown or null.
+function getDay4Html(vertical: string | null | undefined, firstName: string, company: string | null | undefined): string {
+  const c = company || 'your site'
+  const wrapperOpen = '<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.7;">'
+
+  switch (vertical) {
+    case 'Multifamily':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week. Inboxes are brutal — wanted to make sure this didn't get buried.</p>
+
+<p>Quick recap: 70% of leasing inquiries on ${c}'s site get abandoned before submit. ReCapture captures every started-but-not-submitted inquiry and pushes it into AppFolio (or Yardi, Buildium, RentCafe) via webhook within 60 seconds.</p>
+
+<p>For a 200-unit portfolio that's typically 50+ extra qualified prospects feeding the leasing pipeline every month — without changing your stack.</p>
+
+<p>Worth a 15-min walkthrough this week?</p>
+
+${SIGNATURE_HTML}
+</div>`
+
+    case 'Med Spa':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week — wanted to make sure it didn't get buried.</p>
+
+<p>Quick recap: 67% of consultation forms on ${c}'s site get abandoned before submit. ReCapture captures every consultation that didn't finish and pushes it into Boulevard (or Mindbody, Aesthetic Record, Vagaro) within 60 seconds.</p>
+
+<p>At a $2,800 average first treatment, even a 10% recovery rate is typically $30K-$80K in monthly bookings.</p>
+
+<p>Worth a 15-min walkthrough this week?</p>
+
+${SIGNATURE_HTML}
+</div>`
+
+    case 'Luxury Real Estate':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week. Inboxes are brutal mid-week.</p>
+
+<p>Quick recap: 71% of buyer inquiries on ${c}'s site or IDX listings get abandoned before submit. ReCapture captures every inquiry and pushes it into Follow Up Boss (or your CRM) within 60 seconds, with an SMS to the assigned agent.</p>
+
+<p>At your average price point, even one recovered buyer per month is six figures in commission.</p>
+
+<p>Worth a 15-min walkthrough this week?</p>
+
+${SIGNATURE_HTML}
+</div>`
+
+    case 'Cosmetic Dental':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week.</p>
+
+<p>Quick recap: 67% of cosmetic consultation forms on ${c}'s site get abandoned before submit. ReCapture captures every veneer, implant, or smile-makeover inquiry and pushes it into your practice management software via webhook, with a HIPAA-compliant AI voice callback within 60 seconds. BAA available.</p>
+
+<p>At $4K-$50K per case, even one recovered patient per month moves the needle.</p>
+
+<p>Worth a 15-min walkthrough this week?</p>
+
+${SIGNATURE_HTML}
+</div>`
+
+    case 'Plastic Surgery':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week.</p>
+
+<p>Quick recap: 67% of consultation forms on ${c}'s site get abandoned before submit. ReCapture captures every rhinoplasty, breast, or body-contouring inquiry and pushes it into Nextech (or your PMS) via webhook, with a HIPAA-compliant AI voice callback within 60 seconds. BAA available.</p>
+
+<p>At $8K-$30K per procedure, even one recovered patient per month is six figures in surgical revenue.</p>
+
+<p>Worth a 15-min walkthrough this week?</p>
+
+${SIGNATURE_HTML}
+</div>`
+
+    case 'Dermatology':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week.</p>
+
+<p>Quick recap: 67% of cosmetic consultation forms on ${c}'s site get abandoned before submit. ReCapture captures every Botox, laser, or aesthetic-treatment inquiry and pushes it into Nextech (or your PMS) via webhook, with a HIPAA-compliant AI voice callback within 60 seconds. BAA available.</p>
+
+<p>For practices running paid ads to cosmetic landing pages, this typically recovers 15-30 additional qualified consultations per month.</p>
+
+<p>Worth a 15-min walkthrough this week?</p>
+
+${SIGNATURE_HTML}
+</div>`
+
+    default:
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week. Inboxes are brutal — wanted to make sure this didn't get buried.</p>
+
+<p>Quick recap: 60-70% of visitors filling out forms on ${c} never hit submit. ReCapture captures them in real-time so your team can follow up before they go elsewhere.</p>
+
+<p>Open to a 15-minute demo this week?</p>
+
+${SIGNATURE_HTML}
+</div>`
+  }
+}
+
+// Vertical-specific Day 10 breakup templates. Same dispatch pattern as Day 4.
+function getDay10Html(vertical: string | null | undefined, firstName: string, company: string | null | undefined): string {
+  const c = company || 'the work'
+  const wrapperOpen = '<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.7;">'
+
+  switch (vertical) {
+    case 'Multifamily':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note — won't keep pestering.</p>
+
+<p>If pipeline recovery isn't a priority right now, totally understand. If you ever want to see how much paid ad spend is disappearing into bounce-rate on ${c}'s leasing pages, you know where to find me.</p>
+
+<p>Otherwise, wishing you strong leasing momentum heading into summer.</p>
+
+${SIGNATURE_HTML}
+</div>`
+
+    case 'Med Spa':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note from me.</p>
+
+<p>If consultation recovery isn't a priority right now, totally get it. If you ever want to see how much Meta or Google spend is bouncing off ${c} without converting, the door's open.</p>
+
+<p>Otherwise, wishing you a strong rest of the year.</p>
+
+${SIGNATURE_HTML}
+</div>`
+
+    case 'Luxury Real Estate':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note — won't keep bumping.</p>
+
+<p>If lead recovery isn't a priority right now, totally understand. If it becomes one — especially heading into peak buyer season — you know where to find me.</p>
+
+<p>Otherwise, wishing you strong listings and clean closings at ${c}.</p>
+
+${SIGNATURE_HTML}
+</div>`
+
+    case 'Cosmetic Dental':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note from me.</p>
+
+<p>If consultation recovery isn't on the roadmap right now, no worries. If you ever want to see how many veneer or implant inquiries are slipping past ${c}, the door's open.</p>
+
+<p>Otherwise, wishing you a great rest of the year.</p>
+
+${SIGNATURE_HTML}
+</div>`
+
+    case 'Plastic Surgery':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note from me.</p>
+
+<p>If consultation recovery isn't a priority right now, totally get it. If you ever want to see how many surgical consultations are slipping past ${c} into the bounce-rate, the door's open.</p>
+
+<p>Otherwise, wishing you a great rest of the year.</p>
+
+${SIGNATURE_HTML}
+</div>`
+
+    case 'Dermatology':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note from me.</p>
+
+<p>If recovery of abandoned cosmetic inquiries isn't a priority right now, totally understand. If it becomes one, you know where to find me.</p>
+
+<p>Otherwise, wishing you a great rest of the year at ${c}.</p>
+
+${SIGNATURE_HTML}
+</div>`
+
+    default:
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note from me — I don't want to be a pest.</p>
+
+<p>If form abandonment isn't a priority right now, totally understand. If it ever becomes one, you know where to find me. Otherwise, wishing you the best with ${c}.</p>
+
+${SIGNATURE_HTML}
+</div>`
+  }
+}
+
+
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get('authorization')
   if (authHeader !== 'Bearer ' + CRON_SECRET) {
@@ -131,17 +341,7 @@ export async function GET(request: NextRequest) {
 
   for (const item of due4 || []) {
     try {
-      const followupHtml = `<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.7;">
-<p>Hi ${item.prospect_name.split(' ')[0]},</p>
-
-<p>Following up on my note from earlier this week. I know inboxes are brutal — wanted to make sure this didn't get buried.</p>
-
-<p>Quick recap: 60-70% of visitors filling out forms on ${item.prospect_company || 'your site'} never hit submit. ReCapture captures them in real-time so your team can follow up before they go elsewhere.</p>
-
-<p>Open to a 15-minute demo this week? I can show you exactly what your invisible leads look like.</p>
-
-${SIGNATURE_HTML}
-</div>`
+      const followupHtml = getDay4Html(item.vertical, item.prospect_name.split(' ')[0], item.prospect_company)
 
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -185,15 +385,7 @@ ${SIGNATURE_HTML}
 
   for (const item of due10 || []) {
     try {
-      const breakupHtml = `<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.7;">
-<p>Hi ${item.prospect_name.split(' ')[0]},</p>
-
-<p>Last note from me — I don't want to be a pest.</p>
-
-<p>If form abandonment isn't a priority right now, totally understand. If it ever becomes one, you know where to find me. Otherwise, wishing you the best with ${item.prospect_company || 'the work'}.</p>
-
-${SIGNATURE_HTML}
-</div>`
+      const breakupHtml = getDay10Html(item.vertical, item.prospect_name.split(' ')[0], item.prospect_company)
 
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
