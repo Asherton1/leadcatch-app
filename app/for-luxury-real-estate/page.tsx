@@ -3,6 +3,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
+import FAQSection from '../components/FAQSection'
 import DashboardMockup from '../components/DashboardMockup'
 import '../blog/blog.css'
 import '../landing.css'
@@ -17,6 +18,12 @@ const SAMPLE_LEADS = [
   { name: 'Margaret D.', initials: 'MD', email: 'm.davies@gmail.com', service: '$2.4M Highland Park inquiry', value: 72000, status: 'Recovered' as const },
   { name: 'James P.', initials: 'JP', email: 'j.park@outlook.com', service: '$1.8M Preston Hollow', value: 54000, status: 'Contacted' as const },
   { name: 'Vivian C.', initials: 'VC', email: 'v.c@yahoo.com', service: '$3.6M University Park', value: 108000, status: 'Open' as const },
+]
+
+const FAQS: { question: string; answer: string }[] = [
+  { question: "How does ReCapture work for luxury real estate inquiry forms?", answer: "Buyer inquiry forms — property tour requests, showing schedules, listing alerts — typically see 60-70% abandonment. ReCapture captures the name, email, phone, and property of interest from anyone who starts typing, and triggers immediate recovery within 60 seconds via email, SMS, or Ai voice callback." },
+  { question: "Why does the 5-minute response window matter for luxury real estate?", answer: "78% of homebuyers work with the first agent who responds. The average agent takes 15+ hours. ReCapture closes that gap to under 5 minutes — your team can be on the phone with the prospect while they are still on the listing site of your competitor." },
+  { question: "Does ReCapture integrate with Follow Up Boss, Compass, or kvCORE?", answer: "Yes — Follow Up Boss is a native integration that pushes abandoned leads directly into your pipeline. For Compass and kvCORE, ReCapture sends leads via webhook with full property metadata included. Setup completes in under 10 minutes." },
 ]
 
 export default function ForLuxuryRealEstate() {
@@ -380,6 +387,7 @@ export default function ForLuxuryRealEstate() {
         }
       ` }} />
 
+      <FAQSection faqs={FAQS} />
       <RelatedPages page="for-luxury-real-estate" />
 
     </div>

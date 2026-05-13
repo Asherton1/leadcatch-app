@@ -3,6 +3,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
+import FAQSection from '../components/FAQSection'
 import DashboardMockup from '../components/DashboardMockup'
 import '../blog/blog.css'
 import '../landing.css'
@@ -17,6 +18,12 @@ const SAMPLE_LEADS = [
   { name: 'Sarah K.', initials: 'SK', email: 'sarah.k@gmail.com', service: 'Demo request', value: 4800, status: 'Recovered' as const },
   { name: 'Mark T.', initials: 'MT', email: 'mark.t@outlook.com', service: 'Pricing inquiry', value: 6500, status: 'Contacted' as const },
   { name: 'Jessica R.', initials: 'JR', email: 'jess.r@gmail.com', service: 'Contact form', value: 3200, status: 'Open' as const },
+]
+
+const FAQS: { question: string; answer: string }[] = [
+  { question: "How does the HubSpot integration work?", answer: "Native two-way integration. When someone abandons a form on your site, ReCapture creates a new Contact in HubSpot with captured data (name, email, phone, completed fields), sets the lifecycle stage to MQL, and triggers your existing nurture sequence. We also push lead score and abandonment metadata as custom properties." },
+  { question: "Do I need a HubSpot developer to set this up?", answer: "No. The integration uses HubSpot standard OAuth — you authorize ReCapture from inside your HubSpot account in under 2 minutes. We auto-map common fields. Custom field mapping is done via dropdowns in our dashboard, no code required." },
+  { question: "Will HubSpot count abandoned leads as Marketing Contacts?", answer: "Yes — abandoned leads count toward your HubSpot Marketing Contacts billing. ReCapture only pushes leads that exceed a threshold quality score (you control the threshold) to avoid filling HubSpot with low-value data. Most clients see a 15-30% increase in MQL volume." },
 ]
 
 export default function ForHubSpot() {
@@ -380,6 +387,7 @@ export default function ForHubSpot() {
         }
       ` }} />
 
+      <FAQSection faqs={FAQS} />
       <RelatedPages page="for-hubspot" />
 
     </div>

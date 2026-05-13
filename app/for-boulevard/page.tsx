@@ -3,6 +3,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
+import FAQSection from '../components/FAQSection'
 import DashboardMockup from '../components/DashboardMockup'
 import '../blog/blog.css'
 import '../landing.css'
@@ -17,6 +18,12 @@ const SAMPLE_LEADS = [
   { name: 'Sarah K.', initials: 'SK', email: 'sarah.k@gmail.com', service: 'Botox consultation', value: 850, status: 'Recovered' as const },
   { name: 'Mark T.', initials: 'MT', email: 'mark.t@outlook.com', service: 'Filler treatment inquiry', value: 1200, status: 'Contacted' as const },
   { name: 'Jessica R.', initials: 'JR', email: 'jess.r@gmail.com', service: 'Laser package quote', value: 2400, status: 'Open' as const },
+]
+
+const FAQS: { question: string; answer: string }[] = [
+  { question: "How does the Boulevard integration work?", answer: "Native integration. When someone abandons a consultation form, ReCapture creates a new Lead in Boulevard with captured data (name, email, phone, services of interest, completed fields). The lead appears in your booking pipeline ready for your team to convert into a booked consultation." },
+  { question: "Will recovery messages mention specific services from the form?", answer: "Yes — recovery emails and SMS pull from the services the visitor selected on the form. A lead who selected Botox sees consultation copy referencing the treatment specifically. This personalization typically increases reply rates by 30-50% over generic recovery copy." },
+  { question: "Does ReCapture work for solo aesthetic providers, not just multi-location?", answer: "Yes — Essentials plan ($150/mo) is designed for solo and single-location aesthetic providers using Boulevard. You get full form abandonment tracking, recovery emails + SMS, and the Boulevard integration. Ai voice callback is on the Pro plan ($200/mo)." },
 ]
 
 export default function ForBoulevard() {
@@ -380,6 +387,7 @@ export default function ForBoulevard() {
         }
       ` }} />
 
+      <FAQSection faqs={FAQS} />
       <RelatedPages page="for-boulevard" />
 
     </div>

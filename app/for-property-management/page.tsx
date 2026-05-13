@@ -3,6 +3,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
+import FAQSection from '../components/FAQSection'
 import DashboardMockup from '../components/DashboardMockup'
 import '../blog/blog.css'
 import '../landing.css'
@@ -17,6 +18,12 @@ const SAMPLE_LEADS = [
   { name: 'Tyler J.', initials: 'TJ', email: 'tyler.j@gmail.com', service: '2BR tour - The Landmark', value: 28800, status: 'Recovered' as const },
   { name: 'Priya K.', initials: 'PK', email: 'p.k@outlook.com', service: '1BR pricing - Park Vista', value: 22200, status: 'Contacted' as const },
   { name: 'Jordan B.', initials: 'JB', email: 'j.b@yahoo.com', service: '3BR availability - Heights', value: 35400, status: 'Open' as const },
+]
+
+const FAQS: { question: string; answer: string }[] = [
+  { question: "How does ReCapture work for multifamily leasing inquiries?", answer: "Tour request and contact forms on property websites typically see 65-75% abandonment. ReCapture captures the name, email, phone, and property of interest from anyone who starts the form. Recovery sequence (email, SMS, Ai voice callback) fires within 60 seconds." },
+  { question: "What recovery rate should a property management company expect?", answer: "60%+ of renters request a tour within 24 hours of discovering a property, and 41% prefer automated booking. ReCapture clients in property management recover 8-12% of abandoned tour requests within 30 days. For a 200-unit portfolio averaging 100 form abandonments per month, that is 50+ recovered leasing leads monthly." },
+  { question: "Does ReCapture integrate with AppFolio, Yardi, or RentCafe?", answer: "AppFolio is a native integration — abandoned leads push directly into your AppFolio pipeline with property metadata included. For Yardi and RentCafe, we support webhook integration. Most multifamily teams complete setup in under 10 minutes." },
 ]
 
 export default function ForPropertyManagement() {
@@ -380,6 +387,7 @@ export default function ForPropertyManagement() {
         }
       ` }} />
 
+      <FAQSection faqs={FAQS} />
       <RelatedPages page="for-property-management" />
 
     </div>

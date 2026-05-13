@@ -3,6 +3,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
+import FAQSection from '../components/FAQSection'
 import DashboardMockup from '../components/DashboardMockup'
 import '../blog/blog.css'
 import '../landing.css'
@@ -17,6 +18,12 @@ const SAMPLE_LEADS = [
   { name: 'Daniel S.', initials: 'DS', email: 'd.smith@gmail.com', service: 'Cosmetic consultation', value: 4200, status: 'Recovered' as const },
   { name: 'Linda K.', initials: 'LK', email: 'l.kim@outlook.com', service: 'Invisalign inquiry', value: 5500, status: 'Contacted' as const },
   { name: 'Marcus T.', initials: 'MT', email: 'm.t@yahoo.com', service: 'Implants consultation', value: 7800, status: 'Open' as const },
+]
+
+const FAQS: { question: string; answer: string }[] = [
+  { question: "Is ReCapture HIPAA compliant for dental practices?", answer: "Yes — HIPAA-eligible on Enterprise plans with a Business Associate Agreement (BAA). Dental appointment forms collect PHI (treatment needs, insurance details, medical history). ReCapture handles that data with the same standards as your practice management software." },
+  { question: "What is the typical recovery rate for dental appointment forms?", answer: "Dental practices typically see 32% of phone inquiries go unanswered and only 44% appointment confirmation rates. ReCapture clients in dental recover 7-10% of abandoned appointment requests within the first 30 days. For a single-location practice averaging 80 form abandonments per month with average case value of $1,800, that is $10,000-$14,000 in monthly recovery." },
+  { question: "Does ReCapture integrate with Dentrix, Eaglesoft, or Open Dental?", answer: "ReCapture pushes abandoned leads via webhook to any practice management system. For Dentrix and Eaglesoft specifically, leads route through your CRM (HubSpot, Salesforce, or similar). For Open Dental, we support direct webhook integration. Setup takes under 10 minutes." },
 ]
 
 export default function ForDental() {
@@ -380,6 +387,7 @@ export default function ForDental() {
         }
       ` }} />
 
+      <FAQSection faqs={FAQS} />
       <RelatedPages page="for-dental" />
 
     </div>

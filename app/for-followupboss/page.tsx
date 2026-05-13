@@ -3,6 +3,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
+import FAQSection from '../components/FAQSection'
 import DashboardMockup from '../components/DashboardMockup'
 import '../blog/blog.css'
 import '../landing.css'
@@ -17,6 +18,12 @@ const SAMPLE_LEADS = [
   { name: 'Sarah K.', initials: 'SK', email: 'sarah.k@gmail.com', service: 'Property inquiry', value: 12000, status: 'Recovered' as const },
   { name: 'Mark T.', initials: 'MT', email: 'mark.t@outlook.com', service: 'Listing tour request', value: 18500, status: 'Contacted' as const },
   { name: 'Jessica R.', initials: 'JR', email: 'jess.r@gmail.com', service: 'Buyer consultation', value: 9500, status: 'Open' as const },
+]
+
+const FAQS: { question: string; answer: string }[] = [
+  { question: "How does the Follow Up Boss integration work?", answer: "Native integration. Abandoned property inquiry forms create a new Lead in Follow Up Boss with captured data (name, email, phone, property of interest, completed fields) and trigger your existing action plan. We also tag leads as ReCapture-Recovery so you can track channel performance separately." },
+  { question: "Can I assign abandoned leads to specific agents?", answer: "Yes. ReCapture pushes leads via Follow Up Boss standard lead routing — your existing round-robin, geo, or floor rules apply. You can also set a specific agent for ReCapture-sourced leads if you want a designated specialist." },
+  { question: "Will ReCapture trigger Follow Up Boss action plans automatically?", answer: "Yes — every abandoned lead pushed to Follow Up Boss triggers the action plan you configure. We recommend creating a dedicated Abandoned Lead Recovery action plan with aggressive follow-up cadence (call within 5 minutes, text within 15 minutes) to maximize conversion." },
 ]
 
 export default function ForFollowUpBoss() {
@@ -380,6 +387,7 @@ export default function ForFollowUpBoss() {
         }
       ` }} />
 
+      <FAQSection faqs={FAQS} />
       <RelatedPages page="for-followupboss" />
 
     </div>

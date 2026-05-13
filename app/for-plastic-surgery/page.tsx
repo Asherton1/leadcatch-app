@@ -3,6 +3,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
+import FAQSection from '../components/FAQSection'
 import DashboardMockup from '../components/DashboardMockup'
 import '../blog/blog.css'
 import '../landing.css'
@@ -17,6 +18,12 @@ const SAMPLE_LEADS = [
   { name: 'Rachel M.', initials: 'RM', email: 'r.m@gmail.com', service: 'Rhinoplasty consultation', value: 8500, status: 'Recovered' as const },
   { name: 'Ashley P.', initials: 'AP', email: 'a.park@outlook.com', service: 'Breast augmentation', value: 9200, status: 'Contacted' as const },
   { name: 'Sophia L.', initials: 'SL', email: 's.l@yahoo.com', service: 'BBL inquiry', value: 15000, status: 'Open' as const },
+]
+
+const FAQS: { question: string; answer: string }[] = [
+  { question: "Is ReCapture HIPAA compliant for plastic surgery practices?", answer: "Yes — HIPAA-eligible on Enterprise plans with a Business Associate Agreement (BAA). Cosmetic surgery consultation forms collect highly sensitive PHI (areas of concern, body imaging interest, medical history). ReCapture handles that with the same standards as your EMR." },
+  { question: "How much revenue can a plastic surgery practice expect to recover?", answer: "Plastic surgery practices spend an average of $100+ per lead with only 22% converting to procedures. ReCapture clients in this vertical recover 6-10% of abandoned consultation form starters. For a single-location practice with 100 form abandonments per month and average procedure value of $15,000, that is $90,000-$150,000 in monthly recovery." },
+  { question: "Will my consultation forms still work the same way?", answer: "Yes, exactly the same. ReCapture is a passive tracking layer — it does not alter your form UI, validation, or submission flow. Visitors who complete the form still route to your booking system. ReCapture only acts when someone abandons." },
 ]
 
 export default function ForPlasticSurgery() {
@@ -380,6 +387,7 @@ export default function ForPlasticSurgery() {
         }
       ` }} />
 
+      <FAQSection faqs={FAQS} />
       <RelatedPages page="for-plastic-surgery" />
 
     </div>

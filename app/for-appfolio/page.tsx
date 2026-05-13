@@ -3,6 +3,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
+import FAQSection from '../components/FAQSection'
 import DashboardMockup from '../components/DashboardMockup'
 import '../blog/blog.css'
 import '../landing.css'
@@ -17,6 +18,12 @@ const SAMPLE_LEADS = [
   { name: 'Sarah K.', initials: 'SK', email: 'sarah.k@gmail.com', service: 'Tour request', value: 36000, status: 'Recovered' as const },
   { name: 'Mark T.', initials: 'MT', email: 'mark.t@outlook.com', service: '2BR availability', value: 42000, status: 'Contacted' as const },
   { name: 'Jessica R.', initials: 'JR', email: 'jess.r@gmail.com', service: 'Floor plan inquiry', value: 30000, status: 'Open' as const },
+]
+
+const FAQS: { question: string; answer: string }[] = [
+  { question: "How does the AppFolio integration work?", answer: "Native integration via webhook. When someone abandons a leasing inquiry form, ReCapture creates a new Prospect in AppFolio with captured data (name, email, phone, property of interest, completed fields). The Prospect appears in your leasing pipeline immediately, ready for your team to follow up." },
+  { question: "Does this work for both residential and student housing?", answer: "Yes — works with any AppFolio property type (multifamily, student, single-family, condo association, commercial). The integration is identical regardless of vertical." },
+  { question: "Will abandoned leads appear in my AppFolio leasing reports?", answer: "Yes — abandoned-and-recovered Prospects flow into your standard leasing reports just like any other lead. We add a ReCapture-Recovery source tag so you can filter and track channel performance separately if you want." },
 ]
 
 export default function ForAppFolio() {
@@ -380,6 +387,7 @@ export default function ForAppFolio() {
         }
       ` }} />
 
+      <FAQSection faqs={FAQS} />
       <RelatedPages page="for-appfolio" />
 
     </div>
