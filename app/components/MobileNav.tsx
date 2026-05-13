@@ -24,12 +24,12 @@ export default function MobileNav() {
         <Link href="/how-it-works" className={isActive('/how-it-works') ? 'nav-link nav-active' : 'nav-link'}>How It Works</Link>
         <Link href="/integrations" className={isActive('/integrations') ? 'nav-link nav-active' : 'nav-link'}>Integrations</Link>
         <div className="nav-dropdown-wrapper">
-          <span className="nav-link" style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>Tools <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+          <span className="nav-link" style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>Resources <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           <div className="nav-dropdown-menu">
+            <Link href="/faq" className="nav-dropdown-item">FAQ</Link>
             <Link href="/demo" className="nav-dropdown-item">Live Demo</Link>
             <Link href="/calculator" className="nav-dropdown-item">ROI Estimator</Link>
             <Link href="/form-audit" className="nav-dropdown-item">Free Form Audit</Link>
-            <Link href="/faq" className="nav-dropdown-item">FAQ</Link>
           </div>
         </div>
         <a href="tel:+18886060630" className="nav-phone">(888) 606-0630</a>
@@ -78,7 +78,7 @@ export default function MobileNav() {
                 margin: 0,
               }}
             >
-              <span style={{ color: toolsOpen ? '#ff6b35' : '#ccc', fontSize: '0.95rem', fontWeight: 500, transition: 'color 0.3s' }}>Tools</span>
+              <span style={{ color: toolsOpen ? '#ff6b35' : '#ccc', fontSize: '0.95rem', fontWeight: 500, transition: 'color 0.3s' }}>Resources</span>
               <span style={{ color: toolsOpen ? '#ff6b35' : '#555', fontSize: '1.1rem', transition: 'transform 0.3s, color 0.3s', transform: toolsOpen ? 'rotate(45deg)' : 'none' }}>+</span>
             </button>
             <div style={{
@@ -87,10 +87,10 @@ export default function MobileNav() {
               overflow: 'hidden',
               transition: 'max-height 0.3s ease, opacity 0.2s ease',
             }}>
+              <Link href="/faq" className={isActive('/faq') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>FAQ</Link>
               <Link href="/demo" className={isActive('/demo') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Live Demo</Link>
               <Link href="/calculator" className={isActive('/calculator') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>ROI Estimator</Link>
               <Link href="/form-audit" className={isActive('/form-audit') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Free Form Audit</Link>
-              <Link href="/faq" className={isActive('/faq') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>FAQ</Link>
             </div>
           </div>
           <Link href="/login" className="mobile-login">Login</Link>
