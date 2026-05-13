@@ -5,6 +5,7 @@ import ScrollReveal from '../components/ScrollReveal'
 import '../blog/blog.css'
 import '../landing.css'
 import Footer from '../components/Footer'
+import RelatedPages from '../components/RelatedPages'
 import WhyUsAccordion from "../components/WhyUsAccordion"
 import TakedownCards from "../components/TakedownCards"
 
@@ -205,6 +206,7 @@ export default function WhyUsPage() {
 
       </div>
       
+      <RelatedPages page="why-us" />
       <Footer />
     </div>
   )

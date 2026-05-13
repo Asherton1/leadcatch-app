@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
+import RelatedPages from '../components/RelatedPages'
 import '../blog/blog.css'
 import '../landing.css'
 
@@ -96,6 +97,7 @@ export default function BAAPage() {
         </div>
 
       </div>
+      <RelatedPages page="baa" />
       <Footer />
     </div>
   )

@@ -355,6 +355,84 @@ const RELATIONS: Record<string, PageRelations> = {
       ],
     },
   },
+  about: {
+    worksWith: {
+      title: 'Industries we serve',
+      links: [
+        { name: 'Med Spas', href: '/for-med-spas', description: 'Aesthetic consultation form recovery' },
+        { name: 'Plastic Surgery', href: '/for-plastic-surgery', description: 'Surgical consultation recovery' },
+        { name: 'Luxury Real Estate', href: '/for-luxury-real-estate', description: 'Buyer inquiry recovery' },
+        { name: 'Property Management', href: '/for-property-management', description: 'Leasing inquiry recovery' },
+      ],
+    },
+    relatedTopics: {
+      title: 'Learn more',
+      links: [
+        { name: 'How It Works', href: '/how-it-works', description: 'See the recovery layer in action' },
+        { name: 'Why ReCapture', href: '/why-us', description: 'How we compare to Podium and CartStack' },
+        { name: 'Pricing', href: '/pricing', description: 'Plans starting at $197/mo' },
+        { name: 'FAQ', href: '/faq', description: 'Common questions answered' },
+      ],
+    },
+  },
+  'why-us': {
+    worksWith: {
+      title: 'Industries we serve',
+      links: [
+        { name: 'Med Spas', href: '/for-med-spas', description: 'Aesthetic consultation form recovery' },
+        { name: 'Plastic Surgery', href: '/for-plastic-surgery', description: 'Surgical consultation recovery' },
+        { name: 'Luxury Real Estate', href: '/for-luxury-real-estate', description: 'Buyer inquiry recovery' },
+        { name: 'Property Management', href: '/for-property-management', description: 'Leasing inquiry recovery' },
+      ],
+    },
+    relatedTopics: {
+      title: 'Make your decision',
+      links: [
+        { name: 'Pricing', href: '/pricing', description: 'Plans starting at $197/mo' },
+        { name: 'Book a demo', href: '/demo', description: '15-min walkthrough with the founder' },
+        { name: 'How It Works', href: '/how-it-works', description: 'See the recovery layer step-by-step' },
+        { name: 'FAQ', href: '/faq', description: 'Common questions answered' },
+      ],
+    },
+  },
+  baa: {
+    worksWith: {
+      title: 'Healthcare industries we serve',
+      links: [
+        { name: 'Med Spas', href: '/for-med-spas', description: 'HIPAA-eligible deployment' },
+        { name: 'Plastic Surgery', href: '/for-plastic-surgery', description: 'HIPAA-eligible deployment' },
+        { name: 'Dental Practices', href: '/for-dental', description: 'HIPAA-eligible deployment' },
+      ],
+    },
+    relatedTopics: {
+      title: 'Compliance and security',
+      links: [
+        { name: 'Trust & Compliance', href: '/trust', description: 'How we handle data and security' },
+        { name: 'Enterprise', href: '/enterprise', description: 'HIPAA + BAA + white-glove setup' },
+        { name: 'FAQ', href: '/faq', description: 'Common compliance questions' },
+        { name: 'Pricing', href: '/pricing', description: 'Plans starting at $197/mo' },
+      ],
+    },
+  },
+  trust: {
+    worksWith: {
+      title: 'Healthcare industries we serve',
+      links: [
+        { name: 'Med Spas', href: '/for-med-spas', description: 'HIPAA-eligible deployment' },
+        { name: 'Plastic Surgery', href: '/for-plastic-surgery', description: 'HIPAA-eligible deployment' },
+        { name: 'Dental Practices', href: '/for-dental', description: 'HIPAA-eligible deployment' },
+      ],
+    },
+    relatedTopics: {
+      title: 'Related compliance docs',
+      links: [
+        { name: 'BAA & HIPAA', href: '/baa', description: 'Business Associate Agreement details' },
+        { name: 'Privacy Template', href: '/legal/client-privacy-template', description: 'Privacy policy copy-paste language' },
+        { name: 'Enterprise', href: '/enterprise', description: 'White-glove setup with BAA' },
+        { name: 'API Documentation', href: '/docs/api', description: 'For developer teams' },
+      ],
+    },
+  },
 }
 
 export default function RelatedPages({ page }: { page: string }) {

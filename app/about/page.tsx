@@ -5,6 +5,7 @@ import Image from 'next/image'
 import '../blog/blog.css'
 import '../landing.css'
 import Footer from '../components/Footer'
+import RelatedPages from '../components/RelatedPages'
 import './about.css'
 
 export const metadata = {
@@ -174,6 +175,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <RelatedPages page="about" />
       <Footer />
     </div>
   )
