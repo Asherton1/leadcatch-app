@@ -25,6 +25,12 @@ Lost revenue recovery for high-ticket service businesses</p>
 <a href="mailto:hello@userecapture.com" style="color: #ff6b35;">hello@userecapture.com</a><br/>
 <a href="https://userecapture.com" style="color: #ff6b35;">www.userecapture.com</a></p>`
 
+// Forwarding PS for Day 4 + Day 10 follow-ups.
+function psHtml(company: string | null | undefined): string {
+  const c = company || 'your team'
+  return `<p style="color: #888; font-size: 13px; font-style: italic; margin-top: 28px; line-height: 1.5;">P.S. If you're not the right person at ${c}, a quick forward to whoever handles your website or marketing would mean a lot. Thanks either way.</p>`
+}
+
 // Vertical-specific Day 4 follow-up templates. firstName + company injected at runtime.
 // Falls back to generic copy if vertical is unknown or null.
 function getDay4Html(vertical: string | null | undefined, firstName: string, company: string | null | undefined): string {
@@ -45,6 +51,7 @@ function getDay4Html(vertical: string | null | undefined, firstName: string, com
 <p>Worth a 15-min walkthrough this week?</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
 
     case 'Med Spa':
@@ -60,6 +67,7 @@ ${SIGNATURE_HTML}
 <p>Worth a 15-min walkthrough this week?</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
 
     case 'Luxury Real Estate':
@@ -75,6 +83,7 @@ ${SIGNATURE_HTML}
 <p>Worth a 15-min walkthrough this week?</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
 
     case 'Cosmetic Dental':
@@ -90,6 +99,7 @@ ${SIGNATURE_HTML}
 <p>Worth a 15-min walkthrough this week?</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
 
     case 'Plastic Surgery':
@@ -105,6 +115,7 @@ ${SIGNATURE_HTML}
 <p>Worth a 15-min walkthrough this week?</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
 
     case 'Dermatology':
@@ -120,6 +131,7 @@ ${SIGNATURE_HTML}
 <p>Worth a 15-min walkthrough this week?</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
 
     default:
@@ -133,6 +145,7 @@ ${SIGNATURE_HTML}
 <p>Open to a 15-minute demo this week?</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
   }
 }
@@ -154,6 +167,7 @@ function getDay10Html(vertical: string | null | undefined, firstName: string, co
 <p>Otherwise, wishing you strong leasing momentum heading into summer.</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
 
     case 'Med Spa':
@@ -167,6 +181,7 @@ ${SIGNATURE_HTML}
 <p>Otherwise, wishing you a strong rest of the year.</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
 
     case 'Luxury Real Estate':
@@ -180,6 +195,7 @@ ${SIGNATURE_HTML}
 <p>Otherwise, wishing you strong listings and clean closings at ${c}.</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
 
     case 'Cosmetic Dental':
@@ -193,6 +209,7 @@ ${SIGNATURE_HTML}
 <p>Otherwise, wishing you a great rest of the year.</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
 
     case 'Plastic Surgery':
@@ -206,6 +223,7 @@ ${SIGNATURE_HTML}
 <p>Otherwise, wishing you a great rest of the year.</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
 
     case 'Dermatology':
@@ -219,6 +237,7 @@ ${SIGNATURE_HTML}
 <p>Otherwise, wishing you a great rest of the year at ${c}.</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
 
     default:
@@ -230,6 +249,7 @@ ${SIGNATURE_HTML}
 <p>If form abandonment isn't a priority right now, totally understand. If it ever becomes one, you know where to find me. Otherwise, wishing you the best with ${c}.</p>
 
 ${SIGNATURE_HTML}
+${psHtml(company)}
 </div>`
   }
 }

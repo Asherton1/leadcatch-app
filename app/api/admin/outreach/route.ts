@@ -25,6 +25,11 @@ async function isAdmin(request: NextRequest): Promise<boolean> {
   return Boolean(client?.is_admin)
 }
 
+// Forwarding PS appended to every Day 0 cold outreach body.
+// The {company} merge tag gets substituted by mergeTags() below with
+// the vertical-aware fallback (your practice / your team / your dealership).
+const FORWARDING_PS_HTML = `<p style="color: #888; font-size: 13px; font-style: italic; margin-top: 28px; line-height: 1.5;">P.S. If you're not the right person at {company}, a quick forward to whoever handles your website or marketing would mean a lot. Thanks either way.</p>`
+
 // Merge tags
 const COMPANY_FALLBACK: Record<string, string> = {
   med_spa: 'your practice',
@@ -177,7 +182,7 @@ export async function POST(request: NextRequest) {
         city: 'Dallas',
       }
       const personalizedSubject = mergeTags(subject, tagContext)
-      const personalizedBody = mergeTags(body_html, tagContext)
+      const personalizedBody = mergeTags(body_html + FORWARDING_PS_HTML, tagContext)
 
       return {
         prospect_name: p.prospect_name,
