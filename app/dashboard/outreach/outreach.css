@@ -338,3 +338,19 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Native date picker visibility on dark background */
+.outreach-input[type="date"] {
+  color-scheme: dark;
+}
+
+.outreach-input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.outreach-input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
