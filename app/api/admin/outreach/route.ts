@@ -26,6 +26,18 @@ async function isAdmin(request: NextRequest): Promise<boolean> {
 }
 
 // Merge tags
+const COMPANY_FALLBACK: Record<string, string> = {
+  med_spa: 'your practice',
+  plastic_surgery: 'your practice',
+  cosmetic_dental: 'your practice',
+  dental: 'your practice',
+  dermatology: 'your practice',
+  multifamily: 'your team',
+  property_management: 'your team',
+  luxury_real_estate: 'your team',
+  luxury_auto: 'your dealership',
+}
+
 function mergeTags(html: string, prospect: {
   prospect_name: string
   prospect_company: string | null
@@ -33,9 +45,10 @@ function mergeTags(html: string, prospect: {
   city: string | null
 }): string {
   const firstName = prospect.prospect_name.split(' ')[0]
+  const companyText = prospect.prospect_company || COMPANY_FALLBACK[prospect.vertical] || 'your team'
   return html
     .replace(/\{firstName\}/g, firstName)
-    .replace(/\{company\}/g, prospect.prospect_company || '')
+    .replace(/\{company\}/g, companyText)
     .replace(/\{vertical\}/g, prospect.vertical)
     .replace(/\{city\}/g, prospect.city || 'Dallas')
 }
@@ -149,12 +162,14 @@ export async function POST(request: NextRequest) {
         ? singleDayTime(idx, single_date)
         : spreadSchedule(idx, prospects.length)
 
-      const personalizedBody = mergeTags(body_html, {
+      const tagContext = {
         prospect_name: p.prospect_name,
         prospect_company: p.prospect_company,
         vertical: p.vertical,
         city: 'Dallas',
-      })
+      }
+      const personalizedSubject = mergeTags(subject, tagContext)
+      const personalizedBody = mergeTags(body_html, tagContext)
 
       return {
         prospect_name: p.prospect_name,
@@ -163,7 +178,7 @@ export async function POST(request: NextRequest) {
         prospect_role: p.prospect_role,
         vertical: p.vertical,
         city: 'Dallas',
-        email_subject: subject,
+        email_subject: personalizedSubject,
         email_body_html: personalizedBody,
         email_cc: p.email_cc,
         scheduled_send_at: scheduled.toISOString(),
