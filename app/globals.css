@@ -397,3 +397,8 @@ footer a:hover {
   transform: scaleX(0);
   box-shadow: 0 0 8px rgba(255,107,53,0.5);
 }
+
+/* Dark mode for all native form controls (date pickers, selects, scrollbars, autofill) */
+html {
+  color-scheme: dark;
+}
