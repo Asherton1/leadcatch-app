@@ -28,14 +28,18 @@ async function isAdmin(request: NextRequest): Promise<boolean> {
 // Merge tags
 const COMPANY_FALLBACK: Record<string, string> = {
   med_spa: 'your practice',
+  medspa: 'your practice',
   plastic_surgery: 'your practice',
   cosmetic_dental: 'your practice',
   dental: 'your practice',
   dermatology: 'your practice',
   multifamily: 'your team',
   property_management: 'your team',
+  property_mgmt: 'your team',
   luxury_real_estate: 'your team',
+  real_estate: 'your team',
   luxury_auto: 'your dealership',
+  auto: 'your dealership',
 }
 
 function mergeTags(html: string, prospect: {
@@ -45,9 +49,13 @@ function mergeTags(html: string, prospect: {
   city: string | null
 }): string {
   const firstName = prospect.prospect_name.split(' ')[0]
-  const companyText = prospect.prospect_company || COMPANY_FALLBACK[prospect.vertical] || 'your team'
+  const verticalKey = (prospect.vertical || '').toLowerCase().trim().replace(/[\s-]+/g, '_')
+  const companyText = prospect.prospect_company || COMPANY_FALLBACK[verticalKey] || 'your team'
+  const lastChar = companyText.slice(-1).toLowerCase()
+  const companyPossessive = lastChar === 's' ? `${companyText}'` : `${companyText}'s`
   return html
     .replace(/\{firstName\}/g, firstName)
+    .replace(/\{company\}'s/g, companyPossessive)
     .replace(/\{company\}/g, companyText)
     .replace(/\{vertical\}/g, prospect.vertical)
     .replace(/\{city\}/g, prospect.city || 'Dallas')
