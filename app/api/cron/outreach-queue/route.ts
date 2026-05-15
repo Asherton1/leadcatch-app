@@ -57,7 +57,7 @@ function getDay4Html(vertical: string | null | undefined, firstName: string, com
   const wrapperOpen = '<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.7;">'
 
   switch (vertical) {
-    case 'Multifamily':
+    case 'property-mgmt':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
 
@@ -73,7 +73,7 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
-    case 'Med Spa':
+    case 'med-spa':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
 
@@ -89,7 +89,7 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
-    case 'Luxury Real Estate':
+    case 'luxury-real-estate':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
 
@@ -105,7 +105,7 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
-    case 'Cosmetic Dental':
+    case 'dental':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
 
@@ -121,7 +121,7 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
-    case 'Plastic Surgery':
+    case 'plastic-surgery':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
 
@@ -137,7 +137,7 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
-    case 'Dermatology':
+    case 'dermatology':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
 
@@ -175,7 +175,7 @@ function getDay10Html(vertical: string | null | undefined, firstName: string, co
   const wrapperOpen = '<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.7;">'
 
   switch (vertical) {
-    case 'Multifamily':
+    case 'property-mgmt':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
 
@@ -189,7 +189,7 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
-    case 'Med Spa':
+    case 'med-spa':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
 
@@ -203,7 +203,7 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
-    case 'Luxury Real Estate':
+    case 'luxury-real-estate':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
 
@@ -217,7 +217,7 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
-    case 'Cosmetic Dental':
+    case 'dental':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
 
@@ -231,7 +231,7 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
-    case 'Plastic Surgery':
+    case 'plastic-surgery':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
 
@@ -245,7 +245,7 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
-    case 'Dermatology':
+    case 'dermatology':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
 
