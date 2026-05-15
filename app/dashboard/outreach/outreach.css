@@ -943,3 +943,90 @@
     font-size: 2.25rem;
   }
 }
+
+
+/* === SEQUENCE HEALTH (follow-up metrics, editorial layout) === */
+.outreach-sequence {
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+  margin-bottom: 3rem;
+  padding: 1.75rem 0;
+}
+
+.outreach-sequence-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #ff6b35;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0 2rem 1.25rem;
+}
+
+.outreach-sequence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.outreach-sequence-item {
+  padding: 0 2rem;
+  border-right: 1px solid #1a1a1a;
+}
+
+.outreach-sequence-item:last-child {
+  border-right: none;
+}
+
+.outreach-sequence-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 0 0 0.5rem;
+}
+
+.outreach-sequence-value {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  margin: 0 0 0.375rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.outreach-sequence-value.orange {
+  color: #ff6b35;
+}
+
+.outreach-sequence-context {
+  font-size: 0.7rem;
+  color: #888;
+  margin: 0;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .outreach-sequence-grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1.5rem;
+  }
+  .outreach-sequence-item {
+    padding: 0 1rem;
+  }
+  .outreach-sequence-item:nth-child(2n) {
+    border-right: none;
+  }
+  .outreach-sequence-eyebrow {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .outreach-sequence-value {
+    font-size: 1.5rem;
+  }
+}

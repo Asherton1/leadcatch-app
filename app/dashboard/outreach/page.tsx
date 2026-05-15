@@ -22,7 +22,9 @@ interface QueueItem {
   status: string
   sent_at: string | null
   send_error: string | null
+  follow_up_day_4_scheduled_at: string | null
   follow_up_day_4_sent_at: string | null
+  follow_up_day_10_scheduled_at: string | null
   follow_up_day_10_sent_at: string | null
   replied_at: string | null
   notes: string | null
@@ -253,13 +255,47 @@ export default function OutreachAdminPage() {
       if (!hasQueued) emptyWeekdays++
     }
 
+    // Sequence health metrics
+    let day4Sent = 0
+    let day10Sent = 0
+    let dueToday = 0
+    let dueThisWeek = 0
+    const weekFromTodayKey = (() => {
+      const d = parseDayKey(todayKey)
+      d.setDate(d.getDate() + 7)
+      return dayKey(d)
+    })()
+
+    for (const it of items) {
+      if (it.follow_up_day_4_sent_at) day4Sent++
+      if (it.follow_up_day_10_sent_at) day10Sent++
+
+      // Pending Day 4 (scheduled but not sent, prospect hasn't replied)
+      if (it.follow_up_day_4_scheduled_at && !it.follow_up_day_4_sent_at && !it.replied_at) {
+        const schedKey = dayKey(new Date(it.follow_up_day_4_scheduled_at))
+        if (schedKey <= todayKey) dueToday++
+        else if (schedKey <= weekFromTodayKey) dueThisWeek++
+      }
+
+      // Pending Day 10 (same logic)
+      if (it.follow_up_day_10_scheduled_at && !it.follow_up_day_10_sent_at && !it.replied_at) {
+        const schedKey = dayKey(new Date(it.follow_up_day_10_scheduled_at))
+        if (schedKey <= todayKey) dueToday++
+        else if (schedKey <= weekFromTodayKey) dueThisWeek++
+      }
+    }
+
     return {
       queued: items.filter(i => i.status === 'queued').length,
       sent: items.filter(i => i.status === 'sent').length,
       replied: items.filter(i => i.status === 'replied' || i.replied_at).length,
       failed: items.filter(i => i.status === 'failed').length,
       next7Days,
-      emptyWeekdays
+      emptyWeekdays,
+      day4Sent,
+      day10Sent,
+      dueToday,
+      dueThisWeek
     }
   }, [items, itemsByDay, todayKey])
 
@@ -373,6 +409,33 @@ export default function OutreachAdminPage() {
             <p className="outreach-runway-context">
               {stats.emptyWeekdays > 3 ? 'in next 14d · feed the engine' : 'in next 14d · healthy pace'}
             </p>
+          </div>
+        </div>
+
+        {/* SEQUENCE HEALTH — follow-up metrics */}
+        <div className="outreach-sequence">
+          <p className="outreach-sequence-eyebrow">Sequence health</p>
+          <div className="outreach-sequence-grid">
+            <div className="outreach-sequence-item">
+              <p className="outreach-sequence-label">Day 4 sent</p>
+              <p className="outreach-sequence-value">{stats.day4Sent}</p>
+              <p className="outreach-sequence-context">cumulative</p>
+            </div>
+            <div className="outreach-sequence-item">
+              <p className="outreach-sequence-label">Day 10 sent</p>
+              <p className="outreach-sequence-value">{stats.day10Sent}</p>
+              <p className="outreach-sequence-context">cumulative</p>
+            </div>
+            <div className="outreach-sequence-item">
+              <p className="outreach-sequence-label">Due today</p>
+              <p className={`outreach-sequence-value ${stats.dueToday > 0 ? 'orange' : ''}`}>{stats.dueToday}</p>
+              <p className="outreach-sequence-context">{stats.dueToday > 0 ? 'pending follow-ups' : 'all caught up'}</p>
+            </div>
+            <div className="outreach-sequence-item">
+              <p className="outreach-sequence-label">Due this week</p>
+              <p className="outreach-sequence-value">{stats.dueThisWeek}</p>
+              <p className="outreach-sequence-context">projected</p>
+            </div>
           </div>
         </div>
 
