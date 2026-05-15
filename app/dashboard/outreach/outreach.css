@@ -1155,3 +1155,111 @@
     font-size: 0.75rem !important;
   }
 }
+
+
+
+/* === CALENDAR MOBILE OVERFLOW FIX === */
+
+/* Safety: prevent horizontal page overflow anywhere */
+html, body {
+  overflow-x: hidden !important;
+}
+
+.outreach-admin {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
+@media (max-width: 900px) {
+  /* Reduce page padding to give calendar more room */
+  .outreach-admin {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Calendar container */
+  .outreach-calendar {
+    padding: 1rem 0.5rem !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  /* Nav row: tight + wrap if needed */
+  .outreach-calendar-nav {
+    gap: 0.5rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  .outreach-calendar-nav-btn {
+    padding: 0.4rem 0.6rem !important;
+  }
+
+  .outreach-calendar-month {
+    font-size: 1rem !important;
+  }
+
+  .outreach-calendar-today-btn {
+    font-size: 0.65rem !important;
+    padding: 0.35rem 0.65rem !important;
+    margin-left: auto !important;
+  }
+
+  /* Grid: tight cells, full width */
+  .outreach-calendar-grid {
+    gap: 2px !important;
+    width: 100% !important;
+  }
+
+  .outreach-calendar-day {
+    min-height: 56px !important;
+    padding: 0.3rem 0.25rem !important;
+    overflow: hidden !important;
+  }
+
+  .outreach-calendar-weekday {
+    font-size: 0.6rem !important;
+    padding: 0.4rem 0 !important;
+  }
+
+  .outreach-calendar-day-num {
+    font-size: 0.75rem !important;
+  }
+
+  .outreach-calendar-day-count {
+    font-size: 0.65rem !important;
+    padding: 0.08rem 0.3rem !important;
+    min-width: 1rem !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Vertical chips: no room on mobile, drawer shows full breakdown anyway */
+  .outreach-calendar-day-verticals {
+    display: none !important;
+  }
+}
+
+/* Even tighter for very narrow viewports (iPhone SE etc) */
+@media (max-width: 400px) {
+  .outreach-admin {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  .outreach-calendar {
+    padding: 0.75rem 0.25rem !important;
+  }
+
+  .outreach-calendar-day {
+    min-height: 52px !important;
+    padding: 0.25rem 0.15rem !important;
+  }
+
+  .outreach-calendar-day-num {
+    font-size: 0.7rem !important;
+  }
+
+  .outreach-calendar-day-count {
+    font-size: 0.6rem !important;
+    padding: 0.05rem 0.25rem !important;
+  }
+}
