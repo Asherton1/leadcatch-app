@@ -25,6 +25,25 @@ Lost revenue recovery for high-ticket service businesses</p>
 <a href="mailto:hello@userecapture.com" style="color: #ff6b35;">hello@userecapture.com</a><br/>
 <a href="https://userecapture.com" style="color: #ff6b35;">www.userecapture.com</a></p>`
 
+// Get day of week (0=Sun, 6=Sat) in America/Chicago timezone
+function getChicagoDOW(date: Date): number {
+  const day = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Chicago',
+    weekday: 'short'
+  }).format(date)
+  const map: Record<string, number> = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }
+  return map[day] ?? 0
+}
+
+// Push date to next weekday if it lands on Sat/Sun (Chicago time)
+function nextWeekday(date: Date): Date {
+  const d = new Date(date.getTime())
+  const dow = getChicagoDOW(d)
+  if (dow === 6) d.setUTCDate(d.getUTCDate() + 2)  // Sat -> Mon
+  else if (dow === 0) d.setUTCDate(d.getUTCDate() + 1)  // Sun -> Mon
+  return d
+}
+
 // Forwarding PS for Day 4 + Day 10 follow-ups.
 function psHtml(company: string | null | undefined): string {
   const c = company || 'your team'
@@ -261,6 +280,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
+  // Skip weekend runs entirely — no outreach on Sat/Sun (Chicago time)
+  const todayDOW = getChicagoDOW(new Date())
+  if (todayDOW === 0 || todayDOW === 6) {
+    return NextResponse.json({ skipped: 'weekend - Mon-Fri only' })
+  }
+
   const now = new Date().toISOString()
   const results: { sent: number; failed: number; followups_4: number; followups_10: number; errors: string[] } = {
     sent: 0,
@@ -306,8 +331,8 @@ export async function GET(request: NextRequest) {
 
       if (res.ok && data.id) {
         const sentAt = new Date()
-        const day4 = new Date(sentAt.getTime() + 4 * 24 * 60 * 60 * 1000)
-        const day10 = new Date(sentAt.getTime() + 10 * 24 * 60 * 60 * 1000)
+        const day4 = nextWeekday(new Date(sentAt.getTime() + 4 * 24 * 60 * 60 * 1000))
+        const day10 = nextWeekday(new Date(sentAt.getTime() + 10 * 24 * 60 * 60 * 1000))
 
         await supabase
           .from('outreach_queue')
