@@ -1057,3 +1057,101 @@
   background: rgba(192, 132, 252, 0.15);
   color: #d8b4fe;
 }
+
+
+
+/* === FINAL MOBILE POLISH OVERRIDES === */
+
+.outreach-drawer-item-type {
+  display: inline-flex !important;
+  align-items: center;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 0.28rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.outreach-drawer-item-type.type-initial {
+  background: rgba(255, 107, 53, 0.18) !important;
+  color: #ff8556 !important;
+}
+
+.outreach-drawer-item-type.type-day4 {
+  background: rgba(129, 140, 248, 0.18) !important;
+  color: #a5b4fc !important;
+}
+
+.outreach-drawer-item-type.type-day10 {
+  background: rgba(192, 132, 252, 0.18) !important;
+  color: #d8b4fe !important;
+}
+
+@media (max-width: 900px) {
+  .outreach-section-h2 {
+    font-size: 1.125rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .outreach-calendar-day.empty-weekday {
+    border: 2px dashed rgba(255, 107, 53, 0.5) !important;
+    background: rgba(255, 107, 53, 0.03) !important;
+  }
+
+  .outreach-drawer-item {
+    padding: 1rem 0.875rem !important;
+    gap: 0.625rem !important;
+  }
+
+  .outreach-drawer-item-name {
+    font-size: 0.95rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .outreach-drawer-item-meta {
+    gap: 0.5rem !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .outreach-drawer-item-type {
+    font-size: 0.625rem !important;
+    padding: 0.3rem 0.6rem !important;
+  }
+
+  .outreach-drawer-item-email {
+    font-size: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .outreach-drawer-item-actions {
+    gap: 0.5rem !important;
+  }
+
+  .outreach-drawer-item-actions .outreach-btn-secondary,
+  .outreach-drawer-item-actions .outreach-btn-danger {
+    padding: 0.5rem 0.8rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  .outreach-drawer-header {
+    padding: 1.5rem 1.25rem 1rem !important;
+  }
+
+  .outreach-drawer-title {
+    font-size: 1.35rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .outreach-drawer-body {
+    padding: 0.75rem 1.25rem 2rem !important;
+  }
+
+  .outreach-drawer-subtitle {
+    font-size: 0.75rem !important;
+  }
+}
