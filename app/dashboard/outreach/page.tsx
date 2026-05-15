@@ -341,7 +341,7 @@ export default function OutreachAdminPage() {
         )}
 
         {/* STATS - 6 cards (added Next 7 + Empty weekdays) */}
-        <div className="outreach-stats outreach-stats-6">
+        <div className="outreach-stats">
           <div className="outreach-stat">
             <div className="outreach-stat-label">Queued</div>
             <div className="outreach-stat-value orange">{stats.queued}</div>
@@ -358,13 +358,21 @@ export default function OutreachAdminPage() {
             <div className="outreach-stat-label">Failed</div>
             <div className="outreach-stat-value">{stats.failed}</div>
           </div>
-          <div className="outreach-stat">
-            <div className="outreach-stat-label">Next 7 days</div>
-            <div className="outreach-stat-value">{stats.next7Days}</div>
+        </div>
+
+        {/* RUNWAY — engine health (editorial layout) */}
+        <div className="outreach-runway">
+          <div className="outreach-runway-item">
+            <p className="outreach-runway-label">Next 7 days</p>
+            <p className="outreach-runway-value">{stats.next7Days}</p>
+            <p className="outreach-runway-context">emails scheduled to fire</p>
           </div>
-          <div className="outreach-stat">
-            <div className="outreach-stat-label">Empty weekdays (14d)</div>
-            <div className={`outreach-stat-value ${stats.emptyWeekdays > 3 ? 'orange' : ''}`}>{stats.emptyWeekdays}</div>
+          <div className="outreach-runway-item">
+            <p className="outreach-runway-label">Empty weekdays</p>
+            <p className={`outreach-runway-value ${stats.emptyWeekdays > 3 ? 'warning' : 'healthy'}`}>{stats.emptyWeekdays}</p>
+            <p className="outreach-runway-context">
+              {stats.emptyWeekdays > 3 ? 'in next 14d · feed the engine' : 'in next 14d · healthy pace'}
+            </p>
           </div>
         </div>
 
