@@ -153,6 +153,58 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
+    case 'luxury-auto':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week. Inboxes get buried fast mid-week.</p>
+
+<p>Quick recap: Strolid's analysis of 2.3 million auto leads found dealers who respond within 5 minutes are 21-100x more likely to convert than those waiting 30 minutes. But the average dealership takes 42-47 hours. The prospect who started a finance pre-qual or test-drive request at 9 PM Tuesday — and got a Thursday afternoon callback — already walked into the dealership down the street.</p>
+
+<p>ReCapture closes that gap with one line of JavaScript: every visitor who started typing on a finance, test-drive, or vehicle inquiry form on ${c}'s site is captured and pushed to your floor with an SMS within seconds — even if they never hit submit. Optional AI voice callback in under 5 minutes for high-intent leads.</p>
+
+<p>For a dealer group ${c}'s caliber, recovering even 10% of abandoned forms is typically several additional vehicle sales per month — from leads you already paid Google or Meta to acquire.</p>
+
+<p>15-minute walkthrough this week?</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+
+    case 'fertility':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week. I know fertility inboxes are heavy.</p>
+
+<p>Quick recap: fertility prospects are some of the most research-intensive in healthcare. Industry data shows 70%+ of initial consultation inquiries get abandoned before submit — these are couples who are anxious, comparing three or four clinics, and second-guessing every click. The cost of one lost cycle inquiry isn't $200 — it's $15-30K plus lifetime patient value across multiple cycles.</p>
+
+<p>ReCapture captures every started-but-not-submitted inquiry on ${c}'s site and pushes it to your patient coordinator within 60 seconds, with a HIPAA-compliant AI voice callback for high-intent prospects. BAA available. Built specifically so anxious patients get a warm, human-feeling response within minutes — not the 24-48 hour delay that sends them to the next clinic.</p>
+
+<p>15-minute walkthrough this week?</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+
+    case 'lasik':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week.</p>
+
+<p>Quick recap: LASIK is the most comparison-shopped elective procedure in the US. 70%+ of prospects fill out two or three consultation request forms before booking — and they pick the clinic that responds first and with the most reassurance. Industry data shows the average LASIK clinic responds in 8-12 hours, and 67% of started consult forms on sites like ${c}'s never get submitted at all.</p>
+
+<p>ReCapture captures every visitor who started a consultation request and pushes them into your CRM within 60 seconds, with an optional AI voice callback that answers the most common pre-consult question: "Am I a candidate?" Most prospects book the consult right there on the call.</p>
+
+<p>At $4-6K per procedure, even one additional surgery per month moves the needle.</p>
+
+<p>15-minute walkthrough this week?</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+
     default:
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
@@ -254,6 +306,48 @@ ${psHtml(company)}
 <p>If recovery of abandoned cosmetic inquiries isn't a priority right now, totally understand. If it becomes one, you know where to find me.</p>
 
 <p>Otherwise, wishing you a great rest of the year at ${c}.</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+
+    case 'luxury-auto':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note — won't keep pestering.</p>
+
+<p>If speed-to-lead isn't on the priority list right now, totally understand. Dealer floors juggle a lot. If it ever becomes one — especially heading into your next quarterly model push or peak buying season — you know where to find me.</p>
+
+<p>Otherwise, wishing you strong delivery numbers and clean CSI scores at ${c}.</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+
+    case 'fertility':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note from me — fertility is too sensitive an area to bombard inboxes.</p>
+
+<p>If patient inquiry recovery isn't a priority right now, totally understand. If it ever becomes one — especially heading into the next benefits or insurance cycle — you know where to find me.</p>
+
+<p>Otherwise, wishing you a great rest of the year and many positive outcomes for the patients at ${c}.</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+
+    case 'lasik':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note from me.</p>
+
+<p>If LASIK consultation recovery isn't a priority right now, totally understand. The summer push is short and intense — if it becomes one heading into your next paid ad cycle, you know where to find me.</p>
+
+<p>Otherwise, wishing you a great year at ${c}.</p>
 
 ${SIGNATURE_HTML}
 ${psHtml(company)}

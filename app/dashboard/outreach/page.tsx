@@ -44,7 +44,8 @@ interface CalendarEvent {
 
 const VERTICALS = [
   'med-spa', 'dental', 'plastic-surgery', 'property-mgmt',
-  'luxury-real-estate', 'luxury-auto', 'gohighlevel', 'other'
+  'luxury-real-estate', 'luxury-auto', 'dermatology', 'fertility', 'lasik',
+  'gohighlevel', 'other'
 ]
 
 const STATUS_FILTERS = ['all', 'queued', 'sent', 'replied', 'failed', 'paused', 'opted_out']
