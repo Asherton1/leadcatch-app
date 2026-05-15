@@ -22,11 +22,24 @@ interface QueueItem {
   status: string
   sent_at: string | null
   send_error: string | null
+  follow_up_day_4_scheduled_at: string | null
   follow_up_day_4_sent_at: string | null
+  follow_up_day_10_scheduled_at: string | null
   follow_up_day_10_sent_at: string | null
   replied_at: string | null
   notes: string | null
   created_at: string
+}
+
+type EventType = 'initial' | 'day4' | 'day10'
+type EventStatus = 'queued' | 'sent' | 'failed' | 'replied'
+
+interface CalendarEvent {
+  id: string
+  item: QueueItem
+  type: EventType
+  date: Date
+  status: EventStatus
 }
 
 const VERTICALS = [
@@ -39,7 +52,6 @@ const STATUS_FILTERS = ['all', 'queued', 'sent', 'replied', 'failed', 'paused', 
 const VIEW_STORAGE_KEY = 'recapture-outreach-view-mode'
 type ViewMode = 'table' | 'calendar'
 
-// Format a Date as YYYY-MM-DD in America/Chicago (the cron's TZ)
 function dayKey(date: Date): string {
   const fmt = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'America/Chicago',
@@ -48,13 +60,11 @@ function dayKey(date: Date): string {
   return fmt.format(date)
 }
 
-// Parse a YYYY-MM-DD day key back to a Date (local time, noon to avoid TZ shift)
 function parseDayKey(key: string): Date {
   const [y, m, d] = key.split('-').map(Number)
   return new Date(y, m - 1, d, 12, 0, 0)
 }
 
-// Generate a 42-day month grid (6 weeks max), weeks starting Sunday
 function getMonthGrid(monthDate: Date): Date[] {
   const year = monthDate.getFullYear()
   const month = monthDate.getMonth()
@@ -87,6 +97,18 @@ function formatMonthHeader(date: Date): string {
   }).format(date)
 }
 
+function eventTypeLabel(type: EventType): string {
+  if (type === 'initial') return 'INITIAL'
+  if (type === 'day4') return 'DAY 4'
+  return 'DAY 10'
+}
+
+function eventTypeShortLabel(type: EventType): string {
+  if (type === 'initial') return 'initial'
+  if (type === 'day4') return 'Day 4'
+  return 'Day 10'
+}
+
 export default function OutreachAdminPage() {
   const { loading: authLoading, isAdmin } = useIsAdmin()
   const [items, setItems] = useState<QueueItem[]>([])
@@ -94,13 +116,11 @@ export default function OutreachAdminPage() {
   const [statusFilter, setStatusFilter] = useState('all')
   const [flash, setFlash] = useState<{ type: 'success' | 'error'; msg: string } | null>(null)
 
-  // View mode (remembers last preference)
   const [viewMode, setViewMode] = useState<ViewMode>('calendar')
   const [calendarMonth, setCalendarMonth] = useState<Date>(new Date())
   const [hoveredDay, setHoveredDay] = useState<string | null>(null)
   const [clickedDay, setClickedDay] = useState<string | null>(null)
 
-  // Bulk add form state
   const [prospectsBlock, setProspectsBlock] = useState('')
   const [subject, setSubject] = useState('')
   const [bodyHtml, setBodyHtml] = useState('')
@@ -108,7 +128,6 @@ export default function OutreachAdminPage() {
   const [singleDate, setSingleDate] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
-  // Load view preference on mount
   useEffect(() => {
     if (typeof window === 'undefined') return
     const saved = window.localStorage.getItem(VIEW_STORAGE_KEY)
@@ -207,29 +226,73 @@ export default function OutreachAdminPage() {
     }
   }
 
-  // Group items by day in CT
-  const itemsByDay = useMemo(() => {
-    const m = new Map<string, QueueItem[]>()
+  // Expand each QueueItem into up to 3 CalendarEvents (initial + Day 4 + Day 10)
+  const eventsByDay = useMemo(() => {
+    const m = new Map<string, CalendarEvent[]>()
+
     for (const item of items) {
-      const dateStr = item.sent_at || item.scheduled_send_at
-      if (!dateStr) continue
-      const key = dayKey(new Date(dateStr))
-      if (!m.has(key)) m.set(key, [])
-      m.get(key)!.push(item)
+      const initialDate = item.sent_at || item.scheduled_send_at
+      if (initialDate) {
+        let initialStatus: EventStatus
+        if (item.status === 'failed') initialStatus = 'failed'
+        else if (item.replied_at) initialStatus = 'replied'
+        else if (item.sent_at) initialStatus = 'sent'
+        else initialStatus = 'queued'
+
+        const ev: CalendarEvent = {
+          id: `${item.id}-initial`,
+          item,
+          type: 'initial',
+          date: new Date(initialDate),
+          status: initialStatus,
+        }
+        const key = dayKey(ev.date)
+        if (!m.has(key)) m.set(key, [])
+        m.get(key)!.push(ev)
+      }
+
+      // Day 4 — skip if prospect replied or initial failed (cron stops follow-ups)
+      if (!item.replied_at && item.status !== 'failed') {
+        const day4Date = item.follow_up_day_4_sent_at || item.follow_up_day_4_scheduled_at
+        if (day4Date) {
+          const ev: CalendarEvent = {
+            id: `${item.id}-day4`,
+            item,
+            type: 'day4',
+            date: new Date(day4Date),
+            status: item.follow_up_day_4_sent_at ? 'sent' : 'queued',
+          }
+          const key = dayKey(ev.date)
+          if (!m.has(key)) m.set(key, [])
+          m.get(key)!.push(ev)
+        }
+      }
+
+      if (!item.replied_at && item.status !== 'failed') {
+        const day10Date = item.follow_up_day_10_sent_at || item.follow_up_day_10_scheduled_at
+        if (day10Date) {
+          const ev: CalendarEvent = {
+            id: `${item.id}-day10`,
+            item,
+            type: 'day10',
+            date: new Date(day10Date),
+            status: item.follow_up_day_10_sent_at ? 'sent' : 'queued',
+          }
+          const key = dayKey(ev.date)
+          if (!m.has(key)) m.set(key, [])
+          m.get(key)!.push(ev)
+        }
+      }
     }
-    for (const dayItems of m.values()) {
-      dayItems.sort((a, b) => {
-        const aTime = new Date(a.sent_at || a.scheduled_send_at).getTime()
-        const bTime = new Date(b.sent_at || b.scheduled_send_at).getTime()
-        return aTime - bTime
-      })
+
+    for (const dayEvents of m.values()) {
+      dayEvents.sort((a, b) => a.date.getTime() - b.date.getTime())
     }
     return m
   }, [items])
 
   const todayKey = useMemo(() => dayKey(new Date()), [])
 
-  // Enhanced stats including next-7 + empty-weekday warnings
   const stats = useMemo(() => {
     let next7Days = 0
     let emptyWeekdays = 0
@@ -238,8 +301,8 @@ export default function OutreachAdminPage() {
       const d = parseDayKey(todayKey)
       d.setDate(d.getDate() + i)
       const k = dayKey(d)
-      const dayItems = itemsByDay.get(k) || []
-      next7Days += dayItems.filter(it => it.status === 'queued').length
+      const dayEvents = eventsByDay.get(k) || []
+      next7Days += dayEvents.filter(ev => ev.status === 'queued').length
     }
 
     for (let i = 0; i < 14; i++) {
@@ -248,9 +311,36 @@ export default function OutreachAdminPage() {
       const dow = d.getDay()
       if (dow === 0 || dow === 6) continue
       const k = dayKey(d)
-      const dayItems = itemsByDay.get(k) || []
-      const hasQueued = dayItems.some(it => it.status === 'queued')
+      const dayEvents = eventsByDay.get(k) || []
+      const hasQueued = dayEvents.some(ev => ev.status === 'queued')
       if (!hasQueued) emptyWeekdays++
+    }
+
+    let day4Sent = 0
+    let day10Sent = 0
+    let dueToday = 0
+    let dueThisWeek = 0
+    const weekFromTodayKey = (() => {
+      const d = parseDayKey(todayKey)
+      d.setDate(d.getDate() + 7)
+      return dayKey(d)
+    })()
+
+    for (const it of items) {
+      if (it.follow_up_day_4_sent_at) day4Sent++
+      if (it.follow_up_day_10_sent_at) day10Sent++
+
+      if (it.follow_up_day_4_scheduled_at && !it.follow_up_day_4_sent_at && !it.replied_at) {
+        const schedKey = dayKey(new Date(it.follow_up_day_4_scheduled_at))
+        if (schedKey <= todayKey) dueToday++
+        else if (schedKey <= weekFromTodayKey) dueThisWeek++
+      }
+
+      if (it.follow_up_day_10_scheduled_at && !it.follow_up_day_10_sent_at && !it.replied_at) {
+        const schedKey = dayKey(new Date(it.follow_up_day_10_scheduled_at))
+        if (schedKey <= todayKey) dueToday++
+        else if (schedKey <= weekFromTodayKey) dueThisWeek++
+      }
     }
 
     return {
@@ -259,13 +349,16 @@ export default function OutreachAdminPage() {
       replied: items.filter(i => i.status === 'replied' || i.replied_at).length,
       failed: items.filter(i => i.status === 'failed').length,
       next7Days,
-      emptyWeekdays
+      emptyWeekdays,
+      day4Sent,
+      day10Sent,
+      dueToday,
+      dueThisWeek,
     }
-  }, [items, itemsByDay, todayKey])
+  }, [items, eventsByDay, todayKey])
 
   const filtered = statusFilter === 'all' ? items : items.filter(i => i.status === statusFilter)
 
-  // Calendar navigation
   const goToPrevMonth = () => {
     const d = new Date(calendarMonth)
     d.setMonth(d.getMonth() - 1)
@@ -280,28 +373,34 @@ export default function OutreachAdminPage() {
     setCalendarMonth(new Date())
   }
 
-  // Day cell status (for count badge color)
-  function getDayStatusColor(items: QueueItem[]): string {
-    if (items.length === 0) return '#1a1a1a'
-    const hasFailed = items.some(i => i.status === 'failed')
-    const hasQueued = items.some(i => i.status === 'queued')
+  function getEventStatusColor(events: CalendarEvent[]): string {
+    if (events.length === 0) return '#1a1a1a'
+    const hasFailed = events.some(e => e.status === 'failed')
+    const hasQueued = events.some(e => e.status === 'queued')
     if (hasFailed) return '#ef4444'
     if (hasQueued) return '#ff6b35'
-    const allSentOrReplied = items.every(i => i.status === 'sent' || i.status === 'replied')
-    if (allSentOrReplied) return '#10b981'
-    return '#888'
+    return '#10b981'
   }
 
-  // Top verticals for chips
-  function getTopVerticals(items: QueueItem[]): { vertical: string; count: number }[] {
+  function getTopVerticals(events: CalendarEvent[]): { vertical: string; count: number }[] {
     const counts = new Map<string, number>()
-    for (const item of items) {
-      counts.set(item.vertical, (counts.get(item.vertical) || 0) + 1)
+    for (const ev of events) {
+      counts.set(ev.item.vertical, (counts.get(ev.item.vertical) || 0) + 1)
     }
     return Array.from(counts.entries())
       .sort((a, b) => b[1] - a[1])
       .slice(0, 3)
       .map(([vertical, count]) => ({ vertical, count }))
+  }
+
+  function getEventTypeBreakdown(events: CalendarEvent[]): { type: EventType; count: number }[] {
+    const counts: Record<EventType, number> = { initial: 0, day4: 0, day10: 0 }
+    for (const ev of events) counts[ev.type]++
+    const result: { type: EventType; count: number }[] = []
+    if (counts.initial) result.push({ type: 'initial', count: counts.initial })
+    if (counts.day4) result.push({ type: 'day4', count: counts.day4 })
+    if (counts.day10) result.push({ type: 'day10', count: counts.day10 })
+    return result
   }
 
   if (authLoading) {
@@ -322,9 +421,9 @@ export default function OutreachAdminPage() {
 
   const monthDays = getMonthGrid(calendarMonth)
   const currentMonth = calendarMonth.getMonth()
-  const clickedDayItems = clickedDay ? (itemsByDay.get(clickedDay) || []) : []
-  const hoveredDayItems = hoveredDay ? (itemsByDay.get(hoveredDay) || []) : []
-  const hoveredDayVerticals = getTopVerticals(hoveredDayItems)
+  const clickedDayEvents = clickedDay ? (eventsByDay.get(clickedDay) || []) : []
+  const hoveredDayEvents = hoveredDay ? (eventsByDay.get(hoveredDay) || []) : []
+  const hoveredTypeBreakdown = getEventTypeBreakdown(hoveredDayEvents)
 
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0a', color: '#e4e4e7' }}>
@@ -340,8 +439,7 @@ export default function OutreachAdminPage() {
           <div className={`outreach-flash ${flash.type}`}>{flash.msg}</div>
         )}
 
-        {/* STATS - 6 cards (added Next 7 + Empty weekdays) */}
-        <div className="outreach-stats outreach-stats-6">
+        <div className="outreach-stats">
           <div className="outreach-stat">
             <div className="outreach-stat-label">Queued</div>
             <div className="outreach-stat-value orange">{stats.queued}</div>
@@ -358,17 +456,49 @@ export default function OutreachAdminPage() {
             <div className="outreach-stat-label">Failed</div>
             <div className="outreach-stat-value">{stats.failed}</div>
           </div>
-          <div className="outreach-stat">
-            <div className="outreach-stat-label">Next 7 days</div>
-            <div className="outreach-stat-value">{stats.next7Days}</div>
+        </div>
+
+        <div className="outreach-runway">
+          <div className="outreach-runway-item">
+            <p className="outreach-runway-label">Next 7 days</p>
+            <p className="outreach-runway-value">{stats.next7Days}</p>
+            <p className="outreach-runway-context">events scheduled to fire</p>
           </div>
-          <div className="outreach-stat">
-            <div className="outreach-stat-label">Empty weekdays (14d)</div>
-            <div className={`outreach-stat-value ${stats.emptyWeekdays > 3 ? 'orange' : ''}`}>{stats.emptyWeekdays}</div>
+          <div className="outreach-runway-item">
+            <p className="outreach-runway-label">Empty weekdays</p>
+            <p className={`outreach-runway-value ${stats.emptyWeekdays > 3 ? 'warning' : 'healthy'}`}>{stats.emptyWeekdays}</p>
+            <p className="outreach-runway-context">
+              {stats.emptyWeekdays > 3 ? 'in next 14d · feed the engine' : 'in next 14d · healthy pace'}
+            </p>
           </div>
         </div>
 
-        {/* BULK ADD FORM */}
+        <div className="outreach-sequence">
+          <p className="outreach-sequence-eyebrow">Sequence health</p>
+          <div className="outreach-sequence-grid">
+            <div className="outreach-sequence-item">
+              <p className="outreach-sequence-label">Day 4 sent</p>
+              <p className="outreach-sequence-value">{stats.day4Sent}</p>
+              <p className="outreach-sequence-context">cumulative</p>
+            </div>
+            <div className="outreach-sequence-item">
+              <p className="outreach-sequence-label">Day 10 sent</p>
+              <p className="outreach-sequence-value">{stats.day10Sent}</p>
+              <p className="outreach-sequence-context">cumulative</p>
+            </div>
+            <div className="outreach-sequence-item">
+              <p className="outreach-sequence-label">Due today</p>
+              <p className={`outreach-sequence-value ${stats.dueToday > 0 ? 'orange' : ''}`}>{stats.dueToday}</p>
+              <p className="outreach-sequence-context">{stats.dueToday > 0 ? 'pending follow-ups' : 'all caught up'}</p>
+            </div>
+            <div className="outreach-sequence-item">
+              <p className="outreach-sequence-label">Due this week</p>
+              <p className="outreach-sequence-value">{stats.dueThisWeek}</p>
+              <p className="outreach-sequence-context">projected</p>
+            </div>
+          </div>
+        </div>
+
         <div className="outreach-section">
           <p className="outreach-section-eyebrow">01 — Load prospects</p>
           <h2 className="outreach-section-h2">Paste a block of prospects, write one email, schedule across the week.</h2>
@@ -449,7 +579,6 @@ Available merge tags: {firstName}, {company}, {vertical}, {city}`}
           </button>
         </div>
 
-        {/* QUEUE SECTION with view toggle */}
         <div className="outreach-section">
           <div className="outreach-section-header-row">
             <div>
@@ -490,17 +619,17 @@ Available merge tags: {firstName}, {company}, {vertical}, {city}`}
                   ))}
                   {monthDays.map(day => {
                     const key = dayKey(day)
-                    const dayItems = itemsByDay.get(key) || []
+                    const dayEvents = eventsByDay.get(key) || []
                     const isCurrentMonth = day.getMonth() === currentMonth
                     const isToday = key === todayKey
                     const isPast = key < todayKey
                     const isWeekend = day.getDay() === 0 || day.getDay() === 6
-                    const totalCount = dayItems.length
-                    const statusColor = getDayStatusColor(dayItems)
-                    const topVerticals = getTopVerticals(dayItems)
+                    const totalCount = dayEvents.length
+                    const statusColor = getEventStatusColor(dayEvents)
+                    const topVerticals = getTopVerticals(dayEvents)
                     const chipsTotal = topVerticals.reduce((s, t) => s + t.count, 0)
                     const isEmptyWeekday = !isWeekend && !isPast && totalCount === 0 && isCurrentMonth
-                    const isOverloaded = totalCount > 8
+                    const isOverloaded = totalCount > 12
 
                     let cellClass = 'outreach-calendar-day'
                     if (!isCurrentMonth) cellClass += ' other-month'
@@ -548,10 +677,12 @@ Available merge tags: {firstName}, {company}, {vertical}, {city}`}
                           <div className="outreach-calendar-popover">
                             <div className="outreach-calendar-popover-title">{formatDayLabel(day)}</div>
                             <div className="outreach-calendar-popover-summary">
-                              {totalCount} {totalCount === 1 ? 'email' : 'emails'}
-                              {hoveredDayVerticals.length > 0 && (
-                                <> · {hoveredDayVerticals.map(v => `${v.count} ${v.vertical}`).join(', ')}</>
-                              )}
+                              {hoveredTypeBreakdown.map((t, i) => (
+                                <span key={t.type}>
+                                  {i > 0 && ', '}
+                                  {t.count} {eventTypeShortLabel(t.type)}
+                                </span>
+                              ))}
                             </div>
                             <div className="outreach-calendar-popover-hint">Click for full list</div>
                           </div>
@@ -575,7 +706,7 @@ Available merge tags: {firstName}, {company}, {vertical}, {city}`}
                     Has failed
                   </div>
                   <div className="outreach-calendar-legend-item">
-                    <span className="outreach-calendar-legend-dot" style={{ background: 'transparent', border: '1px dashed #ff6b35' }} />
+                    <span className="outreach-calendar-legend-dot" style={{ background: 'transparent', border: '1.5px dashed rgba(255, 107, 53, 0.6)' }} />
                     Empty weekday
                   </div>
                 </div>
@@ -655,7 +786,6 @@ Available merge tags: {firstName}, {company}, {vertical}, {city}`}
           )}
         </div>
 
-        {/* DAY DRAWER (overlay) */}
         {clickedDay && (
           <div className="outreach-drawer-overlay" onClick={() => setClickedDay(null)}>
             <div className="outreach-drawer" onClick={e => e.stopPropagation()}>
@@ -663,37 +793,47 @@ Available merge tags: {firstName}, {company}, {vertical}, {city}`}
                 <div>
                   <p className="outreach-drawer-eyebrow">Day detail</p>
                   <h3 className="outreach-drawer-title">{formatDayLabel(parseDayKey(clickedDay))}</h3>
-                  <p className="outreach-drawer-subtitle">{clickedDayItems.length} {clickedDayItems.length === 1 ? 'email' : 'emails'}</p>
+                  <p className="outreach-drawer-subtitle">
+                    {clickedDayEvents.length} {clickedDayEvents.length === 1 ? 'event' : 'events'}
+                    {(() => {
+                      const breakdown = getEventTypeBreakdown(clickedDayEvents)
+                      if (breakdown.length === 0) return null
+                      return <> · {breakdown.map(b => `${b.count} ${eventTypeShortLabel(b.type)}`).join(', ')}</>
+                    })()}
+                  </p>
                 </div>
                 <button className="outreach-drawer-close" onClick={() => setClickedDay(null)} aria-label="Close">×</button>
               </div>
               <div className="outreach-drawer-body">
-                {clickedDayItems.map(item => (
-                  <div key={item.id} className="outreach-drawer-item">
+                {clickedDayEvents.map(ev => (
+                  <div key={ev.id} className="outreach-drawer-item">
                     <div className="outreach-drawer-item-main">
-                      <div className="outreach-drawer-item-name">{item.prospect_company || item.prospect_name}</div>
+                      <div className="outreach-drawer-item-name">{ev.item.prospect_company || ev.item.prospect_name}</div>
                       <div className="outreach-drawer-item-meta">
-                        <span className="outreach-drawer-item-vertical">{item.vertical}</span>
+                        <span className={`outreach-drawer-item-type type-${ev.type}`}>
+                          {eventTypeLabel(ev.type)}
+                        </span>
+                        <span className="outreach-drawer-item-vertical">{ev.item.vertical}</span>
                         <span className="outreach-drawer-item-time">
-                          {new Date(item.sent_at || item.scheduled_send_at).toLocaleTimeString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit' })}
+                          {ev.date.toLocaleTimeString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit' })}
                         </span>
                       </div>
-                      <div className="outreach-drawer-item-email">{item.prospect_email}</div>
+                      <div className="outreach-drawer-item-email">{ev.item.prospect_email}</div>
                     </div>
                     <div className="outreach-drawer-item-right">
-                      <span className={`outreach-status-pill outreach-status-${item.status}`}>{item.status}</span>
+                      <span className={`outreach-status-pill outreach-status-${ev.status}`}>{ev.status}</span>
                       <div className="outreach-drawer-item-actions">
-                        {item.status === 'queued' && (
+                        {ev.type === 'initial' && ev.item.status === 'queued' && (
                           <>
-                            <button className="outreach-btn-secondary" onClick={() => handleAction(item.id, 'send_now')}>Send now</button>
-                            <button className="outreach-btn-danger" onClick={() => handleAction(item.id, 'cancel')}>Cancel</button>
+                            <button className="outreach-btn-secondary" onClick={() => handleAction(ev.item.id, 'send_now')}>Send now</button>
+                            <button className="outreach-btn-danger" onClick={() => handleAction(ev.item.id, 'cancel')}>Cancel</button>
                           </>
                         )}
-                        {item.status === 'sent' && !item.replied_at && (
-                          <button className="outreach-btn-secondary" onClick={() => handleAction(item.id, 'mark_replied')}>Mark replied</button>
+                        {ev.item.status === 'sent' && !ev.item.replied_at && (
+                          <button className="outreach-btn-secondary" onClick={() => handleAction(ev.item.id, 'mark_replied')}>Mark replied</button>
                         )}
-                        {item.status === 'failed' && (
-                          <button className="outreach-btn-secondary" onClick={() => handleAction(item.id, 'send_now')}>Retry</button>
+                        {ev.type === 'initial' && ev.item.status === 'failed' && (
+                          <button className="outreach-btn-secondary" onClick={() => handleAction(ev.item.id, 'send_now')}>Retry</button>
                         )}
                       </div>
                     </div>
