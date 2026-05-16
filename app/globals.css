@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 html, body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0a; }
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0a; }
 
 .nav-desktop a:hover,
 .nav-dropdown-wrapper:hover > .nav-link {
@@ -90,7 +89,7 @@ footer a:hover {
 
 /* Prevent any horizontal overflow globally */
 html, body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
   overflow-x: hidden;
   max-width: 100vw;
 }
@@ -197,7 +196,7 @@ input, textarea, select, button {
 }
 
 .logo {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.03em;

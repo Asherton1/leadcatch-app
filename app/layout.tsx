@@ -1,8 +1,21 @@
 import './globals.css'
+import { Geist, Geist_Mono } from 'next/font/google'
 import PremiumEffects from './components/PremiumEffects'
 import PageTransitions from './components/PageTransitions'
 import Script from 'next/script'
 import type { Metadata } from 'next'
+
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
@@ -50,7 +63,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-132TK8H7D9" strategy="afterInteractive" />
         <Script id="ga4-init" strategy="afterInteractive">
@@ -59,7 +72,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('js', new Date());
           gtag('config', 'G-132TK8H7D9');`}
         </Script>
-        {/* ReCapture tracker — dogfooding our own product on userecapture.com */}
         <Script
           src="https://www.userecapture.com/track.js?key=admin_252bcf7523b0e813f2b470d2e0f61fd9"
           strategy="afterInteractive"
