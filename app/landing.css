@@ -3846,9 +3846,9 @@
 }
 
 
-/* ─── Problem section — editorial rows (replaces problem-grid cards) ─── */
+/* ─── Problem section — accordion with live stat callouts ─────────── */
 .problem-editorial {
-  max-width: 1100px;
+  max-width: 720px;
   margin: 0 auto;
   padding: 0 2rem;
   position: relative;
@@ -3865,13 +3865,7 @@
 }
 
 .problem-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
-  gap: 3rem;
-  padding: 3.5rem 0;
-  align-items: start;
   position: relative;
-  transition: background 0.25s ease;
 }
 
 .problem-row::after {
@@ -3884,10 +3878,23 @@
   background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.25) 20%, rgba(255, 107, 53, 0.25) 80%, transparent 100%);
 }
 
+.problem-row-trigger {
+  width: 100%;
+  position: relative;
+  padding: 2.5rem 3rem 2.5rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+}
+
 .problem-row-head {
   display: flex;
   flex-direction: column;
-  gap: 0.875rem;
+  gap: 0.75rem;
+  align-items: center;
 }
 
 .problem-row-eyebrow {
@@ -3898,40 +3905,134 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0.75;
+  transition: letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.problem-row-open .problem-row-eyebrow {
+  letter-spacing: 0.28em;
+  opacity: 1;
 }
 
 .problem-row-title {
   font-family: var(--font-geist-sans), sans-serif;
-  font-size: clamp(1.5rem, 2.2vw, 1.875rem);
+  font-size: clamp(1.375rem, 2.2vw, 1.75rem);
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.02em;
   color: #ffffff;
   margin: 0;
+  text-align: center;
+}
+
+.problem-row-icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 1.375rem;
+  font-weight: 300;
+  color: #ff6b35;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1;
+  width: 1.5rem;
+  text-align: center;
+}
+
+.problem-row-open .problem-row-icon {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.problem-row-body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.problem-row-open .problem-row-body {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.problem-row-body-inner {
+  display: grid;
+  grid-template-columns: 1fr 160px;
+  gap: 2.5rem;
+  padding: 0 0 2.75rem;
+  align-items: start;
 }
 
 .problem-row-text {
   font-family: var(--font-geist-sans), sans-serif;
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 400;
   line-height: 1.7;
   color: #999;
   margin: 0;
 }
 
+.problem-row-stat {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  padding-left: 1.75rem;
+  text-align: left;
+}
+
+.problem-row-stat-num {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 2.75rem;
+  font-weight: 600;
+  color: #ff6b35;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.75rem;
+}
+
+.problem-row-stat-label {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: #777;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
 @media (max-width: 768px) {
   .problem-editorial {
     padding: 0 1.25rem;
   }
-  .problem-row {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 2.25rem 0;
+  .problem-row-trigger {
+    padding: 1.75rem 2.5rem 1.75rem 0;
+  }
+  .problem-row-head {
+    align-items: flex-start;
   }
   .problem-row-title {
-    font-size: 1.375rem;
+    font-size: 1.25rem;
+    text-align: left;
   }
-  .problem-row-text {
-    font-size: 0.9375rem;
+  .problem-row-body-inner {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    padding-bottom: 1.75rem;
+  }
+  .problem-row-stat {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-left: 0;
+    padding-top: 1.75rem;
+  }
+  .problem-row-stat-num {
+    font-size: 2.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .problem-row-body,
+  .problem-row-eyebrow,
+  .problem-row-icon {
+    transition: none !important;
   }
 }
