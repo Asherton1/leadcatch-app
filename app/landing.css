@@ -3844,3 +3844,90 @@
   letter-spacing: 0.005em;
   max-width: 520px;
 }
+
+
+/* ─── Problem section — editorial rows (replaces problem-grid cards) ─── */
+.problem-editorial {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  border-top: 1px solid rgba(255, 107, 53, 0.18);
+}
+
+.problem-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  gap: 3rem;
+  padding: 3.5rem 0;
+  border-bottom: 1px solid rgba(255, 107, 53, 0.18);
+  align-items: start;
+  position: relative;
+  transition: background 0.25s ease;
+}
+
+.problem-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 107, 53, 0.6) 50%, transparent 100%);
+  transition: width 0.3s ease;
+}
+
+.problem-row:hover::before {
+  width: 3px;
+}
+
+.problem-row-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.problem-row-eyebrow {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.problem-row-title {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: clamp(1.5rem, 2.2vw, 1.875rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.problem-row-text {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #999;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .problem-editorial {
+    padding: 0 1.25rem;
+  }
+  .problem-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 2.25rem 0;
+  }
+  .problem-row-title {
+    font-size: 1.375rem;
+  }
+  .problem-row-text {
+    font-size: 0.9375rem;
+  }
+}
