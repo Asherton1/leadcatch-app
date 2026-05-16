@@ -97,7 +97,7 @@ export default function LandingPage() {
       <div className="section-divider" />
 
       <section className="lc-section how-it-works-section">
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem", color: "#ffffff" }}>Three Steps to Recovered Revenue</h2>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Three Steps to Recovered Revenue</h2>
         <p className="section-subtitle">No complex setup. No dev team required. Just results.</p>
         <StepsAccordion />
       </section>
