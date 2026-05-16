@@ -3884,21 +3884,6 @@
   background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.25) 20%, rgba(255, 107, 53, 0.25) 80%, transparent 100%);
 }
 
-.problem-row::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(255, 107, 53, 0.6) 50%, transparent 100%);
-  transition: width 0.3s ease;
-}
-
-.problem-row:hover::before {
-  width: 3px;
-}
-
 .problem-row-head {
   display: flex;
   flex-direction: column;
