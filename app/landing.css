@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
 * {
   margin: 0;
   padding: 0;
@@ -60,7 +58,7 @@
 }
 
 .landing {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
@@ -95,7 +93,7 @@
 }
 
 .logo {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -115,7 +113,7 @@
   color: var(--orange);
   padding: 0.625rem 1.5rem;
   border-radius: 0.5rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-weight: 600;
   font-size: 0.875rem;
   cursor: pointer;
@@ -219,10 +217,10 @@
 }
 
 .hero h1 {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 5.5rem;
   font-weight: 800;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   letter-spacing: -0.04em;
   line-height: 1.05;
   margin-bottom: 2rem;
@@ -258,7 +256,7 @@
   color: #000000;
   padding: 1rem 2.5rem;
   border-radius: 0.625rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-weight: 700;
   font-size: 0.9375rem;
   cursor: pointer;
@@ -281,7 +279,7 @@
   color: var(--text-primary);
   padding: 1rem 2.5rem;
   border-radius: 0.625rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-weight: 600;
   font-size: 0.9375rem;
   cursor: pointer;
@@ -329,10 +327,10 @@
 .stat-item:hover      { background: rgba(255, 255, 255, 0.02); }
 
 .stat-number {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 3rem;
   font-weight: 800;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   letter-spacing: -0.04em;
   color: var(--orange);
   display: block;
@@ -369,7 +367,7 @@
 }
 
 .section-title {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: clamp(1.35rem, 5vw, 3.25rem);
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -446,10 +444,10 @@
 .problem-card:hover::before { opacity: 1; }
 
 .problem-number {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 3rem;
   font-weight: 800;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   letter-spacing: -0.04em;
   color: var(--orange);
   opacity: 0.4;
@@ -626,7 +624,7 @@
 .price-amount {
   font-size: 3rem;
   font-weight: 800;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   letter-spacing: -0.04em;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -695,7 +693,7 @@
   padding: 1rem;
   border-radius: 0.625rem;
   white-space: nowrap;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-weight: 700;
   font-size: 0.9375rem;
   cursor: pointer;
@@ -813,7 +811,7 @@
 .final-cta .section-label { margin-bottom: 1rem; }
 
 .final-cta h2 {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 3rem;
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -842,7 +840,7 @@
   border-top: 1px solid var(--border-subtle);
   padding: 4.5rem 4rem 3rem;
   color: var(--text-tertiary);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
 }
 
 .footer-top {
@@ -1184,7 +1182,7 @@
 .how-step-num {
   font-size: 3rem;
   font-weight: 800;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   letter-spacing: -0.04em;
   color: #ff6b35;
   opacity: 0.4;
@@ -1731,7 +1729,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.8125rem;
   color: #888;
   padding: 0.5rem 0;
@@ -1773,7 +1771,7 @@
   color: #aaa;
   text-decoration: none;
   font-size: 0.8125rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   transition: all 0.15s;
 }
 
@@ -2517,7 +2515,7 @@
    NAV PHONE NUMBER (desktop only)
    ======================================== */
 .nav-phone {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
   color: #ff6b35;
@@ -2543,7 +2541,7 @@
 }
 
 .ledger-eyebrow {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
   color: #ff6b35;
@@ -2555,7 +2553,7 @@
 }
 
 .ledger-headline {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: clamp(1.75rem, 4vw, 2.75rem);
   font-weight: 700;
   line-height: 1.15;
@@ -2578,7 +2576,7 @@
   text-align: center;
 }
 .ledger-stat-num {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: clamp(2.25rem, 4vw, 3.25rem);
   font-weight: 700;
   line-height: 1;
@@ -2588,7 +2586,7 @@
 }
 .ledger-stat-orange { color: #ff6b35; }
 .ledger-stat-label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
   color: #777;
@@ -2624,14 +2622,14 @@
   background: rgba(255,255,255,0.015);
 }
 .ledger-row-name {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: #ffffff;
   letter-spacing: -0.01em;
 }
 .ledger-row-email {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.85rem;
   font-weight: 400;
   color: #777;
@@ -2640,14 +2638,14 @@
   white-space: nowrap;
 }
 .ledger-row-value {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: #ffffff;
   letter-spacing: -0.01em;
 }
 .ledger-row-status {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -2748,7 +2746,7 @@
   text-align: center;
 }
 .pricing-hero-v2-eyebrow {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
   color: #ff6b35;
@@ -2758,7 +2756,7 @@
   opacity: 0.75;
 }
 .pricing-hero-v2-headline {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: clamp(1.875rem, 4.2vw, 3rem);
   font-weight: 700;
   line-height: 1.2;
@@ -2860,7 +2858,7 @@
 }
 
 .pricing-row-name {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -2868,7 +2866,7 @@
 }
 
 .pricing-row-hipaa {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -2895,14 +2893,14 @@
 }
 
 .pricing-row-price-currency {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
   color: #777;
 }
 
 .pricing-row-price-amount {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -2911,7 +2909,7 @@
 }
 
 .pricing-row-price-period {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
   color: #777;
@@ -2925,7 +2923,7 @@
 }
 
 .pricing-row-desc {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -2935,7 +2933,7 @@
 }
 
 .pricing-row-features {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.85;
@@ -2950,7 +2948,7 @@
 }
 
 .pricing-row-cta {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -3042,7 +3040,7 @@
   text-align: center;
 }
 .pricing-baseline-eyebrow {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
   color: #ff6b35;
@@ -3052,7 +3050,7 @@
   opacity: 0.75;
 }
 .pricing-baseline-headline {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: clamp(1.25rem, 2.5vw, 1.75rem);
   font-weight: 600;
   line-height: 1.3;
@@ -3088,7 +3086,7 @@
 .pricing-baseline.revealed .pricing-baseline-cell:nth-child(6) { transition-delay: 400ms; }
 
 .pricing-baseline-title {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 1rem;
   font-weight: 600;
   color: #ff6b35;
@@ -3096,7 +3094,7 @@
   letter-spacing: -0.01em;
 }
 .pricing-baseline-desc {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.8125rem;
   font-weight: 400;
   color: #777;
@@ -3211,7 +3209,7 @@
   text-align: center;
 }
 .pricing-math-eyebrow {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
   color: #ff6b35;
@@ -3221,7 +3219,7 @@
   opacity: 0.75;
 }
 .pricing-math-headline {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   font-weight: 700;
   line-height: 1.2;
@@ -3338,7 +3336,7 @@
 .pricing-math-visible .pricing-math-row:nth-child(6) .pricing-math-content { opacity: 1; transform: translateY(0); transition-delay: 1600ms; }
 
 .pricing-math-num {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: clamp(2rem, 4vw, 3.25rem);
   font-weight: 600;
   letter-spacing: -0.03em;
@@ -3353,7 +3351,7 @@
   letter-spacing: 0;
 }
 .pricing-math-desc {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.9375rem;
   font-weight: 400;
   color: #888;
@@ -3361,7 +3359,7 @@
 }
 
 .pricing-math-punchline {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: clamp(1rem, 2vw, 1.375rem);
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -3371,7 +3369,7 @@
   margin-bottom: 0.625rem;
 }
 .pricing-math-punchline-sub {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.9375rem;
   font-weight: 400;
   color: #aaa;
@@ -3497,7 +3495,7 @@
   text-align: center;
 }
 .pricing-faq-eyebrow {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
   color: #ff6b35;
@@ -3507,7 +3505,7 @@
   opacity: 0.75;
 }
 .pricing-faq-headline {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   font-weight: 700;
   line-height: 1.2;
@@ -3533,7 +3531,7 @@
   border: none;
   cursor: pointer;
   text-align: left;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 1rem;
   font-weight: 500;
   color: #ffffff;
@@ -3566,7 +3564,7 @@
   padding: 0 0.5rem 1.75rem;
 }
 .pricing-faq-answer-text {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.9375rem;
   font-weight: 400;
   line-height: 1.65;
@@ -3607,7 +3605,7 @@
   text-align: center;
 }
 .canon-hero-eyebrow {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
   color: #ff6b35;
@@ -3617,7 +3615,7 @@
   opacity: 0.75;
 }
 .canon-hero-headline {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: clamp(1.875rem, 4.2vw, 3rem);
   font-weight: 700;
   line-height: 1.15;
@@ -3628,7 +3626,7 @@
 .canon-hero-headline-primary { color: #ffffff; }
 .canon-hero-headline-muted   { color: #555555; }
 .canon-hero-sub {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   font-size: 1.0625rem;
   font-weight: 400;
   line-height: 1.7;
