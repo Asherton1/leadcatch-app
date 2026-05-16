@@ -3878,6 +3878,10 @@
   background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.25) 20%, rgba(255, 107, 53, 0.25) 80%, transparent 100%);
 }
 
+.problem-row:last-child::after {
+  display: none;
+}
+
 .problem-row-trigger {
   width: 100%;
   position: relative;
