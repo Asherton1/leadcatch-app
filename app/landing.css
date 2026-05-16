@@ -3851,7 +3851,17 @@
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 2rem;
-  border-top: 1px solid rgba(255, 107, 53, 0.18);
+  position: relative;
+}
+
+.problem-editorial::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.25) 20%, rgba(255, 107, 53, 0.25) 80%, transparent 100%);
 }
 
 .problem-row {
@@ -3859,10 +3869,19 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
   gap: 3rem;
   padding: 3.5rem 0;
-  border-bottom: 1px solid rgba(255, 107, 53, 0.18);
   align-items: start;
   position: relative;
   transition: background 0.25s ease;
+}
+
+.problem-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.25) 20%, rgba(255, 107, 53, 0.25) 80%, transparent 100%);
 }
 
 .problem-row::before {
