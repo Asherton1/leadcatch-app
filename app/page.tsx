@@ -11,8 +11,6 @@ import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
 import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
-import LiveTicker from './components/LiveTicker'
-import CaptureFeed from './components/CaptureFeed'
 import LedgerStats from './components/LedgerStats'
 import LedgerRows from './components/LedgerRows'
 
@@ -59,10 +57,7 @@ export default function LandingPage() {
           </div>
           <div className="hero-right hero-animate-delay2">
             <GhostLeadDemoCompact />
-        <div className="hero-live-stats">
-          <LiveTicker />
-          <CaptureFeed />
-        </div>
+        <div className="hero-grid" aria-hidden="true" />
           </div>
         </div>
       </section>
