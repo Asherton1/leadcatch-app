@@ -11,7 +11,7 @@ import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
 import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
-import GhostFunnel from './components/GhostFunnel'
+import Heartbeat from './components/Heartbeat'
 import LedgerStats from './components/LedgerStats'
 import LedgerRows from './components/LedgerRows'
 
@@ -37,7 +37,7 @@ export default function LandingPage() {
       <section className="hero">
         <ParticleNetwork />
         <div className="hero-glow-orb" />
-        <GhostFunnel />
+        <Heartbeat />
 
         <div className="hero-split">
           <div className="hero-left">

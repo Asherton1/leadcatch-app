@@ -4295,106 +4295,60 @@
 }
 
 
-/* ─── Ghost Funnel — phantom form vignettes (hero WOW background) ─── */
-.ghost-funnel {
+/* ─── Heartbeat — precision EKG sweep across hero baseline ─── */
+.heartbeat {
   position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.ghost-vignette {
-  position: absolute;
-  width: 140px;
-  opacity: 0;
-  animation: ghost-vignette-life 6.4s ease-out forwards;
-}
-
-@keyframes ghost-vignette-life {
-  0%   { opacity: 0;    transform: translate(0, 10px); }
-  8%   { opacity: 0.50; transform: translate(4px, 0); }
-  52%  { opacity: 0.50; transform: translate(22px, -4px); }
-  60%  { opacity: 0.20; transform: translate(30px, -8px); }
-  100% { opacity: 0;    transform: translate(48px, -16px); }
-}
-
-.ghost-vignette-label {
-  font-family: var(--font-geist-sans), sans-serif;
-  font-size: 0.55rem;
-  font-weight: 600;
-  color: rgba(255, 107, 53, 0.75);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  margin-bottom: 0.4rem;
-}
-
-.ghost-vignette-field {
-  background: rgba(20, 20, 20, 0.55);
-  border: 1px solid rgba(255, 107, 53, 0.28);
-  border-radius: 4px;
-  padding: 0.5rem 0.625rem;
-  font-family: 'SF Mono', Menlo, monospace;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.78);
+  left: 0;
+  right: 0;
+  bottom: 1.5rem;
   height: 28px;
-  display: flex;
-  align-items: center;
+  pointer-events: none;
+  z-index: 0;
   overflow: hidden;
-  position: relative;
 }
 
-.ghost-vignette-typed {
-  overflow: hidden;
-  white-space: nowrap;
-  display: inline-block;
-  width: 0;
-  animation: ghost-typing 1.8s steps(10, end) 0.5s forwards;
-}
-
-@keyframes ghost-typing {
-  0%   { width: 0; }
-  100% { width: 100%; }
-}
-
-.ghost-vignette-cursor {
-  display: inline-block;
-  width: 1.5px;
-  height: 12px;
-  background: rgba(255, 107, 53, 0.95);
-  margin-left: 1px;
-  animation: ghost-cursor-blink 0.65s steps(2) infinite;
-}
-
-@keyframes ghost-cursor-blink {
-  0%, 50%      { opacity: 1; }
-  50.01%, 100% { opacity: 0; }
-}
-
-.ghost-vignette-pulse {
+.heartbeat-line {
   position: absolute;
-  left: 60%;
-  top: 78%;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255, 107, 53, 1);
-  box-shadow: 0 0 12px rgba(255, 107, 53, 0.85), 0 0 24px rgba(255, 107, 53, 0.5);
-  transform: translate(-50%, -50%) scale(0);
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.22) 18%, rgba(255, 107, 53, 0.22) 82%, transparent 100%);
+  transform: translateY(-50%);
+}
+
+.heartbeat-pulse {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 80px;
+  left: -10%;
   opacity: 0;
-  animation: ghost-pulse 1.4s ease-out 3.2s forwards;
+  color: rgba(255, 107, 53, 1);
+  filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.7)) drop-shadow(0 0 12px rgba(255, 107, 53, 0.4));
+  animation: heartbeat-travel 7s linear infinite;
 }
 
-@keyframes ghost-pulse {
-  0%   { transform: translate(-50%, -50%) scale(0);   opacity: 0; }
-  10%  { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(6);   opacity: 0; }
+.heartbeat-pulse svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-@media (max-width: 900px) {
-  .ghost-funnel { display: none; }
+@keyframes heartbeat-travel {
+  0%   { left: -10%; opacity: 0; }
+  3%   { left: -10%; opacity: 1; }
+  18%  { left: 110%; opacity: 1; }
+  19%  { left: 110%; opacity: 0; }
+  20%  { left: -10%; opacity: 0; }
+  100% { left: -10%; opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .heartbeat { bottom: 1rem; }
+  .heartbeat-pulse { width: 60px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ghost-funnel { display: none; }
+  .heartbeat-pulse { animation: none; opacity: 1; left: 50%; }
 }
