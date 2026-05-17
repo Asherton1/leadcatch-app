@@ -11,7 +11,8 @@ import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
 import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
-import DriftSnap from './components/DriftSnap'
+import LiveTicker from './components/LiveTicker'
+import CaptureFeed from './components/CaptureFeed'
 import LedgerStats from './components/LedgerStats'
 import LedgerRows from './components/LedgerRows'
 
@@ -37,7 +38,6 @@ export default function LandingPage() {
       <section className="hero">
         <ParticleNetwork />
         <div className="hero-glow-orb" />
-        <DriftSnap />
 
         <div className="hero-split">
           <div className="hero-left">
@@ -59,6 +59,10 @@ export default function LandingPage() {
           </div>
           <div className="hero-right hero-animate-delay2">
             <GhostLeadDemoCompact />
+        <div className="hero-live-stats">
+          <LiveTicker />
+          <CaptureFeed />
+        </div>
           </div>
         </div>
       </section>
