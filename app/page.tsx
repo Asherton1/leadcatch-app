@@ -9,8 +9,8 @@ import ProblemAccordion from './components/ProblemAccordion'
 import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
+import ParticleNetwork from './components/ParticleNetwork'
 import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
-import ReturnField from './components/ReturnField'
 import LedgerStats from './components/LedgerStats'
 import LedgerRows from './components/LedgerRows'
 
@@ -55,8 +55,8 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="hero-right hero-animate-delay2">
-            <GhostLeadDemoCompact />
-        <ReturnField />
+            <ParticleNetwork />
+        <GhostLeadDemoCompact />
           </div>
         </div>
       </section>
