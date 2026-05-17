@@ -18,13 +18,11 @@ type Vignette = {
   name: string
 }
 
-// Position regions that AVOID the central headline + the right-side Ghost demo
+// Position regions confined to the LEFT side only — right half is reserved for the Ghost demo
 const positionRegions = [
-  () => ({ x: Math.random() * 12 + 2,  y: Math.random() * 70 + 15 }),  // far left vertical strip
-  () => ({ x: Math.random() * 20 + 3,  y: Math.random() * 16 + 4 }),   // top-left corner
-  () => ({ x: Math.random() * 22 + 3,  y: Math.random() * 16 + 78 }),  // bottom-left corner
-  () => ({ x: Math.random() * 16 + 78, y: Math.random() * 14 + 4 }),   // top-right corner (above demo)
-  () => ({ x: Math.random() * 16 + 78, y: Math.random() * 14 + 82 }),  // bottom-right corner (below demo)
+  () => ({ x: Math.random() * 8 + 1,   y: Math.random() * 60 + 20 }),  // far left vertical strip (mid height)
+  () => ({ x: Math.random() * 22 + 3,  y: Math.random() * 10 + 3 }),   // top-left strip (above headline)
+  () => ({ x: Math.random() * 28 + 3,  y: Math.random() * 8 + 86 }),   // bottom-left strip (below CTA)
 ]
 
 export default function GhostFunnel() {
@@ -59,7 +57,7 @@ export default function GhostFunnel() {
     const t3 = setTimeout(spawn, 4200)
 
     // Recurring spawn every ~2.8s
-    const interval = setInterval(spawn, 2800)
+    const interval = setInterval(spawn, 3500)
 
     return () => {
       clearTimeout(t1)
