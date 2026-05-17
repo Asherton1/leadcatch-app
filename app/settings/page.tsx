@@ -396,7 +396,7 @@ export default function SettingsPage() {
             <div className="settings-field">
               <label className="settings-label">Business Hours</label>
               <input type="text" className="settings-input" value={settings.business_hours ?? ""} onChange={e => update("business_hours", e.target.value)} placeholder="Mon-Fri 9am-5pm, Sat 10am-2pm" />
-              <span className="settings-hint">Used by Ai Voice Callback to know when to call leads</span>
+              <span className="settings-hint">Used by AI Voice Callback to know when to call leads</span>
             </div>
           </div>
         </div>
@@ -524,7 +524,7 @@ export default function SettingsPage() {
             <div className="settings-field">
               <label className="settings-label">Company Tagline</label>
               <input type="text" className="settings-input" value={settings.company_tagline ?? ""} onChange={e => update("company_tagline", e.target.value)} placeholder="Your trusted partner in dental care" />
-              <span className="settings-hint">Used in recovery email footers and Ai voice introductions</span>
+              <span className="settings-hint">Used in recovery email footers and AI voice introductions</span>
             </div>
             <div className="settings-field">
               <label className="settings-label">Brand Color</label>
@@ -723,7 +723,7 @@ export default function SettingsPage() {
             <div className="settings-toggle-row" style={{ borderBottom: "none" }}>
               <div className="settings-toggle-info">
                 <div className="settings-toggle-label">Quiet Hours</div>
-                <div className="settings-toggle-desc">Pause SMS and Ai callbacks during off-hours (emails still send)</div>
+                <div className="settings-toggle-desc">Pause SMS and AI callbacks during off-hours (emails still send)</div>
               </div>
               <Toggle on={!!settings.quiet_hours_start} onChange={v => { if (v) { update("quiet_hours_start", "21:00"); update("quiet_hours_end", "08:00") } else { update("quiet_hours_start", null); update("quiet_hours_end", null) } }} />
             </div>
@@ -747,7 +747,7 @@ export default function SettingsPage() {
             {!isPro && (
               <div className="settings-upgrade-hint">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"/></svg>
-                SMS, Slack, and Ai Voice Callback require the <a href="/pricing">Pro plan</a>
+                SMS, Slack, and AI Voice Callback require the <a href="/pricing">Pro plan</a>
               </div>
             )}
           </div>
@@ -840,15 +840,15 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* ── Ai Voice Callback ────────────────────────────────────────── */}
+        {/* ── AI Voice Callback ────────────────────────────────────────── */}
         <div className="settings-section">
           <div className="settings-section-header">
             <div className="settings-section-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </div>
             <div>
-              <h2 className="settings-section-title">Ai Voice Callback</h2>
-              <p className="settings-section-desc">Our Ai calls abandoned leads back within 60 seconds on behalf of your business</p>
+              <h2 className="settings-section-title">AI Voice Callback</h2>
+              <p className="settings-section-desc">Our AI calls abandoned leads back within 60 seconds on behalf of your business</p>
             </div>
             <Toggle on={settings.ai_callback_enabled} onChange={v => handleVoiceCallbackToggle(v)} disabled={!isPro} />
           </div>
@@ -857,12 +857,12 @@ export default function SettingsPage() {
               <div className="settings-field">
                 <label className="settings-label">Agent Name</label>
                 <input type="text" className="settings-input" value={settings.ai_agent_name ?? "Sarah"} onChange={e => update("ai_agent_name", e.target.value)} placeholder="Sarah" />
-                <span className="settings-hint">The name the Ai introduces herself as: &ldquo;Hi, this is {settings.ai_agent_name || "Sarah"} from {settings.company_name || "your business"}&rdquo;</span>
+                <span className="settings-hint">The name the AI introduces herself as: &ldquo;Hi, this is {settings.ai_agent_name || "Sarah"} from {settings.company_name || "your business"}&rdquo;</span>
               </div>
               <div className="settings-field">
                 <label className="settings-label">Your Services</label>
                 <textarea className="settings-textarea" value={settings.ai_services_list ?? ""} onChange={e => update("ai_services_list", e.target.value)} placeholder="Botox, dermal fillers, laser hair removal, CoolSculpting, chemical peels, HydraFacials..." rows={3} />
-                <span className="settings-hint">List your services so the Ai can answer questions about what you offer</span>
+                <span className="settings-hint">List your services so the AI can answer questions about what you offer</span>
               </div>
               <div className="settings-row">
                 <div className="settings-field">
@@ -878,11 +878,11 @@ export default function SettingsPage() {
                   </select>
                 </div>
               </div>
-              <span className="settings-hint">Ai will only call leads during these hours. Outside these hours, leads are queued for the next available window.</span>
+              <span className="settings-hint">AI will only call leads during these hours. Outside these hours, leads are queued for the next available window.</span>
               {!isPro && (
                 <div className="settings-upgrade-hint">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"/></svg>
-                  Ai Voice Callback requires the <a href="/pricing">Pro plan</a>
+                  AI Voice Callback requires the <a href="/pricing">Pro plan</a>
                 </div>
               )}
             </div>
@@ -906,7 +906,7 @@ export default function SettingsPage() {
               <select className="settings-select" value={settings.min_lead_score} onChange={e => update("min_lead_score", parseInt(e.target.value))}>
                 {SCORE_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
-              <span className="settings-hint">Only trigger SMS, Slack, and Ai callbacks for leads above this score</span>
+              <span className="settings-hint">Only trigger SMS, Slack, and AI callbacks for leads above this score</span>
             </div>
             <div className="settings-toggle-row">
               <div className="settings-toggle-info">

@@ -61,7 +61,7 @@ const integrations = [
       { name: 'Slack', desc: 'Instant lead alerts in your team channels with one-click actions', status: 'live', icon: 'slack' },
       { name: 'SMS Alerts', desc: 'Text alerts the moment a high-value lead abandons', status: 'live', icon: 'sms' },
       { name: 'Email (Resend)', desc: 'Automated branded recovery emails on your behalf', status: 'live', icon: 'email' },
-      { name: 'Ai Voice Callback', desc: 'Ai calls abandoned leads back within 60 seconds on your behalf', status: 'live', icon: 'callrail' },
+      { name: 'AI Voice Callback', desc: 'AI calls abandoned leads back within 60 seconds on your behalf', status: 'live', icon: 'callrail' },
       { name: 'Microsoft Teams', desc: 'Instant lead alerts in your Teams channels', status: 'live', icon: 'teams' },
       { name: 'WhatsApp Business', desc: 'Recovery messages for international luxury buyers', status: 'coming', icon: 'whatsapp' },
       { name: 'Telegram', desc: 'Direct alerts for international and high-net-worth client base', status: 'coming', icon: 'telegram' },
@@ -114,7 +114,7 @@ const integrations = [
       { name: 'Make (Integromat)', desc: 'Advanced workflow automation via webhooks — fires in real time', status: 'live', icon: 'make' },
       { name: 'Webhooks', desc: 'Send lead data to any endpoint in real time', status: 'live', icon: 'webhook' },
       { name: 'REST API', desc: 'Full API access for custom integrations', status: 'live', icon: 'api' },
-      { name: 'Ai Voice Callback', desc: 'Trigger automated Ai callbacks via API when leads abandon forms', status: 'live', icon: 'callrail' },
+      { name: 'AI Voice Callback', desc: 'Trigger automated AI callbacks via API when leads abandon forms', status: 'live', icon: 'callrail' },
     ]
   },
 ]

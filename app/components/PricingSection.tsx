@@ -78,7 +78,7 @@ export default function PricingSection() {
       hipaa: true,
       features: [
         'Everything in Essentials',
-        'Ai voice callback within 60 seconds',
+        'AI voice callback within 60 seconds',
         'Automated lead recovery emails',
         'Instant SMS lead alerts',
         'Instant Slack lead alerts',
@@ -102,7 +102,7 @@ export default function PricingSection() {
       hipaa: true,
       features: [
         'Everything in Pro',
-        'Ai voice callback with custom agent per location',
+        'AI voice callback with custom agent per location',
         'HIPAA BAA included',
         'Unlimited websites & locations',
         'Centralized multi-location dashboard',

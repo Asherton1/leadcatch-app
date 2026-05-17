@@ -112,7 +112,7 @@ export default function GhostLeadDemoCompact() {
           <div className="gc-row"><span className="gc-label">Name</span><span className="gc-value">{fullName}</span></div>
           <div className="gc-row"><span className="gc-label">Email</span><span className="gc-value">{fullEmail}</span></div>
           <div className="gc-row"><span className="gc-label">Phone</span><span className="gc-value">{fullPhone}</span></div>
-          <div className="gc-row"><span className="gc-label">Status</span><span className="gc-status">Ai Callback in 60s</span></div>
+          <div className="gc-row"><span className="gc-label">Status</span><span className="gc-status">AI Callback in 60s</span></div>
         </div>
       </div>
     </div>

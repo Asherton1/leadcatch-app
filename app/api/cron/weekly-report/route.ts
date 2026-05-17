@@ -51,7 +51,7 @@ export async function GET(req: NextRequest) {
 
     const weekLeads = leads ?? []
 
-    // Fetch Ai Voice Callback metrics from Retell
+    // Fetch AI Voice Callback metrics from Retell
     let callMetrics = { total: 0, answered: 0, voicemail: 0, avgDuration: 0, positive: 0, neutral: 0, negative: 0, summaries: [] as string[] }
     if (retellClient && client.plan !== 'essentials') {
       try {
@@ -177,7 +177,7 @@ export async function GET(req: NextRequest) {
 
         ${callMetrics.total > 0 ? `
         <div style="background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 24px; margin-bottom: 32px;">
-          <div style="font-size: 11px; color: #ff6b35; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 16px;">Ai Voice Callback Performance</div>
+          <div style="font-size: 11px; color: #ff6b35; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 16px;">AI Voice Callback Performance</div>
           <div style="display: flex; gap: 12px; margin-bottom: 16px;">
             <div style="flex: 1; text-align: center;">
               <div style="font-size: 24px; font-weight: 700; color: #fff;">${callMetrics.total}</div>

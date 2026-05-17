@@ -119,7 +119,7 @@ export default function GhostLeadDemo() {
             </div>
             <div className="ghost-capture-row">
               <span className="ghost-capture-label">Status</span>
-              <span className="ghost-capture-status">Ai Callback in 60s</span>
+              <span className="ghost-capture-status">AI Callback in 60s</span>
             </div>
           </div>
         </div>

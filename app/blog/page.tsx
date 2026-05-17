@@ -8,7 +8,7 @@ import '../landing.css'
 
 export const metadata = {
   title: 'ReCapture Blog — Form Abandonment Recovery, Lead Strategy',
-  description: 'Strategy, data, and tactics on form abandonment recovery, Ai voice callbacks, and lead conversion for high-ticket service businesses.',
+  description: 'Strategy, data, and tactics on form abandonment recovery, AI voice callbacks, and lead conversion for high-ticket service businesses.',
 }
 
 export default function BlogIndex() {
@@ -51,16 +51,16 @@ export default function BlogIndex() {
         <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
           <Link href="/blog/ai-voice-callbacks-form-abandonment" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
             <div style={{ position: 'relative', width: '100%', height: '200px' }}>
-              <Image src="/blog-ai-voice-callbacks.webp" alt="Ai voice callback technology" fill style={{ objectFit: 'cover' }} />
+              <Image src="/blog-ai-voice-callbacks.webp" alt="AI voice callback technology" fill style={{ objectFit: 'cover' }} />
             </div>
             <div style={{ padding: '1.5rem 2rem 2rem' }}>
-              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Ai Voice Technology</div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>AI Voice Technology</div>
               <div style={{ fontSize: '0.8rem', color: '#666', marginBottom: '0.75rem' }}>
                 <span>April 22, 2026</span>
                 <span style={{ margin: '0 0.5rem' }}>&middot;</span>
                 <span>6 min read</span>
               </div>
-              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>Why Ai Voice Callbacks Convert 391% More Abandoned Leads</div>
+              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>Why AI Voice Callbacks Convert 391% More Abandoned Leads</div>
               <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: 1.6, marginBottom: '1rem' }}>Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts.</div>
               <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Read article <span>&rarr;</span></span>
             </div>
