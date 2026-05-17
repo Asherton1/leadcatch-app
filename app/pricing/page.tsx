@@ -80,11 +80,11 @@ export default function PricingPage() {
         </div>
       </section>
 
+      <FAQSection faqs={FAQS} />
       <section style={{ padding: '4rem 1.5rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Have more questions?</p>
         <Link href="/faq" style={{ color: '#ff6b35', fontWeight: 500, fontSize: '1.0625rem', textDecoration: 'none' }}>View our full FAQ &rarr;</Link>
       </section>
-      <FAQSection faqs={FAQS} />
       <RelatedPages page="pricing" />
       <Footer />
     </div>
