@@ -4295,16 +4295,21 @@
 }
 
 
-/* ─── Heartbeat — precision EKG sweep across hero baseline ─── */
+/* ─── Heartbeat — full-screen multi-line EKG sweep (ambient WOW) ─── */
 .heartbeat {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 1.5rem;
-  height: 28px;
+  inset: 0;
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
+}
+
+.heartbeat-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 28px;
+  transform: translateY(-50%);
 }
 
 .heartbeat-line {
@@ -4313,7 +4318,7 @@
   left: 5%;
   right: 5%;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.22) 18%, rgba(255, 107, 53, 0.22) 82%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.14) 18%, rgba(255, 107, 53, 0.14) 82%, transparent 100%);
   transform: translateY(-50%);
 }
 
@@ -4325,7 +4330,7 @@
   left: -10%;
   opacity: 0;
   color: rgba(255, 107, 53, 1);
-  filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.7)) drop-shadow(0 0 12px rgba(255, 107, 53, 0.4));
+  filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.65)) drop-shadow(0 0 12px rgba(255, 107, 53, 0.35));
   animation: heartbeat-travel 7s linear infinite;
 }
 
@@ -4345,10 +4350,9 @@
 }
 
 @media (max-width: 768px) {
-  .heartbeat { bottom: 1rem; }
   .heartbeat-pulse { width: 60px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .heartbeat-pulse { animation: none; opacity: 1; left: 50%; }
+  .heartbeat-pulse { animation: none; opacity: 0; }
 }
