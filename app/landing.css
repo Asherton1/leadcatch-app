@@ -4295,64 +4295,12 @@
 }
 
 
-/* ─── Heartbeat — full-screen multi-line EKG sweep (ambient WOW) ─── */
-.heartbeat {
+/* ─── Drift & Snap — canvas hero ambient (drifting intent + snap-capture events) ─── */
+.drift-snap {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.heartbeat-row {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 28px;
-  transform: translateY(-50%);
-}
-
-.heartbeat-line {
-  position: absolute;
-  top: 50%;
-  left: 5%;
-  right: 5%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.14) 18%, rgba(255, 107, 53, 0.14) 82%, transparent 100%);
-  transform: translateY(-50%);
-}
-
-.heartbeat-pulse {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 80px;
-  left: -10%;
-  opacity: 0;
-  color: rgba(255, 107, 53, 1);
-  filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.65)) drop-shadow(0 0 12px rgba(255, 107, 53, 0.35));
-  animation: heartbeat-travel 7s linear infinite;
-}
-
-.heartbeat-pulse svg {
+  z-index: 1;
   width: 100%;
   height: 100%;
-  display: block;
-}
-
-@keyframes heartbeat-travel {
-  0%   { left: -10%; opacity: 0; }
-  3%   { left: -10%; opacity: 1; }
-  18%  { left: 110%; opacity: 1; }
-  19%  { left: 110%; opacity: 0; }
-  20%  { left: -10%; opacity: 0; }
-  100% { left: -10%; opacity: 0; }
-}
-
-@media (max-width: 768px) {
-  .heartbeat-pulse { width: 60px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .heartbeat-pulse { animation: none; opacity: 0; }
 }
