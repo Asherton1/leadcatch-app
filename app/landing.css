@@ -3854,16 +3854,6 @@
   position: relative;
 }
 
-.problem-editorial::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.25) 20%, rgba(255, 107, 53, 0.25) 80%, transparent 100%);
-}
-
 .problem-row {
   position: relative;
 }
