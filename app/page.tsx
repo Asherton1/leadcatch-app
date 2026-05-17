@@ -92,7 +92,20 @@ export default function LandingPage() {
         <ProblemAccordion />
       </section>
 
-      <div className="section-divider" />
+      <section className="manifesto reveal">
+        <div className="manifesto-inner">
+          <p className="manifesto-eyebrow">our position</p>
+          <p className="manifesto-body manifesto-body-emphasis">
+            Form abandonment isn&apos;t a UX problem. It&apos;s a business problem.
+          </p>
+          <p className="manifesto-body">
+            Every prospect who started typing was telling you something: that they&apos;re interested, that they need what you sell, that they were ready, until life interrupted. We don&apos;t believe a kid screaming in the background should cost you a $30,000 client.
+          </p>
+          <p className="manifesto-body manifesto-body-emphasis">
+            ReCapture catches the intent the moment it appears.
+          </p>
+        </div>
+      </section>
 
       <section className="lc-section how-it-works-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Three Steps to Recovered Revenue</h2>
