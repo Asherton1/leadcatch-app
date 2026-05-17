@@ -1,82 +1,97 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, Fragment } from 'react'
 
 const steps = [
   {
     num: '01',
     title: 'Install in 60 Seconds',
-    text: "Copy one line of code into your website. Works with WordPress, Wix, Webflow, Squarespace, or any custom site. Takes less time than making coffee."
+    text: 'Copy one line of code into your website. Works with WordPress, Wix, Webflow, Squarespace, or any custom site. Takes less time than making coffee.',
+    statValue: '60s',
+    statLabel: 'time to deploy',
   },
   {
     num: '02',
     title: 'Capture Every Lead',
-    text: "The instant a visitor types into your form, ReCapture captures their name, email, and phone \u2014 even if they close the tab, get distracted, or abandon halfway through."
+    text: 'The instant a visitor types into your form, ReCapture captures their name, email, and phone — even if they close the tab, get distracted, or abandon halfway through.',
+    statValue: '100%',
+    statLabel: 'lead capture rate',
   },
   {
     num: '03',
     title: 'Recover Lost Revenue',
-    text: "Reach out manually from your dashboard or let ReCapture send automated recovery emails on your behalf. Turn invisible drop-offs into booked appointments and closed revenue."
+    text: 'Reach out manually from your dashboard or let ReCapture send automated recovery emails on your behalf. Turn invisible drop-offs into booked appointments and closed revenue.',
+    statValue: '$30K',
+    statLabel: 'monthly recovered revenue',
   },
 ]
 
 export default function StepsAccordion() {
-  const [openIdx, setOpenIdx] = useState<number | null>(null)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 768)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
+    const node = ref.current
+    if (!node) return
+
+    const reduceMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) {
+      setIsVisible(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.2 }
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
   }, [])
 
-  if (!isMobile) {
-    return (
-      <div className="how-it-works-grid">
+  return (
+    <div
+      ref={ref}
+      className={`steps-flow${isVisible ? ' steps-flow-visible' : ''}`}
+    >
+      <div className="steps-flow-grid">
         {steps.map((s, i) => (
-          <div className="how-step" key={i}>
-            <div className="how-step-num">{s.num}</div>
-            <h3 className="how-step-title">{s.title}</h3>
-            <p className="how-step-text">{s.text}</p>
-          </div>
+          <Fragment key={i}>
+            <div className="steps-flow-col">
+              <div className="steps-flow-indicator" aria-hidden="true">
+                <svg viewBox="0 0 28 28" className="steps-flow-ring">
+                  <circle cx="14" cy="14" r="13" />
+                </svg>
+                <span className="steps-flow-num">{s.num}</span>
+              </div>
+              <h3 className="steps-flow-title">{s.title}</h3>
+              <p className="steps-flow-text">{s.text}</p>
+              <div className="steps-flow-stat">
+                <div className="steps-flow-stat-num">{s.statValue}</div>
+                <div className="steps-flow-stat-label">{s.statLabel}</div>
+              </div>
+            </div>
+            {i < steps.length - 1 && (
+              <div
+                className={`steps-flow-connector steps-flow-connector-${i + 1}`}
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 60 12" preserveAspectRatio="none">
+                  <line x1="0" y1="6" x2="50" y2="6" />
+                  <polyline points="50,2 60,6 50,10" />
+                </svg>
+              </div>
+            )}
+          </Fragment>
         ))}
       </div>
-    )
-  }
-
-  return (
-    <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-      {steps.map((s, i) => (
-        <div key={i} style={{ borderBottom: '1px solid #1e1e1e' }}>
-          <button
-            onClick={() => setOpenIdx(openIdx === i ? null : i)}
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              padding: '1.25rem 0',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              textAlign: 'left',
-            }}
-          >
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#ff6b35', fontFamily: 'monospace', flexShrink: 0, transition: 'color 0.3s' }}>{s.num}</span>
-            <span style={{ flex: 1, fontSize: '1rem', fontWeight: 600, color: openIdx === i ? '#ff6b35' : '#fff', transition: 'color 0.3s' }}>{s.title}</span>
-            <span style={{ color: openIdx === i ? '#ff6b35' : '#555', fontSize: '1.25rem', transition: 'transform 0.3s, color 0.3s', transform: openIdx === i ? 'rotate(45deg)' : 'none', flexShrink: 0 }}>+</span>
-          </button>
-          <div style={{
-            maxHeight: openIdx === i ? '200px' : '0',
-            opacity: openIdx === i ? 1 : 0,
-            transition: 'max-height 0.35s ease, opacity 0.25s ease',
-            overflow: 'hidden',
-          }}>
-            <p style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.7, padding: '0 0 1.25rem 2.25rem', margin: 0 }}>{s.text}</p>
-          </div>
-        </div>
-      ))}
     </div>
   )
 }
