@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
   description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
   metadataBase: new URL('https://www.userecapture.com'),
+  themeColor: '#ff6b35',
   alternates: {
     canonical: '/',
   },
