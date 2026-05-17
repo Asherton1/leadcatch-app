@@ -4295,29 +4295,12 @@
 }
 
 
-/* ─── Hero Grid — architectural blueprint backdrop (aesthetic, masked, never competes) ─── */
-.hero-grid {
+/* ─── Return Field — particle drift + curving recovery (canvas backdrop) ─── */
+.return-field {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-image:
-    linear-gradient(rgba(255, 107, 53, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 107, 53, 0.06) 1px, transparent 1px),
-    linear-gradient(rgba(255, 107, 53, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 107, 53, 0.12) 1px, transparent 1px);
-  background-size: 64px 64px, 64px 64px, 320px 320px, 320px 320px;
-  background-position: center center;
-  mask-image: radial-gradient(ellipse 100% 80% at center, transparent 0%, transparent 35%, rgba(0, 0, 0, 0.85) 100%);
-  -webkit-mask-image: radial-gradient(ellipse 100% 80% at center, transparent 0%, transparent 35%, rgba(0, 0, 0, 0.85) 100%);
-  animation: hero-grid-breathe 22s ease-in-out infinite;
-}
-
-@keyframes hero-grid-breathe {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 1; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-grid { animation: none; opacity: 0.75; }
+  width: 100%;
+  height: 100%;
 }

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import ParticleNetwork from './components/ParticleNetwork'
 import Image from 'next/image'
 import './landing.css'
 import StatsBar from './components/StatsBar'
@@ -11,6 +10,7 @@ import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
 import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
+import ReturnField from './components/ReturnField'
 import LedgerStats from './components/LedgerStats'
 import LedgerRows from './components/LedgerRows'
 
@@ -34,7 +34,6 @@ export default function LandingPage() {
       </nav>
 
       <section className="hero">
-        <ParticleNetwork />
         <div className="hero-glow-orb" />
 
         <div className="hero-split">
@@ -57,7 +56,7 @@ export default function LandingPage() {
           </div>
           <div className="hero-right hero-animate-delay2">
             <GhostLeadDemoCompact />
-        <div className="hero-grid" aria-hidden="true" />
+        <ReturnField />
           </div>
         </div>
       </section>
