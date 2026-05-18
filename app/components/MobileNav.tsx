@@ -113,6 +113,22 @@ export default function MobileNav() {
           50% { opacity: 0.45; transform: scale(0.82); }
         }
       `}</style>
+    <style jsx>{`
+        .live-demo-dot {
+          display: inline-block;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #ff6b35;
+          box-shadow: 0 0 8px rgba(255, 107, 53, 0.7);
+          animation: liveDemoPulse 1.4s ease-in-out infinite;
+          flex-shrink: 0;
+        }
+        @keyframes liveDemoPulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.45; transform: scale(0.82); }
+        }
+      `}</style>
     </>
   )
 }
