@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabase'
 import { useIsAdmin } from '@/lib/use-is-admin'
 import AdminNav from '../../components/AdminNav'
 import Footer from '../../components/Footer'
+import InstantTemplateEditor from '../../components/InstantTemplateEditor'
 import '../../landing.css'
 import './sms-templates.css'
 
@@ -135,13 +136,18 @@ export default function SmsTemplatesAdminPage() {
         <div className="smst-hero-inner">
           <p className="smst-eyebrow">Admin · SMS Templates</p>
           <h1 className="smst-headline">
-            <span className="smst-headline-primary">Edit Marissa\u2019s SMS templates.</span>{' '}
-            <span className="smst-headline-muted">Changes apply to the next call. No deploy needed.</span>
+            <span className="smst-headline-primary">Manage your SMS templates.</span>{' '}
+            <span className="smst-headline-muted">Abandonment alerts and Marissa\u2019s voice replies. Changes apply immediately.</span>
           </h1>
         </div>
       </section>
       <section className="smst-section">
         <div className="smst-inner">
+          <InstantTemplateEditor />
+          <div style={{ borderTop: '1px solid #1a1a1a', margin: '3.5rem 0 2rem', paddingTop: '2rem' }}>
+            <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#888', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>Marissa \u00b7 Voice Assistant Replies</div>
+            <div style={{ fontSize: '0.85rem', color: '#666', marginBottom: '1.5rem' }}>Outbound SMS sent during or after AI voice callbacks</div>
+          </div>
           <div className="smst-tags-card">
             <div className="smst-tags-label">Available merge tags</div>
             <div className="smst-tags-list">
