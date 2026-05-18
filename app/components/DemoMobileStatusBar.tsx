@@ -60,10 +60,10 @@ export default function DemoMobileStatusBar({ hasStarted, status, completed, tot
             right: 0;
             z-index: 100;
             background: #0d0d0d;
-            border-top: 1px solid #1e1e1e;
-            padding: 0.7rem 1rem;
-            padding-bottom: calc(0.7rem + env(safe-area-inset-bottom, 0px));
-            box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.7);
+            border-top: 2px solid #1e1e1e;
+            padding: 1.25rem 1rem;
+            padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+            box-shadow: 0 -10px 36px rgba(0, 0, 0, 0.8);
             box-sizing: border-box;
             max-width: 100vw;
             overflow: hidden;
