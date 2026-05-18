@@ -19,7 +19,17 @@ interface SmsAlertPayload {
 }
 
 function fillTemplate(template: string, vars: Record<string, string>): string {
-  let out = template
+  // Drop any line where ALL placeholders resolve to empty so we never render
+  // 'Phone: ' or 'Email: ' on its own when the value is missing/invalid.
+  const lines = template.split('\n').filter(line => {
+    const matches = line.match(/\{([a-z_]+)\}/gi)
+    if (!matches) return true
+    return !matches.every(m => {
+      const key = m.slice(1, -1)
+      return !vars[key] || vars[key].trim() === ''
+    })
+  })
+  let out = lines.join('\n')
   for (const [key, val] of Object.entries(vars)) {
     out = out.split('{' + key + '}').join(val)
   }
@@ -109,9 +119,7 @@ export async function sendSmsAlert(payload: SmsAlertPayload) {
     if (leadName) parts.push(`Name: ${leadName}`)
     if (leadEmail) parts.push(`Email: ${leadEmail}`)
     if (leadPhone) parts.push(`Phone: ${leadPhone}`)
-    if (formDataStr) parts.push(formDataStr)
-    parts.push(`${fieldsCompleted} of ${totalFields} fields completed`)
-    parts.push('Follow up while the intent is fresh.')
+    parts.push('Follow up within 5 minutes for highest conversion.')
     body = parts.join('\n')
   }
 

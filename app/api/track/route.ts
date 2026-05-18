@@ -81,14 +81,23 @@ export async function POST(request: NextRequest) {
     api_key,
     session_id,
     name,
-    email,
-    phone,
+    email: rawEmail,
+    phone: rawPhone,
     fields_completed,
     total_fields,
     time_on_form,
     device_type,
     form_data,
   } = body as Record<string, unknown>
+
+  // Defense in depth — never trust the client. Cached/stale track.js or
+  // tampered embeds could send 'Hi' as phone or 'test' as email. Reject here.
+  const isValidEmailSrv = (v: unknown): v is string =>
+    typeof v === 'string' && /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v.trim())
+  const isValidPhoneSrv = (v: unknown): v is string =>
+    typeof v === 'string' && v.replace(/\D/g, '').length >= 7
+  const email: string | null = isValidEmailSrv(rawEmail) ? rawEmail.trim() : null
+  const phone: string | null = isValidPhoneSrv(rawPhone) ? rawPhone.trim() : null
 
   if (!api_key || !session_id) {
     return NextResponse.json({ error: 'api_key and session_id are required' }, { status: 400 })
