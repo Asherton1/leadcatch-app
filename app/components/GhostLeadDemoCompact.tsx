@@ -61,7 +61,7 @@ export default function GhostLeadDemoCompact() {
   }, [])
 
   return (
-    <div className="gc-wrap">
+    <div data-recapture="ignore" className="gc-wrap">
       <div className={`gc-form ${stage === 4 ? 'gc-form-fade' : ''}`}>
         <div className="gc-form-header">
           <div className="gc-dot"></div>

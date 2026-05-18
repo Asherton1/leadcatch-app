@@ -227,14 +227,17 @@
     var self = this;
 
     function onInput(e) {
+      if (!e.isTrusted) return; // ignore programmatic events: React state writes, JS-dispatched events, demo animations
       var el = e.target;
       if (!el || !el.matches || !el.matches(FIELD_SELECTOR)) return;
       if (isSensitiveField(el)) return; // never capture passwords, SSN, CVV, etc.
+      if (el.closest('[data-recapture="ignore"]')) return; // opt-out for demo/mockup forms
+      var val = (el.value || '').trim();
+      if (val.length < 2) return; // require real content, not single chars or whitespace
       if (!self.touched) {
         self.touched   = true;
         self.startTime = Date.now();
       }
-      var val = (el.value || '').trim();
       var key = el.name || el.id || el.getAttribute('data-name') || el.type;
       if (key) self.formData[key] = val;
       var type = classifyField(el);
@@ -252,7 +255,12 @@
 
   FormTracker.prototype.payload = function () {
     var fields    = this._getFields();
-    var completed = fields.filter(function (f) { return (f.value || '').trim().length > 0; }).length;
+    var completed = fields.filter(function (f) { return (f.value || '').trim().length >= 2; }).length;
+    // Skip own-domain emails (autofilled staff/dogfood addresses)
+    var ownDomain = win.location.hostname.replace(/^www\./, '').toLowerCase();
+    if (this.named.email && this.named.email.toLowerCase().split('@')[1] === ownDomain) {
+      this.named.email = null;
+    }
     return {
       api_key:          apiKey,
       session_id:       this.sessionId,
@@ -269,8 +277,13 @@
 
   FormTracker.prototype.send = function (useBeacon) {
     if (!this.touched) return;
-    if (isExcludedPath()) return; // re-check on every send (Next.js route changes)
+    if (isExcludedPath()) return;
+    var now = Date.now();
+    if (this._lastSendAt && (now - this._lastSendAt) < 5000) return; // throttle: max 1 send per 5s per tracker
+    this._lastSendAt = now;
     var data = this.payload();
+    // Don't send if we have no actionable contact info (after own-domain filter)
+    if (!data.email && !data.phone && !data.name) return;
     if (useBeacon) {
       sendBeacon(TRACK_URL, data);
     } else {
