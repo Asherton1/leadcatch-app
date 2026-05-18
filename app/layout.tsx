@@ -26,7 +26,6 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png?v=20260517',
     shortcut: '/favicon.svg?v=20260517',
   },
-  themeColor: '#ff6b35',
   alternates: {
     canonical: '/',
   },
