@@ -110,7 +110,6 @@ export default function TestForm() {
     <>
       <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Inter', -apple-system, sans-serif" }}>
         <BlogNav />
-        <DemoMobileStatusBar hasStarted={hasStarted} status={status} completed={completed} totalFields={TOTAL_FIELDS} revenueAtRisk={revenueAtRisk} />
       <ScrollReveal />
 
         {/* Hero */}
@@ -126,6 +125,8 @@ export default function TestForm() {
 
         {/* Main Content — Form + Live Dashboard */}
         <div className="demo-split revealed" style={{ maxWidth: '1140px', margin: '0 auto', padding: '3rem 2rem 2rem' }}>
+
+          <DemoMobileStatusBar hasStarted={hasStarted} status={status} completed={completed} totalFields={TOTAL_FIELDS} revenueAtRisk={revenueAtRisk} fields={fields} industryLabel={fields.service ? INDUSTRY_LABELS[fields.service] : ''} captureTime={captureTime} />
 
           {/* LEFT: Form */}
           <div className="demo-form-col reveal">
