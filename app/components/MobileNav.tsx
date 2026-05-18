@@ -21,13 +21,13 @@ export default function MobileNav() {
         <Link href="/blog" className={isActive('/blog') ? 'nav-link nav-active' : 'nav-link'}>Insights</Link>
         <Link href="/pricing" className={isActive('/pricing') ? 'nav-link nav-active' : 'nav-link'}>Pricing</Link>
         <Link href="/why-us" className={isActive('/why-us') ? 'nav-link nav-active' : 'nav-link'}>Why Us</Link>
+        <Link href="/demo" className={isActive('/demo') ? 'nav-link nav-active' : 'nav-link'}>Live Demo</Link>
         <Link href="/how-it-works" className={isActive('/how-it-works') ? 'nav-link nav-active' : 'nav-link'}>How It Works</Link>
         <Link href="/integrations" className={isActive('/integrations') ? 'nav-link nav-active' : 'nav-link'}>Integrations</Link>
         <div className="nav-dropdown-wrapper">
           <span className="nav-link" style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>Resources <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           <div className="nav-dropdown-menu">
             <Link href="/faq" className="nav-dropdown-item">FAQ</Link>
-            <Link href="/demo" className="nav-dropdown-item">Live Demo</Link>
             <Link href="/calculator" className="nav-dropdown-item">ROI Estimator</Link>
             <Link href="/form-audit" className="nav-dropdown-item">Free Form Audit</Link>
           </div>
@@ -61,6 +61,7 @@ export default function MobileNav() {
           <Link href="/blog" className={isActive('/blog') ? 'mobile-link-active' : ''}>Insights</Link>
           <Link href="/pricing" className={isActive('/pricing') ? 'mobile-link-active' : ''}>Pricing</Link>
           <Link href="/why-us" className={isActive('/why-us') ? 'mobile-link-active' : ''}>Why Us</Link>
+          <Link href="/demo" className={isActive('/demo') ? 'mobile-link-active' : ''}>Live Demo</Link>
           <Link href="/how-it-works" className={isActive('/how-it-works') ? 'mobile-link-active' : ''}>How It Works</Link>
           <Link href="/integrations" className={isActive('/integrations') ? 'mobile-link-active' : ''}>Integrations</Link>
           <div style={{ borderTop: '1px solid #1e1e1e', marginTop: '0.25rem' }}>
@@ -88,7 +89,6 @@ export default function MobileNav() {
               transition: 'max-height 0.3s ease, opacity 0.2s ease',
             }}>
               <Link href="/faq" className={isActive('/faq') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>FAQ</Link>
-              <Link href="/demo" className={isActive('/demo') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Live Demo</Link>
               <Link href="/calculator" className={isActive('/calculator') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>ROI Estimator</Link>
               <Link href="/form-audit" className={isActive('/form-audit') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Free Form Audit</Link>
             </div>
