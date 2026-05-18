@@ -155,6 +155,24 @@
 
   // --- Helpers ---
 
+  function isLoggedInAdmin() {
+    try {
+      var cookies = doc.cookie || '';
+      // Supabase auth cookie => visitor is logged in to the dashboard (staff/owner)
+      return /sb-[\w-]+-auth-token/.test(cookies);
+    } catch (e) { return false; }
+  }
+
+  function isValidEmail(s) {
+    return typeof s === 'string' && /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(s.trim());
+  }
+
+  function isValidPhone(s) {
+    if (typeof s !== 'string') return false;
+    var digits = s.replace(/\D/g, '');
+    return digits.length >= 7;
+  }
+
   function genId() {
     try { return crypto.randomUUID(); } catch (e) {}
     return Math.random().toString(36).slice(2) + Date.now().toString(36);
@@ -278,12 +296,16 @@
   FormTracker.prototype.send = function (useBeacon) {
     if (!this.touched) return;
     if (isExcludedPath()) return;
+    if (isLoggedInAdmin()) return; // staff/owner is logged in to dashboard — skip tracking on marketing pages
     var now = Date.now();
-    if (this._lastSendAt && (now - this._lastSendAt) < 5000) return; // throttle: max 1 send per 5s per tracker
+    if (this._lastSendAt && (now - this._lastSendAt) < 5000) return;
     this._lastSendAt = now;
     var data = this.payload();
-    // Don't send if we have no actionable contact info (after own-domain filter)
-    if (!data.email && !data.phone && !data.name) return;
+    // Validate captured contact fields — reject junk (partial emails, short phone digits)
+    if (!isValidEmail(data.email)) data.email = null;
+    if (!isValidPhone(data.phone)) data.phone = null;
+    // Require at least one CONTACTABLE field to fire an alert (name alone isn't actionable)
+    if (!data.email && !data.phone) return;
     if (useBeacon) {
       sendBeacon(TRACK_URL, data);
     } else {
