@@ -6,6 +6,7 @@ import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
+import DemoMobileStatusBar from '../components/DemoMobileStatusBar'
 import '../blog/blog.css'
 import '../landing.css'
 
@@ -109,6 +110,7 @@ export default function TestForm() {
     <>
       <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Inter', -apple-system, sans-serif" }}>
         <BlogNav />
+        <DemoMobileStatusBar hasStarted={hasStarted} status={status} completed={completed} totalFields={TOTAL_FIELDS} revenueAtRisk={revenueAtRisk} />
       <ScrollReveal />
 
         {/* Hero */}
