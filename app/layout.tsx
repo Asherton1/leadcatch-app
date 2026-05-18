@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import PremiumEffects from './components/PremiumEffects'
 import PageTransitions from './components/PageTransitions'
 import Script from 'next/script'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -16,6 +16,8 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
   display: 'swap',
 })
+
+export const viewport: Viewport = { themeColor: '#0a0a0a' }
 
 export const metadata: Metadata = {
   title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
