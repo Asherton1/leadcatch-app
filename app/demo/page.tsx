@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
@@ -64,6 +64,8 @@ export default function TestForm() {
   const [hasStarted, setHasStarted] = useState(false)
   const [captureTime, setCaptureTime] = useState('')
   const [showDashPulse, setShowDashPulse] = useState(false)
+  const [status, setStatus] = useState<'capturing' | 'abandoned'>('capturing')
+  const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const completed = countCompleted(fields)
   const revenueAtRisk = fields.service ? REVENUE_MAP[fields.service] || 2000 : 0
   const fieldsCapture = completed
@@ -76,7 +78,18 @@ export default function TestForm() {
       setShowDashPulse(true)
       setTimeout(() => setShowDashPulse(false), 1500)
     }
+    setStatus('capturing')
+    if (idleTimer.current) clearTimeout(idleTimer.current)
+    idleTimer.current = setTimeout(() => {
+      setStatus('abandoned')
+      setShowDashPulse(true)
+      setTimeout(() => setShowDashPulse(false), 1500)
+    }, 4000)
   }
+
+  useEffect(() => {
+    return () => { if (idleTimer.current) clearTimeout(idleTimer.current) }
+  }, [])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -273,7 +286,7 @@ export default function TestForm() {
               {/* Stats row */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', borderBottom: '1px solid #1a1a1a' }}>
                 <div style={{ padding: '1.25rem 1.5rem', borderRight: '1px solid #1a1a1a' }}>
-                  <div style={{ fontSize: '0.65rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: '0.5rem' }}>Abandoned Leads</div>
+                  <div style={{ fontSize: '0.65rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: '0.5rem' }}>{status === 'abandoned' ? 'Abandoned Leads' : 'Active Sessions'}</div>
                   <div style={{ fontSize: '1.75rem', fontWeight: 800, color: dashActive ? '#fff' : '#333', transition: 'color 0.4s ease' }}>{dashActive ? '1' : '0'}</div>
                 </div>
                 <div style={{ padding: '1.25rem 1.5rem', borderRight: '1px solid #1a1a1a' }}>
@@ -293,7 +306,7 @@ export default function TestForm() {
                 <div style={{ fontSize: '0.65rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span>Captured Leads</span>
                   {dashActive && (
-                    <span style={{ background: 'rgba(255,107,53,0.12)', color: '#ff6b35', padding: '0.2rem 0.6rem', borderRadius: 4, fontSize: '0.6rem', fontWeight: 700 }}>1 NEW</span>
+                    <span style={{ background: 'rgba(255,107,53,0.12)', color: '#ff6b35', padding: '0.2rem 0.6rem', borderRadius: 4, fontSize: '0.6rem', fontWeight: 700 }}>{status === 'abandoned' ? '1 NEW' : '1 ACTIVE'}</span>
                   )}
                 </div>
 
@@ -332,16 +345,25 @@ export default function TestForm() {
                       </div>
                       <div style={{
                         padding: '0.25rem 0.6rem',
-                        background: 'rgba(239,68,68,0.1)',
-                        border: '1px solid rgba(239,68,68,0.2)',
+                        background: status === 'abandoned' ? 'rgba(239,68,68,0.1)' : 'rgba(255,107,53,0.12)',
+                        border: status === 'abandoned' ? '1px solid rgba(239,68,68,0.2)' : '1px solid rgba(255,107,53,0.25)',
                         borderRadius: 6,
                         fontSize: '0.65rem',
                         fontWeight: 700,
-                        color: '#ef4444',
+                        color: status === 'abandoned' ? '#ef4444' : '#ff6b35',
                         textTransform: 'uppercase',
                         letterSpacing: '0.05em',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
+                        transition: 'all 0.4s ease',
                       }}>
-                        Abandoned
+                        <span style={{
+                          width: 6, height: 6, borderRadius: '50%',
+                          background: status === 'abandoned' ? '#ef4444' : '#ff6b35',
+                          animation: status === 'capturing' ? 'badgePulse 1.4s ease-in-out infinite' : 'none',
+                        }} />
+                        {status === 'abandoned' ? 'Abandoned' : 'Capturing'}
                       </div>
                     </div>
 
@@ -389,7 +411,7 @@ export default function TestForm() {
               {/* Dashboard footer */}
               <div style={{ padding: '1rem 1.5rem', borderTop: '1px solid #1a1a1a', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '0.7rem', color: '#333' }}>
-                  {dashActive ? 'This is what your dashboard looks like when a lead abandons your form.' : ''}
+                  {dashActive ? (status === 'abandoned' ? 'This is what your dashboard looks like when a lead abandons your form.' : 'Capturing in real time — they have not abandoned yet.') : ''}
                 </span>
                 <span style={{ fontSize: '0.65rem', color: '#333' }}>userecapture.com</span>
               </div>
@@ -456,6 +478,10 @@ export default function TestForm() {
           0% { box-shadow: 0 0 0 0 rgba(255,107,53,0.3); }
           50% { box-shadow: 0 0 20px 4px rgba(255,107,53,0.15); }
           100% { box-shadow: 0 0 0 0 rgba(255,107,53,0); }
+        }
+        @keyframes badgePulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.35; }
         }
         @media (max-width: 900px) {
           .demo-split {
