@@ -21,7 +21,7 @@ export default function MobileNav() {
         <Link href="/blog" className={isActive('/blog') ? 'nav-link nav-active' : 'nav-link'}>Insights</Link>
         <Link href="/pricing" className={isActive('/pricing') ? 'nav-link nav-active' : 'nav-link'}>Pricing</Link>
         <Link href="/why-us" className={isActive('/why-us') ? 'nav-link nav-active' : 'nav-link'}>Why Us</Link>
-        <Link href="/demo" className={isActive('/demo') ? 'nav-link nav-active' : 'nav-link'}>Live Demo</Link>
+        <Link href="/demo" className={isActive('/demo') ? 'nav-link nav-active' : 'nav-link'} style={{ display: 'inline-flex', alignItems: 'center', gap: '7px' }}><span className="live-demo-dot" />Live Demo</Link>
         <Link href="/how-it-works" className={isActive('/how-it-works') ? 'nav-link nav-active' : 'nav-link'}>How It Works</Link>
         <Link href="/integrations" className={isActive('/integrations') ? 'nav-link nav-active' : 'nav-link'}>Integrations</Link>
         <div className="nav-dropdown-wrapper">
@@ -61,7 +61,7 @@ export default function MobileNav() {
           <Link href="/blog" className={isActive('/blog') ? 'mobile-link-active' : ''}>Insights</Link>
           <Link href="/pricing" className={isActive('/pricing') ? 'mobile-link-active' : ''}>Pricing</Link>
           <Link href="/why-us" className={isActive('/why-us') ? 'mobile-link-active' : ''}>Why Us</Link>
-          <Link href="/demo" className={isActive('/demo') ? 'mobile-link-active' : ''}>Live Demo</Link>
+          <Link href="/demo" className={isActive('/demo') ? 'mobile-link-active' : ''}><span className="live-demo-dot" style={{ marginRight: '9px', verticalAlign: 'middle' }} />Live Demo</Link>
           <Link href="/how-it-works" className={isActive('/how-it-works') ? 'mobile-link-active' : ''}>How It Works</Link>
           <Link href="/integrations" className={isActive('/integrations') ? 'mobile-link-active' : ''}>Integrations</Link>
           <div style={{ borderTop: '1px solid #1e1e1e', marginTop: '0.25rem' }}>
@@ -97,6 +97,22 @@ export default function MobileNav() {
           <Link href="/start-trial" className="nav-mobile-cta">Start your 7-day free trial</Link>
         </div>
       </div>
+    <style jsx>{`
+        .live-demo-dot {
+          display: inline-block;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #ff6b35;
+          box-shadow: 0 0 8px rgba(255, 107, 53, 0.7);
+          animation: liveDemoPulse 1.4s ease-in-out infinite;
+          flex-shrink: 0;
+        }
+        @keyframes liveDemoPulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.45; transform: scale(0.82); }
+        }
+      `}</style>
     </>
   )
 }
