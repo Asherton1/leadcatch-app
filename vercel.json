@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/cron/outreach-queue",
-      "schedule": "0 14-21 * * 1-5"
+      "schedule": "0 20 * * 1-5"
     }
   ]
 }
