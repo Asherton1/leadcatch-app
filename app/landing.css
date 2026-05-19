@@ -4323,3 +4323,35 @@
   50%  { top: 100%; opacity: 0; }
   100% { top: -140px; opacity: 0; }
 }
+
+/* Capture Bursts — desktop-only ambient motion. 4 staggered radial pulses suggest leads captured at random spots. Mobile keeps scanline instead. */
+.hero-pulse { display: none; }
+
+@media (min-width: 769px) {
+  .hero-scanline { display: none; }
+
+  .hero-pulse {
+    display: block;
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.32) 0%, rgba(255, 107, 53, 0.14) 25%, rgba(255, 107, 53, 0.04) 50%, transparent 75%);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    animation: capturePulse 20s ease-in-out infinite;
+  }
+
+  .hero-pulse-1 { top: 12%; left: 16%; animation-delay: 0s; }
+  .hero-pulse-2 { top: 58%; left: 72%; animation-delay: 5s; }
+  .hero-pulse-3 { top: 28%; left: 52%; animation-delay: 10s; }
+  .hero-pulse-4 { top: 72%; left: 22%; animation-delay: 15s; }
+}
+
+@keyframes capturePulse {
+  0%   { opacity: 0; transform: scale(0.7); }
+  5%   { opacity: 1; transform: scale(1); }
+  17%  { opacity: 0; transform: scale(1.4); }
+  100% { opacity: 0; transform: scale(0.7); }
+}
