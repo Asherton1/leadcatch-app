@@ -3,18 +3,15 @@
 import { useEffect, useRef, useState } from 'react'
 
 /**
- * PhantomCapture — Bloom Earth video (v6: CSS override + horizontal stretch)
- * --------------------------------------------------------------------------
- * Root cause of the orange-on-right problem: the .hero element's own CSS has
- * orange radial-gradient backgrounds painted on it, and there's a .hero-glow-orb
- * div that adds more orange. No amount of overlay layers from inside this
- * component could fully hide them. Fix: globally override .hero's background
- * and hide hero-glow-orb when this component is mounted.
+ * PhantomCapture — v8: three-layer stack, content on forefront
+ * ------------------------------------------------------------
+ * Stacking from bottom to top:
+ *   Layer 1 (zIndex 1): video, recessed (opacity 0.45) — ambient background
+ *   Layer 2 (zIndex 2): heavy dark dim layer (opacity 0.65) — separates content from video
+ *   Content (zIndex 5+ via .hero-split): sits on the forefront, sharp and readable
  *
- * Then: scaleX(1.4) on the video horizontally stretches the Earth content so
- * it extends across the full width instead of being confined to the left.
- *
- * Gated at >=768px (tablet+). Mobile falls through to .hero defaults.
+ * Width is forced to 100vw via !important overrides on .landing and .hero
+ * so layers fully extend edge to edge.
  */
 export default function PhantomCapture() {
   const [show, setShow] = useState(false)
@@ -47,11 +44,20 @@ export default function PhantomCapture() {
 
   return (
     <>
-      {/* Global CSS overrides — kill .hero's natural orange gradients */}
       <style jsx global>{`
         @media (min-width: 768px) {
+          .landing {
+            max-width: 100vw !important;
+            width: 100% !important;
+            overflow-x: hidden !important;
+          }
           section.hero {
             background: #0a0604 !important;
+            width: 100vw !important;
+            max-width: 100vw !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            box-sizing: border-box !important;
           }
           section.hero::before {
             display: none !important;
@@ -62,7 +68,7 @@ export default function PhantomCapture() {
         }
       `}</style>
 
-      {/* Earth video — horizontally stretched to fill the whole hero width */}
+      {/* Layer 1: video in BACKGROUND, recessed and atmospheric */}
       <video
         ref={videoRef}
         autoPlay
@@ -74,33 +80,32 @@ export default function PhantomCapture() {
         style={{
           position: 'absolute',
           top: 0,
-          left: 'calc(50% - 50vw)',
-          width: '100vw',
+          left: 0,
+          width: '100%',
           height: '100%',
           objectFit: 'cover',
-          objectPosition: 'center center',
           pointerEvents: 'none',
           zIndex: 1,
-          opacity: 0.65,
-          transform: 'scaleX(1.4)',
+          opacity: 0.45,
+          transform: 'scaleX(2.2)',
           transformOrigin: 'center center',
         }}
       >
         <source src="/bloom-hero.mp4" type="video/mp4" />
       </video>
 
-      {/* Subtle warm brand tint */}
+      {/* Layer 2: HEAVY dark layer UNDERNEATH the content, ABOVE the video */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute',
           top: 0,
-          left: 'calc(50% - 50vw)',
-          width: '100vw',
+          left: 0,
+          width: '100%',
           height: '100%',
           pointerEvents: 'none',
           zIndex: 2,
-          background: 'rgba(35, 14, 5, 0.35)',
+          background: 'rgba(15, 6, 3, 0.65)',
         }}
       />
     </>
