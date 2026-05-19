@@ -10,7 +10,6 @@ import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
 import ParticleNetwork from './components/ParticleNetwork'
-import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
 import LedgerStats from './components/LedgerStats'
 import LedgerRows from './components/LedgerRows'
 
@@ -33,31 +32,26 @@ export default function LandingPage() {
         <MobileNav />
       </nav>
 
-      <section className="hero">
-        <div className="hero-glow-orb" />
-
-        <div className="hero-split">
-          <div className="hero-left">
-            <p style={{ fontSize: '0.65rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Born &amp; Built in Dallas, Texas</p>
-            <h1 className="hero-animate">
-              Your Best Leads<br />
-              <span className="hero-highlight">Never Hit Submit.</span>
-            </h1>
-            <p className="hero-subtitle hero-animate-delay">
-              High-value prospects start filling out your form, then vanish before submitting.
-              ReCapture captures their info the moment they start typing — giving you a second chance to close.
-            </p>
-            <p className="hero-platform-line hero-animate-delay" style={{ marginTop: '2rem', marginBottom: '2.5rem' }}>
-              Form abandonment is the start. ReCapture is building the recovery layer for high-ticket service businesses.
-            </p>
-            <div className="cta-group hero-animate-delay2">
-              <Link href="/start-trial" className="cta-primary">Start your 7-day free trial</Link>
-            </div>
+      <section className="recap-hero">
+        <ParticleNetwork />
+        <div className="recap-hero-overlay" />
+        <div className="recap-hero-content">
+          <h1 className="recap-hero-title recap-fade-up" style={{ animationDelay: '0.2s' }}>
+            <span className="recap-hero-title-re">Re</span><span className="recap-hero-title-capture">Capture</span>
+          </h1>
+          <p className="recap-hero-subhead recap-fade-up" style={{ animationDelay: '0.4s' }}>
+            Lost leads. Recovered in real time.
+          </p>
+          <p className="recap-hero-desc recap-fade-up" style={{ animationDelay: '0.55s' }}>
+            Every form. Every field. Every almost-lead captured and recovered before they go to a competitor.
+          </p>
+          <div className="recap-hero-ctas recap-fade-up" style={{ animationDelay: '0.7s' }}>
+            <Link href="/start-trial" className="recap-cta-primary">Start Free Trial</Link>
+            <Link href="/demo" className="recap-cta-secondary">See Live Demo</Link>
           </div>
-          <div className="hero-right hero-animate-delay2">
-            <ParticleNetwork />
-        <GhostLeadDemoCompact />
-          </div>
+          <p className="recap-hero-trust recap-fade-up" style={{ animationDelay: '0.85s' }}>
+            Built in Dallas, TX. Deployed across luxury real estate, med spa, and fertility verticals.
+          </p>
         </div>
       </section>
 
