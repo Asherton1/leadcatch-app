@@ -139,6 +139,7 @@
   text-align: center;
   background: #0a0a0a;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .hero::before {
