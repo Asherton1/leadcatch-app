@@ -35,6 +35,7 @@ export default function LandingPage() {
 
       <section className="hero">
         <div className="hero-particles" aria-hidden="true"><ParticleNetwork /></div>
+        <div className="hero-scanline" aria-hidden="true"></div>
         <div className="hero-glow-orb" />
 
         <div className="hero-split">
