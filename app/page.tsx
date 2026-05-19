@@ -10,6 +10,7 @@ import StepsAccordion from './components/StepsAccordion'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
 import ParticleNetwork from './components/ParticleNetwork'
+import PhantomCapture from './components/PhantomCapture'
 import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
 import LedgerStats from './components/LedgerStats'
 import LedgerRows from './components/LedgerRows'
@@ -35,11 +36,8 @@ export default function LandingPage() {
 
       <section className="hero">
         <div className="hero-particles" aria-hidden="true"><ParticleNetwork /></div>
+        <PhantomCapture />
         <div className="hero-scanline" aria-hidden="true"></div>
-        <div className="hero-pulse hero-pulse-1" aria-hidden="true"></div>
-        <div className="hero-pulse hero-pulse-2" aria-hidden="true"></div>
-        <div className="hero-pulse hero-pulse-3" aria-hidden="true"></div>
-        <div className="hero-pulse hero-pulse-4" aria-hidden="true"></div>
         <div className="hero-glow-orb" />
 
         <div className="hero-split">
