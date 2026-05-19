@@ -2,11 +2,7 @@
   "crons": [
     {
       "path": "/api/cron/outreach-queue",
-      "schedule": "0 14 * * 1-5"
-    },
-    {
-      "path": "/api/cron/follow-up-sequence",
-      "schedule": "0 15 * * *"
+      "schedule": "0 14-21 * * 1-5"
     }
   ]
 }
