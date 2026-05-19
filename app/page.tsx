@@ -34,6 +34,7 @@ export default function LandingPage() {
       </nav>
 
       <section className="hero">
+        <div className="hero-particles" aria-hidden="true"><ParticleNetwork /></div>
         <div className="hero-glow-orb" />
 
         <div className="hero-split">
@@ -55,7 +56,6 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="hero-right hero-animate-delay2">
-            <ParticleNetwork />
         <GhostLeadDemoCompact />
           </div>
         </div>
