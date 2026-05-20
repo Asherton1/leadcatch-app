@@ -64,10 +64,25 @@ export async function POST(req: NextRequest) {
     const topic = String(args.topic || args.Topic || 'general').toLowerCase()
     const notes = String(args.notes || args.Notes || '').trim()
 
-    // Normalize phone
-    const phone = normalizePhone(rawPhone)
+    // Determine caller's actual phone from Retell call object — used as fallback
+    // if args.phone wasn't extracted from conversation.
+    let callerPhoneFallback: string | undefined
+    const cpRawEarly = args.caller_phone || rawBody.caller_phone
+    if (cpRawEarly && typeof cpRawEarly === 'string' && !cpRawEarly.includes('{{')) {
+      callerPhoneFallback = cpRawEarly
+    }
+    if (!callerPhoneFallback && callObj?.from_number) {
+      callerPhoneFallback = String(callObj.from_number)
+    }
+
+    // Normalize phone — try args.phone first, fall back to caller's actual phone
+    let phone = normalizePhone(rawPhone)
+    if (!phone && callerPhoneFallback) {
+      phone = normalizePhone(callerPhoneFallback)
+      console.log('[marissa-sms] using caller_phone fallback:', phone)
+    }
     if (!phone) {
-      console.error('[marissa-sms] invalid phone:', rawPhone)
+      console.error('[marissa-sms] invalid phone — no args.phone and no caller_phone:', rawPhone)
       return NextResponse.json({ ok: false, error: 'Invalid phone number', raw: rawPhone }, { status: 400 })
     }
 
