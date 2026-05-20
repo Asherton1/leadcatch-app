@@ -3,14 +3,19 @@
 import { useEffect, useRef, useState } from 'react'
 
 /**
- * PhantomCapture — v9: single video, no dark wash, content on forefront
- * --------------------------------------------------------------------
- * - Single dim video layer (opacity 0.5 + filter) — ambient background
- * - NO dark wash overlay (removes "the dark box")
- * - .hero-right background killed (removes the dark column behind the form)
- * - .hero overflow:visible (lets video extend beyond .hero bounds)
- * - width:100vw + left:calc(50% - 50vw) (forces full viewport width)
- * - scaleX(2.5) (stretches Earth across the full width)
+ * PhantomCapture — v10: actually full-bleed, content forward, single layer
+ * ------------------------------------------------------------------------
+ * The bug for 8 iterations was .hero > * { max-width: 1200px; margin: auto; }
+ * in landing.css line 162. That rule applied to every direct child of .hero,
+ * including the video element, clamping it to 1200px centered.
+ *
+ * Fix: video has className="phantom-video" so we can target it with
+ * `section.hero > video.phantom-video` which wins on specificity over .hero > *.
+ *
+ * Also killing .hero::before, .hero::after, .hero-glow-orb so the video sits
+ * on a solid dark base without orange bleed.
+ *
+ * Mobile (<768px): component returns null. Hero keeps its original styling.
  */
 export default function PhantomCapture() {
   const [show, setShow] = useState(false)
@@ -45,38 +50,37 @@ export default function PhantomCapture() {
     <>
       <style jsx global>{`
         @media (min-width: 768px) {
-          .landing {
-            max-width: none !important;
-            width: 100% !important;
-            overflow-x: hidden !important;
-          }
-          section.hero {
-            background: #0a0604 !important;
-            width: 100vw !important;
+          /* Beat the .hero > * { max-width: 1200px } rule that was constraining the video.
+             Without this, video gets clamped to a 1200px centered column inside the hero. */
+          section.hero > video.phantom-video {
             max-width: none !important;
             min-width: 100vw !important;
-            margin-left: 0 !important;
-            margin-right: 0 !important;
-            overflow: visible !important;
-            box-sizing: border-box !important;
+            width: 100vw !important;
+            margin: 0 !important;
+            position: absolute !important;
+            left: 0 !important;
+            top: 0 !important;
           }
+          /* Hide hero's orange gradient pseudo-elements so the video reads clean */
           section.hero::before {
+            display: none !important;
+          }
+          section.hero::after {
             display: none !important;
           }
           .hero-glow-orb {
             display: none !important;
           }
-          /* kill the dark column behind the form mockup */
-          .hero-right {
-            background: transparent !important;
-            background-color: transparent !important;
+          /* Solid dark base on .hero so dim video sits on consistent ground */
+          section.hero {
+            background: #0a0604 !important;
           }
         }
       `}</style>
 
-      {/* Single dim video. No wash. */}
       <video
         ref={videoRef}
+        className="phantom-video"
         autoPlay
         loop
         muted
@@ -84,18 +88,15 @@ export default function PhantomCapture() {
         aria-hidden="true"
         preload="auto"
         style={{
-          position: 'absolute',
-          top: 0,
-          left: 'calc(50% - 50vw)',
-          width: '100vw',
           height: '100%',
           objectFit: 'cover',
           pointerEvents: 'none',
           zIndex: 1,
           opacity: 0.5,
           filter: 'saturate(0.65) brightness(0.55)',
-          transform: 'scaleX(2.5)',
+          transform: 'scaleX(2.0) translateZ(0)',
           transformOrigin: 'center center',
+          willChange: 'transform',
         }}
       >
         <source src="/bloom-hero.mp4" type="video/mp4" />
