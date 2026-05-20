@@ -36,6 +36,7 @@ export default function Footer() {
           <p className="footer-col-label">Company</p>
           <Link href="/about" className="footer-link">About</Link>
           <Link href="/blog" className="footer-link">Insights</Link>
+          <Link href="/partners" className="footer-link">Partners</Link>
           <Link href="/start-trial" className="footer-link">Start Trial</Link>
           <Link href="/login" className="footer-link">Login</Link>
           <a href="mailto:hello@userecapture.com" className="footer-link">Contact</a>
