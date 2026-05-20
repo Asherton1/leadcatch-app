@@ -1,35 +1,24 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 /**
- * PhantomCapture — v10: actually full-bleed, content forward, single layer
- * ------------------------------------------------------------------------
- * The bug for 8 iterations was .hero > * { max-width: 1200px; margin: auto; }
- * in landing.css line 162. That rule applied to every direct child of .hero,
- * including the video element, clamping it to 1200px centered.
+ * PhantomCapture — v11: full-bleed video, desktop + mobile, fully responsive
+ * --------------------------------------------------------------------------
+ * Video sized with width:100vw + height:100% + object-fit:cover, so it adapts
+ * to whatever .hero's dimensions are at any breakpoint. No screen-size gate.
  *
- * Fix: video has className="phantom-video" so we can target it with
- * `section.hero > video.phantom-video` which wins on specificity over .hero > *.
+ * The .hero > * rule in landing.css (line 162) constrains every child of .hero
+ * to max-width:1200px centered. We beat it with `section.hero > video.phantom-video`
+ * which is more specific. !important locks it.
  *
- * Also killing .hero::before, .hero::after, .hero-glow-orb so the video sits
- * on a solid dark base without orange bleed.
- *
- * Mobile (<768px): component returns null. Hero keeps its original styling.
+ * Pseudo-elements (.hero::before, .hero::after) and .hero-glow-orb are hidden
+ * so the orange mesh gradients don't bleed through the dim video.
  */
 export default function PhantomCapture() {
-  const [show, setShow] = useState(false)
   const videoRef = useRef(null)
 
   useEffect(() => {
-    const check = () => setShow(window.innerWidth >= 768)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
-
-  useEffect(() => {
-    if (!show) return
     const v = videoRef.current
     if (!v) return
     const setRate = () => {
@@ -42,39 +31,31 @@ export default function PhantomCapture() {
       v.removeEventListener('loadedmetadata', setRate)
       v.removeEventListener('play', setRate)
     }
-  }, [show])
-
-  if (!show) return null
+  }, [])
 
   return (
     <>
       <style jsx global>{`
-        @media (min-width: 768px) {
-          /* Beat the .hero > * { max-width: 1200px } rule that was constraining the video.
-             Without this, video gets clamped to a 1200px centered column inside the hero. */
-          section.hero > video.phantom-video {
-            max-width: none !important;
-            min-width: 100vw !important;
-            width: 100vw !important;
-            margin: 0 !important;
-            position: absolute !important;
-            left: 0 !important;
-            top: 0 !important;
-          }
-          /* Hide hero's orange gradient pseudo-elements so the video reads clean */
-          section.hero::before {
-            display: none !important;
-          }
-          section.hero::after {
-            display: none !important;
-          }
-          .hero-glow-orb {
-            display: none !important;
-          }
-          /* Solid dark base on .hero so dim video sits on consistent ground */
-          section.hero {
-            background: #0a0604 !important;
-          }
+        /* Beats .hero > * { max-width: 1200px; margin: auto; } from landing.css.
+           Applies at every screen size — desktop, tablet, mobile. */
+        section.hero > video.phantom-video {
+          max-width: none !important;
+          min-width: 100vw !important;
+          width: 100vw !important;
+          margin: 0 !important;
+          position: absolute !important;
+          left: 0 !important;
+          top: 0 !important;
+        }
+        /* Hide the hero's orange gradient pseudo-elements at every breakpoint */
+        section.hero::before,
+        section.hero::after,
+        .hero-glow-orb {
+          display: none !important;
+        }
+        /* Solid dark base on .hero (overrides desktop AND mobile @480px gradient) */
+        section.hero {
+          background: #0a0604 !important;
         }
       `}</style>
 
