@@ -4355,3 +4355,279 @@
   17%  { opacity: 0; transform: scale(1.4); }
   100% { opacity: 0; transform: scale(0.7); }
 }
+
+
+/* ========================================
+   PARTNERS PAGE — editorial rebuild
+   Type-first. Restaurant-menu rhythm. One big visual moment.
+   ======================================== */
+.partners-pitch {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 5rem 2rem 4rem;
+  text-align: center;
+}
+.partners-pitch-body {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+  line-height: 1.65;
+  color: #999;
+  margin: 0;
+  letter-spacing: -0.005em;
+}
+.partners-pitch-body strong {
+  color: #fff;
+  font-weight: 500;
+}
+.partners-pitch-body + .partners-pitch-body {
+  margin-top: 1.5rem;
+}
+
+/* The number moment */
+.partners-number {
+  text-align: center;
+  padding: 6rem 2rem;
+  background: var(--bg-secondary);
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+}
+.partners-number-num {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: clamp(6rem, 14vw, 12rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  color: #ff6b35;
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+}
+.partners-number-caption {
+  font-size: 0.6875rem;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 2rem 0 0;
+  font-weight: 500;
+  opacity: 0.75;
+}
+.partners-number-sub {
+  font-size: 1rem;
+  color: #999;
+  max-width: 480px;
+  margin: 1.75rem auto 0;
+  line-height: 1.6;
+}
+
+/* Restaurant-menu rows */
+.partners-rows {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+.partners-row {
+  width: 100%;
+}
+.partners-row-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.875rem;
+  gap: 2rem;
+}
+.partners-row-name {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #ff6b35;
+  text-transform: uppercase;
+  margin: 0;
+}
+.partners-row-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.25) 20%, rgba(255, 107, 53, 0.25) 80%, transparent 100%);
+  margin-bottom: 1.5rem;
+}
+.partners-row-desc {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #999;
+  margin: 0;
+  max-width: 720px;
+}
+.partners-row-desc strong {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Who this fits — single editorial paragraph */
+.partners-fit {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  text-align: left;
+}
+.partners-fit-eyebrow {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  opacity: 0.75;
+}
+.partners-fit-body {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #aaa;
+  margin: 0;
+}
+.partners-fit-body strong {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Apply section */
+.partners-apply {
+  background: var(--bg-secondary);
+  padding: 6rem 2rem;
+  border-top: 1px solid #1a1a1a;
+}
+.partners-apply-inner {
+  max-width: 480px;
+  margin: 0 auto;
+}
+.partners-apply-eyebrow {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  opacity: 0.75;
+  text-align: center;
+}
+.partners-apply-headline {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #fff;
+  text-align: center;
+  margin: 0 0 0.75rem;
+}
+.partners-apply-sub {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.9375rem;
+  color: #888;
+  text-align: center;
+  margin: 0 0 2.5rem;
+  line-height: 1.6;
+}
+.partners-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.partners-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.partners-field-label {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #888;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.partners-field-input,
+.partners-field-textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #2a2a2a;
+  padding: 0.5rem 0;
+  color: #fff;
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+  border-radius: 0;
+}
+.partners-field-input:focus,
+.partners-field-textarea:focus {
+  outline: none;
+  border-bottom-color: #ff6b35;
+}
+.partners-field-textarea {
+  resize: vertical;
+  min-height: 80px;
+  padding-top: 0.75rem;
+}
+.partners-submit {
+  background: #ff6b35;
+  color: #000;
+  font-weight: 700;
+  padding: 1rem;
+  border-radius: 8px;
+  border: none;
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s;
+}
+.partners-submit:hover { opacity: 0.9; }
+.partners-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.partners-error {
+  color: #f87171;
+  font-size: 0.8125rem;
+  margin: 0;
+  text-align: center;
+}
+.partners-footnote {
+  font-size: 0.75rem;
+  color: #666;
+  text-align: center;
+  margin: 0.5rem 0 0;
+}
+.partners-success {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+.partners-success-headline {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+.partners-success-body {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.9375rem;
+  color: #888;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .partners-pitch { padding: 3rem 1.25rem 2.5rem; }
+  .partners-pitch-body + .partners-pitch-body { margin-top: 1.25rem; }
+  .partners-number { padding: 4rem 1.25rem; }
+  .partners-number-sub { margin-top: 1.5rem; padding: 0 0.5rem; }
+  .partners-rows { padding: 4rem 1.25rem; gap: 3rem; }
+  .partners-fit { padding: 3.5rem 1.25rem; }
+  .partners-apply { padding: 4rem 1.25rem; }
+}
