@@ -561,6 +561,29 @@ export async function POST(request: NextRequest) {
   }
 
 
+  // --- ADMIN NOTIFICATION (every lead, every client) ---
+  // Founder gets pinged on every captured lead, regardless of client settings.
+  // Set ADMIN_NOTIFY_EMAIL in Vercel env to enable.
+  if ((email || phone) && process.env.ADMIN_NOTIFY_EMAIL) {
+    try {
+      const score = Number(fields_completed ?? 0) >= 3 ? 'Hot' : Number(fields_completed ?? 0) >= 2 ? 'Warm' : 'Cold'
+      const clientLabel = client.company_name || client.name || 'Unknown client'
+      await sendEmailAlert({
+        toEmail: process.env.ADMIN_NOTIFY_EMAIL,
+        leadName: (name as string) ?? null,
+        leadEmail: (email as string) ?? null,
+        leadPhone: (phone as string) ?? null,
+        formData: (form_data as Record<string, unknown>) ?? null,
+        fieldsCompleted: Number(fields_completed ?? 0),
+        totalFields: Number(total_fields ?? 0),
+        clientCompanyName: '[ADMIN] ' + clientLabel + ' - ' + score,
+      })
+    } catch (err) {
+      console.error('Admin notify failed for lead', lead.id, err)
+    }
+  }
+
+
   // --- AUTO-RECOVERY EMAIL ---
 
     // AI Voice Callback (Retell)
