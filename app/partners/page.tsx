@@ -1,6 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import '../landing.css'
+import MobileNav from '../components/MobileNav'
+import Footer from '../components/Footer'
+import GSAPAnimations from '../components/GSAPAnimations'
+import ScrollReveal from '../components/ScrollReveal'
 
 export default function PartnersPage() {
   const [formData, setFormData] = useState({
@@ -44,7 +51,18 @@ export default function PartnersPage() {
   }
 
   return (
-    <main className="landing">
+    <div className="landing">
+      <div className="ambient-bg" />
+      <GSAPAnimations />
+      <ScrollReveal />
+
+      <nav className="lc-nav">
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" priority />
+        </Link>
+        <MobileNav />
+      </nav>
+
       {/* Hero */}
       <section className="canon-hero">
         <div className="canon-hero-inner">
@@ -209,6 +227,8 @@ export default function PartnersPage() {
           )}
         </div>
       </section>
-    </main>
+
+      <Footer />
+    </div>
   )
 }
