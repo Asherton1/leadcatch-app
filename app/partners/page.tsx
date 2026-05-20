@@ -71,6 +71,9 @@ export default function PartnersPage() {
             <span className="canon-hero-headline-primary">For agencies running ads </span>
             <span className="canon-hero-headline-muted">for high-ticket service businesses.</span>
           </h1>
+          <p className="canon-hero-sub">
+            You drive the traffic. We catch what falls. You get paid for both.
+          </p>
         </div>
       </section>
 
@@ -84,13 +87,53 @@ export default function PartnersPage() {
         </p>
       </section>
 
-      {/* The Number Moment */}
+      {/* The 20% Number */}
       <section className="partners-number">
         <div className="partners-number-num">20%</div>
         <p className="partners-number-caption">Recurring on every install. Monthly.</p>
         <p className="partners-number-sub">
           No expiration. No clawback. No cap. As long as your clients pay, you earn &mdash; for the life of the account.
         </p>
+      </section>
+
+      {/* Math */}
+      <section className="partners-math">
+        <div className="partners-math-inner">
+          <p className="partners-math-eyebrow">Run the numbers</p>
+          <h2 className="partners-math-headline">Passive recurring revenue, on top of your existing book.</h2>
+          <p className="partners-math-sub">
+            Based on the Pro plan at $200/mo. Most agencies install on their full client list within 90 days.
+          </p>
+          <div className="partners-math-grid">
+            <div className="partners-math-card">
+              <p className="partners-math-card-clients">5 clients</p>
+              <div className="partners-math-card-number">
+                $200<span className="partners-math-card-period">/mo</span>
+              </div>
+              <div className="partners-math-card-divider" />
+              <p className="partners-math-card-annual"><strong>$2,400</strong> annually</p>
+            </div>
+            <div className="partners-math-card">
+              <p className="partners-math-card-clients">15 clients</p>
+              <div className="partners-math-card-number">
+                $600<span className="partners-math-card-period">/mo</span>
+              </div>
+              <div className="partners-math-card-divider" />
+              <p className="partners-math-card-annual"><strong>$7,200</strong> annually</p>
+            </div>
+            <div className="partners-math-card">
+              <p className="partners-math-card-clients">30 clients</p>
+              <div className="partners-math-card-number">
+                $1,200<span className="partners-math-card-period">/mo</span>
+              </div>
+              <div className="partners-math-card-divider" />
+              <p className="partners-math-card-annual"><strong>$14,400</strong> annually</p>
+            </div>
+          </div>
+          <p className="partners-math-footnote">
+            You don&rsquo;t change how you sell. You don&rsquo;t take on technical support. You just install on the client accounts you already manage.
+          </p>
+        </div>
       </section>
 
       {/* The Offer */}

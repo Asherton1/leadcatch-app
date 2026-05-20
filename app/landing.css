@@ -4631,3 +4631,180 @@
   .partners-fit { padding: 3.5rem 1.25rem; }
   .partners-apply { padding: 4rem 1.25rem; }
 }
+
+
+/* ========================================
+   PARTNERS V3 — math grid, hover states, glow pulse
+   ======================================== */
+
+/* Math / earnings calculator */
+.partners-math {
+  background: var(--bg-primary);
+  padding: 6rem 2rem;
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+}
+.partners-math-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.partners-math-eyebrow {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  opacity: 0.75;
+  text-align: center;
+}
+.partners-math-headline {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #fff;
+  text-align: center;
+  margin: 0 auto 0.75rem;
+  max-width: 640px;
+}
+.partners-math-sub {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.9375rem;
+  color: #888;
+  text-align: center;
+  margin: 0 auto 4rem;
+  line-height: 1.6;
+  max-width: 560px;
+}
+.partners-math-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.partners-math-card {
+  text-align: center;
+  padding: 2.75rem 1.75rem;
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.partners-math-card:hover {
+  border-color: rgba(255, 107, 53, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3), 0 0 32px rgba(255, 107, 53, 0.06);
+}
+.partners-math-card-clients {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  opacity: 0.85;
+}
+.partners-math-card-number {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+.partners-math-card-period {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.5em;
+  color: #888;
+  font-weight: 500;
+}
+.partners-math-card-divider {
+  height: 1px;
+  background: rgba(255, 107, 53, 0.25);
+  width: 40px;
+  margin: 1.5rem auto;
+}
+.partners-math-card-annual {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 0.875rem;
+  color: #aaa;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+.partners-math-card-annual strong {
+  color: #ff6b35;
+  font-weight: 600;
+}
+.partners-math-footnote {
+  font-family: var(--font-geist-sans), sans-serif;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: #666;
+  margin: 3rem auto 0;
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+/* Number moment — pulsing orange glow */
+.partners-number {
+  position: relative;
+  overflow: hidden;
+}
+.partners-number::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0.04) 30%, transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: partnersNumberOrb 4s ease-in-out infinite;
+  z-index: 0;
+}
+@keyframes partnersNumberOrb {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.95); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+}
+.partners-number-num,
+.partners-number-caption,
+.partners-number-sub {
+  position: relative;
+  z-index: 1;
+}
+
+/* Row hover states */
+.partners-row-name {
+  transition: letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.partners-row-divider {
+  transition: background 0.4s ease;
+}
+.partners-row:hover .partners-row-name {
+  letter-spacing: 0.24em;
+}
+.partners-row:hover .partners-row-divider {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.55) 20%, rgba(255, 107, 53, 0.55) 80%, transparent 100%);
+}
+
+@media (max-width: 768px) {
+  .partners-math { padding: 4rem 1.25rem; }
+  .partners-math-headline { font-size: 1.5rem; }
+  .partners-math-sub { margin-bottom: 2.5rem; }
+  .partners-math-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .partners-math-card { padding: 2rem 1.5rem; }
+  .partners-number::before { width: 380px; height: 380px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partners-number::before { animation: none; }
+  .partners-math-card { transition: none; }
+  .partners-row-name,
+  .partners-row-divider { transition: none; }
+}
