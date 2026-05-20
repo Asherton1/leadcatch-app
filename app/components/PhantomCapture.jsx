@@ -3,17 +3,12 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * PhantomCapture — v11: full-bleed video, desktop + mobile, fully responsive
+ * PhantomCapture — v12: full-bleed video, desktop + mobile, fully responsive
  * --------------------------------------------------------------------------
- * Video sized with width:100vw + height:100% + object-fit:cover, so it adapts
- * to whatever .hero's dimensions are at any breakpoint. No screen-size gate.
+ * Adds .hero-scanline { display: none } so the orange scanning beam is
+ * removed on mobile. Desktop had it hidden already via the original CSS.
  *
- * The .hero > * rule in landing.css (line 162) constrains every child of .hero
- * to max-width:1200px centered. We beat it with `section.hero > video.phantom-video`
- * which is more specific. !important locks it.
- *
- * Pseudo-elements (.hero::before, .hero::after) and .hero-glow-orb are hidden
- * so the orange mesh gradients don't bleed through the dim video.
+ * Everything else identical to v11.
  */
 export default function PhantomCapture() {
   const videoRef = useRef(null)
@@ -36,8 +31,6 @@ export default function PhantomCapture() {
   return (
     <>
       <style jsx global>{`
-        /* Beats .hero > * { max-width: 1200px; margin: auto; } from landing.css.
-           Applies at every screen size — desktop, tablet, mobile. */
         section.hero > video.phantom-video {
           max-width: none !important;
           min-width: 100vw !important;
@@ -47,13 +40,12 @@ export default function PhantomCapture() {
           left: 0 !important;
           top: 0 !important;
         }
-        /* Hide the hero's orange gradient pseudo-elements at every breakpoint */
         section.hero::before,
         section.hero::after,
-        .hero-glow-orb {
+        .hero-glow-orb,
+        .hero-scanline {
           display: none !important;
         }
-        /* Solid dark base on .hero (overrides desktop AND mobile @480px gradient) */
         section.hero {
           background: #0a0604 !important;
         }
