@@ -3,21 +3,39 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * PhantomCapture — v13: Signal Capture Network
+ * PhantomCapture — v14: Earth video + signal capture network overlay
  * --------------------------------------------------------------------------
- * Replaces the MP4 video with a canvas-based animation that visualizes what
- * ReCapture actually does: signals flow through a network, occasionally one
- * gets caught at a "capture" node (orange flash + expanding ring).
+ * Earth sets the cinematic mood. Canvas overlay narrates ReCapture's product:
+ * signals flow through a drifting network of nodes, and when one lands on a
+ * "capture" node it flashes orange with a halo + expanding ring.
  *
- * - Faint white constellation of drifting nodes on dark background
- * - Small white pulses travel along nearest-neighbor lines (signals)
- * - When a pulse lands on a capture node: orange flash + halo + expanding ring
- * - 60fps via requestAnimationFrame, canvas resizes to .hero at any breakpoint
- * - No MP4 dependency, no video bandwidth cost
+ * Layer stack (bottom to top):
+ *   1. .hero #0a0604 dark base
+ *   2. Earth video (dimmed via opacity + filter, stretched scaleX 2.0)
+ *   3. Canvas signal network (drifting nodes, white pulses, orange captures)
+ *   4. .hero-split content (text + form mockup) — wins via DOM order at z:1
  */
 export default function PhantomCapture() {
+  const videoRef = useRef(null)
   const canvasRef = useRef(null)
 
+  // Video playback rate
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v) return
+    const setRate = () => {
+      v.playbackRate = 0.5
+    }
+    setRate()
+    v.addEventListener('loadedmetadata', setRate)
+    v.addEventListener('play', setRate)
+    return () => {
+      v.removeEventListener('loadedmetadata', setRate)
+      v.removeEventListener('play', setRate)
+    }
+  }, [])
+
+  // Canvas signal-capture network animation
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -31,7 +49,7 @@ export default function PhantomCapture() {
     let w = 0
     let h = 0
     const dpr = window.devicePixelRatio || 1
-    const CONNECT_DIST = 180 // max px between nodes for a line to draw
+    const CONNECT_DIST = 200
 
     const resize = () => {
       const parent = canvas.parentElement
@@ -48,17 +66,16 @@ export default function PhantomCapture() {
     }
 
     const initNodes = () => {
-      // Scale node count to viewport so dense screens get more, sparse less
-      const count = Math.max(28, Math.min(60, Math.floor((w * h) / 24000)))
+      // Slightly sparser than v13 since layered over Earth (avoid clutter)
+      const count = Math.max(24, Math.min(48, Math.floor((w * h) / 30000)))
       nodes = []
       for (let i = 0; i < count; i++) {
         nodes.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.18,
-          vy: (Math.random() - 0.5) * 0.18,
-          // ~20% of nodes are "capture" nodes that flash orange on signal arrival
-          captureNode: Math.random() < 0.2,
+          vx: (Math.random() - 0.5) * 0.2,
+          vy: (Math.random() - 0.5) * 0.2,
+          captureNode: Math.random() < 0.25, // 25% are capture nodes
           glow: 0,
         })
       }
@@ -67,7 +84,6 @@ export default function PhantomCapture() {
     const spawnPulse = () => {
       if (nodes.length < 2) return
       const start = nodes[Math.floor(Math.random() * nodes.length)]
-      // Only send pulse to a node within CONNECT_DIST (a real network neighbor)
       const neighbors = nodes.filter((n) => {
         if (n === start) return false
         const dx = n.x - start.x
@@ -84,7 +100,7 @@ export default function PhantomCapture() {
       frame++
       ctx.clearRect(0, 0, w, h)
 
-      // Drift nodes gently, bounce off edges
+      // Drift nodes, bounce off edges
       for (const n of nodes) {
         n.x += n.vx
         n.y += n.vy
@@ -105,8 +121,8 @@ export default function PhantomCapture() {
           const d2 = dx * dx + dy * dy
           if (d2 < CONNECT_DIST * CONNECT_DIST) {
             const d = Math.sqrt(d2)
-            const alpha = (1 - d / CONNECT_DIST) * 0.12
-            ctx.strokeStyle = `rgba(200,200,210,${alpha})`
+            const alpha = (1 - d / CONNECT_DIST) * 0.18
+            ctx.strokeStyle = `rgba(220,220,235,${alpha})`
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)
             ctx.lineTo(b.x, b.y)
@@ -115,45 +131,43 @@ export default function PhantomCapture() {
         }
       }
 
-      // Spawn new pulses periodically
-      if (frame % 22 === 0 && Math.random() < 0.85) spawnPulse()
+      // Spawn pulses
+      if (frame % 20 === 0 && Math.random() < 0.9) spawnPulse()
 
-      // Pulses — small bright dots traveling along lines
+      // Pulses — white signals traveling along lines
       const newPulses = []
       for (const p of pulses) {
         p.t += p.speed
         if (p.t < 1) {
           const x = p.start.x + (p.end.x - p.start.x) * p.t
           const y = p.start.y + (p.end.y - p.start.y) * p.t
-          // bright core
-          ctx.fillStyle = 'rgba(255,255,255,0.55)'
+          ctx.fillStyle = 'rgba(255,255,255,0.7)'
           ctx.beginPath()
-          ctx.arc(x, y, 1.6, 0, Math.PI * 2)
+          ctx.arc(x, y, 1.8, 0, Math.PI * 2)
           ctx.fill()
-          // soft halo
-          ctx.fillStyle = 'rgba(255,255,255,0.2)'
+          ctx.fillStyle = 'rgba(255,255,255,0.25)'
           ctx.beginPath()
-          ctx.arc(x, y, 3.2, 0, Math.PI * 2)
+          ctx.arc(x, y, 3.4, 0, Math.PI * 2)
           ctx.fill()
           newPulses.push(p)
         } else {
-          // Pulse landed — if at a capture node, fire the orange flash + ring
+          // Pulse arrived — if at a capture node, fire orange flash + ring
           if (p.end.captureNode) {
             p.end.glow = 1
-            rings.push({ node: p.end, r: 4, a: 0.7 })
+            rings.push({ node: p.end, r: 4, a: 0.75 })
           }
         }
       }
       pulses = newPulses
 
-      // Capture rings — orange expanding circles
+      // Orange capture rings expanding outward
       const newRings = []
       for (const r of rings) {
-        r.r += 0.7
+        r.r += 0.8
         r.a -= 0.011
-        if (r.a > 0 && r.r < 70) {
+        if (r.a > 0 && r.r < 80) {
           ctx.strokeStyle = `rgba(255,107,53,${r.a})`
-          ctx.lineWidth = 1.3
+          ctx.lineWidth = 1.5
           ctx.beginPath()
           ctx.arc(r.node.x, r.node.y, r.r, 0, Math.PI * 2)
           ctx.stroke()
@@ -162,28 +176,28 @@ export default function PhantomCapture() {
       }
       rings = newRings
 
-      // Nodes themselves — bright orange if currently glowing, otherwise faint dot
+      // Nodes — bright orange flash if currently captured, faint white otherwise
       for (const n of nodes) {
         if (n.glow > 0) {
-          // radial halo
-          const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 22)
-          grad.addColorStop(0, `rgba(255,107,53,${n.glow * 0.6})`)
+          // Orange halo
+          const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 26)
+          grad.addColorStop(0, `rgba(255,107,53,${n.glow * 0.75})`)
           grad.addColorStop(1, 'rgba(255,107,53,0)')
           ctx.fillStyle = grad
           ctx.beginPath()
-          ctx.arc(n.x, n.y, 22, 0, Math.PI * 2)
+          ctx.arc(n.x, n.y, 26, 0, Math.PI * 2)
           ctx.fill()
-          // bright dot
-          ctx.fillStyle = `rgba(255,107,53,${0.7 + n.glow * 0.3})`
+          // Bright dot
+          ctx.fillStyle = `rgba(255,107,53,${0.8 + n.glow * 0.2})`
           ctx.beginPath()
-          ctx.arc(n.x, n.y, 3, 0, Math.PI * 2)
+          ctx.arc(n.x, n.y, 3.5, 0, Math.PI * 2)
           ctx.fill()
           n.glow = Math.max(0, n.glow - 0.008)
         } else {
-          // dim default node
-          ctx.fillStyle = 'rgba(210,210,220,0.28)'
+          // Default visible dim node
+          ctx.fillStyle = 'rgba(220,220,235,0.4)'
           ctx.beginPath()
-          ctx.arc(n.x, n.y, 1.4, 0, Math.PI * 2)
+          ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2)
           ctx.fill()
         }
       }
@@ -206,18 +220,25 @@ export default function PhantomCapture() {
   return (
     <>
       <style jsx global>{`
-        /* Beat .hero > * { max-width: 1200px; margin: auto } so canvas spans full hero */
+        /* Beat .hero > * { max-width: 1200px } for both video and canvas */
+        section.hero > video.phantom-video,
         section.hero > canvas.phantom-canvas {
           max-width: none !important;
-          width: 100% !important;
-          height: 100% !important;
           margin: 0 !important;
           position: absolute !important;
           top: 0 !important;
           left: 0 !important;
+        }
+        section.hero > video.phantom-video {
+          min-width: 100vw !important;
+          width: 100vw !important;
+        }
+        section.hero > canvas.phantom-canvas {
+          width: 100% !important;
+          height: 100% !important;
           pointer-events: none !important;
         }
-        /* Hide hero's other ambient layers so this is the sole backdrop */
+        /* Hide hero's other ambient layers so our stack is clean */
         section.hero::before,
         section.hero::after,
         .hero-glow-orb,
@@ -229,6 +250,31 @@ export default function PhantomCapture() {
           background: #0a0604 !important;
         }
       `}</style>
+
+      <video
+        ref={videoRef}
+        className="phantom-video"
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden="true"
+        preload="auto"
+        style={{
+          height: '100%',
+          objectFit: 'cover',
+          pointerEvents: 'none',
+          zIndex: 1,
+          opacity: 0.5,
+          filter: 'saturate(0.65) brightness(0.55)',
+          transform: 'scaleX(2.0) translateZ(0)',
+          transformOrigin: 'center center',
+          willChange: 'transform',
+        }}
+      >
+        <source src="/bloom-hero.mp4" type="video/mp4" />
+      </video>
+
       <canvas
         ref={canvasRef}
         className="phantom-canvas"
