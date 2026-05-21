@@ -1,0 +1,209 @@
+.partners-page {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 2.5rem 5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #ffffff;
+  background: #080808;
+  min-height: calc(100vh - 120px);
+}
+
+.partners-state {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem;
+  color: #b0b0b0;
+}
+
+.partners-state-error { color: #ef4444; }
+
+.partners-header { padding: 0.5rem 0 2rem; }
+
+.partners-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem;
+  opacity: 0.85;
+}
+
+.partners-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.partners-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.partners-stat {
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.5rem 1.625rem;
+}
+
+.partners-stat-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #636363;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin: 0 0 0.875rem;
+}
+
+.partners-stat-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.partners-stat-accent .partners-stat-label { color: #ff6b35; }
+.partners-stat-accent .partners-stat-value { color: #ff6b35; }
+
+.partners-empty {
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.75rem;
+  padding: 3rem 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.partners-empty-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #636363;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+}
+
+.partners-empty-headline {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 1rem;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.partners-empty-body {
+  font-size: 0.9375rem;
+  color: #b0b0b0;
+  margin: 0 0 2rem;
+  line-height: 1.7;
+  max-width: 640px;
+}
+
+.partners-empty-actions {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.partners-link-primary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.25);
+  color: #ff6b35;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.partners-link-primary:hover {
+  background: rgba(255, 107, 53, 0.18);
+  border-color: rgba(255, 107, 53, 0.4);
+}
+
+.partners-link-secondary {
+  color: #b0b0b0;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 1px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.partners-link-secondary:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.partners-roadmap {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 0.75rem;
+  padding: 2rem 2.5rem;
+}
+
+.partners-roadmap-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #636363;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+}
+
+.partners-roadmap-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.partners-roadmap-list li {
+  padding: 0.875rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: #b0b0b0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.partners-roadmap-list li:last-child { border-bottom: none; }
+
+.partners-roadmap-list strong {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .partners-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .partners-page { padding: 0 1.25rem 4rem; }
+  .partners-title { font-size: 1.5rem; }
+  .partners-stats { gap: 0.75rem; margin-bottom: 2rem; }
+  .partners-stat { padding: 1.25rem; }
+  .partners-stat-value { font-size: 1.75rem; }
+  .partners-empty { padding: 2rem 1.5rem; }
+  .partners-empty-headline { font-size: 1.125rem; }
+  .partners-roadmap { padding: 1.5rem; }
+  .partners-empty-actions { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .partners-page { padding: 0 1rem 3rem; }
+  .partners-stats { grid-template-columns: 1fr; }
+}
