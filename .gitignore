@@ -6,3 +6,4 @@ node_modules
 
 # Outreach preview emails
 preview-*.html
+.env*
