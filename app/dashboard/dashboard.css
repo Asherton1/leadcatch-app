@@ -1197,19 +1197,15 @@ body {
   .header-right {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 0.75rem;
     width: 100%;
     flex-wrap: wrap;
   }
   .client-name {
-    font-size: 0.75rem;
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    display: none;
   }
-  .logout-btn { font-size: 0.7rem; padding: 0.375rem 0.75rem; }
+  .logout-btn { font-size: 0.75rem; padding: 0.5rem 0.875rem; }
 
   /* ── Client Selector Bar ── */
   .client-bar {
