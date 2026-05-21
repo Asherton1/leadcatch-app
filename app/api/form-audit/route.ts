@@ -259,7 +259,7 @@ export async function POST(request: NextRequest) {
         from: 'ReCapture <hello@userecapture.com>',
         to: 'hello@userecapture.com',
         subject: 'New Form Audit Request — ' + url,
-        html: '<p><strong>URL:</strong> ' + url + '</p><p><strong>Email:</strong> ' + email + '</p><p><strong>Industry:</strong> ' + detectedIndustry + '</p><p><strong>Fields:</strong> ' + totalFields + '</p><p><strong>Est. abandonment:</strong> ' + estAbandonment + '%</p><p><strong>Monthly revenue at risk:</strong> $' + monthlyRevenueLost.toLocaleString() + '</p>',
+        html: '<p><strong>URL:</strong> ' + url + '</p><p><strong>Email:</strong> ' + email + '</p><p><strong>Industry:</strong> ' + detectedIndustry + '</p><p><strong>Grade:</strong> ' + grade + ' (' + healthScore + '/100)</p><p><strong>Fields:</strong> ' + totalFields + '</p><p><strong>Est. abandonment:</strong> ' + estAbandonment + '%</p><p><strong>Monthly revenue at risk:</strong> $' + monthlyRevenueLost.toLocaleString() + '</p><p><strong>Annual revenue at risk:</strong> $' + yearlyRevenueLost.toLocaleString() + '</p>',
       }),
     })
 
