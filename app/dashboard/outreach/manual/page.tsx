@@ -3,7 +3,6 @@
 import { useEffect, useState, useCallback, useMemo } from 'react'
 import { supabase } from '@/lib/supabase'
 import { useIsAdmin } from '@/lib/use-is-admin'
-import AdminNav from '../../../components/AdminNav'
 import Footer from '../../../components/Footer'
 import '../../../landing.css'
 import './outreach.css'
@@ -428,8 +427,6 @@ export default function OutreachAdminPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0a', color: '#e4e4e7' }}>
-      <AdminNav />
-
       <div className="outreach-admin">
         <div className="outreach-admin-header">
           <p className="outreach-admin-eyebrow">Admin · Outreach Queue</p>
