@@ -7,26 +7,52 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
 
-const ADMIN_EMAILS = new Set([
-  'asherton@userecapture.com',
-  'asherton.c@me.com',
-])
-
 interface SupabaseUser {
   id?: string
   email?: string
   [key: string]: unknown
 }
 
+interface ClientRow {
+  is_admin?: boolean
+}
+
+/**
+ * Mirrors lib/use-is-admin.ts:
+ *   1. Get user from session token
+ *   2. Look up clients table by email
+ *   3. Require is_admin = true
+ */
 async function validateAdminToken(token: string): Promise<{ ok: boolean; email?: string; reason?: string }> {
   if (!token) return { ok: false, reason: 'missing token' }
-  const res = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+
+  // Step 1: validate session token, get user
+  const userRes = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
     headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${token}` },
   })
-  if (!res.ok) return { ok: false, reason: `auth check failed: ${res.status}` }
-  const user: SupabaseUser = await res.json()
+  if (!userRes.ok) return { ok: false, reason: `auth check failed: ${userRes.status}` }
+  const user: SupabaseUser = await userRes.json()
   if (!user.email) return { ok: false, reason: 'no email on user' }
-  if (!ADMIN_EMAILS.has(user.email)) return { ok: false, reason: 'not an admin' }
+
+  // Step 2: query clients.is_admin (same as useIsAdmin)
+  const clientUrl = `${SUPABASE_URL}/rest/v1/clients?email=eq.${encodeURIComponent(user.email)}&select=is_admin`
+  const clientRes = await fetch(clientUrl, {
+    headers: {
+      apikey: SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+    },
+    cache: 'no-store',
+  })
+  if (!clientRes.ok) return { ok: false, reason: `clients lookup failed: ${clientRes.status}` }
+
+  const rows = await clientRes.json() as ClientRow[]
+  if (!Array.isArray(rows) || rows.length === 0) {
+    return { ok: false, reason: 'no client row for this email' }
+  }
+  if (!rows[0].is_admin) {
+    return { ok: false, reason: 'is_admin is false' }
+  }
+
   return { ok: true, email: user.email }
 }
 
