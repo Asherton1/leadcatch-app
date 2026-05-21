@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  const { url, email, dryRun } = body as { url: string; email: string; dryRun?: boolean }
+  const { url, email, dryRun, industryHint } = body as { url: string; email: string; dryRun?: boolean; industryHint?: string }
   if (!url || !email) {
     return NextResponse.json({ error: 'URL and email required' }, { status: 400 })
   }
@@ -94,6 +94,41 @@ export async function POST(request: NextRequest) {
     }
 
 
+
+    // Override auto-detection with industryHint if provided
+    if (industryHint) {
+      const hint = industryHint.toLowerCase().trim()
+      const mapping: Array<[string, string, number]> = [
+        ['plastic surg', 'Plastic Surgery', 8500],
+        ['cosmetic surg', 'Plastic Surgery', 8500],
+        ['med spa', 'Med Spa', 2800],
+        ['medspa', 'Med Spa', 2800],
+        ['lasik', 'LASIK / Eye Care', 4200],
+        ['eye care', 'LASIK / Eye Care', 4200],
+        ['fertility', 'Fertility', 12000],
+        ['ivf', 'Fertility', 12000],
+        ['dental', 'Dental', 3500],
+        ['dentist', 'Dental', 3500],
+        ['dermatolog', 'Dermatology', 2200],
+        ['property', 'Property Management', 1800],
+        ['multifamily', 'Property Management', 1800],
+        ['leasing', 'Property Management', 1800],
+        ['luxury real estate', 'Luxury Real Estate', 15000],
+        ['real estate', 'Luxury Real Estate', 15000],
+        ['chiro', 'Chiropractic', 1200],
+        ['legal', 'Legal', 5000],
+        ['attorney', 'Legal', 5000],
+        ['lawyer', 'Legal', 5000],
+        ['healthcare', 'General Business', 1500],
+      ]
+      for (const [key, industry, value] of mapping) {
+        if (hint.includes(key)) {
+          detectedIndustry = industry
+          industryLeadValue = value
+          break
+        }
+      }
+    }
 
     const avgLeadValue = industryLeadValue
         const monthlyVisitors = 500
