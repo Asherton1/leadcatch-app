@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  const { url, email } = body as { url: string; email: string }
+  const { url, email, dryRun } = body as { url: string; email: string; dryRun?: boolean }
   if (!url || !email) {
     return NextResponse.json({ error: 'URL and email required' }, { status: 400 })
   }
@@ -239,6 +239,20 @@ export async function POST(request: NextRequest) {
         '<p style="color:#555;font-size:11px;margin:0;">ReCapture &nbsp;|&nbsp; userecapture.com &nbsp;|&nbsp; hello@userecapture.com &nbsp;|&nbsp; Dallas, Texas</p>' +
       '</div>' +
     '</div>'
+    // Dry run: return computed data without sending any emails
+    if (dryRun) {
+      return NextResponse.json({
+        success: true,
+        dryRun: true,
+        detectedIndustry,
+        grade,
+        healthScore,
+        totalFields,
+        estAbandonment,
+        monthlyRevenueLost,
+        yearlyRevenueLost,
+      })
+    }
 
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -263,7 +277,16 @@ export async function POST(request: NextRequest) {
       }),
     })
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({
+      success: true,
+      detectedIndustry,
+      grade,
+      healthScore,
+      totalFields,
+      estAbandonment,
+      monthlyRevenueLost,
+      yearlyRevenueLost,
+    })
   } catch (err) {
     console.error('Form audit error:', err)
     return NextResponse.json({ error: 'Audit failed' }, { status: 500 })
