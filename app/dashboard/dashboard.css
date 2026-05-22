@@ -1188,14 +1188,16 @@ body {
 
   /* ── Header ── */
   .header {
-    padding: 0.75rem 0 1rem;
+    padding: 0.5rem 0 0.75rem;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
+    justify-content: flex-end;
+    gap: 0.5rem;
     flex-wrap: nowrap;
+    border-bottom: none;
+    margin-bottom: 0.5rem;
   }
-  .logo { font-size: 1.0625rem; flex: 0 1 auto; min-width: 0; }
+  .logo { display: none; }
   .header-right {
     display: flex;
     align-items: center;
