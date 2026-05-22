@@ -45,12 +45,7 @@ body {
 
 /* ── Header ──────────────────────────────────────────────────────────────── */
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.75rem 0 2.5rem;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 2.5rem;
+  display: none;
 }
 
 /* IMPORTANT: no flex gap here — would split Re/Capture */

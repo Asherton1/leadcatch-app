@@ -1,11 +1,15 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { supabase } from '@/lib/supabase'
 import './AdminNav.css'
 
 export default function AdminNav() {
   const pathname = usePathname()
+  const router = useRouter()
+  const [signingOut, setSigningOut] = useState(false)
 
   const links = [
     { href: '/dashboard', label: 'Dashboard' },
@@ -13,6 +17,18 @@ export default function AdminNav() {
     { href: '/dashboard/outreach', label: 'Outreach' },
     { href: '/admin/sms-templates', label: 'SMS' },
   ]
+
+  const handleSignOut = async () => {
+    if (signingOut) return
+    setSigningOut(true)
+    try {
+      await supabase.auth.signOut()
+      router.push('/login')
+    } catch (err) {
+      console.error('Sign out failed:', err)
+      setSigningOut(false)
+    }
+  }
 
   return (
     <nav className="admin-nav">
@@ -46,6 +62,14 @@ export default function AdminNav() {
       <div className="admin-nav-right">
         <Link href="/settings" className="admin-nav-link">Settings</Link>
         <Link href="/" className="admin-nav-link admin-nav-link-public-site">Public Site</Link>
+        <button
+          onClick={handleSignOut}
+          disabled={signingOut}
+          className="admin-nav-link admin-nav-link-signout"
+          type="button"
+        >
+          {signingOut ? 'Signing out...' : 'Sign out'}
+        </button>
       </div>
     </nav>
   )
