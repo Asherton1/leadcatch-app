@@ -368,6 +368,28 @@ ${psHtml(company)}
 }
 
 
+// Batch 2 audit followup template — for prospects who received both a form audit
+// AND a cold intro on the same day. Acknowledges the double-touch and pivots
+// off the audit data rather than starting fresh.
+function getBatch2AuditFollowupHtml(firstName: string, company: string | null | undefined, website: string): string {
+  const wrapperOpen = '<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.7;">'
+  return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Sent over a form audit for ${website} Friday afternoon — likely got buried right before the holiday weekend.</p>
+
+<p>If you got a chance to skim it: did the estimated monthly revenue lost feel close to your gut, or off?</p>
+
+<p>Genuinely curious. Most folks tell me the abandonment rate is what surprises them — not the dollar figure.</p>
+
+<p>If you missed it entirely, the tool's at <a href="https://userecapture.com/form-audit" style="color: #ff6b35;">userecapture.com/form-audit</a> (30 seconds).</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+}
+
+
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get('authorization')
   if (authHeader !== 'Bearer ' + CRON_SECRET) {
@@ -480,7 +502,18 @@ export async function GET(request: NextRequest) {
 
   for (const item of due4 || []) {
     try {
-      const followupHtml = getDay4Html(item.vertical, item.prospect_name.split(' ')[0], item.prospect_company)
+      const firstName = item.prospect_name.split(' ')[0]
+      let followupSubject: string
+      let followupHtml: string
+
+      if (item.template_variant === 'batch_2_audit_followup') {
+        const emailDomain = (item.prospect_email.split('@')[1] || 'your site')
+        followupSubject = 'That ReCapture audit on Friday — anything land?'
+        followupHtml = getBatch2AuditFollowupHtml(firstName, item.prospect_company, emailDomain)
+      } else {
+        followupSubject = 'Re: ' + item.email_subject
+        followupHtml = getDay4Html(item.vertical, firstName, item.prospect_company)
+      }
 
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -491,7 +524,7 @@ export async function GET(request: NextRequest) {
         body: JSON.stringify({
           from: 'Asherton Chraibi <hello@userecapture.com>',
           to: item.prospect_email,
-          subject: 'Re: ' + item.email_subject,
+          subject: followupSubject,
           html: followupHtml,
         }),
       })
@@ -554,6 +587,29 @@ export async function GET(request: NextRequest) {
       results.errors.push(`day-10 ${item.prospect_email}: ${String(err)}`)
     }
     await sleep(300)
+  }
+
+  // Slack alert summary — post run results to admin workspace.
+  // Defensive: a Slack failure must never change the cron response.
+  const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK_URL
+  if (SLACK_WEBHOOK) {
+    try {
+      const errorPreview = results.errors.slice(0, 5).map(e => `• ${e}`).join('\n')
+      const moreErrors = results.errors.length > 5 ? `\n• ...and ${results.errors.length - 5} more` : ''
+      const ctTime = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' })
+      const text = `📬 *Outreach cron — ${ctTime} CT*
+- Initial sends: ${results.sent} sent, ${results.failed} failed
+- Day 4 follow-ups: ${results.followups_4} sent
+- Day 10 breakups: ${results.followups_10} sent${results.errors.length > 0 ? `\n*Errors:*\n${errorPreview}${moreErrors}` : ''}`
+
+      await fetch(SLACK_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+      })
+    } catch (err) {
+      console.error('Slack alert failed (non-fatal):', err)
+    }
   }
 
   return NextResponse.json(results)

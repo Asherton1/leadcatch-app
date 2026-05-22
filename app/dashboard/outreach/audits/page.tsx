@@ -41,7 +41,7 @@ const STATUS_LABELS: Record<string, string> = {
 
 const EVENT_LABELS: Record<string, string> = {
   audit_submitted: 'Audit submitted', audit_delivered: 'Audit delivered',
-  cold_email_sent: 'Cold email sent', cold_email_opened: 'Email opened',
+  cold_email_sent: 'Cold email scheduled', cold_email_opened: 'Email opened',
   cold_email_clicked: 'Email clicked', replied: 'Replied',
   manual_note: 'Note', status_change: 'Status changed',
   unsubscribed: 'Unsubscribed',
@@ -142,7 +142,7 @@ export default function AuditsPage() {
           <p className="audits-stat-value">{auditsSent.toLocaleString()}</p>
         </div>
         <div className="audits-stat">
-          <p className="audits-stat-label">Cold Emails Sent</p>
+          <p className="audits-stat-label">Cold Emails Scheduled</p>
           <p className="audits-stat-value">{emailsSent.toLocaleString()}</p>
         </div>
         <div className="audits-stat audits-stat-accent">
