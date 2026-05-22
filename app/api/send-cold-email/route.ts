@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     html,
   }
   if (text) payload.text = text
-  if (scheduledAt) payload.scheduledAt = scheduledAt
+  if (scheduledAt) payload.scheduled_at = scheduledAt
 
   try {
     const resendRes = await fetch('https://api.resend.com/emails', {
