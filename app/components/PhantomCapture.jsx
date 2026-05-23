@@ -3,39 +3,19 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * PhantomCapture — v14: Earth video + signal capture network overlay
+ * PhantomCapture — v15: Aurora ambient backdrop + signal capture network overlay
  * --------------------------------------------------------------------------
- * Earth sets the cinematic mood. Canvas overlay narrates ReCapture's product:
- * signals flow through a drifting network of nodes, and when one lands on a
- * "capture" node it flashes orange with a halo + expanding ring.
+ * Earth video swapped for CSS-only gradient aurora. Canvas network unchanged.
  *
  * Layer stack (bottom to top):
  *   1. .hero #0a0604 dark base
- *   2. Earth video (dimmed via opacity + filter, stretched scaleX 2.0)
+ *   2. Aurora div (3 blurred orange radial-gradient blobs, slow drift, CSS-only)
  *   3. Canvas signal network (drifting nodes, white pulses, orange captures)
- *   4. .hero-split content (text + form mockup) — wins via DOM order at z:1
+ *   4. .hero-split content (text + form mockup)
  */
 export default function PhantomCapture() {
-  const videoRef = useRef(null)
   const canvasRef = useRef(null)
 
-  // Video playback rate
-  useEffect(() => {
-    const v = videoRef.current
-    if (!v) return
-    const setRate = () => {
-      v.playbackRate = 0.5
-    }
-    setRate()
-    v.addEventListener('loadedmetadata', setRate)
-    v.addEventListener('play', setRate)
-    return () => {
-      v.removeEventListener('loadedmetadata', setRate)
-      v.removeEventListener('play', setRate)
-    }
-  }, [])
-
-  // Canvas signal-capture network animation
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -59,14 +39,13 @@ export default function PhantomCapture() {
       h = rect.height
       canvas.width = w * dpr
       canvas.height = h * dpr
-      canvas.style.width = `${w}px`
-      canvas.style.height = `${h}px`
+      canvas.style.width = w + 'px'
+      canvas.style.height = h + 'px'
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       initNodes()
     }
 
     const initNodes = () => {
-      // Slightly sparser than v13 since layered over Earth (avoid clutter)
       const count = Math.max(24, Math.min(48, Math.floor((w * h) / 30000)))
       nodes = []
       for (let i = 0; i < count; i++) {
@@ -75,7 +54,7 @@ export default function PhantomCapture() {
           y: Math.random() * h,
           vx: (Math.random() - 0.5) * 0.2,
           vy: (Math.random() - 0.5) * 0.2,
-          captureNode: Math.random() < 0.25, // 25% are capture nodes
+          captureNode: Math.random() < 0.25,
           glow: 0,
         })
       }
@@ -100,7 +79,6 @@ export default function PhantomCapture() {
       frame++
       ctx.clearRect(0, 0, w, h)
 
-      // Drift nodes, bounce off edges
       for (const n of nodes) {
         n.x += n.vx
         n.y += n.vy
@@ -110,7 +88,6 @@ export default function PhantomCapture() {
         if (n.y > h) { n.y = h; n.vy *= -1 }
       }
 
-      // Network lines — alpha falls off with distance
       ctx.lineWidth = 1
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
@@ -122,7 +99,7 @@ export default function PhantomCapture() {
           if (d2 < CONNECT_DIST * CONNECT_DIST) {
             const d = Math.sqrt(d2)
             const alpha = (1 - d / CONNECT_DIST) * 0.18
-            ctx.strokeStyle = `rgba(220,220,235,${alpha})`
+            ctx.strokeStyle = 'rgba(220,220,235,' + alpha + ')'
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)
             ctx.lineTo(b.x, b.y)
@@ -131,10 +108,8 @@ export default function PhantomCapture() {
         }
       }
 
-      // Spawn pulses
       if (frame % 20 === 0 && Math.random() < 0.9) spawnPulse()
 
-      // Pulses — white signals traveling along lines
       const newPulses = []
       for (const p of pulses) {
         p.t += p.speed
@@ -151,7 +126,6 @@ export default function PhantomCapture() {
           ctx.fill()
           newPulses.push(p)
         } else {
-          // Pulse arrived — if at a capture node, fire orange flash + ring
           if (p.end.captureNode) {
             p.end.glow = 1
             rings.push({ node: p.end, r: 4, a: 0.75 })
@@ -160,13 +134,12 @@ export default function PhantomCapture() {
       }
       pulses = newPulses
 
-      // Orange capture rings expanding outward
       const newRings = []
       for (const r of rings) {
         r.r += 0.8
         r.a -= 0.011
         if (r.a > 0 && r.r < 80) {
-          ctx.strokeStyle = `rgba(255,107,53,${r.a})`
+          ctx.strokeStyle = 'rgba(255,107,53,' + r.a + ')'
           ctx.lineWidth = 1.5
           ctx.beginPath()
           ctx.arc(r.node.x, r.node.y, r.r, 0, Math.PI * 2)
@@ -176,25 +149,21 @@ export default function PhantomCapture() {
       }
       rings = newRings
 
-      // Nodes — bright orange flash if currently captured, faint white otherwise
       for (const n of nodes) {
         if (n.glow > 0) {
-          // Orange halo
           const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 26)
-          grad.addColorStop(0, `rgba(255,107,53,${n.glow * 0.75})`)
+          grad.addColorStop(0, 'rgba(255,107,53,' + (n.glow * 0.75) + ')')
           grad.addColorStop(1, 'rgba(255,107,53,0)')
           ctx.fillStyle = grad
           ctx.beginPath()
           ctx.arc(n.x, n.y, 26, 0, Math.PI * 2)
           ctx.fill()
-          // Bright dot
-          ctx.fillStyle = `rgba(255,107,53,${0.8 + n.glow * 0.2})`
+          ctx.fillStyle = 'rgba(255,107,53,' + (0.8 + n.glow * 0.2) + ')'
           ctx.beginPath()
           ctx.arc(n.x, n.y, 3.5, 0, Math.PI * 2)
           ctx.fill()
           n.glow = Math.max(0, n.glow - 0.008)
         } else {
-          // Default visible dim node
           ctx.fillStyle = 'rgba(220,220,235,0.4)'
           ctx.beginPath()
           ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2)
@@ -220,25 +189,21 @@ export default function PhantomCapture() {
   return (
     <>
       <style jsx global>{`
-        /* Beat .hero > * { max-width: 1200px } for both video and canvas */
-        section.hero > video.phantom-video,
-        section.hero > canvas.phantom-canvas {
+        section.hero > canvas.phantom-canvas,
+        section.hero > .phantom-aurora {
           max-width: none !important;
           margin: 0 !important;
           position: absolute !important;
           top: 0 !important;
           left: 0 !important;
-        }
-        section.hero > video.phantom-video {
-          min-width: 100vw !important;
-          width: 100vw !important;
-        }
-        section.hero > canvas.phantom-canvas {
           width: 100% !important;
           height: 100% !important;
           pointer-events: none !important;
         }
-        /* Hide hero's other ambient layers so our stack is clean */
+        section.hero > .phantom-aurora {
+          overflow: hidden !important;
+          z-index: 0 !important;
+        }
         section.hero::before,
         section.hero::after,
         .hero-glow-orb,
@@ -249,31 +214,58 @@ export default function PhantomCapture() {
         section.hero {
           background: #0a0604 !important;
         }
+        .phantom-aurora-blob {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(90px);
+          will-change: transform;
+        }
+        .phantom-aurora-blob-1 {
+          width: 60%;
+          height: 80%;
+          background: radial-gradient(circle at center, rgba(255, 107, 53, 0.55) 0%, rgba(255, 107, 53, 0) 70%);
+          opacity: 0.45;
+          top: -10%;
+          left: -10%;
+          animation: phantom-aurora-drift-1 32s ease-in-out infinite;
+        }
+        .phantom-aurora-blob-2 {
+          width: 50%;
+          height: 70%;
+          background: radial-gradient(circle at center, rgba(180, 60, 20, 0.55) 0%, rgba(180, 60, 20, 0) 70%);
+          opacity: 0.4;
+          bottom: -20%;
+          right: -15%;
+          animation: phantom-aurora-drift-2 48s ease-in-out infinite;
+        }
+        .phantom-aurora-blob-3 {
+          width: 40%;
+          height: 60%;
+          background: radial-gradient(circle at center, rgba(255, 140, 80, 0.45) 0%, rgba(255, 140, 80, 0) 70%);
+          opacity: 0.3;
+          top: 20%;
+          right: 10%;
+          animation: phantom-aurora-drift-3 60s ease-in-out infinite;
+        }
+        @keyframes phantom-aurora-drift-1 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(15%, 10%) scale(1.15); }
+        }
+        @keyframes phantom-aurora-drift-2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(-12%, -8%) scale(0.9); }
+        }
+        @keyframes phantom-aurora-drift-3 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(-8%, 15%) scale(1.2); }
+        }
       `}</style>
 
-      <video
-        ref={videoRef}
-        className="phantom-video"
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-hidden="true"
-        preload="auto"
-        style={{
-          height: '100%',
-          objectFit: 'cover',
-          pointerEvents: 'none',
-          zIndex: 1,
-          opacity: 0.5,
-          filter: 'saturate(0.65) brightness(0.55)',
-          transform: 'scaleX(2.0) translateZ(0)',
-          transformOrigin: 'center center',
-          willChange: 'transform',
-        }}
-      >
-        <source src="/bloom-hero.mp4" type="video/mp4" />
-      </video>
+      <div className="phantom-aurora" aria-hidden="true">
+        <div className="phantom-aurora-blob phantom-aurora-blob-1" />
+        <div className="phantom-aurora-blob phantom-aurora-blob-2" />
+        <div className="phantom-aurora-blob phantom-aurora-blob-3" />
+      </div>
 
       <canvas
         ref={canvasRef}
