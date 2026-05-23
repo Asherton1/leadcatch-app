@@ -54,7 +54,7 @@ export async function sendEmailAlert(payload: EmailAlertPayload) {
       <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;background:#0a0a0a;">
         <tr><td style="padding:0 0 24px 0;">
           <span style="font-size:18px;font-weight:700;letter-spacing:-0.02em;color:#fff;">
-            <span style="color:#ff6b35;font-weight:800;">+</span> Re<span style="color:#ff6b35;">Capture</span>
+            <span style="color:#ff6b35;font-weight:800;padding-right:4px;">+</span>Re<span style="color:#ff6b35;">Capture</span>
           </span>
         </td></tr>
         <tr><td style="padding:0 0 8px 0;">

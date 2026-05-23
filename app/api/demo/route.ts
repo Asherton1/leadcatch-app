@@ -25,7 +25,7 @@ function prospectConfirmationHtml(name: string) {
         <!-- Logo -->
         <tr><td style="padding:0 0 32px 0;">
           <span style="font-family:'Inter',sans-serif;font-size:1.25rem;font-weight:700;letter-spacing:-0.02em;color:#ffffff;">
-            <span style="color:#ff6b35;font-weight:800;">+</span> Re<span style="color:#ff6b35;">Capture</span>
+            <span style="color:#ff6b35;font-weight:800;padding-right:4px;">+</span>Re<span style="color:#ff6b35;">Capture</span>
           </span>
         </td></tr>
 

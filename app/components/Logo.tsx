@@ -4,10 +4,10 @@ interface LogoProps {
 }
 
 const SIZES: Record<NonNullable<LogoProps['size']>, { plus: number; text: string; gap: string }> = {
-  sm: { plus: 16, text: '0.9rem', gap: '0.45rem' },
-  md: { plus: 22, text: '1.1rem', gap: '0.5rem' },
-  lg: { plus: 28, text: '1.4rem', gap: '0.55rem' },
-  xl: { plus: 40, text: '2rem', gap: '0.7rem' },
+  sm: { plus: 16, text: '0.9rem', gap: '0.25rem' },
+  md: { plus: 22, text: '1.1rem', gap: '0.3rem' },
+  lg: { plus: 28, text: '1.4rem', gap: '0.35rem' },
+  xl: { plus: 40, text: '2rem', gap: '0.45rem' },
 }
 
 export default function Logo({ size = 'md', className = '' }: LogoProps) {
