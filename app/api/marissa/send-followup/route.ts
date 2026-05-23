@@ -144,7 +144,7 @@ export async function POST(req: NextRequest) {
 <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;">
 <tr><td style="padding:0 0 24px;">
   <span style="font-size:18px;font-weight:700;letter-spacing:-0.02em;color:#fff;">
-    <span style="color:#ff6b35;">[•]</span> Re<span style="color:#ff6b35;">Capture</span>
+    <span style="color:#ff6b35;font-weight:800;">+</span> Re<span style="color:#ff6b35;">Capture</span>
   </span>
 </td></tr>
 <tr><td style="padding:0 0 24px;">

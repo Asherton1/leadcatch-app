@@ -161,7 +161,7 @@ export async function POST(req: NextRequest) {
           html: `<!DOCTYPE html><html><body style="margin:0;padding:0;background:#0a0a0a;font-family:-apple-system,'Inter',sans-serif;color:#fff;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;padding:40px 20px;"><tr><td align="center">
 <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;">
-<tr><td style="padding:0 0 24px;"><span style="font-size:18px;font-weight:700;color:#fff;"><span style="color:#ff6b35;">[•]</span> Re<span style="color:#ff6b35;">Capture</span></span></td></tr>
+<tr><td style="padding:0 0 24px;"><span style="font-size:18px;font-weight:700;color:#fff;"><span style="color:#ff6b35;font-weight:800;">+</span> Re<span style="color:#ff6b35;">Capture</span></span></td></tr>
 <tr><td style="padding:0 0 8px;"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:0.2em;color:#ff6b35;text-transform:uppercase;">Welcome to Enterprise</p></td></tr>
 <tr><td style="padding:0 0 24px;"><h1 style="margin:0;font-size:26px;font-weight:700;color:#fff;line-height:1.3;letter-spacing:-0.02em;">Thanks for joining ReCapture, ${customerName || 'partner'}.</h1></td></tr>
 <tr><td style="padding:0 0 24px;"><p style="margin:0;font-size:15px;color:#aaa;line-height:1.7;">Your ${tierInfo.name} subscription is active. I'll personally be in touch within one business day to begin your white-glove onboarding.</p></td></tr>
