@@ -8,6 +8,7 @@ import "./settings.css"
 import Footer from '../components/Footer'
 import '../landing.css'
 import AdminNav from '../components/AdminNav'
+import Logo from '../components/Logo'
 
 interface ClientSettings {
   id: string
@@ -301,13 +302,7 @@ export default function SettingsPage() {
       <header className="header">
         <div className="logo">
           <span style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <svg width="24" height="24" viewBox="0 0 36 36" style={{ flexShrink: 0 }}>
-              <g><path d="M10 5 L4 5 L4 31 L10 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
-              <g><path d="M26 5 L32 5 L32 31 L26 31" fill="none" stroke="#ff6b35" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/></g>
-              <circle cx="18" cy="18" r="8" fill="#ff6b35"/>
-              <circle cx="18" cy="18" r="5" fill="#ff6b35"/>
-            </svg>
-            <span><span style={{ color: "#fff", fontWeight: 700 }}>Re</span><span style={{ color: "#ff6b35", fontWeight: 700 }}>Capture</span></span>
+            <Logo />
           </span>
         </div>
         <div className="header-right">
