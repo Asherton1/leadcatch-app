@@ -9,6 +9,7 @@ import Footer from '../components/Footer'
 import GSAPAnimations from '../components/GSAPAnimations'
 import ScrollReveal from '../components/ScrollReveal'
 import RelatedPages from '../components/RelatedPages'
+import Logo from '../components/Logo'
 
 export default function FormAuditPage() {
   const [url, setUrl] = useState('')
@@ -49,7 +50,7 @@ export default function FormAuditPage() {
 
       <nav className="lc-nav">
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" priority />
+          <Logo size="lg" />
         </Link>
         <MobileNav />
       </nav>

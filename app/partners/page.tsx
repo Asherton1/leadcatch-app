@@ -8,6 +8,7 @@ import MobileNav from '../components/MobileNav'
 import Footer from '../components/Footer'
 import GSAPAnimations from '../components/GSAPAnimations'
 import ScrollReveal from '../components/ScrollReveal'
+import Logo from '../components/Logo'
 
 export default function PartnersPage() {
   const [formData, setFormData] = useState({
@@ -58,7 +59,7 @@ export default function PartnersPage() {
 
       <nav className="lc-nav">
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" priority />
+          <Logo size="lg" />
         </Link>
         <MobileNav />
       </nav>

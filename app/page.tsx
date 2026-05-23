@@ -14,6 +14,7 @@ import PhantomCapture from './components/PhantomCapture'
 import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
 import LedgerStats from './components/LedgerStats'
 import LedgerRows from './components/LedgerRows'
+import Logo from './components/Logo'
 
 export const metadata = {
   title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
@@ -29,7 +30,7 @@ export default function LandingPage() {
 
       <nav className="lc-nav">
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" priority />
+            <Logo size="lg" />
           </Link>
         <MobileNav />
       </nav>

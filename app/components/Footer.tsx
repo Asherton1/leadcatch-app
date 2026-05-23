@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import Logo from './Logo'
 
 export default function Footer() {
   return (
@@ -7,7 +8,7 @@ export default function Footer() {
       {/* Logo + tagline */}
       <div className="footer-top">
         <Link href="/" style={{ textDecoration: 'none', display: 'inline-block' }}>
-          <Image src="/logo.png" alt="ReCapture" width={160} height={41} className="nav-logo-img" />
+          <Logo size="md" />
         </Link>
         <p className="footer-tagline">
           The recovery layer for high-ticket service businesses.
