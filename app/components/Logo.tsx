@@ -10,7 +10,7 @@ const SIZES: Record<NonNullable<LogoProps['size']>, { plus: number; text: string
   xl: { plus: 40, text: '2rem', gap: '0.7rem' },
 }
 
-export default function Logo({ size = 'lg', className = '' }: LogoProps) {
+export default function Logo({ size = 'md', className = '' }: LogoProps) {
   const s = SIZES[size]
   return (
     <span

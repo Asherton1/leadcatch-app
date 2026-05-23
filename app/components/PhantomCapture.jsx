@@ -59,6 +59,7 @@ export default function PhantomCapture() {
         style={{
           height: '100%',
           objectFit: 'cover',
+        objectPosition: 'center top',
           pointerEvents: 'none',
           zIndex: 1,
           opacity: 0.65,
