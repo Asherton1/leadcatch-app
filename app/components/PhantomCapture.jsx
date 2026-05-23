@@ -3,39 +3,20 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * PhantomCapture — v14: Earth video + signal capture network overlay
+ * PhantomCapture — v16: Ghost fields backdrop + signal capture network overlay
  * --------------------------------------------------------------------------
- * Earth sets the cinematic mood. Canvas overlay narrates ReCapture's product:
- * signals flow through a drifting network of nodes, and when one lands on a
- * "capture" node it flashes orange with a halo + expanding ring.
+ * Earth video swapped for ambient ghost data fields (left margins only).
+ * Canvas network unchanged.
  *
  * Layer stack (bottom to top):
  *   1. .hero #0a0604 dark base
- *   2. Earth video (dimmed via opacity + filter, stretched scaleX 2.0)
+ *   2. Ghost fields layer (left 50% only, text-only, edge-margins)
  *   3. Canvas signal network (drifting nodes, white pulses, orange captures)
- *   4. .hero-split content (text + form mockup) — wins via DOM order at z:1
+ *   4. .hero-split content (text + form mockup)
  */
 export default function PhantomCapture() {
-  const videoRef = useRef(null)
   const canvasRef = useRef(null)
 
-  // Video playback rate
-  useEffect(() => {
-    const v = videoRef.current
-    if (!v) return
-    const setRate = () => {
-      v.playbackRate = 0.5
-    }
-    setRate()
-    v.addEventListener('loadedmetadata', setRate)
-    v.addEventListener('play', setRate)
-    return () => {
-      v.removeEventListener('loadedmetadata', setRate)
-      v.removeEventListener('play', setRate)
-    }
-  }, [])
-
-  // Canvas signal-capture network animation
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -59,14 +40,13 @@ export default function PhantomCapture() {
       h = rect.height
       canvas.width = w * dpr
       canvas.height = h * dpr
-      canvas.style.width = `${w}px`
-      canvas.style.height = `${h}px`
+      canvas.style.width = w + 'px'
+      canvas.style.height = h + 'px'
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       initNodes()
     }
 
     const initNodes = () => {
-      // Slightly sparser than v13 since layered over Earth (avoid clutter)
       const count = Math.max(24, Math.min(48, Math.floor((w * h) / 30000)))
       nodes = []
       for (let i = 0; i < count; i++) {
@@ -75,7 +55,7 @@ export default function PhantomCapture() {
           y: Math.random() * h,
           vx: (Math.random() - 0.5) * 0.2,
           vy: (Math.random() - 0.5) * 0.2,
-          captureNode: Math.random() < 0.25, // 25% are capture nodes
+          captureNode: Math.random() < 0.25,
           glow: 0,
         })
       }
@@ -100,7 +80,6 @@ export default function PhantomCapture() {
       frame++
       ctx.clearRect(0, 0, w, h)
 
-      // Drift nodes, bounce off edges
       for (const n of nodes) {
         n.x += n.vx
         n.y += n.vy
@@ -110,7 +89,6 @@ export default function PhantomCapture() {
         if (n.y > h) { n.y = h; n.vy *= -1 }
       }
 
-      // Network lines — alpha falls off with distance
       ctx.lineWidth = 1
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
@@ -122,7 +100,7 @@ export default function PhantomCapture() {
           if (d2 < CONNECT_DIST * CONNECT_DIST) {
             const d = Math.sqrt(d2)
             const alpha = (1 - d / CONNECT_DIST) * 0.18
-            ctx.strokeStyle = `rgba(220,220,235,${alpha})`
+            ctx.strokeStyle = 'rgba(220,220,235,' + alpha + ')'
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)
             ctx.lineTo(b.x, b.y)
@@ -131,10 +109,8 @@ export default function PhantomCapture() {
         }
       }
 
-      // Spawn pulses
       if (frame % 20 === 0 && Math.random() < 0.9) spawnPulse()
 
-      // Pulses — white signals traveling along lines
       const newPulses = []
       for (const p of pulses) {
         p.t += p.speed
@@ -151,7 +127,6 @@ export default function PhantomCapture() {
           ctx.fill()
           newPulses.push(p)
         } else {
-          // Pulse arrived — if at a capture node, fire orange flash + ring
           if (p.end.captureNode) {
             p.end.glow = 1
             rings.push({ node: p.end, r: 4, a: 0.75 })
@@ -160,13 +135,12 @@ export default function PhantomCapture() {
       }
       pulses = newPulses
 
-      // Orange capture rings expanding outward
       const newRings = []
       for (const r of rings) {
         r.r += 0.8
         r.a -= 0.011
         if (r.a > 0 && r.r < 80) {
-          ctx.strokeStyle = `rgba(255,107,53,${r.a})`
+          ctx.strokeStyle = 'rgba(255,107,53,' + r.a + ')'
           ctx.lineWidth = 1.5
           ctx.beginPath()
           ctx.arc(r.node.x, r.node.y, r.r, 0, Math.PI * 2)
@@ -176,25 +150,21 @@ export default function PhantomCapture() {
       }
       rings = newRings
 
-      // Nodes — bright orange flash if currently captured, faint white otherwise
       for (const n of nodes) {
         if (n.glow > 0) {
-          // Orange halo
           const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 26)
-          grad.addColorStop(0, `rgba(255,107,53,${n.glow * 0.75})`)
+          grad.addColorStop(0, 'rgba(255,107,53,' + (n.glow * 0.75) + ')')
           grad.addColorStop(1, 'rgba(255,107,53,0)')
           ctx.fillStyle = grad
           ctx.beginPath()
           ctx.arc(n.x, n.y, 26, 0, Math.PI * 2)
           ctx.fill()
-          // Bright dot
-          ctx.fillStyle = `rgba(255,107,53,${0.8 + n.glow * 0.2})`
+          ctx.fillStyle = 'rgba(255,107,53,' + (0.8 + n.glow * 0.2) + ')'
           ctx.beginPath()
           ctx.arc(n.x, n.y, 3.5, 0, Math.PI * 2)
           ctx.fill()
           n.glow = Math.max(0, n.glow - 0.008)
         } else {
-          // Default visible dim node
           ctx.fillStyle = 'rgba(220,220,235,0.4)'
           ctx.beginPath()
           ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2)
@@ -220,25 +190,25 @@ export default function PhantomCapture() {
   return (
     <>
       <style jsx global>{`
-        /* Beat .hero > * { max-width: 1200px } for both video and canvas */
-        section.hero > video.phantom-video,
-        section.hero > canvas.phantom-canvas {
+        section.hero > canvas.phantom-canvas,
+        section.hero > .phantom-ghost-fields {
           max-width: none !important;
           margin: 0 !important;
           position: absolute !important;
           top: 0 !important;
           left: 0 !important;
-        }
-        section.hero > video.phantom-video {
-          min-width: 100vw !important;
-          width: 100vw !important;
+          pointer-events: none !important;
         }
         section.hero > canvas.phantom-canvas {
           width: 100% !important;
           height: 100% !important;
-          pointer-events: none !important;
         }
-        /* Hide hero's other ambient layers so our stack is clean */
+        section.hero > .phantom-ghost-fields {
+          width: 50% !important;
+          height: 100% !important;
+          overflow: hidden !important;
+          z-index: 0 !important;
+        }
         section.hero::before,
         section.hero::after,
         .hero-glow-orb,
@@ -249,31 +219,123 @@ export default function PhantomCapture() {
         section.hero {
           background: #0a0604 !important;
         }
+        @media (max-width: 768px) {
+          section.hero > .phantom-ghost-fields {
+            display: none !important;
+          }
+        }
+        .ghost-field {
+          position: absolute;
+          font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+          font-size: 11px;
+          color: rgba(220, 220, 235, 0.5);
+          white-space: nowrap;
+          will-change: opacity, transform, color;
+          pointer-events: none;
+          opacity: 0;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .ghost-field-label {
+          color: rgba(255, 107, 53, 0.7);
+          font-size: 9px;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          font-weight: 600;
+        }
+        .ghost-field-value {
+          display: inline-block;
+          overflow: hidden;
+          white-space: nowrap;
+          width: 0;
+          will-change: width;
+        }
+        .ghost-field-1 {
+          top: 5%;
+          left: 3%;
+          animation: ghost-complete 12s ease-in-out infinite;
+          animation-delay: 0s;
+        }
+        .ghost-field-2 {
+          top: 28%;
+          left: 1%;
+          animation: ghost-abandon 12s ease-in-out infinite;
+          animation-delay: 2.4s;
+        }
+        .ghost-field-3 {
+          top: 55%;
+          left: 2%;
+          animation: ghost-abandon 12s ease-in-out infinite;
+          animation-delay: 4.8s;
+        }
+        .ghost-field-4 {
+          top: 78%;
+          left: 4%;
+          animation: ghost-complete 12s ease-in-out infinite;
+          animation-delay: 7.2s;
+        }
+        .ghost-field-5 {
+          top: 92%;
+          left: 8%;
+          animation: ghost-abandon 12s ease-in-out infinite;
+          animation-delay: 9.6s;
+        }
+        .ghost-field-1 .ghost-field-value { animation: ghost-type 12s linear infinite; animation-delay: 0s; }
+        .ghost-field-2 .ghost-field-value { animation: ghost-type 12s linear infinite; animation-delay: 2.4s; }
+        .ghost-field-3 .ghost-field-value { animation: ghost-type 12s linear infinite; animation-delay: 4.8s; }
+        .ghost-field-4 .ghost-field-value { animation: ghost-type 12s linear infinite; animation-delay: 7.2s; }
+        .ghost-field-5 .ghost-field-value { animation: ghost-type 12s linear infinite; animation-delay: 9.6s; }
+        @keyframes ghost-complete {
+          0% { opacity: 0; }
+          5% { opacity: 0.6; }
+          40% { opacity: 0.6; color: rgba(220, 220, 235, 0.5); }
+          45% { color: rgba(255, 255, 255, 0.85); }
+          55% { color: rgba(255, 255, 255, 0.85); }
+          70% { opacity: 0; color: rgba(255, 255, 255, 0.85); }
+          100% { opacity: 0; }
+        }
+        @keyframes ghost-abandon {
+          0% { opacity: 0; transform: translateX(0) scale(1); }
+          5% { opacity: 0.6; transform: translateX(0) scale(1); }
+          40% { opacity: 0.5; color: rgba(220, 220, 235, 0.5); transform: translateX(0) scale(1); }
+          45% { opacity: 0.3; color: rgba(150, 150, 160, 0.4); }
+          55% { opacity: 0.95; color: rgba(255, 107, 53, 0.95); transform: translateX(0) scale(1.05); }
+          65% { opacity: 0.7; color: rgba(255, 107, 53, 0.7); transform: translateX(12px) scale(1); }
+          75% { opacity: 0.3; color: rgba(255, 107, 53, 0.6); transform: translateX(24px) scale(0.98); }
+          85% { opacity: 0; transform: translateX(36px) scale(0.95); }
+          100% { opacity: 0; }
+        }
+        @keyframes ghost-type {
+          0% { width: 0; }
+          8% { width: 0; }
+          30% { width: 100%; }
+          100% { width: 100%; }
+        }
       `}</style>
 
-      <video
-        ref={videoRef}
-        className="phantom-video"
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-hidden="true"
-        preload="auto"
-        style={{
-          height: '100%',
-          objectFit: 'cover',
-          pointerEvents: 'none',
-          zIndex: 1,
-          opacity: 0.5,
-          filter: 'saturate(0.65) brightness(0.55)',
-          transform: 'scaleX(2.0) translateZ(0)',
-          transformOrigin: 'center center',
-          willChange: 'transform',
-        }}
-      >
-        <source src="/bloom-hero.mp4" type="video/mp4" />
-      </video>
+      <div className="phantom-ghost-fields" aria-hidden="true">
+        <div className="ghost-field ghost-field-1">
+          <span className="ghost-field-label">Name</span>
+          <span className="ghost-field-value">Jennifer Thorne</span>
+        </div>
+        <div className="ghost-field ghost-field-2">
+          <span className="ghost-field-label">Email</span>
+          <span className="ghost-field-value">m.delacroix@gmail.com</span>
+        </div>
+        <div className="ghost-field ghost-field-3">
+          <span className="ghost-field-label">Phone</span>
+          <span className="ghost-field-value">(214) 555-0193</span>
+        </div>
+        <div className="ghost-field ghost-field-4">
+          <span className="ghost-field-label">Inquiry</span>
+          <span className="ghost-field-value">Veneer consultation</span>
+        </div>
+        <div className="ghost-field ghost-field-5">
+          <span className="ghost-field-label">Budget</span>
+          <span className="ghost-field-value">$15-25K</span>
+        </div>
+      </div>
 
       <canvas
         ref={canvasRef}
