@@ -7,6 +7,7 @@ import "../dashboard/dashboard.css"
 import "./settings.css"
 import Footer from '../components/Footer'
 import '../landing.css'
+import AdminNav from '../components/AdminNav'
 
 interface ClientSettings {
   id: string
@@ -296,6 +297,7 @@ export default function SettingsPage() {
 
   return (
     <div className="dashboard">
+      <AdminNav />
       <header className="header">
         <div className="logo">
           <span style={{ display: "flex", alignItems: "center", gap: "10px" }}>
