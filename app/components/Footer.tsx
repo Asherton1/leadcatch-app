@@ -8,7 +8,7 @@ export default function Footer() {
       {/* Logo + tagline */}
       <div className="footer-top">
         <Link href="/" style={{ textDecoration: 'none', display: 'inline-block' }}>
-          <Logo size="md" />
+          <Logo />
         </Link>
         <p className="footer-tagline">
           The recovery layer for high-ticket service businesses.

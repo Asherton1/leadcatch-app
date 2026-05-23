@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
   metadataBase: new URL('https://www.userecapture.com'),
   icons: {
-    icon: '/favicon.svg?v=20260523',
-    apple: '/apple-touch-icon.png?v=20260523',
-    shortcut: '/favicon.svg?v=20260523',
+    icon: '/favicon.svg?v=20260524',
+    apple: '/apple-touch-icon.png?v=20260524',
+    shortcut: '/favicon.svg?v=20260524',
   },
   alternates: {
     canonical: '/',

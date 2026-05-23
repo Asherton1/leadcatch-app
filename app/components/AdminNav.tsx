@@ -34,7 +34,7 @@ export default function AdminNav() {
   return (
     <nav className="admin-nav">
       <Link href="/dashboard" className="admin-nav-logo">
-        <Logo size="md" />
+        <Logo />
       </Link>
 
       <div className="admin-nav-pills">

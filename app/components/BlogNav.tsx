@@ -7,7 +7,7 @@ export default function BlogNav() {
   return (
     <nav className="lc-nav">
       <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-        <Logo size="md" />
+        <Logo />
       </Link>
       <MobileNav />
     </nav>

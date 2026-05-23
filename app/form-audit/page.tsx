@@ -50,7 +50,7 @@ export default function FormAuditPage() {
 
       <nav className="lc-nav">
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <Logo size="lg" />
+          <Logo />
         </Link>
         <MobileNav />
       </nav>
