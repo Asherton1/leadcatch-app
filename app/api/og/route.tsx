@@ -10,7 +10,6 @@ export async function GET(req: NextRequest) {
     "You're Losing |60% of Your Leads|. Here's the Proof."
   const eyebrow = searchParams.get('eyebrow') || ''
 
-  // Load Inter from /public/fonts — same font every render, every page
   const [interRegular, interSemiBold, interBold, interExtraBold] =
     await Promise.all([
       fetch(new URL('/fonts/Inter-Regular.ttf', req.url)).then((r) =>
@@ -43,45 +42,53 @@ export async function GET(req: NextRequest) {
           fontFamily: 'Inter',
         }}
       >
-        {/* Logo */}
+        {/* Logo: SVG + mark matches site Logo.tsx exactly */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span
-            style={{
-              color: '#ff6b35',
-              fontWeight: 800,
-              fontSize: 68,
-              paddingRight: '14px',
-              lineHeight: 1,
-              display: 'flex',
-              letterSpacing: '-0.025em',
-            }}
+          <svg
+            width="60"
+            height="60"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ marginRight: '12px' }}
           >
-            +
-          </span>
-          <span
-            style={{
-              color: '#ffffff',
-              fontSize: 64,
-              fontWeight: 700,
-              letterSpacing: '-0.03em',
-              lineHeight: 1,
-              display: 'flex',
-            }}
-          >
-            Re
-          </span>
-          <span
-            style={{
-              color: '#ff6b35',
-              fontSize: 64,
-              fontWeight: 700,
-              letterSpacing: '-0.03em',
-              lineHeight: 1,
-              display: 'flex',
-            }}
-          >
-            Capture
-          </span>
+            <path
+              d="M12 5V19"
+              stroke="#ff6b35"
+              strokeWidth="3.5"
+              strokeLinecap="round"
+            />
+            <path
+              d="M5 12H19"
+              stroke="#ff6b35"
+              strokeWidth="3.5"
+              strokeLinecap="round"
+            />
+          </svg>
+          <div style={{ display: 'flex', alignItems: 'baseline' }}>
+            <span
+              style={{
+                color: '#ffffff',
+                fontSize: 64,
+                fontWeight: 700,
+                letterSpacing: '-0.03em',
+                fontFamily: 'Inter',
+              }}
+            >
+              Re
+            </span>
+            <span
+              style={{
+                color: '#ff6b35',
+                fontSize: 64,
+                fontWeight: 700,
+                letterSpacing: '-0.03em',
+                fontFamily: 'Inter',
+              }}
+            >
+              Capture
+            </span>
+          </div>
         </div>
 
         {/* Body */}
@@ -96,6 +103,7 @@ export async function GET(req: NextRequest) {
                 textTransform: 'uppercase',
                 marginBottom: '28px',
                 display: 'flex',
+                fontFamily: 'Inter',
               }}
             >
               {eyebrow}
@@ -111,6 +119,7 @@ export async function GET(req: NextRequest) {
               display: 'flex',
               flexWrap: 'wrap',
               color: '#ffffff',
+              fontFamily: 'Inter',
             }}
           >
             {parts.map((part, i) => (
@@ -120,6 +129,7 @@ export async function GET(req: NextRequest) {
                   color: i % 2 === 1 ? '#ff6b35' : '#ffffff',
                   whiteSpace: 'pre-wrap',
                   display: 'flex',
+                  fontFamily: 'Inter',
                 }}
               >
                 {part}
@@ -129,13 +139,14 @@ export async function GET(req: NextRequest) {
         </div>
 
         {/* Footer */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <div
             style={{
               width: '72px',
               height: '4px',
               background: '#ff6b35',
               display: 'flex',
+              marginRight: '18px',
             }}
           />
           <div
@@ -145,6 +156,7 @@ export async function GET(req: NextRequest) {
               fontWeight: 600,
               letterSpacing: '0.04em',
               display: 'flex',
+              fontFamily: 'Inter',
             }}
           >
             userecapture.com
