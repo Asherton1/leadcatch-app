@@ -42,7 +42,7 @@ function installNudgeHtml(firstName: string, apiKey: string, daysSinceSignup: nu
 
     '<tr><td style="padding:0 0 40px 0;">',
     '<span style="font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.3px;">',
-    '<span style="color:#ff6b35;">[&bull;]</span> Re<span style="color:#ff6b35;">Capture</span>',
+    '<span style="color:#ff6b35;font-weight:800;padding-right:4px;">+</span>Re<span style="color:#ff6b35;">Capture</span>',
     '</span>',
     '</td></tr>',
 

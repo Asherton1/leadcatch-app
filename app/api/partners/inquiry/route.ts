@@ -63,7 +63,7 @@ ${message ? `<tr><td style="padding:8px 0;color:#888;vertical-align:top;">Notes<
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;padding:40px 20px;"><tr><td align="center">
 <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;">
 <tr><td style="padding:0 0 24px;">
-  <span style="font-size:18px;font-weight:700;color:#fff;"><span style="color:#ff6b35;">[&bull;]</span> Re<span style="color:#ff6b35;">Capture</span></span>
+  <span style="font-size:18px;font-weight:700;color:#fff;"><span style="color:#ff6b35;font-weight:800;padding-right:4px;">+</span>Re<span style="color:#ff6b35;">Capture</span></span>
 </td></tr>
 <tr><td style="padding:0 0 16px;">
   <p style="margin:0;font-size:16px;color:#fff;line-height:1.6;">Hi ${escapeHtml(firstName)},</p>
