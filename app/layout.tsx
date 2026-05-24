@@ -50,21 +50,19 @@ export const metadata: Metadata = {
     description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
     url: 'https://www.userecapture.com',
     siteName: 'ReCapture',
-    images: [
-      {
-        url: 'https://www.userecapture.com/og-image.png',
+    images: [{
+        url: 'https://www.userecapture.com/api/og',
         width: 1200,
         height: 630,
-        alt: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
-      },
-    ],
+        alt: 'ReCapture',
+      }],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
     description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
-    images: ['https://www.userecapture.com/og-image.png'],
+    images: ['https://www.userecapture.com/api/og'],
   },
 }
 

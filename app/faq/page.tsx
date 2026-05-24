@@ -12,6 +12,12 @@ export const metadata: Metadata = {
     url: 'https://www.userecapture.com/faq',
     siteName: 'ReCapture',
     type: 'website',
+    images: [{
+        url: 'https://www.userecapture.com/api/og?title=ReCapture%20FAQ%20%E2%80%94%20Common%20Questions%20About%20Lead%20Recovery&eyebrow=FAQ',
+        width: 1200,
+        height: 630,
+        alt: 'ReCapture',
+      }],
   },
 }
 
