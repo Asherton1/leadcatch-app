@@ -135,7 +135,7 @@ export async function POST(req: NextRequest) {
   <tr><td style="padding:0 0 32px 0;">
     <table cellpadding="0" cellspacing="0"><tr>
       <td style="font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.5px;">
-        <span style="color:#ff6b35;font-weight:800;">[</span><span style="color:#ff6b35;">&#8226;</span><span style="color:#ff6b35;font-weight:800;">]</span>&nbsp;&nbsp;<span style="color:#fff;">Re</span><span style="color:#ff6b35;">Capture</span>
+        <span style="color:#ff6b35;font-weight:800;padding-right:4px;">+</span><span style="color:#fff;">Re</span><span style="color:#ff6b35;">Capture</span>
       </td>
     </tr></table>
   </td></tr>
@@ -246,7 +246,7 @@ export async function POST(req: NextRequest) {
   <tr><td style="padding:0 0 8px 0;text-align:center;">
     <table cellpadding="0" cellspacing="0" style="margin:0 auto;"><tr>
       <td style="font-size:18px;font-weight:700;color:#fff;letter-spacing:-0.5px;">
-        <span style="color:#ff6b35;font-weight:800;">[</span><span style="color:#ff6b35;">&#8226;</span><span style="color:#ff6b35;font-weight:800;">]</span>&nbsp;&nbsp;<span style="color:#fff;">Re</span><span style="color:#ff6b35;">Capture</span>
+        <span style="color:#ff6b35;font-weight:800;padding-right:4px;">+</span><span style="color:#fff;">Re</span><span style="color:#ff6b35;">Capture</span>
       </td>
     </tr></table>
   </td></tr>

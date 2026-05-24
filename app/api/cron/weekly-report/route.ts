@@ -347,7 +347,7 @@ export async function GET(req: NextRequest) {
         <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#0a0a0a;color:#fff;">
 
           <tr><td style="padding:0 0 24px 0;">
-            <span style="font-size:22px;font-weight:700;color:#fff;">Re</span><span style="font-size:22px;font-weight:700;color:#ff6b35;">Capture</span>
+            <span style="font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.4px;"><span style="color:#ff6b35;font-weight:800;padding-right:4px;">+</span>Re<span style="color:#ff6b35;">Capture</span></span>
             <span style="font-size:11px;color:#888;margin-left:12px;">Monday Briefing</span>
           </td></tr>
 
