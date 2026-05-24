@@ -10,7 +10,23 @@ export async function GET(req: NextRequest) {
     "You're Losing |60% of Your Leads|. Here's the Proof."
   const eyebrow = searchParams.get('eyebrow') || ''
 
-  // Split title on |...| markers for orange highlights
+  // Load Inter from /public/fonts — same font every render, every page
+  const [interRegular, interSemiBold, interBold, interExtraBold] =
+    await Promise.all([
+      fetch(new URL('/fonts/Inter-Regular.ttf', req.url)).then((r) =>
+        r.arrayBuffer(),
+      ),
+      fetch(new URL('/fonts/Inter-SemiBold.ttf', req.url)).then((r) =>
+        r.arrayBuffer(),
+      ),
+      fetch(new URL('/fonts/Inter-Bold.ttf', req.url)).then((r) =>
+        r.arrayBuffer(),
+      ),
+      fetch(new URL('/fonts/Inter-ExtraBold.ttf', req.url)).then((r) =>
+        r.arrayBuffer(),
+      ),
+    ])
+
   const parts = title.split('|')
 
   return new ImageResponse(
@@ -24,7 +40,7 @@ export async function GET(req: NextRequest) {
           justifyContent: 'space-between',
           background: '#0a0a0a',
           padding: '80px',
-          fontFamily: 'sans-serif',
+          fontFamily: 'Inter',
         }}
       >
         {/* Logo */}
@@ -32,11 +48,12 @@ export async function GET(req: NextRequest) {
           <span
             style={{
               color: '#ff6b35',
-              fontWeight: 900,
+              fontWeight: 800,
               fontSize: 68,
               paddingRight: '14px',
               lineHeight: 1,
               display: 'flex',
+              letterSpacing: '-0.025em',
             }}
           >
             +
@@ -45,8 +62,8 @@ export async function GET(req: NextRequest) {
             style={{
               color: '#ffffff',
               fontSize: 64,
-              fontWeight: 800,
-              letterSpacing: '-0.025em',
+              fontWeight: 700,
+              letterSpacing: '-0.03em',
               lineHeight: 1,
               display: 'flex',
             }}
@@ -57,8 +74,8 @@ export async function GET(req: NextRequest) {
             style={{
               color: '#ff6b35',
               fontSize: 64,
-              fontWeight: 800,
-              letterSpacing: '-0.025em',
+              fontWeight: 700,
+              letterSpacing: '-0.03em',
               lineHeight: 1,
               display: 'flex',
             }}
@@ -90,7 +107,7 @@ export async function GET(req: NextRequest) {
               fontSize: 78,
               fontWeight: 800,
               lineHeight: 1.08,
-              letterSpacing: '-0.028em',
+              letterSpacing: '-0.03em',
               display: 'flex',
               flexWrap: 'wrap',
               color: '#ffffff',
@@ -111,7 +128,7 @@ export async function GET(req: NextRequest) {
           </div>
         </div>
 
-        {/* Footer bar */}
+        {/* Footer */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
           <div
             style={{
@@ -138,6 +155,12 @@ export async function GET(req: NextRequest) {
     {
       width: 1200,
       height: 630,
+      fonts: [
+        { name: 'Inter', data: interRegular, weight: 400, style: 'normal' },
+        { name: 'Inter', data: interSemiBold, weight: 600, style: 'normal' },
+        { name: 'Inter', data: interBold, weight: 700, style: 'normal' },
+        { name: 'Inter', data: interExtraBold, weight: 800, style: 'normal' },
+      ],
     },
   )
 }
