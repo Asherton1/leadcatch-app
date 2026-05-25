@@ -24,7 +24,10 @@ export async function GET(req: NextRequest) {
         fontFamily: 'Inter',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', fontSize: 64, fontWeight: 700, letterSpacing: '-0.03em', fontFamily: 'Inter' }}>
-          <span style={{ color: '#ff6b35', marginRight: '12px', fontFamily: 'Inter' }}>+</span>
+          <svg width="56" height="56" viewBox="0 0 24 24" style={{ marginRight: '12px' }} xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 5V19" stroke="#ff6b35" strokeWidth="3.5" strokeLinecap="round" />
+            <path d="M5 12H19" stroke="#ff6b35" strokeWidth="3.5" strokeLinecap="round" />
+          </svg>
           <span style={{ color: 'white', fontFamily: 'Inter' }}>Re</span>
           <span style={{ color: '#ff6b35', fontFamily: 'Inter' }}>Capture</span>
         </div>
