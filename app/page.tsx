@@ -221,12 +221,12 @@ export default function LandingPage() {
             </div>
           </div>
           <div style={{ padding: '2rem 1.5rem', borderBottom: '1px solid #1a1a1a' }}>
-            <p style={{ color: '#bbb', lineHeight: 1.8, fontSize: '0.95rem', margin: '0 0 1.5rem 0', fontStyle: 'italic' }}>&quot;I was skeptical at first — another tracking tool? But ReCapture is different. It captures the leads that literally don&apos;t exist anywhere else. We recovered three high-value clients in the first month that we would have completely lost.&quot;</p>
+            <p style={{ color: '#bbb', lineHeight: 1.8, fontSize: '0.95rem', margin: '0 0 1.5rem 0', fontStyle: 'italic' }}>&quot;Three high-value Medicare clients in our first month — all from prospects who never finished our quote form. We still can&apos;t get over it. They never hit submit, never showed up in our CRM, never existed to us. ReCapture catches the moment someone types their name and email, then triggers a personalized recovery email within 60 seconds. For seniors comparing a multi-step Medicare quote, that timing is everything.&quot;</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, color: '#ff6b35' }}>D</div>
+              <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, color: '#ff6b35' }}>J</div>
               <div>
-                <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.875rem' }}>Dillon R.</p>
-                <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>Business Owner</p>
+                <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.875rem' }}>Joe &amp; Terry S.</p>
+                <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>Suncoast Insurance Solutions</p>
               </div>
             </div>
           </div>
