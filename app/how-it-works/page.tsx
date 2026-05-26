@@ -11,6 +11,26 @@ import './how-it-works.css'
 export const metadata = {
   title: 'How ReCapture Works — Form Abandonment Recovery in 3 Steps',
   description: 'See exactly how ReCapture captures abandoned form data, scores leads, and recovers lost revenue — all from one script tag. No dev team required.',
+  alternates: { canonical: '/how-it-works' },
+  openGraph: {
+    title: 'How ReCapture Works — Form Abandonment Recovery in 3 Steps',
+    description: 'See exactly how ReCapture captures abandoned form data, scores leads, and recovers lost revenue — all from one script tag. No dev team required.',
+    url: 'https://www.userecapture.com/how-it-works',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=How%20ReCapture%20Works%20%E2%80%94%20Recovery%20in%203%20Steps&eyebrow=How%20It%20Works',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'How ReCapture Works — Form Abandonment Recovery in 3 Steps',
+    description: 'See exactly how ReCapture captures abandoned form data, scores leads, and recovers lost revenue.',
+    images: ['https://www.userecapture.com/api/og?title=How%20ReCapture%20Works%20%E2%80%94%20Recovery%20in%203%20Steps&eyebrow=How%20It%20Works'],
+  },
 }
 
 const FAQS: { question: string; answer: string }[] = [

@@ -9,6 +9,26 @@ import '../landing.css'
 export const metadata = {
   title: 'ReCapture Blog — Form Abandonment Recovery, Lead Strategy',
   description: 'Strategy, data, and tactics on form abandonment recovery, AI voice callbacks, and lead conversion for high-ticket service businesses.',
+  alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'ReCapture Blog — Form Abandonment Recovery, Lead Strategy',
+    description: 'Strategy, data, and tactics on form abandonment recovery, AI voice callbacks, and lead conversion for high-ticket service businesses.',
+    url: 'https://www.userecapture.com/blog',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=ReCapture%20Blog%20%E2%80%94%20Insights%20on%20Lead%20Recovery&eyebrow=Insights',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ReCapture Blog — Form Abandonment Recovery, Lead Strategy',
+    description: 'Strategy, data, and tactics on form abandonment recovery, AI voice callbacks, and lead conversion.',
+    images: ['https://www.userecapture.com/api/og?title=ReCapture%20Blog%20%E2%80%94%20Insights%20on%20Lead%20Recovery&eyebrow=Insights'],
+  },
 }
 
 export default function BlogIndex() {
