@@ -30,6 +30,7 @@ export default function MobileNav() {
             <Link href="/faq" className="nav-dropdown-item">FAQ</Link>
             <Link href="/calculator" className="nav-dropdown-item">ROI Estimator</Link>
             <Link href="/form-audit" className="nav-dropdown-item">Free Form Audit</Link>
+            <Link href="/contact" className="nav-dropdown-item">Contact</Link>
           </div>
         </div>
         <a href="tel:+18886060630" className="nav-phone">(888) 606-0630</a>
@@ -91,6 +92,7 @@ export default function MobileNav() {
               <Link href="/faq" className={isActive('/faq') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>FAQ</Link>
               <Link href="/calculator" className={isActive('/calculator') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>ROI Estimator</Link>
               <Link href="/form-audit" className={isActive('/form-audit') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Free Form Audit</Link>
+              <Link href="/contact" className={isActive('/contact') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Contact</Link>
             </div>
           </div>
           <Link href="/login" className="mobile-login">Login</Link>

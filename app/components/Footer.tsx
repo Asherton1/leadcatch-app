@@ -40,7 +40,7 @@ export default function Footer() {
           <Link href="/partners" className="footer-link">Partners</Link>
           <Link href="/start-trial" className="footer-link">Start Trial</Link>
           <Link href="/login" className="footer-link">Login</Link>
-          <a href="mailto:hello@userecapture.com" className="footer-link">Contact</a>
+          <Link href="/contact" className="footer-link">Contact</Link>
         </div>
 
         <div className="footer-col">
