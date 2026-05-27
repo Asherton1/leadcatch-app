@@ -10,6 +10,26 @@ import './api-docs.css'
 export const metadata = {
   title: 'API Documentation — ReCapture',
   description: 'Complete reference for the ReCapture tracking script, REST API endpoints, and webhook payloads. Built for developers and engineering teams.',
+  alternates: { canonical: '/docs/api' },
+  openGraph: {
+    title: 'API Documentation — ReCapture',
+    description: 'Complete reference for the ReCapture tracking script, REST API endpoints, and webhook payloads. Built for developers.',
+    url: 'https://www.userecapture.com/docs/api',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=API%20Documentation&eyebrow=Docs',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'API Documentation — ReCapture',
+    description: 'Complete reference for tracking script, REST API, and webhook payloads.',
+    images: ['https://www.userecapture.com/api/og?title=API%20Documentation&eyebrow=Docs'],
+  },
 }
 
 export default function ApiDocsPage() {

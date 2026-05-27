@@ -11,6 +11,26 @@ export const dynamic = "force-dynamic"
 export const metadata = {
   title: "Client Privacy Policy Template — ReCapture",
   description: "Copy-paste privacy policy language for businesses deploying ReCapture. Add this to your existing privacy policy to disclose form abandonment recovery technology.",
+  alternates: { canonical: "/legal/client-privacy-template" },
+  openGraph: {
+    title: "Client Privacy Policy Template — ReCapture",
+    description: "Copy-paste privacy policy language for businesses deploying ReCapture form abandonment recovery technology.",
+    url: "https://www.userecapture.com/legal/client-privacy-template",
+    siteName: "ReCapture",
+    type: "website",
+    images: [{
+      url: "https://www.userecapture.com/api/og?title=Client%20Privacy%20Template&eyebrow=Legal",
+      width: 1200,
+      height: 630,
+      alt: "ReCapture",
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Client Privacy Policy Template — ReCapture",
+    description: "Copy-paste privacy policy language for ReCapture deployments.",
+    images: ["https://www.userecapture.com/api/og?title=Client%20Privacy%20Template&eyebrow=Legal"],
+  },
 }
 
 const sections = [
