@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  const { url, email, dryRun, industryHint } = body as { url: string; email: string; dryRun?: boolean; industryHint?: string }
+  const { url, email, name, dryRun, industryHint } = body as { url: string; email: string; name?: string; dryRun?: boolean; industryHint?: string }
   if (!url || !email) {
     return NextResponse.json({ error: 'URL and email required' }, { status: 400 })
   }
@@ -205,6 +205,22 @@ export async function POST(request: NextRequest) {
 
     recommendations.push('Install ReCapture to capture partial form data in real time, even when visitors abandon without submitting.')
 
+    const personName = (typeof name === 'string' && name.trim()) ? name.trim() : ''
+    const greeting = personName ? 'Hi ' + personName : 'Hi there'
+    const gradeStatus = healthScore >= 90 ? 'Excellent' : healthScore >= 80 ? 'Strong' : healthScore >= 70 ? 'Above average' : healthScore >= 60 ? 'Room to grow' : healthScore >= 50 ? 'Needs work' : 'Critical'
+    const gradeContext = healthScore >= 90 ? 'Top tier' : healthScore >= 80 ? 'Above average' : healthScore >= 70 ? 'Industry standard' : healthScore >= 60 ? 'Below average' : healthScore >= 50 ? 'Bottom quartile' : 'Significant risk'
+    const gradeDescription = healthScore >= 90
+      ? 'Your forms are well-configured for capture. Minor opportunities remain to recover the leads who don&rsquo;t make it through the final submit.'
+      : healthScore >= 80
+      ? 'Your forms are solid but missing the recovery layer that catches the visitors who type and don&rsquo;t submit.'
+      : healthScore >= 70
+      ? 'Your forms work, but meaningful revenue is leaving through abandonment.'
+      : healthScore >= 60
+      ? 'Your forms have gaps. Most of your form starters never become leads.'
+      : healthScore >= 50
+      ? 'Your forms are losing significant revenue. The recovery opportunity here is substantial.'
+      : 'Your forms are bleeding revenue. Most visitors who start typing never convert and you have no visibility into them.'
+
     const reportHTML = '<div style="background:#0a0a0a;color:#fff;font-family:Inter,Helvetica Neue,Arial,sans-serif;max-width:640px;margin:0 auto;padding:0;">' +
       // HEADER
       '<div style="padding:48px 32px 24px;">' +
@@ -213,23 +229,35 @@ export async function POST(request: NextRequest) {
           '<span style="color:#fff;font-weight:800;font-size:18px;margin-left:6px;letter-spacing:-0.01em;">Re</span>' +
           '<span style="color:#ff6b35;font-weight:800;font-size:18px;letter-spacing:-0.01em;">Capture</span>' +
         '</div>' +
-        '<p style="color:#777;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 16px;">Form Audit</p>' +
-        '<h1 style="font-size:32px;font-weight:800;letter-spacing:-0.02em;line-height:1.15;margin:0 0 16px;color:#fff;">Your audit is ready.</h1>' +
+        '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 16px;">Form Audit</p>' +
+        '<h1 style="font-size:32px;font-weight:800;letter-spacing:-0.02em;line-height:1.15;margin:0 0 12px;color:#fff;">' + greeting + ', your audit is ready.</h1>' +
         '<p style="color:#aaa;font-size:15px;line-height:1.6;margin:0;">Prepared for <span style="color:#ff6b35;">' + url + '</span></p>' +
       '</div>' +
 
-      // SCORE
+      // SCORE — with life
       '<div style="padding:24px 32px 48px;">' +
-        '<p style="color:#777;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 16px;">Form Health Score</p>' +
-        '<span style="font-size:72px;font-weight:800;color:' + gradeColor + ';line-height:1;letter-spacing:-0.04em;vertical-align:middle;">' + grade + '</span>' +
-        '<span style="color:#888;font-size:14px;vertical-align:middle;margin-left:16px;">' + healthScore + ' / 100</span>' +
+        '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Form Health Score</p>' +
+        '<table style="border-collapse:collapse;margin-bottom:28px;"><tr>' +
+          '<td style="vertical-align:middle;padding-right:28px;">' +
+            '<span style="font-size:96px;font-weight:800;color:' + gradeColor + ';line-height:0.9;letter-spacing:-0.05em;">' + grade + '</span>' +
+          '</td>' +
+          '<td style="vertical-align:middle;border-left:1px solid rgba(255,255,255,0.08);padding-left:28px;">' +
+            '<p style="color:' + gradeColor + ';font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 8px;">' + gradeStatus + '</p>' +
+            '<p style="color:#fff;font-size:22px;font-weight:700;margin:0 0 4px;letter-spacing:-0.02em;">' + healthScore + ' <span style="color:#666;font-weight:400;">/ 100</span></p>' +
+            '<p style="color:#888;font-size:12px;margin:0;">' + gradeContext + '</p>' +
+          '</td>' +
+        '</tr></table>' +
+        '<div style="height:3px;background:rgba(255,255,255,0.06);margin-bottom:20px;">' +
+          '<div style="height:3px;background:' + gradeColor + ';width:' + healthScore + '%;"></div>' +
+        '</div>' +
+        '<p style="color:#aaa;font-size:14px;line-height:1.6;margin:0;max-width:520px;">' + gradeDescription + '</p>' +
       '</div>' +
 
       // OVERVIEW
       '<div style="padding:40px 32px;border-top:1px solid rgba(255,255,255,0.06);">' +
-        '<p style="color:#777;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Overview</p>' +
+        '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Overview</p>' +
         '<table style="width:100%;border-collapse:collapse;">' +
-          '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Detected Industry</td><td style="color:#ff6b35;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + detectedIndustry + '</td></tr>' +
+          '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Detected Industry</td><td style="color:#fff;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + detectedIndustry + '</td></tr>' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Avg. Lead Value (' + detectedIndustry + ')</td><td style="color:#22c55e;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">$' + industryLeadValue.toLocaleString() + '</td></tr>' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Forms Detected</td><td style="color:#fff;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + formCount + '</td></tr>' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Total Form Fields</td><td style="color:#fff;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + totalFields + '</td></tr>' +
@@ -242,7 +270,7 @@ export async function POST(request: NextRequest) {
 
       // REVENUE AT RISK
       '<div style="padding:40px 32px;border-top:1px solid rgba(255,255,255,0.06);">' +
-        '<p style="color:#777;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Revenue at Risk</p>' +
+        '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Revenue at Risk</p>' +
         '<table style="width:100%;border-collapse:collapse;">' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Est. Abandonment Rate</td><td style="color:#ef4444;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:700;">' + estAbandonment + '%</td></tr>' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Est. Monthly Leads Lost</td><td style="color:#ef4444;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:700;">' + abandonedLeads + '</td></tr>' +
@@ -254,7 +282,7 @@ export async function POST(request: NextRequest) {
 
       // FINDINGS
       '<div style="padding:40px 32px;border-top:1px solid rgba(255,255,255,0.06);">' +
-        '<p style="color:#777;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Findings</p>' +
+        '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Findings</p>' +
         findings.map((f, i) =>
           '<table style="width:100%;border-collapse:collapse;margin-bottom:16px;"><tr>' +
             '<td style="color:#ff6b35;font-size:11px;font-weight:700;letter-spacing:0.1em;width:32px;vertical-align:top;padding-top:4px;">' + String(i + 1).padStart(2, '0') + '</td>' +
@@ -265,7 +293,7 @@ export async function POST(request: NextRequest) {
 
       // TRACKING & ANALYTICS
       '<div style="padding:40px 32px;border-top:1px solid rgba(255,255,255,0.06);">' +
-        '<p style="color:#777;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Tracking &amp; Analytics</p>' +
+        '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Tracking &amp; Analytics</p>' +
         '<table style="width:100%;border-collapse:collapse;">' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Google Analytics / GTM</td><td style="color:' + (hasGA || hasGTM ? '#22c55e' : '#ef4444') + ';font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + (hasGA || hasGTM ? 'Detected' : 'Not Found') + '</td></tr>' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Meta / Facebook Pixel</td><td style="color:' + (hasMetaPixel ? '#22c55e' : '#ef4444') + ';font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + (hasMetaPixel ? 'Detected' : 'Not Found') + '</td></tr>' +
@@ -276,7 +304,7 @@ export async function POST(request: NextRequest) {
 
       // INDUSTRY BENCHMARKS
       '<div style="padding:40px 32px;border-top:1px solid rgba(255,255,255,0.06);">' +
-        '<p style="color:#777;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Industry Benchmarks</p>' +
+        '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Industry Benchmarks</p>' +
         '<table style="width:100%;border-collapse:collapse;">' +
           '<tr><td style="color:#555;font-size:10px;font-weight:700;padding:8px 0 16px;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);">Industry</td><td style="color:#555;font-size:10px;font-weight:700;padding:8px 0 16px;text-align:center;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);">Avg Fields</td><td style="color:#555;font-size:10px;font-weight:700;padding:8px 0 16px;text-align:center;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);">Abandon</td><td style="color:#555;font-size:10px;font-weight:700;padding:8px 0 16px;text-align:right;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);">Lead Value</td></tr>' +
           industryBenchmarks.map(b => '<tr><td style="color:#ccc;font-size:13px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);">' + b.industry + '</td><td style="color:#888;font-size:13px;padding:12px 0;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">' + b.avgFields + '</td><td style="color:#ef4444;font-size:13px;padding:12px 0;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">' + b.avgAbandonment + '%</td><td style="color:#22c55e;font-size:13px;padding:12px 0;text-align:right;border-bottom:1px solid rgba(255,255,255,0.04);">$' + b.avgLeadValue.toLocaleString() + '</td></tr>').join('') +
@@ -285,7 +313,7 @@ export async function POST(request: NextRequest) {
 
       // RECOMMENDATIONS
       '<div style="padding:40px 32px;border-top:1px solid rgba(255,255,255,0.06);">' +
-        '<p style="color:#777;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Recommendations</p>' +
+        '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Recommendations</p>' +
         recommendations.map((r, i) =>
           '<table style="width:100%;border-collapse:collapse;margin-bottom:16px;"><tr>' +
             '<td style="color:#ff6b35;font-size:11px;font-weight:700;letter-spacing:0.1em;width:32px;vertical-align:top;padding-top:4px;">' + String(i + 1).padStart(2, '0') + '</td>' +
@@ -294,19 +322,82 @@ export async function POST(request: NextRequest) {
         ).join('') +
       '</div>' +
 
-      // CLOSING CTA — editorial, no card, no pill button
+      // FROM ASHERTON — personal note + CTA + full signature
       '<div style="padding:56px 32px;border-top:1px solid rgba(255,255,255,0.06);">' +
-        '<p style="color:#777;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 16px;">Next Step</p>' +
-        '<h2 style="color:#fff;font-size:26px;font-weight:700;letter-spacing:-0.02em;margin:0 0 16px;line-height:1.25;">Recover the leads you\'re already paying for.</h2>' +
-        '<p style="color:#aaa;font-size:15px;line-height:1.6;margin:0 0 32px;max-width:480px;">One script tag. No form changes. Results inside 48 hours.</p>' +
-        '<a href="https://userecapture.com/start-trial" style="color:#fff;font-size:15px;font-weight:600;text-decoration:none;display:inline-block;">' +
-          '<span style="color:#ff6b35;margin-right:10px;font-weight:700;">&rarr;</span>Start your free trial' +
+        '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">From Asherton</p>' +
+        '<p style="color:#ccc;font-size:15px;line-height:1.7;margin:0 0 20px;max-width:520px;">A few months back I was a marketing consultant watching high-value leads slip through forms every week. I built ReCapture to fix that. If the numbers in your audit feel familiar &mdash; let&rsquo;s recover them.</p>' +
+        '<p style="color:#aaa;font-size:14px;line-height:1.6;margin:0 0 32px;">One script tag. No form changes. Results inside 48 hours.</p>' +
+        '<a href="https://userecapture.com/start-trial" style="color:#ff6b35;font-size:15px;font-weight:600;text-decoration:none;display:inline-block;margin-bottom:24px;">' +
+          '<span style="margin-right:10px;font-weight:700;">&rarr;</span>Start your free trial' +
         '</a>' +
+        '<p style="color:#888;font-size:13px;line-height:1.6;margin:0 0 40px;">Or just reply to this email and I&rsquo;ll set you up manually.</p>' +
+        // Signature
+        '<div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;">' +
+          '<p style="color:#ff6b35;font-size:14px;font-weight:700;margin:0 0 4px;">Asherton Chraibi</p>' +
+          '<p style="font-size:13px;margin:0 0 4px;">' +
+            '<span style="color:#fff;">Founder, </span>' +
+            '<span style="color:#ff6b35;font-weight:300;font-size:17px;line-height:1;vertical-align:-2px;">+</span>' +
+            '<span style="color:#fff;font-weight:700;letter-spacing:-0.01em;margin-left:4px;">Re</span>' +
+            '<span style="color:#ff6b35;font-weight:700;letter-spacing:-0.01em;">Capture</span>' +
+          '</p>' +
+          '<p style="color:#888;font-size:12px;margin:0 0 14px;">Recovering the leads your forms are losing.</p>' +
+          '<p style="color:#ccc;font-size:13px;margin:0 0 4px;">(888) 606-0630 <span style="color:#666;">&mdash; Concierge line</span></p>' +
+          '<p style="font-size:13px;margin:0 0 4px;"><a href="mailto:hello@userecapture.com" style="color:#ccc;text-decoration:none;">hello@userecapture.com</a></p>' +
+          '<p style="font-size:13px;margin:0;"><a href="https://userecapture.com" style="color:#ccc;text-decoration:none;">www.userecapture.com</a></p>' +
+        '</div>' +
       '</div>' +
 
-      // FOOTER
-      '<div style="padding:32px;border-top:1px solid rgba(255,255,255,0.06);">' +
-        '<p style="color:#555;font-size:11px;margin:0;letter-spacing:0.02em;line-height:1.6;">ReCapture &nbsp;&middot;&nbsp; <a href="https://userecapture.com" style="color:#888;text-decoration:none;">userecapture.com</a> &nbsp;&middot;&nbsp; <a href="mailto:hello@userecapture.com" style="color:#888;text-decoration:none;">hello@userecapture.com</a> &nbsp;&middot;&nbsp; Dallas, Texas</p>' +
+      // FOOTER — matches site
+      '<div style="padding:48px 32px 32px;border-top:1px solid rgba(255,255,255,0.06);background:#080808;">' +
+        // Brand block
+        '<div style="margin-bottom:32px;">' +
+          '<div style="margin-bottom:12px;">' +
+            '<span style="color:#ff6b35;font-weight:300;font-size:22px;line-height:1;vertical-align:-3px;">+</span>' +
+            '<span style="color:#fff;font-weight:800;font-size:15px;margin-left:5px;letter-spacing:-0.01em;">Re</span>' +
+            '<span style="color:#ff6b35;font-weight:800;font-size:15px;letter-spacing:-0.01em;">Capture</span>' +
+          '</div>' +
+          '<p style="color:#888;font-size:13px;line-height:1.6;margin:0;max-width:380px;">The recovery layer for high-ticket service businesses.<br>Capture every lead. Recover lost revenue.</p>' +
+        '</div>' +
+        '<div style="height:1px;background:rgba(255,255,255,0.06);margin:0 0 32px;"></div>' +
+        // Link grid
+        '<table style="width:100%;border-collapse:collapse;margin-bottom:32px;"><tr style="vertical-align:top;">' +
+          '<td style="width:33%;padding-right:16px;">' +
+            '<p style="color:#777;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;margin:0 0 14px;">Product</p>' +
+            '<p style="margin:0 0 8px;"><a href="https://userecapture.com/pricing" style="color:#aaa;font-size:13px;text-decoration:none;">Pricing</a></p>' +
+            '<p style="margin:0 0 8px;"><a href="https://userecapture.com/how-it-works" style="color:#aaa;font-size:13px;text-decoration:none;">How It Works</a></p>' +
+            '<p style="margin:0 0 8px;"><a href="https://userecapture.com/integrations" style="color:#aaa;font-size:13px;text-decoration:none;">Integrations</a></p>' +
+            '<p style="margin:0 0 8px;"><a href="https://userecapture.com/why-us" style="color:#aaa;font-size:13px;text-decoration:none;">Why Us</a></p>' +
+            '<p style="margin:0;"><a href="https://userecapture.com/docs/api" style="color:#aaa;font-size:13px;text-decoration:none;">API Docs</a></p>' +
+          '</td>' +
+          '<td style="width:33%;padding-right:16px;">' +
+            '<p style="color:#777;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;margin:0 0 14px;">Company</p>' +
+            '<p style="margin:0 0 8px;"><a href="https://userecapture.com/about" style="color:#aaa;font-size:13px;text-decoration:none;">About</a></p>' +
+            '<p style="margin:0 0 8px;"><a href="https://userecapture.com/blog" style="color:#aaa;font-size:13px;text-decoration:none;">Insights</a></p>' +
+            '<p style="margin:0 0 8px;"><a href="https://userecapture.com/partners" style="color:#aaa;font-size:13px;text-decoration:none;">Partners</a></p>' +
+            '<p style="margin:0 0 8px;"><a href="https://userecapture.com/contact" style="color:#aaa;font-size:13px;text-decoration:none;">Contact</a></p>' +
+            '<p style="margin:0;"><a href="https://userecapture.com/start-trial" style="color:#aaa;font-size:13px;text-decoration:none;">Start Trial</a></p>' +
+          '</td>' +
+          '<td style="width:33%;">' +
+            '<p style="color:#777;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;margin:0 0 14px;">Trust &amp; Legal</p>' +
+            '<p style="margin:0 0 8px;"><a href="https://userecapture.com/trust" style="color:#aaa;font-size:13px;text-decoration:none;">Trust &amp; Compliance</a></p>' +
+            '<p style="margin:0 0 8px;"><a href="https://userecapture.com/baa" style="color:#aaa;font-size:13px;text-decoration:none;">HIPAA BAA</a></p>' +
+            '<p style="margin:0;"><a href="https://userecapture.com/legal/client-privacy-template" style="color:#aaa;font-size:13px;text-decoration:none;">Privacy Template</a></p>' +
+          '</td>' +
+        '</tr></table>' +
+        // Trust badge + copyright
+        '<div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;">' +
+          '<table style="width:100%;border-collapse:collapse;"><tr>' +
+            '<td style="vertical-align:middle;">' +
+              '<span style="color:#22c55e;font-size:13px;font-weight:600;">&#9679;</span>' +
+              '<span style="color:#aaa;font-size:13px;margin-left:6px;">HIPAA Compliant</span>' +
+              '<span style="color:#444;padding:0 10px;">&middot;</span>' +
+              '<a href="https://userecapture.com/baa" style="color:#888;font-size:13px;text-decoration:none;">BAA Available</a>' +
+            '</td>' +
+            '<td style="vertical-align:middle;text-align:right;">' +
+              '<span style="color:#555;font-size:11px;">&copy; 2026 ReCapture &middot; Dallas, TX</span>' +
+            '</td>' +
+          '</tr></table>' +
+        '</div>' +
       '</div>' +
     '</div>'
     // Dry run: return computed data without sending any emails
