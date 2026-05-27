@@ -52,15 +52,37 @@ export default function ContactPage() {
   const currentType = INQUIRY_TYPES.find(t => t.value === inquiryType) || INQUIRY_TYPES[0]
 
   const handleSubmit = async () => {
-    if (!name || !email || !message) {
+    // Browser autofill writes directly to the DOM without firing React's
+    // onChange, so controlled state can be stale. Pull live values from
+    // the DOM with state as fallback.
+    const getDomValue = (id: string, fallback: string): string => {
+      if (typeof document === 'undefined') return fallback
+      const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null
+      return (el?.value || fallback).trim()
+    }
+
+    const nameVal = getDomValue('contact-name', name)
+    const emailVal = getDomValue('contact-email', email)
+    const companyVal = getDomValue('contact-company', company)
+    const phoneVal = getDomValue('contact-phone', phone)
+    const messageVal = getDomValue('contact-message', message)
+
+    // Sync React state so the form visually reflects what was submitted
+    if (nameVal !== name) setName(nameVal)
+    if (emailVal !== email) setEmail(emailVal)
+    if (companyVal !== company) setCompany(companyVal)
+    if (phoneVal !== phone) setPhone(phoneVal)
+    if (messageVal !== message) setMessage(messageVal)
+
+    if (!nameVal || !emailVal || !messageVal) {
       setError('Name, email, and message are required.')
       return
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
       setError('Please enter a valid email address.')
       return
     }
-    if (message.length < 10) {
+    if (messageVal.length < 10) {
       setError('Please add a bit more detail to your message.')
       return
     }
@@ -70,7 +92,14 @@ export default function ContactPage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, company, phone, inquiryType, message }),
+        body: JSON.stringify({
+          name: nameVal,
+          email: emailVal,
+          company: companyVal,
+          phone: phoneVal,
+          inquiryType,
+          message: messageVal,
+        }),
       })
       if (!res.ok) {
         const data = await res.json().catch(() => ({}))
