@@ -5504,3 +5504,64 @@ select.audit-form-input option {
 .contact-who-headline-muted {
   color: #777;
 }
+
+
+/* /contact thank-you polish — richer success state */
+.contact-success-body-secondary {
+  margin-top: 1.25rem;
+}
+
+.contact-success-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 2.5rem 0 1.75rem;
+  max-width: 36rem;
+}
+
+.contact-success-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #777;
+  margin: 0 0 1.25rem;
+}
+
+.contact-success-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  max-width: 36rem;
+}
+
+.contact-success-action {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: color 0.18s ease, border-color 0.18s ease, padding-left 0.18s ease;
+}
+.contact-success-action:hover {
+  color: #ff6b35;
+  border-bottom-color: rgba(255, 107, 53, 0.3);
+  padding-left: 0.375rem;
+}
+.contact-success-action:last-child {
+  border-bottom: none;
+}
+
+.contact-success-action-arrow {
+  color: #ff6b35;
+  font-size: 1.125rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: transform 0.18s ease;
+}
+.contact-success-action:hover .contact-success-action-arrow {
+  transform: translateX(3px);
+}

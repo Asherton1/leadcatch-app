@@ -46,6 +46,8 @@ export default function ContactPage() {
   const [inquiryType, setInquiryType] = useState('sales')
   const [message, setMessage] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [submittedName, setSubmittedName] = useState('')
+  const [submittedEmail, setSubmittedEmail] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
 
@@ -105,6 +107,8 @@ export default function ContactPage() {
         const data = await res.json().catch(() => ({}))
         throw new Error(data.error || 'Submission failed')
       }
+      setSubmittedName(nameVal)
+      setSubmittedEmail(emailVal)
       setSubmitted(true)
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : 'Something went wrong'
@@ -183,8 +187,29 @@ export default function ContactPage() {
               <svg className="contact-success-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
               <h2 className="contact-success-headline">Message received.</h2>
               <p className="contact-success-body">
-                Thanks <strong>{name}</strong>&mdash; we&rsquo;ll get back to you within 24 hours. Check your inbox for a confirmation.
+                Thanks <strong>{submittedName}</strong> &mdash; we got it.
               </p>
+              <p className="contact-success-body contact-success-body-secondary">
+                Confirmation email on its way to <strong>{submittedEmail}</strong>. We&rsquo;ll review your inquiry today and respond within 24 hours &mdash; from a real human, not an SDR.
+              </p>
+
+              <div className="contact-success-divider" />
+
+              <p className="contact-success-label">While you wait</p>
+              <div className="contact-success-actions">
+                <a href="/demo" className="contact-success-action">
+                  <span className="contact-success-action-arrow">&rarr;</span>
+                  <span>See ReCapture in action</span>
+                </a>
+                <a href="/blog" className="contact-success-action">
+                  <span className="contact-success-action-arrow">&rarr;</span>
+                  <span>Browse the blog</span>
+                </a>
+                <a href="/form-audit" className="contact-success-action">
+                  <span className="contact-success-action-arrow">&rarr;</span>
+                  <span>Run a free form audit on your site</span>
+                </a>
+              </div>
             </div>
           ) : (
             <div className="audit-form-block">
