@@ -10,6 +10,26 @@ import { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Trust & Compliance — ReCapture",
   description: "How ReCapture handles data, compliance, security, and your responsibilities as a customer. TCPA, CAN-SPAM, GDPR, HIPAA-ready.",
+  alternates: { canonical: "/trust" },
+  openGraph: {
+    title: "Trust & Compliance — ReCapture",
+    description: "How ReCapture handles data, compliance, security, and your responsibilities. TCPA, CAN-SPAM, GDPR, HIPAA-ready.",
+    url: "https://www.userecapture.com/trust",
+    siteName: "ReCapture",
+    type: "website",
+    images: [{
+      url: "https://www.userecapture.com/api/og?title=Trust%20%26%20Compliance&eyebrow=Trust",
+      width: 1200,
+      height: 630,
+      alt: "ReCapture",
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Trust & Compliance — ReCapture",
+    description: "How ReCapture handles data, compliance, security. TCPA, CAN-SPAM, GDPR, HIPAA-ready.",
+    images: ["https://www.userecapture.com/api/og?title=Trust%20%26%20Compliance&eyebrow=Trust"],
+  },
 }
 
 export default function TrustPage() {

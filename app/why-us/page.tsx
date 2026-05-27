@@ -13,6 +13,26 @@ export const metadata = {
   title: 'Why ReCapture vs Podium, GoHighLevel & CartStack',
   description: 'How ReCapture compares to Podium, GoHighLevel, and CartStack for form abandonment recovery. Built for multi-location businesses where a recovered lead is worth $1,500 to $10,000.',
   keywords: 'ReCapture vs Podium, ReCapture vs GoHighLevel, form abandonment recovery, multi-location lead recovery, enterprise form tracking',
+  alternates: { canonical: '/why-us' },
+  openGraph: {
+    title: 'Why ReCapture vs Podium, GoHighLevel & CartStack',
+    description: 'How ReCapture compares for form abandonment recovery. Built for multi-location businesses where a recovered lead is worth $1,500 to $10,000.',
+    url: 'https://www.userecapture.com/why-us',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=Why%20ReCapture%20vs%20The%20Rest&eyebrow=Why%20ReCapture',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Why ReCapture vs Podium, GoHighLevel & CartStack',
+    description: 'Built for multi-location businesses where a recovered lead is worth $1,500-$10,000.',
+    images: ['https://www.userecapture.com/api/og?title=Why%20ReCapture%20vs%20The%20Rest&eyebrow=Why%20ReCapture'],
+  },
 }
 
 type Cell = string | boolean

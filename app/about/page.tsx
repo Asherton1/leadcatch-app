@@ -11,6 +11,26 @@ import './about.css'
 export const metadata = {
   title: 'About ReCapture — Form Abandonment Recovery Built in Dallas, TX',
   description: 'The story behind ReCapture — built by a digital marketing veteran in Dallas who spent a decade watching high-value leads slip through the cracks.',
+  alternates: { canonical: '/about' },
+  openGraph: {
+    title: 'About ReCapture — Form Abandonment Recovery Built in Dallas, TX',
+    description: 'The story behind ReCapture — built by a digital marketing veteran in Dallas who spent a decade watching high-value leads slip through the cracks.',
+    url: 'https://www.userecapture.com/about',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=The%20leads%20were%20always%20there&eyebrow=About',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About ReCapture — Built in Dallas, TX',
+    description: 'The story behind ReCapture — a decade of watching high-value leads slip through the cracks.',
+    images: ['https://www.userecapture.com/api/og?title=The%20leads%20were%20always%20there&eyebrow=About'],
+  },
 }
 
 export default function AboutPage() {

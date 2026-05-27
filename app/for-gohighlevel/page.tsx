@@ -11,6 +11,26 @@ export const metadata = {
   title: 'ReCapture for GoHighLevel Agencies — Form Abandonment Recovery Add-On',
   description: 'GoHighLevel captures submitted leads. ReCapture captures the 60-70% who never submit. Add form abandonment recovery to any GHL client site with one script tag.',
   keywords: 'GoHighLevel form abandonment, GHL lead recovery, GoHighLevel add-on, HighLevel partial form capture, GHL agency tools',
+  alternates: { canonical: '/for-gohighlevel' },
+  openGraph: {
+    title: 'ReCapture for GoHighLevel — Form Abandonment Recovery Add-On',
+    description: 'GoHighLevel captures submitted leads. ReCapture captures the 60-70% who never submit. One script tag, any GHL client site.',
+    url: 'https://www.userecapture.com/for-gohighlevel',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=ReCapture%20for%20GoHighLevel&eyebrow=GoHighLevel',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ReCapture for GoHighLevel — Form Abandonment Recovery Add-On',
+    description: 'GHL captures submits. ReCapture catches the 60-70% who never finish. One script tag.',
+    images: ['https://www.userecapture.com/api/og?title=ReCapture%20for%20GoHighLevel&eyebrow=GoHighLevel'],
+  },
 }
 
 const SAMPLE_LEADS = [

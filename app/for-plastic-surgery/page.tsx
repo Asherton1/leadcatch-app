@@ -12,6 +12,26 @@ export const metadata = {
   title: 'Form Abandonment Recovery for Plastic Surgery — ReCapture',
   description: 'Cosmetic surgery practices spend $100+ per lead and only 22% convert to procedures. ReCapture captures every visitor who started typing on your consultation form and recovers them in under five minutes.',
   keywords: 'form abandonment plastic surgery, plastic surgery lead recovery, cosmetic surgery lead generation',
+  alternates: { canonical: '/for-plastic-surgery' },
+  openGraph: {
+    title: 'Form Abandonment Recovery for Plastic Surgery — ReCapture',
+    description: 'Cosmetic surgery practices spend $100+ per lead and only 22% convert. ReCapture captures every form starter and recovers them in five minutes.',
+    url: 'https://www.userecapture.com/for-plastic-surgery',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Plastic%20Surgery&eyebrow=For%20Plastic%20Surgery',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Form Abandonment Recovery for Plastic Surgery — ReCapture',
+    description: 'Cosmetic surgery costs $100+ per lead, 22% conversion. ReCapture recovers every form starter.',
+    images: ['https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Plastic%20Surgery&eyebrow=For%20Plastic%20Surgery'],
+  },
 }
 
 const SAMPLE_LEADS = [

@@ -12,6 +12,26 @@ export const metadata = {
   title: 'ReCapture for Boulevard — Capture Consultation Leads Before They Leave',
   description: 'Boulevard books the consultations that submit. ReCapture captures the 67% of consultation forms that never finish. Push abandoned leads into Boulevard in real-time via webhook.',
   keywords: 'Boulevard form abandonment, Boulevard lead recovery, Boulevard integration, med spa lead capture, plastic surgery consultation forms, dermatology booking Zapier',
+  alternates: { canonical: '/for-boulevard' },
+  openGraph: {
+    title: 'ReCapture for Boulevard — Aesthetic Lead Recovery',
+    description: 'Boulevard books submitted consultations. ReCapture catches the 67% who never finish. Real-time webhook into your Boulevard pipeline.',
+    url: 'https://www.userecapture.com/for-boulevard',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=ReCapture%20for%20Boulevard&eyebrow=Boulevard',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ReCapture for Boulevard — Aesthetic Lead Recovery',
+    description: '67% of consultation forms never finish. ReCapture catches them and pushes them to Boulevard.',
+    images: ['https://www.userecapture.com/api/og?title=ReCapture%20for%20Boulevard&eyebrow=Boulevard'],
+  },
 }
 
 const SAMPLE_LEADS = [

@@ -12,6 +12,26 @@ export const metadata = {
   title: 'Form Abandonment Recovery for Property Management — ReCapture',
   description: '60%+ of renters request a tour within 24 hours of discovering a property and 41% prefer automated booking. ReCapture captures every visitor who started filling out a tour or contact form on your property websites.',
   keywords: 'form abandonment property management, apartment lead recovery, multifamily lead generation',
+  alternates: { canonical: '/for-property-management' },
+  openGraph: {
+    title: 'Form Abandonment Recovery for Property Management — ReCapture',
+    description: '60%+ of renters request a tour within 24 hours. ReCapture captures every visitor who started filling out a tour form on your property sites.',
+    url: 'https://www.userecapture.com/for-property-management',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Property%20Management&eyebrow=Property%20Mgmt',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Form Abandonment Recovery for Property Management — ReCapture',
+    description: '60% of renters tour within 24 hours. ReCapture captures every tour form starter.',
+    images: ['https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Property%20Management&eyebrow=Property%20Mgmt'],
+  },
 }
 
 const SAMPLE_LEADS = [

@@ -11,6 +11,26 @@ export const metadata = {
   title: 'Form Abandonment Recovery for Luxury Auto — ReCapture',
   description: 'Average auto dealer response time is 42-47 hours. Responding within 5 minutes makes you 21-100x more likely to convert. ReCapture captures every visitor who started typing on your inquiry form.',
   keywords: 'form abandonment luxury auto, dealership lead recovery, auto lead generation',
+  alternates: { canonical: '/for-luxury-auto' },
+  openGraph: {
+    title: 'Form Abandonment Recovery for Luxury Auto — ReCapture',
+    description: 'Average dealer response time is 42-47 hours. Responding in 5 minutes makes you 21-100x more likely to convert. ReCapture catches every form starter.',
+    url: 'https://www.userecapture.com/for-luxury-auto',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Luxury%20Auto&eyebrow=Luxury%20Auto',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Form Abandonment Recovery for Luxury Auto — ReCapture',
+    description: 'Dealer avg response: 42-47 hours. ReCapture cuts it to five minutes.',
+    images: ['https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Luxury%20Auto&eyebrow=Luxury%20Auto'],
+  },
 }
 
 const SAMPLE_LEADS = [

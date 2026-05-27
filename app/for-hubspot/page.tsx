@@ -12,6 +12,26 @@ export const metadata = {
   title: 'ReCapture for HubSpot — Push Abandoned Leads Into Your Pipeline',
   description: 'HubSpot captures submitted leads. ReCapture captures the 60-70% who never submit. Push abandoned leads into your HubSpot pipeline in real-time via webhook.',
   keywords: 'HubSpot form abandonment, HubSpot lead recovery, HubSpot integration, HubSpot webhook, HubSpot Zapier, HubSpot pipeline sync',
+  alternates: { canonical: '/for-hubspot' },
+  openGraph: {
+    title: 'ReCapture for HubSpot — Push Abandoned Leads Into Your Pipeline',
+    description: 'HubSpot captures submits. ReCapture captures the 60-70% who never finish. Real-time webhook into your HubSpot pipeline.',
+    url: 'https://www.userecapture.com/for-hubspot',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=ReCapture%20for%20HubSpot&eyebrow=HubSpot',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ReCapture for HubSpot — Push Abandoned Leads Into Your Pipeline',
+    description: 'HubSpot captures submits. ReCapture catches the 60-70% who never finish.',
+    images: ['https://www.userecapture.com/api/og?title=ReCapture%20for%20HubSpot&eyebrow=HubSpot'],
+  },
 }
 
 const SAMPLE_LEADS = [

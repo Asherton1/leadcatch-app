@@ -12,6 +12,26 @@ export const metadata = {
   title: 'ReCapture for AppFolio — Push Leasing Prospects Into Your Pipeline',
   description: 'AppFolio tracks submitted leasing inquiries. ReCapture captures the 70% who started an inquiry and never finished. Push abandoned prospects into AppFolio in real-time via webhook.',
   keywords: 'AppFolio form abandonment, AppFolio lead recovery, AppFolio integration, multifamily lead capture, property management leasing forms, multifamily Zapier',
+  alternates: { canonical: '/for-appfolio' },
+  openGraph: {
+    title: 'ReCapture for AppFolio — Multifamily Lead Recovery',
+    description: 'AppFolio tracks submitted inquiries. ReCapture catches the 70% who started and never finished. Real-time webhook into your AppFolio pipeline.',
+    url: 'https://www.userecapture.com/for-appfolio',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=ReCapture%20for%20AppFolio&eyebrow=AppFolio',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ReCapture for AppFolio — Multifamily Lead Recovery',
+    description: '70% of leasing inquiries never submit. ReCapture catches them and pushes them to AppFolio.',
+    images: ['https://www.userecapture.com/api/og?title=ReCapture%20for%20AppFolio&eyebrow=AppFolio'],
+  },
 }
 
 const SAMPLE_LEADS = [

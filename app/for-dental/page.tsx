@@ -12,6 +12,26 @@ export const metadata = {
   title: 'Form Abandonment Recovery for Dental Practices — ReCapture',
   description: '32% of dental practice phone calls go unanswered and the average appointment confirmation rate is just 44%. ReCapture captures every visitor who started typing on your appointment form and recovers them in under five minutes.',
   keywords: 'form abandonment dental, dental practice lead recovery, dental lead generation, patient intake form tracking',
+  alternates: { canonical: '/for-dental' },
+  openGraph: {
+    title: 'Form Abandonment Recovery for Dental Practices — ReCapture',
+    description: '32% of dental practice phone calls go unanswered. ReCapture captures every visitor who started typing on your appointment form and recovers them in under five minutes.',
+    url: 'https://www.userecapture.com/for-dental',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Dental%20Practices&eyebrow=For%20Dental',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Form Abandonment Recovery for Dental Practices — ReCapture',
+    description: '32% of dental phone calls go unanswered. ReCapture recovers them in under five minutes.',
+    images: ['https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Dental%20Practices&eyebrow=For%20Dental'],
+  },
 }
 
 const SAMPLE_LEADS = [

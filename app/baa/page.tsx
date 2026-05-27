@@ -12,6 +12,26 @@ export const metadata = {
   title: 'HIPAA Business Associate Agreement (BAA) — ReCapture',
   description: 'ReCapture HIPAA Business Associate Agreement (BAA) for med spas, dental practices, plastic surgery, and other HIPAA-eligible businesses on Enterprise plans.',
   robots: 'noindex',
+  alternates: { canonical: '/baa' },
+  openGraph: {
+    title: 'HIPAA Business Associate Agreement (BAA) — ReCapture',
+    description: 'ReCapture BAA for HIPAA-eligible businesses on Enterprise plans. Med spas, dental, plastic surgery, dermatology.',
+    url: 'https://www.userecapture.com/baa',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=HIPAA%20Business%20Associate%20Agreement&eyebrow=BAA',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'HIPAA Business Associate Agreement (BAA) — ReCapture',
+    description: 'ReCapture BAA for HIPAA-eligible businesses on Enterprise plans.',
+    images: ['https://www.userecapture.com/api/og?title=HIPAA%20Business%20Associate%20Agreement&eyebrow=BAA'],
+  },
 }
 
 export default function BAAPage() {

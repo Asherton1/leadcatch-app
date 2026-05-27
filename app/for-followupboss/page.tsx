@@ -12,6 +12,26 @@ export const metadata = {
   title: 'ReCapture for Follow Up Boss — Push Real Estate Leads Into Your Pipeline',
   description: 'Follow Up Boss captures submitted leads. ReCapture captures the 70% of property inquiries that never submit. Push abandoned leads into Follow Up Boss in real-time via webhook.',
   keywords: 'Follow Up Boss form abandonment, FUB lead recovery, Follow Up Boss integration, real estate lead capture, IDX form abandonment, real estate Zapier',
+  alternates: { canonical: '/for-followupboss' },
+  openGraph: {
+    title: 'ReCapture for Follow Up Boss — Real Estate Lead Recovery',
+    description: 'FUB captures submits. ReCapture catches the 70% of property inquiries that never submit. Real-time webhook into your FUB pipeline.',
+    url: 'https://www.userecapture.com/for-followupboss',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=ReCapture%20for%20Follow%20Up%20Boss&eyebrow=Follow%20Up%20Boss',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ReCapture for Follow Up Boss — Real Estate Lead Recovery',
+    description: '70% of property inquiries never submit. ReCapture catches them and pushes them to FUB.',
+    images: ['https://www.userecapture.com/api/og?title=ReCapture%20for%20Follow%20Up%20Boss&eyebrow=Follow%20Up%20Boss'],
+  },
 }
 
 const SAMPLE_LEADS = [

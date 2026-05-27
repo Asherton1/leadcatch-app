@@ -12,6 +12,26 @@ export const metadata = {
   title: 'Form Abandonment Recovery for Med Spas — ReCapture',
   description: 'Med spas lose two-thirds of consultation form starters before they submit. ReCapture is the recovery layer for high-ticket service businesses — capture every visitor who started typing, recover them in under five minutes.',
   keywords: 'form abandonment med spa, med spa lead recovery, med spa lead generation, consultation form tracking, med spa marketing',
+  alternates: { canonical: '/for-med-spas' },
+  openGraph: {
+    title: 'Form Abandonment Recovery for Med Spas — ReCapture',
+    description: 'Med spas lose two-thirds of consultation form starters before they submit. ReCapture captures and recovers them in under five minutes.',
+    url: 'https://www.userecapture.com/for-med-spas',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Med%20Spas&eyebrow=For%20Med%20Spas',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Form Abandonment Recovery for Med Spas — ReCapture',
+    description: 'Med spas lose 67% of consultation form starters. ReCapture recovers them in under five minutes.',
+    images: ['https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Med%20Spas&eyebrow=For%20Med%20Spas'],
+  },
 }
 
 const SAMPLE_LEADS = [

@@ -12,6 +12,26 @@ export const metadata = {
   title: 'Form Abandonment Recovery for Luxury Real Estate — ReCapture',
   description: '78% of homebuyers work with the first agent who responds. The average agent takes 15+ hours. ReCapture captures every visitor who started typing on your inquiry form and gets you on the phone in five minutes.',
   keywords: 'form abandonment real estate, luxury real estate lead recovery, real estate lead generation',
+  alternates: { canonical: '/for-luxury-real-estate' },
+  openGraph: {
+    title: 'Form Abandonment Recovery for Luxury Real Estate — ReCapture',
+    description: '78% of homebuyers work with the first agent who responds. Average response: 15+ hours. ReCapture gets you on the phone in five minutes.',
+    url: 'https://www.userecapture.com/for-luxury-real-estate',
+    siteName: 'ReCapture',
+    type: 'website',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Luxury%20Real%20Estate&eyebrow=Luxury%20Real%20Estate',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Form Abandonment Recovery for Luxury Real Estate — ReCapture',
+    description: '78% of buyers pick the first agent who responds. ReCapture cuts response time to five minutes.',
+    images: ['https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Luxury%20Real%20Estate&eyebrow=Luxury%20Real%20Estate'],
+  },
 }
 
 const SAMPLE_LEADS = [
