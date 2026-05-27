@@ -8,12 +8,63 @@ import '../../landing.css'
 export const metadata = {
   title: 'The Form Abandonment Compliance Problem (and How We Solved It)',
   description: 'Most form abandonment tools were built before the laws caught up. TCPA, CAN-SPAM, GDPR, and HIPAA all matter now. Here is what changed and how ReCapture handles compliance differently.',
+  alternates: { canonical: '/blog/the-form-abandonment-compliance-problem' },
+  openGraph: {
+    title: 'The Form Abandonment Compliance Problem (and How We Solved It)',
+    description: 'Most form abandonment tools were built before the laws caught up. TCPA, CAN-SPAM, GDPR, and HIPAA all matter now. Here is what changed and how ReCapture handles compliance differently.',
+    url: 'https://www.userecapture.com/blog/the-form-abandonment-compliance-problem',
+    siteName: 'ReCapture',
+    type: 'article',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=The+Form+Abandonment+Compliance+Problem&eyebrow=Blog',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'The Form Abandonment Compliance Problem (and How We Solved It)',
+    description: 'Most form abandonment tools were built before the laws caught up. TCPA, CAN-SPAM, GDPR, and HIPAA all matter now. Here is what changed and how ReCaptu',
+    images: ['https://www.userecapture.com/api/og?title=The+Form+Abandonment+Compliance+Problem&eyebrow=Blog'],
+  },
 }
 
 export default function Post() {
   return (
     <div className="blog-post">
       <BlogNav />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: 'The Form Abandonment Compliance Problem (and How We Solved It)',
+            description: 'Most form abandonment tools were built before the laws caught up. TCPA, CAN-SPAM, GDPR, and HIPAA all matter now. Here is what changed and how ReCapture handles compliance differently.',
+            image: 'https://www.userecapture.com/api/og?title=The+Form+Abandonment+Compliance+Problem&eyebrow=Blog',
+            datePublished: '2026-05-08T00:00:00Z',
+            dateModified: '2026-05-27T00:00:00Z',
+            author: {
+              '@type': 'Person',
+              name: 'Asherton Chraibi',
+              url: 'https://www.userecapture.com/about',
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'ReCapture',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://www.userecapture.com/icon.png',
+              },
+            },
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': 'https://www.userecapture.com/blog/the-form-abandonment-compliance-problem',
+            },
+          }),
+        }}
+      />
 
       <div className="blog-post-header">
         <Link href="/blog" className="blog-post-back">&larr; Back to Insights</Link>

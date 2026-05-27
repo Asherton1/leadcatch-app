@@ -7,12 +7,63 @@ import Image from 'next/image'
 export const metadata = {
   title: 'The Hidden Cost of Form Abandonment — ReCapture Blog',
   description: "Most businesses track traffic and ad spend but ignore the leads that start a form and never finish. Here is what that blind spot is really costing.",
+  alternates: { canonical: '/blog/hidden-cost-of-form-abandonment' },
+  openGraph: {
+    title: 'The Hidden Cost of Form Abandonment — ReCapture Blog',
+    description: 'Most businesses track traffic and ad spend but ignore the leads that start a form and never finish. Here is what that blind spot is really costing.',
+    url: 'https://www.userecapture.com/blog/hidden-cost-of-form-abandonment',
+    siteName: 'ReCapture',
+    type: 'article',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=The+Hidden+Cost+of+Form+Abandonment&eyebrow=Blog',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'The Hidden Cost of Form Abandonment — ReCapture Blog',
+    description: 'Most businesses track traffic and ad spend but ignore the leads that start a form and never finish. Here is what that blind spot is really costing.',
+    images: ['https://www.userecapture.com/api/og?title=The+Hidden+Cost+of+Form+Abandonment&eyebrow=Blog'],
+  },
 }
 
 export default function Post() {
   return (
     <div className="blog-post">
       <BlogNav />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: 'The Hidden Cost of Form Abandonment — ReCapture Blog',
+            description: 'Most businesses track traffic and ad spend but ignore the leads that start a form and never finish. Here is what that blind spot is really costing.',
+            image: 'https://www.userecapture.com/api/og?title=The+Hidden+Cost+of+Form+Abandonment&eyebrow=Blog',
+            datePublished: '2026-04-01T00:00:00Z',
+            dateModified: '2026-05-27T00:00:00Z',
+            author: {
+              '@type': 'Person',
+              name: 'Asherton Chraibi',
+              url: 'https://www.userecapture.com/about',
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'ReCapture',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://www.userecapture.com/icon.png',
+              },
+            },
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': 'https://www.userecapture.com/blog/hidden-cost-of-form-abandonment',
+            },
+          }),
+        }}
+      />
 
       <div className="blog-post-header">
         <Link href="/blog" className="blog-post-back">← Back to Insights</Link>

@@ -8,12 +8,63 @@ export const metadata = {
   title: 'Why Google Analytics Is Lying About Your Form Conversions',
   description: 'Google Analytics tracks pageviews and submissions. But it completely misses the leads who start your form and never finish. Here is the data gap costing you thousands.',
   keywords: 'form abandonment, Google Analytics form tracking, form conversion rate, partial form data, lead recovery, form analytics',
+  alternates: { canonical: '/blog/google-analytics-form-conversions' },
+  openGraph: {
+    title: 'Why Google Analytics Is Lying About Your Form Conversions',
+    description: 'Google Analytics tracks pageviews and submissions. But it completely misses the leads who start your form and never finish. Here is the data gap costing you thousands.',
+    url: 'https://www.userecapture.com/blog/google-analytics-form-conversions',
+    siteName: 'ReCapture',
+    type: 'article',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=Google+Analytics+Is+Lying+About+Your+Forms&eyebrow=Blog',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Why Google Analytics Is Lying About Your Form Conversions',
+    description: 'Google Analytics tracks pageviews and submissions. But it completely misses the leads who start your form and never finish. Here is the data gap costi',
+    images: ['https://www.userecapture.com/api/og?title=Google+Analytics+Is+Lying+About+Your+Forms&eyebrow=Blog'],
+  },
 }
 
 export default function Post() {
   return (
     <div className="blog-post">
       <BlogNav />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: 'Why Google Analytics Is Lying About Your Form Conversions',
+            description: 'Google Analytics tracks pageviews and submissions. But it completely misses the leads who start your form and never finish. Here is the data gap costing you thousands.',
+            image: 'https://www.userecapture.com/api/og?title=Google+Analytics+Is+Lying+About+Your+Forms&eyebrow=Blog',
+            datePublished: '2026-04-10T00:00:00Z',
+            dateModified: '2026-05-27T00:00:00Z',
+            author: {
+              '@type': 'Person',
+              name: 'Asherton Chraibi',
+              url: 'https://www.userecapture.com/about',
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'ReCapture',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://www.userecapture.com/icon.png',
+              },
+            },
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': 'https://www.userecapture.com/blog/google-analytics-form-conversions',
+            },
+          }),
+        }}
+      />
 
       <div className="blog-post-header">
         <Link href="/blog" className="blog-post-back">← Back to Insights</Link>

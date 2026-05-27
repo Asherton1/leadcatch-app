@@ -7,12 +7,63 @@ import Image from 'next/image'
 export const metadata = {
   title: 'Why Mobile Form Abandonment Is Different (And Why Most Recovery Tools Miss It)',
   description: 'Mobile drives the majority of inbound inquiries, but most form recovery tools were built for desktop browsers. Here is why that gap matters and what changes when you treat mobile as a first-class environment.',
+  alternates: { canonical: '/blog/mobile-form-abandonment-is-different' },
+  openGraph: {
+    title: 'Why Mobile Form Abandonment Is Different (And Why Most Recovery Tools Miss It)',
+    description: 'Mobile drives the majority of inbound inquiries, but most form recovery tools were built for desktop browsers. Here is why that gap matters and what changes when you treat mobile as a first-class environment.',
+    url: 'https://www.userecapture.com/blog/mobile-form-abandonment-is-different',
+    siteName: 'ReCapture',
+    type: 'article',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=Mobile+Form+Abandonment+Is+Different&eyebrow=Blog',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Why Mobile Form Abandonment Is Different (And Why Most Recovery Tools Miss It)',
+    description: 'Mobile drives the majority of inbound inquiries, but most form recovery tools were built for desktop browsers. Here is why that gap matters and what c',
+    images: ['https://www.userecapture.com/api/og?title=Mobile+Form+Abandonment+Is+Different&eyebrow=Blog'],
+  },
 }
 
 export default function Post() {
   return (
     <div className="blog-post">
       <BlogNav />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: 'Why Mobile Form Abandonment Is Different (And Why Most Recovery Tools Miss It)',
+            description: 'Mobile drives the majority of inbound inquiries, but most form recovery tools were built for desktop browsers. Here is why that gap matters and what changes when you treat mobile as a first-class environment.',
+            image: 'https://www.userecapture.com/api/og?title=Mobile+Form+Abandonment+Is+Different&eyebrow=Blog',
+            datePublished: '2026-05-18T00:00:00Z',
+            dateModified: '2026-05-27T00:00:00Z',
+            author: {
+              '@type': 'Person',
+              name: 'Asherton Chraibi',
+              url: 'https://www.userecapture.com/about',
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'ReCapture',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://www.userecapture.com/icon.png',
+              },
+            },
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': 'https://www.userecapture.com/blog/mobile-form-abandonment-is-different',
+            },
+          }),
+        }}
+      />
 
       <div className="blog-post-header">
         <Link href="/blog" className="blog-post-back">← Back to Insights</Link>

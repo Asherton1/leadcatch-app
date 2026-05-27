@@ -8,12 +8,63 @@ import '../../landing.css'
 export const metadata = {
   title: 'Why AI Voice Callbacks Convert 391% More Abandoned Leads',
   description: 'Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts. Here is why AI voice callbacks are the future of lead recovery.',
+  alternates: { canonical: '/blog/ai-voice-callbacks-form-abandonment' },
+  openGraph: {
+    title: 'Why AI Voice Callbacks Convert 391% More Abandoned Leads',
+    description: 'Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts. Here is why AI voice callbacks are the future of lead recovery.',
+    url: 'https://www.userecapture.com/blog/ai-voice-callbacks-form-abandonment',
+    siteName: 'ReCapture',
+    type: 'article',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=Why+AI+Voice+Callbacks+Convert+391%25+More&eyebrow=Blog',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Why AI Voice Callbacks Convert 391% More Abandoned Leads',
+    description: 'Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts. Here is why AI voice callbacks are the fu',
+    images: ['https://www.userecapture.com/api/og?title=Why+AI+Voice+Callbacks+Convert+391%25+More&eyebrow=Blog'],
+  },
 }
 
 export default function Post() {
   return (
     <div className="blog-post">
       <BlogNav />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: 'Why AI Voice Callbacks Convert 391% More Abandoned Leads',
+            description: 'Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts. Here is why AI voice callbacks are the future of lead recovery.',
+            image: 'https://www.userecapture.com/api/og?title=Why+AI+Voice+Callbacks+Convert+391%25+More&eyebrow=Blog',
+            datePublished: '2026-04-22T00:00:00Z',
+            dateModified: '2026-05-27T00:00:00Z',
+            author: {
+              '@type': 'Person',
+              name: 'Asherton Chraibi',
+              url: 'https://www.userecapture.com/about',
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'ReCapture',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://www.userecapture.com/icon.png',
+              },
+            },
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': 'https://www.userecapture.com/blog/ai-voice-callbacks-form-abandonment',
+            },
+          }),
+        }}
+      />
 
       <div className="blog-post-header">
         <Link href="/blog" className="blog-post-back">&larr; Back to Insights</Link>

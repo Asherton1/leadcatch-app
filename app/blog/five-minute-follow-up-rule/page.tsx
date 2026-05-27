@@ -7,12 +7,63 @@ import Image from 'next/image'
 export const metadata = {
   title: 'The 5-Minute Follow-Up Rule: Speed to Lead Wins Every Time',
   description: 'Research shows that calling a lead within 5 minutes makes you 21x more likely to convert. Here is why most businesses miss that window — and how to close it automatically.',
+  alternates: { canonical: '/blog/five-minute-follow-up-rule' },
+  openGraph: {
+    title: 'The 5-Minute Follow-Up Rule: Speed to Lead Wins Every Time',
+    description: 'Research shows that calling a lead within 5 minutes makes you 21x more likely to convert. Here is why most businesses miss that window — and how to close it automatically.',
+    url: 'https://www.userecapture.com/blog/five-minute-follow-up-rule',
+    siteName: 'ReCapture',
+    type: 'article',
+    images: [{
+      url: 'https://www.userecapture.com/api/og?title=The+5-Minute+Follow-Up+Rule&eyebrow=Blog',
+      width: 1200,
+      height: 630,
+      alt: 'ReCapture',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'The 5-Minute Follow-Up Rule: Speed to Lead Wins Every Time',
+    description: 'Research shows that calling a lead within 5 minutes makes you 21x more likely to convert. Here is why most businesses miss that window — and how to cl',
+    images: ['https://www.userecapture.com/api/og?title=The+5-Minute+Follow-Up+Rule&eyebrow=Blog'],
+  },
 }
 
 export default function Post() {
   return (
     <div className="blog-post">
       <BlogNav />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: 'The 5-Minute Follow-Up Rule: Speed to Lead Wins Every Time',
+            description: 'Research shows that calling a lead within 5 minutes makes you 21x more likely to convert. Here is why most businesses miss that window — and how to close it automatically.',
+            image: 'https://www.userecapture.com/api/og?title=The+5-Minute+Follow-Up+Rule&eyebrow=Blog',
+            datePublished: '2026-04-17T00:00:00Z',
+            dateModified: '2026-05-27T00:00:00Z',
+            author: {
+              '@type': 'Person',
+              name: 'Asherton Chraibi',
+              url: 'https://www.userecapture.com/about',
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'ReCapture',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://www.userecapture.com/icon.png',
+              },
+            },
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': 'https://www.userecapture.com/blog/five-minute-follow-up-rule',
+            },
+          }),
+        }}
+      />
 
       <div className="blog-post-header">
         <Link href="/blog" className="blog-post-back">← Back to Insights</Link>
