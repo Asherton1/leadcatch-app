@@ -10,12 +10,60 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 const VALID_INQUIRY_TYPES = ['sales', 'demo', 'partnership', 'support', 'other']
 
+// In-memory rate limit: IP -> array of submission timestamps (ms).
+// Resets on container restart. Sufficient for contact form spam levels.
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000  // 10 minutes
+const RATE_LIMIT_MAX = 3                       // 3 submissions per window per IP
+const submissionLog = new Map<string, number[]>()
+
+function getClientIp(request: NextRequest): string {
+  const xff = request.headers.get('x-forwarded-for')
+  if (xff) return xff.split(',')[0].trim()
+  const real = request.headers.get('x-real-ip')
+  if (real) return real.trim()
+  return 'unknown'
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now()
+  const windowStart = now - RATE_LIMIT_WINDOW_MS
+  const previous = submissionLog.get(ip) || []
+  const inWindow = previous.filter(t => t > windowStart)
+  if (inWindow.length >= RATE_LIMIT_MAX) {
+    submissionLog.set(ip, inWindow)
+    return true
+  }
+  inWindow.push(now)
+  submissionLog.set(ip, inWindow)
+  // Cleanup: if map grows too large, drop oldest entries
+  if (submissionLog.size > 5000) {
+    const entries = Array.from(submissionLog.entries())
+    entries.sort((a, b) => Math.max(...a[1]) - Math.max(...b[1]))
+    for (let i = 0; i < 1000; i++) submissionLog.delete(entries[i][0])
+  }
+  return false
+}
+
 export async function POST(request: NextRequest) {
+  // Rate limit check (before parsing body)
+  const ip = getClientIp(request)
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ error: 'Too many submissions. Try again in a few minutes.' }, { status: 429 })
+  }
+
   let body: Record<string, unknown>
   try {
     body = await request.json()
   } catch {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
+  }
+
+  // Honeypot check: humans never fill 'website' field. If filled, silently
+  // succeed without doing any of the real work — bots think they got through.
+  const honeypot = String(body.website || '').trim()
+  if (honeypot) {
+    console.log('Contact honeypot triggered from IP=' + ip + ' value=' + honeypot.slice(0, 50))
+    return NextResponse.json({ success: true })
   }
 
   const name = String(body.name || '').trim()
