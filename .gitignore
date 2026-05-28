@@ -7,3 +7,4 @@ node_modules
 # Outreach preview emails
 preview-*.html
 .env*
+public/_backup_*
