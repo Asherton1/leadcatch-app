@@ -99,6 +99,43 @@ export async function POST(request: NextRequest) {
     }
     if (bestScore === 0) { detectedIndustry = 'General Business'; industryLeadValue = 1500 }
 
+    // ---- AI classification (Claude Haiku) ----
+    // Tries Claude first so ANY business type is recognized, not just the
+    // hand-coded list above. On missing key / failure / bad JSON it silently
+    // keeps the keyword result. Skipped when an explicit industryHint is given.
+    const anthropicKey = process.env.ANTHROPIC_API_KEY
+    if (!industryHint && anthropicKey) {
+      try {
+        const aiRes = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'x-api-key': anthropicKey,
+            'anthropic-version': '2023-06-01',
+          },
+          body: JSON.stringify({
+            model: 'claude-haiku-4-5-20251001',
+            max_tokens: 100,
+            messages: [{
+              role: 'user',
+              content: 'Classify this business from its website text. Return ONLY JSON like {"industry":"Med Spa","leadValue":2800} and nothing else. leadValue = the average gross dollar value of ONE new client for this type of business. Reference anchors: Med Spa 2800, Dental 3500, Plastic Surgery 8500, LASIK / Eye Care 4200, Luxury Real Estate 15000, Fertility 12000, Dermatology 2200, Property Management 1800, Legal 5000, Chiropractic 1200, Luxury Auto 7500. For any other industry estimate a comparable figure. If genuinely unclear use {"industry":"General Business","leadValue":1500}.\n\nWebsite text:\n' + signal.slice(0, 1500),
+            }],
+          }),
+        })
+        if (aiRes.ok) {
+          const aiData = await aiRes.json()
+          const aiText: string = aiData?.content?.[0]?.text || ''
+          const aiParsed = JSON.parse(aiText.replace(/```json|```/g, '').trim())
+          if (aiParsed && typeof aiParsed.industry === 'string' && typeof aiParsed.leadValue === 'number') {
+            detectedIndustry = aiParsed.industry
+            industryLeadValue = Math.max(500, Math.min(Math.round(aiParsed.leadValue), 50000))
+          }
+        }
+      } catch {
+        // keep keyword fallback silently
+      }
+    }
+
 
 
     // Override auto-detection with industryHint if provided
