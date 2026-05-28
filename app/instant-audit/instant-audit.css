@@ -3,13 +3,19 @@
    Matches ReCapture design system: #0a0a0a, #ff6b35, hairlines
    ============================================================ */
 
-.ia-root {
+.ia-page-wrap {
   min-height: 100vh;
   background: #0a0a0a;
   display: flex;
+  flex-direction: column;
+}
+
+.ia-root {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 24px;
+  padding: 60px 24px;
 }
 
 .ia-container {

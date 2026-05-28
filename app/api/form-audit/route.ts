@@ -59,39 +59,45 @@ export async function POST(request: NextRequest) {
 
     // Auto-detect industry from site content
     const htmlLower = html.toLowerCase()
+    // Auto-detect industry from HIGH-SIGNAL fields only (title, meta,
+    // headings) rather than the whole page, then SCORE matches. This stops
+    // stray body words from forcing a wrong industry (e.g. an agency that
+    // mentions 'property' for its clients). No strong match -> General Business.
+    const extractSignal = (raw: string): string => {
+      const parts: string[] = []
+      const grab = (re: RegExp) => { const x = raw.match(re); if (x && x[1]) parts.push(x[1]) }
+      grab(/<title[^>]*>([\s\S]*?)<\/title>/i)
+      grab(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i)
+      grab(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)
+      grab(/<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["']/i)
+      const heads = raw.match(/<h[12][^>]*>([\s\S]*?)<\/h[12]>/gi) || []
+      for (const h of heads.slice(0, 8)) parts.push(h.replace(/<[^>]+>/g, ' '))
+      return parts.join(' ').toLowerCase().replace(/\s+/g, ' ')
+    }
+    const signal = extractSignal(html)
+
+    const INDUSTRY_RULES: Array<{ name: string; value: number; patterns: RegExp[] }> = [
+      { name: 'Plastic Surgery', value: 8500, patterns: [/plastic surg/, /rhinoplast/, /breast augment/, /facelift/, /liposuction/, /tummy tuck/, /cosmetic surg/] },
+      { name: 'Fertility', value: 12000, patterns: [/fertility/, /\bivf\b/, /reproductive/, /egg freez/, /embryo transfer/] },
+      { name: 'Luxury Real Estate', value: 15000, patterns: [/real estate/, /luxury home/, /\bmls\b/, /open house/, /realtor/, /luxury condo/] },
+      { name: 'LASIK / Eye Care', value: 4200, patterns: [/lasik/, /ophthalmolog/, /eye care/, /cataract/, /vision correct/, /\bprk\b/, /refractive/] },
+      { name: 'Dental', value: 3500, patterns: [/dental/, /dentist/, /orthodont/, /invisalign/, /veneer/, /teeth whiten/, /dental implant/] },
+      { name: 'Med Spa', value: 2800, patterns: [/med spa/, /medspa/, /botox/, /dermal filler/, /laser hair/, /hydrafacial/, /coolsculpt/, /aesthetic clinic/] },
+      { name: 'Dermatology', value: 2200, patterns: [/dermatolog/, /skin cancer/, /\bacne\b/, /eczema/, /psoriasis/, /\bmohs\b/] },
+      { name: 'Property Management', value: 1800, patterns: [/property manage/, /\bleasing\b/, /apartment/, /multifamily/, /\btenant/, /floor plan/] },
+      { name: 'Legal', value: 5000, patterns: [/\battorney/, /\blawyer/, /law firm/, /personal injury/] },
+      { name: 'Chiropractic', value: 1200, patterns: [/chiropract/, /spinal decompress/, /back pain relief/] },
+    ]
+
     let detectedIndustry = 'General Business'
     let industryLeadValue = 1500
-    if (/med\s?spa|medspa|botox|filler|aesthetic|laser\s?hair|skin\s?care|hydrafacial|coolsculpt/i.test(html)) {
-      detectedIndustry = 'Med Spa'
-      industryLeadValue = 2800
-    } else if (/dental|dentist|orthodont|invisalign|implant|veneer|crown|root\s?canal|teeth\s?whiten/i.test(html)) {
-      detectedIndustry = 'Dental'
-      industryLeadValue = 3500
-    } else if (/plastic\s?surg|rhinoplast|breast\s?augment|facelift|liposuction|tummy\s?tuck|cosmetic\s?surg/i.test(html)) {
-      detectedIndustry = 'Plastic Surgery'
-      industryLeadValue = 8500
-    } else if (/lasik|ophthalmolog|eye\s?care|cataract|vision\s?correct|prk|refractive/i.test(html)) {
-      detectedIndustry = 'LASIK / Eye Care'
-      industryLeadValue = 4200
-    } else if (/property\s?manage|leasing|apartment|multifamily|tenant|rent|floor\s?plan|move.in/i.test(html)) {
-      detectedIndustry = 'Property Management'
-      industryLeadValue = 1800
-    } else if (/real\s?estate|luxury\s?home|listing|mortgage|realtor|mls|open\s?house|condo/i.test(html)) {
-      detectedIndustry = 'Luxury Real Estate'
-      industryLeadValue = 15000
-    } else if (/fertility|ivf|reproductive|egg\s?freez|embryo|obgyn|ob.gyn/i.test(html)) {
-      detectedIndustry = 'Fertility'
-      industryLeadValue = 12000
-    } else if (/dermatolog|skin\s?cancer|acne|eczema|psoriasis|mohs/i.test(html)) {
-      detectedIndustry = 'Dermatology'
-      industryLeadValue = 2200
-    } else if (/chiropractic|chiropractor|spinal|adjustment|back\s?pain/i.test(html)) {
-      detectedIndustry = 'Chiropractic'
-      industryLeadValue = 1200
-    } else if (/attorney|lawyer|law\s?firm|legal|injury|accident/i.test(html)) {
-      detectedIndustry = 'Legal'
-      industryLeadValue = 5000
+    let bestScore = 0
+    for (const rule of INDUSTRY_RULES) {
+      let score = 0
+      for (const p of rule.patterns) { if (p.test(signal)) score++ }
+      if (score > bestScore) { bestScore = score; detectedIndustry = rule.name; industryLeadValue = rule.value }
     }
+    if (bestScore === 0) { detectedIndustry = 'General Business'; industryLeadValue = 1500 }
 
 
 

@@ -1,6 +1,9 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
+import Logo from '../components/Logo'
+import MobileNav from '../components/MobileNav'
 import '../landing.css'
 import './instant-audit.css'
 
@@ -117,6 +120,13 @@ export default function InstantAuditPage() {
     : ''
 
   return (
+    <div className="ia-page-wrap">
+      <nav className="lc-nav">
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <Logo />
+        </Link>
+        <MobileNav />
+      </nav>
     <div className="ia-root">
       <div className="ia-container">
 
@@ -254,6 +264,7 @@ export default function InstantAuditPage() {
         )}
 
       </div>
+    </div>
     </div>
   )
 }
