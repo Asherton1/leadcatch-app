@@ -22,7 +22,17 @@ export async function POST(request: NextRequest) {
     const html = await siteRes.text()
 
     const formCount = (html.match(/<form/gi) || []).length
-    const inputCount = (html.match(/<input/gi) || []).length
+    // Count only FILLABLE fields. Exclude hidden/submit/button/checkbox/radio/
+    // search so search boxes, newsletter inputs and tracking fields don't
+    // inflate the count (this is what made a portfolio site read as 42 fields).
+    const skipTypes = new Set(['hidden', 'submit', 'button', 'reset', 'image', 'checkbox', 'radio', 'search'])
+    const inputTags = html.match(/<input[^>]*>/gi) || []
+    let inputCount = 0
+    for (const tag of inputTags) {
+      const tm = tag.match(/type=["']?([a-zA-Z]+)/i)
+      const t = tm ? tm[1].toLowerCase() : 'text'
+      if (!skipTypes.has(t)) inputCount++
+    }
     const textareaCount = (html.match(/<textarea/gi) || []).length
     const selectCount = (html.match(/<select/gi) || []).length
     const totalFields = inputCount + textareaCount + selectCount
@@ -175,7 +185,7 @@ export async function POST(request: NextRequest) {
 
     const avgLeadValue = industryLeadValue
         const monthlyVisitors = 500
-    const formStarts = Math.round(monthlyVisitors * 0.15)
+    const formStarts = Math.round(monthlyVisitors * 0.06)
     const abandonedLeads = Math.round(formStarts * (estAbandonment / 100))
     const monthlyRevenueLost = abandonedLeads * avgLeadValue
     const yearlyRevenueLost = monthlyRevenueLost * 12
@@ -320,7 +330,7 @@ export async function POST(request: NextRequest) {
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Est. Monthly Revenue Lost</td><td style="color:#ef4444;font-size:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:800;">$' + monthlyRevenueLost.toLocaleString() + '</td></tr>' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;">Est. Annual Revenue Lost</td><td style="color:#ef4444;font-size:18px;padding:14px 0;text-align:right;font-weight:800;">$' + yearlyRevenueLost.toLocaleString() + '</td></tr>' +
         '</table>' +
-        '<p style="color:#666;font-size:12px;margin:24px 0 0;line-height:1.6;">Based on 500 monthly visitors, 15% form start rate, and $' + industryLeadValue.toLocaleString() + ' avg. ' + detectedIndustry + ' client value. Your actual numbers may be higher.</p>' +
+        '<p style="color:#666;font-size:12px;margin:24px 0 0;line-height:1.6;">Based on 500 monthly visitors, 6% form start rate, and $' + industryLeadValue.toLocaleString() + ' avg. ' + detectedIndustry + ' client value. Your actual numbers may be higher.</p>' +
       '</div>' +
 
       // FINDINGS

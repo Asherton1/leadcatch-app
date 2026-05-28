@@ -242,7 +242,7 @@ export default function InstantAuditPage() {
             </div>
 
             <p className="ia-methodology">
-              Based on 500 monthly visitors, a 15% form-start rate, and average {result.detectedIndustry} client value.
+              Based on 500 monthly visitors, a 6% form-start rate, and average {result.detectedIndustry} client value.
               Your actual numbers may be higher.
             </p>
 
