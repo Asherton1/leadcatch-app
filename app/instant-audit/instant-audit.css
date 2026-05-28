@@ -1,0 +1,373 @@
+/* ============================================================
+   Instant Audit — live form audit "wow page"
+   Matches ReCapture design system: #0a0a0a, #ff6b35, hairlines
+   ============================================================ */
+
+.ia-root {
+  min-height: 100vh;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+}
+
+.ia-container {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ---------- shared ---------- */
+.ia-eyebrow,
+.ia-results-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ff6b35;
+  margin: 0 0 20px;
+}
+
+/* ---------- INPUT STATE ---------- */
+.ia-input-state {
+  text-align: center;
+  animation: ia-fade-up 0.5s ease both;
+}
+
+.ia-headline {
+  font-size: 44px;
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0 0 20px;
+}
+
+.ia-subhead {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #999;
+  max-width: 460px;
+  margin: 0 auto 40px;
+}
+
+.ia-form {
+  display: flex;
+  gap: 10px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.ia-input {
+  flex: 1;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-size: 16px;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.ia-input::placeholder { color: #555; }
+.ia-input:focus { border-color: #ff6b35; }
+
+.ia-analyze-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ff6b35;
+  color: #0a0a0a;
+  border: none;
+  border-radius: 10px;
+  padding: 16px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+.ia-analyze-btn:hover { background: #ff7d4d; transform: translateY(-1px); }
+.ia-analyze-btn svg { transition: transform 0.2s ease; }
+.ia-analyze-btn:hover svg { transform: translateX(3px); }
+
+.ia-error {
+  color: #ef4444;
+  font-size: 14px;
+  margin: 16px 0 0;
+}
+
+.ia-trust-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.ia-trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #777;
+}
+.ia-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+}
+
+/* ---------- LOADING STATE ---------- */
+.ia-loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
+  padding: 40px 0;
+  animation: ia-fade-up 0.4s ease both;
+}
+
+.ia-scanner {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ia-scanner-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-top-color: #ff6b35;
+  border-radius: 50%;
+  animation: ia-spin 1s linear infinite;
+}
+.ia-scanner-ring-2 {
+  inset: 14px;
+  border-top-color: transparent;
+  border-bottom-color: rgba(255, 107, 53, 0.4);
+  animation: ia-spin 1.6s linear infinite reverse;
+}
+.ia-scanner-core {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff6b35;
+  animation: ia-pulse 1.2s ease-in-out infinite;
+}
+
+.ia-loading-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 240px;
+}
+.ia-loading-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: #555;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+.ia-loading-step-active { color: #fff; }
+.ia-loading-step-done { color: #888; }
+
+/* ---------- RESULTS STATE ---------- */
+.ia-results-state {
+  animation: ia-fade-up 0.6s ease both;
+}
+
+.ia-grade-block {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.ia-grade-letter {
+  font-size: 88px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.ia-grade-meta { flex: 1; }
+.ia-grade-score {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 2px;
+  letter-spacing: -0.02em;
+}
+.ia-grade-score-max { color: #666; font-weight: 400; font-size: 20px; }
+.ia-grade-status {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+.ia-grade-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.ia-grade-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ia-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.ia-fact {
+  background: #0a0a0a;
+  padding: 24px 20px;
+  text-align: center;
+}
+.ia-fact-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #777;
+  margin: 0 0 8px;
+}
+.ia-fact-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+.ia-fact-value-red { color: #ef4444; }
+
+/* The big reveal */
+.ia-reveal {
+  text-align: center;
+  padding: 52px 0 40px;
+}
+.ia-reveal-label {
+  font-size: 15px;
+  color: #999;
+  margin: 0 0 16px;
+}
+.ia-reveal-number {
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #ef4444;
+  margin: 0 0 8px;
+  font-variant-numeric: tabular-nums;
+}
+.ia-reveal-period {
+  font-size: 16px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 24px;
+}
+.ia-reveal-monthly {
+  font-size: 16px;
+  color: #aaa;
+  margin: 0;
+}
+.ia-reveal-monthly strong { color: #fff; font-weight: 700; }
+
+.ia-methodology {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #666;
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* CTA */
+.ia-cta-block { text-align: center; }
+.ia-cta-headline {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 14px;
+}
+.ia-cta-sub {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #999;
+  max-width: 480px;
+  margin: 0 auto 32px;
+}
+.ia-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: #ff6b35;
+  color: #0a0a0a;
+  border-radius: 10px;
+  padding: 17px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+.ia-cta-btn:hover { background: #ff7d4d; transform: translateY(-1px); }
+.ia-cta-btn svg { transition: transform 0.2s ease; }
+.ia-cta-btn:hover svg { transform: translateX(3px); }
+
+.ia-reset {
+  display: block;
+  margin: 24px auto 0;
+  background: none;
+  border: none;
+  color: #777;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ia-reset:hover { color: #aaa; }
+
+/* ---------- animations ---------- */
+@keyframes ia-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ia-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes ia-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.6; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 640px) {
+  .ia-root { padding: 48px 20px; }
+  .ia-headline { font-size: 32px; }
+  .ia-subhead { font-size: 16px; margin-bottom: 32px; }
+  .ia-form { flex-direction: column; }
+  .ia-analyze-btn { justify-content: center; padding: 16px; }
+  .ia-grade-block { gap: 20px; }
+  .ia-grade-letter { font-size: 64px; }
+  .ia-grade-score { font-size: 24px; }
+  .ia-reveal-number { font-size: 52px; }
+  .ia-cta-headline { font-size: 26px; }
+  .ia-facts { grid-template-columns: 1fr; }
+  .ia-fact { padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; text-align: left; }
+  .ia-fact-label { margin: 0; }
+}
