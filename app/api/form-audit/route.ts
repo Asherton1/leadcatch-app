@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  const { url, email, name, dryRun, industryHint } = body as { url: string; email: string; name?: string; dryRun?: boolean; industryHint?: string }
+  const { url, email, name, dryRun, industryHint, delay } = body as { url: string; email: string; name?: string; dryRun?: boolean; industryHint?: string; delay?: boolean }
   if (!url || !email) {
     return NextResponse.json({ error: 'URL and email required' }, { status: 400 })
   }
@@ -415,16 +415,22 @@ export async function POST(request: NextRequest) {
       })
     }
 
+    // Build recipient payload. Send immediately by default (website form
+    // requests + tests want it now). Only delay 2-3hr when delay:true is
+    // passed — used for cold outreach so audits don't look bot-blasted.
+    const recipientPayload: Record<string, unknown> = {
+      from: 'ReCapture <hello@userecapture.com>',
+      to: email,
+      subject: 'Your ReCapture Form Audit Report — ' + url,
+      html: reportHTML,
+    }
+    if (delay) {
+      recipientPayload.scheduled_at = new Date(Date.now() + (Math.floor(Math.random() * 60 + 120) * 60 * 1000)).toISOString()
+    }
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + RESEND_KEY },
-      body: JSON.stringify({
-        from: 'ReCapture <hello@userecapture.com>',
-        to: email,
-        scheduled_at: new Date(Date.now() + (Math.floor(Math.random() * 60 + 120) * 60 * 1000)).toISOString(),
-        subject: 'Your ReCapture Form Audit Report — ' + url,
-        html: reportHTML,
-      }),
+      body: JSON.stringify(recipientPayload),
     })
 
     await fetch('https://api.resend.com/emails', {
