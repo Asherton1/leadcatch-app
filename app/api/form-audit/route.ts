@@ -333,7 +333,7 @@ export async function POST(request: NextRequest) {
         '<p style="color:#888;font-size:13px;line-height:1.6;margin:0 0 40px;">Or just reply to this email and I&rsquo;ll set you up manually.</p>' +
         // Signature
         '<div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;">' +
-          '<p style="color:#ff6b35;font-size:14px;font-weight:700;margin:0 0 4px;">Asherton Chraibi</p>' +
+          '<p style="color:#fff;font-size:14px;font-weight:700;margin:0 0 4px;">Asherton Chraibi</p>' +
           '<p style="font-size:13px;margin:0 0 4px;">' +
             '<span style="color:#fff;">Founder, </span>' +
             '<span style="color:#ff6b35;font-weight:300;font-size:17px;line-height:1;vertical-align:-2px;">+</span>' +
