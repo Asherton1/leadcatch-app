@@ -12,6 +12,7 @@ import RelatedPages from '../components/RelatedPages'
 import Logo from '../components/Logo'
 
 export default function FormAuditPage() {
+  const [name, setName] = useState('')
   const [url, setUrl] = useState('')
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
@@ -29,7 +30,7 @@ export default function FormAuditPage() {
       const res = await fetch('/api/form-audit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url, email }),
+        body: JSON.stringify({ url, email, name }),
       })
       if (!res.ok) {
         throw new Error('Audit request failed')
@@ -76,6 +77,17 @@ export default function FormAuditPage() {
         ) : (
           <div className="audit-form-block">
             <div className="audit-form-inputs">
+              <div className="audit-form-field">
+                <label className="audit-form-label" htmlFor="audit-name">Your Name</label>
+                <input
+                  className="audit-form-input"
+                  id="audit-name"
+                  type="text"
+                  placeholder="First name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
               <div className="audit-form-field">
                 <label className="audit-form-label" htmlFor="audit-url">Website URL</label>
                 <input
