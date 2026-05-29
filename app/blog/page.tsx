@@ -71,6 +71,18 @@ export default function BlogIndex() {
       <div className="blog-more reveal" style={{ maxWidth: '960px', margin: '0 auto', padding: '0 2rem 5rem' }}>
         <h2 style={{ color: '#ff6b35', fontSize: '1.5rem', fontWeight: 700, margin: '0 0 2rem 0' }}>More Insights</h2>
         <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
+          <Link href="/blog/hidden-cost-of-form-abandonment" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+              <Image src="/blog-form-abandonment.webp" alt="The hidden cost of form abandonment" fill style={{ objectFit: 'cover' }} />
+            </div>
+            <div style={{ padding: '1.5rem 2rem 2rem' }}>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Revenue</div>
+              <div style={{ fontSize: '0.8rem', color: '#666', marginBottom: '0.75rem' }}><span>April 3, 2026</span><span style={{ margin: '0 0.5rem' }}>·</span><span>7 min read</span></div>
+              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>The Hidden Cost of Form Abandonment</div>
+              <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: 1.6, marginBottom: '1rem' }}>Most businesses track traffic and ad spend but ignore the leads that start a form and never finish — and that blind spot is quietly expensive.</div>
+              <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Read article →</span>
+            </div>
+          </Link>
           <Link href="/blog/the-form-abandonment-compliance-problem" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
             <div style={{ position: 'relative', width: '100%', height: '200px' }}>
               <Image src="/blog-compliance-problem.webp" alt="Compliance and legal infrastructure" fill style={{ objectFit: 'cover' }} />
