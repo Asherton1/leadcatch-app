@@ -232,6 +232,10 @@ export async function POST(request: NextRequest) {
     if (!hasGTM && !hasGA) healthScore -= 15
     if (hasCaptcha) healthScore -= 10
     if (formCount === 0) healthScore -= 5
+    // JS-embedded / third-party forms carry inherently higher abandonment and are
+    // harder to track and recover — reflect that when the field count was estimated.
+    if (fieldsEstimated) healthScore -= 15
+    if (healthScore < 0) healthScore = 0
     const grade = healthScore >= 90 ? 'A' : healthScore >= 80 ? 'B' : healthScore >= 70 ? 'C+' : healthScore >= 60 ? 'C' : healthScore >= 50 ? 'D' : 'F'
     const gradeColor = healthScore >= 80 ? '#22c55e' : healthScore >= 60 ? '#f59e0b' : '#ef4444'
 
