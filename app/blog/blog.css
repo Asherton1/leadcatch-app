@@ -753,3 +753,24 @@
 .blog-more a > div:first-child { overflow: hidden; }
 .blog-more a img { transition: transform 0.5s ease; }
 .blog-more a:hover img { transform: scale(1.06); }
+
+
+/* ── Insights cards — cursor-following glow (pairs with BlogCardEffects tilt) ── */
+.blog-more a { position: relative; }
+.blog-more a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%),
+              rgba(255,107,53,0.13), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.blog-more a:hover::before { opacity: 1; }
+
+/* featured card — cover image zoom on hover */
+.blog-featured-visual img { transition: transform 0.5s ease; }
+.blog-featured-card:hover .blog-featured-visual img { transform: scale(1.05); }

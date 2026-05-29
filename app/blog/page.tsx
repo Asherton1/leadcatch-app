@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
+import BlogCardEffects from '../components/BlogCardEffects'
 import Footer from '../components/Footer'
 import './blog.css'
 import '../landing.css'
@@ -36,6 +37,7 @@ export default function BlogIndex() {
     <div className="blog-page">
       <BlogNav />
       <ScrollReveal />
+      <BlogCardEffects />
 
       <section className="canon-hero">
         <div className="canon-hero-inner">
