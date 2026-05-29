@@ -134,7 +134,7 @@ export async function POST(request: NextRequest) {
     // hand-coded list above. On missing key / failure / bad JSON it silently
     // keeps the keyword result. Skipped when an explicit industryHint is given.
     const anthropicKey = process.env.ANTHROPIC_API_KEY
-    if (!industryHint && anthropicKey) {
+    if (!industryHint && anthropicKey && signal.replace(/\s/g, '').length >= 40) {
       try {
         const aiRes = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
@@ -146,6 +146,7 @@ export async function POST(request: NextRequest) {
           body: JSON.stringify({
             model: 'claude-haiku-4-5-20251001',
             max_tokens: 100,
+            temperature: 0,
             messages: [{
               role: 'user',
               content: 'You are identifying what a business actually does, from its website text below. Return ONLY a JSON object and nothing else.\n\nFirst, read the text and name the business INDUSTRY accurately and specifically, based on what they truly do. Style of answer: "Breast Ultrasound Screening", "Wedding Photographer", "HVAC Repair", "Med Spa". Do NOT force the business into any preset list. Name what it actually is, even if it is not a category below.\n\nThen set leadValue = the average gross dollar value of ONE new customer for that industry. Use the following ONLY as dollar calibration reference points, NEVER as a menu of industries to choose from: Med Spa ~2800, Dental ~3500, Plastic Surgery ~8500, Eye Care or LASIK ~4200, Luxury Real Estate ~15000, Fertility ~12000, Dermatology ~2200, Property Management ~1800, Legal ~5000, Chiropractic ~1200, Luxury Auto ~7500, general small business ~1500. Pick a dollar number that fits the actual business you named.\n\nReturn exactly this shape and nothing else: {"industry":"<the accurate industry you identified>","leadValue":<integer dollars>}\n\nWebsite text:\n' + signal.slice(0, 1500),
