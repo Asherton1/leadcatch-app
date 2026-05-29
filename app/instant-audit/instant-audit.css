@@ -378,9 +378,8 @@
   .ia-fact-label { margin: 0; }
 }
 
-
 /* ===================================================
-   Input-state visual polish (ambient depth + preview)
+   Input-state visual polish (ambient depth + report)
    =================================================== */
 
 .ia-root { position: relative; overflow: hidden; }
@@ -420,9 +419,9 @@
   z-index: 0;
 }
 
-/* sample preview card */
+/* ---------- sample mini-report card ---------- */
 .ia-preview {
-  margin-top: 56px;
+  margin-top: 60px;
   opacity: 0;
   animation: ia-fade-up 0.8s ease 0.35s both;
 }
@@ -432,52 +431,100 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #666;
-  margin: 0 0 16px;
+  margin: 0 0 18px;
 }
 .ia-preview-card {
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  max-width: 440px;
+  max-width: 520px;
   margin: 0 auto;
-  padding: 24px 28px;
   text-align: left;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012));
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.012));
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
 }
 .ia-preview-card::after {
   content: '';
   position: absolute;
   top: 0;
-  left: -120%;
-  width: 100%;
+  left: -130%;
+  width: 80%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,107,53,0.10), transparent);
-  animation: ia-scan 4s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent, rgba(255,107,53,0.09), transparent);
+  animation: ia-scan 4.5s ease-in-out infinite;
   pointer-events: none;
+  z-index: 2;
 }
 @keyframes ia-scan {
-  0% { left: -120%; }
-  55%, 100% { left: 120%; }
+  0% { left: -130%; }
+  55%, 100% { left: 130%; }
+}
+
+/* window chrome */
+.ia-preview-chrome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.ia-preview-dots { display: inline-flex; gap: 6px; }
+.ia-preview-dots i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.16);
+  display: block;
+}
+.ia-preview-url {
+  flex: 1;
+  font-size: 12px;
+  color: #777;
+  font-family: var(--font-geist-mono, ui-monospace, monospace);
+}
+.ia-preview-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ff6b35;
+  border: 1px solid rgba(255,107,53,0.35);
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+/* grade row */
+.ia-preview-grade-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 24px 24px 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 .ia-preview-grade {
   flex-shrink: 0;
-  font-size: 56px;
+  font-size: 66px;
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.04em;
   color: #f59e0b;
 }
-.ia-preview-meta { flex: 1; min-width: 0; }
+.ia-preview-grade-meta { flex: 1; min-width: 0; }
+.ia-preview-score { font-size: 15px; color: #aaa; margin: 0 0 2px; }
+.ia-preview-score strong { color: #fff; font-size: 22px; font-weight: 700; }
+.ia-preview-score span { color: #666; }
+.ia-preview-status {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f59e0b;
+  margin: 0 0 12px;
+}
 .ia-preview-bar {
-  height: 4px;
+  height: 5px;
   background: rgba(255,255,255,0.08);
   border-radius: 4px;
   overflow: hidden;
-  margin-bottom: 12px;
 }
 .ia-preview-bar-fill {
   height: 100%;
@@ -485,29 +532,57 @@
   background: #f59e0b;
   border-radius: 4px;
 }
-.ia-preview-line {
-  font-size: 13px;
-  color: #888;
+
+/* stats row */
+.ia-preview-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.ia-preview-stat {
+  padding: 18px 20px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.ia-preview-stat:last-child { border-right: none; }
+.ia-preview-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #777;
+  margin: 0 0 6px;
+}
+.ia-preview-stat-value { font-size: 16px; font-weight: 700; color: #fff; margin: 0; }
+.ia-preview-red { color: #ef4444; }
+
+/* revenue hero */
+.ia-preview-reveal { padding: 24px; }
+.ia-preview-reveal-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #777;
   margin: 0 0 8px;
 }
-.ia-preview-lost {
-  font-size: 22px;
+.ia-preview-reveal-number {
+  font-size: 42px;
   font-weight: 800;
   color: #fff;
-  margin: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  margin: 0 0 4px;
+  font-variant-numeric: tabular-nums;
 }
-.ia-preview-lost span {
-  font-size: 13px;
-  font-weight: 500;
-  color: #777;
-  letter-spacing: 0;
-}
+.ia-preview-reveal-number span { font-size: 18px; color: #777; font-weight: 600; }
+.ia-preview-reveal-sub { font-size: 13px; color: #888; margin: 0; }
 
 @media (max-width: 640px) {
-  .ia-preview { margin-top: 40px; }
-  .ia-preview-card { gap: 18px; padding: 20px 22px; }
-  .ia-preview-grade { font-size: 46px; }
-  .ia-preview-lost { font-size: 19px; }
+  .ia-preview { margin-top: 44px; }
+  .ia-preview-card { max-width: 100%; }
+  .ia-preview-grade { font-size: 54px; }
+  .ia-preview-grade-row { gap: 18px; padding: 20px; }
+  .ia-preview-reveal-number { font-size: 34px; }
+  .ia-preview-stat { padding: 14px 12px; }
+  .ia-preview-stat-value { font-size: 14px; }
   .ia-root::before { width: 560px; height: 420px; }
 }

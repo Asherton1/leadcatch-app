@@ -167,13 +167,39 @@ export default function InstantAuditPage() {
               <span className="ia-trust-item"><span className="ia-dot" /> No signup</span>
             </div>
             <div className="ia-preview">
-              <p className="ia-preview-label">A preview of what you&apos;ll see</p>
+              <p className="ia-preview-label">A preview of what you&apos;ll get</p>
               <div className="ia-preview-card">
-                <div className="ia-preview-grade">C</div>
-                <div className="ia-preview-meta">
-                  <div className="ia-preview-bar"><div className="ia-preview-bar-fill" /></div>
-                  <p className="ia-preview-line">Med Spa &middot; 62% form abandonment</p>
-                  <p className="ia-preview-lost">$184,000<span> /yr at risk</span></p>
+                <div className="ia-preview-chrome">
+                  <span className="ia-preview-dots"><i /><i /><i /></span>
+                  <span className="ia-preview-url">yourpractice.com</span>
+                  <span className="ia-preview-tag">Sample</span>
+                </div>
+                <div className="ia-preview-grade-row">
+                  <div className="ia-preview-grade">C</div>
+                  <div className="ia-preview-grade-meta">
+                    <p className="ia-preview-score">Form Health <strong>65</strong><span>/100</span></p>
+                    <p className="ia-preview-status">Room to grow</p>
+                    <div className="ia-preview-bar"><div className="ia-preview-bar-fill" /></div>
+                  </div>
+                </div>
+                <div className="ia-preview-stats">
+                  <div className="ia-preview-stat">
+                    <p className="ia-preview-stat-label">Industry</p>
+                    <p className="ia-preview-stat-value">Med Spa</p>
+                  </div>
+                  <div className="ia-preview-stat">
+                    <p className="ia-preview-stat-label">Form Fields</p>
+                    <p className="ia-preview-stat-value">6</p>
+                  </div>
+                  <div className="ia-preview-stat">
+                    <p className="ia-preview-stat-label">Abandonment</p>
+                    <p className="ia-preview-stat-value ia-preview-red">62%</p>
+                  </div>
+                </div>
+                <div className="ia-preview-reveal">
+                  <p className="ia-preview-reveal-label">Estimated revenue at risk</p>
+                  <p className="ia-preview-reveal-number">$184,000<span> /yr</span></p>
+                  <p className="ia-preview-reveal-sub">about $15,300 every month</p>
                 </div>
               </div>
             </div>
