@@ -1,0 +1,23 @@
+/* Integrations page — card depth + hover polish */
+.int-card {
+  background: linear-gradient(180deg, #131313, #0f0f0f);
+  border: 1px solid #1e1e1e;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.int-card:hover {
+  border-color: rgba(255,107,53,0.45);
+  background: linear-gradient(180deg, #1a1513, #131313);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.45);
+}
+.int-icon {
+  background: rgba(255,107,53,0.08);
+  border: 1px solid rgba(255,107,53,0.15);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+.int-card:hover .int-icon {
+  background: rgba(255,107,53,0.18);
+  border-color: rgba(255,107,53,0.4);
+}
+.int-card-soon { opacity: 0.6; }
+.int-card-soon:hover { opacity: 1; }
