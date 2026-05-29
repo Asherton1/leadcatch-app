@@ -81,7 +81,10 @@ export async function POST(request: NextRequest) {
     // so static HTML shows 0 fields and would falsely earn a perfect grade. The form
     // exists — estimate a typical field count so grade + abandonment reflect reality.
     let fieldsEstimated = false
-    if (totalFields === 0 && (hasHubspot || hasTypeform || hasJotform)) {
+    const embeddedBuilderKnown = hasHubspot || hasTypeform || hasJotform
+    if (totalFields === 0) {
+      // 0 countable fields almost always means the form is JS-rendered (server-side
+      // fetch can't run JavaScript) — not a perfect form. Estimate + flag honestly.
       totalFields = 6
       fieldsEstimated = true
     }
@@ -246,8 +249,12 @@ export async function POST(request: NextRequest) {
     const recommendations: string[] = []
 
     if (fieldsEstimated) {
-      findings.push('Your form is embedded via ' + formBuilder + ' and loads through JavaScript, so its fields cannot be counted directly. Based on typical embedded forms, we estimate roughly ' + totalFields + ' fields. Embedded and third-party forms often see higher abandonment from load delay and tracking gaps.')
-      recommendations.push('Embedded and third-party forms are the hardest to track and recover — ReCapture captures started-but-abandoned submissions even on embedded forms.')
+      if (embeddedBuilderKnown) {
+        findings.push('Your form is embedded via ' + formBuilder + ' and loads through JavaScript, so its fields cannot be counted directly. Based on typical embedded forms, we estimate roughly ' + totalFields + ' fields. Embedded and third-party forms often see higher abandonment from load delay and tracking gaps.')
+      } else {
+        findings.push('Your form appears to load via JavaScript, so its fields could not be measured directly from the page source. Based on typical lead forms, we estimate roughly ' + totalFields + ' fields. JavaScript-rendered forms are common and often see higher abandonment from load delays and weaker tracking.')
+      }
+      recommendations.push('Forms that load via JavaScript or third-party builders are the hardest to track and recover — ReCapture captures started-but-abandoned submissions even on these.')
     } else if (totalFields > 7) {
       findings.push('Your form has ' + totalFields + ' fields. Research shows each field beyond 4 increases abandonment by 5-10%.')
       recommendations.push('Reduce form fields to 4-5 essentials: name, email, phone, and service interest.')
