@@ -178,7 +178,7 @@ export default function IntegrationsPage() {
       <BlogNav />
       <ScrollReveal />
 
-      <section className="canon-hero">
+      <section className="canon-hero int-hero">
         <div className="canon-hero-inner">
           <p className="canon-hero-eyebrow">Integrations</p>
           <h1 className="canon-hero-headline">
@@ -187,6 +187,23 @@ export default function IntegrationsPage() {
           </h1>
         </div>
       </section>
+
+      {(() => {
+        const allInts = integrations.flatMap(g => g.items)
+        const mid = Math.ceil(allInts.length / 2)
+        const rows = [allInts.slice(0, mid), allInts.slice(mid)]
+        return (
+          <div className="int-marquee-wrap" aria-hidden="true">
+            {rows.map((row, ri) => (
+              <div key={ri} className={ri === 1 ? 'int-marquee rev' : 'int-marquee'}>
+                {[...row, ...row].map((it, idx) => (
+                  <div key={idx} className="int-chip"><div className="int-icon"><Icon type={it.icon} /></div><span>{it.name}</span></div>
+                ))}
+              </div>
+            ))}
+          </div>
+        )
+      })()}
 
       <section style={{ maxWidth: 900, margin: '0 auto', padding: '0 2rem 4rem' }}>
         {integrations.map((group, gi) => (
