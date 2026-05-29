@@ -68,9 +68,11 @@ export default function BlogIndex() {
         </Link>
       </div>
 
+      <div className="blog-divider" aria-hidden="true"><span></span></div>
+
       <div className="blog-more reveal" style={{ maxWidth: '960px', margin: '0 auto', padding: '0 2rem 5rem' }}>
         <h2 style={{ color: '#ff6b35', fontSize: '1.5rem', fontWeight: 700, margin: '0 0 2rem 0' }}>More Insights</h2>
-        <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
+        <div className="blog-bento">
           <Link href="/blog/hidden-cost-of-form-abandonment" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
             <div style={{ position: 'relative', width: '100%', height: '200px' }}>
               <Image src="/blog-form-abandonment.webp" alt="The hidden cost of form abandonment" fill style={{ objectFit: 'cover' }} />
