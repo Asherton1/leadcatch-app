@@ -15,6 +15,7 @@ import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
 import LedgerStats from './components/LedgerStats'
 import LedgerRows from './components/LedgerRows'
 import Logo from './components/Logo'
+import IntegrationMarquee from './components/IntegrationMarquee'
 
 export const metadata = {
   title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
@@ -184,6 +185,16 @@ export default function LandingPage() {
       </section>
 
 
+
+      <section className="lc-section reveal" style={{ textAlign: 'center' }}>
+        <p style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#ff6b35', marginBottom: '0.75rem' }}>Integrations</p>
+        <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 0.75rem' }}>Works with the tools you already use</h2>
+        <p style={{ fontSize: '1rem', color: '#888', maxWidth: 520, margin: '0 auto 2.5rem', lineHeight: 1.6 }}>Recovered leads flow straight into your existing stack — no rip-and-replace, no manual imports.</p>
+        <IntegrationMarquee />
+        <div style={{ marginTop: '2rem' }}>
+          <Link href="/integrations" className="page-transition-link" style={{ color: '#ff6b35', fontWeight: 600, fontSize: '0.9375rem', textDecoration: 'none' }}>See all integrations &rarr;</Link>
+        </div>
+      </section>
 
       <section className="pricing-band reveal">
         <div className="pricing-band-inner">
