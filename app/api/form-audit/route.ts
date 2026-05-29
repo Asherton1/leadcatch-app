@@ -35,7 +35,27 @@ export async function POST(request: NextRequest) {
     }
     const textareaCount = (html.match(/<textarea/gi) || []).length
     const selectCount = (html.match(/<select/gi) || []).length
-    const totalFields = inputCount + textareaCount + selectCount
+    // Use the LARGEST single form (the primary lead form), not the sum of
+    // every form on the page. Summing made multi-form sites (contact +
+    // newsletter + quote) read as one oversized form.
+    const totalFields = (() => {
+      const skip = new Set(['hidden','submit','button','reset','image','checkbox','radio','search'])
+      const countIn = (chunk: string): number => {
+        let n = 0
+        for (const tag of (chunk.match(/<input[^>]*>/gi) || [])) {
+          const tm = tag.match(/type=["']?([a-zA-Z]+)/i)
+          if (!skip.has((tm ? tm[1] : 'text').toLowerCase())) n++
+        }
+        n += (chunk.match(/<textarea/gi) || []).length
+        n += (chunk.match(/<select/gi) || []).length
+        return n
+      }
+      const forms = html.match(/<form[\s\S]*?<\/form>/gi) || []
+      if (forms.length === 0) return inputCount + textareaCount + selectCount
+      let max = 0
+      for (const f of forms) { const c = countIn(f); if (c > max) max = c }
+      return max
+    })()
     const hasTypeform = /typeform/i.test(html)
     const hasHubspot = /hubspot|hs-form/i.test(html)
     const hasJotform = /jotform/i.test(html)
