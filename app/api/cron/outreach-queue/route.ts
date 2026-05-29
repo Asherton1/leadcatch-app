@@ -105,6 +105,7 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
+    case 'cosmetic-dental':
     case 'dental':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
@@ -205,6 +206,54 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
+    case 'chiropractic':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week.</p>
+
+<p>Quick recap: roughly 60% of new-patient inquiries on ${c}'s site get abandoned before submit. ReCapture captures every unfinished appointment or consultation request and pushes it to your front desk within 60 seconds, so someone can follow up while the patient is still deciding.</p>
+
+<p>Recovering even a handful of new patients a month — each worth ongoing visit revenue — adds up fast.</p>
+
+<p>Worth a 15-min walkthrough this week?</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+
+    case 'iv-wellness':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week.</p>
+
+<p>Quick recap: a large share of membership and first-visit inquiries on ${c}'s site get started and abandoned before submit. ReCapture captures every unfinished inquiry within 60 seconds — and since IV wellness runs on recurring memberships, one recovered first visit is months of revenue, not a one-time drip.</p>
+
+<p>Across your locations, that compounds quickly.</p>
+
+<p>Worth a 15-min walkthrough this week?</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+
+    case 'concierge-medicine':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Following up on my note from earlier this week.</p>
+
+<p>Quick recap: concierge-medicine prospects research carefully, and many start a membership inquiry on ${c}'s site without finishing. ReCapture captures every unfinished inquiry within 60 seconds so you can reach them while they're still deciding, with a HIPAA-compliant AI voice callback. BAA available.</p>
+
+<p>At annual membership values, even one or two recovered members a month is meaningful recurring revenue.</p>
+
+<p>Worth a 15-min walkthrough this week?</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+
     default:
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
@@ -269,6 +318,7 @@ ${SIGNATURE_HTML}
 ${psHtml(company)}
 </div>`
 
+    case 'cosmetic-dental':
     case 'dental':
       return `${wrapperOpen}
 <p>Hi ${firstName},</p>
@@ -348,6 +398,48 @@ ${psHtml(company)}
 <p>If LASIK consultation recovery isn't a priority right now, totally understand. The summer push is short and intense — if it becomes one heading into your next paid ad cycle, you know where to find me.</p>
 
 <p>Otherwise, wishing you a great year at ${c}.</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+
+    case 'chiropractic':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note from me.</p>
+
+<p>If new-patient recovery isn't a priority right now, no worries. If you ever want to see how many appointment requests are slipping past ${c}, the door's open.</p>
+
+<p>Otherwise, wishing you a great rest of the year.</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+
+    case 'iv-wellness':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note from me.</p>
+
+<p>If membership recovery isn't on the radar right now, no worries. If you ever want to see how many first-visit inquiries are slipping past ${c}, the door's open.</p>
+
+<p>Otherwise, wishing you a great rest of the year.</p>
+
+${SIGNATURE_HTML}
+${psHtml(company)}
+</div>`
+
+    case 'concierge-medicine':
+      return `${wrapperOpen}
+<p>Hi ${firstName},</p>
+
+<p>Last note from me.</p>
+
+<p>If membership recovery isn't a priority right now, totally get it. If you ever want to see how many prospective members are slipping past ${c}, the door's open.</p>
+
+<p>Otherwise, wishing you a great rest of the year.</p>
 
 ${SIGNATURE_HTML}
 ${psHtml(company)}
