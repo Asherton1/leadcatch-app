@@ -16,6 +16,7 @@ import LedgerStats from './components/LedgerStats'
 import LedgerRows from './components/LedgerRows'
 import Logo from './components/Logo'
 import IntegrationMarquee from './components/IntegrationMarquee'
+import TestimonialSpotlight from './components/TestimonialSpotlight'
 
 export const metadata = {
   title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
@@ -210,48 +211,7 @@ export default function LandingPage() {
 
       <section className="lc-section testimonials-tone">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>What Our Clients Say</h2>
-        <div className="testimonials-grid reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }}>
-          <div style={{ padding: '2rem 1.5rem', borderBottom: '1px solid #1a1a1a' }}>
-            <p style={{ color: '#bbb', lineHeight: 1.8, fontSize: '0.95rem', margin: '0 0 1.5rem 0', fontStyle: 'italic' }}>&quot;We had no idea how many leads were starting our consultation form and dropping off. Within the first week, ReCapture surfaced 14 leads we never would have known about. Three of them booked. That alone paid for the year.&quot;</p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, color: '#ff6b35' }}>R</div>
-              <div>
-                <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.875rem' }}>Sarah K.</p>
-                <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>Practice Director, DFW</p>
-              </div>
-            </div>
-          </div>
-          <div style={{ padding: '2rem 1.5rem', borderBottom: '1px solid #1a1a1a' }}>
-            <p style={{ color: '#bbb', lineHeight: 1.8, fontSize: '0.95rem', margin: '0 0 1.5rem 0', fontStyle: 'italic' }}>&quot;As a healthcare practice, every qualified lead matters. ReCapture showed us exactly who was falling through the cracks on our intake forms. The dashboard is clean, the data is actionable, and the setup took less than two minutes.&quot;</p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, color: '#ff6b35' }}>D</div>
-              <div>
-                <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.875rem' }}>David M.</p>
-                <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>ESD Health</p>
-              </div>
-            </div>
-          </div>
-          <div style={{ padding: '2rem 1.5rem', borderBottom: '1px solid #1a1a1a' }}>
-            <p style={{ color: '#bbb', lineHeight: 1.8, fontSize: '0.95rem', margin: '0 0 1.5rem 0', fontStyle: 'italic' }}>&quot;Three high-value Medicare clients in our first month — all from prospects who never finished our quote form. We still can&apos;t get over it. They never hit submit, never showed up in our CRM, never existed to us. ReCapture catches the moment someone types their name and email, then triggers a personalized recovery email within 60 seconds. For seniors comparing a multi-step Medicare quote, that timing is everything.&quot;</p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, color: '#ff6b35' }}>J</div>
-              <div>
-                <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.875rem' }}>Joe &amp; Terry S.</p>
-                <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>Suncoast Insurance Solutions</p>
-              </div>
-            </div>
-          </div>
-          <div style={{ padding: '2rem 1.5rem', borderBottom: '1px solid #1a1a1a' }}>
-            <p style={{ color: '#bbb', lineHeight: 1.8, fontSize: '0.95rem', margin: '0 0 1.5rem 0', fontStyle: 'italic' }}>&quot;We run lead gen across multiple verticals and the drop-off between form views and submissions was always a black box. ReCapture opened that box. Now we see every lead that touches a form — and the ROI data makes reporting to stakeholders effortless.&quot;</p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1e1e1e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, color: '#ff6b35' }}>M</div>
-              <div>
-                <p style={{ margin: 0, fontWeight: 600, color: '#ff6b35', fontSize: '0.875rem' }}>Michael T.</p>
-                <p style={{ margin: 0, color: '#666', fontSize: '0.8rem' }}>3Con Partners</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <TestimonialSpotlight />
       </section>
 
       <section className="final-cta reveal">
