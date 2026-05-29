@@ -102,6 +102,25 @@ export default function GSAPAnimations() {
           stagger: 0.2 }
       )
 
+      // ── Ledger stats — count up from 0 on scroll-in ──
+      document.querySelectorAll<HTMLElement>('.ledger-stat-num').forEach((el) => {
+        const raw = (el.textContent || '').trim()
+        const isCurrency = raw.startsWith('$')
+        const target = parseInt(raw.replace(/[^0-9]/g, ''), 10)
+        if (!target) return
+        const obj = { val: 0 }
+        el.textContent = (isCurrency ? '$' : '') + '0'
+        gsap.to(obj, {
+          val: target,
+          duration: 1.6,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 85%' },
+          onUpdate: () => {
+            el.textContent = (isCurrency ? '$' : '') + Math.round(obj.val).toLocaleString('en-US')
+          },
+        })
+      })
+
     })
 
     return () => ctx.revert()
