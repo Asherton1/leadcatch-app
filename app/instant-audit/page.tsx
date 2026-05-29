@@ -166,6 +166,17 @@ export default function InstantAuditPage() {
               <span className="ia-trust-item"><span className="ia-dot" /> Instant results</span>
               <span className="ia-trust-item"><span className="ia-dot" /> No signup</span>
             </div>
+            <div className="ia-preview">
+              <p className="ia-preview-label">A preview of what you&apos;ll see</p>
+              <div className="ia-preview-card">
+                <div className="ia-preview-grade">C</div>
+                <div className="ia-preview-meta">
+                  <div className="ia-preview-bar"><div className="ia-preview-bar-fill" /></div>
+                  <p className="ia-preview-line">Med Spa &middot; 62% form abandonment</p>
+                  <p className="ia-preview-lost">$184,000<span> /yr at risk</span></p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
