@@ -706,3 +706,50 @@
 .nav-phone:hover {
   opacity: 0.75;
 }
+
+
+/* ===== Insights index — visual polish ===== */
+
+/* hero atmosphere (scoped to blog page only) */
+.blog-page .canon-hero { position: relative; overflow: hidden; }
+.blog-page .canon-hero::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 560px;
+  background: radial-gradient(ellipse at center, rgba(255,107,53,0.13), rgba(255,107,53,0) 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: blog-glow 6s ease-in-out infinite;
+}
+@keyframes blog-glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+.blog-page .canon-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+  mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.blog-page .canon-hero-inner { position: relative; z-index: 1; }
+
+/* More Insights cards — hover lift + glow + cover-image zoom */
+.blog-more a {
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+.blog-more a:hover {
+  border-color: rgba(255,107,53,0.45) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+}
+.blog-more a > div:first-child { overflow: hidden; }
+.blog-more a img { transition: transform 0.5s ease; }
+.blog-more a:hover img { transform: scale(1.06); }
