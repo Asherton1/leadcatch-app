@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     // Use the LARGEST single form (the primary lead form), not the sum of
     // every form on the page. Summing made multi-form sites (contact +
     // newsletter + quote) read as one oversized form.
-    const totalFields = (() => {
+    let totalFields = (() => {
       const skip = new Set(['hidden','submit','button','reset','image','checkbox','radio','search'])
       const countIn = (chunk: string): number => {
         let n = 0
@@ -76,6 +76,15 @@ export async function POST(request: NextRequest) {
     else if (hasGravity) formBuilder = 'Gravity Forms'
     else if (hasWPForms) formBuilder = 'WPForms'
     else if (hasContactForm7) formBuilder = 'Contact Form 7'
+
+    // Embedded/JS builders (HubSpot, Typeform, Jotform) inject fields via JavaScript,
+    // so static HTML shows 0 fields and would falsely earn a perfect grade. The form
+    // exists — estimate a typical field count so grade + abandonment reflect reality.
+    let fieldsEstimated = false
+    if (totalFields === 0 && (hasHubspot || hasTypeform || hasJotform)) {
+      totalFields = 6
+      fieldsEstimated = true
+    }
 
     const fieldScore = totalFields <= 4 ? 'Good' : totalFields <= 7 ? 'Moderate' : 'High Risk'
     const fieldRisk = totalFields <= 4 ? 'low' : totalFields <= 7 ? 'medium' : 'high'
@@ -236,7 +245,10 @@ export async function POST(request: NextRequest) {
     const findings: string[] = []
     const recommendations: string[] = []
 
-    if (totalFields > 7) {
+    if (fieldsEstimated) {
+      findings.push('Your form is embedded via ' + formBuilder + ' and loads through JavaScript, so its fields cannot be counted directly. Based on typical embedded forms, we estimate roughly ' + totalFields + ' fields. Embedded and third-party forms often see higher abandonment from load delay and tracking gaps.')
+      recommendations.push('Embedded and third-party forms are the hardest to track and recover — ReCapture captures started-but-abandoned submissions even on embedded forms.')
+    } else if (totalFields > 7) {
       findings.push('Your form has ' + totalFields + ' fields. Research shows each field beyond 4 increases abandonment by 5-10%.')
       recommendations.push('Reduce form fields to 4-5 essentials: name, email, phone, and service interest.')
     } else if (totalFields > 4) {
