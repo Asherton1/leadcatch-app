@@ -802,3 +802,70 @@
   background-size: 220% 100%;
   animation: blog-divider-shimmer 5.5s ease-in-out infinite;
 }
+
+
+/* ========================================
+   ABOUT STORY — collapsible + ghost numerals (May 30)
+   ======================================== */
+.about-story-v2-section { position: relative; }
+
+/* oversized ghost numeral behind each title */
+.about-story-v2-section::before {
+  content: attr(data-num);
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(5rem, 13vw, 10rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: rgba(255, 107, 53, 0.06);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+.about-story-v2-summary,
+.about-story-v2-body { position: relative; z-index: 1; }
+
+/* summary (clickable header) */
+.about-story-v2-summary {
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 2.75rem;
+  outline: none;
+}
+.about-story-v2-summary::-webkit-details-marker { display: none; }
+.about-story-v2-summary::marker { content: ''; }
+.about-story-v2-summary .about-story-v2-eyebrow { margin-bottom: 1rem; }
+.about-story-v2-summary .about-story-v2-headline { margin-bottom: 0; transition: color 0.25s ease; }
+.about-story-v2-summary:hover .about-story-v2-headline { color: #ff6b35; }
+
+/* chevron pinned right, rotates when open */
+.about-story-v2-chevron {
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+.about-story-v2-section[open] .about-story-v2-chevron {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* spacing for body when expanded */
+.about-story-v2-section[open] .about-story-v2-body { margin-top: 2rem; }
+
+@media (max-width: 768px) {
+  .about-story-v2-summary { padding: 0 2.25rem; }
+  .about-story-v2-section::before {
+    top: -0.5rem;
+    font-size: clamp(4rem, 18vw, 6rem);
+  }
+}
