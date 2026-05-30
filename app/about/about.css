@@ -892,21 +892,21 @@
 .about-founder-v2-image { position: relative; z-index: 1; }
 
 
-/* ===== mobile: unify to a clean left column (headings match left-aligned bodies) ===== */
+/* ===== mobile: center everything (founder + story — headings and bodies) ===== */
 @media (max-width: 768px) {
-  /* founder: photo + name + location + bio all left */
-  .about-founder-v2-grid { align-items: flex-start; }
-  .about-founder-v2-frame { margin: 0; }
+  .about-founder-v2-grid { align-items: center; }
+  .about-founder-v2-frame { margin: 0 auto; }
   .about-founder-v2-eyebrow,
-  .about-founder-v2-info { text-align: left; }
+  .about-founder-v2-info,
+  .about-founder-v2-bio { text-align: center; }
 
-  /* story: left-align eyebrow + headline to match the left bodies */
   .about-story-v2-eyebrow,
-  .about-story-v2-headline { text-align: left; }
-  .about-story-v2-summary { margin: 0; }
-  /* ghost numeral slides to the left so it sits behind the left-aligned title */
+  .about-story-v2-headline { text-align: center; }
+  .about-story-v2-summary { margin: 0 auto; }
+  .about-story-v2-body,
+  .about-story-v2-body p { text-align: center; }
   .about-story-v2-section::before {
-    left: 1.25rem;
-    transform: translateX(0);
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
