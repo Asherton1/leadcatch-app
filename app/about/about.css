@@ -704,3 +704,101 @@
     border-bottom: none !important;
   }
 }
+
+
+/* ========================================
+   ABOUT — May 30 motion/depth polish pass
+   (pure CSS, reuses blog keyframes)
+   ======================================== */
+
+/* hero atmosphere — animated glow over the photo */
+.about-page .about-hero-v2 { position: relative; overflow: hidden; }
+.about-page .about-hero-v2::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 520px;
+  background: radial-gradient(ellipse at center, rgba(255,107,53,0.16), rgba(255,107,53,0) 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: blog-glow 6s ease-in-out infinite;
+}
+.about-page .about-hero-v2-inner { position: relative; z-index: 1; }
+
+/* founder photo — grayscale -> color reveal + zoom inside a glow frame */
+.about-founder-v2-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.about-founder-v2-image img {
+  transition: filter 0.5s ease, transform 0.6s ease !important;
+  display: block;
+}
+.about-founder-v2-image:hover {
+  box-shadow: 0 0 0 1px rgba(255,107,53,0.5), 0 18px 50px rgba(255,107,53,0.12);
+}
+.about-founder-v2-image:hover img {
+  filter: grayscale(0%) !important;
+  transform: scale(1.04);
+}
+
+/* client list rows — hover brighten + sliding orange accent bar */
+.about-clients-row {
+  position: relative;
+  transition: background 0.25s ease, padding-left 0.25s ease;
+}
+.about-clients-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 60%;
+  background: #ff6b35;
+  border-radius: 2px;
+  transition: transform 0.25s ease;
+  transform-origin: center;
+}
+.about-clients-row:hover {
+  background: rgba(255,107,53,0.04);
+  padding-left: 1.25rem;
+}
+.about-clients-row:hover::before { transform: translateY(-50%) scaleY(1); }
+.about-clients-row:hover .about-clients-name { color: #ff6b35; }
+.about-clients-name { transition: color 0.25s ease; }
+
+/* values rows — same editorial hover */
+.about-values-v2-cell {
+  position: relative;
+  transition: background 0.25s ease, padding-left 0.25s ease;
+}
+.about-values-v2-cell::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 55%;
+  background: #ff6b35;
+  border-radius: 2px;
+  transition: transform 0.25s ease;
+}
+.about-values-v2-cell:hover {
+  background: rgba(255,107,53,0.04);
+  padding-left: 1.25rem;
+}
+.about-values-v2-cell:hover::before { transform: translateY(-50%) scaleY(1); }
+
+/* story dividers — shimmer (reuse blog-divider-shimmer keyframe) */
+.about-story-v2-divider {
+  background: linear-gradient(90deg, transparent, rgba(255,107,53,0.12) 18%, rgba(255,107,53,0.6) 50%, rgba(255,107,53,0.12) 82%, transparent);
+  background-size: 220% 100%;
+  animation: blog-divider-shimmer 5.5s ease-in-out infinite;
+}
