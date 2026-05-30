@@ -979,3 +979,59 @@
   transform: translateY(-3px);
   box-shadow: 0 14px 36px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,107,53,0.18);
 }
+
+
+/* ============================================================
+   HOW IT WORKS — pass 2: continuous scroll-fill spine + captured fix
+   ============================================================ */
+
+.hiw-flow { position: relative; }
+.hiw-spine { display: none; }
+
+@media (min-width: 769px) {
+  .hiw-spine {
+    display: block;
+    position: absolute;
+    left: 106px;
+    top: 2rem;
+    bottom: 2rem;
+    width: 2px;
+    background: #1a1a1a;
+    z-index: 0;
+    border-radius: 2px;
+  }
+  .hiw-spine-fill {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: var(--hiw-fill, 0%);
+    background: linear-gradient(to bottom, rgba(255,107,53,0.85), #ff6b35);
+    box-shadow: 0 0 10px rgba(255,107,53,0.5);
+    border-radius: 2px;
+  }
+  .hiw-spine-fill::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; left: 50%;
+    transform: translateX(-50%);
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: #ff6b35;
+    box-shadow: 0 0 16px rgba(255,107,53,0.85);
+  }
+  /* old centered connector segments -> invisible spacers (spine replaces them) */
+  .hiw-connector-line { background: transparent !important; }
+  .hiw-connector-dot { background: transparent !important; box-shadow: none !important; }
+  /* steps sit above the spine */
+  .hiw-step { position: relative; z-index: 1; }
+}
+
+/* captured labels — leading separators (wraps stay clean, no orphan middot) */
+.hiw-detail-items span:not(:last-child)::after { content: none !important; }
+.hiw-detail-items span { white-space: nowrap; font-size: 0.8125rem; }
+.hiw-detail-items span:not(:first-child)::before {
+  content: '\00b7';
+  color: #ff6b35;
+  margin: 0 0.5rem;
+  opacity: 0.6;
+}

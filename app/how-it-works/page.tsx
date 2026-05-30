@@ -3,6 +3,7 @@ import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
 import FAQSection from '../components/FAQSection'
 import ScrollReveal from '../components/ScrollReveal'
+import HiwSpine from '../components/HiwSpine'
 import Link from 'next/link'
 import '../blog/blog.css'
 import '../landing.css'
@@ -46,6 +47,7 @@ export default function HowItWorksPage() {
     <div className="hiw-page">
       <BlogNav />
       <ScrollReveal />
+      <HiwSpine />
 
       {/* Hero */}
       <section className="canon-hero">
@@ -60,6 +62,7 @@ export default function HowItWorksPage() {
 
       {/* Visual Flow */}
       <section className="hiw-flow">
+        <div className="hiw-spine" aria-hidden="true"><span className="hiw-spine-fill"></span></div>
 
         {/* Step 1 */}
         <div className="hiw-step reveal">
