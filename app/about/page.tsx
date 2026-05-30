@@ -56,8 +56,10 @@ export default function AboutPage() {
         <div className="about-founder-v2-inner">
           <p className="about-founder-v2-eyebrow">Founder</p>
           <div className="about-founder-v2-grid">
-            <div className="about-founder-v2-image">
-              <Image src="/founder.png" alt="Asherton Chraibi — Founder of ReCapture" width={400} height={400} style={{ objectFit: 'cover', filter: 'grayscale(100%)', borderRadius: '4px', width: '100%', height: 'auto' }} />
+            <div className="about-founder-v2-frame">
+              <div className="about-founder-v2-image">
+                <Image src="/founder.png" alt="Asherton Chraibi — Founder of ReCapture" width={400} height={400} style={{ objectFit: 'cover', filter: 'grayscale(100%)', borderRadius: '4px', width: '100%', height: 'auto' }} />
+              </div>
             </div>
             <div className="about-founder-v2-info">
               <h2 className="about-founder-v2-name">Asherton Chraibi</h2>

@@ -869,3 +869,24 @@
     font-size: clamp(4rem, 18vw, 6rem);
   }
 }
+
+
+/* founder photo — offset editorial frame line */
+.about-founder-v2-frame {
+  position: relative;
+  width: 170px;
+  margin: 0 auto;
+}
+.about-founder-v2-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 107, 53, 0.45);
+  border-radius: 4px;
+  transform: translate(11px, 11px);
+  transition: transform 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.about-founder-v2-frame:hover::before { transform: translate(7px, 7px); }
+.about-founder-v2-image { position: relative; z-index: 1; }
