@@ -1035,3 +1035,44 @@
   margin: 0 0.5rem;
   opacity: 0.6;
 }
+
+
+/* ============================================================
+   HOW IT WORKS — spine on mobile (left-edge rail)
+   ============================================================ */
+@media (max-width: 768px) {
+  .hiw-flow { padding-left: 2.25rem; }
+  .hiw-spine {
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 1.5rem;
+    bottom: 1.5rem;
+    width: 2px;
+    background: #1a1a1a;
+    z-index: 0;
+    border-radius: 2px;
+  }
+  .hiw-spine-fill {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: var(--hiw-fill, 0%);
+    background: linear-gradient(to bottom, rgba(255,107,53,0.85), #ff6b35);
+    box-shadow: 0 0 10px rgba(255,107,53,0.5);
+    border-radius: 2px;
+  }
+  .hiw-spine-fill::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; left: 50%;
+    transform: translateX(-50%);
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: #ff6b35;
+    box-shadow: 0 0 16px rgba(255,107,53,0.85);
+  }
+  .hiw-step { position: relative; z-index: 1; }
+  .hiw-connector-line { background: transparent !important; }
+  .hiw-connector-dot { background: transparent !important; box-shadow: none !important; }
+}
