@@ -383,3 +383,100 @@
   .faq-q { padding: 1.1rem 0.6rem; }
   .faq-a-inner p { padding: 0 0.8rem 1.2rem 0.6rem; }
 }
+
+
+/* ============================================================
+   FAQ instant search (May 31)
+   ============================================================ */
+.faq-search {
+  position: relative;
+  max-width: 520px;
+  margin: 1.85rem auto 0;
+  display: flex;
+  align-items: center;
+}
+.faq-search-icon {
+  position: absolute;
+  left: 1rem;
+  color: #666;
+  display: inline-flex;
+  pointer-events: none;
+}
+.faq-search input {
+  width: 100%;
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.975rem;
+  padding: 0.85rem 2.75rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.faq-search input::placeholder { color: #666; }
+.faq-search input:focus {
+  border-color: rgba(255,107,53,0.5);
+  box-shadow: 0 0 0 3px rgba(255,107,53,0.12);
+}
+.faq-search-clear {
+  position: absolute;
+  right: 0.85rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  display: inline-flex;
+  padding: 0.2rem;
+  border-radius: 6px;
+  transition: color 0.2s ease;
+}
+.faq-search-clear:hover { color: #fff; }
+.faq-search-hint {
+  position: absolute;
+  right: 0.9rem;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid #2a2a2a;
+  border-radius: 5px;
+  padding: 0.02rem 0.45rem;
+  pointer-events: none;
+}
+
+.faq-mark {
+  background: rgba(255,107,53,0.22);
+  color: #ffb692;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+.faq-results {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+}
+.faq-results-count {
+  color: #888;
+  font-size: 0.9rem;
+  margin: 0 0 2rem;
+  letter-spacing: 0.01em;
+}
+.faq-empty {
+  text-align: center;
+  padding: 2.5rem 1rem 1rem;
+  color: #888;
+}
+.faq-empty p {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  margin: 0 0 1.75rem;
+}
+
+/* static (non-toggle) items in search results */
+.faq-q-static { cursor: default; }
+
+@media (max-width: 768px) {
+  .faq-search-hint { display: none; }
+  .faq-results { padding: 1.5rem 1.25rem 2rem; }
+}
