@@ -98,7 +98,7 @@ function Val({ v }: { v: string | boolean }) {
 
 export default function WhyUsPage() {
   return (
-    <div className="blog-post">
+    <div className="blog-post why-us-page">
       <BlogNav />
       <ScrollReveal />
 
@@ -215,7 +215,7 @@ export default function WhyUsPage() {
           <p style={{ color: '#bbb', lineHeight: 1.8, margin: 0 }}>Podium tells you who messaged you. GoHighLevel helps you follow up with submitted leads. CartStack recovers e-commerce carts. ReCapture captures <em>who</em> dropped off, scores how serious they were, alerts you in real time, calls them back with AI within 60 seconds, and automatically brings them back. That&apos;s not analytics. That&apos;s recovered revenue.</p>
         </div>
 
-        <div className="reveal" style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a1a 100%)', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2.5rem', margin: '3rem 0', textAlign: 'center' }}>
+        <div className="reveal" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2.5rem', margin: '3rem 0', textAlign: 'center' }}>
           <h3 style={{ color: '#ff6b35', fontSize: '1.5rem', margin: '0 0 0.75rem 0' }}>Ready to recover your lost leads?</h3>
           <p style={{ color: '#888', margin: '0 0 1.5rem 0' }}>Start your free trial — full access from day one. No setup fees. Cancel anytime.</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>

@@ -5572,3 +5572,34 @@ select.audit-form-input option {
 .pricing-faq-card:hover { border-color: rgba(255,107,53,0.4) !important; transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
 .pricing-faq-card-cta span { display: inline-block; transition: transform 0.25s ease; }
 .pricing-faq-card:hover .pricing-faq-card-cta span { transform: translateX(4px); }
+
+
+/* ============================================================
+   why-us polish (May 31)
+   ============================================================ */
+@keyframes whyus-glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+.why-us-page .canon-hero { position: relative; overflow: hidden; }
+.why-us-page .canon-hero::before {
+  content: '';
+  position: absolute; top: -15%; left: 50%; transform: translateX(-50%);
+  width: 880px; height: 520px;
+  background: radial-gradient(ellipse at center, rgba(255,107,53,0.13), rgba(255,107,53,0) 70%);
+  pointer-events: none; z-index: 0;
+  animation: whyus-glow 6s ease-in-out infinite;
+}
+.why-us-page .canon-hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+  mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+.why-us-page .canon-hero-inner { position: relative; z-index: 1; }
+
+/* comparison table — row hover highlight */
+.why-us-page .compare-desktop tbody tr td { transition: background 0.18s ease; }
+.why-us-page .compare-desktop tbody tr:hover td { background: rgba(255,107,53,0.055) !important; }

@@ -25,7 +25,7 @@ function AccordionItem({ item }: { item: FeatureItem }) {
         type="button"
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(255,107,53,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <div style={{ width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             {item.icon}
           </div>
           <div style={{ textAlign: 'left' }}>
