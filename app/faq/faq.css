@@ -333,3 +333,21 @@
   .faq-chevron,
   .faq-item::before { transition: none; }
 }
+
+
+/* ============================================================
+   FAQ fixes (May 31) - mobile cleanup + robust sticky rail
+   ============================================================ */
+
+/* Desktop: rail itself is the sticky element (cleaner, more reliable) */
+@media (min-width: 769px) {
+  .faq-rail { align-self: start; position: sticky; top: 96px; }
+  .faq-rail-sticky { position: static; top: auto; }
+}
+
+/* Mobile: drop the rail entirely; clean single-column stacked categories */
+@media (max-width: 768px) {
+  .faq-rail { display: none; }
+  .faq-layout { display: block; padding: 1.5rem 1.25rem 2rem; }
+  .faq-content { width: 100%; }
+}
