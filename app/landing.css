@@ -5565,3 +5565,10 @@ select.audit-form-input option {
 .contact-success-action:hover .contact-success-action-arrow {
   transform: translateX(3px);
 }
+
+
+/* pricing -> full FAQ card */
+.pricing-faq-card { transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease; }
+.pricing-faq-card:hover { border-color: rgba(255,107,53,0.4) !important; transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+.pricing-faq-card-cta span { display: inline-block; transition: transform 0.25s ease; }
+.pricing-faq-card:hover .pricing-faq-card-cta span { transform: translateX(4px); }
