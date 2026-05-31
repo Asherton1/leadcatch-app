@@ -480,3 +480,74 @@
   .faq-search-hint { display: none; }
   .faq-results { padding: 1.5rem 1.25rem 2rem; }
 }
+
+
+/* ============================================================
+   FAQ mobile WOW - editorial chapters + motion (May 31)
+   ============================================================ */
+@media (max-width: 768px) {
+  /* drop the boxed-card look -> full-bleed editorial chapters */
+  .faq-cat {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 2.75rem;
+    position: relative;
+  }
+
+  /* big ghost numeral per category (matches About story sections) */
+  .faq-content { counter-reset: faqcat; }
+  .faq-cat { counter-increment: faqcat; }
+  .faq-cat::before {
+    content: counter(faqcat, decimal-leading-zero);
+    position: absolute;
+    top: -0.75rem;
+    right: 0.15rem;
+    font-size: 3.6rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: rgba(255,107,53,0.09);
+    pointer-events: none;
+    user-select: none;
+  }
+  .faq-cat-title,
+  .faq-list { position: relative; }
+
+  /* bolder chapter title with a hairline rule */
+  .faq-cat-title {
+    font-size: 1.3rem;
+    padding-bottom: 0.9rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .faq-cat-title-bar { display: none; }
+
+  /* stronger open-state: growing orange left rail */
+  .faq-item.is-open {
+    padding-left: 0.85rem;
+    border-left: 2px solid #ff6b35;
+    border-radius: 0 10px 10px 0;
+  }
+}
+
+/* scroll-driven entrance motion (CSS-only, safely gated) */
+@supports (animation-timeline: view()) {
+  @media (max-width: 768px) {
+    @keyframes faq-enter {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .faq-cat-title,
+    .faq-item {
+      animation: faq-enter linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 20%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-cat-title, .faq-item { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
