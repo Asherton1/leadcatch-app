@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef, type MouseEvent } from 'react'
 import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
@@ -8,183 +8,164 @@ import RelatedPages from '../components/RelatedPages'
 import ScrollReveal from '../components/ScrollReveal'
 import '../blog/blog.css'
 import '../landing.css'
+import './faq.css'
 import { faqCategories } from './faqs'
 
 export default function FAQClient() {
   const [openKey, setOpenKey] = useState<string | null>('0-0')
+  const [active, setActive] = useState(0)
+  const sectionRefs = useRef<(HTMLElement | null)[]>([])
 
-  const toggle = (key: string) => {
-    setOpenKey(openKey === key ? null : key)
+  const toggle = (key: string) => setOpenKey(openKey === key ? null : key)
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const idx = Number((e.target as HTMLElement).dataset.idx)
+            if (!Number.isNaN(idx)) setActive(idx)
+          }
+        })
+      },
+      { rootMargin: '-25% 0px -65% 0px', threshold: 0 }
+    )
+    sectionRefs.current.forEach((el) => el && obs.observe(el))
+    return () => obs.disconnect()
+  }, [])
+
+  const jump = (idx: number) => {
+    setActive(idx)
+    sectionRefs.current[idx]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const handleGlow = (e: MouseEvent<HTMLDivElement>) => {
+    const el = e.currentTarget
+    const r = el.getBoundingClientRect()
+    el.style.setProperty('--mx', `${e.clientX - r.left}px`)
+    el.style.setProperty('--my', `${e.clientY - r.top}px`)
   }
 
   return (
-    <div className="landing" style={{ minHeight: '100vh', background: '#0a0a0a' }}>
+    <div className="faq-page">
       <BlogNav />
       <ScrollReveal />
-      <main style={{ color: '#fff' }}>
+
       {/* Hero */}
-      <section
-        style={{
-          padding: '6rem 1.5rem 3rem',
-          textAlign: 'center',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
-        }}
-      >
-        <div style={{ maxWidth: '720px', margin: '0 auto' }}>
-          <p
-            style={{
-              color: '#ff6b35',
-              fontSize: '0.8rem',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              marginBottom: '1rem',
-              fontWeight: 500,
-            }}
-          >
-            FAQ
-          </p>
-          <h1
-            style={{
-              fontSize: '3rem',
-              fontWeight: 600,
-              lineHeight: 1.1,
-              marginBottom: '1.5rem',
-              color: '#fff',
-            }}
-          >
-            Frequently Asked Questions
+      <section className="faq-hero">
+        <div className="faq-hero-inner">
+          <p className="faq-hero-eyebrow">FAQ</p>
+          <h1 className="faq-hero-headline">
+            <span className="faq-hero-headline-primary">Frequently asked.</span>{' '}
+            <span className="faq-hero-headline-muted">Honestly answered.</span>
           </h1>
-          <p
-            style={{
-              fontSize: '1.125rem',
-              color: 'rgba(255,255,255,0.7)',
-              lineHeight: 1.6,
-            }}
-          >
-            Everything you need to know about ReCapture &mdash; the recovery layer for high-ticket service businesses.
+          <p className="faq-hero-sub">
+            Everything about ReCapture &mdash; setup, the AI voice callback, compliance, and billing. No fluff.
           </p>
         </div>
       </section>
 
-      {/* Categorized FAQs */}
-      <div style={{ padding: '4rem 1.5rem', maxWidth: '780px', margin: '0 auto' }}>
-        {faqCategories.map((cat, catIdx) => (
-          <section
-            key={catIdx}
-            style={{ marginBottom: catIdx === faqCategories.length - 1 ? '0' : '3rem' }}
-          >
-            <h2
-              style={{
-                fontSize: '1.25rem',
-                fontWeight: 600,
-                color: '#fff',
-                marginBottom: '1.5rem',
-                paddingBottom: '0.75rem',
-                borderBottom: '1px solid rgba(255,107,53,0.3)',
+      {/* Two-column knowledge base */}
+      <div className="faq-layout">
+        {/* Category rail */}
+        <aside className="faq-rail" aria-label="FAQ categories">
+          <div className="faq-rail-sticky">
+            {faqCategories.map((cat, i) => (
+              <button
+                key={i}
+                className={`faq-rail-item ${active === i ? 'is-active' : ''}`}
+                onClick={() => jump(i)}
+              >
+                <span className="faq-rail-name">{cat.name}</span>
+                <span className="faq-rail-count">{cat.faqs.length}</span>
+              </button>
+            ))}
+          </div>
+        </aside>
+
+        {/* Accordions */}
+        <div className="faq-content">
+          {faqCategories.map((cat, catIdx) => (
+            <section
+              key={catIdx}
+              className="faq-cat"
+              data-idx={catIdx}
+              ref={(el) => {
+                sectionRefs.current[catIdx] = el
               }}
             >
-              {cat.name}
-            </h2>
-            <div className="pricing-faq-list">
-              {cat.faqs.map((faq, faqIdx) => {
-                const key = `${catIdx}-${faqIdx}`
-                const isOpen = openKey === key
-                return (
-                  <div
-                    key={key}
-                    className={`pricing-faq-item ${isOpen ? 'pricing-faq-item-open' : ''}`}
-                  >
-                    <button
-                      className="pricing-faq-trigger"
-                      onClick={() => toggle(key)}
-                      aria-expanded={isOpen}
+              <h2 className="faq-cat-title">
+                <span className="faq-cat-title-bar" />
+                {cat.name}
+              </h2>
+              <div className="faq-list">
+                {cat.faqs.map((faq, faqIdx) => {
+                  const key = `${catIdx}-${faqIdx}`
+                  const isOpen = openKey === key
+                  return (
+                    <div
+                      key={key}
+                      className={`faq-item ${isOpen ? 'is-open' : ''}`}
+                      onMouseMove={handleGlow}
                     >
-                      <span>{faq.q}</span>
-                      <span className="pricing-faq-icon">+</span>
-                    </button>
-                    <div className="pricing-faq-answer">
-                      <p className="pricing-faq-answer-text">{faq.a}</p>
+                      <button
+                        className="faq-q"
+                        onClick={() => toggle(key)}
+                        aria-expanded={isOpen}
+                      >
+                        <span className="faq-q-text">{faq.q}</span>
+                        <span className="faq-chevron" aria-hidden="true">
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <polyline points="6 9 12 15 18 9" />
+                          </svg>
+                        </span>
+                      </button>
+                      <div className="faq-a-wrap">
+                        <div className="faq-a-inner">
+                          <p>{faq.a}</p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                )
-              })}
-            </div>
-          </section>
-        ))}
+                  )
+                })}
+              </div>
+            </section>
+          ))}
+        </div>
       </div>
 
       {/* CTA */}
-      <section
-        style={{
-          padding: '5rem 1.5rem',
-          textAlign: 'center',
-          borderTop: '1px solid rgba(255,255,255,0.06)',
-        }}
-      >
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <h2
-            style={{
-              fontSize: '2rem',
-              fontWeight: 600,
-              color: '#fff',
-              marginBottom: '1rem',
-            }}
-          >
-            Still have questions?
-          </h2>
-          <p
-            style={{
-              fontSize: '1.0625rem',
-              color: 'rgba(255,255,255,0.7)',
-              lineHeight: 1.6,
-              marginBottom: '2rem',
-            }}
-          >
+      <section className="faq-cta">
+        <div className="faq-cta-inner">
+          <h2 className="faq-cta-headline">Still have questions?</h2>
+          <p className="faq-cta-sub">
             Book a 15-minute demo and we&rsquo;ll walk through your specific setup.
           </p>
-          <div
-            style={{
-              display: 'flex',
-              gap: '1rem',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-            }}
-          >
+          <div className="faq-cta-actions">
             <a
               href="https://cal.com/userecapture"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                background: '#ff6b35',
-                color: '#fff',
-                padding: '0.875rem 1.75rem',
-                borderRadius: '6px',
-                fontWeight: 500,
-                textDecoration: 'none',
-                fontSize: '0.95rem',
-              }}
+              className="faq-cta-primary"
             >
               Book a demo
             </a>
-            <Link
-              href="/signup"
-              style={{
-                background: 'transparent',
-                color: '#fff',
-                padding: '0.875rem 1.75rem',
-                borderRadius: '6px',
-                fontWeight: 500,
-                textDecoration: 'none',
-                fontSize: '0.95rem',
-                border: '1px solid rgba(255,255,255,0.2)',
-              }}
-            >
+            <Link href="/signup" className="faq-cta-secondary">
               Start your 7-day free trial
             </Link>
           </div>
         </div>
       </section>
-    </main>
+
       <RelatedPages page="faq" />
       <Footer />
     </div>
