@@ -5615,3 +5615,15 @@ select.audit-form-input option {
   transform: translateY(-4px);
   box-shadow: 0 16px 40px rgba(0,0,0,0.45);
 }
+
+
+/* ============================================================
+   Homepage mobile rhythm — tighten section spacing (May 31)
+   Wins over the four older conflicting .lc-section mobile rules.
+   ============================================================ */
+@media (max-width: 768px) {
+  .lc-section {
+    margin: 2rem auto !important;
+    padding: 1.5rem 1.25rem !important;
+  }
+}
