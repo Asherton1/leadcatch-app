@@ -6,10 +6,10 @@
 }
 .ts-card {
   position: relative;
-  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012));
+  background: rgba(255,255,255,0.025);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 20px;
-  padding: 3.25rem 3.25rem 2.5rem;
+  padding: 2.5rem 2.75rem 2.25rem;
   text-align: center;
   overflow: hidden;
 }
@@ -38,7 +38,7 @@
   position: relative;
   z-index: 1;
   animation: ts-fade 0.6s ease;
-  min-height: 360px;
+  min-height: 180px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -131,5 +131,5 @@
 @media (max-width: 640px) {
   .ts-card { padding: 2.5rem 1.5rem 2rem; }
   .ts-arrow { display: none; }
-  .ts-anim { min-height: 420px; }
+  .ts-anim { min-height: 240px; }
 }

@@ -17,7 +17,7 @@ const TESTIMONIALS = [
     initial: "D",
   },
   {
-    quote: "Three high-value Medicare clients in our first month — all from prospects who never finished our quote form. We still can't get over it. They never hit submit, never showed up in our CRM, never existed to us. ReCapture catches the moment someone types their name and email, then triggers a personalized recovery email within 60 seconds. For seniors comparing a multi-step Medicare quote, that timing is everything.",
+    quote: "Three high-value Medicare clients in our first month — all from prospects who never finished our quote form. They never hit submit, never showed up in our CRM, never existed to us. ReCapture caught them the moment they typed their name and email.",
     name: "Joe & Terry S.",
     company: "Suncoast Insurance Solutions",
     initial: "J",
