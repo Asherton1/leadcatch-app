@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
@@ -8,6 +8,7 @@ import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
 import '../blog/blog.css'
 import '../landing.css'
+import './calculator.css'
 
 const INDUSTRIES: { value: string; label: string; avgDeal: number; abandonmentRate: number; avgCloseRate: number; mobileTraffic: number }[] = [
   { value: 'medspa', label: 'Med Spa', avgDeal: 2800, abandonmentRate: 67, avgCloseRate: 35, mobileTraffic: 72 },
@@ -24,6 +25,26 @@ const INDUSTRIES: { value: string; label: string; avgDeal: number; abandonmentRa
 
 function formatCurrency(n: number) { return '$' + Math.round(n).toLocaleString() }
 function formatNum(n: number) { return Math.round(n).toLocaleString() }
+
+function CountUp({ value, run, format }: { value: number; run: boolean; format: (n: number) => string }) {
+  const [v, setV] = useState(0)
+  useEffect(() => {
+    if (!run) { setV(0); return }
+    let raf = 0
+    const start = performance.now()
+    const dur = 900
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / dur)
+      const eased = 1 - Math.pow(1 - p, 3)
+      setV(value * eased)
+      if (p < 1) raf = requestAnimationFrame(tick)
+      else setV(value)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [value, run])
+  return <>{format(v)}</>
+}
 
 export default function CalculatorPage() {
   const [industry, setIndustry] = useState('')
@@ -69,14 +90,8 @@ export default function CalculatorPage() {
     if (industry && submissions) setShowResults(true)
   }
 
-  const inputStyle = { width: '100%', padding: '0.875rem 1rem', background: '#0a0a0a', border: '1px solid #1e1e1e', borderRadius: 8, fontSize: '0.9375rem', color: '#fff', outline: 'none', fontFamily: 'inherit' as const, boxSizing: 'border-box' as const }
-  const labelStyle = { fontSize: '0.75rem', fontWeight: 600 as const, color: '#888', textTransform: 'uppercase' as const, letterSpacing: '0.05em', display: 'block' as const, marginBottom: '0.5rem' }
-  const statCardStyle = { background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '1.5rem', textAlign: 'center' as const }
-  const statLabelStyle = { fontSize: '0.6rem', color: '#555', textTransform: 'uppercase' as const, letterSpacing: '0.1em', fontWeight: 600 as const, marginBottom: '0.5rem' }
-  const subStyle = { fontSize: '0.7rem', color: '#444', marginTop: '0.35rem' }
-
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: "'Inter', -apple-system, sans-serif" }}>
+    <div className="calc-page">
       <BlogNav />
       <ScrollReveal />
 
@@ -90,177 +105,167 @@ export default function CalculatorPage() {
         </div>
       </section>
 
-      <div style={{ maxWidth: '880px', margin: '0 auto', padding: '3rem 2rem' }}>
-        <div className="reveal" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 16, padding: '2.5rem', marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>Your Business Numbers</h2>
-          <p style={{ fontSize: '0.85rem', color: '#555', marginBottom: '2rem' }}>The more accurate your inputs, the more precise your results. Ad spend is optional but unlocks cost-per-lead insights.</p>
+      <div className="calc-wrap">
+        <div className="calc-card reveal">
+          <h2 className="calc-card-title">Your Business Numbers</h2>
+          <p className="calc-card-sub">The more accurate your inputs, the more precise your results. Ad spend is optional but unlocks cost-per-lead insights.</p>
 
-          <div className="calc-input-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
-            <div>
-              <label style={labelStyle}>Your Industry</label>
-              <select value={industry} onChange={e => handleIndustryChange(e.target.value)} style={{ ...inputStyle, color: industry ? '#fff' : '#666', cursor: 'pointer', appearance: 'none' as const }}>
-                <option value="">Select industry...</option>
-                {INDUSTRIES.map(ind => (<option key={ind.value} value={ind.value}>{ind.label}</option>))}
-              </select>
+          <div className="calc-input-grid">
+            <div className="calc-field">
+              <label className="calc-label">Your Industry</label>
+              <div className="calc-select-wrap">
+                <select className="calc-input calc-select" value={industry} onChange={e => handleIndustryChange(e.target.value)} style={{ color: industry ? '#fff' : '#666' }}>
+                  <option value="">Select industry...</option>
+                  {INDUSTRIES.map(ind => (<option key={ind.value} value={ind.value}>{ind.label}</option>))}
+                </select>
+                <span className="calc-select-chevron" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+                </span>
+              </div>
             </div>
-            <div>
-              <label style={labelStyle}>Avg. Deal / Client Value ($)</label>
-              <input type="text" inputMode="numeric" placeholder={selected ? formatCurrency(selected.avgDeal) : '$2,500'} value={dealValue ? formatCurrency(parseInt(dealValue.replace(/[^0-9]/g, '') || '0')).replace('$0', '') : ''} onChange={e => { setDealValue(e.target.value.replace(/[^0-9]/g, '')); setShowResults(false) }} style={inputStyle} />
-              {selected && !dealValue && <p style={{ fontSize: '0.7rem', color: '#444', margin: '0.35rem 0 0' }}>Industry avg: {formatCurrency(selected.avgDeal)}</p>}
+            <div className="calc-field">
+              <label className="calc-label">Avg. Deal / Client Value ($)</label>
+              <input className="calc-input" type="text" inputMode="numeric" placeholder={selected ? formatCurrency(selected.avgDeal) : '$2,500'} value={dealValue ? formatCurrency(parseInt(dealValue.replace(/[^0-9]/g, '') || '0')).replace('$0', '') : ''} onChange={e => { setDealValue(e.target.value.replace(/[^0-9]/g, '')); setShowResults(false) }} />
+              {selected && !dealValue && <p className="calc-hint">Industry avg: {formatCurrency(selected.avgDeal)}</p>}
             </div>
-            <div>
-              <label style={labelStyle}>Monthly Form Submissions</label>
-              <input type="text" inputMode="numeric" placeholder="e.g. 30" value={monthlySubmissions} onChange={e => { setMonthlySubmissions(e.target.value.replace(/[^0-9]/g, '')); setShowResults(false) }} style={inputStyle} />
-              <p style={{ fontSize: '0.7rem', color: '#444', margin: '0.35rem 0 0' }}>Completed submissions you currently receive</p>
+            <div className="calc-field">
+              <label className="calc-label">Monthly Form Submissions</label>
+              <input className="calc-input" type="text" inputMode="numeric" placeholder="e.g. 30" value={monthlySubmissions} onChange={e => { setMonthlySubmissions(e.target.value.replace(/[^0-9]/g, '')); setShowResults(false) }} />
+              <p className="calc-hint">Completed submissions you currently receive</p>
             </div>
-            <div>
-              <label style={labelStyle}>Monthly Ad Spend ($) <span style={{ color: '#444', textTransform: 'none', fontWeight: 400 }}>optional</span></label>
-              <input type="text" inputMode="numeric" placeholder="e.g. $5,000" value={monthlyAdSpend ? formatCurrency(parseInt(monthlyAdSpend.replace(/[^0-9]/g, '') || '0')).replace('$0', '') : ''} onChange={e => { setMonthlyAdSpend(e.target.value.replace(/[^0-9]/g, '')); setShowResults(false) }} style={inputStyle} />
-              <p style={{ fontSize: '0.7rem', color: '#444', margin: '0.35rem 0 0' }}>Unlocks cost-per-lead comparison</p>
+            <div className="calc-field">
+              <label className="calc-label">Monthly Ad Spend ($) <span className="calc-label-opt">optional</span></label>
+              <input className="calc-input" type="text" inputMode="numeric" placeholder="e.g. $5,000" value={monthlyAdSpend ? formatCurrency(parseInt(monthlyAdSpend.replace(/[^0-9]/g, '') || '0')).replace('$0', '') : ''} onChange={e => { setMonthlyAdSpend(e.target.value.replace(/[^0-9]/g, '')); setShowResults(false) }} />
+              <p className="calc-hint">Unlocks cost-per-lead comparison</p>
             </div>
           </div>
 
-          <button onClick={handleCalculate} disabled={!industry || !submissions} style={{ width: '100%', padding: '1rem', background: (!industry || !submissions) ? '#333' : '#ff6b35', color: '#fff', border: 'none', borderRadius: 8, fontSize: '1rem', fontWeight: 700, cursor: (!industry || !submissions) ? 'not-allowed' : 'pointer', fontFamily: 'inherit', transition: 'background 0.2s ease' }}>
+          <button className="calc-btn" onClick={handleCalculate} disabled={!industry || !submissions}>
             Calculate My Lost Revenue
           </button>
         </div>
 
         {showResults && submissions > 0 && (
-          <div className="revealed" style={{ animation: 'fadeInUp 0.5s ease' }}>
+          <div className="calc-results">
 
-            <h3 style={{ fontSize: '0.8rem', color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: '1rem' }}>The Problem: What You Cannot See</h3>
+            <h3 className="calc-section-label calc-label-red">The Problem: What You Cannot See</h3>
 
-            <div className="calc-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
-              <div style={statCardStyle}>
-                <div style={statLabelStyle}>Total Form Starts</div>
-                <div style={{ fontSize: '2rem', fontWeight: 800, color: '#fff' }}>{formatNum(totalFormStarts)}</div>
-                <div style={subStyle}>per month</div>
+            <div className="calc-stat-grid calc-grid-4">
+              <div className="calc-stat">
+                <div className="calc-stat-label">Total Form Starts</div>
+                <div className="calc-stat-num"><CountUp value={totalFormStarts} run={showResults} format={formatNum} /></div>
+                <div className="calc-stat-sub">per month</div>
               </div>
-              <div style={statCardStyle}>
-                <div style={statLabelStyle}>Abandoned Before Submit</div>
-                <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ef4444' }}>{formatNum(abandonedLeads)}</div>
-                <div style={subStyle}>{abandonmentRate}% abandonment</div>
+              <div className="calc-stat">
+                <div className="calc-stat-label">Abandoned Before Submit</div>
+                <div className="calc-stat-num calc-num-red"><CountUp value={abandonedLeads} run={showResults} format={formatNum} /></div>
+                <div className="calc-stat-sub">{abandonmentRate}% abandonment</div>
               </div>
-              <div style={{ ...statCardStyle, border: '1px solid rgba(255,107,53,0.2)' }}>
-                <div style={statLabelStyle}>Revenue at Risk / Month</div>
-                <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ff6b35' }}>{formatCurrency(revenueAtRisk)}</div>
-                <div style={subStyle}>{formatNum(abandonedLeads)} x {formatCurrency(deal)}</div>
+              <div className="calc-stat calc-stat-accent">
+                <div className="calc-stat-label">Revenue at Risk / Month</div>
+                <div className="calc-stat-num calc-num-orange"><CountUp value={revenueAtRisk} run={showResults} format={formatCurrency} /></div>
+                <div className="calc-stat-sub">{formatNum(abandonedLeads)} &times; {formatCurrency(deal)}</div>
               </div>
-              <div style={{ ...statCardStyle, border: '1px solid rgba(255,107,53,0.2)' }}>
-                <div style={statLabelStyle}>Annual Revenue at Risk</div>
-                <div style={{ fontSize: '2rem', fontWeight: 800, color: '#ff6b35' }}>{formatCurrency(annualRevenueAtRisk)}</div>
-                <div style={subStyle}>12-month projection</div>
+              <div className="calc-stat calc-stat-accent">
+                <div className="calc-stat-label">Annual Revenue at Risk</div>
+                <div className="calc-stat-num calc-num-orange"><CountUp value={annualRevenueAtRisk} run={showResults} format={formatCurrency} /></div>
+                <div className="calc-stat-sub">12-month projection</div>
               </div>
             </div>
 
-            <div className="calc-context-bar" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, padding: '1.25rem 1.5rem', marginBottom: '2rem', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', textAlign: 'center' }}>
-              <div>
-                <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: '0.35rem' }}>Industry</div>
-                <div style={{ fontSize: '0.85rem', color: '#fff', fontWeight: 600 }}>{selected?.label}</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: '0.35rem' }}>Abandonment</div>
-                <div style={{ fontSize: '0.85rem', color: '#ef4444', fontWeight: 600 }}>{abandonmentRate}%</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: '0.35rem' }}>Close Rate</div>
-                <div style={{ fontSize: '0.85rem', color: '#fff', fontWeight: 600 }}>{closeRate}%</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: '0.35rem' }}>Mobile Traffic</div>
-                <div style={{ fontSize: '0.85rem', color: '#fff', fontWeight: 600 }}>{mobileTraffic}%</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: '0.35rem' }}>Mobile Abandoned</div>
-                <div style={{ fontSize: '0.85rem', color: '#ef4444', fontWeight: 600 }}>{formatNum(mobileAbandoned)}/mo</div>
-              </div>
+            <div className="calc-context-bar">
+              <div className="calc-context-item"><div className="calc-context-label">Industry</div><div className="calc-context-val">{selected?.label}</div></div>
+              <div className="calc-context-item"><div className="calc-context-label">Abandonment</div><div className="calc-context-val calc-val-red">{abandonmentRate}%</div></div>
+              <div className="calc-context-item"><div className="calc-context-label">Close Rate</div><div className="calc-context-val">{closeRate}%</div></div>
+              <div className="calc-context-item"><div className="calc-context-label">Mobile Traffic</div><div className="calc-context-val">{mobileTraffic}%</div></div>
+              <div className="calc-context-item"><div className="calc-context-label">Mobile Abandoned</div><div className="calc-context-val calc-val-red">{formatNum(mobileAbandoned)}/mo</div></div>
             </div>
 
-            <h3 style={{ fontSize: '0.8rem', color: '#10b981', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: '1rem' }}>The Solution: What ReCapture Recovers</h3>
+            <h3 className="calc-section-label calc-label-green">The Solution: What ReCapture Recovers</h3>
 
-            <div style={{ background: 'linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(16,185,129,0.02) 100%)', border: '1px solid rgba(16,185,129,0.15)', borderRadius: 16, padding: '2rem', marginBottom: '1.5rem' }}>
-              <div className="calc-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', textAlign: 'center', marginBottom: '1.5rem' }}>
-                <div>
-                  <div style={statLabelStyle}>Leads Recaptured</div>
-                  <div style={{ fontSize: '2rem', fontWeight: 800, color: '#10b981' }}>{formatNum(recoveredLeads)}</div>
-                  <div style={subStyle}>at {recoveryRate}% recovery</div>
+            <div className="calc-solution">
+              <div className="calc-stat-grid calc-grid-4 calc-grid-plain">
+                <div className="calc-stat-plain">
+                  <div className="calc-stat-label">Leads Recaptured</div>
+                  <div className="calc-stat-num calc-num-green"><CountUp value={recoveredLeads} run={showResults} format={formatNum} /></div>
+                  <div className="calc-stat-sub">at {recoveryRate}% recovery</div>
                 </div>
-                <div>
-                  <div style={statLabelStyle}>Closed From Recovery</div>
-                  <div style={{ fontSize: '2rem', fontWeight: 800, color: '#10b981' }}>{formatNum(closedFromRecovery)}</div>
-                  <div style={subStyle}>at {closeRate}% close rate</div>
+                <div className="calc-stat-plain">
+                  <div className="calc-stat-label">Closed From Recovery</div>
+                  <div className="calc-stat-num calc-num-green"><CountUp value={closedFromRecovery} run={showResults} format={formatNum} /></div>
+                  <div className="calc-stat-sub">at {closeRate}% close rate</div>
                 </div>
-                <div>
-                  <div style={statLabelStyle}>Revenue Recovered / Mo</div>
-                  <div style={{ fontSize: '2rem', fontWeight: 800, color: '#10b981' }}>{formatCurrency(recoveredRevenue)}</div>
-                  <div style={subStyle}>{formatNum(closedFromRecovery)} x {formatCurrency(deal)}</div>
+                <div className="calc-stat-plain">
+                  <div className="calc-stat-label">Revenue Recovered / Mo</div>
+                  <div className="calc-stat-num calc-num-green"><CountUp value={recoveredRevenue} run={showResults} format={formatCurrency} /></div>
+                  <div className="calc-stat-sub">{formatNum(closedFromRecovery)} &times; {formatCurrency(deal)}</div>
                 </div>
-                <div>
-                  <div style={statLabelStyle}>Annual Recovery</div>
-                  <div style={{ fontSize: '2rem', fontWeight: 800, color: '#10b981' }}>{formatCurrency(annualRecovered)}</div>
-                  <div style={subStyle}>{monthlyROI > 0 ? `${formatNum(monthlyROI)}% monthly ROI` : ''}</div>
+                <div className="calc-stat-plain">
+                  <div className="calc-stat-label">Annual Recovery</div>
+                  <div className="calc-stat-num calc-num-green"><CountUp value={annualRecovered} run={showResults} format={formatCurrency} /></div>
+                  <div className="calc-stat-sub">{monthlyROI > 0 ? `${formatNum(monthlyROI)}% monthly ROI` : ''}</div>
                 </div>
               </div>
 
-              <div className="calc-detail-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', borderTop: '1px solid rgba(16,185,129,0.1)', paddingTop: '1.5rem' }}>
-                <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 10, padding: '1rem', textAlign: 'center' }}>
-                  <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: '0.35rem' }}>Cost per Recovered Lead</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff' }}>{formatCurrency(costPerRecoveredLead)}</div>
+              <div className="calc-detail-grid">
+                <div className="calc-detail">
+                  <div className="calc-context-label">Cost per Recovered Lead</div>
+                  <div className="calc-detail-num">{formatCurrency(costPerRecoveredLead)}</div>
                 </div>
-                <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 10, padding: '1rem', textAlign: 'center' }}>
-                  <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: '0.35rem' }}>Pays for Itself In</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff' }}>{paybackDays} day{paybackDays !== 1 ? 's' : ''}</div>
+                <div className="calc-detail">
+                  <div className="calc-context-label">Pays for Itself In</div>
+                  <div className="calc-detail-num">{paybackDays} day{paybackDays !== 1 ? 's' : ''}</div>
                 </div>
-                <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 10, padding: '1rem', textAlign: 'center' }}>
-                  <div style={{ fontSize: '0.6rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: '0.35rem' }}>ReCapture Cost</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff' }}>{formatCurrency(recaptureCost)}<span style={{ fontSize: '0.75rem', color: '#555' }}>/mo</span></div>
+                <div className="calc-detail">
+                  <div className="calc-context-label">ReCapture Cost</div>
+                  <div className="calc-detail-num">{formatCurrency(recaptureCost)}<span className="calc-detail-unit">/mo</span></div>
                 </div>
               </div>
             </div>
 
             {adSpend > 0 && costPerAcquisitionNow > 0 && (
-              <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 16, padding: '2rem', marginBottom: '1.5rem' }}>
-                <h3 style={{ fontSize: '0.8rem', color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: '1.5rem', textAlign: 'center' }}>Ad Spend Efficiency: Before vs. After ReCapture</h3>
-                <div className="calc-vs-grid" style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1.5rem', alignItems: 'center', textAlign: 'center' }}>
+              <div className="calc-vs-card">
+                <h3 className="calc-section-label calc-label-orange calc-vs-title">Ad Spend Efficiency: Before vs. After ReCapture</h3>
+                <div className="calc-vs-grid">
                   <div>
-                    <div style={statLabelStyle}>Current Cost per Lead</div>
-                    <div style={{ fontSize: '2.25rem', fontWeight: 800, color: '#ef4444' }}>{formatCurrency(costPerAcquisitionNow)}</div>
-                    <div style={subStyle}>{formatCurrency(adSpend)} / {formatNum(submissions)} leads</div>
+                    <div className="calc-stat-label">Current Cost per Lead</div>
+                    <div className="calc-vs-num calc-num-red">{formatCurrency(costPerAcquisitionNow)}</div>
+                    <div className="calc-stat-sub">{formatCurrency(adSpend)} / {formatNum(submissions)} leads</div>
                   </div>
-                  <div style={{ fontSize: '1.5rem', color: '#333' }}>vs</div>
+                  <div className="calc-vs-sep">vs</div>
                   <div>
-                    <div style={statLabelStyle}>With ReCapture</div>
-                    <div style={{ fontSize: '2.25rem', fontWeight: 800, color: '#10b981' }}>{formatCurrency(costPerAcquisitionWith)}</div>
-                    <div style={subStyle}>{formatCurrency(adSpend)} / {formatNum(submissions + recoveredLeads)} leads</div>
+                    <div className="calc-stat-label">With ReCapture</div>
+                    <div className="calc-vs-num calc-num-green">{formatCurrency(costPerAcquisitionWith)}</div>
+                    <div className="calc-stat-sub">{formatCurrency(adSpend)} / {formatNum(submissions + recoveredLeads)} leads</div>
                   </div>
                 </div>
-                <div style={{ textAlign: 'center', marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid #1a1a1a' }}>
-                  <span style={{ fontSize: '0.85rem', color: '#bbb' }}>Save </span>
-                  <span style={{ fontSize: '0.85rem', color: '#10b981', fontWeight: 700 }}>{formatCurrency(costPerAcquisitionNow - costPerAcquisitionWith)} per lead</span>
-                  <span style={{ fontSize: '0.85rem', color: '#bbb' }}> without spending a single extra dollar on ads.</span>
+                <div className="calc-vs-foot">
+                  <span>Save </span>
+                  <span className="calc-hl-green">{formatCurrency(costPerAcquisitionNow - costPerAcquisitionWith)} per lead</span>
+                  <span> without spending a single extra dollar on ads.</span>
                 </div>
               </div>
             )}
 
-            <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 16, padding: '2rem', textAlign: 'center', marginBottom: '1.5rem' }}>
-              <div style={{ borderLeft: '3px solid #ff6b35', display: 'inline-block', textAlign: 'left', padding: '0.75rem 1.5rem', maxWidth: '640px' }}>
-                <p style={{ color: '#bbb', fontSize: '1rem', lineHeight: 1.8, margin: 0 }}>
-                  Your {selected?.label || 'business'} is losing an estimated <strong style={{ color: '#ff6b35' }}>{formatNum(abandonedLeads)} leads</strong> and <strong style={{ color: '#ff6b35' }}>{formatCurrency(revenueAtRisk)}</strong> every month to form abandonment.
-                  With ReCapture, you could recover <strong style={{ color: '#10b981' }}>{formatNum(closedFromRecovery)} closed deals</strong> worth <strong style={{ color: '#10b981' }}>{formatCurrency(recoveredRevenue)}/month</strong> — a <strong style={{ color: '#fff' }}>{formatNum(monthlyROI)}% return</strong> on a {formatCurrency(recaptureCost)}/month investment.
+            <div className="calc-summary">
+              <div className="calc-summary-inner">
+                <p>
+                  Your {selected?.label || 'business'} is losing an estimated <strong className="calc-hl-orange">{formatNum(abandonedLeads)} leads</strong> and <strong className="calc-hl-orange">{formatCurrency(revenueAtRisk)}</strong> every month to form abandonment.
+                  With ReCapture, you could recover <strong className="calc-hl-green">{formatNum(closedFromRecovery)} closed deals</strong> worth <strong className="calc-hl-green">{formatCurrency(recoveredRevenue)}/month</strong> &mdash; a <strong className="calc-hl-white">{formatNum(monthlyROI)}% return</strong> on a {formatCurrency(recaptureCost)}/month investment.
                 </p>
               </div>
             </div>
 
-            <p style={{ fontSize: '0.7rem', color: '#333', textAlign: 'center', marginBottom: '2rem', lineHeight: 1.6 }}>
+            <p className="calc-disclaimer">
               Abandonment rates based on industry research from Baymard Institute, Zuko Analytics, and Contentsquare (2025-2026). Recovery rate of {recoveryRate}% is a conservative baseline. Actual results vary by business.
             </p>
 
-            <div style={{ background: 'linear-gradient(135deg, #111 0%, #1a1a1a 100%)', border: '1px solid #1e1e1e', borderRadius: 16, padding: '2.5rem', textAlign: 'center' }}>
-              <h3 style={{ color: '#ff6b35', fontSize: '1.5rem', margin: '0 0 0.75rem 0', fontWeight: 700 }}>Stop Leaving Money on the Table</h3>
-              <p style={{ color: '#888', margin: '0 0 1.5rem 0', fontSize: '0.95rem', lineHeight: 1.7 }}>One script tag. 60-second setup. Your first recovered lead within 48 hours.</p>
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <Link href="/demo" style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem' }}>Try the Live Demo</Link>
-                <Link href="/start-trial" style={{ display: 'inline-block', background: 'transparent', color: '#ff6b35', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.95rem', border: '1px solid rgba(255,107,53,0.4)' }}>Start your 7-day free trial</Link>
+            <div className="calc-cta">
+              <h3 className="calc-cta-title">Stop Leaving Money on the Table</h3>
+              <p className="calc-cta-sub">One script tag. 60-second setup. Your first recovered lead within 48 hours.</p>
+              <div className="calc-cta-actions">
+                <Link href="/demo" className="calc-cta-primary">Try the Live Demo</Link>
+                <Link href="/start-trial" className="calc-cta-secondary">Start your 7-day free trial</Link>
               </div>
             </div>
           </div>
@@ -269,21 +274,6 @@ export default function CalculatorPage() {
 
       <RelatedPages page="calculator" />
       <Footer />
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @media (max-width: 768px) {
-          .calc-input-grid { grid-template-columns: 1fr !important; }
-          .calc-stat-grid { grid-template-columns: 1fr !important; }
-          .calc-context-bar { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
-          .calc-detail-grid { grid-template-columns: 1fr !important; }
-          .calc-vs-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
-          .calc-vs-grid > div:nth-child(2) { display: none; }
-        }
-      `}</style>
     </div>
   )
 }
