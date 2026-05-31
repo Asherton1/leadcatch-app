@@ -351,3 +351,35 @@
   .faq-layout { display: block; padding: 1.5rem 1.25rem 2rem; }
   .faq-content { width: 100%; }
 }
+
+
+/* ============================================================
+   FAQ mobile elevation (May 31)
+   ============================================================ */
+@media (max-width: 768px) {
+  /* each category becomes a grouped block with depth */
+  .faq-cat {
+    background: #0c0c0c;
+    border: 1px solid #1a1a1a;
+    border-radius: 14px;
+    padding: 1.35rem 1.1rem 0.4rem;
+    margin-bottom: 1rem;
+  }
+  .faq-cat-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+  }
+  .faq-item:last-child { border-bottom: none; }
+
+  /* no cursor on mobile -> light the open question up */
+  .faq-item.is-open {
+    background: rgba(255,107,53,0.045);
+    border-radius: 10px;
+  }
+  .faq-item.is-open::before {
+    opacity: 1;
+    background: radial-gradient(240px circle at 18% 28%, rgba(255,107,53,0.10), transparent 62%);
+  }
+  .faq-q { padding: 1.1rem 0.6rem; }
+  .faq-a-inner p { padding: 0 0.8rem 1.2rem 0.6rem; }
+}
