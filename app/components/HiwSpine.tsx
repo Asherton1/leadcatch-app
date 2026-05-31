@@ -8,17 +8,25 @@ export default function HiwSpine() {
     const flow = document.querySelector('.hiw-flow') as HTMLElement | null
     if (!flow) return
 
+    const steps = Array.from(flow.querySelectorAll<HTMLElement>('.hiw-step'))
+
     let raf = 0
     const update = () => {
       raf = 0
       const rect = flow.getBoundingClientRect()
       const vh = window.innerHeight
-      // 0 when the flow's top hits ~45% down the viewport,
-      // 1 when its bottom reaches the same line
       const line = vh * 0.45
       const p = (line - rect.top) / rect.height
       const clamped = Math.max(0, Math.min(1, p))
       flow.style.setProperty('--hiw-fill', (clamped * 100).toFixed(2) + '%')
+
+      // ignite each step once the activation line passes its midpoint
+      for (const step of steps) {
+        const r = step.getBoundingClientRect()
+        const mid = r.top + r.height * 0.5
+        if (mid <= line) step.classList.add('is-lit')
+        else step.classList.remove('is-lit')
+      }
     }
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update)

@@ -1109,3 +1109,36 @@
 .hiw-step-content h2 { transition: color 0.45s ease; }
 .hiw-step.is-lit .hiw-step-content h2 { color: #fff; }
 .hiw-step:not(.is-lit) .hiw-step-content h2 { color: #e3e3e3; }
+
+
+/* ============================================================
+   HOW IT WORKS — spine 'ignite' active states (.is-lit)
+   ============================================================ */
+.hiw-step-number,
+.hiw-step-content,
+.hiw-step-icon svg { transition: color 0.45s ease, transform 0.35s ease, box-shadow 0.35s ease, border-color 0.45s ease, opacity 0.45s ease; }
+
+/* number ignites */
+.hiw-step.is-lit .hiw-step-number { color: rgba(255,107,53,0.9); }
+.hiw-step.is-lit .hiw-step-number-green { color: rgba(34,197,94,0.9); }
+
+/* icon brightens */
+.hiw-step .hiw-step-icon svg { opacity: 0.7; }
+.hiw-step.is-lit .hiw-step-icon svg { opacity: 1; transform: scale(1.06); }
+
+/* card activates (lift + orange edge), green for the final step */
+.hiw-step.is-lit .hiw-step-content {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,107,53,0.28);
+}
+.hiw-step-final.is-lit .hiw-step-content {
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(34,197,94,0.3);
+}
+.hiw-step-alert.is-lit .hiw-step-content {
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(239,68,68,0.28);
+}
+
+/* title brightens on activate */
+.hiw-step-content h2 { transition: color 0.45s ease; }
+.hiw-step.is-lit .hiw-step-content h2 { color: #fff; }
+.hiw-step:not(.is-lit) .hiw-step-content h2 { color: #e3e3e3; }
