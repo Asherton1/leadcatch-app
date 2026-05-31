@@ -90,11 +90,11 @@ footer a:hover {
 /* Prevent any horizontal overflow globally */
 html, body {
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
 }
 .landing {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 
