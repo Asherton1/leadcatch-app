@@ -19,7 +19,7 @@ const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 const SIGNATURE_HTML = `<p>Best,<br/>
 Asherton Chraibi<br/>
 Founder, ReCapture<br/>
-Lost revenue recovery for high-ticket service businesses</p>
+Recovering the leads your forms are losing</p>
 
 <p>(888) 606-0630 — Concierge line<br/>
 <a href="mailto:hello@userecapture.com" style="color: #ff6b35;">hello@userecapture.com</a><br/>
