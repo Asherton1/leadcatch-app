@@ -522,6 +522,10 @@ export async function GET(request: NextRequest) {
         to: item.prospect_email,
         subject: item.email_subject,
         html: item.email_body_html,
+        headers: {
+          'List-Unsubscribe': '<https://www.userecapture.com/api/unsubscribe>, <mailto:hello@userecapture.com?subject=unsubscribe>',
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+        },
       }
       if (item.email_cc) {
         payload.cc = item.email_cc
