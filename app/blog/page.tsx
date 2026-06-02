@@ -50,19 +50,19 @@ export default function BlogIndex() {
       </section>
 
       <div className="blog-featured reveal">
-        <Link href="/blog/mobile-form-abandonment-is-different" className="blog-featured-card">
+        <Link href="/blog/form-abandonment-at-scale" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
-            <Image src="/blog-mobile-abandonment.webp" alt="Mobile form abandonment is different" fill style={{ objectFit: 'cover' }} />
+            <Image src="/blog-form-abandonment.webp" alt="Form abandonment at scale" fill style={{ objectFit: 'cover' }} />
           </div>
           <div className="blog-featured-content">
-            <div className="blog-featured-tag">Mobile UX</div>
+            <div className="blog-featured-tag">Revenue Recovery</div>
             <div className="blog-featured-meta">
-              <span className="blog-featured-date">May 18, 2026</span>
+              <span className="blog-featured-date">June 2, 2026</span>
               <span className="blog-featured-dot" />
               <span className="blog-featured-readtime">8 min read</span>
             </div>
-            <div className="blog-featured-title">Why Mobile Form Abandonment Is Different (And Why Most Recovery Tools Miss It)</div>
-            <div className="blog-featured-excerpt">Mobile drives the majority of inbound inquiries for most service businesses. The form recovery tools they use were built for desktop browsers and miss how mobile users actually leave.</div>
+            <div className="blog-featured-title">Form Abandonment at Scale: The Math Changes at 10, 100, and 500 Locations</div>
+            <div className="blog-featured-excerpt">Single-practice form abandonment is annoying. Multi-location form abandonment is structural. Here is the math at 10, 100, and 500 locations — and why scale makes the problem worse, not better.</div>
             <span className="blog-featured-cta">Read article <span>→</span></span>
           </div>
         </Link>
@@ -73,6 +73,18 @@ export default function BlogIndex() {
       <div className="blog-more reveal" style={{ maxWidth: '960px', margin: '0 auto', padding: '0 2rem 5rem' }}>
         <h2 style={{ color: '#ff6b35', fontSize: '1.5rem', fontWeight: 700, margin: '0 0 2rem 0' }}>More Insights</h2>
         <div className="blog-bento">
+          <Link href="/blog/mobile-form-abandonment-is-different" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+              <Image src="/blog-mobile-abandonment.webp" alt="Mobile form abandonment is different" fill style={{ objectFit: 'cover' }} />
+            </div>
+            <div style={{ padding: '1.5rem 2rem 2rem' }}>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Mobile UX</div>
+              <div style={{ fontSize: '0.8rem', color: '#666', marginBottom: '0.75rem' }}><span>May 18, 2026</span><span style={{ margin: '0 0.5rem' }}>·</span><span>8 min read</span></div>
+              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>Why Mobile Form Abandonment Is Different (And Why Most Recovery Tools Miss It)</div>
+              <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: 1.6, marginBottom: '1rem' }}>Mobile drives the majority of inbound inquiries for most service businesses. The form recovery tools they use were built for desktop browsers.</div>
+              <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Read article →</span>
+            </div>
+          </Link>
           <Link href="/blog/hidden-cost-of-form-abandonment" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
             <div style={{ position: 'relative', width: '100%', height: '200px' }}>
               <Image src="/blog-form-abandonment.webp" alt="The hidden cost of form abandonment" fill style={{ objectFit: 'cover' }} />
