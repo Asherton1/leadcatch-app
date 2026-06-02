@@ -517,10 +517,18 @@ export async function GET(request: NextRequest) {
 
   for (const item of dueSends || []) {
     try {
+      const firstName = (item.prospect_name || '').split(' ')[0] || 'there'
+      const cleanSubj = (str: string) => (str || '')
+        .replace(/\{firstName\}/g, firstName)
+        .replace(/\{first_name\}/g, firstName)
+        .replace(/\{company\}/g, item.prospect_company || '')
+        .replace(/&mdash;/g, '—')
+        .replace(/&ndash;/g, '–')
+        .replace(/&amp;/g, '&')
       const payload: Record<string, unknown> = {
         from: 'Asherton Chraibi <hello@userecapture.com>',
         to: item.prospect_email,
-        subject: item.email_subject,
+        subject: cleanSubj(item.email_subject),
         html: item.email_body_html,
         headers: {
           'List-Unsubscribe': '<https://www.userecapture.com/api/unsubscribe>, <mailto:hello@userecapture.com?subject=unsubscribe>',
@@ -607,7 +615,13 @@ export async function GET(request: NextRequest) {
         followupSubject = 'That ReCapture audit on Friday — anything land?'
         followupHtml = getBatch2AuditFollowupHtml(firstName, item.prospect_company, emailDomain)
       } else {
-        followupSubject = 'Re: ' + item.email_subject
+        followupSubject = 'Re: ' + (item.email_subject || '')
+          .replace(/\{firstName\}/g, firstName)
+          .replace(/\{first_name\}/g, firstName)
+          .replace(/\{company\}/g, item.prospect_company || '')
+          .replace(/&mdash;/g, '—')
+          .replace(/&ndash;/g, '–')
+          .replace(/&amp;/g, '&')
         followupHtml = getDay4Html(item.vertical, firstName, item.prospect_company)
       }
 
