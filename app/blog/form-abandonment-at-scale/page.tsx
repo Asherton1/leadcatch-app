@@ -78,7 +78,7 @@ export default function Post() {
       </div>
 
       <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
-        <Image src="/blog-form-abandonment.webp" alt="Form abandonment at scale visualization" fill style={{ objectFit: 'cover' }} />
+        <Image src="/blog-form-abandonment-at-scale.jpg" alt="Form abandonment at scale visualization" fill style={{ objectFit: 'cover' }} />
       </div>
 
       <div className="blog-post-divider"><hr /></div>

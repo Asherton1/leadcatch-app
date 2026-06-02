@@ -52,7 +52,7 @@ export default function BlogIndex() {
       <div className="blog-featured reveal">
         <Link href="/blog/form-abandonment-at-scale" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
-            <Image src="/blog-form-abandonment.webp" alt="Form abandonment at scale" fill style={{ objectFit: 'cover' }} />
+            <Image src="/blog-form-abandonment-at-scale.jpg" alt="Form abandonment at scale" fill style={{ objectFit: 'cover' }} />
           </div>
           <div className="blog-featured-content">
             <div className="blog-featured-tag">Revenue Recovery</div>
