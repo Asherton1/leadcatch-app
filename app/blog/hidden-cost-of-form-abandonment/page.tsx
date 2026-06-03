@@ -147,7 +147,7 @@ export default function Post() {
       </div>
 
       <div className="blog-post-author">
-        <div className="blog-post-author-avatar">AC</div>
+        <div className="blog-post-author-avatar">RCT</div>
         <div>
           <div className="blog-post-author-name">ReCapture Team</div>
           <div className="blog-post-author-role">userecapture.com</div>

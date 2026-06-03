@@ -136,6 +136,21 @@ export default function Post() {
         </div>
 
       </div>
+      <div className="blog-post-author">
+        <div className="blog-post-author-avatar">RCT</div>
+        <div>
+          <div className="blog-post-author-name">ReCapture Team</div>
+          <div className="blog-post-author-role">userecapture.com</div>
+        </div>
+      </div>
+
+      <div className="blog-post-cta">
+        <div className="blog-post-cta-box">
+          <h3>See how much revenue your forms are leaking</h3>
+          <p>ReCapture shows you every lead that starts your form but never submits — with names, emails, phone numbers, and the dollar value at stake. One script tag. Results within 48 hours.</p>
+          <Link href="/demo">Try the Live Demo →</Link>
+        </div>
+      </div>
       <Footer />
     </div>
   )
