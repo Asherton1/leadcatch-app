@@ -1,5 +1,6 @@
 import './globals.css'
 import { Geist, Geist_Mono } from 'next/font/google'
+import SmoothScroll from './components/SmoothScroll'
 import PremiumEffects from './components/PremiumEffects'
 import PageTransitions from './components/PageTransitions'
 import Script from 'next/script'
@@ -113,6 +114,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }),
           }}
         />
+        <SmoothScroll />
         <PremiumEffects />
         <PageTransitions />
         {children}
