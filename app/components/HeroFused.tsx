@@ -6,62 +6,10 @@ import './HeroFused.css'
 
 export default function HeroFused() {
   const rootRef = useRef<HTMLElement>(null)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     const root = rootRef.current
-    const canvas = canvasRef.current
-    if (!root || !canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const dpr = Math.min(window.devicePixelRatio || 1, 2)
-    let raf = 0
-
-    const size = () => {
-      canvas.width = root.clientWidth * dpr
-      canvas.height = root.clientHeight * dpr
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-    }
-    size()
-    window.addEventListener('resize', size)
-
-    const blobs = [
-      { x: 0.66, y: 0.40, r: 0.6, ph: 0, sp: 0.00030, col: [255, 107, 53] },
-      { x: 0.84, y: 0.58, r: 0.52, ph: 2.1, sp: 0.00024, col: [255, 140, 70] },
-      { x: 0.72, y: 0.24, r: 0.46, ph: 4.2, sp: 0.00034, col: [190, 55, 22] },
-      { x: 0.80, y: 0.72, r: 0.4, ph: 1.1, sp: 0.00027, col: [255, 95, 40] },
-    ]
-
-    const frame = (t: number) => {
-      const w = root.clientWidth
-      const h = root.clientHeight
-      ctx.clearRect(0, 0, w, h)
-      ctx.fillStyle = '#0a0a0a'
-      ctx.fillRect(0, 0, w, h)
-      const gather = (Math.sin(t * 0.00018) * 0.5 + 0.5) * 0.5
-      ctx.globalCompositeOperation = 'lighter'
-      for (const b of blobs) {
-        let bx = b.x + Math.sin(t * b.sp + b.ph) * 0.10
-        let by = b.y + Math.cos(t * b.sp * 0.92 + b.ph) * 0.10
-        bx = bx + (0.72 - bx) * gather
-        by = by + (0.5 - by) * gather
-        const cx = bx * w
-        const cy = by * h
-        const rr = b.r * Math.min(w, h) * (1 - gather * 0.18)
-        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rr)
-        g.addColorStop(0, `rgba(${b.col[0]},${b.col[1]},${b.col[2]},0.22)`)
-        g.addColorStop(1, `rgba(${b.col[0]},${b.col[1]},${b.col[2]},0)`)
-        ctx.fillStyle = g
-        ctx.beginPath()
-        ctx.arc(cx, cy, rr, 0, Math.PI * 2)
-        ctx.fill()
-      }
-      ctx.globalCompositeOperation = 'source-over'
-      raf = requestAnimationFrame(frame)
-    }
-    raf = requestAnimationFrame(frame)
-
+    if (!root) return
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const gctx = gsap.context(() => {
       if (reduce) {
@@ -81,17 +29,14 @@ export default function HeroFused() {
         .to('.hf-sub', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 1.2)
         .to('.hf-cta', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 1.4)
     }, root)
-
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('resize', size)
-      gctx.revert()
-    }
+    return () => gctx.revert()
   }, [])
 
   return (
     <section className="hf-hero" ref={rootRef}>
-      <canvas className="hf-bg" ref={canvasRef} aria-hidden="true" />
+      <video className="hf-bg" autoPlay loop muted playsInline preload="auto" aria-hidden="true">
+        <source src="/dallas-hero.mp4" type="video/mp4" />
+      </video>
       <div className="hf-scrim" aria-hidden="true" />
       <div className="hf-inner">
         <p className="hf-eyebrow">Born &amp; Built in Dallas, Texas</p>
