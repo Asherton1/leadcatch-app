@@ -6,7 +6,6 @@ import './HeroFused.css'
 
 export default function HeroFused() {
   const rootRef = useRef<HTMLElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     const root = rootRef.current
@@ -33,47 +32,10 @@ export default function HeroFused() {
     return () => gctx.revert()
   }, [])
 
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-    let raf = 0
-    let direction = 1
-    let last = 0
-
-    const reverseStep = (now: number) => {
-      const dt = Math.min((now - last) / 1000, 0.05)
-      last = now
-      video.currentTime = Math.max(0, video.currentTime - dt)
-      if (video.currentTime <= 0.03) {
-        direction = 1
-        video.play().catch(() => {})
-        return
-      }
-      raf = requestAnimationFrame(reverseStep)
-    }
-
-    const onTimeUpdate = () => {
-      if (direction === 1 && video.duration && video.currentTime >= video.duration - 0.12) {
-        direction = -1
-        video.pause()
-        last = performance.now()
-        raf = requestAnimationFrame(reverseStep)
-      }
-    }
-
-    video.addEventListener('timeupdate', onTimeUpdate)
-    video.play().catch(() => {})
-
-    return () => {
-      cancelAnimationFrame(raf)
-      video.removeEventListener('timeupdate', onTimeUpdate)
-    }
-  }, [])
-
   return (
     <section className="hf-hero" ref={rootRef}>
-      <video className="hf-bg" ref={videoRef} autoPlay muted playsInline preload="auto" aria-hidden="true">
-        <source src="/dallas-hero.mp4" type="video/mp4" />
+      <video className="hf-bg" autoPlay loop muted playsInline preload="auto" aria-hidden="true">
+        <source src="/dallas-hero-loop.mp4" type="video/mp4" />
       </video>
       <div className="hf-scrim" aria-hidden="true" />
       <div className="hf-inner">
