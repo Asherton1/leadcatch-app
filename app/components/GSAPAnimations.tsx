@@ -10,28 +10,7 @@ export default function GSAPAnimations() {
   useEffect(() => {
     const ctx = gsap.context(() => {
 
-      // ── Hero entrance — cinematic stagger ──
-      const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-      heroTl
-        .fromTo('.hero h1',
-          { opacity: 0, y: 60, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 1 }
-        )
-        .fromTo('.hero-subtitle',
-          { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          '-=0.5'
-        )
-        .fromTo('.cta-group',
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.7 },
-          '-=0.4'
-        )
-        .fromTo('.dashboard-video-wrap',
-          { opacity: 0, y: 60, scale: 0.92 },
-          { opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power2.out' },
-          '-=0.3'
-        )
+      // Hero entrance is handled by CSS (.hero-animate*) — GSAP duplicate removed to stop double-animation
 
       // ── Stats bar — count up effect ──
       gsap.fromTo('.stats-bridge',
