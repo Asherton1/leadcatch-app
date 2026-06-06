@@ -218,7 +218,7 @@ export default function LandingPage() {
         <div className="cta-group" style={{ justifyContent: 'center' }}>
           <Link href="/start-trial" className="cta-primary">Start your 7-day free trial</Link>
         </div>
-        <div style={{ marginTop: '1.5rem', textAlign: 'center', display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div className="final-cta-sublinks" style={{ marginTop: '1.5rem', textAlign: 'center', display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link href="/demo" className="page-transition-link" style={{ color: '#888', fontSize: '0.9375rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}>Try the Live Demo &rarr;</Link>
           <Link href="/pricing" className="page-transition-link" style={{ color: '#888', fontSize: '0.9375rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s' }}>See Pricing &rarr;</Link>
         </div>

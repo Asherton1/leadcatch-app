@@ -5627,3 +5627,8 @@ select.audit-form-input option {
     padding: 1.5rem 1.25rem !important;
   }
 }
+
+/* Mobile only: breathing room below final-CTA links, above footer */
+@media (max-width: 768px) {
+  .final-cta-sublinks { margin-bottom: 2.5rem; }
+}
