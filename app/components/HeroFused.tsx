@@ -39,8 +39,8 @@ export default function HeroFused() {
         <source src="/dallas-hero-loop.mp4" type="video/mp4" />
       </video>
       <div className="hf-scrim" aria-hidden="true" />
-      <div className="hf-inner">
-        <div className="hf-text">
+      <div className="hero-split hf-split">
+        <div className="hero-left hf-text">
           <p className="hf-eyebrow">Born &amp; Built in Dallas, Texas</p>
           <h1 className="hf-h1">
             <span className="hf-mask"><span className="hf-line hf-l1">Your best leads</span></span>
@@ -52,7 +52,7 @@ export default function HeroFused() {
             <svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
           </a>
         </div>
-        <div className="hf-demo">
+        <div className="hero-right">
           <GhostLeadDemoCompact />
         </div>
       </div>
