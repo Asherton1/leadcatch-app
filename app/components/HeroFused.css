@@ -32,7 +32,7 @@
   padding: 0 clamp(24px, 5vw, 56px);
 }
 
-.hf-eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: #ff7d4d; margin: 0 0 22px; }
+.hf-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: #ff8c5a; margin: 0 0 22px; text-shadow: 0 1px 3px rgba(0,0,0,0.55), 0 2px 18px rgba(0,0,0,0.85); }
 .hf-h1 { font-weight: 800; font-size: clamp(2.6rem, 5.6vw, 5.5rem); line-height: 1.05; letter-spacing: -0.04em; color: #ffffff; margin: 0; text-shadow: 0 2px 22px rgba(0,0,0,0.65); }
 .hf-mask { overflow: hidden; padding-bottom: 2px; }
 .hf-line { display: block; }
