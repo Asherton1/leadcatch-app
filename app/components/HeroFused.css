@@ -25,13 +25,15 @@
 .hf-split {
   position: relative; z-index: 5; width: 100%;
   max-width: 1280px;
+  margin: 0 auto;
+  align-items: center;
   grid-template-columns: minmax(0, 1fr) 480px;
   gap: clamp(2rem, 4vw, 4rem);
   padding: 0 clamp(24px, 5vw, 56px);
 }
 
 .hf-eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: #ff7d4d; margin: 0 0 22px; }
-.hf-h1 { font-weight: 700; font-size: clamp(2.1rem, 4.6vw, 3.7rem); line-height: 0.98; letter-spacing: -0.035em; color: #ffffff; margin: 0; text-shadow: 0 2px 22px rgba(0,0,0,0.65); }
+.hf-h1 { font-weight: 800; font-size: clamp(2.6rem, 5.6vw, 5.5rem); line-height: 1.05; letter-spacing: -0.04em; color: #ffffff; margin: 0; text-shadow: 0 2px 22px rgba(0,0,0,0.65); }
 .hf-mask { overflow: hidden; padding-bottom: 2px; }
 .hf-line { display: block; }
 .hf-accent { position: relative; color: #ff6b35; display: inline-block; }
