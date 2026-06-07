@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import GhostLeadDemoCompact from './GhostLeadDemoCompact'
 import './HeroFused.css'
 
 export default function HeroFused() {
@@ -39,16 +40,21 @@ export default function HeroFused() {
       </video>
       <div className="hf-scrim" aria-hidden="true" />
       <div className="hf-inner">
-        <p className="hf-eyebrow">Born &amp; Built in Dallas, Texas</p>
-        <h1 className="hf-h1">
-          <span className="hf-mask"><span className="hf-line hf-l1">Your best leads</span></span>
-          <span className="hf-mask"><span className="hf-line hf-l2">never hit <span className="hf-accent">submit.<span className="hf-strike" /></span></span></span>
-        </h1>
-        <p className="hf-sub">High-value prospects start typing, then vanish. ReCapture captures them the moment they begin — so the lead is never truly gone.</p>
-        <a className="hf-cta" href="/start-trial">
-          Start your 7-day free trial
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-        </a>
+        <div className="hf-text">
+          <p className="hf-eyebrow">Born &amp; Built in Dallas, Texas</p>
+          <h1 className="hf-h1">
+            <span className="hf-mask"><span className="hf-line hf-l1">Your best leads</span></span>
+            <span className="hf-mask"><span className="hf-line hf-l2">never hit <span className="hf-accent">submit.<span className="hf-strike" /></span></span></span>
+          </h1>
+          <p className="hf-sub">High-value prospects start typing, then vanish. ReCapture captures them the moment they begin — so the lead is never truly gone.</p>
+          <a className="hf-cta" href="/start-trial">
+            Start your 7-day free trial
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+        </div>
+        <div className="hf-demo">
+          <GhostLeadDemoCompact />
+        </div>
       </div>
     </section>
   )

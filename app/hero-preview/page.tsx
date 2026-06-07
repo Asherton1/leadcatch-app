@@ -1,3 +1,4 @@
+import '../landing.css'
 import HeroFused from '../components/HeroFused'
 
 export const metadata = {
@@ -7,7 +8,7 @@ export const metadata = {
 
 export default function HeroPreviewPage() {
   return (
-    <main style={{ background: '#0a0a0a', minHeight: '100vh' }}>
+    <main className="landing" style={{ background: '#0a0a0a', minHeight: '100vh' }}>
       <HeroFused />
     </main>
   )
