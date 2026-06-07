@@ -32,7 +32,7 @@
   padding: 0 clamp(24px, 5vw, 56px);
 }
 
-.hf-eyebrow { display: inline-flex; align-items: center; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #ff8c5a; margin: 0 0 22px; padding: 8px 16px; background: rgba(10,10,12,0.82); border: 1px solid rgba(255,107,53,0.28); border-radius: 999px; backdrop-filter: blur(6px); }
+.hf-eyebrow { display: inline-flex; align-items: center; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #ff8c5a; margin: 0 0 22px; padding: 8px 14px; background: rgba(10,10,12,0.82); border: 1px solid rgba(255,107,53,0.28); border-radius: 0; backdrop-filter: blur(6px); }
 .hf-h1 { font-weight: 800; font-size: clamp(2.6rem, 5.6vw, 5.5rem); line-height: 1.05; letter-spacing: -0.04em; color: #ffffff; margin: 0; text-shadow: 0 2px 22px rgba(0,0,0,0.65); }
 .hf-mask { overflow: hidden; padding-bottom: 2px; }
 .hf-line { display: block; }
