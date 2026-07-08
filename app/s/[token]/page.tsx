@@ -278,8 +278,8 @@ function PricingContent({ industry }: { firstName: string; industry: ReturnType<
 
           <div className="sl-plans-grid">
             <div className="sl-plan-card">
-              <div className="sl-plan-name">Essentials</div>
-              <div className="sl-plan-price"><span className="sl-plan-amount">$197</span><span className="sl-plan-period">/mo</span></div>
+              <div className="sl-plan-name">Pro</div>
+              <div className="sl-plan-price"><span className="sl-plan-amount">$397</span><span className="sl-plan-period">/mo</span></div>
               <p className="sl-plan-tagline">See every lead you&apos;re losing — and recover them manually.</p>
               <ul className="sl-plan-features">
                 <li>Lead capture from every form on your site</li>
@@ -296,7 +296,7 @@ function PricingContent({ industry }: { firstName: string; industry: ReturnType<
               <div className="sl-plan-price"><span className="sl-plan-amount">$397</span><span className="sl-plan-period">/mo</span></div>
               <p className="sl-plan-tagline">Full automation. AI does the recovery for you.</p>
               <ul className="sl-plan-features">
-                <li>Everything in Essentials</li>
+                <li>Everything in Pro</li>
                 <li><strong>AI voice callback within 60 seconds</strong></li>
                 <li>Automated branded recovery emails</li>
                 <li>Instant SMS alerts to your team</li>

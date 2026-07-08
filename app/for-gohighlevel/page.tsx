@@ -293,7 +293,7 @@ export default function ForGoHighLevel() {
             05 — Pricing
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
-            Plans start at $197/mo. 7-day free trial.
+            Plans start at $397/mo. 7-day free trial.
           </h2>
           <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
             <p>

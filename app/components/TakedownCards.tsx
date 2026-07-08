@@ -203,7 +203,7 @@ export default function TakedownCards() {
 
       <div className="td-summary">
         <p>
-          ReCapture starts at <strong>$197/mo</strong>. Transparent pricing, no add-ons, HIPAA included on Pro with no lock-in, one-day install. Built specifically for high-ticket service businesses — the buyers these tools weren&apos;t designed for.
+          ReCapture starts at <strong>$397/mo</strong>. Transparent pricing, no add-ons, HIPAA included on Pro with no lock-in, one-day install. Built specifically for high-ticket service businesses — the buyers these tools weren&apos;t designed for.
         </p>
       </div>
 

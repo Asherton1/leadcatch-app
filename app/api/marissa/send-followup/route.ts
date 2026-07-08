@@ -24,16 +24,16 @@ function templateForTopic(topic: string, name: string) {
       subject: 'Your ReCapture pricing — as promised',
       body: `Thanks for calling earlier. Here's the pricing breakdown we discussed.
 
-<strong>Essentials — $197/month</strong>
+<strong>Pro — $397/month</strong>
 See every lead you're losing. Manual follow-up tools. Lead dashboard with hot/warm/cold scoring.
 
 <strong>Pro — $397/month</strong>
-Everything in Essentials, plus AI voice callback within 60 seconds, automated recovery emails, instant SMS alerts to your team, and Slack notifications. HIPAA-ready with BAA available.
+AI voice callback within 60 seconds, automated recovery emails, instant SMS alerts to your team, and Slack notifications. HIPAA-ready with BAA available.
 
 <strong>Enterprise — from $1,997/month</strong>
 For multi-location practices, franchise systems, and high-volume operations. Custom-priced based on your locations and integration needs.
 
-Both Essentials and Pro come with a 7-day free trial. Cancel anytime.`,
+Pro comes with a 7-day free trial. Cancel anytime.`,
       cta: { label: 'Start your 7-day free trial', url: 'https://www.userecapture.com/start-trial' },
     },
     trial: {

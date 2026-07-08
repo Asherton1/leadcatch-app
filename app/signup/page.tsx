@@ -42,15 +42,15 @@ function SignupForm() {
   const [loading, setLoading] = useState(false)
   const [baaAccepted, setBaaAccepted] = useState(false)
   const searchParams = useSearchParams()
-  const [plan, setPlan] = useState<'essentials' | 'pro'>('pro')
+  const [plan, setPlan] = useState<'pro'>('pro')
 
   useEffect(() => {
     const p = searchParams.get('plan')
-    if (p === 'essentials' || p === 'pro') setPlan(p)
+    if (p === 'pro') setPlan(p)
   }, [searchParams])
 
-  const planPrice = plan === 'essentials' ? 197 : 397
-  const planName = plan === 'essentials' ? 'Essentials' : 'Pro'
+  const planPrice = 397
+  const planName = 'Pro'
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -136,18 +136,11 @@ function SignupForm() {
           </div>
           <div style={s.divider} />
           <p style={s.sectionLabel}>Your Plan</p>
-          <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.25rem' }}>
-            <button type="button" onClick={() => setPlan('essentials')} style={{ flex: 1, padding: '1rem', background: plan === 'essentials' ? '#1a1a1a' : '#0d0d0d', border: plan === 'essentials' ? '2px solid #ff6b35' : '1px solid #2a2a2a', borderRadius: '10px', cursor: 'pointer', textAlign: 'center' as const }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: plan === 'essentials' ? '#ff6b35' : '#666', textTransform: 'uppercase' as const, letterSpacing: '0.08em', marginBottom: '0.25rem' }}>Essentials</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff' }}>$197<span style={{ fontSize: '0.75rem', color: '#555', fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: '0.6875rem', color: '#555', marginTop: '0.25rem' }}>See your lost leads</div>
-            </button>
-            <button type="button" onClick={() => setPlan('pro')} style={{ flex: 1, padding: '1rem', background: plan === 'pro' ? '#1a1a1a' : '#0d0d0d', border: plan === 'pro' ? '2px solid #ff6b35' : '1px solid #2a2a2a', borderRadius: '10px', cursor: 'pointer', textAlign: 'center' as const, position: 'relative' as const }}>
-              {plan === 'pro' && <div style={{ position: 'absolute' as const, top: '-8px', right: '12px', background: '#ff6b35', color: '#000', fontSize: '0.5625rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px', textTransform: 'uppercase' as const, letterSpacing: '0.05em' }}>Popular</div>}
-              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: plan === 'pro' ? '#ff6b35' : '#666', textTransform: 'uppercase' as const, letterSpacing: '0.08em', marginBottom: '0.25rem' }}>Pro</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff' }}>$397<span style={{ fontSize: '0.75rem', color: '#555', fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: '0.6875rem', color: '#555', marginTop: '0.25rem' }}>Auto-recover your leads</div>
-            </button>
+          <div style={{ padding: '1.25rem', background: '#0d0d0d', border: '2px solid #ff6b35', borderRadius: '10px', textAlign: 'center' as const, marginBottom: '0.25rem', position: 'relative' as const }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase' as const, letterSpacing: '0.08em', marginBottom: '0.4rem' }}>Pro Plan</div>
+            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>$397<span style={{ fontSize: '0.875rem', color: '#666', fontWeight: 400 }}>/mo</span></div>
+            <div style={{ fontSize: '0.8125rem', color: '#888', marginTop: '0.5rem' }}>AI voice callback, automated recovery, HIPAA-ready</div>
+            <div style={{ fontSize: '0.6875rem', color: '#666', marginTop: '0.5rem' }}>Multi-location? <a href="/pricing" style={{ color: '#ff6b35', textDecoration: 'none' }}>See Enterprise →</a></div>
           </div>
           <div style={s.divider} />
           <p style={s.sectionLabel}>Payment Method</p>

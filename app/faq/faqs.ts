@@ -80,8 +80,8 @@ export const faqCategories: FAQCategory[] = [
         a: "You get full access to every feature on the Pro plan for 7 days. A card is required to start (so there's no friction when you decide to continue), but you can cancel anytime in your dashboard before day 7 and you won't be charged. After day 7, billing starts automatically at $397/mo.",
       },
       {
-        q: "What's the difference between Essentials, Pro, and Enterprise?",
-        a: 'Essentials ($197/mo) — form capture, dashboard, email/SMS alerts, webhook integrations, 1 website. Pro ($397/mo) — adds AI voice callback, lead scoring, weekly performance reports, branded recovery emails, 3 websites. Enterprise (from $1,997/mo) — unlimited websites, HIPAA + BAA, dedicated account manager, white-glove setup, custom integrations.',
+        q: "What's the difference between Pro and Enterprise?",
+        a: 'Pro ($397/mo) — form capture, dashboard, AI voice callback within 60 seconds, lead scoring, email/SMS/Slack alerts, weekly performance reports, branded recovery emails, webhook integrations, 3 websites. Enterprise (from $1,997/mo) — unlimited websites, HIPAA + BAA, dedicated account manager, white-glove setup, custom integrations, per-location dashboards.',
       },
       {
         q: 'Do you offer an annual discount?',
