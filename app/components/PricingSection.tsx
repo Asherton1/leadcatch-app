@@ -11,7 +11,6 @@ export default function PricingSection() {
   const [visible, setVisible] = useState(false)
   const wrapRef = useRef<HTMLDivElement>(null)
 
-  const essentials = annual ? 167 : 197
   const pro = annual ? 337 : 397
 
   useEffect(() => {
@@ -48,28 +47,6 @@ export default function PricingSection() {
 
   const tiers = [
     {
-      name: 'ESSENTIALS',
-      price: essentials,
-      priceDisplay: `$${essentials}`,
-      period: '/ mo',
-      desc: "See every lead you\u2019re losing. Follow up manually.",
-      hipaa: false,
-      features: [
-        'Real-time form abandonment tracking',
-        'Exit-intent detection',
-        'Lead dashboard with contact details',
-        'Lead scoring (hot/warm/cold) with breakdown',
-        'Status filters (Open / Contacted / Converted / Lost)',
-        'Recovered Revenue counter (live ROI tracking)',
-        'Revenue-at-risk estimation',
-        'Onboarding & trial guidance emails',
-        'Weekly email report',
-        'Manual follow-up (email & call)',
-      ],
-      cta: { label: 'Start your 7-day free trial', href: '/signup?plan=essentials', isModal: false },
-      isPro: false,
-    },
-    {
       name: 'PRO',
       price: pro,
       priceDisplay: `$${pro}`,
@@ -90,7 +67,7 @@ export default function PricingSection() {
         'Priority support',
       ],
       cta: { label: 'Start your 7-day free trial', href: '/signup?plan=pro', isModal: false },
-      isPro: true,
+      isPro: false,
     },
     {
       name: 'ENTERPRISE',
@@ -114,7 +91,7 @@ export default function PricingSection() {
         'Dedicated account manager',
       ],
       cta: { label: 'Contact Sales', href: '', isModal: true },
-      isPro: false,
+      isPro: true,
     },
   ]
 
