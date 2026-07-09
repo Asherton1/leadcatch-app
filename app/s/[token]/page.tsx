@@ -165,13 +165,22 @@ export default async function ShortLinkPage({ params }: PageProps) {
       {/* HERO — Editorial split headline */}
       <section className="sl-hero">
         <div className="sl-hero-inner">
-          <p className="sl-hero-eyebrow">Call summary · {callDate}</p>
-          <div className="sl-hero-meta">
-            <span className="sl-hero-meta-item"><span className="sl-hero-meta-dot"></span>Prepared by Marissa</span>
-            <span className="sl-hero-meta-sep">·</span>
-            <span className="sl-hero-meta-item">AI Concierge</span>
-            <span className="sl-hero-meta-sep">·</span>
-            <span className="sl-hero-meta-item sl-hero-meta-ref">Ref #{token.slice(0, 8).toUpperCase()}</span>
+          <p className="sl-hero-eyebrow">Call summary</p>
+          <div className="sl-briefing">
+            <div className="sl-briefing-col sl-briefing-col-status">
+              <span className="sl-briefing-dot"></span>
+              <span className="sl-briefing-label">Live briefing</span>
+            </div>
+            <div className="sl-briefing-divider"></div>
+            <div className="sl-briefing-col">
+              <span className="sl-briefing-key">{callDate}</span>
+              <span className="sl-briefing-sub">Call ID · <span className="sl-briefing-mono">{token.slice(0, 8).toUpperCase()}</span></span>
+            </div>
+            <div className="sl-briefing-divider"></div>
+            <div className="sl-briefing-col">
+              <span className="sl-briefing-key">Marissa</span>
+              <span className="sl-briefing-sub">ReCapture AI Concierge</span>
+            </div>
           </div>
           <h1 className="sl-hero-headline">
             <span className="sl-hero-headline-primary">Hi {firstName}, here&apos;s everything we discussed.</span>{' '}
