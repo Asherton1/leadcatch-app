@@ -54,7 +54,6 @@ export default function PricingSection() {
       desc: "Automated recovery. Leads come back without lifting a finger.",
       hipaa: true,
       features: [
-        'Everything in Pro',
         'AI voice callback within 60 seconds',
         'Automated lead recovery emails',
         'Instant SMS lead alerts',
