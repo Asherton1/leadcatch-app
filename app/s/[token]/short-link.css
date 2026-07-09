@@ -716,3 +716,102 @@
 @media (max-width: 540px) {
   .sl-tier-grid { grid-template-columns: 1fr; }
 }
+
+/* HERO — Briefing meta row */
+.sl-hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+  margin: 0 0 2rem 0;
+  padding: 0.625rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  width: fit-content;
+}
+.sl-hero-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #a1a1aa;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.sl-hero-meta-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+  animation: sl-pulse 2s ease-in-out infinite;
+}
+@keyframes sl-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.sl-hero-meta-sep {
+  color: #3a3a3a;
+  font-size: 0.75rem;
+}
+.sl-hero-meta-ref {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  color: #6b7280;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+}
+
+/* PRICING — Featured card gradient border, glow, MOST POPULAR badge */
+.sl-plan-featured {
+  border-color: transparent;
+  background: linear-gradient(#111, #111) padding-box,
+              linear-gradient(135deg, rgba(255,107,53,0.6), rgba(255,107,53,0.15)) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 0 40px rgba(255, 107, 53, 0.08),
+              0 8px 32px rgba(0, 0, 0, 0.4);
+}
+.sl-plan-featured::before {
+  content: "MOST POPULAR";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff6b35;
+  color: #0a0a0a;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 2px 12px rgba(255, 107, 53, 0.35);
+}
+
+/* PRICING — Refined hover lift + card fade-in */
+.sl-plan-card {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+  animation: sl-fade-in-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+.sl-plan-card:nth-child(1) { animation-delay: 0.05s; }
+.sl-plan-card:nth-child(2) { animation-delay: 0.15s; }
+.sl-plan-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+.sl-plan-featured:hover {
+  box-shadow: 0 0 60px rgba(255, 107, 53, 0.15),
+              0 16px 48px rgba(0, 0, 0, 0.5);
+}
+@keyframes sl-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
