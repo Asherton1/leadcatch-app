@@ -277,26 +277,13 @@ function PricingContent({ industry }: { firstName: string; industry: ReturnType<
           <h2 className="sl-section-headline">Pick the plan that fits your stage.</h2>
 
           <div className="sl-plans-grid">
-            <div className="sl-plan-card">
-              <div className="sl-plan-name">Pro</div>
-              <div className="sl-plan-price"><span className="sl-plan-amount">$397</span><span className="sl-plan-period">/mo</span></div>
-              <p className="sl-plan-tagline">See every lead you&apos;re losing — and recover them manually.</p>
-              <ul className="sl-plan-features">
-                <li>Lead capture from every form on your site</li>
-                <li>Hot/warm/cold lead scoring</li>
-                <li>Manual follow-up tools</li>
-                <li>Lead dashboard with filters</li>
-                <li>Email + Slack alerts</li>
-              </ul>
-              <a href="/start-trial" className="sl-plan-cta">Start 7-day trial</a>
-            </div>
-
             <div className="sl-plan-card sl-plan-featured">
               <div className="sl-plan-name">Pro</div>
               <div className="sl-plan-price"><span className="sl-plan-amount">$397</span><span className="sl-plan-period">/mo</span></div>
               <p className="sl-plan-tagline">Full automation. AI does the recovery for you.</p>
               <ul className="sl-plan-features">
-                <li>Everything in Pro</li>
+                <li>Lead capture from every form on your site</li>
+                <li>Hot/warm/cold lead scoring</li>
                 <li><strong>AI voice callback within 60 seconds</strong></li>
                 <li>Automated branded recovery emails</li>
                 <li>Instant SMS alerts to your team</li>
