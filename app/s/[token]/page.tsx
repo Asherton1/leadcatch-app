@@ -166,6 +166,13 @@ export default async function ShortLinkPage({ params }: PageProps) {
       <section className="sl-hero">
         <div className="sl-hero-inner">
           <p className="sl-hero-eyebrow">Call summary · {callDate}</p>
+          <div className="sl-hero-meta">
+            <span className="sl-hero-meta-item"><span className="sl-hero-meta-dot"></span>Prepared by Marissa</span>
+            <span className="sl-hero-meta-sep">·</span>
+            <span className="sl-hero-meta-item">AI Concierge</span>
+            <span className="sl-hero-meta-sep">·</span>
+            <span className="sl-hero-meta-item sl-hero-meta-ref">Ref #{token.slice(0, 8).toUpperCase()}</span>
+          </div>
           <h1 className="sl-hero-headline">
             <span className="sl-hero-headline-primary">Hi {firstName}, here&apos;s everything we discussed.</span>{' '}
             <span className="sl-hero-headline-muted">{link.notes ? `Tailored for your ${industry.label.toLowerCase()} operation. ` : `Tailored just for you. `}Everything below was prepared after our call.</span>
