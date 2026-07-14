@@ -154,14 +154,21 @@ export default function Post() {
         <p>The tower down the street is not doing this. That is the opportunity.</p>
       </div>
 
-      <div className="blog-post-cta reveal">
-        <div className="blog-post-cta-inner">
-          <h3>Recovering the leads your sales gallery is losing.</h3>
-          <p>ReCapture is the recovery layer for pre-construction developers, sales agencies, and multi-tower operators. Form abandonment, AI voice callback within 60 seconds, portfolio-level attribution. Deployed inside the campaigns we manage.</p>
-          <Link href="/pricing" className="blog-post-cta-btn">See how it works →</Link>
+      <div className="blog-post-author">
+        <div className="blog-post-author-avatar">RCT</div>
+        <div>
+          <div className="blog-post-author-name">ReCapture Team</div>
+          <div className="blog-post-author-role">userecapture.com</div>
         </div>
       </div>
 
+      <div className="blog-post-cta">
+        <div className="blog-post-cta-box">
+          <h3>See what your sales gallery is losing</h3>
+          <p>Run a free form audit on any sales gallery site or developer landing page and see exactly where high-intent buyers are dropping off before they submit. Or use the ROI Estimator to see the recovery opportunity in your own numbers.</p>
+          <Link href="/demo">Try the Live Demo →</Link>
+        </div>
+      </div>
       <Footer />
     </div>
   )
