@@ -267,7 +267,18 @@ function LeadModal({
           </div>
         </div>
 
-        <div className="modal-body">
+        <div
+          className="modal-body"
+          onWheel={(e) => {
+            const el = e.currentTarget
+            const atTop = el.scrollTop === 0
+            const atBottom = el.scrollHeight - el.scrollTop === el.clientHeight
+            if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
+              e.preventDefault()
+            }
+            e.stopPropagation()
+          }}
+        >
 
           {/* Contact info */}
           <div className="modal-section">
@@ -946,7 +957,18 @@ export default function Dashboard() {
           <div className="table-header-cell"></div>
         </div>
 
-        <div className="table-body">
+        <div
+          className="table-body"
+          onWheel={(e) => {
+            const el = e.currentTarget
+            const atTop = el.scrollTop === 0
+            const atBottom = el.scrollHeight - el.scrollTop === el.clientHeight
+            if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
+              return
+            }
+            e.stopPropagation()
+          }}
+        >
           {isLoading && <div className="state-row">Loading leads…</div>}
           {leadsError && <div className="state-row" style={{ color: '#f87171' }}>Error: {leadsError}</div>}
           {!isLoading && !leadsError && filteredLeads.length === 0 && (

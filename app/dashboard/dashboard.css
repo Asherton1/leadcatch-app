@@ -509,6 +509,7 @@ body {
 .table-body {
   max-height: 600px;
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .table-row {
@@ -1639,4 +1640,10 @@ body {
 .stat-card-clickable:focus-visible {
   outline: 2px solid rgba(255, 107, 53, 0.4);
   outline-offset: 2px;
+}
+
+/* Modal scroll lock v4 — clean */
+html:has(.modal-backdrop),
+body:has(.modal-backdrop) {
+  overflow: hidden !important;
 }

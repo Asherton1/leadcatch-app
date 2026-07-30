@@ -1,23 +1,36 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import './AdminNav.css'
 import Logo from './Logo'
 
+const ADMIN_EMAILS = ['hello@userecapture.com', 'asherton@userecapture.com']
+
 export default function AdminNav() {
   const pathname = usePathname()
   const router = useRouter()
   const [signingOut, setSigningOut] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
 
-  const links = [
-    { href: '/dashboard', label: 'Dashboard' },
-    { href: '/admin', label: 'Admin' },
-    { href: '/dashboard/outreach', label: 'Outreach' },
-    { href: '/admin/sms-templates', label: 'SMS' },
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user?.email && ADMIN_EMAILS.includes(data.user.email)) {
+        setIsAdmin(true)
+      }
+    })
+  }, [])
+
+  const allLinks = [
+    { href: '/dashboard', label: 'Dashboard', adminOnly: false },
+    { href: '/admin', label: 'Admin', adminOnly: true },
+    { href: '/dashboard/outreach', label: 'Outreach', adminOnly: true },
+    { href: '/admin/sms-templates', label: 'SMS', adminOnly: true },
   ]
+
+  const links = allLinks.filter(link => !link.adminOnly || isAdmin)
 
   const handleSignOut = async () => {
     if (signingOut) return
