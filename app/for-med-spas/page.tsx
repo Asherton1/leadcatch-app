@@ -142,7 +142,7 @@ export default function ForMedSpas() {
             </div>
             <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
               <p>
-                The average med spa client lifetime value is <strong style={{ color: '#fff' }}>$2,800</strong> across Botox, fillers, laser, and skin care touchpoints. The Pro plan of ReCapture costs <strong style={{ color: '#fff' }}>$397</strong> per month. Five recovered patients in a year — total — covers the entire annual subscription.
+                The average med spa client lifetime value is <strong style={{ color: '#fff' }}>$2,800</strong> across Botox, fillers, laser, and skin care touchpoints. The Pro plan of ReCapture costs <strong style={{ color: '#fff' }}>$394</strong> per month. Five recovered patients in a year — total — covers the entire annual subscription.
               </p>
               <p>
                 The realistic recovery rate for tracked partial submissions sits between <strong style={{ color: '#fff' }}>8% and 22%</strong> depending on follow-up speed. On 180 monthly form starters, that is between <strong style={{ color: '#fff' }}>14 and 40 additional patients per month</strong> — patients who already showed buying intent on your site and would otherwise have been forgotten.
@@ -299,14 +299,14 @@ export default function ForMedSpas() {
             05 — Pricing
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
-            Plans start at $397/mo. 7-day free trial.
+            Plans start at $394/mo. 7-day free trial.
           </h2>
           <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for single-location med spas. Includes recovery dashboard, tracker, automated follow-up emails, AI voice callback within 60 seconds, and instant SMS/Slack alerts.
+              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $394/mo for single-location med spas. Includes recovery dashboard, tracker, automated follow-up emails, AI voice callback within 60 seconds, and instant SMS/Slack alerts.
             </p>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for established med spas with consistent ad spend. Adds SMS alerts to front desk, AI voice callback (Marissa), and weekly performance reports.
+              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $394/mo for established med spas with consistent ad spend. Adds SMS alerts to front desk, AI voice callback (Marissa), and weekly performance reports.
             </p>
             <p>
               <strong style={{ color: '#e4e4e7' }}>Enterprise</strong> for multi-location groups, BAA-required healthcare practices, and sites with high lead volume. Custom pricing, dedicated account manager.

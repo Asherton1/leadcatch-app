@@ -43,7 +43,7 @@ const SAMPLE_LEADS = [
 const FAQS: { question: string; answer: string }[] = [
   { question: "How does the Boulevard integration work?", answer: "Native integration. When someone abandons a consultation form, ReCapture creates a new Lead in Boulevard with captured data (name, email, phone, services of interest, completed fields). The lead appears in your booking pipeline ready for your team to convert into a booked consultation." },
   { question: "Will recovery messages mention specific services from the form?", answer: "Yes — recovery emails and SMS pull from the services the visitor selected on the form. A lead who selected Botox sees consultation copy referencing the treatment specifically. This personalization typically increases reply rates by 30-50% over generic recovery copy." },
-  { question: "Does ReCapture work for solo aesthetic providers, not just multi-location?", answer: "Yes — Pro plan ($397/mo) is designed for solo through multi-location aesthetic providers using Boulevard. You get full form abandonment tracking, AI voice callback within 60 seconds, recovery emails + SMS, and the Boulevard integration." },
+  { question: "Does ReCapture work for solo aesthetic providers, not just multi-location?", answer: "Yes — Pro plan ($394/mo) is designed for solo through multi-location aesthetic providers using Boulevard. You get full form abandonment tracking, AI voice callback within 60 seconds, recovery emails + SMS, and the Boulevard integration." },
 ]
 
 export default function ForBoulevard() {
@@ -300,11 +300,11 @@ export default function ForBoulevard() {
             05 — Pricing
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
-            Plans start at $397/mo. 7-day free trial.
+            Plans start at $394/mo. 7-day free trial.
           </h2>
           <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Per-client Pro</strong> at $397/mo per managed client site. Includes recovery dashboard, tracker, AI voice callback, SMS alerts.
+              <strong style={{ color: '#e4e4e7' }}>Per-client Pro</strong> at $394/mo per managed client site. Includes recovery dashboard, tracker, AI voice callback, SMS alerts.
             </p>
             <p>
               <strong style={{ color: '#e4e4e7' }}>Multi-site teams</strong> discounts available for 3+ properties. Contact us for custom pricing.

@@ -138,7 +138,7 @@ function SignupForm() {
           <p style={s.sectionLabel}>Your Plan</p>
           <div style={{ padding: '1.25rem', background: '#0d0d0d', border: '2px solid #ff6b35', borderRadius: '10px', textAlign: 'center' as const, marginBottom: '0.25rem', position: 'relative' as const }}>
             <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase' as const, letterSpacing: '0.08em', marginBottom: '0.4rem' }}>Pro Plan</div>
-            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>$397<span style={{ fontSize: '0.875rem', color: '#666', fontWeight: 400 }}>/mo</span></div>
+            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>$394<span style={{ fontSize: '0.875rem', color: '#666', fontWeight: 400 }}>/mo</span></div>
             <div style={{ fontSize: '0.8125rem', color: '#888', marginTop: '0.5rem' }}>AI voice callback, automated recovery, HIPAA-ready</div>
             <div style={{ fontSize: '0.6875rem', color: '#666', marginTop: '0.5rem' }}>Multi-location? <a href="/pricing" style={{ color: '#ff6b35', textDecoration: 'none' }}>See Enterprise →</a></div>
           </div>

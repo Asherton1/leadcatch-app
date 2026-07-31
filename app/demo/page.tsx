@@ -182,7 +182,7 @@ export default function TestForm() {
                     <label style={{ fontSize: '0.75rem', fontWeight: 600, color: '#888', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '0.5rem' }}>Plan Interest</label>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.625rem' }}>
                       {[
-                        { value: 'pro', label: 'Pro', price: '$397/mo', desc: 'HIPAA + AI voice + multi-location' },
+                        { value: 'pro', label: 'Pro', price: '$394/mo', desc: 'HIPAA + AI voice + multi-location' },
                         { value: 'enterprise', label: 'Enterprise', price: 'From $1,997/mo', desc: 'Multi-location groups, franchise systems, high-volume practices' },
                       ].map(tier => {
                         const selected = fields.plan_tier === tier.value

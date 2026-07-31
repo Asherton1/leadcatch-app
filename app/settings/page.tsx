@@ -979,7 +979,7 @@ export default function SettingsPage() {
               <div className="settings-plan-info">
                 <div className="settings-plan-name">{(settings.plan ?? "essentials").charAt(0).toUpperCase() + (settings.plan ?? "essentials").slice(1)}</div>
                 <div className="settings-plan-price">
-                  {settings.plan === "enterprise" ? "Custom pricing" : settings.plan === "pro" ? "$397/mo" : "$197/mo"}
+                  {settings.plan === "enterprise" ? "Custom pricing" : "$394/mo"}
                 </div>
                 {settings.trial_ends_at && (
                   <div className="settings-plan-trial">

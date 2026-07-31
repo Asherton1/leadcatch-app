@@ -293,14 +293,14 @@ export default function ForLuxuryAuto() {
             05 — Pricing
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
-            Plans start at $397/mo. 7-day free trial.
+            Plans start at $394/mo. 7-day free trial.
           </h2>
           <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for single-rooftop dealerships. Includes recovery dashboard, tracker, automated follow-up emails, AI voice callback within 60 seconds, and instant SMS/Slack alerts.
+              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $394/mo for single-rooftop dealerships. Includes recovery dashboard, tracker, automated follow-up emails, AI voice callback within 60 seconds, and instant SMS/Slack alerts.
             </p>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for established dealerships with consistent ad spend. Adds SMS alerts to sales floor, AI voice callback (Marissa), and weekly performance reports.
+              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $394/mo for established dealerships with consistent ad spend. Adds SMS alerts to sales floor, AI voice callback (Marissa), and weekly performance reports.
             </p>
             <p>
               <strong style={{ color: '#e4e4e7' }}>Enterprise</strong> for multi-rooftop groups, dealer groups, and high lead volume sites. Custom pricing, dedicated account manager, multi-rooftop dashboard.

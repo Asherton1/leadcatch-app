@@ -198,7 +198,7 @@ export default function LandingPage() {
         <div className="pricing-band-inner">
           <p className="pricing-band-eyebrow">Simple, transparent pricing</p>
           <p className="pricing-band-line">
-            Plans start at <strong>$397/mo</strong> · 7-day free trial · Cancel anytime
+            Plans start at <strong>$394/mo</strong> · 7-day free trial · Cancel anytime
           </p>
           <Link href="/pricing" className="pricing-band-link page-transition-link">
             See all plans &rarr;

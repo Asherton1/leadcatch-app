@@ -295,7 +295,7 @@ function PricingContent({ industry }: { firstName: string; industry: ReturnType<
           <div className="sl-plans-grid">
             <div className="sl-plan-card sl-plan-featured">
               <div className="sl-plan-name">Pro</div>
-              <div className="sl-plan-price"><span className="sl-plan-amount">$397</span><span className="sl-plan-period">/mo</span></div>
+              <div className="sl-plan-price"><span className="sl-plan-amount">$394</span><span className="sl-plan-period">/mo</span></div>
               <p className="sl-plan-tagline">Full automation. AI does the recovery for you.</p>
               <ul className="sl-plan-features">
                 <li>Lead capture from every form on your site</li>
