@@ -110,15 +110,50 @@ export default function FamilyLawROI() {
     </div>
   )
 
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v) return
+    let dir = 1
+    let raf: number | null = null
+
+    v.playbackRate = 0.55
+
+    const onEnd = () => {
+      dir = -1
+      v.pause()
+      const step = () => {
+        if (dir !== -1 || !v.duration) return
+        v.currentTime = Math.max(0, v.currentTime - 0.022)
+        if (v.currentTime <= 0.05) {
+          dir = 1
+          v.play().catch(() => {})
+          return
+        }
+        raf = requestAnimationFrame(step)
+      }
+      step()
+    }
+
+    v.addEventListener('ended', onEnd)
+    v.play().catch(() => {})
+
+    return () => {
+      v.removeEventListener('ended', onEnd)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
+
   return (
     <div className="flr-page">
       <div className="flr-video-wrap" aria-hidden="true">
         <video
+          ref={videoRef}
           className="flr-video"
           src="/family-law-bg.mp4"
           autoPlay
           muted
-          loop
           playsInline
           preload="auto"
         />
