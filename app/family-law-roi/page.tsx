@@ -165,7 +165,9 @@ export default function FamilyLawROI() {
       <div className="flr-noise" aria-hidden="true" />
       <div className="flr-vignette" aria-hidden="true" />
 
-      <BlogNav />
+      <div className="flr-nav-wrap">
+        <BlogNav />
+      </div>
 
       <div className="flr-container">
         <header className="flr-header">
@@ -262,7 +264,9 @@ export default function FamilyLawROI() {
         </p>
       </div>
 
-      <Footer />
+      <div className="flr-footer-wrap">
+        <Footer />
+      </div>
     </div>
   )
 }
