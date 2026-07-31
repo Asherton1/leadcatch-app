@@ -3,7 +3,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
-import FlowField from './FlowField'
 import '../landing.css'
 import './family-law-roi.css'
 
@@ -113,12 +112,18 @@ export default function FamilyLawROI() {
 
   return (
     <div className="flr-page">
-      <div className="flr-orbs" aria-hidden="true">
-        <div className="flr-orb flr-orb-1" />
-        <div className="flr-orb flr-orb-2" />
-        <div className="flr-orb flr-orb-3" />
+      <div className="flr-video-wrap" aria-hidden="true">
+        <video
+          className="flr-video"
+          src="/family-law-bg.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
+        <div className="flr-video-scrim" />
       </div>
-      <FlowField />
       <div className="flr-noise" aria-hidden="true" />
       <div className="flr-vignette" aria-hidden="true" />
 

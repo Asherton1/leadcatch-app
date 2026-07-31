@@ -524,111 +524,74 @@
   .flr-fstep-bar { transition: none; }
 }
 
-/* ═══ BACKGROUND LAYERS ══════════════════════════ */
-
-/* Layer 1 — fine grid mesh */
-.flr-page::after {
-  content: '';
+/* ═══ VIDEO BACKGROUND ═══════════════════════════ */
+.flr-video-wrap {
   position: fixed;
   inset: 0;
-  pointer-events: none;
   z-index: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 20%, transparent 78%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 20%, transparent 78%);
-}
-
-/* Layer 2 — drifting orbs */
-.flr-orbs {
-  position: fixed;
-  inset: 0;
   pointer-events: none;
-  z-index: 0;
   overflow: hidden;
+  background: #060606;
 }
 
-.flr-orb {
+.flr-video {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%) scale(1.08);
+  object-fit: cover;
+  filter: blur(3px) saturate(0.45) brightness(0.38) contrast(1.05);
   opacity: 0.5;
+  animation: flrVideoDrift 40s ease-in-out infinite alternate;
 }
 
-.flr-orb-1 {
-  width: 520px; height: 520px;
-  top: -12%; left: -8%;
-  background: radial-gradient(circle, rgba(255,107,53,0.30) 0%, transparent 68%);
-  animation: flrDrift1 22s ease-in-out infinite;
+@keyframes flrVideoDrift {
+  from { transform: translate(-50%, -50%) scale(1.08); }
+  to   { transform: translate(-50%, -50%) scale(1.16); }
 }
 
-.flr-orb-2 {
-  width: 620px; height: 620px;
-  bottom: -18%; right: -10%;
-  background: radial-gradient(circle, rgba(255,107,53,0.20) 0%, transparent 70%);
-  animation: flrDrift2 28s ease-in-out infinite;
-}
-
-.flr-orb-3 {
-  width: 400px; height: 400px;
-  top: 42%; left: 55%;
-  background: radial-gradient(circle, rgba(255,134,89,0.13) 0%, transparent 72%);
-  animation: flrDrift3 34s ease-in-out infinite;
-}
-
-@keyframes flrDrift1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(60px, 70px) scale(1.12); }
-}
-
-@keyframes flrDrift2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(-70px, -50px) scale(1.08); }
-}
-
-@keyframes flrDrift3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%      { transform: translate(-50px, 40px) scale(1.15); }
-  66%      { transform: translate(40px, -30px) scale(0.94); }
-}
-
-/* Layer 3 — noise grain */
-.flr-noise {
-  position: fixed;
+/* Scrim: darkens edges, warms the center, keeps text legible */
+.flr-video-scrim {
+  position: absolute;
   inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.16;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background:
+    radial-gradient(ellipse 75% 60% at 50% 40%, rgba(255,107,53,0.10) 0%, transparent 65%),
+    linear-gradient(180deg, rgba(10,10,10,0.94) 0%, rgba(10,10,10,0.80) 30%, rgba(10,10,10,0.86) 70%, rgba(10,10,10,0.96) 100%);
 }
 
-/* Top vignette so nav sits cleanly */
-.flr-vignette {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 220px;
-  pointer-events: none;
-  z-index: 0;
-  background: linear-gradient(180deg, rgba(10,10,10,0.9) 0%, transparent 100%);
+/* Fine grid over the video for structure */
+.flr-video-scrim::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 35%, #000 15%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 35%, #000 15%, transparent 75%);
+}
+
+/* Panels get glass treatment so the video reads through */
+.flr-panel {
+  background: rgba(16, 16, 16, 0.72);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+}
+
+.flr-panel-right {
+  background: rgba(14, 14, 14, 0.66);
+}
+
+.flr-hero {
+  backdrop-filter: blur(16px) saturate(1.15);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flr-orb { animation: none; }
+  .flr-video { animation: none; }
 }
-
-/* Canvas flow field */
-.flr-canvas {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.85;
-}
-
-/* soften the CSS orbs now that canvas carries the motion */
-.flr-orb { opacity: 0.32; }
-.flr-orb-3 { opacity: 0.22; }
