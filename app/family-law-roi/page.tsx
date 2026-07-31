@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
 import '../landing.css'
@@ -11,6 +11,46 @@ function fmtNum(n: number) { return Math.round(n).toLocaleString() }
 function fill(val: number, min: number, max: number) {
   const pct = ((val - min) / (max - min)) * 100
   return { background: `linear-gradient(90deg, #ff6b35 ${pct}%, rgba(255,255,255,0.09) ${pct}%)` }
+}
+
+/* Smoothly animates between old and new value */
+function useCountUp(target: number, duration = 550) {
+  const [display, setDisplay] = useState(target)
+  const fromRef = useRef(target)
+  const rafRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    const from = fromRef.current
+    const delta = target - from
+    if (delta === 0) return
+    const start = performance.now()
+
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration)
+      const eased = 1 - Math.pow(1 - t, 3)
+      const val = from + delta * eased
+      setDisplay(val)
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(tick)
+      } else {
+        fromRef.current = target
+      }
+    }
+    rafRef.current = requestAnimationFrame(tick)
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
+  }, [target, duration])
+
+  return display
+}
+
+function Money({ value, className }: { value: number; className?: string }) {
+  const v = useCountUp(value)
+  return <span className={className}>{fmt(v)}</span>
+}
+
+function Count({ value, className }: { value: number; className?: string }) {
+  const v = useCountUp(value)
+  return <span className={className}>{fmtNum(v)}</span>
 }
 
 export default function FamilyLawROI() {
@@ -38,6 +78,13 @@ export default function FamilyLawROI() {
       monthly, annual: monthly * 12, roi: monthly / 394,
     }
   }, [monthlyLeads, consultBookRate, showUpRate, retainRate, avgCaseValue, abandonmentRate, recoveryRate])
+
+  const funnelSteps = [
+    { label: 'Leads', value: monthlyLeads },
+    { label: 'Consults', value: c.consults },
+    { label: 'Show Up', value: c.shows },
+    { label: 'Retained', value: c.retained },
+  ]
 
   const funnelSliders = [
     { label: 'Monthly Lead Inquiries', val: monthlyLeads, set: setMonthlyLeads, min: 50, max: 500, step: 5, display: fmtNum(monthlyLeads) },
@@ -77,43 +124,38 @@ export default function FamilyLawROI() {
         </header>
 
         <div className="flr-grid">
-          {/* LEFT — inputs */}
           <section className="flr-panel">
             <div className="flr-panel-head">Your Funnel</div>
             <div className="flr-sliders">{funnelSliders.map(Slider)}</div>
-
             <div className="flr-panel-head flr-panel-head-alt">The Leak</div>
             <div className="flr-sliders">{leakSliders.map(Slider)}</div>
           </section>
 
-          {/* RIGHT — current state */}
           <section className="flr-panel flr-panel-right">
             <div className="flr-panel-head">Current Monthly Funnel</div>
 
-            <div className="flr-funnel">
-              <div className="flr-funnel-step">
-                <span className="flr-funnel-num">{fmtNum(monthlyLeads)}</span>
-                <span className="flr-funnel-lbl">Leads</span>
-              </div>
-              <span className="flr-funnel-arrow">→</span>
-              <div className="flr-funnel-step">
-                <span className="flr-funnel-num">{fmtNum(c.consults)}</span>
-                <span className="flr-funnel-lbl">Consults</span>
-              </div>
-              <span className="flr-funnel-arrow">→</span>
-              <div className="flr-funnel-step">
-                <span className="flr-funnel-num">{fmtNum(c.shows)}</span>
-                <span className="flr-funnel-lbl">Show Up</span>
-              </div>
-              <span className="flr-funnel-arrow">→</span>
-              <div className="flr-funnel-step">
-                <span className="flr-funnel-num">{fmtNum(c.retained)}</span>
-                <span className="flr-funnel-lbl">Retained</span>
-              </div>
+            <div className="flr-funnel-viz">
+              {funnelSteps.map((step, i) => {
+                const pct = monthlyLeads > 0 ? (step.value / monthlyLeads) * 100 : 0
+                return (
+                  <div className="flr-fstep" key={step.label}>
+                    <div className="flr-fstep-top">
+                      <span className="flr-fstep-label">{step.label}</span>
+                      <Count value={step.value} className="flr-fstep-num" />
+                    </div>
+                    <div className="flr-fstep-track">
+                      <div
+                        className="flr-fstep-bar"
+                        style={{ width: `${Math.max(2, pct)}%`, animationDelay: `${i * 60}ms` }}
+                      />
+                    </div>
+                  </div>
+                )
+              })}
             </div>
 
             <div className="flr-rev-row">
-              <span className="flr-rev-value">{fmt(c.currentRevenue)}</span>
+              <Money value={c.currentRevenue} className="flr-rev-value" />
               <span className="flr-rev-label">current monthly revenue</span>
             </div>
 
@@ -121,12 +163,12 @@ export default function FamilyLawROI() {
               <div className="flr-leak-head">Hidden Leak</div>
               <div className="flr-leak-body">
                 <div className="flr-leak-stat">
-                  <span className="flr-leak-num">{fmtNum(c.totalStarts)}</span>
+                  <Count value={c.totalStarts} className="flr-leak-num" />
                   <span className="flr-leak-lbl">Form starts</span>
                 </div>
                 <div className="flr-leak-divider" />
                 <div className="flr-leak-stat">
-                  <span className="flr-leak-num flr-leak-num-red">{fmtNum(c.abandoned)}</span>
+                  <Count value={c.abandoned} className="flr-leak-num flr-leak-num-red" />
                   <span className="flr-leak-lbl">Abandoned before submitting</span>
                 </div>
               </div>
@@ -136,27 +178,28 @@ export default function FamilyLawROI() {
             </div>
           </section>
 
-          {/* FULL-WIDTH — the result */}
           <section className="flr-hero">
             <div className="flr-hero-head">Recovered with ReCapture</div>
             <div className="flr-hero-stats">
               <div className="flr-hero-stat">
-                <span className="flr-hero-num">{fmt(c.monthly)}</span>
+                <Money value={c.monthly} className="flr-hero-num" />
                 <span className="flr-hero-lbl">Additional revenue / month</span>
               </div>
               <div className="flr-hero-divider" />
               <div className="flr-hero-stat">
-                <span className="flr-hero-num flr-hero-num-orange">{fmt(c.annual)}</span>
+                <Money value={c.annual} className="flr-hero-num flr-hero-num-orange" />
                 <span className="flr-hero-lbl">Additional revenue / year</span>
               </div>
               <div className="flr-hero-divider" />
               <div className="flr-hero-stat">
-                <span className="flr-hero-num flr-hero-num-green">{Math.round(c.roi)}×</span>
+                <span className="flr-hero-num flr-hero-num-green">
+                  <Count value={c.roi} />×
+                </span>
                 <span className="flr-hero-lbl">Return on $394 / month</span>
               </div>
             </div>
             <div className="flr-hero-foot">
-              {fmtNum(c.recovered)} recovered inquiries per month → {c.recoveredRetained.toFixed(1)} additional retained cases
+              <Count value={c.recovered} /> recovered inquiries per month → {c.recoveredRetained.toFixed(1)} additional retained cases
             </div>
           </section>
         </div>

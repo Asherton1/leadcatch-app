@@ -373,3 +373,153 @@
   line-height: 1.6;
   max-width: 720px;
 }
+
+/* ═══ WOW LAYER ═══════════════════════════════════ */
+
+/* Proportional funnel bars replace the old arrow row */
+.flr-funnel-viz {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+  margin-bottom: 1.75rem;
+}
+
+.flr-fstep-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.flr-fstep-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-tertiary, #555);
+}
+
+.flr-fstep-num {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums;
+}
+
+.flr-fstep-track {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+
+.flr-fstep-bar {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--orange-dark, #e55a2b), var(--orange, #ff6b35));
+  box-shadow: 0 0 12px rgba(255,107,53,0.35);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.flr-fstep:last-child .flr-fstep-bar {
+  background: linear-gradient(90deg, var(--orange, #ff6b35), var(--orange-light, #ff8659));
+  box-shadow: 0 0 16px rgba(255,107,53,0.5);
+}
+
+/* Hero band breathes */
+.flr-hero::after {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 50% 0%, rgba(255,107,53,0.18) 0%, transparent 55%);
+  animation: flrBreathe 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes flrBreathe {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.06); }
+}
+
+.flr-hero-head,
+.flr-hero-stats,
+.flr-hero-foot {
+  position: relative;
+  z-index: 1;
+}
+
+/* Big numbers get a soft luminous edge */
+.flr-hero-num {
+  text-shadow: 0 0 40px rgba(255,255,255,0.12);
+}
+
+.flr-hero-num-orange {
+  text-shadow: 0 0 40px rgba(255,107,53,0.4);
+}
+
+.flr-hero-num-green {
+  text-shadow: 0 0 40px rgba(34,197,94,0.35);
+}
+
+/* Panels lift on hover */
+.flr-panel {
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.flr-panel:hover {
+  border-color: rgba(255,107,53,0.22);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+
+/* Slider thumb glows while dragging */
+.flr-slider input[type=range]:active::-webkit-slider-thumb {
+  transform: scale(1.3);
+  box-shadow: 0 0 0 8px rgba(255,107,53,0.18), 0 2px 8px rgba(0,0,0,0.6);
+}
+
+/* Slider row highlights on hover */
+.flr-slider {
+  padding: 0.125rem 0;
+  transition: opacity 0.2s ease;
+}
+
+.flr-sliders:hover .flr-slider { opacity: 0.55; }
+.flr-sliders:hover .flr-slider:hover { opacity: 1; }
+
+.flr-slider:hover .flr-slider-value {
+  color: var(--orange-light, #ff8659);
+}
+
+/* Leak numbers pulse subtly to draw the eye */
+.flr-leak-num-red {
+  animation: flrLeakPulse 3.5s ease-in-out infinite;
+}
+
+@keyframes flrLeakPulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.72; }
+}
+
+/* Entrance */
+.flr-panel, .flr-hero {
+  animation: flrRise 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.flr-panel:nth-child(1) { animation-delay: 0.05s; }
+.flr-panel:nth-child(2) { animation-delay: 0.13s; }
+.flr-hero              { animation-delay: 0.21s; }
+
+@keyframes flrRise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flr-hero::after,
+  .flr-leak-num-red,
+  .flr-panel,
+  .flr-hero { animation: none; }
+  .flr-fstep-bar { transition: none; }
+}
