@@ -1992,3 +1992,12 @@ body:has(.modal-backdrop) {
 .live-visitor-journey-arrow {
   color: rgba(255,255,255,0.25);
 }
+
+.live-drawer-updated {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.35);
+  margin-left: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: lowercase;
+}

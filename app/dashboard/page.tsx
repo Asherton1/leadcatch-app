@@ -563,6 +563,8 @@ export default function Dashboard() {
   const [selectedClient, setSelectedClient]     = useState<Client | null>(null)
   const [liveVisitors, setLiveVisitors] = useState<number>(0)
   const [liveDrawerOpen, setLiveDrawerOpen] = useState(false)
+  const [nowTick, setNowTick] = useState(0)
+  const [lastPollAt, setLastPollAt] = useState<number>(0)
   const [liveVisitorList, setLiveVisitorList] = useState<Array<{
     id: string
     session_id: string
@@ -613,13 +615,23 @@ export default function Dashboard() {
       try {
         const res = await fetch(`/api/live-visitors-list?client_id=${selectedClient.id}`)
         const data = await res.json()
-        if (!cancelled) setLiveVisitorList(data.visitors || [])
+        if (!cancelled) {
+          setLiveVisitorList(data.visitors || [])
+          setLastPollAt(Date.now())
+        }
       } catch { /* silent */ }
     }
     fetchList()
     const iv = setInterval(fetchList, 10000)
     return () => { cancelled = true; clearInterval(iv) }
   }, [liveDrawerOpen, selectedClient?.id])
+
+  useEffect(() => {
+    if (!liveDrawerOpen) return
+    const iv = setInterval(() => setNowTick(t => t + 1), 1000)
+    return () => clearInterval(iv)
+  }, [liveDrawerOpen])
+
 
   const [clientsLoading, setClientsLoading]     = useState(true)
   const [leads, setLeads]                       = useState<Lead[]>([])
@@ -1163,6 +1175,15 @@ export default function Dashboard() {
                 <span className="live-pulse-dot"></span>
                 Live Visitors on Your Site
                 <span className="live-drawer-count">{liveVisitorList.length}</span>
+                {lastPollAt > 0 && (
+                  <span className="live-drawer-updated">
+                    {(() => {
+                      void nowTick
+                      const s = Math.max(0, Math.floor((Date.now() - lastPollAt) / 1000))
+                      return s < 2 ? 'just now' : `updated ${s}s ago`
+                    })()}
+                  </span>
+                )}
               </div>
               <button className="live-drawer-close" onClick={() => setLiveDrawerOpen(false)} type="button" aria-label="Close">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -1198,7 +1219,11 @@ export default function Dashboard() {
                       const parts = [v.city, v.region, v.country].filter(Boolean)
                       return parts.length > 0 ? parts.join(', ') : 'Unknown location'
                     })()
-                    const timeOnSite = v.time_on_site_seconds
+                    void nowTick; // subscribe to nowTick so this re-renders every second
+                    const nowMs = Date.now()
+                    const serverTimeOnSite = v.time_on_site_seconds
+                    const secondsSinceServerData = Math.floor((nowMs - new Date(v.last_ping_at).getTime()) / 1000)
+                    const timeOnSite = serverTimeOnSite + Math.max(0, secondsSinceServerData)
                     const timeOnSiteLabel = timeOnSite < 60 ? `${timeOnSite}s` : `${Math.floor(timeOnSite/60)}m ${timeOnSite%60}s`
                     const lastSeenSec = Math.round((Date.now() - new Date(v.last_ping_at).getTime()) / 1000)
                     const lastSeenLabel = lastSeenSec < 15 ? 'active now' : lastSeenSec < 60 ? `${lastSeenSec}s ago` : `${Math.round(lastSeenSec/60)}m ago`
