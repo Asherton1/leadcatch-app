@@ -143,7 +143,7 @@ export default function ForLegal() {
             </div>
             <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
               <p>
-                A contested divorce runs <strong style={{ color: '#fff' }}>$22,000</strong>. Custody and modification matters run closer to <strong style={{ color: '#fff' }}>$15,000</strong>. Personal injury runs from <strong style={{ color: '#fff' }}>$50,000</strong> to seven figures. ReCapture costs <strong style={{ color: '#fff' }}>$394</strong> per month.
+                A contested divorce runs <strong style={{ color: '#fff' }}>$22,000</strong>. Custody and modification matters run closer to <strong style={{ color: '#fff' }}>$15,000</strong>. Personal injury runs from <strong style={{ color: '#fff' }}>$50,000</strong> to seven figures. ReCapture costs <strong style={{ color: '#fff' }}>$397</strong> per month.
               </p>
               <p>
                 A single recovered matter — one, in an entire year — returns roughly <strong style={{ color: '#fff' }}>fifty times</strong> the annual cost of the platform. There is no other line item in a firm&apos;s marketing budget where the math is this lopsided, because there is no other line item where the asset being recovered is worth five figures on its own.
@@ -301,11 +301,11 @@ export default function ForLegal() {
             05 — Pricing
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
-            $394 per month. 7-day free trial.
+            $397 per month. 7-day free trial.
           </h2>
           <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $394/mo includes the recovery dashboard, the tracker, automated follow-up email, live visitor tracking with intent scoring, CRM push to Lawmatics or Clio, and instant SMS or Slack alerts to the intake team.
+              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo includes the recovery dashboard, the tracker, automated follow-up email, live visitor tracking with intent scoring, CRM push to Lawmatics or Clio, and instant SMS or Slack alerts to the intake team.
             </p>
             <p>
               <strong style={{ color: '#e4e4e7' }}>Enterprise</strong> from $1,997/mo for multi-office firms and high-volume practices. Unlimited sites, dedicated account manager, and per-office lead segmentation.

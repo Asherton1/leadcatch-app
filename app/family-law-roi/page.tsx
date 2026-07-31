@@ -75,7 +75,7 @@ export default function FamilyLawROI() {
     const monthly = recoveredRetained * avgCaseValue
     return {
       consults, shows, retained, currentRevenue, totalStarts, abandoned, recovered, recoveredRetained,
-      monthly, annual: monthly * 12, roi: monthly / 394,
+      monthly, annual: monthly * 12, roi: monthly / 397,
     }
   }, [monthlyLeads, consultBookRate, showUpRate, retainRate, avgCaseValue, abandonmentRate, recoveryRate])
 
@@ -250,7 +250,7 @@ export default function FamilyLawROI() {
                 <span className="flr-hero-num flr-hero-num-green">
                   <Count value={c.roi} />×
                 </span>
-                <span className="flr-hero-lbl">Return on $394 / month</span>
+                <span className="flr-hero-lbl">Return on $397 / month</span>
               </div>
             </div>
             <div className="flr-hero-foot">
