@@ -169,8 +169,24 @@
   win.addEventListener('popstate', checkUrlChange);
   win.setInterval(checkUrlChange, 3000);
 
-  // Fire on page unload
-  win.addEventListener('beforeunload', sendVisitorPing);
+  // Fire on page unload — use sendBeacon which is guaranteed to send even during unload
+  function sendOfflineBeacon() {
+    try {
+      var payload = JSON.stringify({
+        api_key: apiKey,
+        session_id: visitorSessionId,
+        page_url: win.location.href,
+        is_active: false,
+        mark_offline: true
+      });
+      if (win.navigator && win.navigator.sendBeacon) {
+        var blob = new Blob([payload], { type: 'application/json' });
+        win.navigator.sendBeacon(VISITOR_ENDPOINT, blob);
+      }
+    } catch (e) { /* silent */ }
+  }
+  win.addEventListener('beforeunload', sendOfflineBeacon);
+  win.addEventListener('pagehide', sendOfflineBeacon);
 
   // Expose for internal use — form_started event fires when user first touches a form
   win.__rcSendVisitorEvent = sendVisitorEvent;

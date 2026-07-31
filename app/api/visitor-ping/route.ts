@@ -15,18 +15,26 @@ export async function OPTIONS() {
 // Geo lookup via free ipapi service — 30k requests/month free tier
 async function lookupGeo(ip: string): Promise<{ country: string | null; city: string | null; region: string | null }> {
   if (!ip || ip === 'unknown') return { country: null, city: null, region: null }
+  // Strip IPv6 mapped prefix and localhost
+  const cleanIp = ip.replace(/^::ffff:/, '').trim()
+  if (cleanIp === '127.0.0.1' || cleanIp === '::1' || cleanIp.startsWith('192.168.') || cleanIp.startsWith('10.')) {
+    return { country: null, city: null, region: null }
+  }
   try {
-    const res = await fetch(`https://ipapi.co/${ip}/json/`, {
-      signal: AbortSignal.timeout(1500),
+    // ip-api.com free tier: 45 req/min, no key required
+    const res = await fetch(`http://ip-api.com/json/${cleanIp}?fields=status,country,regionName,city`, {
+      signal: AbortSignal.timeout(2500),
     })
     if (!res.ok) return { country: null, city: null, region: null }
     const data = await res.json()
+    if (data.status !== 'success') return { country: null, city: null, region: null }
     return {
-      country: data.country_name || null,
+      country: data.country || null,
       city: data.city || null,
-      region: data.region || null,
+      region: data.regionName || null,
     }
-  } catch {
+  } catch (err) {
+    console.error('geo lookup failed:', err)
     return { country: null, city: null, region: null }
   }
 }
@@ -34,7 +42,7 @@ async function lookupGeo(ip: string): Promise<{ country: string | null; city: st
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { api_key, session_id, page_url, referrer, utm_source, utm_medium, utm_campaign, is_active } = body
+    const { api_key, session_id, page_url, referrer, utm_source, utm_medium, utm_campaign, is_active, mark_offline } = body
 
     if (!api_key || !session_id) {
       return NextResponse.json(
@@ -81,11 +89,17 @@ export async function POST(req: NextRequest) {
       .maybeSingle()
 
     if (existing) {
-      // Only update fields that change over time
+      // If marking offline, backdate last_ping_at so visitor immediately drops out of "live" window
       const update: Record<string, unknown> = {
-        last_ping_at: new Date().toISOString(),
         page_url: page_url || null,
         is_active: is_active !== false,
+      }
+      if (mark_offline) {
+        // Backdate to 60 sec ago so the 45-sec live window excludes them immediately
+        update.last_ping_at = new Date(Date.now() - 60 * 1000).toISOString()
+        update.is_active = false
+      } else {
+        update.last_ping_at = new Date().toISOString()
       }
       await supabase.from('visitors').update(update).eq('id', existing.id)
     } else {
