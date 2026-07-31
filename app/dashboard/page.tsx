@@ -194,7 +194,24 @@ function LeadModal({
   // Lock body scroll while open
   useEffect(() => {
     document.body.style.overflow = 'hidden'
-    return () => { document.body.style.overflow = '' }
+  
+
+  useEffect(() => {
+    if (!selectedClient?.id) return
+    let cancelled = false
+    const fetchLive = async () => {
+      try {
+        const res = await fetch(`/api/live-visitors?client_id=${selectedClient.id}`)
+        const data = await res.json()
+        if (!cancelled) setLiveVisitors(data.live_visitors || 0)
+      } catch { /* silent */ }
+    }
+    fetchLive()
+    const iv = setInterval(fetchLive, 15000)
+    return () => { cancelled = true; clearInterval(iv) }
+  }, [selectedClient?.id])
+
+  return () => { document.body.style.overflow = '' }
   }, [])
 
   // Close on Escape
@@ -559,6 +576,7 @@ export default function Dashboard() {
   const [recoveredCount, setRecoveredCount]     = useState<number>(0)
   const [recoveredWindow, setRecoveredWindow]   = useState<'month' | '30days' | 'all'>('month')
   const [selectedClient, setSelectedClient]     = useState<Client | null>(null)
+  const [liveVisitors, setLiveVisitors] = useState<number>(0)
   const [clientsLoading, setClientsLoading]     = useState(true)
   const [leads, setLeads]                       = useState<Lead[]>([])
   const [leadsLoading, setLeadsLoading]         = useState(false)
@@ -837,6 +855,17 @@ export default function Dashboard() {
 
       {/* ── Stats (5 cards) — 4 are clickable filter shortcuts ─────────────── */}
       <div className="stats-grid">
+        <div className="stat-card stat-card-live">
+          <div className="stat-header">
+            <div className="stat-label">
+              <span className="live-pulse-dot"></span>
+              Live Visitors
+            </div>
+            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          </div>
+          <div className="stat-value">{liveVisitors}</div>
+        </div>
+
         <button
           className={`stat-card stat-card-clickable${cardFilter === 'none' && statusFilter === 'all' ? ' active' : ''}`}
           onClick={() => { setCardFilter('none'); setStatusFilter('all') }}

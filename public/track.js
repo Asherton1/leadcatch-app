@@ -66,6 +66,55 @@
     return;
   }
 
+  // ============================================================
+  // VISITOR TRACKING — sends heartbeat pings to /api/visitor-ping
+  // Enables live-visitor count on client dashboards
+  // ============================================================
+  var VISITOR_ENDPOINT = 'https://www.userecapture.com/api/visitor-ping';
+  var visitorSessionId = null;
+  try {
+    // Persist session id across page navigations in the same tab
+    visitorSessionId = win.sessionStorage.getItem('_rc_visitor_session');
+    if (!visitorSessionId) {
+      visitorSessionId = 'vs_' + Date.now() + '_' + Math.random().toString(36).substring(2, 10);
+      win.sessionStorage.setItem('_rc_visitor_session', visitorSessionId);
+    }
+  } catch (e) {
+    visitorSessionId = 'vs_' + Date.now() + '_' + Math.random().toString(36).substring(2, 10);
+  }
+
+  function sendVisitorPing() {
+    if (isExcludedPath()) return;
+    try {
+      var payload = JSON.stringify({
+        api_key: apiKey,
+        session_id: visitorSessionId,
+        page_url: win.location.href,
+        referrer: doc.referrer || null
+      });
+      // Use sendBeacon if available (fires on page unload); else fetch
+      if (win.navigator && win.navigator.sendBeacon) {
+        var blob = new Blob([payload], { type: 'application/json' });
+        win.navigator.sendBeacon(VISITOR_ENDPOINT, blob);
+      } else {
+        fetch(VISITOR_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: payload,
+          keepalive: true
+        }).catch(function () { /* silent */ });
+      }
+    } catch (e) { /* silent */ }
+  }
+
+  // Initial ping on script load
+  sendVisitorPing();
+  // Heartbeat every 30 seconds to keep visitor "alive"
+  win.setInterval(sendVisitorPing, 30000);
+  // Fire on page unload to update last_ping_at
+  win.addEventListener('beforeunload', sendVisitorPing);
+
+
   // --- EU Geo-Block ---
   // GDPR exposure is real and complex. Until we can afford a full EU compliance
   // review, we don't track EU/UK/Swiss visitors at all. Detection uses a free
