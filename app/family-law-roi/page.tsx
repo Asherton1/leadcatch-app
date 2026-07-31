@@ -112,6 +112,14 @@ export default function FamilyLawROI() {
 
   return (
     <div className="flr-page">
+      <div className="flr-orbs" aria-hidden="true">
+        <div className="flr-orb flr-orb-1" />
+        <div className="flr-orb flr-orb-2" />
+        <div className="flr-orb flr-orb-3" />
+      </div>
+      <div className="flr-noise" aria-hidden="true" />
+      <div className="flr-vignette" aria-hidden="true" />
+
       <BlogNav />
 
       <div className="flr-container">
