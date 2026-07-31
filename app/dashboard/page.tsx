@@ -569,8 +569,26 @@ export default function Dashboard() {
     page_url: string | null
     referrer: string | null
     user_agent: string | null
+    country: string | null
+    city: string | null
+    region: string | null
+    utm_source: string | null
+    utm_medium: string | null
+    utm_campaign: string | null
+    pages_visited: number
+    form_started: boolean
+    is_active: boolean
     created_at: string
     last_ping_at: string
+    time_on_site_seconds: number
+    intent_score: number
+    intent_label: 'hot' | 'warm' | 'cool'
+    journey: Array<{
+      event_type: string
+      page_url: string | null
+      metadata: Record<string, unknown> | null
+      created_at: string
+    }>
   }>>([])
 
   useEffect(() => {
@@ -1162,40 +1180,102 @@ export default function Dashboard() {
                 <div className="live-visitors-list">
                   {liveVisitorList.map(v => {
                     const isMobile = /Mobile|Android|iPhone|iPad|iPod/i.test(v.user_agent || '')
-                    const pagePath = (() => {
+                    const currentPath = (() => {
                       try {
                         const u = new URL(v.page_url || '')
                         return u.pathname || '/'
                       } catch { return v.page_url || '/' }
                     })()
-                    const refDomain = (() => {
+                    const source = (() => {
+                      if (v.utm_source) return `${v.utm_source}${v.utm_medium ? ' / ' + v.utm_medium : ''}`
                       if (!v.referrer) return 'Direct'
                       try {
                         const u = new URL(v.referrer)
                         return u.hostname.replace(/^www\./, '')
                       } catch { return 'Direct' }
                     })()
-                    const timeOnSite = Math.max(1, Math.round((new Date(v.last_ping_at).getTime() - new Date(v.created_at).getTime()) / 1000))
+                    const locationLabel = (() => {
+                      const parts = [v.city, v.region, v.country].filter(Boolean)
+                      return parts.length > 0 ? parts.join(', ') : 'Unknown location'
+                    })()
+                    const timeOnSite = v.time_on_site_seconds
+                    const timeOnSiteLabel = timeOnSite < 60 ? `${timeOnSite}s` : `${Math.floor(timeOnSite/60)}m ${timeOnSite%60}s`
                     const lastSeenSec = Math.round((Date.now() - new Date(v.last_ping_at).getTime()) / 1000)
-                    const lastSeenLabel = lastSeenSec < 15 ? 'just now' : lastSeenSec < 60 ? `${lastSeenSec}s ago` : `${Math.round(lastSeenSec/60)}m ago`
+                    const lastSeenLabel = lastSeenSec < 15 ? 'active now' : lastSeenSec < 60 ? `${lastSeenSec}s ago` : `${Math.round(lastSeenSec/60)}m ago`
+                    const pageViews = v.journey.filter(e => e.event_type === 'page_view')
+                    const activityColor = v.is_active && lastSeenSec < 20 ? '#22c55e' : lastSeenSec < 45 ? '#f59e0b' : '#6b7280'
+
                     return (
-                      <div key={v.id} className="live-visitor-card">
-                        <div className="live-visitor-row">
-                          <div className="live-visitor-device">
-                            {isMobile ? (
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
-                            ) : (
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="4" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
-                            )}
+                      <div key={v.id} className={`live-visitor-card intent-${v.intent_label}`}>
+                        <div className="live-visitor-top">
+                          <div className="live-visitor-top-left">
+                            <div className="live-visitor-device-icon">
+                              {isMobile ? (
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+                              ) : (
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="4" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+                              )}
+                            </div>
+                            <div className="live-visitor-location">{locationLabel}</div>
                           </div>
-                          <div className="live-visitor-page">{pagePath}</div>
-                          <div className="live-visitor-last-seen">{lastSeenLabel}</div>
+                          <div className="live-visitor-top-right">
+                            <div className={`live-visitor-intent-pill intent-${v.intent_label}`}>
+                              <span className="intent-pulse" style={{ background: v.intent_label === 'hot' ? '#ef4444' : v.intent_label === 'warm' ? '#f59e0b' : '#6b7280' }}></span>
+                              {v.intent_label === 'hot' ? 'Hot' : v.intent_label === 'warm' ? 'Warm' : 'Browsing'} · {v.intent_score}
+                            </div>
+                            <div className="live-visitor-last-seen" style={{ color: activityColor }}>
+                              <span className="live-visitor-activity-dot" style={{ background: activityColor }}></span>
+                              {lastSeenLabel}
+                            </div>
+                          </div>
                         </div>
-                        <div className="live-visitor-meta">
-                          <span className="live-visitor-meta-item">From: <span className="live-visitor-meta-value">{refDomain}</span></span>
-                          <span className="live-visitor-meta-item">On site: <span className="live-visitor-meta-value">{timeOnSite < 60 ? `${timeOnSite}s` : `${Math.round(timeOnSite/60)}m`}</span></span>
-                          <span className="live-visitor-meta-item">Device: <span className="live-visitor-meta-value">{isMobile ? 'Mobile' : 'Desktop'}</span></span>
+
+                        <div className="live-visitor-current">
+                          <div className="live-visitor-current-label">Currently on</div>
+                          <div className="live-visitor-current-page">{currentPath}</div>
+                          {v.form_started && (
+                            <div className="live-visitor-form-badge">
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
+                              Filling out form
+                            </div>
+                          )}
                         </div>
+
+                        <div className="live-visitor-stats">
+                          <div className="live-visitor-stat">
+                            <div className="live-visitor-stat-value">{timeOnSiteLabel}</div>
+                            <div className="live-visitor-stat-label">On Site</div>
+                          </div>
+                          <div className="live-visitor-stat">
+                            <div className="live-visitor-stat-value">{v.pages_visited || 1}</div>
+                            <div className="live-visitor-stat-label">Pages</div>
+                          </div>
+                          <div className="live-visitor-stat">
+                            <div className="live-visitor-stat-value">{source}</div>
+                            <div className="live-visitor-stat-label">Source</div>
+                          </div>
+                          <div className="live-visitor-stat">
+                            <div className="live-visitor-stat-value">{isMobile ? 'Mobile' : 'Desktop'}</div>
+                            <div className="live-visitor-stat-label">Device</div>
+                          </div>
+                        </div>
+
+                        {pageViews.length > 1 && (
+                          <div className="live-visitor-journey">
+                            <div className="live-visitor-journey-label">Journey</div>
+                            <div className="live-visitor-journey-path">
+                              {pageViews.slice(-5).map((e, i, arr) => {
+                                const path = (e.metadata as { path?: string })?.path || '/'
+                                return (
+                                  <span key={i} className="live-visitor-journey-step">
+                                    <span className="live-visitor-journey-page">{path}</span>
+                                    {i < arr.length - 1 && <span className="live-visitor-journey-arrow">→</span>}
+                                  </span>
+                                )
+                              })}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     )
                   })}

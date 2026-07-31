@@ -67,13 +67,13 @@
   }
 
   // ============================================================
-  // VISITOR TRACKING — sends heartbeat pings to /api/visitor-ping
-  // Enables live-visitor count on client dashboards
+  // VISITOR TRACKING — heartbeat + journey events
   // ============================================================
   var VISITOR_ENDPOINT = 'https://www.userecapture.com/api/visitor-ping';
+  var VISITOR_EVENT_ENDPOINT = 'https://www.userecapture.com/api/visitor-event';
+
   var visitorSessionId = null;
   try {
-    // Persist session id across page navigations in the same tab
     visitorSessionId = win.sessionStorage.getItem('_rc_visitor_session');
     if (!visitorSessionId) {
       visitorSessionId = 'vs_' + Date.now() + '_' + Math.random().toString(36).substring(2, 10);
@@ -83,16 +83,39 @@
     visitorSessionId = 'vs_' + Date.now() + '_' + Math.random().toString(36).substring(2, 10);
   }
 
+  function parseUtmParams() {
+    try {
+      var params = new URLSearchParams(win.location.search);
+      return {
+        utm_source: params.get('utm_source'),
+        utm_medium: params.get('utm_medium'),
+        utm_campaign: params.get('utm_campaign')
+      };
+    } catch (e) { return {}; }
+  }
+
+  var lastActivityAt = Date.now();
+  function markActive() { lastActivityAt = Date.now(); }
+  doc.addEventListener('mousemove', markActive, { passive: true });
+  doc.addEventListener('keydown',  markActive, { passive: true });
+  doc.addEventListener('scroll',    markActive, { passive: true });
+  doc.addEventListener('touchstart', markActive, { passive: true });
+
   function sendVisitorPing() {
     if (isExcludedPath()) return;
     try {
+      var utm = parseUtmParams();
+      var isActive = (Date.now() - lastActivityAt) < 60000;
       var payload = JSON.stringify({
         api_key: apiKey,
         session_id: visitorSessionId,
         page_url: win.location.href,
-        referrer: doc.referrer || null
+        referrer: doc.referrer || null,
+        utm_source: utm.utm_source,
+        utm_medium: utm.utm_medium,
+        utm_campaign: utm.utm_campaign,
+        is_active: isActive
       });
-      // Fetch is more reliable cross-origin than sendBeacon for our endpoint
       fetch(VISITOR_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -103,12 +126,54 @@
     } catch (e) { /* silent */ }
   }
 
-  // Initial ping on script load
+  function sendVisitorEvent(eventType, metadata) {
+    if (isExcludedPath()) return;
+    try {
+      var payload = JSON.stringify({
+        api_key: apiKey,
+        session_id: visitorSessionId,
+        event_type: eventType,
+        page_url: win.location.href,
+        metadata: metadata || {}
+      });
+      fetch(VISITOR_EVENT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true,
+        mode: 'cors'
+      }).catch(function () { /* silent */ });
+    } catch (e) { /* silent */ }
+  }
+
+  // Initial ping + page-view event on script load
   sendVisitorPing();
-  // Heartbeat every 30 seconds to keep visitor "alive"
-  win.setInterval(sendVisitorPing, 30000);
-  // Fire on page unload to update last_ping_at
+  sendVisitorEvent('page_view', { title: doc.title, path: win.location.pathname });
+
+  // Heartbeat every 20 seconds
+  win.setInterval(sendVisitorPing, 20000);
+
+  // Detect SPA navigation (Next.js, React apps) via History API
+  var lastUrl = win.location.href;
+  function checkUrlChange() {
+    if (win.location.href !== lastUrl) {
+      lastUrl = win.location.href;
+      sendVisitorPing();
+      sendVisitorEvent('page_view', { title: doc.title, path: win.location.pathname });
+    }
+  }
+  var pushState = win.history.pushState;
+  var replaceState = win.history.replaceState;
+  win.history.pushState = function () { pushState.apply(this, arguments); checkUrlChange(); };
+  win.history.replaceState = function () { replaceState.apply(this, arguments); checkUrlChange(); };
+  win.addEventListener('popstate', checkUrlChange);
+  win.setInterval(checkUrlChange, 3000);
+
+  // Fire on page unload
   win.addEventListener('beforeunload', sendVisitorPing);
+
+  // Expose for internal use — form_started event fires when user first touches a form
+  win.__rcSendVisitorEvent = sendVisitorEvent;
 
 
   // --- EU Geo-Block ---
@@ -300,6 +365,16 @@
       if (!self.touched) {
         self.touched   = true;
         self.startTime = Date.now();
+        // Fire form_started event for visitor journey tracking
+        try {
+          if (win.__rcSendVisitorEvent) {
+            win.__rcSendVisitorEvent('form_started', {
+              form_id: self.form.id || null,
+              form_name: self.form.name || null,
+              page: win.location.pathname
+            });
+          }
+        } catch (e) { /* silent */ }
       }
       var key = el.name || el.id || el.getAttribute('data-name') || el.type;
       if (key) self.formData[key] = val;
