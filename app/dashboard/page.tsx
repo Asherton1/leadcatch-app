@@ -562,6 +562,16 @@ export default function Dashboard() {
   const [recoveredWindow, setRecoveredWindow]   = useState<'month' | '30days' | 'all'>('month')
   const [selectedClient, setSelectedClient]     = useState<Client | null>(null)
   const [liveVisitors, setLiveVisitors] = useState<number>(0)
+  const [liveDrawerOpen, setLiveDrawerOpen] = useState(false)
+  const [liveVisitorList, setLiveVisitorList] = useState<Array<{
+    id: string
+    session_id: string
+    page_url: string | null
+    referrer: string | null
+    user_agent: string | null
+    created_at: string
+    last_ping_at: string
+  }>>([])
 
   useEffect(() => {
     if (!selectedClient?.id) return
@@ -577,6 +587,22 @@ export default function Dashboard() {
     const iv = setInterval(fetchLive, 15000)
     return () => { cancelled = true; clearInterval(iv) }
   }, [selectedClient?.id])
+
+  useEffect(() => {
+    if (!liveDrawerOpen || !selectedClient?.id) return
+    let cancelled = false
+    const fetchList = async () => {
+      try {
+        const res = await fetch(`/api/live-visitors-list?client_id=${selectedClient.id}`)
+        const data = await res.json()
+        if (!cancelled) setLiveVisitorList(data.visitors || [])
+      } catch { /* silent */ }
+    }
+    fetchList()
+    const iv = setInterval(fetchList, 10000)
+    return () => { cancelled = true; clearInterval(iv) }
+  }, [liveDrawerOpen, selectedClient?.id])
+
   const [clientsLoading, setClientsLoading]     = useState(true)
   const [leads, setLeads]                       = useState<Lead[]>([])
   const [leadsLoading, setLeadsLoading]         = useState(false)
@@ -855,7 +881,12 @@ export default function Dashboard() {
 
       {/* ── Stats (5 cards) — 4 are clickable filter shortcuts ─────────────── */}
       <div className="stats-grid">
-        <div className="stat-card stat-card-live">
+        <button
+          className="stat-card stat-card-live stat-card-clickable"
+          onClick={() => setLiveDrawerOpen(true)}
+          type="button"
+          aria-label="Show live visitors detail"
+        >
           <div className="stat-header">
             <div className="stat-label">
               <span className="live-pulse-dot"></span>
@@ -864,7 +895,7 @@ export default function Dashboard() {
             <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
           </div>
           <div className="stat-value">{liveVisitors}</div>
-        </div>
+        </button>
 
         <button
           className={`stat-card stat-card-clickable${cardFilter === 'none' && statusFilter === 'all' ? ' active' : ''}`}
@@ -1103,6 +1134,76 @@ export default function Dashboard() {
           onClose={() => setModalLead(null)}
           onStatusChange={handleStatusChange}
         />
+      )}
+
+      
+      {liveDrawerOpen && (
+        <div className="live-drawer-backdrop" onClick={e => { if (e.target === e.currentTarget) setLiveDrawerOpen(false) }}>
+          <div className="live-drawer">
+            <div className="live-drawer-header">
+              <div className="live-drawer-title">
+                <span className="live-pulse-dot"></span>
+                Live Visitors on Your Site
+                <span className="live-drawer-count">{liveVisitorList.length}</span>
+              </div>
+              <button className="live-drawer-close" onClick={() => setLiveDrawerOpen(false)} type="button" aria-label="Close">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/>
+                </svg>
+              </button>
+            </div>
+            <div className="live-drawer-body">
+              {liveVisitorList.length === 0 ? (
+                <div className="live-drawer-empty">
+                  No visitors right now.<br/>
+                  <span className="live-drawer-empty-sub">Anyone who lands on your site in the next 2 minutes will show up here.</span>
+                </div>
+              ) : (
+                <div className="live-visitors-list">
+                  {liveVisitorList.map(v => {
+                    const isMobile = /Mobile|Android|iPhone|iPad|iPod/i.test(v.user_agent || '')
+                    const pagePath = (() => {
+                      try {
+                        const u = new URL(v.page_url || '')
+                        return u.pathname || '/'
+                      } catch { return v.page_url || '/' }
+                    })()
+                    const refDomain = (() => {
+                      if (!v.referrer) return 'Direct'
+                      try {
+                        const u = new URL(v.referrer)
+                        return u.hostname.replace(/^www\./, '')
+                      } catch { return 'Direct' }
+                    })()
+                    const timeOnSite = Math.max(1, Math.round((new Date(v.last_ping_at).getTime() - new Date(v.created_at).getTime()) / 1000))
+                    const lastSeenSec = Math.round((Date.now() - new Date(v.last_ping_at).getTime()) / 1000)
+                    const lastSeenLabel = lastSeenSec < 15 ? 'just now' : lastSeenSec < 60 ? `${lastSeenSec}s ago` : `${Math.round(lastSeenSec/60)}m ago`
+                    return (
+                      <div key={v.id} className="live-visitor-card">
+                        <div className="live-visitor-row">
+                          <div className="live-visitor-device">
+                            {isMobile ? (
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+                            ) : (
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="4" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+                            )}
+                          </div>
+                          <div className="live-visitor-page">{pagePath}</div>
+                          <div className="live-visitor-last-seen">{lastSeenLabel}</div>
+                        </div>
+                        <div className="live-visitor-meta">
+                          <span className="live-visitor-meta-item">From: <span className="live-visitor-meta-value">{refDomain}</span></span>
+                          <span className="live-visitor-meta-item">On site: <span className="live-visitor-meta-value">{timeOnSite < 60 ? `${timeOnSite}s` : `${Math.round(timeOnSite/60)}m`}</span></span>
+                          <span className="live-visitor-meta-item">Device: <span className="live-visitor-meta-value">{isMobile ? 'Mobile' : 'Desktop'}</span></span>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       )}
 
       <Footer />
