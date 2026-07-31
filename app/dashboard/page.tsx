@@ -196,21 +196,6 @@ function LeadModal({
     document.body.style.overflow = 'hidden'
   
 
-  useEffect(() => {
-    if (!selectedClient?.id) return
-    let cancelled = false
-    const fetchLive = async () => {
-      try {
-        const res = await fetch(`/api/live-visitors?client_id=${selectedClient.id}`)
-        const data = await res.json()
-        if (!cancelled) setLiveVisitors(data.live_visitors || 0)
-      } catch { /* silent */ }
-    }
-    fetchLive()
-    const iv = setInterval(fetchLive, 15000)
-    return () => { cancelled = true; clearInterval(iv) }
-  }, [selectedClient?.id])
-
   return () => { document.body.style.overflow = '' }
   }, [])
 
@@ -577,6 +562,21 @@ export default function Dashboard() {
   const [recoveredWindow, setRecoveredWindow]   = useState<'month' | '30days' | 'all'>('month')
   const [selectedClient, setSelectedClient]     = useState<Client | null>(null)
   const [liveVisitors, setLiveVisitors] = useState<number>(0)
+
+  useEffect(() => {
+    if (!selectedClient?.id) return
+    let cancelled = false
+    const fetchLive = async () => {
+      try {
+        const res = await fetch(`/api/live-visitors?client_id=${selectedClient.id}`)
+        const data = await res.json()
+        if (!cancelled) setLiveVisitors(data.live_visitors || 0)
+      } catch { /* silent */ }
+    }
+    fetchLive()
+    const iv = setInterval(fetchLive, 15000)
+    return () => { cancelled = true; clearInterval(iv) }
+  }, [selectedClient?.id])
   const [clientsLoading, setClientsLoading]     = useState(true)
   const [leads, setLeads]                       = useState<Lead[]>([])
   const [leadsLoading, setLeadsLoading]         = useState(false)
