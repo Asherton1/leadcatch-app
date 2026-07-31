@@ -92,18 +92,14 @@
         page_url: win.location.href,
         referrer: doc.referrer || null
       });
-      // Use sendBeacon if available (fires on page unload); else fetch
-      if (win.navigator && win.navigator.sendBeacon) {
-        var blob = new Blob([payload], { type: 'application/json' });
-        win.navigator.sendBeacon(VISITOR_ENDPOINT, blob);
-      } else {
-        fetch(VISITOR_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: payload,
-          keepalive: true
-        }).catch(function () { /* silent */ });
-      }
+      // Fetch is more reliable cross-origin than sendBeacon for our endpoint
+      fetch(VISITOR_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true,
+        mode: 'cors'
+      }).catch(function () { /* silent */ });
     } catch (e) { /* silent */ }
   }
 
