@@ -1,6 +1,11 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+
+function sliderFill(val: number, min: number, max: number) {
+  const pct = ((val - min) / (max - min)) * 100
+  return { background: `linear-gradient(90deg, #ff6b35 ${pct}%, rgba(255,255,255,0.08) ${pct}%)` }
+}
 import './family-law-roi.css'
 
 function fmt(n: number) { return '$' + Math.round(n).toLocaleString() }
@@ -68,7 +73,7 @@ export default function FamilyLawROI() {
             <div className="flr-input-group">
               <label>Monthly Leads (form inquiries)</label>
               <div className="flr-input-row">
-                <input type="range" min="50" max="500" value={monthlyLeads} onChange={e => setMonthlyLeads(+e.target.value)} />
+                <input type="range" min="50" max="500" value={monthlyLeads} onChange={e => setMonthlyLeads(+e.target.value)} style={sliderFill(monthlyLeads, 50, 500)} />
                 <span className="flr-input-value">{fmtNum(monthlyLeads)}</span>
               </div>
             </div>
@@ -76,7 +81,7 @@ export default function FamilyLawROI() {
             <div className="flr-input-group">
               <label>Booked to Paid Consult</label>
               <div className="flr-input-row">
-                <input type="range" min="10" max="80" value={consultBookRate} onChange={e => setConsultBookRate(+e.target.value)} />
+                <input type="range" min="10" max="80" value={consultBookRate} onChange={e => setConsultBookRate(+e.target.value)} style={sliderFill(consultBookRate, 10, 80)} />
                 <span className="flr-input-value">{consultBookRate}%</span>
               </div>
             </div>
@@ -84,7 +89,7 @@ export default function FamilyLawROI() {
             <div className="flr-input-group">
               <label>Consult Show-Up Rate</label>
               <div className="flr-input-row">
-                <input type="range" min="40" max="100" value={showUpRate} onChange={e => setShowUpRate(+e.target.value)} />
+                <input type="range" min="40" max="100" value={showUpRate} onChange={e => setShowUpRate(+e.target.value)} style={sliderFill(showUpRate, 40, 100)} />
                 <span className="flr-input-value">{showUpRate}%</span>
               </div>
             </div>
@@ -92,7 +97,7 @@ export default function FamilyLawROI() {
             <div className="flr-input-group">
               <label>Retain the Firm (after consult)</label>
               <div className="flr-input-row">
-                <input type="range" min="20" max="90" value={retainRate} onChange={e => setRetainRate(+e.target.value)} />
+                <input type="range" min="20" max="90" value={retainRate} onChange={e => setRetainRate(+e.target.value)} style={sliderFill(retainRate, 20, 90)} />
                 <span className="flr-input-value">{retainRate}%</span>
               </div>
             </div>
@@ -100,7 +105,7 @@ export default function FamilyLawROI() {
             <div className="flr-input-group">
               <label>Average Case Value</label>
               <div className="flr-input-row">
-                <input type="range" min="5000" max="50000" step="1000" value={avgCaseValue} onChange={e => setAvgCaseValue(+e.target.value)} />
+                <input type="range" min="5000" max="50000" step="1000" value={avgCaseValue} onChange={e => setAvgCaseValue(+e.target.value)} style={sliderFill(avgCaseValue, 5000, 50000)} />
                 <span className="flr-input-value">{fmt(avgCaseValue)}</span>
               </div>
             </div>
@@ -110,7 +115,7 @@ export default function FamilyLawROI() {
             <div className="flr-input-group">
               <label>Form Abandonment Rate</label>
               <div className="flr-input-row">
-                <input type="range" min="40" max="80" value={abandonmentRate} onChange={e => setAbandonmentRate(+e.target.value)} />
+                <input type="range" min="40" max="80" value={abandonmentRate} onChange={e => setAbandonmentRate(+e.target.value)} style={sliderFill(abandonmentRate, 40, 80)} />
                 <span className="flr-input-value">{abandonmentRate}%</span>
               </div>
             </div>
@@ -118,7 +123,7 @@ export default function FamilyLawROI() {
             <div className="flr-input-group">
               <label>ReCapture Recovery Rate</label>
               <div className="flr-input-row">
-                <input type="range" min="5" max="15" value={recoveryRate} onChange={e => setRecoveryRate(+e.target.value)} />
+                <input type="range" min="5" max="15" value={recoveryRate} onChange={e => setRecoveryRate(+e.target.value)} style={sliderFill(recoveryRate, 5, 15)} />
                 <span className="flr-input-value">{recoveryRate}%</span>
               </div>
             </div>
