@@ -115,6 +115,9 @@ export default function FamilyLawROI() {
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
+    // Skip video entirely on mobile — saves data and battery
+    if (window.matchMedia('(max-width: 820px)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let dir = 1
     let raf: number | null = null
 
