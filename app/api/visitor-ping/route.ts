@@ -22,16 +22,16 @@ async function lookupGeo(ip: string): Promise<{ country: string | null; city: st
   }
   try {
     // ip-api.com free tier: 45 req/min, no key required
-    const res = await fetch(`http://ip-api.com/json/${cleanIp}?fields=status,country,regionName,city`, {
+    const res = await fetch(`https://ipwho.is/${cleanIp}`, {
       signal: AbortSignal.timeout(2500),
     })
     if (!res.ok) return { country: null, city: null, region: null }
     const data = await res.json()
-    if (data.status !== 'success') return { country: null, city: null, region: null }
+    if (data.success === false) return { country: null, city: null, region: null }
     return {
       country: data.country || null,
       city: data.city || null,
-      region: data.regionName || null,
+      region: data.region || null,
     }
   } catch (err) {
     console.error('geo lookup failed:', err)
@@ -95,6 +95,7 @@ export async function POST(req: NextRequest) {
         is_active: is_active !== false,
       }
       if (mark_offline) {
+        console.log('[visitor-ping] MARK_OFFLINE for session:', session_id)
         // Backdate to 60 sec ago so the 45-sec live window excludes them immediately
         update.last_ping_at = new Date(Date.now() - 60 * 1000).toISOString()
         update.is_active = false
