@@ -78,14 +78,18 @@ export default function Post() {
         <p className="post-subtitle">Legal is the highest-stakes form-abandonment vertical in America. A single case is worth fifty thousand to five million dollars. And the intake form is exactly where firms lose their most valuable prospects — before the first phone call ever happens.</p>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '1.5rem', flexWrap: 'wrap', margin: '0 0 2.25rem 0', padding: '0.9rem 0', borderTop: '1px solid #1e1e1e', borderBottom: '1px solid #1e1e1e' }}>
-        <span style={{ color: '#8a8a8f', fontSize: '0.8125rem', lineHeight: 1.5, letterSpacing: '0.01em' }}>
-          <span style={{ color: '#ff6b35', fontWeight: 700, fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.16em', marginRight: '0.6rem' }}>Interactive</span>
-          Model the recovery opportunity against your firm&apos;s own case values.
-        </span>
-        <Link href="/family-law-roi" style={{ flexShrink: 0, color: '#ff6b35', fontWeight: 600, fontSize: '0.8125rem', textDecoration: 'none', whiteSpace: 'nowrap', borderBottom: '1px solid rgba(255,107,53,0.35)', paddingBottom: '1px' }}>
-          Run your numbers &rarr;
-        </Link>
+      <div style={{ maxWidth: '720px', margin: '0 auto 2.25rem', padding: '0 2rem' }}>
+        <div style={{ background: '#0d0d0d', border: '1px solid #1a1a1a', borderLeft: '3px solid #ff6b35', borderRadius: '0 14px 14px 0', padding: '1.75rem 2rem' }}>
+          <h3 style={{ fontFamily: "'Inter', -apple-system, sans-serif", fontSize: '1.25rem', fontWeight: 400, color: '#fff', margin: '0 0 0.6rem 0', lineHeight: 1.35 }}>
+            What is your firm&apos;s number?
+          </h3>
+          <p style={{ fontSize: '0.9375rem', color: '#666', lineHeight: 1.7, margin: '0 0 1.5rem 0' }}>
+            Model the recovery opportunity against your own intake volume, consult rates, and case values.
+          </p>
+          <Link href="/family-law-roi" style={{ display: 'inline-block', background: '#ff6b35', color: '#000', fontWeight: 700, padding: '0.8rem 1.6rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9375rem' }}>
+            Run your numbers &rarr;
+          </Link>
+        </div>
       </div>
 
       <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
