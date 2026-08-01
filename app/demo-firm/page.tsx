@@ -1,16 +1,21 @@
 'use client'
 
-import Script from 'next/script'
+import { useEffect } from 'react'
 import './demo-firm.css'
 
 
 export default function DemoFirm() {
+  useEffect(() => {
+    if (document.getElementById('rc-tracker')) return
+    const el = document.createElement('script')
+    el.id = 'rc-tracker'
+    el.src = 'https://www.userecapture.com/track.js?key=sk_live_whitmore_d4e91c7b3f28a6501bcd94e7f2a3861d'
+    el.async = true
+    document.body.appendChild(el)
+  }, [])
+
   return (
     <div className="wfl">
-      <Script
-        src="https://www.userecapture.com/track.js?key=sk_live_whitmore_d4e91c7b3f28a6501bcd94e7f2a3861d"
-        strategy="afterInteractive"
-      />
 
       <header className="wfl-nav">
         <div className="wfl-nav-inner">
