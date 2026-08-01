@@ -212,24 +212,26 @@
       try {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'https://ipapi.co/country/', true);
-        xhr.timeout = 2000;
+        xhr.timeout = 6000;
         xhr.onload = function () {
           if (xhr.status === 200) {
             var country = (xhr.responseText || '').trim().toUpperCase();
             euBlocked = EU_COUNTRIES.indexOf(country) !== -1;
           } else {
-            euBlocked = true; // fail-closed
+            // Lookup unavailable tells us nothing about location. Blocking here
+            // silently drops mobile traffic, which is where most inquiries occur.
+            euBlocked = false;
           }
           resolve(euBlocked);
         };
         xhr.onerror = xhr.ontimeout = function () {
-          euBlocked = true; // fail-closed on network errors
-          resolve(true);
+          euBlocked = false;
+          resolve(false);
         };
         xhr.send();
       } catch (e) {
-        euBlocked = true;
-        resolve(true);
+        euBlocked = false;
+        resolve(false);
       }
     });
     return euCheckPromise;
