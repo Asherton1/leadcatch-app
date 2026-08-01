@@ -47,10 +47,10 @@ export default function Footer() {
           <p className="footer-col-label">Industries</p>
           <Link href="/for-med-spas" className="footer-link">Med Spas</Link>
           <Link href="/for-dental" className="footer-link">Dental</Link>
+          <Link href="/for-legal" className="footer-link">Law Firms</Link>
           <Link href="/for-plastic-surgery" className="footer-link">Plastic Surgery</Link>
           <Link href="/for-luxury-real-estate" className="footer-link">Luxury Real Estate</Link>
           <Link href="/for-property-management" className="footer-link">Property Mgmt</Link>
-          <Link href="/for-luxury-auto" className="footer-link">Luxury Auto</Link>
           <Link href="/for-gohighlevel" className="footer-link">GoHighLevel</Link>
           <Link href="/for-hubspot" className="footer-link">HubSpot</Link>
           <Link href="/for-followupboss" className="footer-link">Follow Up Boss</Link>
