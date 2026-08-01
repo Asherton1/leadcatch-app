@@ -220,16 +220,15 @@ export async function POST(request: NextRequest) {
 
     // Form Health Score (A-F)
     let healthScore = 100
-    if (totalFields > 7) healthScore -= 25
-    else if (totalFields > 4) healthScore -= 10
+    if (!fieldsEstimated && totalFields > 7) healthScore -= 25
+    else if (!fieldsEstimated && totalFields > 4) healthScore -= 10
     if (!hasMobileViewport) healthScore -= 20
     if (!isHTTPS) healthScore -= 25
     if (!hasGTM && !hasGA) healthScore -= 15
     if (hasCaptcha) healthScore -= 10
-    if (formCount === 0) healthScore -= 5
     // JS-embedded / third-party forms carry inherently higher abandonment and are
     // harder to track and recover — reflect that when the field count was estimated.
-    if (fieldsEstimated) healthScore -= 15
+    if (fieldsEstimated) healthScore -= 5
     if (healthScore < 0) healthScore = 0
     const grade = healthScore >= 90 ? 'A' : healthScore >= 80 ? 'B' : healthScore >= 70 ? 'C+' : healthScore >= 60 ? 'C' : healthScore >= 50 ? 'D' : 'F'
     const gradeColor = healthScore >= 80 ? '#22c55e' : healthScore >= 60 ? '#f59e0b' : '#ef4444'
@@ -249,9 +248,9 @@ export async function POST(request: NextRequest) {
 
     if (fieldsEstimated) {
       if (embeddedBuilderKnown) {
-        findings.push('Your form is embedded via ' + formBuilder + ' and loads through JavaScript, so its fields cannot be counted directly. Based on typical embedded forms, we estimate roughly ' + totalFields + ' fields. Embedded and third-party forms often see higher abandonment from load delay and tracking gaps.')
+        findings.push('Your form is embedded via ' + formBuilder + ' and is assembled by JavaScript after the page loads, so we could not read it from your page source. This is not a defect — it is how most modern embedded forms work. It does mean conventional analytics see very little of what happens inside the form, which is precisely where abandonment occurs.')
       } else {
-        findings.push('Your form appears to load via JavaScript, so its fields could not be measured directly from the page source. Based on typical lead forms, we estimate roughly ' + totalFields + ' fields. JavaScript-rendered forms are common and often see higher abandonment from load delays and weaker tracking.')
+        findings.push('Your form is rendered by JavaScript rather than served in the page source, so we could not count its fields from outside. This is standard for modern sites and is not a defect. The relevant point is that the same thing limits what analytics tools can observe inside the form — page-level tracking sees the visit, but not the fields someone filled in before leaving.')
       }
       recommendations.push('Forms that load via JavaScript or third-party builders are the hardest to track and recover — ReCapture captures started-but-abandoned submissions even on these.')
     } else if (totalFields > 7) {
@@ -270,9 +269,9 @@ export async function POST(request: NextRequest) {
     }
 
     if (formCount === 0) {
-      findings.push('No standard HTML forms detected. You may be using an embedded form builder.')
+      findings.push('No standard HTML form elements appeared in your page source. On a JavaScript-rendered site this is expected and tells us nothing is wrong — it only means the form could not be inspected from outside the browser.')
       if (hasTypeform || hasHubspot || hasJotform) {
-        findings.push('Detected embedded form: ' + formBuilder + '. iFrame forms are harder to track for abandonment.')
+        findings.push('Detected embedded form: ' + formBuilder + '. Forms served inside an iFrame are isolated from page-level analytics, so abandonment inside them is generally invisible to standard tracking.')
       }
     }
 
@@ -350,12 +349,12 @@ export async function POST(request: NextRequest) {
         '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Overview</p>' +
         '<table style="width:100%;border-collapse:collapse;">' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Detected Industry</td><td style="color:#fff;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + detectedIndustry + '</td></tr>' +
-          '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Forms Detected</td><td style="color:#fff;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + formCount + '</td></tr>' +
-          '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Total Form Fields</td><td style="color:#fff;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + totalFields + '</td></tr>' +
-          '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Form Builder</td><td style="color:#fff;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + formBuilder + '</td></tr>' +
+          '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Forms in Page Source</td><td style="color:' + (formCount > 0 ? '#fff' : '#f59e0b') + ';font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + (formCount > 0 ? String(formCount) : 'None — JavaScript rendered') + '</td></tr>' +
+          '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Total Form Fields</td><td style="color:' + (fieldsEstimated ? '#666' : '#fff') + ';font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + (fieldsEstimated ? 'Not measurable' : String(totalFields)) + '</td></tr>' +
+          '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Form Builder</td><td style="color:' + (fieldsEstimated && formBuilder === 'Custom/Native HTML' ? '#666' : '#fff') + ';font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + (fieldsEstimated && formBuilder === 'Custom/Native HTML' ? 'Not identified' : formBuilder) + '</td></tr>' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Mobile Optimized</td><td style="color:' + (hasMobileViewport ? '#22c55e' : '#ef4444') + ';font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + (hasMobileViewport ? 'Yes' : 'No') + '</td></tr>' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">HTTPS Secured</td><td style="color:' + (isHTTPS ? '#22c55e' : '#ef4444') + ';font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + (isHTTPS ? 'Yes' : 'No') + '</td></tr>' +
-          '<tr><td style="color:#888;font-size:14px;padding:14px 0;">Field Count Risk</td><td style="color:' + (fieldRisk === 'low' ? '#22c55e' : fieldRisk === 'medium' ? '#f59e0b' : '#ef4444') + ';font-size:14px;padding:14px 0;text-align:right;font-weight:600;">' + fieldScore + '</td></tr>' +
+          (fieldsEstimated ? '' : '<tr><td style="color:#888;font-size:14px;padding:14px 0;">Field Count Risk</td><td style="color:' + (fieldRisk === 'low' ? '#22c55e' : fieldRisk === 'medium' ? '#f59e0b' : '#ef4444') + ';font-size:14px;padding:14px 0;text-align:right;font-weight:600;">' + fieldScore + '</td></tr>') +
         '</table>' +
       '</div>' +
 
