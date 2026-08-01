@@ -302,16 +302,16 @@ export async function POST(request: NextRequest) {
     const gradeStatus = healthScore >= 90 ? 'Excellent' : healthScore >= 80 ? 'Strong' : healthScore >= 70 ? 'Above average' : healthScore >= 60 ? 'Room to grow' : healthScore >= 50 ? 'Needs work' : 'Critical'
     const gradeContext = healthScore >= 90 ? 'Top tier' : healthScore >= 80 ? 'Above average' : healthScore >= 70 ? 'Industry standard' : healthScore >= 60 ? 'Below average' : healthScore >= 50 ? 'Bottom quartile' : 'Significant risk'
     const gradeDescription = healthScore >= 90
-      ? 'Your forms are well-configured for capture. Minor opportunities remain to recover the leads who don&rsquo;t make it through the final submit.'
+      ? 'Your forms are well configured. What is missing is visibility into the visitors who start typing and never submit.'
       : healthScore >= 80
-      ? 'Your forms are solid but missing the recovery layer that catches the visitors who type and don&rsquo;t submit.'
+      ? 'Your forms are solid. There is no recovery layer catching the visitors who begin an inquiry and leave before submitting.'
       : healthScore >= 70
-      ? 'Your forms work, but meaningful revenue is leaving through abandonment.'
+      ? 'Your forms function correctly, but nothing is currently tracking or recovering abandoned starts.'
       : healthScore >= 60
-      ? 'Your forms have gaps. Most of your form starters never become leads.'
+      ? 'Your forms have measurable gaps in field count, tracking, or delivery that make abandonment more likely and harder to see.'
       : healthScore >= 50
-      ? 'Your forms are losing significant revenue. The recovery opportunity here is substantial.'
-      : 'Your forms are bleeding revenue. Most visitors who start typing never convert and you have no visibility into them.'
+      ? 'Several elements of your form setup work against completion, and there is no visibility into who drops off.'
+      : 'Your form setup has significant structural issues, and abandoned inquiries are currently invisible to you.'
 
     const reportHTML = '<div style="background:#0a0a0a;color:#fff;font-family:Inter,Helvetica Neue,Arial,sans-serif;max-width:640px;margin:0 auto;padding:0;">' +
       // HEADER
@@ -393,8 +393,8 @@ export async function POST(request: NextRequest) {
       '<div style="padding:40px 32px;border-top:1px solid rgba(255,255,255,0.06);">' +
         '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Industry Benchmarks</p>' +
         '<table style="width:100%;border-collapse:collapse;">' +
-          '<tr><td style="color:#555;font-size:10px;font-weight:700;padding:8px 0 16px;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);">Industry</td><td style="color:#555;font-size:10px;font-weight:700;padding:8px 0 16px;text-align:center;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);">Avg Fields</td><td style="color:#555;font-size:10px;font-weight:700;padding:8px 0 16px;text-align:center;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);">Abandon</td><td style="color:#555;font-size:10px;font-weight:700;padding:8px 0 16px;text-align:right;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);">Lead Value</td></tr>' +
-          industryBenchmarks.map(b => '<tr><td style="color:#ccc;font-size:13px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);">' + b.industry + '</td><td style="color:#888;font-size:13px;padding:12px 0;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">' + b.avgFields + '</td><td style="color:#ef4444;font-size:13px;padding:12px 0;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">' + b.avgAbandonment + '%</td><td style="color:#22c55e;font-size:13px;padding:12px 0;text-align:right;border-bottom:1px solid rgba(255,255,255,0.04);">$' + b.avgLeadValue.toLocaleString() + '</td></tr>').join('') +
+          '<tr><td style="color:#555;font-size:10px;font-weight:700;padding:8px 0 16px;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);">Industry</td><td style="color:#555;font-size:10px;font-weight:700;padding:8px 0 16px;text-align:center;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);">Avg Fields</td><td style="color:#555;font-size:10px;font-weight:700;padding:8px 0 16px;text-align:right;letter-spacing:0.12em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);">Abandonment</td></tr>' +
+          industryBenchmarks.map(b => '<tr><td style="color:#ccc;font-size:13px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);">' + b.industry + '</td><td style="color:#888;font-size:13px;padding:12px 0;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);">' + b.avgFields + '</td><td style="color:#ef4444;font-size:13px;padding:12px 0;text-align:right;border-bottom:1px solid rgba(255,255,255,0.04);">' + b.avgAbandonment + '%</td></tr>').join('') +
         '</table>' +
       '</div>' +
 
@@ -412,7 +412,7 @@ export async function POST(request: NextRequest) {
       // FROM ASHERTON — personal note + CTA + full signature
       '<div style="padding:56px 32px;border-top:1px solid rgba(255,255,255,0.06);">' +
         '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">From Asherton</p>' +
-        '<p style="color:#ccc;font-size:15px;line-height:1.7;margin:0 0 20px;max-width:520px;">A few months back I was a marketing consultant watching high-value leads slip through forms every week. I built ReCapture to fix that. If the numbers in your audit feel familiar &mdash; let&rsquo;s recover them.</p>' +
+        '<p style="color:#ccc;font-size:15px;line-height:1.7;margin:0 0 20px;max-width:520px;">A few months back I was a marketing consultant watching high-value leads slip through forms every week. I built ReCapture to fix that. If any of this looks familiar &mdash; let&rsquo;s recover them.</p>' +
         '<p style="color:#aaa;font-size:14px;line-height:1.6;margin:0 0 32px;">One script tag. No form changes. Results inside 48 hours.</p>' +
         '<a href="https://userecapture.com/start-trial" style="color:#ff6b35;font-size:15px;font-weight:600;text-decoration:none;display:inline-block;margin-bottom:24px;">' +
           '<span style="margin-right:10px;font-weight:700;">&rarr;</span>Start your free trial' +
