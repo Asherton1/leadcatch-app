@@ -78,12 +78,13 @@ export default function Post() {
         <p className="post-subtitle">Legal is the highest-stakes form-abandonment vertical in America. A single case is worth fifty thousand to five million dollars. And the intake form is exactly where firms lose their most valuable prospects — before the first phone call ever happens.</p>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.25rem', flexWrap: 'wrap', margin: '0 0 2rem 0', padding: '1.1rem 1.5rem', background: 'rgba(255,107,53,0.07)', border: '1px solid rgba(255,107,53,0.26)', borderRadius: '12px' }}>
-        <span style={{ color: '#e4e4e7', fontSize: '0.95rem', lineHeight: 1.5 }}>
-          Want your firm&apos;s actual number? The calculator models it in about thirty seconds.
+      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '1.5rem', flexWrap: 'wrap', margin: '0 0 2.25rem 0', padding: '0.9rem 0', borderTop: '1px solid #1e1e1e', borderBottom: '1px solid #1e1e1e' }}>
+        <span style={{ color: '#8a8a8f', fontSize: '0.8125rem', lineHeight: 1.5, letterSpacing: '0.01em' }}>
+          <span style={{ color: '#ff6b35', fontWeight: 700, fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.16em', marginRight: '0.6rem' }}>Interactive</span>
+          Model the recovery opportunity against your firm&apos;s own case values.
         </span>
-        <Link href="/family-law-roi" style={{ flexShrink: 0, display: 'inline-block', background: '#ff6b35', color: '#0a0a0a', fontWeight: 700, padding: '0.7rem 1.35rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
-          Run your numbers →
+        <Link href="/family-law-roi" style={{ flexShrink: 0, color: '#ff6b35', fontWeight: 600, fontSize: '0.8125rem', textDecoration: 'none', whiteSpace: 'nowrap', borderBottom: '1px solid rgba(255,107,53,0.35)', paddingBottom: '1px' }}>
+          Run your numbers &rarr;
         </Link>
       </div>
 
