@@ -217,11 +217,6 @@ export async function POST(request: NextRequest) {
     }
 
     const avgLeadValue = industryLeadValue
-        const monthlyVisitors = 500
-    const formStarts = Math.round(monthlyVisitors * 0.06)
-    const abandonedLeads = Math.round(formStarts * (estAbandonment / 100))
-    const monthlyRevenueLost = abandonedLeads * avgLeadValue
-    const yearlyRevenueLost = monthlyRevenueLost * 12
 
     // Form Health Score (A-F)
     let healthScore = 100
@@ -355,7 +350,6 @@ export async function POST(request: NextRequest) {
         '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Overview</p>' +
         '<table style="width:100%;border-collapse:collapse;">' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Detected Industry</td><td style="color:#fff;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + detectedIndustry + '</td></tr>' +
-          '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Avg. Lead Value (' + detectedIndustry + ')</td><td style="color:#22c55e;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">$' + industryLeadValue.toLocaleString() + '</td></tr>' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Forms Detected</td><td style="color:#fff;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + formCount + '</td></tr>' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Total Form Fields</td><td style="color:#fff;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + totalFields + '</td></tr>' +
           '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Form Builder</td><td style="color:#fff;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:600;">' + formBuilder + '</td></tr>' +
@@ -365,16 +359,12 @@ export async function POST(request: NextRequest) {
         '</table>' +
       '</div>' +
 
-      // REVENUE AT RISK
+      // WHAT WE COULD NOT MEASURE
       '<div style="padding:40px 32px;border-top:1px solid rgba(255,255,255,0.06);">' +
-        '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Revenue at Risk</p>' +
-        '<table style="width:100%;border-collapse:collapse;">' +
-          '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Est. Abandonment Rate</td><td style="color:#ef4444;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:700;">' + estAbandonment + '%</td></tr>' +
-          '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Est. Monthly Leads Lost</td><td style="color:#ef4444;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:700;">' + abandonedLeads + '</td></tr>' +
-          '<tr><td style="color:#888;font-size:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);">Est. Monthly Revenue Lost</td><td style="color:#ef4444;font-size:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;font-weight:800;">$' + monthlyRevenueLost.toLocaleString() + '</td></tr>' +
-          '<tr><td style="color:#888;font-size:14px;padding:14px 0;">Est. Annual Revenue Lost</td><td style="color:#ef4444;font-size:18px;padding:14px 0;text-align:right;font-weight:800;">$' + yearlyRevenueLost.toLocaleString() + '</td></tr>' +
-        '</table>' +
-        '<p style="color:#666;font-size:12px;margin:24px 0 0;line-height:1.6;">Based on 500 monthly visitors, 6% form start rate, and $' + industryLeadValue.toLocaleString() + ' avg. ' + detectedIndustry + ' client value. Your actual numbers may be higher.</p>' +
+        '<p style="color:#ff6b35;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 24px;">Revenue Impact</p>' +
+        '<p style="color:#ccc;font-size:14px;line-height:1.7;margin:0 0 20px;">Everything above was measured directly from your site. Revenue impact cannot be — it depends on your traffic volume, inquiry rate, and average client value, and those are numbers only you have.</p>' +
+        '<p style="color:#888;font-size:14px;line-height:1.7;margin:0 0 24px;">Industry abandonment for ' + detectedIndustry + ' runs around ' + estAbandonment + '%. Applied to your own funnel, that is the figure worth knowing.</p>' +
+        '<a href="https://www.userecapture.com/calculator" style="display:inline-block;background:#ff6b35;color:#000;font-weight:700;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;">Model it with your numbers &rarr;</a>' +
       '</div>' +
 
       // FINDINGS
@@ -507,8 +497,6 @@ export async function POST(request: NextRequest) {
         healthScore,
         totalFields,
         estAbandonment,
-        monthlyRevenueLost,
-        yearlyRevenueLost,
       })
     }
 
@@ -537,7 +525,7 @@ export async function POST(request: NextRequest) {
         from: 'ReCapture <hello@userecapture.com>',
         to: 'hello@userecapture.com',
         subject: 'New Form Audit Request — ' + url,
-        html: '<p><strong>URL:</strong> ' + url + '</p><p><strong>Email:</strong> ' + email + '</p><p><strong>Industry:</strong> ' + detectedIndustry + '</p><p><strong>Grade:</strong> ' + grade + ' (' + healthScore + '/100)</p><p><strong>Fields:</strong> ' + totalFields + '</p><p><strong>Est. abandonment:</strong> ' + estAbandonment + '%</p><p><strong>Monthly revenue at risk:</strong> $' + monthlyRevenueLost.toLocaleString() + '</p><p><strong>Annual revenue at risk:</strong> $' + yearlyRevenueLost.toLocaleString() + '</p>',
+        html: '<p><strong>URL:</strong> ' + url + '</p><p><strong>Email:</strong> ' + email + '</p><p><strong>Industry:</strong> ' + detectedIndustry + '</p><p><strong>Grade:</strong> ' + grade + ' (' + healthScore + '/100)</p><p><strong>Fields:</strong> ' + totalFields + '</p><p><strong>Est. abandonment:</strong> ' + estAbandonment + '%</p>',
       }),
     })
 
@@ -548,8 +536,6 @@ export async function POST(request: NextRequest) {
       healthScore,
       totalFields,
       estAbandonment,
-      monthlyRevenueLost,
-      yearlyRevenueLost,
     })
   } catch (err) {
     console.error('Form audit error:', err)
