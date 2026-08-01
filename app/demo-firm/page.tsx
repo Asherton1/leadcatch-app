@@ -1,11 +1,8 @@
+'use client'
+
 import Script from 'next/script'
 import './demo-firm.css'
 
-export const metadata = {
-  title: 'Whitmore Family Law — Confidential Consultation',
-  description: 'Board certified family law representation in Dallas. Request a confidential consultation.',
-  robots: { index: false, follow: false },
-}
 
 export default function DemoFirm() {
   return (
@@ -62,7 +59,7 @@ export default function DemoFirm() {
           </section>
 
           <section className="wfl-form-wrap">
-            <form className="wfl-form" action="#" method="post">
+            <form className="wfl-form" onSubmit={(e) => { e.preventDefault(); alert('Thank you — a member of our team will contact you within one business day.') }}>
               <div className="wfl-form-head">
                 <h2>Request a Consultation</h2>
                 <p>We respond to every inquiry within one business day.</p>
