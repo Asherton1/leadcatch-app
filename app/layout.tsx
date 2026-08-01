@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import SmoothScroll from './components/SmoothScroll'
 import PremiumEffects from './components/PremiumEffects'
 import PageTransitions from './components/PageTransitions'
+import SiteTracker from './components/SiteTracker'
 import Script from 'next/script'
 import type { Metadata, Viewport } from 'next'
 
@@ -78,10 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('js', new Date());
           gtag('config', 'G-132TK8H7D9');`}
         </Script>
-        <Script
-          src="https://www.userecapture.com/track.js?key=admin_252bcf7523b0e813f2b470d2e0f61fd9"
-          strategy="afterInteractive"
-        />
+        <SiteTracker />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
