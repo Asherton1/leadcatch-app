@@ -68,7 +68,7 @@ const sections: Section[] = [
   {
     category: 'Pricing & Setup',
     rows: [
-      { label: 'Transparent pricing', recapture: '$394-$1,997+/mo', podium: 'Quote only', ghl: '$297-497/mo', cartstack: '$39-169/mo' },
+      { label: 'Transparent pricing', recapture: '$397-$1,997+/mo', podium: 'Quote only', ghl: '$297-497/mo', cartstack: '$39-169/mo' },
       { label: 'Free trial', recapture: '14 days', podium: 'None listed', ghl: '$7 paid trial', cartstack: '14 days' },
     ],
   },

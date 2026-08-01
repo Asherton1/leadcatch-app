@@ -77,11 +77,11 @@ export const faqCategories: FAQCategory[] = [
     faqs: [
       {
         q: 'What happens during the 7-day trial?',
-        a: "You get full access to every feature on the Pro plan for 7 days. A card is required to start (so there's no friction when you decide to continue), but you can cancel anytime in your dashboard before day 7 and you won't be charged. After day 7, billing starts automatically at $394/mo.",
+        a: "You get full access to every feature on the Pro plan for 7 days. A card is required to start (so there's no friction when you decide to continue), but you can cancel anytime in your dashboard before day 7 and you won't be charged. After day 7, billing starts automatically at $397/mo.",
       },
       {
         q: "What's the difference between Pro and Enterprise?",
-        a: 'Pro ($394/mo) — form capture, dashboard, AI voice callback within 60 seconds, lead scoring, email/SMS/Slack alerts, weekly performance reports, branded recovery emails, webhook integrations, 3 websites. Enterprise (from $1,997/mo) — unlimited websites, HIPAA + BAA, dedicated account manager, white-glove setup, custom integrations, per-location dashboards.',
+        a: 'Pro ($397/mo) — form capture, dashboard, AI voice callback within 60 seconds, lead scoring, email/SMS/Slack alerts, weekly performance reports, branded recovery emails, webhook integrations, 3 websites. Enterprise (from $1,997/mo) — unlimited websites, HIPAA + BAA, dedicated account manager, white-glove setup, custom integrations, per-location dashboards.',
       },
       {
         q: 'Do you offer an annual discount?',

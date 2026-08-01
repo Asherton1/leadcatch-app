@@ -200,7 +200,7 @@ const RELATIONS: Record<string, PageRelations> = {
     worksWith: {
       title: 'Explore the recovery layer',
       links: [
-        { name: 'Pricing', href: '/pricing', description: 'Pro at $394/mo, Enterprise from $1,997/mo' },
+        { name: 'Pricing', href: '/pricing', description: 'Pro at $397/mo, Enterprise from $1,997/mo' },
         { name: 'FAQ', href: '/faq', description: 'Common questions answered' },
         { name: 'Integrations', href: '/integrations', description: 'CRM and tool integrations' },
         { name: 'Book a demo', href: '/demo', description: '15-min walkthrough with the founder' },
@@ -219,7 +219,7 @@ const RELATIONS: Record<string, PageRelations> = {
     worksWith: {
       title: 'Explore the recovery layer',
       links: [
-        { name: 'Pricing', href: '/pricing', description: 'Pro at $394/mo, Enterprise from $1,997/mo' },
+        { name: 'Pricing', href: '/pricing', description: 'Pro at $397/mo, Enterprise from $1,997/mo' },
         { name: 'How It Works', href: '/how-it-works', description: 'See the recovery layer step-by-step' },
         { name: 'Integrations', href: '/integrations', description: 'CRM and tool integrations' },
         { name: 'Free Form Audit', href: '/form-audit', description: 'Audit your existing form abandonment' },
@@ -290,7 +290,7 @@ const RELATIONS: Record<string, PageRelations> = {
       title: 'Learn more before you book',
       links: [
         { name: 'How It Works', href: '/how-it-works', description: 'See the recovery layer step-by-step' },
-        { name: 'Pricing', href: '/pricing', description: 'Pro at $394/mo, Enterprise from $1,997/mo' },
+        { name: 'Pricing', href: '/pricing', description: 'Pro at $397/mo, Enterprise from $1,997/mo' },
         { name: 'FAQ', href: '/faq', description: 'Common questions answered' },
         { name: 'ROI Calculator', href: '/calculator', description: 'Estimate your recovery revenue' },
       ],
@@ -309,7 +309,7 @@ const RELATIONS: Record<string, PageRelations> = {
     relatedTopics: {
       title: 'After you see the numbers',
       links: [
-        { name: 'Pricing', href: '/pricing', description: 'Pro at $394/mo, Enterprise from $1,997/mo' },
+        { name: 'Pricing', href: '/pricing', description: 'Pro at $397/mo, Enterprise from $1,997/mo' },
         { name: 'Book a demo', href: '/demo', description: '15-min walkthrough with the founder' },
         { name: 'Free Form Audit', href: '/form-audit', description: 'Live audit of your existing forms' },
         { name: 'FAQ', href: '/faq', description: 'Common questions answered' },
@@ -329,7 +329,7 @@ const RELATIONS: Record<string, PageRelations> = {
     relatedTopics: {
       title: 'After the audit',
       links: [
-        { name: 'Pricing', href: '/pricing', description: 'Pro at $394/mo, Enterprise from $1,997/mo' },
+        { name: 'Pricing', href: '/pricing', description: 'Pro at $397/mo, Enterprise from $1,997/mo' },
         { name: 'Book a demo', href: '/demo', description: '15-min walkthrough with the founder' },
         { name: 'How It Works', href: '/how-it-works', description: 'See the recovery layer step-by-step' },
         { name: 'ROI Calculator', href: '/calculator', description: 'Estimate your recovery revenue' },
@@ -348,7 +348,7 @@ const RELATIONS: Record<string, PageRelations> = {
     relatedTopics: {
       title: 'Enterprise resources',
       links: [
-        { name: 'Pricing', href: '/pricing', description: 'Pro at $394/mo, Enterprise from $1,997/mo' },
+        { name: 'Pricing', href: '/pricing', description: 'Pro at $397/mo, Enterprise from $1,997/mo' },
         { name: 'Book a demo', href: '/demo', description: '15-min walkthrough with the founder' },
         { name: 'BAA & HIPAA', href: '/baa', description: 'Healthcare compliance details' },
         { name: 'FAQ', href: '/faq', description: 'Common questions answered' },
@@ -370,7 +370,7 @@ const RELATIONS: Record<string, PageRelations> = {
       links: [
         { name: 'How It Works', href: '/how-it-works', description: 'See the recovery layer in action' },
         { name: 'Why ReCapture', href: '/why-us', description: 'How we compare to Podium and CartStack' },
-        { name: 'Pricing', href: '/pricing', description: 'Pro at $394/mo, Enterprise from $1,997/mo' },
+        { name: 'Pricing', href: '/pricing', description: 'Pro at $397/mo, Enterprise from $1,997/mo' },
         { name: 'FAQ', href: '/faq', description: 'Common questions answered' },
       ],
     },
@@ -388,7 +388,7 @@ const RELATIONS: Record<string, PageRelations> = {
     relatedTopics: {
       title: 'Make your decision',
       links: [
-        { name: 'Pricing', href: '/pricing', description: 'Pro at $394/mo, Enterprise from $1,997/mo' },
+        { name: 'Pricing', href: '/pricing', description: 'Pro at $397/mo, Enterprise from $1,997/mo' },
         { name: 'Book a demo', href: '/demo', description: '15-min walkthrough with the founder' },
         { name: 'How It Works', href: '/how-it-works', description: 'See the recovery layer step-by-step' },
         { name: 'FAQ', href: '/faq', description: 'Common questions answered' },
@@ -410,7 +410,7 @@ const RELATIONS: Record<string, PageRelations> = {
         { name: 'Trust & Compliance', href: '/trust', description: 'How we handle data and security' },
         { name: 'Enterprise', href: '/enterprise', description: 'HIPAA + BAA + white-glove setup' },
         { name: 'FAQ', href: '/faq', description: 'Common compliance questions' },
-        { name: 'Pricing', href: '/pricing', description: 'Pro at $394/mo, Enterprise from $1,997/mo' },
+        { name: 'Pricing', href: '/pricing', description: 'Pro at $397/mo, Enterprise from $1,997/mo' },
       ],
     },
   },

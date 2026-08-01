@@ -95,8 +95,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               url: 'https://www.userecapture.com',
               offers: {
                 '@type': 'AggregateOffer',
-                lowPrice: '394',
-                highPrice: '394',
+                lowPrice: '397',
+                highPrice: '397',
                 priceCurrency: 'USD',
                 offerCount: 2,
               },

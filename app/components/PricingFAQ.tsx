@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: 'What happens during the 7-day trial?',
-    a: 'You get full access to every feature on the Pro plan for 7 days. A card is required to start (so there\u2019s no friction when you decide to continue), but you can cancel anytime in your dashboard before day 7 and you won\u2019t be charged. After day 7, billing starts automatically at $394/mo.',
+    a: 'You get full access to every feature on the Pro plan for 7 days. A card is required to start (so there\u2019s no friction when you decide to continue), but you can cancel anytime in your dashboard before day 7 and you won\u2019t be charged. After day 7, billing starts automatically at $397/mo.',
   },
   {
     q: 'Is my data really HIPAA-compliant?',

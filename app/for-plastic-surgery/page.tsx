@@ -140,7 +140,7 @@ export default function ForPlasticSurgery() {
             </div>
             <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
               <p>
-                The average plastic surgery patient lifetime value is <strong style={{ color: '#fff' }}>$12,500+ over three years</strong> (CuFinder 2026), with single high-ticket procedures like BBL exceeding <strong style={{ color: '#fff' }}>$15,000 in lifetime value</strong>. Pro plan ReCapture costs <strong style={{ color: '#fff' }}>$394/month</strong>. One recovered procedure pays for two years of subscription.
+                The average plastic surgery patient lifetime value is <strong style={{ color: '#fff' }}>$12,500+ over three years</strong> (CuFinder 2026), with single high-ticket procedures like BBL exceeding <strong style={{ color: '#fff' }}>$15,000 in lifetime value</strong>. Pro plan ReCapture costs <strong style={{ color: '#fff' }}>$397/month</strong>. One recovered procedure pays for two years of subscription.
               </p>
               <p>
                 For a practice generating 200 monthly form starts, an 8-22% recovery rate translates to <strong style={{ color: '#fff' }}>16 to 44 additional procedure consults monthly</strong> — from leads you already paid $20,000 in ad spend to acquire.
@@ -300,14 +300,14 @@ export default function ForPlasticSurgery() {
             05 — Pricing
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
-            Plans start at $394/mo. 7-day free trial.
+            Plans start at $397/mo. 7-day free trial.
           </h2>
           <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $394/mo for solo-practitioner clinics. Includes recovery dashboard, tracker, automated follow-up emails, AI voice callback within 60 seconds, and instant SMS/Slack alerts.
+              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for solo-practitioner clinics. Includes recovery dashboard, tracker, automated follow-up emails, AI voice callback within 60 seconds, and instant SMS/Slack alerts.
             </p>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $394/mo for established plastic surgery practices with consistent ad spend. Adds SMS alerts to coordinator, AI voice callback (Marissa), and weekly performance reports.
+              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for established plastic surgery practices with consistent ad spend. Adds SMS alerts to coordinator, AI voice callback (Marissa), and weekly performance reports.
             </p>
             <p>
               <strong style={{ color: '#e4e4e7' }}>Enterprise</strong> for multi-surgeon practices, BAA-required HIPAA deployments, and high lead volume sites. Custom pricing, dedicated account manager.

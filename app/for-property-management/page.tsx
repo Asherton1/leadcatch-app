@@ -140,7 +140,7 @@ export default function ForPropertyManagement() {
             </div>
             <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
               <p>
-                The average multifamily annual lease value is <strong style={{ color: '#fff' }}>$24,000+ at $2,000/month</strong>, with luxury units exceeding $48,000/year. Pro plan ReCapture is $394/month. <strong style={{ color: '#fff' }}>One recovered lease pays for five years of subscription.</strong>
+                The average multifamily annual lease value is <strong style={{ color: '#fff' }}>$24,000+ at $2,000/month</strong>, with luxury units exceeding $48,000/year. Pro plan ReCapture is $397/month. <strong style={{ color: '#fff' }}>One recovered lease pays for five years of subscription.</strong>
               </p>
               <p>
                 Across a 10-property portfolio generating 500+ monthly form starts, an 8-22% recovery rate translates to <strong style={{ color: '#fff' }}>40-110 additional tour bookings monthly</strong>. At industry-average application-to-lease rates, that's 3-8 additional signed leases per month from leads you already had.
@@ -300,14 +300,14 @@ export default function ForPropertyManagement() {
             05 — Pricing
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
-            Plans start at $394/mo. 7-day free trial.
+            Plans start at $397/mo. 7-day free trial.
           </h2>
           <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $394/mo for single-property managers. Includes recovery dashboard, tracker, automated follow-up emails, AI voice callback within 60 seconds, and instant SMS/Slack alerts.
+              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for single-property managers. Includes recovery dashboard, tracker, automated follow-up emails, AI voice callback within 60 seconds, and instant SMS/Slack alerts.
             </p>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $394/mo for established multifamily operators with consistent traffic. Adds SMS alerts to leasing team, AI voice callback (Marissa), and weekly performance reports.
+              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for established multifamily operators with consistent traffic. Adds SMS alerts to leasing team, AI voice callback (Marissa), and weekly performance reports.
             </p>
             <p>
               <strong style={{ color: '#e4e4e7' }}>Enterprise</strong> for portfolio operators (10+ properties), institutional multifamily, and high lead volume sites. Custom pricing, dedicated account manager, multi-property dashboard.

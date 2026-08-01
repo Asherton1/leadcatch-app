@@ -221,7 +221,7 @@ export default function ClientSmsTemplatesPage() {
             <h2 className="sms-tpl-locked-title">Custom SMS Templates is a Pro feature</h2>
             <p className="sms-tpl-locked-desc">
               You're currently on the {clientPlan === 'essentials' ? 'Essentials' : 'Free'} plan.
-              Upgrade to Pro ($394/mo) to customize the alert messages you receive when leads abandon your forms.
+              Upgrade to Pro ($397/mo) to customize the alert messages you receive when leads abandon your forms.
               Until then, your leads get our proven default templates.
             </p>
             <a href="/pricing" className="sms-tpl-upgrade-cta">Upgrade to Pro &rarr;</a>
