@@ -149,6 +149,16 @@ export default function Post() {
 
         <p>Firms competing for cases in the current market are spending more on paid media every quarter to hold flat on signed matters. The recovery layer is the intervention that lifts signed matters without touching ad spend. It is the one lever left on the table for firms that already have their front-end funnel optimized.</p>
 
+        <div style={{ margin: '2.5rem 0', padding: '1.75rem 2rem', background: 'linear-gradient(150deg, rgba(255,107,53,0.09) 0%, rgba(255,107,53,0.02) 100%)', border: '1px solid rgba(255,107,53,0.28)', borderRadius: '14px' }}>
+          <div style={{ fontSize: '0.68rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.14em', marginBottom: '0.75rem' }}>Run your own numbers</div>
+          <p style={{ color: '#e4e4e7', fontSize: '1.02rem', lineHeight: 1.6, margin: '0 0 1.25rem 0' }}>
+            Every firm&apos;s intake volume, consult rate, and case values are different. Put yours into the calculator and see what your own form is costing you each month.
+          </p>
+          <Link href="/family-law-roi" style={{ display: 'inline-block', background: '#ff6b35', color: '#0a0a0a', fontWeight: 700, padding: '0.8rem 1.6rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.9rem' }}>
+            Open the revenue calculator →
+          </Link>
+        </div>
+
         <h2>The Bottom Line</h2>
 
         <p>Legal is the vertical where form abandonment costs the most and where recovery infrastructure pays back the fastest. Every firm running paid media against a multi-field intake form is watching cases evaporate before the intake coordinator ever knew they existed. The math on a single recovered case is so lopsided against the annual cost of recovery infrastructure that the question is not whether recovery is worth deploying — it is why the firm has not deployed it yet.</p>
@@ -169,8 +179,11 @@ export default function Post() {
       <div className="blog-post-cta">
         <div className="blog-post-cta-box">
           <h3>See what your firm&apos;s intake form is losing</h3>
-          <p>Run a free form audit on your firm&apos;s intake page and see exactly where high-value prospects are dropping off before they submit. Or use the ROI Estimator to see the recovery opportunity in your own case values.</p>
-          <Link href="/demo">Try the Live Demo →</Link>
+          <p>Model the recovery opportunity against your own case values, or run a free audit on your intake page to see exactly where high-value prospects are dropping off before they submit.</p>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Link href="/family-law-roi">Run your numbers →</Link>
+            <Link href="/form-audit" style={{ background: 'transparent', border: '1px solid #2a2a2a', color: '#a1a1aa' }}>Free form audit</Link>
+          </div>
         </div>
       </div>
       <Footer />
