@@ -30,6 +30,7 @@
 .admin-nav-pills {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   flex: 1;
   overflow-x: auto;
@@ -47,9 +48,9 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #ff6b35;
-  background: rgba(255,107,53,0.1);
-  border: 1px solid rgba(255,107,53,0.3);
+  color: rgba(255,255,255,0.45);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 6px;
   padding: 6px 12px;
   text-decoration: none;
@@ -59,18 +60,20 @@
 }
 
 .admin-nav-pill:hover {
-  background: rgba(255,107,53,0.18);
-  border-color: rgba(255,107,53,0.5);
+  color: rgba(255,255,255,0.8);
+  border-color: rgba(255,255,255,0.25);
 }
 
 .admin-nav-pill-active {
-  color: #0a0a0a;
-  background: #ff6b35;
+  color: #ff6b35;
+  background: rgba(255,107,53,0.08);
+  border-color: rgba(255,107,53,0.35);
 }
 
 .admin-nav-pill-active:hover {
-  background: #ff6b35;
-  border-color: #ff6b35;
+  color: #ff6b35;
+  background: rgba(255,107,53,0.12);
+  border-color: rgba(255,107,53,0.45);
 }
 
 .admin-nav-right {
@@ -164,4 +167,15 @@
   .admin-nav-link-public-site {
     display: none;
   }
+}
+
+/* Balance left and right so the centered pills sit true center */
+.admin-nav-logo { flex: 1; }
+.admin-nav-right { flex: 1; justify-content: flex-end; }
+.admin-nav-pills { flex: 0 0 auto; }
+
+@media (max-width: 720px) {
+  .admin-nav-logo,
+  .admin-nav-right { flex: 0 0 auto; }
+  .admin-nav-pills { flex: 1; justify-content: center; }
 }
