@@ -50,7 +50,7 @@ export default function AdminNav() {
         <Logo />
       </Link>
 
-      <div className="admin-nav-pills">
+      {links.length > 1 && <div className="admin-nav-pills">
         {links.map(link => {
           const isActive = pathname === link.href
           return (
@@ -63,7 +63,7 @@ export default function AdminNav() {
             </Link>
           )
         })}
-      </div>
+      </div>}
 
       <div className="admin-nav-right">
         <Link href="/settings" className="admin-nav-link">Settings</Link>
