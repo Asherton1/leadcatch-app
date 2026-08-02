@@ -360,6 +360,7 @@
     this.touched   = false;
     this.submitted = false;
     this.named     = { name: null, email: null, phone: null };
+    this.nameParts = { first: null, last: null, full: null };
     this.formData  = {};
     trackerCount++;
     this._attach();
@@ -397,7 +398,26 @@
       var key = el.name || el.id || el.getAttribute('data-name') || el.type;
       if (key) self.formData[key] = val;
       var type = classifyField(el);
-      if (type !== 'other' && val) self.named[type] = val;
+      if (type !== 'other' && val) {
+        if (type === 'name') {
+          // Forms often split first and last. Keep both instead of overwriting.
+          var hay = ((el.name || '') + ' ' + (el.id || '') + ' ' + (el.getAttribute('autocomplete') || '')).toLowerCase();
+          var isFirst = /first|given|fname/.test(hay);
+          var isLast  = /last|family|surname|lname/.test(hay);
+          if (isFirst) {
+            self.nameParts.first = val;
+          } else if (isLast) {
+            self.nameParts.last = val;
+          } else {
+            self.nameParts.full = val;
+          }
+          self.named.name = self.nameParts.full
+            || [self.nameParts.first, self.nameParts.last].filter(Boolean).join(' ')
+            || val;
+        } else {
+          self.named[type] = val;
+        }
+      }
     }
 
     this.form.addEventListener('input',  onInput);
