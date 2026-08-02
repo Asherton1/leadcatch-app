@@ -1122,7 +1122,7 @@ export default function Dashboard() {
     const cutoff = Date.now() - 48 * 60 * 60 * 1000
     const rows = leads.filter(l => {
       const recent = new Date(l.created_at).getTime() >= cutoff
-      const untouched = (l.status ?? 'open') === 'open'
+      const untouched = !['contacted', 'converted', 'lost'].includes(l.status ?? '')
       const hot = scoreLead(l).score >= 75
       return recent && untouched && hot
     })
