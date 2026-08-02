@@ -1117,6 +1117,25 @@ export default function Dashboard() {
     return { bands: out, total, count: rows.length }
   }, [filteredLeads])
 
+  // ── Needs attention: hot, recent, still untouched ─────────────────────────
+  const needsAttention = useMemo(() => {
+    const cutoff = Date.now() - 48 * 60 * 60 * 1000
+    const rows = leads.filter(l => {
+      const recent = new Date(l.created_at).getTime() >= cutoff
+      const untouched = (l.status ?? 'open') === 'open'
+      const hot = scoreLead(l).score >= 75
+      return recent && untouched && hot
+    })
+    const oldest = rows.length > 0
+      ? rows.reduce((a, b) => new Date(a.created_at) < new Date(b.created_at) ? a : b)
+      : null
+    return {
+      count: rows.length,
+      value: rows.reduce((sum, l) => sum + (l.estimated_value ?? 0), 0),
+      oldestAt: oldest ? oldest.created_at : null,
+    }
+  }, [leads])
+
   // ── CSV export of exactly what is on screen ───────────────────────────────
   const exportCSV = () => {
     const esc = (v: unknown) => {
@@ -1234,6 +1253,28 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      {needsAttention.count > 0 && (
+        <button
+          className="attn-strip"
+          type="button"
+          onClick={() => { setStatusFilter('hot'); setCardFilter('none'); setFilter('week') }}
+        >
+          <span className="attn-pulse" />
+          <span className="attn-text">
+            <b>{needsAttention.count} hot {needsAttention.count === 1 ? 'inquiry' : 'inquiries'}</b>
+            {' from the last 48 hours '}
+            {needsAttention.count === 1 ? 'has' : 'have'} not been contacted
+            <span className="attn-value">{formatCurrency(needsAttention.value)} in pipeline</span>
+          </span>
+          <span className="attn-cta">
+            Show them
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </span>
+        </button>
+      )}
 
       {/* ── Month over month ──────────────────────────────────────────────── */}
       <div className="mom-band">
