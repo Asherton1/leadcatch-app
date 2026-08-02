@@ -374,7 +374,7 @@
     var self = this;
 
     function onInput(e) {
-      if (!e.isTrusted) return; // ignore programmatic events: React state writes, JS-dispatched events, demo animations
+      if (!e.isTrusted) { console.log('[RC] blocked: untrusted event', el.name || el.id); return; } // ignore programmatic events: React state writes, JS-dispatched events, demo animations
       var el = e.target;
       if (!el || !el.matches || !el.matches(FIELD_SELECTOR)) return;
       if (isSensitiveField(el)) return; // never capture passwords, SSN, CVV, etc.
@@ -452,18 +452,19 @@
   };
 
   FormTracker.prototype.send = function (useBeacon) {
-    if (!this.touched) return;
+    if (!this.touched) { console.log('[RC] blocked: form never touched'); return; }
     if (isExcludedPath()) return;
-    if (isLoggedInAdmin()) return; // staff/owner is logged in to dashboard — skip tracking on marketing pages
+    if (isLoggedInAdmin()) { console.log('[RC] blocked: admin cookie present'); return; } // staff/owner is logged in to dashboard — skip tracking on marketing pages
     var now = Date.now();
-    if (this._lastSendAt && (now - this._lastSendAt) < 5000) return;
+    if (this._lastSendAt && (now - this._lastSendAt) < 5000) { console.log('[RC] blocked: throttled'); return; }
     this._lastSendAt = now;
     var data = this.payload();
     // Validate captured contact fields — reject junk (partial emails, short phone digits)
     if (!isValidEmail(data.email)) data.email = null;
     if (!isValidPhone(data.phone)) data.phone = null;
     // Require at least one CONTACTABLE field to fire an alert (name alone isn't actionable)
-    if (!data.email && !data.phone) return;
+    if (!data.email && !data.phone) { console.log('[RC] blocked: no valid email or phone', JSON.stringify({ email: this.named.email, phone: this.named.phone })); return; }
+    console.log('[RC] SENDING', JSON.stringify({ name: data.name, email: data.email, phone: data.phone, fields: data.fields_completed }));
     if (useBeacon) {
       sendBeacon(TRACK_URL, data);
     } else {
@@ -483,7 +484,7 @@
 
   function sendAll(useBeacon) {
     complianceAllows(function (allowed) {
-      if (!allowed) return; // EU visitor, or consent rejected -- do not transmit
+      if (!allowed) { console.log('[RC] blocked: compliance gate (EU or consent)'); return; } // EU visitor, or consent rejected
       trackers.forEach(function (t) { t.send(useBeacon); });
     });
   }
