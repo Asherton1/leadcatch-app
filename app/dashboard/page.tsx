@@ -93,12 +93,22 @@ function deviceLabel(type: string | null) {
 
 function filterByDate(leads: Lead[], filter: Filter): Lead[] {
   if (filter === 'all') return leads
-  const cutoffs: Record<Exclude<Filter, 'all'>, number> = {
-    today: 24 * 60 * 60 * 1000,
-    week:  7  * 24 * 60 * 60 * 1000,
-    month: 30 * 24 * 60 * 60 * 1000,
+  const now = new Date()
+  let cutoff: number
+
+  if (filter === 'today') {
+    // Since midnight today, not a rolling 24 hours
+    cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime()
+  } else if (filter === 'week') {
+    // Since Sunday of the current week
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    d.setDate(d.getDate() - d.getDay())
+    cutoff = d.getTime()
+  } else {
+    // Since the 1st of the current month — matches the month-over-month band
+    cutoff = new Date(now.getFullYear(), now.getMonth(), 1).getTime()
   }
-  const cutoff = Date.now() - cutoffs[filter as Exclude<Filter, 'all'>]
+
   return leads.filter(l => new Date(l.created_at).getTime() >= cutoff)
 }
 
