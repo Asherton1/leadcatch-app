@@ -572,6 +572,7 @@ export default function Dashboard() {
   const [recoveredWindow, setRecoveredWindow]   = useState<'month' | '30days' | 'all'>('month')
   const [selectedClient, setSelectedClient]     = useState<Client | null>(null)
   const [liveVisitors, setLiveVisitors] = useState<number>(0)
+  const [momPeriod, setMomPeriod] = useState<'7d' | '14d' | '30d' | '90d' | 'month'>('30d')
   const [liveDrawerOpen, setLiveDrawerOpen] = useState(false)
   const [nowTick, setNowTick] = useState(0)
   const [lastPollAt, setLastPollAt] = useState<number>(0)
@@ -840,11 +841,36 @@ export default function Dashboard() {
     return { total_leads, emails_deployed, total_revenue_lost, avg_completion_rate, avg_time_on_form }
   }, [filteredLeads])
 
-  // ── Month over month ──────────────────────────────────────────────────────
+  // ── Period comparison ─────────────────────────────────────────────────────
+  const PERIOD_LABELS: Record<string, string> = {
+    '7d': 'Last 7 days',
+    '14d': 'Last 14 days',
+    '30d': 'Last 30 days',
+    '90d': 'Last 90 days',
+    'month': 'This month',
+  }
+
   const monthCompare = useMemo(() => {
     const now = new Date()
-    const thisStart = new Date(now.getFullYear(), now.getMonth(), 1).getTime()
-    const lastStart = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime()
+    const DAY = 24 * 60 * 60 * 1000
+
+    let currentFrom: number
+    let currentTo: number
+    let previousFrom: number
+    let previousTo: number
+
+    if (momPeriod === 'month') {
+      currentFrom = new Date(now.getFullYear(), now.getMonth(), 1).getTime()
+      currentTo = now.getTime() + 1
+      previousFrom = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime()
+      previousTo = currentFrom
+    } else {
+      const days = momPeriod === '7d' ? 7 : momPeriod === '14d' ? 14 : momPeriod === '90d' ? 90 : 30
+      currentTo = now.getTime() + 1
+      currentFrom = currentTo - days * DAY
+      previousTo = currentFrom
+      previousFrom = previousTo - days * DAY
+    }
 
     const bucket = (from: number, to: number) => {
       const rows = leads.filter(l => {
@@ -859,26 +885,52 @@ export default function Dashboard() {
       }
     }
 
-    const current = bucket(thisStart, now.getTime() + 1)
-    const previous = bucket(lastStart, thisStart)
+    const current = bucket(currentFrom, currentTo)
+    const previous = bucket(previousFrom, previousTo)
 
     const delta = (a: number, b: number) => {
       if (b === 0) return a > 0 ? 100 : 0
       return Math.round(((a - b) / b) * 100)
     }
 
+    // Daily buckets across the current window for the sparkline
+    const spanDays = Math.max(1, Math.round((currentTo - currentFrom) / DAY))
+    const buckets = Math.min(spanDays, 90)
+    const step = (currentTo - currentFrom) / buckets
+    const daily: number[] = []
+    for (let i = 0; i < buckets; i++) {
+      const from = currentFrom + i * step
+      const to = from + step
+      daily.push(leads.filter(l => {
+        const t = new Date(l.created_at).getTime()
+        return t >= from && t < to
+      }).length)
+    }
+
+    const conversionRate = current.count > 0
+      ? Math.round((current.recovered / current.count) * 100)
+      : 0
+
+    const fmtRange = (from: number, to: number) => {
+      const o: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' }
+      return new Date(from).toLocaleDateString('en-US', o) + ' \u2013 ' + new Date(to - 1).toLocaleDateString('en-US', o)
+    }
+
     return {
+      daily,
+      conversionRate,
       current,
       previous,
       countDelta: delta(current.count, previous.count),
       valueDelta: delta(current.value, previous.value),
       recoveredDelta: delta(current.recovered, previous.recovered),
       emailedDelta: delta(current.emailed, previous.emailed),
-      thisLabel: now.toLocaleDateString('en-US', { month: 'long' }),
-      lastLabel: new Date(now.getFullYear(), now.getMonth() - 1, 1).toLocaleDateString('en-US', { month: 'long' }),
+      periodLabel: PERIOD_LABELS[momPeriod],
+      currentRange: fmtRange(currentFrom, currentTo),
+      previousRange: fmtRange(previousFrom, previousTo),
       hasPrevious: previous.count > 0,
     }
-  }, [leads])
+  }, [leads, momPeriod])
 
   // ── CSV export of exactly what is on screen ───────────────────────────────
   const exportCSV = () => {
@@ -1015,8 +1067,27 @@ export default function Dashboard() {
       {/* ── Month over month ──────────────────────────────────────────────── */}
       <div className="mom-band">
         <div className="mom-head">
-          <div className="mom-title">
-            {monthCompare.thisLabel} vs {monthCompare.lastLabel}
+          <div className="mom-head-left">
+            <div className="mom-period-row">
+              <select
+                className="mom-period"
+                value={momPeriod}
+                onChange={e => setMomPeriod(e.target.value as typeof momPeriod)}
+                aria-label="Comparison period"
+              >
+                <option value="7d">Last 7 days</option>
+                <option value="14d">Last 14 days</option>
+                <option value="30d">Last 30 days</option>
+                <option value="90d">Last 90 days</option>
+                <option value="month">This month</option>
+              </select>
+              <span className="mom-range">{monthCompare.currentRange}</span>
+            </div>
+            <div className="mom-sub">
+              {monthCompare.hasPrevious
+                ? 'Compared against ' + monthCompare.previousRange
+                : 'No activity in the prior period (' + monthCompare.previousRange + ')'}
+            </div>
           </div>
           <button className="mom-export" onClick={exportCSV} type="button" title="Download the leads currently shown as CSV">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1026,62 +1097,76 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {monthCompare.hasPrevious ? (
-          <div className="mom-grid">
-            <div className="mom-cell">
-              <div className="mom-metric">{monthCompare.current.count}</div>
-              <div className="mom-label">Leads Captured</div>
-              <div className={'mom-delta ' + (monthCompare.countDelta >= 0 ? 'up' : 'down')}>
-                {monthCompare.countDelta >= 0 ? '▲' : '▼'} {Math.abs(monthCompare.countDelta)}%
-                <span className="mom-prev">vs {monthCompare.previous.count}</span>
-              </div>
+        <div className="mom-grid">
+          {[
+            {
+              key: 'captured',
+              value: String(monthCompare.current.count),
+              label: 'Leads Captured',
+              delta: monthCompare.countDelta,
+              prev: String(monthCompare.previous.count),
+              empty: 'No captures yet this month',
+              spark: true,
+            },
+            {
+              key: 'value',
+              value: formatCurrency(monthCompare.current.value),
+              label: 'Pipeline Value',
+              delta: monthCompare.valueDelta,
+              prev: formatCurrency(monthCompare.previous.value),
+              empty: 'Based on your average case value',
+            },
+            {
+              key: 'converted',
+              value: String(monthCompare.current.recovered),
+              label: 'Marked Converted',
+              delta: monthCompare.recoveredDelta,
+              prev: String(monthCompare.previous.recovered),
+              empty: 'Set a lead to Converted to track this',
+              suffix: monthCompare.current.recovered > 0 ? monthCompare.conversionRate + '% of captured' : undefined,
+            },
+            {
+              key: 'emails',
+              value: String(monthCompare.current.emailed),
+              label: 'Recovery Emails',
+              delta: monthCompare.emailedDelta,
+              prev: String(monthCompare.previous.emailed),
+              empty: 'Enable auto-send in Settings',
+            },
+          ].map(m => (
+            <div className="mom-cell" key={m.key}>
+              <div className="mom-metric">{m.value}</div>
+              <div className="mom-label">{m.label}</div>
+
+              {monthCompare.hasPrevious ? (
+                <div className={'mom-delta ' + (m.delta >= 0 ? 'up' : 'down')}>
+                  {m.delta >= 0 ? '\u25b2' : '\u25bc'} {Math.abs(m.delta)}%
+                  <span className="mom-prev">vs {m.prev}</span>
+                </div>
+              ) : m.suffix ? (
+                <div className="mom-note accent">{m.suffix}</div>
+              ) : (
+                <div className="mom-note">{m.empty}</div>
+              )}
+
+              {m.spark && monthCompare.daily.length > 1 && (
+                <div className="mom-spark">
+                  {monthCompare.daily.map((v, i) => {
+                    const peak = Math.max(...monthCompare.daily, 1)
+                    return (
+                      <span
+                        key={i}
+                        className={'mom-spark-bar' + (v > 0 ? ' filled' : '')}
+                        style={{ height: Math.max(2, (v / peak) * 22) + 'px' }}
+                        title={v + (v === 1 ? ' lead' : ' leads')}
+                      />
+                    )
+                  })}
+                </div>
+              )}
             </div>
-            <div className="mom-cell">
-              <div className="mom-metric">{formatCurrency(monthCompare.current.value)}</div>
-              <div className="mom-label">Value Captured</div>
-              <div className={'mom-delta ' + (monthCompare.valueDelta >= 0 ? 'up' : 'down')}>
-                {monthCompare.valueDelta >= 0 ? '▲' : '▼'} {Math.abs(monthCompare.valueDelta)}%
-                <span className="mom-prev">vs {formatCurrency(monthCompare.previous.value)}</span>
-              </div>
-            </div>
-            <div className="mom-cell">
-              <div className="mom-metric">{monthCompare.current.recovered}</div>
-              <div className="mom-label">Converted</div>
-              <div className={'mom-delta ' + (monthCompare.recoveredDelta >= 0 ? 'up' : 'down')}>
-                {monthCompare.recoveredDelta >= 0 ? '▲' : '▼'} {Math.abs(monthCompare.recoveredDelta)}%
-                <span className="mom-prev">vs {monthCompare.previous.recovered}</span>
-              </div>
-            </div>
-            <div className="mom-cell">
-              <div className="mom-metric">{monthCompare.current.emailed}</div>
-              <div className="mom-label">Recovery Emails Sent</div>
-              <div className={'mom-delta ' + (monthCompare.emailedDelta >= 0 ? 'up' : 'down')}>
-                {monthCompare.emailedDelta >= 0 ? '▲' : '▼'} {Math.abs(monthCompare.emailedDelta)}%
-                <span className="mom-prev">vs {monthCompare.previous.emailed}</span>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="mom-grid">
-            <div className="mom-cell">
-              <div className="mom-metric">{monthCompare.current.count}</div>
-              <div className="mom-label">Leads Captured</div>
-              <div className="mom-delta neutral">First month &mdash; no prior period</div>
-            </div>
-            <div className="mom-cell">
-              <div className="mom-metric">{formatCurrency(monthCompare.current.value)}</div>
-              <div className="mom-label">Value Captured</div>
-            </div>
-            <div className="mom-cell">
-              <div className="mom-metric">{monthCompare.current.recovered}</div>
-              <div className="mom-label">Converted</div>
-            </div>
-            <div className="mom-cell">
-              <div className="mom-metric">{monthCompare.current.emailed}</div>
-              <div className="mom-label">Recovery Emails Sent</div>
-            </div>
-          </div>
-        )}
+          ))}
+        </div>
       </div>
 
       {/* ── Stats (5 cards) — 4 are clickable filter shortcuts ─────────────── */}
