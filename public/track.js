@@ -332,10 +332,31 @@
   }
 
   function sendBeacon(url, data) {
+    var payload = JSON.stringify(data);
+    // sendBeacon survives page unload on iOS where fetch is killed mid-flight.
     try {
-      var blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-      navigator.sendBeacon(url, blob);
+      if (navigator.sendBeacon) {
+        var blob = new Blob([payload], { type: 'application/json' });
+        if (navigator.sendBeacon(url, blob)) return;
+      }
     } catch (e) {}
+    // Fallback: keepalive fetch, then sync XHR as a last resort
+    try {
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true,
+        mode: 'cors'
+      }).catch(function () {});
+    } catch (e) {
+      try {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', url, false);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(payload);
+      } catch (e2) {}
+    }
   }
 
   function sendFetch(url, data) {
@@ -531,6 +552,9 @@
   doc.addEventListener('visibilitychange', function () {
     if (doc.visibilityState === 'hidden') sendAll(true);
   });
+
+  // iOS fires pagehide reliably where beforeunload does not
+  win.addEventListener('pagehide', function () { sendAll(true); });
 
   // Heartbeat -- saves data even if unload events fail
   setInterval(function () { sendAll(false); }, HEARTBEAT_MS);
