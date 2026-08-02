@@ -577,6 +577,7 @@ export default function Dashboard() {
   const [hoursDrawerOpen, setHoursDrawerOpen] = useState(false)
   const [fieldsDrawerOpen, setFieldsDrawerOpen] = useState(false)
   const [pipelineDrawerOpen, setPipelineDrawerOpen] = useState(false)
+  const [attnOpen, setAttnOpen] = useState(false)
   const [nowTick, setNowTick] = useState(0)
   const [lastPollAt, setLastPollAt] = useState<number>(0)
   const [liveVisitorList, setLiveVisitorList] = useState<Array<{
@@ -1133,6 +1134,7 @@ export default function Dashboard() {
       count: rows.length,
       value: rows.reduce((sum, l) => sum + (l.estimated_value ?? 0), 0),
       oldestAt: oldest ? oldest.created_at : null,
+      rows: [...rows].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()),
     }
   }, [leads])
 
@@ -1255,25 +1257,50 @@ export default function Dashboard() {
       </div>
 
       {needsAttention.count > 0 && (
-        <button
-          className="attn-strip"
-          type="button"
-          onClick={() => { setStatusFilter('hot'); setCardFilter('none'); setFilter('week') }}
-        >
-          <span className="attn-pulse" />
-          <span className="attn-text">
-            <b>{needsAttention.count} hot {needsAttention.count === 1 ? 'inquiry' : 'inquiries'}</b>
-            {' from the last 48 hours '}
-            {needsAttention.count === 1 ? 'has' : 'have'} not been contacted
-            <span className="attn-value">{formatCurrency(needsAttention.value)} in pipeline</span>
-          </span>
-          <span className="attn-cta">
-            Show them
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="9 18 15 12 9 6"/>
-            </svg>
-          </span>
-        </button>
+        <div className={'attn-wrap' + (attnOpen ? ' open' : '')}>
+          <button className="attn-strip" type="button" onClick={() => setAttnOpen(o => !o)}>
+            <span className="attn-pulse" />
+            <span className="attn-text">
+              <b>{needsAttention.count} hot {needsAttention.count === 1 ? 'inquiry' : 'inquiries'}</b>
+              {' from the last 48 hours '}
+              {needsAttention.count === 1 ? 'has' : 'have'} not been contacted
+              <span className="attn-value">{formatCurrency(needsAttention.value)} in pipeline</span>
+            </span>
+            <span className="attn-cta">
+              {attnOpen ? 'Hide' : 'Review'}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: attnOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease' }}>
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </span>
+          </button>
+
+          {attnOpen && (
+            <div className="attn-body">
+              {needsAttention.rows.map(l => {
+                const sc = scoreLead(l)
+                return (
+                  <button key={l.id} className="attn-row" type="button" onClick={() => setModalLead(l)}>
+                    <span className="attn-row-main">
+                      <span className="attn-row-name">{l.name || 'Unknown'}</span>
+                      <span className="attn-row-contact">{l.email || l.phone || 'No contact captured'}</span>
+                    </span>
+                    <span className="attn-row-meta">
+                      <span className="attn-row-score" style={{ color: sc.color }}>{sc.label} {sc.score}</span>
+                      <span className="attn-row-time">{formatRelativeTime(l.created_at)}</span>
+                      <span className="attn-row-value">{formatCurrency(l.estimated_value ?? 0)}</span>
+                    </span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="attn-row-arrow">
+                      <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                  </button>
+                )
+              })}
+              <div className="attn-foot">
+                Oldest waiting {needsAttention.oldestAt ? formatRelativeTime(needsAttention.oldestAt) : ''} &middot; open one to log the outcome
+              </div>
+            </div>
+          )}
+        </div>
       )}
 
       {/* ── Month over month ──────────────────────────────────────────────── */}
