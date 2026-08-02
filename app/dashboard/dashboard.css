@@ -2001,3 +2001,111 @@ body:has(.modal-backdrop) {
   font-family: 'JetBrains Mono', monospace;
   text-transform: lowercase;
 }
+
+/* ── Month over month band ─────────────────────────────────────────── */
+.mom-band {
+  background: linear-gradient(160deg, #141414 0%, #111 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem 1.625rem;
+  margin-bottom: 1.25rem;
+}
+
+.mom-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.125rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.mom-title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--orange, #ff6b35);
+}
+
+.mom-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.75);
+  padding: 0.5rem 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.mom-export:hover {
+  background: rgba(255,107,53,0.12);
+  border-color: rgba(255,107,53,0.4);
+  color: #fff;
+}
+
+.mom-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.mom-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+}
+
+.mom-metric {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.mom-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--text-tertiary, #555);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.mom-delta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4375rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-top: 0.1875rem;
+}
+
+.mom-delta.up { color: #22c55e; }
+.mom-delta.down { color: #ef4444; }
+.mom-delta.neutral {
+  color: var(--text-tertiary, #555);
+  font-weight: 500;
+  font-size: 0.6875rem;
+}
+
+.mom-prev {
+  color: var(--text-tertiary, #555);
+  font-weight: 500;
+  font-size: 0.6875rem;
+}
+
+@media (max-width: 900px) {
+  .mom-band { padding: 1.25rem 1.25rem 1.375rem; }
+  .mom-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .mom-head { flex-wrap: wrap; }
+}

@@ -830,6 +830,99 @@ export default function Dashboard() {
     return { total_leads, emails_deployed, total_revenue_lost, avg_completion_rate, avg_time_on_form }
   }, [filteredLeads])
 
+  // ── Month over month ──────────────────────────────────────────────────────
+  const monthCompare = useMemo(() => {
+    const now = new Date()
+    const thisStart = new Date(now.getFullYear(), now.getMonth(), 1).getTime()
+    const lastStart = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime()
+
+    const bucket = (from: number, to: number) => {
+      const rows = leads.filter(l => {
+        const t = new Date(l.created_at).getTime()
+        return t >= from && t < to
+      })
+      return {
+        count: rows.length,
+        value: rows.reduce((sum, l) => sum + (l.estimated_value ?? 0), 0),
+        recovered: rows.filter(l => l.status === 'converted').length,
+        emailed: rows.filter(l => l.email_sent).length,
+      }
+    }
+
+    const current = bucket(thisStart, now.getTime() + 1)
+    const previous = bucket(lastStart, thisStart)
+
+    const delta = (a: number, b: number) => {
+      if (b === 0) return a > 0 ? 100 : 0
+      return Math.round(((a - b) / b) * 100)
+    }
+
+    return {
+      current,
+      previous,
+      countDelta: delta(current.count, previous.count),
+      valueDelta: delta(current.value, previous.value),
+      recoveredDelta: delta(current.recovered, previous.recovered),
+      emailedDelta: delta(current.emailed, previous.emailed),
+      thisLabel: now.toLocaleDateString('en-US', { month: 'long' }),
+      lastLabel: new Date(now.getFullYear(), now.getMonth() - 1, 1).toLocaleDateString('en-US', { month: 'long' }),
+      hasPrevious: previous.count > 0,
+    }
+  }, [leads])
+
+  // ── CSV export of exactly what is on screen ───────────────────────────────
+  const exportCSV = () => {
+    const esc = (v: unknown) => {
+      const str = v === null || v === undefined ? '' : String(v)
+      return /[",\n]/.test(str) ? '"' + str.replace(/"/g, '""') + '"' : str
+    }
+
+    const headers = [
+      'Captured At', 'Name', 'Email', 'Phone', 'Lead Score', 'Score Band',
+      'Status', 'Fields Completed', 'Total Fields', 'Completion %',
+      'Time on Form (sec)', 'Device', 'Estimated Value', 'Recovery Email Sent',
+      'Recovery Email Sent At', 'Session ID',
+    ]
+
+    const rows = filteredLeads.map(l => {
+      const sc = scoreLead(l)
+      const completion = l.total_fields > 0
+        ? Math.round((l.fields_completed / l.total_fields) * 100)
+        : 0
+      return [
+        new Date(l.created_at).toLocaleString('en-US', { timeZone: 'America/Chicago' }),
+        l.name ?? '',
+        l.email ?? '',
+        l.phone ?? '',
+        sc.score,
+        sc.label,
+        l.status ?? '',
+        l.fields_completed,
+        l.total_fields,
+        completion,
+        l.time_on_form ?? 0,
+        l.device_type ?? '',
+        l.estimated_value ?? 0,
+        l.email_sent ? 'Yes' : 'No',
+        l.email_sent_at ? new Date(l.email_sent_at).toLocaleString('en-US', { timeZone: 'America/Chicago' }) : '',
+        l.session_id ?? '',
+      ].map(esc).join(',')
+    })
+
+    const csv = [headers.join(','), ...rows].join('\n')
+    const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    const stamp = new Date().toISOString().slice(0, 10)
+    const who = selectedClient?.company_name || selectedClient?.name || 'recapture'
+    a.href = url
+    a.download = who.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '-leads-' + stamp + '.csv'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+
   const isLoading = leadsLoading || clientsLoading
 
   // ── Auth spinner ───────────────────────────────────────────────────────────
@@ -907,6 +1000,78 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* ── Month over month ──────────────────────────────────────────────── */}
+      <div className="mom-band">
+        <div className="mom-head">
+          <div className="mom-title">
+            {monthCompare.thisLabel} vs {monthCompare.lastLabel}
+          </div>
+          <button className="mom-export" onClick={exportCSV} type="button" title="Download the leads currently shown as CSV">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Export CSV
+          </button>
+        </div>
+
+        {monthCompare.hasPrevious ? (
+          <div className="mom-grid">
+            <div className="mom-cell">
+              <div className="mom-metric">{monthCompare.current.count}</div>
+              <div className="mom-label">Leads Captured</div>
+              <div className={'mom-delta ' + (monthCompare.countDelta >= 0 ? 'up' : 'down')}>
+                {monthCompare.countDelta >= 0 ? '▲' : '▼'} {Math.abs(monthCompare.countDelta)}%
+                <span className="mom-prev">vs {monthCompare.previous.count}</span>
+              </div>
+            </div>
+            <div className="mom-cell">
+              <div className="mom-metric">{formatCurrency(monthCompare.current.value)}</div>
+              <div className="mom-label">Value Captured</div>
+              <div className={'mom-delta ' + (monthCompare.valueDelta >= 0 ? 'up' : 'down')}>
+                {monthCompare.valueDelta >= 0 ? '▲' : '▼'} {Math.abs(monthCompare.valueDelta)}%
+                <span className="mom-prev">vs {formatCurrency(monthCompare.previous.value)}</span>
+              </div>
+            </div>
+            <div className="mom-cell">
+              <div className="mom-metric">{monthCompare.current.recovered}</div>
+              <div className="mom-label">Converted</div>
+              <div className={'mom-delta ' + (monthCompare.recoveredDelta >= 0 ? 'up' : 'down')}>
+                {monthCompare.recoveredDelta >= 0 ? '▲' : '▼'} {Math.abs(monthCompare.recoveredDelta)}%
+                <span className="mom-prev">vs {monthCompare.previous.recovered}</span>
+              </div>
+            </div>
+            <div className="mom-cell">
+              <div className="mom-metric">{monthCompare.current.emailed}</div>
+              <div className="mom-label">Recovery Emails Sent</div>
+              <div className={'mom-delta ' + (monthCompare.emailedDelta >= 0 ? 'up' : 'down')}>
+                {monthCompare.emailedDelta >= 0 ? '▲' : '▼'} {Math.abs(monthCompare.emailedDelta)}%
+                <span className="mom-prev">vs {monthCompare.previous.emailed}</span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="mom-grid">
+            <div className="mom-cell">
+              <div className="mom-metric">{monthCompare.current.count}</div>
+              <div className="mom-label">Leads Captured</div>
+              <div className="mom-delta neutral">First month &mdash; no prior period</div>
+            </div>
+            <div className="mom-cell">
+              <div className="mom-metric">{formatCurrency(monthCompare.current.value)}</div>
+              <div className="mom-label">Value Captured</div>
+            </div>
+            <div className="mom-cell">
+              <div className="mom-metric">{monthCompare.current.recovered}</div>
+              <div className="mom-label">Converted</div>
+            </div>
+            <div className="mom-cell">
+              <div className="mom-metric">{monthCompare.current.emailed}</div>
+              <div className="mom-label">Recovery Emails Sent</div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* ── Stats (5 cards) — 4 are clickable filter shortcuts ─────────────── */}
