@@ -1782,7 +1782,7 @@ export default function Dashboard() {
         <div className="live-drawer-backdrop" onClick={e => { if (e.target === e.currentTarget) setDeviceDrawerOpen(false) }}>
           <div className="live-drawer">
             <div className="live-drawer-header">
-              <div className="live-drawer-title">How People Reach You<span className="live-drawer-count">{deviceBreak.total}</span></div>
+              <div className="live-drawer-title">Device Breakdown<span className="live-drawer-count">{deviceBreak.total}</span></div>
               <button className="live-drawer-close" onClick={() => setDeviceDrawerOpen(false)} type="button" aria-label="Close">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 4L14 14M14 4L4 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
               </button>
