@@ -2184,3 +2184,321 @@ body:has(.modal-backdrop) {
   font-family: 'JetBrains Mono', monospace;
   letter-spacing: -0.01em;
 }
+
+/* Hero now reflects the period selector instead of its own toggle */
+.roi-period-note { text-align: right; }
+
+.roi-period-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.04em;
+}
+
+.roi-period-range {
+  font-size: 0.6875rem;
+  color: var(--text-tertiary, #555);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 0.25rem;
+}
+
+/* Sparkline tooltips */
+.mom-spark { position: relative; }
+
+.mom-spark-bar {
+  position: relative;
+  cursor: default;
+}
+
+/* Invisible hit area so thin bars are still easy to hover */
+.mom-spark-bar::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: -24px;
+  bottom: -4px;
+}
+
+.mom-spark-tip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #1c1c1c;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 7px;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.6875rem;
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  z-index: 20;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.mom-spark-tip b {
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.mom-spark-tip em {
+  font-style: normal;
+  color: var(--text-tertiary, #555);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.625rem;
+}
+
+.mom-spark-tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: #1c1c1c;
+}
+
+.mom-spark-bar:hover .mom-spark-tip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.mom-spark-bar:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+.mom-spark-bar.filled:hover {
+  background: var(--orange-light, #ff8659);
+}
+
+/* Two rows of five */
+.stats-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 0.875rem;
+}
+
+.stat-sub {
+  font-size: 0.625rem;
+  color: var(--text-tertiary, #555);
+  font-weight: 500;
+  margin-top: 0.3125rem;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 1180px) {
+  .stats-grid { grid-template-columns: repeat(3, 1fr) !important; }
+}
+
+@media (max-width: 760px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.625rem; }
+}
+
+/* Buttons and divs must render identically in the stat grid */
+.stats-grid .stat-card,
+.stats-grid button.stat-card {
+  background: linear-gradient(150deg, #161616 0%, #131313 100%);
+  border: 1px solid rgba(255,255,255,0.055);
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.stats-grid button.stat-card { cursor: pointer; }
+.stats-grid div.stat-card { cursor: default; }
+
+.stats-grid button.stat-card:hover {
+  border-color: rgba(255,107,53,0.28);
+}
+
+.stats-grid button.stat-card.active {
+  border-color: rgba(255,107,53,0.5);
+  background: linear-gradient(150deg, rgba(255,107,53,0.08) 0%, #131313 100%);
+}
+
+/* ── Inquiry timing drawer ─────────────────────────────────────────── */
+.hours-summary {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 0 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.hours-summary-item { flex: 1; }
+.hours-summary-value {
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.hours-summary-label {
+  font-size: 0.6875rem;
+  color: var(--text-tertiary, #555);
+  font-weight: 600;
+  margin-top: 0.4375rem;
+}
+.hours-summary-divider { width: 1px; align-self: stretch; background: rgba(255,255,255,0.07); }
+
+.hours-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 150px;
+  margin-bottom: 0.75rem;
+}
+.hours-col { flex: 1; display: flex; flex-direction: column; height: 100%; }
+.hours-bar-wrap { flex: 1; display: flex; align-items: flex-end; }
+.hours-bar {
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+  background: rgba(255,255,255,0.06);
+  position: relative;
+  transition: background 0.15s ease;
+}
+.hours-bar.filled { background: linear-gradient(180deg, var(--orange, #ff6b35), rgba(255,107,53,0.45)); }
+.hours-bar.filled.after { background: linear-gradient(180deg, #6366f1, rgba(99,102,241,0.45)); }
+.hours-bar.filled:hover { filter: brightness(1.25); }
+
+.hours-tip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #1c1c1c;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 7px;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.6875rem;
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  z-index: 30;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+.hours-tip b { color: #fff; font-size: 0.8125rem; font-weight: 700; }
+.hours-tip em { font-style: normal; color: #666; font-family: 'JetBrains Mono', monospace; font-size: 0.625rem; }
+.hours-bar:hover .hours-tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.hours-axis {
+  font-size: 0.5625rem;
+  color: var(--text-tertiary, #555);
+  text-align: center;
+  margin-top: 0.375rem;
+  white-space: nowrap;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.hours-legend {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.6875rem;
+  color: var(--text-tertiary, #555);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.hours-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.hours-swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.hours-swatch.biz { background: var(--orange, #ff6b35); }
+.hours-swatch.aft { background: #6366f1; }
+
+.hours-top-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange, #ff6b35);
+  margin-bottom: 1rem;
+}
+.hours-top-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+.hours-top-time {
+  font-size: 0.8125rem;
+  color: #fff;
+  font-weight: 600;
+  width: 62px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.hours-top-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.hours-top-bar span { display: block; height: 100%; background: var(--orange, #ff6b35); border-radius: 3px; }
+.hours-top-bar span.after { background: #6366f1; }
+.hours-top-count {
+  font-size: 0.6875rem;
+  color: var(--text-tertiary, #555);
+  width: 66px;
+  text-align: right;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.hours-note {
+  font-size: 0.75rem;
+  color: var(--text-secondary, #a0a0a0);
+  line-height: 1.6;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ── Drop-off + pipeline band drawers ──────────────────────────────── */
+.drop-intro {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #a0a0a0);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.drop-list { display: flex; flex-direction: column; gap: 1.25rem; }
+.drop-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 0.5rem; }
+.drop-name { font-size: 0.875rem; color: #fff; font-weight: 600; }
+.drop-pct { font-size: 0.9375rem; color: var(--orange, #ff6b35); font-weight: 700; font-variant-numeric: tabular-nums; }
+.drop-bar { height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; }
+.drop-bar span {
+  display: block; height: 100%; border-radius: 4px;
+  background: linear-gradient(90deg, var(--orange-dark, #e55a2b), var(--orange, #ff6b35));
+  transition: width 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.drop-meta {
+  font-size: 0.6875rem; color: var(--text-tertiary, #555);
+  margin-top: 0.4375rem; display: flex; justify-content: space-between; gap: 1rem;
+}
+.drop-lost { color: #f87171; font-weight: 600; }
+
+.band-list { display: flex; flex-direction: column; gap: 1.375rem; }
+.band-head { display: flex; align-items: center; gap: 0.625rem; margin-bottom: 0.5rem; }
+.band-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.band-label { font-size: 0.875rem; color: #fff; font-weight: 600; flex: 1; }
+.band-value { font-size: 1rem; color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; }
+.band-bar { height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; }
+.band-bar span { display: block; height: 100%; border-radius: 4px; transition: width 0.4s cubic-bezier(0.22,1,0.36,1); }
+.band-meta { font-size: 0.6875rem; color: var(--text-tertiary, #555); margin-top: 0.4375rem; }

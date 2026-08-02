@@ -574,6 +574,9 @@ export default function Dashboard() {
   const [liveVisitors, setLiveVisitors] = useState<number>(0)
   const [momPeriod, setMomPeriod] = useState<'7d' | '14d' | '30d' | '90d' | 'month'>('30d')
   const [liveDrawerOpen, setLiveDrawerOpen] = useState(false)
+  const [hoursDrawerOpen, setHoursDrawerOpen] = useState(false)
+  const [fieldsDrawerOpen, setFieldsDrawerOpen] = useState(false)
+  const [pipelineDrawerOpen, setPipelineDrawerOpen] = useState(false)
   const [nowTick, setNowTick] = useState(0)
   const [lastPollAt, setLastPollAt] = useState<number>(0)
   const [liveVisitorList, setLiveVisitorList] = useState<Array<{
@@ -758,6 +761,37 @@ export default function Dashboard() {
     })
   }, [selectedClient, recoveredWindow])
 
+  // ── Silent poll so new captures appear without a manual refresh ──────────
+  useEffect(() => {
+    if (!selectedClient) return
+    let cancelled = false
+
+    const poll = async () => {
+      const { data, error } = await supabase
+        .from('leads')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data')
+        .eq('client_id', selectedClient.id)
+        .order('created_at', { ascending: false })
+
+      if (cancelled || error || !data) return
+
+      setLeads(prev => {
+        // Only replace if something actually changed, so we don't fight the UI
+        if (prev.length === data.length && prev[0]?.id === (data[0] as Lead)?.id) {
+          const statusChanged = data.some((row, i) =>
+            (row as Lead).status !== prev[i]?.status ||
+            (row as Lead).email_sent !== prev[i]?.email_sent
+          )
+          if (!statusChanged) return prev
+        }
+        return data as Lead[]
+      })
+    }
+
+    const iv = setInterval(poll, 12000)
+    return () => { cancelled = true; clearInterval(iv) }
+  }, [selectedClient])
+
   // ── Fetch leads for selected client ───────────────────────────────────────
   useEffect(() => {
     if (!selectedClient) return
@@ -898,6 +932,7 @@ export default function Dashboard() {
     const buckets = Math.min(spanDays, 90)
     const step = (currentTo - currentFrom) / buckets
     const daily: number[] = []
+    const dayLabels: string[] = []
     for (let i = 0; i < buckets; i++) {
       const from = currentFrom + i * step
       const to = from + step
@@ -905,6 +940,7 @@ export default function Dashboard() {
         const t = new Date(l.created_at).getTime()
         return t >= from && t < to
       }).length)
+      dayLabels.push(new Date(from).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }))
     }
 
     const conversionRate = current.count > 0
@@ -918,6 +954,7 @@ export default function Dashboard() {
 
     return {
       daily,
+      dayLabels,
       conversionRate,
       current,
       previous,
@@ -931,6 +968,154 @@ export default function Dashboard() {
       hasPrevious: previous.count > 0,
     }
   }, [leads, momPeriod])
+
+  const periodRecovered = useMemo(() => {
+    const now = new Date()
+    const DAY = 24 * 60 * 60 * 1000
+    let from: number
+    const to = now.getTime() + 1
+    if (momPeriod === 'month') {
+      from = new Date(now.getFullYear(), now.getMonth(), 1).getTime()
+    } else {
+      const days = momPeriod === '7d' ? 7 : momPeriod === '14d' ? 14 : momPeriod === '90d' ? 90 : 30
+      from = to - days * DAY
+    }
+    const rows = leads.filter(l => {
+      const t = new Date(l.created_at).getTime()
+      return t >= from && t < to && l.status === 'converted'
+    })
+    return {
+      count: rows.length,
+      value: rows.reduce((sum, l) => sum + (l.estimated_value ?? 0), 0),
+    }
+  }, [leads, momPeriod])
+
+  // ── Behavior metrics from captured leads ─────────────────────────────────
+  const behavior = useMemo(() => {
+    const rows = filteredLeads
+    if (rows.length === 0) {
+      return {
+        afterHoursPct: 0, afterHoursCount: 0, mobilePct: 0,
+        peakHour: null as string | null, peakCount: 0,
+        responseMins: null as number | null,
+        hourly: [] as { hour: number; label: string; count: number; afterHours: boolean; pct: number }[],
+        topHours: [] as { hour: number; label: string; count: number; afterHours: boolean; pct: number }[],
+        totalRows: 0,
+      }
+    }
+
+    // After hours = before 8am or at/after 6pm, local time
+    const afterHours = rows.filter(l => {
+      const h = new Date(l.created_at).getHours()
+      return h < 8 || h >= 18
+    }).length
+
+    const mobile = rows.filter(l => (l.device_type || '').toLowerCase().includes('mobile')).length
+
+    // Peak hour of day
+    const hours = new Array(24).fill(0)
+    rows.forEach(l => { hours[new Date(l.created_at).getHours()]++ })
+    let peakIdx = 0
+    hours.forEach((c, i) => { if (c > hours[peakIdx]) peakIdx = i })
+    const peakCount = hours[peakIdx]
+    const fmtHour = (h: number) => {
+      const ampm = h < 12 ? 'AM' : 'PM'
+      const display = h % 12 === 0 ? 12 : h % 12
+      return display + ' ' + ampm
+    }
+
+    // Median minutes between capture and recovery email
+    const gaps = rows
+      .filter(l => l.email_sent && l.email_sent_at)
+      .map(l => (new Date(l.email_sent_at as string).getTime() - new Date(l.created_at).getTime()) / 60000)
+      .filter(m => m >= 0)
+      .sort((a, b) => a - b)
+    const responseMins = gaps.length > 0 ? Math.round(gaps[Math.floor(gaps.length / 2)]) : null
+
+    // Full 24h distribution for the drawer
+    const hourly = hours.map((count, h) => ({
+      hour: h,
+      label: fmtHour(h),
+      count,
+      afterHours: h < 8 || h >= 18,
+      pct: rows.length > 0 ? Math.round((count / rows.length) * 100) : 0,
+    }))
+
+    const topHours = [...hourly]
+      .filter(x => x.count > 0)
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 3)
+
+    return {
+      afterHoursPct: Math.round((afterHours / rows.length) * 100),
+      afterHoursCount: afterHours,
+      mobilePct: Math.round((mobile / rows.length) * 100),
+      peakHour: peakCount > 0 ? fmtHour(peakIdx) : null,
+      peakCount,
+      responseMins,
+      hourly,
+      topHours,
+      totalRows: rows.length,
+    }
+  }, [filteredLeads])
+
+  // ── Field-level drop-off ─────────────────────────────────────────────────
+  const fieldDropoff = useMemo(() => {
+    const rows = filteredLeads
+    if (rows.length === 0) return { fields: [] as { name: string; count: number; pct: number }[], total: 0 }
+
+    const tally: Record<string, number> = {}
+    rows.forEach(l => {
+      if (!l.form_data) return
+      Object.keys(l.form_data).forEach(k => {
+        const val = l.form_data?.[k]
+        if (val && String(val).trim()) tally[k] = (tally[k] || 0) + 1
+      })
+    })
+
+    const pretty = (k: string) =>
+      k.replace(/[_-]+/g, ' ')
+       .replace(/([a-z])([A-Z])/g, '$1 $2')
+       .replace(/\b\w/g, c => c.toUpperCase())
+       .trim()
+
+    const fields = Object.entries(tally)
+      .map(([name, count]) => ({
+        name: pretty(name),
+        count,
+        pct: Math.round((count / rows.length) * 100),
+      }))
+      .sort((a, b) => b.count - a.count)
+
+    return { fields, total: rows.length }
+  }, [filteredLeads])
+
+  // ── Pipeline value by score band ─────────────────────────────────────────
+  const pipelineBands = useMemo(() => {
+    const rows = filteredLeads
+    const bands = [
+      { key: 'hot',  label: 'Hot',  color: '#ef4444', min: 75, max: 101 },
+      { key: 'warm', label: 'Warm', color: '#f59e0b', min: 50, max: 75 },
+      { key: 'cold', label: 'Cold', color: '#6b7280', min: 0,  max: 50 },
+    ]
+    const total = rows.reduce((sum, l) => sum + (l.estimated_value ?? 0), 0)
+
+    const out = bands.map(b => {
+      const matched = rows.filter(l => {
+        const sc = scoreLead(l).score
+        return sc >= b.min && sc < b.max
+      })
+      const value = matched.reduce((sum, l) => sum + (l.estimated_value ?? 0), 0)
+      return {
+        ...b,
+        count: matched.length,
+        value,
+        pct: total > 0 ? Math.round((value / total) * 100) : 0,
+      }
+    })
+
+    return { bands: out, total, count: rows.length }
+  }, [filteredLeads])
 
   // ── CSV export of exactly what is on screen ───────────────────────────────
   const exportCSV = () => {
@@ -981,8 +1166,11 @@ export default function Dashboard() {
     a.download = who.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '-leads-' + stamp + '.csv'
     document.body.appendChild(a)
     a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    // Give the browser time to read the blob before releasing it.
+    setTimeout(() => {
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
+    }, 2000)
   }
 
   const isLoading = leadsLoading || clientsLoading
@@ -1030,35 +1218,18 @@ export default function Dashboard() {
           <div className="roi-hero-left">
             <div className="roi-eyebrow">RECOVERED REVENUE</div>
             <div className="roi-amount">
-              ${recoveredRevenue.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+              ${periodRecovered.value.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
             </div>
             <div className="roi-subtitle">
-              Across {recoveredCount} recovered lead{recoveredCount === 1 ? '' : 's'}
+              {periodRecovered.count > 0
+                ? 'Across ' + periodRecovered.count + ' recovered lead' + (periodRecovered.count === 1 ? '' : 's') + ' \u00b7 ' + monthCompare.conversionRate + '% of captured'
+                : 'Mark a lead Converted and its value lands here'}
             </div>
           </div>
           <div className="roi-hero-right">
-            <div className="roi-window-selector">
-              <button
-                className={`roi-window-btn ${recoveredWindow === 'month' ? 'active' : ''}`}
-                onClick={() => setRecoveredWindow('month')}
-                type="button"
-              >
-                This Month
-              </button>
-              <button
-                className={`roi-window-btn ${recoveredWindow === '30days' ? 'active' : ''}`}
-                onClick={() => setRecoveredWindow('30days')}
-                type="button"
-              >
-                30 Days
-              </button>
-              <button
-                className={`roi-window-btn ${recoveredWindow === 'all' ? 'active' : ''}`}
-                onClick={() => setRecoveredWindow('all')}
-                type="button"
-              >
-                All Time
-              </button>
+            <div className="roi-period-note">
+              <div className="roi-period-label">{monthCompare.periodLabel}</div>
+              <div className="roi-period-range">{monthCompare.currentRange}</div>
             </div>
           </div>
         </div>
@@ -1145,8 +1316,10 @@ export default function Dashboard() {
                 </div>
               ) : m.suffix ? (
                 <div className="mom-note accent">{m.suffix}</div>
-              ) : (
+              ) : m.value === '0' || m.value === '$0' ? (
                 <div className="mom-note">{m.empty}</div>
+              ) : (
+                <div className="mom-note">No prior period to compare</div>
               )}
 
               {m.spark && monthCompare.daily.length > 1 && (
@@ -1158,8 +1331,12 @@ export default function Dashboard() {
                         key={i}
                         className={'mom-spark-bar' + (v > 0 ? ' filled' : '')}
                         style={{ height: Math.max(2, (v / peak) * 22) + 'px' }}
-                        title={v + (v === 1 ? ' lead' : ' leads')}
-                      />
+                      >
+                        <span className="mom-spark-tip">
+                          <b>{v}</b> {v === 1 ? 'lead' : 'leads'}
+                          <em>{monthCompare.dayLabels[i]}</em>
+                        </span>
+                      </span>
                     )
                   })}
                 </div>
@@ -1171,6 +1348,8 @@ export default function Dashboard() {
 
       {/* ── Stats (5 cards) — 4 are clickable filter shortcuts ─────────────── */}
       <div className="stats-grid">
+
+        {/* ── Row 1 · Activity ─────────────────────────────────────────── */}
         <button
           className="stat-card stat-card-live stat-card-clickable"
           onClick={() => setLiveDrawerOpen(true)}
@@ -1178,10 +1357,7 @@ export default function Dashboard() {
           aria-label="Show live visitors detail"
         >
           <div className="stat-header">
-            <div className="stat-label">
-              <span className="live-pulse-dot"></span>
-              Live Visitors
-            </div>
+            <div className="stat-label"><span className="live-pulse-dot"></span>Live Visitors</div>
             <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
           </div>
           <div className="stat-value">{liveVisitors}</div>
@@ -1194,36 +1370,23 @@ export default function Dashboard() {
           aria-label="Show all leads"
         >
           <div className="stat-header">
-            <div className="stat-label">Partial Submissions</div>
-            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg></div>
+            <div className="stat-label">Leads Captured</div>
+            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
           </div>
-          <div className="stat-value">{isLoading ? '—' : stats.total_leads}</div>
+          <div className="stat-value">{isLoading ? '\u2014' : stats.total_leads}</div>
         </button>
 
         <button
           className={`stat-card stat-card-clickable${cardFilter === 'completion-desc' ? ' active' : ''}`}
-          onClick={() => setCardFilter(cardFilter === 'completion-desc' ? 'none' : 'completion-desc')}
+          onClick={() => setFieldsDrawerOpen(true)}
           type="button"
-          aria-label="Sort leads by highest completion rate"
+          aria-label="Show field drop-off breakdown"
         >
           <div className="stat-header">
             <div className="stat-label">Completion Rate</div>
             <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
           </div>
-          <div className="stat-value">{isLoading ? '—' : `${stats.avg_completion_rate}%`}</div>
-        </button>
-
-        <button
-          className={`stat-card stat-card-clickable${cardFilter === 'value-desc' ? ' active' : ''}`}
-          onClick={() => setCardFilter(cardFilter === 'value-desc' ? 'none' : 'value-desc')}
-          type="button"
-          aria-label="Sort leads by highest estimated value"
-        >
-          <div className="stat-header">
-            <div className="stat-label">Estimated Lost Revenue</div>
-            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-          </div>
-          <div className="stat-value">{isLoading ? '—' : formatCurrency(stats.total_revenue_lost)}</div>
+          <div className="stat-value">{isLoading ? '\u2014' : `${stats.avg_completion_rate}%`}</div>
         </button>
 
         <div className="stat-card">
@@ -1231,26 +1394,80 @@ export default function Dashboard() {
             <div className="stat-label">Avg. Time on Form</div>
             <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
           </div>
-          <div className="stat-value">{isLoading ? '—' : formatDuration(stats.avg_time_on_form)}</div>
+          <div className="stat-value">{isLoading ? '\u2014' : formatDuration(stats.avg_time_on_form)}</div>
         </div>
 
         <button
-          className={`stat-card stat-card-clickable${cardFilter === 'emails-only' ? ' active' : ''}`}
-          onClick={() => setCardFilter(cardFilter === 'emails-only' ? 'none' : 'emails-only')}
+          className="stat-card stat-card-clickable"
+          onClick={() => setHoursDrawerOpen(true)}
           type="button"
-          aria-label="Filter to leads with emails deployed"
+          aria-label="Show inquiry timing breakdown"
         >
           <div className="stat-header">
-            <div className="stat-label">Emails Deployed</div>
-            <div className="stat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-            </div>
+            <div className="stat-label">Peak Inquiry Hour</div>
+            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
           </div>
-          <div className="stat-value">{isLoading ? '—' : stats.emails_deployed}</div>
+          <div className="stat-value">{isLoading ? '\u2014' : (behavior.peakHour ?? '\u2014')}</div>
+          {behavior.peakCount > 0 && (
+            <div className="stat-sub">{behavior.peakCount} {behavior.peakCount === 1 ? 'lead' : 'leads'}</div>
+          )}
         </button>
+
+        {/* ── Row 2 · Value ────────────────────────────────────────────── */}
+        <button
+          className={`stat-card stat-card-clickable${cardFilter === 'value-desc' ? ' active' : ''}`}
+          onClick={() => setPipelineDrawerOpen(true)}
+          type="button"
+          aria-label="Show pipeline value breakdown"
+        >
+          <div className="stat-header">
+            <div className="stat-label">Pipeline at Risk</div>
+            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          </div>
+          <div className="stat-value">{isLoading ? '\u2014' : formatCurrency(stats.total_revenue_lost)}</div>
+        </button>
+
+        <button
+          className={`stat-card stat-card-clickable${statusFilter === 'converted' ? ' active' : ''}`}
+          onClick={() => setStatusFilter(statusFilter === 'converted' ? 'all' : 'converted')}
+          type="button"
+          aria-label="Filter to converted leads"
+        >
+          <div className="stat-header">
+            <div className="stat-label">Recovered Revenue</div>
+            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          </div>
+          <div className="stat-value" style={{ color: periodRecovered.value > 0 ? '#22c55e' : undefined }}>
+            {isLoading ? '\u2014' : formatCurrency(periodRecovered.value)}
+          </div>
+        </button>
+
+        <div className="stat-card">
+          <div className="stat-header">
+            <div className="stat-label">Recovery Rate</div>
+            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          </div>
+          <div className="stat-value">{isLoading ? '\u2014' : monthCompare.conversionRate + '%'}</div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-header">
+            <div className="stat-label">After Hours</div>
+            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+          </div>
+          <div className="stat-value">{isLoading ? '\u2014' : behavior.afterHoursPct + '%'}</div>
+          <div className="stat-sub">before 8am or after 6pm</div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-header">
+            <div className="stat-label">Mobile Share</div>
+            <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div>
+          </div>
+          <div className="stat-value">{isLoading ? '\u2014' : behavior.mobilePct + '%'}</div>
+          <div className="stat-sub">of captured inquiries</div>
+        </div>
+
       </div>
 
       {/* ── Status filter chips ─────────────────────────────────────────────── */}
@@ -1427,6 +1644,203 @@ export default function Dashboard() {
       )}
 
       
+      {fieldsDrawerOpen && (
+        <div className="live-drawer-backdrop" onClick={e => { if (e.target === e.currentTarget) setFieldsDrawerOpen(false) }}>
+          <div className="live-drawer">
+            <div className="live-drawer-header">
+              <div className="live-drawer-title">
+                Where People Stop
+                <span className="live-drawer-count">{stats.avg_completion_rate}%</span>
+              </div>
+              <button className="live-drawer-close" onClick={() => setFieldsDrawerOpen(false)} type="button" aria-label="Close">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 4L14 14M14 4L4 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
+              </button>
+            </div>
+            <div className="live-drawer-body">
+              {fieldDropoff.fields.length === 0 ? (
+                <div className="live-drawer-empty">
+                  No field data captured yet.<br/>
+                  <span className="live-drawer-empty-sub">Drop-off patterns appear once inquiries start coming in.</span>
+                </div>
+              ) : (
+                <>
+                  <p className="drop-intro">
+                    Of {fieldDropoff.total} captured {fieldDropoff.total === 1 ? 'inquiry' : 'inquiries'}, here is how far people got before leaving.
+                  </p>
+                  <div className="drop-list">
+                    {fieldDropoff.fields.map((f, i) => {
+                      const prev = i > 0 ? fieldDropoff.fields[i - 1].count : f.count
+                      const lost = prev - f.count
+                      return (
+                        <div className="drop-row" key={f.name}>
+                          <div className="drop-head">
+                            <span className="drop-name">{f.name}</span>
+                            <span className="drop-pct">{f.pct}%</span>
+                          </div>
+                          <div className="drop-bar">
+                            <span style={{ width: f.pct + '%' }} />
+                          </div>
+                          <div className="drop-meta">
+                            {f.count} of {fieldDropoff.total}
+                            {lost > 0 && <span className="drop-lost">&minus;{lost} dropped here</span>}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                  <p className="hours-note">
+                    The steepest fall is where the form is costing the most. Removing or reordering that field is usually the fastest win.
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {pipelineDrawerOpen && (
+        <div className="live-drawer-backdrop" onClick={e => { if (e.target === e.currentTarget) setPipelineDrawerOpen(false) }}>
+          <div className="live-drawer">
+            <div className="live-drawer-header">
+              <div className="live-drawer-title">
+                Pipeline at Risk
+                <span className="live-drawer-count">{formatCurrency(pipelineBands.total)}</span>
+              </div>
+              <button className="live-drawer-close" onClick={() => setPipelineDrawerOpen(false)} type="button" aria-label="Close">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 4L14 14M14 4L4 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
+              </button>
+            </div>
+            <div className="live-drawer-body">
+              {pipelineBands.count === 0 ? (
+                <div className="live-drawer-empty">
+                  No captured inquiries yet.<br/>
+                  <span className="live-drawer-empty-sub">Value breakdown appears once inquiries start coming in.</span>
+                </div>
+              ) : (
+                <>
+                  <p className="drop-intro">
+                    Estimated value of captured inquiries, split by how engaged the visitor was before leaving.
+                  </p>
+                  <div className="band-list">
+                    {pipelineBands.bands.map(b => (
+                      <div className="band-row" key={b.key}>
+                        <div className="band-head">
+                          <span className="band-dot" style={{ background: b.color }} />
+                          <span className="band-label">{b.label}</span>
+                          <span className="band-value">{formatCurrency(b.value)}</span>
+                        </div>
+                        <div className="band-bar">
+                          <span style={{ width: Math.max(b.pct, b.count > 0 ? 3 : 0) + '%', background: b.color }} />
+                        </div>
+                        <div className="band-meta">
+                          {b.count} {b.count === 1 ? 'inquiry' : 'inquiries'} &middot; {b.pct}% of value
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="hours-note">
+                    Hot inquiries got furthest into the form and are the most likely to respond. That is where recovery effort returns the most.
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {hoursDrawerOpen && (
+        <div className="live-drawer-backdrop" onClick={e => { if (e.target === e.currentTarget) setHoursDrawerOpen(false) }}>
+          <div className="live-drawer">
+            <div className="live-drawer-header">
+              <div className="live-drawer-title">
+                When Inquiries Arrive
+                <span className="live-drawer-count">{behavior.totalRows}</span>
+              </div>
+              <button className="live-drawer-close" onClick={() => setHoursDrawerOpen(false)} type="button" aria-label="Close">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/>
+                </svg>
+              </button>
+            </div>
+            <div className="live-drawer-body">
+              {behavior.totalRows === 0 ? (
+                <div className="live-drawer-empty">
+                  No captured inquiries yet.<br/>
+                  <span className="live-drawer-empty-sub">Timing patterns appear once inquiries start coming in.</span>
+                </div>
+              ) : (
+                <>
+                  <div className="hours-summary">
+                    <div className="hours-summary-item">
+                      <div className="hours-summary-value">{behavior.afterHoursPct}%</div>
+                      <div className="hours-summary-label">Arrive outside 8am&ndash;6pm</div>
+                    </div>
+                    <div className="hours-summary-divider" />
+                    <div className="hours-summary-item">
+                      <div className="hours-summary-value">{behavior.peakHour ?? '\u2014'}</div>
+                      <div className="hours-summary-label">Busiest hour</div>
+                    </div>
+                    <div className="hours-summary-divider" />
+                    <div className="hours-summary-item">
+                      <div className="hours-summary-value">{behavior.mobilePct}%</div>
+                      <div className="hours-summary-label">On mobile</div>
+                    </div>
+                  </div>
+
+                  <div className="hours-chart">
+                    {behavior.hourly.map(h => {
+                      const peak = Math.max(...behavior.hourly.map(x => x.count), 1)
+                      return (
+                        <div className="hours-col" key={h.hour}>
+                          <div className="hours-bar-wrap">
+                            <div
+                              className={'hours-bar' + (h.count > 0 ? ' filled' : '') + (h.afterHours ? ' after' : '')}
+                              style={{ height: h.count > 0 ? Math.max(6, (h.count / peak) * 100) + '%' : '2px' }}
+                            >
+                              {h.count > 0 && (
+                                <span className="hours-tip">
+                                  <b>{h.count}</b> {h.count === 1 ? 'inquiry' : 'inquiries'}
+                                  <em>{h.label}</em>
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          {h.hour % 6 === 0 && <div className="hours-axis">{h.label.replace(' ', '')}</div>}
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  <div className="hours-legend">
+                    <span><i className="hours-swatch biz" /> Business hours</span>
+                    <span><i className="hours-swatch aft" /> After hours</span>
+                  </div>
+
+                  {behavior.topHours.length > 0 && (
+                    <div className="hours-top">
+                      <div className="hours-top-label">Busiest Windows</div>
+                      {behavior.topHours.map(h => (
+                        <div className="hours-top-row" key={h.hour}>
+                          <span className="hours-top-time">{h.label}</span>
+                          <span className="hours-top-bar">
+                            <span style={{ width: h.pct + '%' }} className={h.afterHours ? 'after' : ''} />
+                          </span>
+                          <span className="hours-top-count">{h.count} &middot; {h.pct}%</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <p className="hours-note">
+                    Inquiries arriving outside business hours are the ones most likely to go unanswered until the next morning.
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {liveDrawerOpen && (
         <div className="live-drawer-backdrop" onClick={e => { if (e.target === e.currentTarget) setLiveDrawerOpen(false) }}>
           <div className="live-drawer">
