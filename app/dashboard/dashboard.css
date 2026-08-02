@@ -2688,3 +2688,6 @@ body:has(.modal-backdrop) {
 @media (prefers-reduced-motion: reduce) {
   .attn-body, .attn-row, .attn-foot { animation: none; }
 }
+
+/* Funnel meta rows carry a note on the right */
+.drop-meta span { color: rgba(255,255,255,0.28); font-style: italic; }

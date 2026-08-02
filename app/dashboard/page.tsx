@@ -578,6 +578,8 @@ export default function Dashboard() {
   const [fieldsDrawerOpen, setFieldsDrawerOpen] = useState(false)
   const [pipelineDrawerOpen, setPipelineDrawerOpen] = useState(false)
   const [attnOpen, setAttnOpen] = useState(false)
+  const [deviceDrawerOpen, setDeviceDrawerOpen] = useState(false)
+  const [funnelDrawerOpen, setFunnelDrawerOpen] = useState(false)
   const [nowTick, setNowTick] = useState(0)
   const [lastPollAt, setLastPollAt] = useState<number>(0)
   const [liveVisitorList, setLiveVisitorList] = useState<Array<{
@@ -1138,6 +1140,60 @@ export default function Dashboard() {
     }
   }, [leads])
 
+  // ── Device + after-hours crossover ───────────────────────────────────────
+  const deviceBreak = useMemo(() => {
+    const rows = filteredLeads
+    if (rows.length === 0) return { total: 0, mobile: 0, desktop: 0, tablet: 0, mobilePct: 0, mobileAfterHours: 0, mobileAfterHoursPct: 0, avgMobileFields: 0, avgDesktopFields: 0 }
+
+    const isMob = (l: Lead) => (l.device_type || '').toLowerCase().includes('mobile')
+    const isTab = (l: Lead) => (l.device_type || '').toLowerCase().includes('tablet')
+    const mobileRows = rows.filter(isMob)
+    const tabletRows = rows.filter(isTab)
+    const desktopRows = rows.filter(l => !isMob(l) && !isTab(l))
+
+    const afterHrs = (l: Lead) => { const h = new Date(l.created_at).getHours(); return h < 8 || h >= 18 }
+    const mobileAfterHours = mobileRows.filter(afterHrs).length
+
+    const avg = (arr: Lead[]) => arr.length > 0
+      ? Math.round(arr.reduce((sum, l) => sum + (l.total_fields > 0 ? l.fields_completed / l.total_fields : 0), 0) / arr.length * 100)
+      : 0
+
+    return {
+      total: rows.length,
+      mobile: mobileRows.length,
+      desktop: desktopRows.length,
+      tablet: tabletRows.length,
+      mobilePct: Math.round((mobileRows.length / rows.length) * 100),
+      mobileAfterHours,
+      mobileAfterHoursPct: mobileRows.length > 0 ? Math.round((mobileAfterHours / mobileRows.length) * 100) : 0,
+      avgMobileFields: avg(mobileRows),
+      avgDesktopFields: avg(desktopRows),
+    }
+  }, [filteredLeads])
+
+  // ── Recovery funnel ──────────────────────────────────────────────────────
+  const recoveryFunnel = useMemo(() => {
+    const rows = filteredLeads
+    const captured = rows.length
+    const emailed = rows.filter(l => l.email_sent).length
+    const contacted = rows.filter(l => ['contacted', 'converted'].includes(l.status ?? '')).length
+    const converted = rows.filter(l => l.status === 'converted').length
+    const lost = rows.filter(l => l.status === 'lost').length
+    const open = captured - contacted - lost
+
+    const pct = (n: number) => captured > 0 ? Math.round((n / captured) * 100) : 0
+
+    return {
+      captured, emailed, contacted, converted, lost, open,
+      emailedPct: pct(emailed),
+      contactedPct: pct(contacted),
+      convertedPct: pct(converted),
+      openPct: pct(open),
+      convertedValue: rows.filter(l => l.status === 'converted').reduce((sum, l) => sum + (l.estimated_value ?? 0), 0),
+      contactToConvert: contacted > 0 ? Math.round((converted / contacted) * 100) : 0,
+    }
+  }, [filteredLeads])
+
   // ── CSV export of exactly what is on screen ───────────────────────────────
   const exportCSV = () => {
     const esc = (v: unknown) => {
@@ -1510,13 +1566,18 @@ export default function Dashboard() {
           </div>
         </button>
 
-        <div className="stat-card">
+        <button
+          className="stat-card stat-card-clickable"
+          onClick={() => setFunnelDrawerOpen(true)}
+          type="button"
+          aria-label="Show recovery funnel"
+        >
           <div className="stat-header">
             <div className="stat-label">Recovery Rate</div>
             <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
           </div>
           <div className="stat-value">{isLoading ? '\u2014' : monthCompare.conversionRate + '%'}</div>
-        </div>
+        </button>
 
         <div className="stat-card">
           <div className="stat-header">
@@ -1527,14 +1588,19 @@ export default function Dashboard() {
           <div className="stat-sub">before 8am or after 6pm</div>
         </div>
 
-        <div className="stat-card">
+        <button
+          className="stat-card stat-card-clickable"
+          onClick={() => setDeviceDrawerOpen(true)}
+          type="button"
+          aria-label="Show device breakdown"
+        >
           <div className="stat-header">
-            <div className="stat-label">Mobile Share</div>
+            <div className="stat-label">On Mobile</div>
             <div className="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div>
           </div>
           <div className="stat-value">{isLoading ? '\u2014' : behavior.mobilePct + '%'}</div>
           <div className="stat-sub">of captured inquiries</div>
-        </div>
+        </button>
 
       </div>
 
@@ -1712,6 +1778,127 @@ export default function Dashboard() {
       )}
 
       
+      {deviceDrawerOpen && (
+        <div className="live-drawer-backdrop" onClick={e => { if (e.target === e.currentTarget) setDeviceDrawerOpen(false) }}>
+          <div className="live-drawer">
+            <div className="live-drawer-header">
+              <div className="live-drawer-title">How People Reach You<span className="live-drawer-count">{deviceBreak.total}</span></div>
+              <button className="live-drawer-close" onClick={() => setDeviceDrawerOpen(false)} type="button" aria-label="Close">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 4L14 14M14 4L4 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
+              </button>
+            </div>
+            <div className="live-drawer-body">
+              {deviceBreak.total === 0 ? (
+                <div className="live-drawer-empty">No captured inquiries yet.<br/><span className="live-drawer-empty-sub">Device patterns appear once inquiries start coming in.</span></div>
+              ) : (
+                <>
+                  <p className="drop-intro">The device someone uses tells you when and how they are reaching out &mdash; and how much of the form they are likely to finish.</p>
+                  <div className="band-list">
+                    {[
+                      { label: 'Mobile', count: deviceBreak.mobile, color: '#ff6b35' },
+                      { label: 'Desktop', count: deviceBreak.desktop, color: '#6366f1' },
+                      { label: 'Tablet', count: deviceBreak.tablet, color: '#6b7280' },
+                    ].filter(d => d.count > 0).map(d => {
+                      const pct = Math.round((d.count / deviceBreak.total) * 100)
+                      return (
+                        <div className="band-row" key={d.label}>
+                          <div className="band-head">
+                            <span className="band-dot" style={{ background: d.color }} />
+                            <span className="band-label">{d.label}</span>
+                            <span className="band-value">{pct}%</span>
+                          </div>
+                          <div className="band-bar"><span style={{ width: Math.max(pct, 3) + '%', background: d.color }} /></div>
+                          <div className="band-meta">{d.count} {d.count === 1 ? 'inquiry' : 'inquiries'}</div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                  {deviceBreak.mobile > 0 && (
+                    <div className="hours-summary" style={{ marginTop: '1.75rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.06)', paddingBottom: 0, borderBottom: 'none' }}>
+                      <div className="hours-summary-item">
+                        <div className="hours-summary-value">{deviceBreak.mobileAfterHoursPct}%</div>
+                        <div className="hours-summary-label">Of mobile inquiries arrive after hours</div>
+                      </div>
+                      <div className="hours-summary-divider" />
+                      <div className="hours-summary-item">
+                        <div className="hours-summary-value">{deviceBreak.avgMobileFields}%</div>
+                        <div className="hours-summary-label">Avg. form completion on mobile</div>
+                      </div>
+                      {deviceBreak.desktop > 0 && (
+                        <>
+                          <div className="hours-summary-divider" />
+                          <div className="hours-summary-item">
+                            <div className="hours-summary-value">{deviceBreak.avgDesktopFields}%</div>
+                            <div className="hours-summary-label">Avg. completion on desktop</div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  )}
+                  <p className="hours-note">Mobile inquiries typically arrive outside business hours and complete less of the form. They are the hardest to catch and the easiest to lose.</p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {funnelDrawerOpen && (
+        <div className="live-drawer-backdrop" onClick={e => { if (e.target === e.currentTarget) setFunnelDrawerOpen(false) }}>
+          <div className="live-drawer">
+            <div className="live-drawer-header">
+              <div className="live-drawer-title">Recovery Funnel<span className="live-drawer-count">{recoveryFunnel.convertedPct}%</span></div>
+              <button className="live-drawer-close" onClick={() => setFunnelDrawerOpen(false)} type="button" aria-label="Close">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 4L14 14M14 4L4 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
+              </button>
+            </div>
+            <div className="live-drawer-body">
+              {recoveryFunnel.captured === 0 ? (
+                <div className="live-drawer-empty">No captured inquiries yet.<br/><span className="live-drawer-empty-sub">The funnel appears once inquiries start coming in.</span></div>
+              ) : (
+                <>
+                  <p className="drop-intro">Recovery rate is converted divided by captured. Here is every stage in between.</p>
+                  <div className="drop-list">
+                    {[
+                      { name: 'Captured', count: recoveryFunnel.captured, pct: 100, note: 'Inquiries that started but never submitted' },
+                      { name: 'Recovery email sent', count: recoveryFunnel.emailed, pct: recoveryFunnel.emailedPct, note: 'Follow-up delivered' },
+                      { name: 'Contacted', count: recoveryFunnel.contacted, pct: recoveryFunnel.contactedPct, note: 'Someone on your team reached out' },
+                      { name: 'Converted', count: recoveryFunnel.converted, pct: recoveryFunnel.convertedPct, note: 'Became a client' },
+                    ].map(f => (
+                      <div className="drop-row" key={f.name}>
+                        <div className="drop-head">
+                          <span className="drop-name">{f.name}</span>
+                          <span className="drop-pct">{f.pct}%</span>
+                        </div>
+                        <div className="drop-bar"><span style={{ width: Math.max(f.pct, f.count > 0 ? 3 : 0) + '%' }} /></div>
+                        <div className="drop-meta">{f.count} of {recoveryFunnel.captured}<span>{f.note}</span></div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="hours-summary" style={{ marginTop: '1.75rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.06)', paddingBottom: 0, borderBottom: 'none' }}>
+                    <div className="hours-summary-item">
+                      <div className="hours-summary-value">{recoveryFunnel.open}</div>
+                      <div className="hours-summary-label">Still open</div>
+                    </div>
+                    <div className="hours-summary-divider" />
+                    <div className="hours-summary-item">
+                      <div className="hours-summary-value">{recoveryFunnel.contactToConvert}%</div>
+                      <div className="hours-summary-label">Convert once contacted</div>
+                    </div>
+                    <div className="hours-summary-divider" />
+                    <div className="hours-summary-item">
+                      <div className="hours-summary-value">{formatCurrency(recoveryFunnel.convertedValue)}</div>
+                      <div className="hours-summary-label">Recovered value</div>
+                    </div>
+                  </div>
+                  <p className="hours-note">The gap between contacted and converted is a follow-up question. The gap between captured and contacted is a speed question.</p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {fieldsDrawerOpen && (
         <div className="live-drawer-backdrop" onClick={e => { if (e.target === e.currentTarget) setFieldsDrawerOpen(false) }}>
           <div className="live-drawer">
