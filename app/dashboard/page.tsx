@@ -837,9 +837,9 @@ export default function Dashboard() {
     }
     // Status filter chips: hot/warm/cold use score thresholds, contacted/converted match status field
     if (statusFilter === 'hot') {
-      rows = rows.filter(l => scoreLead(l).score >= 75)
+      rows = rows.filter(l => scoreLead(l).score >= 70)
     } else if (statusFilter === 'warm') {
-      rows = rows.filter(l => { const s = scoreLead(l).score; return s >= 50 && s < 75 })
+      rows = rows.filter(l => { const s = scoreLead(l).score; return s >= 50 && s < 70 })
     } else if (statusFilter === 'cold') {
       rows = rows.filter(l => scoreLead(l).score < 50)
     } else if (statusFilter === 'contacted') {
@@ -1094,8 +1094,8 @@ export default function Dashboard() {
   const pipelineBands = useMemo(() => {
     const rows = filteredLeads
     const bands = [
-      { key: 'hot',  label: 'Hot',  color: '#ef4444', min: 75, max: 101 },
-      { key: 'warm', label: 'Warm', color: '#f59e0b', min: 50, max: 75 },
+      { key: 'hot',  label: 'Hot',  color: '#ef4444', min: 70, max: 101 },
+      { key: 'warm', label: 'Warm', color: '#f59e0b', min: 50, max: 70 },
       { key: 'cold', label: 'Cold', color: '#6b7280', min: 0,  max: 50 },
     ]
     const total = rows.reduce((sum, l) => sum + (l.estimated_value ?? 0), 0)
@@ -1123,7 +1123,7 @@ export default function Dashboard() {
     const rows = leads.filter(l => {
       const recent = new Date(l.created_at).getTime() >= cutoff
       const untouched = !['contacted', 'converted', 'lost'].includes(l.status ?? '')
-      const hot = scoreLead(l).score >= 75
+      const hot = scoreLead(l).score >= 70
       return recent && untouched && hot
     })
     const oldest = rows.length > 0
