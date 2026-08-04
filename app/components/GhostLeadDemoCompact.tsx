@@ -45,14 +45,15 @@ export default function GhostLeadDemoCompact() {
         timeouts.push(setTimeout(() => setPhoneText(fullPhone.slice(0, i)), phoneStart + i * 80))
       }
 
-      const abandonTime = phoneStart + fullPhone.length * 80 + 800
+      // Hold on a blinking cursor. This pause is the interruption.
+      const abandonTime = phoneStart + fullPhone.length * 80 + 2400
       timeouts.push(setTimeout(() => setStage(4), abandonTime))
       timeouts.push(setTimeout(() => setCaptured(true), abandonTime + 600))
 
       // Only loop on desktop — mobile runs once and stays on captured state
       const isMobile = typeof window !== 'undefined' && window.innerWidth < 900
       if (!isMobile) {
-        timeouts.push(setTimeout(runSequence, abandonTime + 5000))
+        timeouts.push(setTimeout(runSequence, abandonTime + 6000))
       }
     }
 
@@ -68,6 +69,7 @@ export default function GhostLeadDemoCompact() {
           <div className="gc-dot"></div>
           <div className="gc-dot"></div>
           <span className="gc-url">yourwebsite.com/contact</span>
+          <span className="gc-clock">9:47 PM</span>
         </div>
         <div className="gc-form-body">
           <h4>Book a Consultation</h4>
@@ -108,7 +110,7 @@ export default function GhostLeadDemoCompact() {
           <div className="gc-pulse"></div>
           <span>Abandoned Lead Captured</span>
         </div>
-        <div className="gc-capture-data">
+        <div className="gc-capture-data gc-stagger">
           <div className="gc-row"><span className="gc-label">Name</span><span className="gc-value">{fullName}</span></div>
           <div className="gc-row"><span className="gc-label">Email</span><span className="gc-value">{fullEmail}</span></div>
           <div className="gc-row"><span className="gc-label">Phone</span><span className="gc-value">{fullPhone}</span></div>
