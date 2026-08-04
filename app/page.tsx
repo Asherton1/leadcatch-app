@@ -12,7 +12,7 @@ import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
 import ParticleNetwork from './components/ParticleNetwork'
 import PhantomCapture from './components/PhantomCapture'
-import GhostLeadDemoCompact from './components/GhostLeadDemoCompact'
+import HeroCapture from './components/HeroCapture'
 import LedgerStats from './components/LedgerStats'
 import LedgerRows from './components/LedgerRows'
 import Logo from './components/Logo'
@@ -61,7 +61,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="hero-right hero-animate-delay2">
-        <GhostLeadDemoCompact />
+        <HeroCapture />
           </div>
         </div>
       </section>
