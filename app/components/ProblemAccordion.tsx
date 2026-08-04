@@ -43,13 +43,13 @@ function AnimatedNumber({
   prefix: string
   suffix: string
 }) {
-  const [current, setCurrent] = useState(0)
+  // Start at the real number so collapsed panels never render zero.
+  const [current, setCurrent] = useState(target)
+  const [hasAnimated, setHasAnimated] = useState(false)
 
   useEffect(() => {
-    if (!isActive) {
-      const timer = setTimeout(() => setCurrent(0), 400)
-      return () => clearTimeout(timer)
-    }
+    if (!isActive || hasAnimated) return
+    setHasAnimated(true)
 
     const reduceMotion =
       typeof window !== 'undefined' &&
@@ -74,7 +74,7 @@ function AnimatedNumber({
 
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [isActive, target])
+  }, [isActive, target, hasAnimated])
 
   return (
     <span>

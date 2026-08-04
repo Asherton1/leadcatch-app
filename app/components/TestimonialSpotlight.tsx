@@ -5,12 +5,6 @@ import './testimonial-spotlight.css'
 
 const TESTIMONIALS = [
   {
-    quote: "We had no idea how many leads were starting our consultation form and dropping off. Within the first week, ReCapture surfaced 14 leads we never would have known about. Three of them booked. That alone paid for the year.",
-    name: "Sarah K.",
-    company: "Practice Director, DFW",
-    initial: "S",
-  },
-  {
     quote: "As a healthcare practice, every qualified lead matters. ReCapture showed us exactly who was falling through the cracks on our intake forms. The dashboard is clean, the data is actionable, and the setup took less than two minutes.",
     name: "David M.",
     company: "ESD Health",
