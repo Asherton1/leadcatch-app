@@ -401,3 +401,6 @@ footer a:hover {
 html {
   color-scheme: dark;
 }
+
+/* Always reserve scrollbar space so layout doesn't shift between pages */
+html { scrollbar-gutter: stable; }
