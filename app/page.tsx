@@ -7,6 +7,7 @@ import MobileNav from './components/MobileNav'
 import Footer from './components/Footer'
 import ProblemAccordion from './components/ProblemAccordion'
 import StepsAccordion from './components/StepsAccordion'
+import LiveVisitorsDemo from './components/LiveVisitorsDemo'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
 import ParticleNetwork from './components/ParticleNetwork'
@@ -140,28 +141,7 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
-            <div style={{ background: 'linear-gradient(160deg, #141414 0%, #0f0f0f 100%)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '16px', padding: '1.5rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 10px rgba(34,197,94,0.7)' }} />
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#fff', letterSpacing: '0.02em' }}>3 on your site now</span>
-              </div>
-              {[
-                { path: '/contact', meta: 'Dallas, TX · Mobile', badge: 'Hot 82', color: '#ef4444', note: 'Filling out form' },
-                { path: '/practice-areas', meta: 'Plano, TX · Desktop', badge: 'Warm 54', color: '#f59e0b', note: '4 pages · 3m 12s' },
-                { path: '/', meta: 'Frisco, TX · Mobile', badge: 'Cool 21', color: '#6b7280', note: 'Just landed' },
-              ].map(v => (
-                <div key={v.path} style={{ padding: '0.85rem 0', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginBottom: '0.3rem' }}>
-                    <span style={{ fontFamily: 'monospace', fontSize: '0.85rem', color: '#ff6b35', fontWeight: 600 }}>{v.path}</span>
-                    <span style={{ fontSize: '0.65rem', fontWeight: 700, color: v.color, textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>{v.badge}</span>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
-                    <span style={{ fontSize: '0.75rem', color: '#666' }}>{v.meta}</span>
-                    <span style={{ fontSize: '0.7rem', color: '#888' }}>{v.note}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <LiveVisitorsDemo />
           </div>
         </div>
       </section>

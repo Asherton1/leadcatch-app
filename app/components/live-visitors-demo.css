@@ -1,0 +1,94 @@
+.lvd {
+  background: linear-gradient(160deg, #141414 0%, #0f0f0f 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 1.5rem;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lvd-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.1rem; }
+
+.lvd-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34,197,94,0.7);
+  animation: lvdPulse 2s ease-in-out infinite;
+}
+
+@keyframes lvdPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.3); }
+}
+
+.lvd-count {
+  font-size: 0.75rem; font-weight: 700; color: #fff; letter-spacing: 0.02em;
+}
+
+.lvd-rows { flex: 1; }
+
+.lvd-row {
+  padding: 0.85rem 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  animation: lvdIn 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+
+@keyframes lvdIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lvd-row-top {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; margin-bottom: 0.3rem;
+}
+
+.lvd-path {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem; color: #ff6b35; font-weight: 600;
+}
+
+.lvd-badge {
+  font-size: 0.65rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  white-space: nowrap;
+  transition: color 0.4s ease;
+}
+
+.lvd-row-bot {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+
+.lvd-meta { font-size: 0.75rem; color: #666; }
+
+.lvd-note {
+  font-size: 0.7rem; color: #888;
+  transition: color 0.3s ease;
+}
+
+.lvd-note.active {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.lvd-capture {
+  display: flex; align-items: center; gap: 0.45rem;
+  margin-top: 1rem;
+  padding: 0.65rem 0.85rem;
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.25);
+  border-radius: 9px;
+  font-size: 0.7rem; font-weight: 700; color: #22c55e;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.lvd-capture.show { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lvd-dot, .lvd-row { animation: none; }
+}
