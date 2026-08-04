@@ -5632,3 +5632,7 @@ select.audit-form-input option {
 @media (max-width: 768px) {
   .final-cta-sublinks { margin-bottom: 2.5rem; }
 }
+
+@media (max-width: 860px) {
+  .lv-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+}

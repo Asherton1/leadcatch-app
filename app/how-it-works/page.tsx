@@ -269,8 +269,8 @@ export default function HowItWorksPage() {
                   <span className="hiw-channel-name">DASHBOARD UPDATE</span>
                   <span className="hiw-channel-tier hiw-tier-essentials">Included on all plans</span>
                 </div>
-                <p className="hiw-channel-desc">The lead appears in your dashboard with full contact details, revenue-at-risk estimate, and recovery status.</p>
-                <p className="hiw-channel-control">Always on. Real-time.</p>
+                <p className="hiw-channel-desc">The lead appears in your dashboard with everything they typed, an intent score, time on form, device, and an estimated value. Alongside it: which field they quit at, what time of day your inquiries actually arrive, how many come from a phone, and a recovery funnel from captured through contacted to converted. Set the comparison window to whatever period you report on, and export any view to CSV.</p>
+                <p className="hiw-channel-control">Always on. Updates without a refresh.</p>
               </div>
             </div>
           </div>

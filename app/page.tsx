@@ -121,6 +121,51 @@ export default function LandingPage() {
 
 
       <section className="lc-section">
+      <section className="lc-section reveal">
+        <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }} className="lv-grid">
+            <div>
+              <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>
+                Live Visitors
+              </p>
+              <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', fontWeight: 700, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.25rem' }}>
+                Not just who you lost. Who is on your site right now.
+              </h2>
+              <div style={{ color: '#a0a0a0', fontSize: '1.0625rem', lineHeight: 1.7 }}>
+                <p style={{ marginBottom: '1rem' }}>
+                  Recovery is the second half. The first is seeing the people who are still deciding. Live Visitors shows who is on your site at this moment, what page they are on, where they came from, and how engaged they are.
+                </p>
+                <p style={{ margin: 0 }}>
+                  When someone opens your form, you see it happen. When they leave without submitting, you already know who they were.
+                </p>
+              </div>
+            </div>
+            <div style={{ background: 'linear-gradient(160deg, #141414 0%, #0f0f0f 100%)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '16px', padding: '1.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 10px rgba(34,197,94,0.7)' }} />
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#fff', letterSpacing: '0.02em' }}>3 on your site now</span>
+              </div>
+              {[
+                { path: '/contact', meta: 'Dallas, TX · Mobile', badge: 'Hot 82', color: '#ef4444', note: 'Filling out form' },
+                { path: '/practice-areas', meta: 'Plano, TX · Desktop', badge: 'Warm 54', color: '#f59e0b', note: '4 pages · 3m 12s' },
+                { path: '/', meta: 'Frisco, TX · Mobile', badge: 'Cool 21', color: '#6b7280', note: 'Just landed' },
+              ].map(v => (
+                <div key={v.path} style={{ padding: '0.85rem 0', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginBottom: '0.3rem' }}>
+                    <span style={{ fontFamily: 'monospace', fontSize: '0.85rem', color: '#ff6b35', fontWeight: 600 }}>{v.path}</span>
+                    <span style={{ fontSize: '0.65rem', fontWeight: 700, color: v.color, textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>{v.badge}</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
+                    <span style={{ fontSize: '0.75rem', color: '#666' }}>{v.meta}</span>
+                    <span style={{ fontSize: '0.7rem', color: '#888' }}>{v.note}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Purpose-Built for High-Ticket Industries</h2>
         <p className="section-subtitle">ReCapture is not a generic form tool. Every feature was designed for businesses where a single recovered lead pays for the entire year.</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }} className="industries-grid">
