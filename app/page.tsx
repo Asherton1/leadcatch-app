@@ -52,8 +52,9 @@ export default function LandingPage() {
               <span className="hero-highlight">Never Hit Submit.</span>
             </h1>
             <p className="hero-subtitle hero-animate-delay">
-              High-value prospects start filling out your form, then vanish before submitting.
-              ReCapture captures their info the moment they start typing — giving you a second chance to close.
+              Most of them start the form at night, from a phone, right after something happened.
+              By the time anyone sees the inbox in the morning, they&apos;ve called someone else.
+              ReCapture catches them while it still matters.
             </p>
             <div className="cta-group hero-animate-delay2">
               <Link href="/start-trial" className="cta-primary">Start your 7-day free trial</Link>
