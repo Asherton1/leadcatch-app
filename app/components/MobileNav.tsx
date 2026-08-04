@@ -17,14 +17,14 @@ export default function MobileNav() {
   return (
     <>
       <div className="nav-desktop">
-        <Link href="/about" className={isActive('/about') ? 'nav-link nav-active' : 'nav-link'}>About</Link>
-        <Link href="/why-us" className={isActive('/why-us') ? 'nav-link nav-active' : 'nav-link'}>Why Us</Link>
-        <Link href="/how-it-works" className={isActive('/how-it-works') ? 'nav-link nav-active' : 'nav-link'}>How It Works</Link>
-        <Link href="/dashboard-tour" className={isActive('/dashboard-tour') ? 'nav-link nav-active' : 'nav-link'}>Dashboard</Link>
+        <Link data-label="About" href="/about" className={isActive('/about') ? 'nav-link nav-active' : 'nav-link'}>About</Link>
+        <Link data-label="Why Us" href="/why-us" className={isActive('/why-us') ? 'nav-link nav-active' : 'nav-link'}>Why Us</Link>
+        <Link data-label="How It Works" href="/how-it-works" className={isActive('/how-it-works') ? 'nav-link nav-active' : 'nav-link'}>How It Works</Link>
+        <Link data-label="Dashboard" href="/dashboard-tour" className={isActive('/dashboard-tour') ? 'nav-link nav-active' : 'nav-link'}>Dashboard</Link>
         <Link href="/demo" className={isActive('/demo') ? 'nav-link nav-active' : 'nav-link'} style={{ display: 'inline-flex', alignItems: 'center', gap: '7px' }}><span className="live-demo-dot" />Live Demo</Link>
-        <Link href="/integrations" className={isActive('/integrations') ? 'nav-link nav-active' : 'nav-link'}>Integrations</Link>
-        <Link href="/pricing" className={isActive('/pricing') ? 'nav-link nav-active' : 'nav-link'}>Pricing</Link>
-        <Link href="/blog" className={isActive('/blog') ? 'nav-link nav-active' : 'nav-link'}>Insights</Link>
+        <Link data-label="Integrations" href="/integrations" className={isActive('/integrations') ? 'nav-link nav-active' : 'nav-link'}>Integrations</Link>
+        <Link data-label="Pricing" href="/pricing" className={isActive('/pricing') ? 'nav-link nav-active' : 'nav-link'}>Pricing</Link>
+        <Link data-label="Insights" href="/blog" className={isActive('/blog') ? 'nav-link nav-active' : 'nav-link'}>Insights</Link>
         <div className="nav-dropdown-wrapper">
           <span className="nav-link" style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>Resources <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           <div className="nav-dropdown-menu">
@@ -65,6 +65,7 @@ export default function MobileNav() {
           <Link href="/why-us" className={isActive('/why-us') ? 'mobile-link-active' : ''}>Why Us</Link>
           <Link href="/demo" className={isActive('/demo') ? 'mobile-link-active' : ''}><span className="live-demo-dot" style={{ marginRight: '9px', verticalAlign: 'middle' }} />Live Demo</Link>
           <Link href="/how-it-works" className={isActive('/how-it-works') ? 'mobile-link-active' : ''}>How It Works</Link>
+          <Link href="/dashboard-tour" className={isActive('/dashboard-tour') ? 'mobile-link-active' : ''}>Dashboard</Link>
           <Link href="/integrations" className={isActive('/integrations') ? 'mobile-link-active' : ''}>Integrations</Link>
           <div style={{ borderTop: '1px solid #1e1e1e', marginTop: '0.25rem' }}>
             <button
