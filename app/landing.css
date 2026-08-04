@@ -5644,29 +5644,3 @@ select.audit-form-input option {
   .industries-grid { display: none !important; }
   .industries-accordion { display: flex !important; }
 }
-
-/* ── Nav must not resize between pages ─────────────── */
-.nav-desktop {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-}
-
-.nav-desktop .nav-link {
-  display: inline-flex !important;
-  align-items: center;
-  white-space: nowrap;
-  position: relative;
-  /* Reserve the bold width so the active state never reflows the bar */
-  font-weight: 500;
-}
-
-.nav-desktop .nav-link::before {
-  content: attr(data-label);
-  font-weight: 700;
-  height: 0;
-  overflow: hidden;
-  visibility: hidden;
-  pointer-events: none;
-  display: block;
-}
