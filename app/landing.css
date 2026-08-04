@@ -5636,3 +5636,11 @@ select.audit-form-input option {
 @media (max-width: 860px) {
   .lv-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
 }
+
+/* Industries render twice — grid on desktop, accordion on mobile */
+.industries-accordion { display: none !important; }
+
+@media (max-width: 860px) {
+  .industries-grid { display: none !important; }
+  .industries-accordion { display: flex !important; }
+}

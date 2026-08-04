@@ -1,0 +1,224 @@
+.dt-page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #e4e4e7;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.dt-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+.dt-narrow { max-width: 760px; }
+
+.dt-eyebrow, .dt-section-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.dt-hero { padding: 7rem 0 4rem; }
+
+.dt-h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  color: #fff;
+  margin: 0 0 1.5rem;
+  max-width: 18ch;
+}
+
+.dt-lede {
+  font-size: 1.0625rem;
+  color: #a1a1aa;
+  line-height: 1.75;
+  max-width: 46rem;
+  margin: 0 0 2.25rem;
+}
+
+.dt-cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.dt-btn {
+  display: inline-block;
+  background: #ff6b35;
+  color: #0a0a0a;
+  font-weight: 700;
+  padding: 0.9rem 1.85rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.dt-btn-ghost {
+  display: inline-block;
+  background: transparent;
+  color: #a1a1aa;
+  font-weight: 600;
+  padding: 0.9rem 1.85rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border: 1px solid #1e1e1e;
+}
+
+.dt-band { padding: 4.5rem 0; border-top: 1px solid #1a1a1a; }
+.dt-band-alt { background: #0d0d0d; }
+
+.dt-h2 {
+  font-size: clamp(1.4rem, 3vw, 1.875rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  margin: 0 0 1.5rem;
+  max-width: 24ch;
+}
+
+.dt-body { color: #a1a1aa; font-size: 1rem; line-height: 1.8; }
+.dt-body p { margin: 0 0 1.125rem; }
+.dt-body p:last-child { margin: 0; }
+
+.dt-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.dt-metric {
+  padding: 1.75rem;
+  border-right: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.dt-metric-name {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ff6b35;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.dt-metric-value {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  margin-bottom: 0.75rem;
+}
+
+.dt-metric-detail {
+  color: #8a8a8f;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.dt-drawers { display: flex; flex-direction: column; gap: 2rem; margin-top: 2.5rem; }
+.dt-drawer { display: grid; grid-template-columns: 44px 1fr; gap: 1.25rem; }
+
+.dt-drawer-n {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ff6b35;
+  letter-spacing: 0.1em;
+  padding-top: 0.35rem;
+}
+
+.dt-drawer-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.625rem;
+  letter-spacing: -0.015em;
+}
+
+.dt-drawer-body {
+  color: #a1a1aa;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.dt-final { padding: 5rem 0 6rem; border-top: 1px solid #1a1a1a; }
+.dt-final .dt-body { margin-bottom: 2rem; }
+
+@media (max-width: 720px) {
+  .dt-hero { padding: 5.5rem 0 3rem; }
+  .dt-inner { padding: 0 1.25rem; }
+  .dt-band { padding: 3.5rem 0; }
+  .dt-metric { border-right: none; }
+  .dt-drawer { grid-template-columns: 36px 1fr; gap: 0.875rem; }
+}
+
+.dt-caption { margin-top: 2rem; max-width: 640px; }
+.dt-caption .dt-h2 { margin-bottom: 1rem; }
+.dt-caption p {
+  color: #a1a1aa;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin: 0 0 1.125rem;
+}
+.dt-caption p:last-child { margin: 0; }
+
+/* ── Consistent rhythm across the whole page ─────────── */
+.dt-narrow { max-width: 720px; }
+
+.dt-band { padding: 5rem 0; }
+
+.dt-caption {
+  margin-top: 2.25rem;
+  max-width: 100%;
+}
+
+.dt-caption .dt-h2 {
+  font-size: 1.5rem;
+  max-width: 100%;
+  margin-bottom: 1rem;
+}
+
+.dt-caption p {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.dt-h1 { max-width: 15ch; }
+.dt-lede { max-width: 100%; }
+.dt-h2 { max-width: 100%; }
+
+/* Visuals sit flush with the text column */
+.tv-frame,
+.tv-attn {
+  margin-top: 0;
+}
+
+.dt-section-eyebrow { margin-bottom: 1rem; }
+
+@media (max-width: 760px) {
+  .dt-band { padding: 3.5rem 0; }
+  .dt-caption { margin-top: 1.75rem; }
+  .dt-caption .dt-h2 { font-size: 1.25rem; }
+  .dt-caption p { font-size: 1rem; }
+}
+
+/* Text leads, visual follows */
+.dt-caption-lead {
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+/* Tighter vertical rhythm */
+.dt-band { padding: 3.5rem 0; }
+.dt-hero { padding: 6rem 0 3rem; }
+.dt-final { padding: 3.5rem 0 5rem; }
+
+@media (max-width: 760px) {
+  .dt-band { padding: 2.75rem 0; }
+  .dt-hero { padding: 5rem 0 2.5rem; }
+  .dt-caption-lead { margin-bottom: 1.5rem; }
+}

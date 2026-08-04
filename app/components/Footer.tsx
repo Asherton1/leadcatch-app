@@ -24,6 +24,7 @@ export default function Footer() {
           <p className="footer-col-label">Product</p>
           <Link href="/pricing" className="footer-link">Pricing</Link>
           <Link href="/why-us" className="footer-link">Why Us</Link>
+          <Link href="/dashboard-tour" className="footer-link">The Dashboard</Link>
           <Link href="/how-it-works" className="footer-link">How It Works</Link>
           <Link href="/integrations" className="footer-link">Integrations</Link>
           <Link href="/faq" className="footer-link">FAQ</Link>
