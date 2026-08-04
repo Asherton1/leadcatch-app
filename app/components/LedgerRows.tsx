@@ -12,10 +12,10 @@ interface Lead {
 }
 
 const leads: Lead[] = [
-  { name: 'Sarah Mitchell', email: 'sarah.m@gmail.com', value: '$1,100', finalStatus: 'CONVERTED' },
-  { name: 'James Nguyen', email: 'james.n@gmail.com', value: '$1,100', finalStatus: 'CONTACTED' },
-  { name: 'Kelsey Thomas', email: 'kelsey.t@gmail.com', value: '$1,100', finalStatus: 'OPEN' },
-  { name: 'David Lin', email: 'david.l@gmail.com', value: '$1,100', finalStatus: 'OPEN' },
+  { name: 'Marcus Alvarez', email: 'm.alvarez@gmail.com', value: '$4,200', finalStatus: 'CONVERTED' },
+  { name: 'James Nguyen', email: 'james.n@gmail.com', value: '$1,850', finalStatus: 'CONTACTED' },
+  { name: 'Kelsey Thomas', email: 'kelsey.t@gmail.com', value: '$2,400', finalStatus: 'OPEN' },
+  { name: 'David Lin', email: 'david.l@gmail.com', value: '$980', finalStatus: 'OPEN' },
 ]
 
 const statusClassMap: Record<Status, string> = {

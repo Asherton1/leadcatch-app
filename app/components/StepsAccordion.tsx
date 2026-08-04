@@ -21,8 +21,8 @@ const steps = [
     num: '03',
     title: 'Recover Lost Revenue',
     text: 'Reach out manually from your dashboard or let ReCapture send automated recovery emails on your behalf. Turn invisible drop-offs into booked appointments and closed revenue.',
-    statValue: '$30K',
-    statLabel: 'monthly recovered revenue',
+    statValue: '1 line',
+    statLabel: 'of JavaScript, no dev team',
   },
 ]
 

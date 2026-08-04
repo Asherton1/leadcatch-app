@@ -23,7 +23,7 @@ export const viewport: Viewport = { themeColor: '#0a0a0a' }
 
 export const metadata: Metadata = {
   title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
-  description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
+  description: 'See who is on your site, catch the inquiries that never get submitted, and recover them before they go elsewhere. Built for law firms, medical practices, and high-consideration service businesses.',
   metadataBase: new URL('https://www.userecapture.com'),
   icons: {
     icon: '/favicon.svg?v=20260524',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
-  keywords: ['recovery layer', 'lead recovery platform', 'form abandonment recovery', 'high-ticket lead recovery', 'lead capture SaaS', 'partial form capture', 'med spa lead recovery', 'dental practice leads', 'multi-location lead recovery', 'AI lead recovery', 'enterprise lead recovery'],
+  keywords: ['recovery layer', 'lead recovery platform', 'form abandonment recovery', 'high-ticket lead recovery', 'lead capture SaaS', 'partial form capture', 'law firm intake form abandonment', 'legal intake recovery', 'med spa lead recovery', 'dental practice leads', 'multi-location lead recovery', 'AI lead recovery', 'enterprise lead recovery', 'live visitor tracking', 'intake form analytics'],
   formatDetection: {
     telephone: false,
     email: false,
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
-    description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
+    description: 'See who is on your site, catch the inquiries that never get submitted, and recover them before they go elsewhere. Built for law firms, medical practices, and high-consideration service businesses.',
     url: 'https://www.userecapture.com',
     siteName: 'ReCapture',
     images: [{
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
-    description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
+    description: 'See who is on your site, catch the inquiries that never get submitted, and recover them before they go elsewhere. Built for law firms, medical practices, and high-consideration service businesses.',
     images: ['https://www.userecapture.com/api/og'],
   },
 }
@@ -89,7 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               name: 'ReCapture',
               applicationCategory: 'BusinessApplication',
               operatingSystem: 'Web',
-              description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
+              description: 'See who is on your site, catch the inquiries that never get submitted, and recover them before they go elsewhere. Built for law firms, medical practices, and high-consideration service businesses.',
               url: 'https://www.userecapture.com',
               offers: {
                 '@type': 'AggregateOffer',
