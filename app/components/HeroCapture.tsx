@@ -133,7 +133,7 @@ export default function HeroCapture() {
               <b>Email</b>
               <span>Sent from your domain, 60 second delay</span>
             </div>
-            <span className="hc-ch-state on">On</span>
+            <span className="hc-toggle" />
           </div>
           <div className="hc-ch">
             <div className="hc-ch-icon">
@@ -143,7 +143,7 @@ export default function HeroCapture() {
               <b>SMS</b>
               <span>Alert your intake team instantly</span>
             </div>
-            <span className="hc-ch-state">Off</span>
+            <span className="hc-toggle" />
           </div>
           <div className="hc-ch">
             <div className="hc-ch-icon">
@@ -153,9 +153,9 @@ export default function HeroCapture() {
               <b>AI callback</b>
               <span>Books straight to your calendar</span>
             </div>
-            <span className="hc-ch-state">Off</span>
+            <span className="hc-toggle" />
           </div>
-          <div className="hc-deploy-foot">Every channel is a setting. You decide what goes out.</div>
+          <div className="hc-deploy-foot">Every channel is a switch. Turn on what fits your business.</div>
         </div>
       </div>
     </div>

@@ -5671,3 +5671,7 @@ select.audit-form-input option {
 @media (prefers-reduced-motion: reduce) {
   .gc-capture-visible .gc-stagger .gc-row { animation: none; }
 }
+
+/* Clean hero — no scanline, no ambient pulses */
+.hero-scanline { display: none !important; }
+.capture-burst { display: none !important; }
