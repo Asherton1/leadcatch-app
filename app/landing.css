@@ -5679,3 +5679,6 @@ select.audit-form-input option {
 /* Clean hero background — gradients and particles off, video only */
 .hero::after { display: none !important; }
 .hero-particles { display: none !important; }
+
+/* Noise overlay reads as banding over flat sections — off */
+.landing::after { display: none !important; }
