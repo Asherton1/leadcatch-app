@@ -179,8 +179,8 @@ export default function HeroCapture() {
                   <span className="hc-notif-app">MAIL</span>
                   <span className="hc-notif-when">now</span>
                 </div>
-                <div className="hc-notif-title">You started to reach out &mdash; we saved it</div>
-                <div className="hc-notif-text">No need to start over. Just reply here and we&rsquo;ll pick it up from where you left off.</div>
+                <div className="hc-notif-title">Sarah, we saved what you started</div>
+                <div className="hc-notif-text">Hi Sarah &mdash; looks like you didn&rsquo;t get to finish. No need to start over, just reply here.</div>
               </div>
             </div>
           </div>

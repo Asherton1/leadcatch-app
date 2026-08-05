@@ -735,3 +735,16 @@
   margin-bottom: 1.6rem !important;
   font-weight: 400 !important;
 }
+
+/* Notification content must sit left, tight to the icon */
+.hc-notif-body,
+.hc-notif-title,
+.hc-notif-text,
+.hc-notif-top { text-align: left !important; }
+
+.hc-notif-body { align-items: flex-start; }
+
+.hc-notif {
+  gap: 0.55rem !important;
+  text-align: left !important;
+}
