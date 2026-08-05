@@ -572,6 +572,7 @@ export default function Dashboard() {
   const [recoveredWindow, setRecoveredWindow]   = useState<'month' | '30days' | 'all'>('month')
   const [selectedClient, setSelectedClient]     = useState<Client | null>(null)
   const [liveVisitors, setLiveVisitors] = useState<number>(0)
+  const pausePollUntil = useRef<number>(0)
   const [momPeriod, setMomPeriod] = useState<'7d' | '14d' | '30d' | '90d' | 'month'>('30d')
   const [liveDrawerOpen, setLiveDrawerOpen] = useState(false)
   const [hoursDrawerOpen, setHoursDrawerOpen] = useState(false)
@@ -777,6 +778,7 @@ export default function Dashboard() {
         .order('created_at', { ascending: false })
 
       if (cancelled || error || !data) return
+      if (Date.now() < pausePollUntil.current) return
 
       setLeads(prev => {
         // Only replace if something actually changed, so we don't fight the UI
@@ -825,6 +827,8 @@ export default function Dashboard() {
   function handleStatusChange(id: string, status: string) {
     setLeads(prev => prev.map(l => l.id === id ? { ...l, status } : l))
     if (modalLead?.id === id) setModalLead(prev => prev ? { ...prev, status } : null)
+    // Pause the background poll briefly so it cannot overwrite a fresh write
+    pausePollUntil.current = Date.now() + 6000
   }
 
   // ── Derived ────────────────────────────────────────────────────────────────

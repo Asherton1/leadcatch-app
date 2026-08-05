@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Missing client_id' }, { status: 400 })
     }
 
-    const twoMinAgo = new Date(Date.now() - 45 * 1000).toISOString()
+    const twoMinAgo = new Date(Date.now() - 2 * 60 * 1000).toISOString()
 
     const { data: visitors, error } = await supabase
       .from('visitors')
