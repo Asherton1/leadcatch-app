@@ -163,21 +163,26 @@ export default function HeroCapture() {
         </div>
 
         <div className={'hc-sent' + (phase === 'sent' ? ' in' : '')}>
-          <div className="hc-result-head">
-            <span className="hc-pip" />
-            Sent &middot; 9:48 PM
-          </div>
+          <div className="hc-lock">
+            <div className="hc-lock-time">9:48</div>
+            <div className="hc-lock-date">Tuesday, 12 November</div>
 
-          <div className="hc-mail">
-            <div className="hc-mail-head">
-              <span className="hc-mail-from">Your Business</span>
-              <span className="hc-mail-time">now</span>
+            <div className="hc-notif">
+              <div className="hc-notif-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div className="hc-notif-body">
+                <div className="hc-notif-top">
+                  <span className="hc-notif-app">Mail</span>
+                  <span className="hc-notif-when">now</span>
+                </div>
+                <div className="hc-notif-title">You started to reach out &mdash; we saved it</div>
+                <div className="hc-notif-text">No need to start over. Just reply here and we&rsquo;ll pick it up from where you left off.</div>
+              </div>
             </div>
-            <div className="hc-mail-subject">You started to reach out &mdash; we saved it</div>
-            <div className="hc-mail-body">
-              Hi Sarah, it looks like you began getting in touch with us tonight and did not get to finish. No need to start over &mdash; just reply here and we will take it from there.
-            </div>
-            <div className="hc-mail-cta">Pick up where you left off</div>
           </div>
 
           <div className="hc-sent-foot">
