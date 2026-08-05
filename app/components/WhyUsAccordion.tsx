@@ -213,7 +213,7 @@ const features: FeatureItem[] = [
       </svg>
     ),
     title: 'Free Form Audit Report',
-    description: 'Before you even become a client, we scan your website and send you a detailed audit report — form field count, mobile UX issues, tracking gaps, industry-specific abandonment benchmarks, and exactly how much revenue your forms are leaking every month. It is the most thorough form analysis in the industry and it is completely free. No other competitor offers anything like it.',
+    description: 'Before you become a client, we scan your site and send back what we can actually measure — how your form is built, how many fields it asks for, whether abandonment tracking exists, what analytics can and cannot see inside it, and how it compares to benchmarks for your industry. We do not estimate your revenue or guess at your traffic, because those are numbers only you have. Free, no commitment, and no competitor offers it.',
     visual: null,
   },
 ]
