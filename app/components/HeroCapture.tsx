@@ -165,7 +165,7 @@ export default function HeroCapture() {
         <div className={'hc-sent' + (phase === 'sent' ? ' in' : '')}>
           <div className="hc-lock">
             <div className="hc-lock-time">9:48</div>
-            <div className="hc-lock-date">Tuesday, 12 November</div>
+            <div className="hc-lock-date">Tuesday, November 12</div>
 
             <div className="hc-notif">
               <div className="hc-notif-icon">
@@ -176,7 +176,7 @@ export default function HeroCapture() {
               </div>
               <div className="hc-notif-body">
                 <div className="hc-notif-top">
-                  <span className="hc-notif-app">Mail</span>
+                  <span className="hc-notif-app">MAIL</span>
                   <span className="hc-notif-when">now</span>
                 </div>
                 <div className="hc-notif-title">You started to reach out &mdash; we saved it</div>
