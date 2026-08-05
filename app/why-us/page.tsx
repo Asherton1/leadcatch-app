@@ -53,8 +53,8 @@ const sections: Section[] = [
     category: 'Recovery & Alerts',
     rows: [
       { label: 'Auto-recovery emails', recapture: true, podium: false, ghl: true, cartstack: true },
-      { label: 'Instant SMS lead alerts (to staff)', recapture: 'Pro plan', podium: false, ghl: false, cartstack: false },
-      { label: 'AI voice callback (60 seconds)', recapture: 'Pro plan', podium: false, ghl: false, cartstack: false },
+      { label: 'Instant SMS lead alerts (to staff)', recapture: true, podium: false, ghl: false, cartstack: false },
+      { label: 'AI voice callback (60 seconds)', recapture: true, podium: false, ghl: false, cartstack: false },
     ],
   },
   {

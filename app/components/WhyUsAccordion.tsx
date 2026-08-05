@@ -187,7 +187,6 @@ const features: FeatureItem[] = [
     title: 'AI Voice Callback in 60 Seconds',
     description: 'This is the feature nobody else has. When someone abandons your form and leaves a phone number, ReCapture\'s AI calls them back within 60 seconds. Not an email. Not a text. A real phone call with a warm, natural-sounding voice that introduces itself as your front desk, offers to help, and collects their booking preferences. Responding within one minute makes you 391% more likely to convert. No other form recovery tool on the market does this.',
     visual: null,
-    badge: 'Pro Plan',
   },
   {
     icon: (
@@ -196,7 +195,6 @@ const features: FeatureItem[] = [
       </svg>
     ),
     title: 'Instant SMS Lead Alerts',
-    badge: 'Pro Plan',
     description: 'Your phone buzzes within 60 seconds of someone abandoning your form. Not an email you check later. A text message with their name, their email, and what they were looking for. Research shows that calling a lead within 5 minutes makes you 21x more likely to convert them. No other form abandonment tool offers real-time SMS alerts.',
     visual: <SmsMockup />,
   },
