@@ -622,7 +622,7 @@ export default function Dashboard() {
       } catch { /* silent */ }
     }
     fetchLive()
-    const iv = setInterval(fetchLive, 15000)
+    const iv = setInterval(fetchLive, 5000)
     return () => { cancelled = true; clearInterval(iv) }
   }, [selectedClient?.id])
 
@@ -640,7 +640,7 @@ export default function Dashboard() {
       } catch { /* silent */ }
     }
     fetchList()
-    const iv = setInterval(fetchList, 10000)
+    const iv = setInterval(fetchList, 5000)
     return () => { cancelled = true; clearInterval(iv) }
   }, [liveDrawerOpen, selectedClient?.id])
 
