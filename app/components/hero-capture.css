@@ -748,3 +748,9 @@
   gap: 0.55rem !important;
   text-align: left !important;
 }
+
+/* Delivered line centered on all breakpoints */
+.hc-sent-foot {
+  justify-content: center;
+  text-align: center;
+}
