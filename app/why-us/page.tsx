@@ -58,6 +58,17 @@ const sections: Section[] = [
     ],
   },
   {
+    category: 'Intelligence',
+    rows: [
+      { label: 'Live visitor tracking', recapture: true, podium: false, ghl: false, cartstack: false },
+      { label: 'Field-level drop-off analysis', recapture: true, podium: false, ghl: false, cartstack: false },
+      { label: 'Inquiry timing breakdown', recapture: true, podium: false, ghl: false, cartstack: false },
+      { label: 'Recovery funnel reporting', recapture: true, podium: false, ghl: false, cartstack: false },
+      { label: 'Configurable comparison windows', recapture: true, podium: false, ghl: false, cartstack: false },
+      { label: 'CSV export with filters applied', recapture: true, podium: false, ghl: false, cartstack: false },
+    ],
+  },
+  {
     category: 'Built for Service Business',
     rows: [
       { label: 'Multi-location dashboard', recapture: true, podium: false, ghl: false, cartstack: false },
