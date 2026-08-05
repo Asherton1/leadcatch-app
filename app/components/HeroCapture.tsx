@@ -63,9 +63,7 @@ export default function HeroCapture() {
       at(clock + 3400, () => setPhase('sent'))
       clock += 3400
 
-      if (typeof window !== 'undefined' && window.innerWidth >= 900) {
-        at(clock + 4600, run)
-      }
+      at(clock + 4600, run)
     }
 
     run()
