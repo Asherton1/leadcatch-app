@@ -156,6 +156,30 @@ function AutoRecoveryMockup() {
 const features: FeatureItem[] = [
   {
     icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    ),
+    title: 'Live Visitor Tracking',
+    description: 'Recovery is the second half. The first is seeing who is on your site right now — what page they are on, where they came from, what device, and an intent score that climbs as they engage. When someone opens your form, you watch it happen. When they leave without submitting, you already know who they were. No other tool in this comparison shows you the visitor before they become a lead.',
+    visual: null,
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    ),
+    title: 'Field-Level Drop-Off',
+    description: 'Everyone fills in a name. Fewer give a phone number. Almost nobody reaches an open text box asking them to describe their situation. ReCapture shows you the exact field where people quit, and how many you lose at each step. The steepest fall is the field costing you the most — and until you can see it, changing your form is guesswork. Podium, GoHighLevel, and CartStack tell you a form was abandoned. None of them tell you where.',
+    visual: null,
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+    ),
+    title: 'Inquiry Timing',
+    description: 'A twenty-four hour breakdown of when inquiries actually arrive, split between business hours and after hours, with your busiest windows ranked. For most high-consideration businesses the answer is nights and weekends, from a phone, right after something happened. If your peak sits at nine in the evening, that is not a marketing insight — it is a staffing decision, and this is the chart that starts the conversation.',
+    visual: null,
+  },
+  {
+    icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
       </svg>
