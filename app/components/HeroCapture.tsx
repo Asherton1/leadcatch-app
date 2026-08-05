@@ -7,7 +7,7 @@ const NAME = 'Sarah Mitchell'
 const EMAIL = 'sarah.m@gmail.com'
 const PHONE = '(214) 555-'
 
-type Phase = 'idle' | 'name' | 'email' | 'phone' | 'held' | 'leaving' | 'captured' | 'deploying'
+type Phase = 'idle' | 'name' | 'email' | 'phone' | 'held' | 'leaving' | 'captured' | 'deploying' | 'sent'
 
 export default function HeroCapture() {
   const [phase, setPhase] = useState<Phase>('idle')
@@ -59,8 +59,12 @@ export default function HeroCapture() {
       at(clock + 2600, () => setPhase('deploying'))
       clock += 2600
 
+      // Fourth beat: the message actually going out
+      at(clock + 3400, () => setPhase('sent'))
+      clock += 3400
+
       if (typeof window !== 'undefined' && window.innerWidth >= 900) {
-        at(clock + 4200, run)
+        at(clock + 4600, run)
       }
     }
 
@@ -69,7 +73,7 @@ export default function HeroCapture() {
   }, [])
 
   const typing = phase === 'name' || phase === 'email' || phase === 'phone' || phase === 'held'
-  const gone = phase === 'leaving' || phase === 'captured' || phase === 'deploying'
+  const gone = phase === 'leaving' || phase === 'captured' || phase === 'deploying' || phase === 'sent'
 
   const Field = ({
     label, value, active, cursor,
@@ -120,7 +124,7 @@ export default function HeroCapture() {
           </div>
         </div>
 
-        <div className={'hc-deploy' + (phase === 'deploying' ? ' in' : '')}>
+        <div className={'hc-deploy' + (phase === 'deploying' ? ' in' : '') + (phase === 'sent' ? ' out' : '')}>
           <div className="hc-result-head">
             <span className="hc-pip" />
             Recovery channels
@@ -156,6 +160,30 @@ export default function HeroCapture() {
             <span className="hc-toggle" />
           </div>
           <div className="hc-deploy-foot">Every channel is a switch. Turn on what fits your business.</div>
+        </div>
+
+        <div className={'hc-sent' + (phase === 'sent' ? ' in' : '')}>
+          <div className="hc-result-head">
+            <span className="hc-pip" />
+            Sent &middot; 9:48 PM
+          </div>
+
+          <div className="hc-mail">
+            <div className="hc-mail-head">
+              <span className="hc-mail-from">Your Business</span>
+              <span className="hc-mail-time">now</span>
+            </div>
+            <div className="hc-mail-subject">You started to reach out &mdash; we saved it</div>
+            <div className="hc-mail-body">
+              Hi Sarah, it looks like you began getting in touch with us tonight and did not get to finish. No need to start over &mdash; just reply here and we will take it from there.
+            </div>
+            <div className="hc-mail-cta">Pick up where you left off</div>
+          </div>
+
+          <div className="hc-sent-foot">
+            <span className="hc-sent-tick">&#10003;</span>
+            Delivered 61 seconds after they left
+          </div>
         </div>
       </div>
     </div>

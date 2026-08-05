@@ -445,3 +445,122 @@
   .hc-toggle::after { transform: translateX(14px); background: #ff6b35; }
   .hc-ch-icon { background: rgba(255,107,53,0.09); border-color: rgba(255,107,53,0.22); color: #ff6b35; }
 }
+
+.hc-deploy.out {
+  opacity: 0;
+  transform: translateY(-14px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hc-sent {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  top: 4.6rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22,1,0.36,1);
+  pointer-events: none;
+}
+.hc-sent.in { opacity: 1; transform: translateY(0); }
+
+.hc-mail {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 11px;
+  padding: 0.95rem 1rem;
+  opacity: 0;
+}
+.hc-sent.in .hc-mail {
+  animation: hcMailIn 0.55s cubic-bezier(0.22,1,0.36,1) 0.18s forwards;
+}
+
+@keyframes hcMailIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.hc-mail-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.hc-mail-from {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #ff6b35;
+  letter-spacing: 0.02em;
+}
+
+.hc-mail-time {
+  font-size: 0.5625rem;
+  color: #55555a;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.hc-mail-subject {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.005em;
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+
+.hc-mail-body {
+  font-size: 0.6875rem;
+  color: #8a8a8f;
+  line-height: 1.6;
+  margin-bottom: 0.85rem;
+}
+
+.hc-mail-cta {
+  display: inline-block;
+  padding: 0.45rem 0.85rem;
+  background: rgba(255,107,53,0.12);
+  border: 1px solid rgba(255,107,53,0.3);
+  border-radius: 6px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: #ff6b35;
+  letter-spacing: 0.02em;
+}
+
+.hc-sent-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #22c55e;
+  letter-spacing: 0.01em;
+  opacity: 0;
+}
+.hc-sent.in .hc-sent-foot {
+  animation: hcFoot 0.5s ease 0.75s forwards;
+}
+
+.hc-sent-tick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: rgba(34,197,94,0.14);
+  border: 1px solid rgba(34,197,94,0.35);
+  font-size: 0.5625rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .hc-sent { left: 1.25rem; right: 1.25rem; top: 4.2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hc-sent, .hc-deploy.out { transition: none; }
+  .hc-sent.in .hc-mail, .hc-sent.in .hc-sent-foot { animation: none; opacity: 1; }
+}
