@@ -73,6 +73,18 @@ export default function BlogIndex() {
       <div className="blog-more reveal" style={{ maxWidth: '960px', margin: '0 auto', padding: '0 2rem 5rem' }}>
         <h2 style={{ color: '#ff6b35', fontSize: '1.5rem', fontWeight: 700, margin: '0 0 2rem 0' }}>More Insights</h2>
         <div className="blog-bento">
+          <Link href="/blog/why-law-firms-leak-their-best-cases" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+              <Image src="/blog-law-firms-intake.webp" alt="The $2M intake form why law firms leak their best cases" fill style={{ objectFit: 'cover' }} />
+            </div>
+            <div style={{ padding: '1.5rem 2rem 2rem' }}>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Legal Marketing</div>
+              <div style={{ fontSize: '0.8rem', color: '#666', marginBottom: '0.75rem' }}><span>July 30, 2026</span><span style={{ margin: '0 0.5rem' }}>&middot;</span><span>8 min read</span></div>
+              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>The $2M Intake Form: Why Law Firms Leak Their Best Cases Before the First Call</div>
+              <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: 1.6, marginBottom: '1rem' }}>Legal is the highest-stakes form-abandonment vertical in America. A single case is worth $50K to $5M. And the intake form is exactly where firms lose their most valuable prospects.</div>
+              <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Read article &rarr;</span>
+            </div>
+          </Link>
           <Link href="/blog/agency-partnership-revenue-recovery" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
             <div style={{ position: 'relative', width: '100%', height: '200px' }}>
               <Image src="/blog-agency-partnership.webp" alt="Why the best agencies are adding revenue recovery to their retainer structures" fill style={{ objectFit: 'cover' }} />
