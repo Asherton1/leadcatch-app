@@ -50,19 +50,19 @@ export default function BlogIndex() {
       </section>
 
       <div className="blog-featured reveal">
-        <Link href="/blog/why-law-firms-leak-their-best-cases" className="blog-featured-card">
+        <Link href="/blog/can-a-law-firm-follow-up-on-an-abandoned-intake-form" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
             <Image src="/blog-law-firms-intake.webp" alt="The $2M intake form why law firms leak their best cases before the first call" fill style={{ objectFit: 'cover' }} />
           </div>
           <div className="blog-featured-content">
             <div className="blog-featured-tag">Legal Marketing</div>
             <div className="blog-featured-meta">
-              <span className="blog-featured-date">July 30, 2026</span>
+              <span className="blog-featured-date">August 9, 2026</span>
               <span className="blog-featured-dot" />
               <span className="blog-featured-readtime">8 min read</span>
             </div>
-            <div className="blog-featured-title">The $2M Intake Form: Why Law Firms Leak Their Best Cases Before the First Call</div>
-            <div className="blog-featured-excerpt">Legal is the highest-stakes form-abandonment vertical in America. A single case is worth $50K to $5M. And the intake form is exactly where firms lose their most valuable prospects — before the first phone call ever happens.</div>
+            <div className="blog-featured-title">Can a Law Firm Follow Up on an Intake Form Nobody Submitted?</div>
+            <div className="blog-featured-excerpt">Texas Disciplinary Rule 7.03 restricts how lawyers may solicit. Before deploying to a Texas firm, we read the rule. Here is what it actually says about email, voice, and the conflict problem nobody is talking about.</div>
             <span className="blog-featured-cta">Read article <span>→</span></span>
           </div>
         </Link>
