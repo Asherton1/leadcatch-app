@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Footer from '../../components/Footer'
 import BlogNav from '../../components/BlogNav'
+import Image from 'next/image'
 import '../blog.css'
 import '../../landing.css'
 
@@ -80,6 +81,10 @@ export default function Post() {
             We build software. We are not a law firm, and nothing here is a substitute for your own counsel. What follows is the diligence we did before proposing a deployment to a Texas practice, written down so a firm can check our reasoning rather than take our word for it.
           </p>
         </div>
+      </div>
+
+      <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
+        <Image src="/blog-rule-703.webp" alt="A single lit window at night" fill style={{ objectFit: 'cover' }} />
       </div>
 
       <div className="blog-post-divider"><hr /></div>

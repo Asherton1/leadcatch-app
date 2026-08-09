@@ -52,7 +52,7 @@ export default function BlogIndex() {
       <div className="blog-featured reveal">
         <Link href="/blog/can-a-law-firm-follow-up-on-an-abandoned-intake-form" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
-            <Image src="/blog-law-firms-intake.webp" alt="The $2M intake form why law firms leak their best cases before the first call" fill style={{ objectFit: 'cover' }} />
+            <Image src="/blog-rule-703.webp" alt="A single lit window at night" fill style={{ objectFit: 'cover' }} />
           </div>
           <div className="blog-featured-content">
             <div className="blog-featured-tag">Legal Marketing</div>
