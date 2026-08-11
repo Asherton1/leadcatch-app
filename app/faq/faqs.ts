@@ -68,6 +68,39 @@ export const faqCategories: FAQCategory[] = [
     ],
   },
   {
+    name: 'Multi-Location & Franchise',
+    faqs: [
+      {
+        q: 'How does this work across multiple locations?',
+        a: 'It deploys once at the account level and runs across every site you own. For a group with fifteen practices or forty franchise locations, that is one implementation rather than forty. Each location gets its own view, and reporting rolls up so you can see the whole system or drill into a single site.',
+      },
+      {
+        q: 'Can each location see only its own leads?',
+        a: 'Yes. Location managers see their own inquiries. Corporate sees everything, with the ability to compare locations side by side. That comparison is usually the most valuable part — it tends to reveal that two or three locations are producing most of the recovered revenue while others are not working the list at all.',
+      },
+      {
+        q: 'We are a franchisor. Do our franchisees pay, or do we?',
+        a: 'Either, and we have seen both work. Some brands deploy it centrally and fund it as a corporate benefit. Others make it available and let individual franchisees opt in. If you are running franchise development marketing at corporate and local lead generation at the unit level, those are usually configured separately.',
+      },
+      {
+        q: 'Is franchise development a good fit for this?',
+        a: 'It is the highest-value version of the problem we have found. A franchise development inquiry is worth six figures in fees plus years of royalties, and those forms are long because you need financial qualification up front. People start them, reach the net worth question, and stop. That is hesitation rather than disqualification, and today it is indistinguishable from someone who never visited. Recovering one a quarter is not a marginal number.',
+      },
+      {
+        q: 'Our locations use different website platforms. Does that matter?',
+        a: 'No. It is one script tag and it does not care what the site is built on — WordPress, Squarespace, Wix, Webflow, a custom build, or a franchise site provider. If some locations run a corporate template and others built their own, both are covered the same way.',
+      },
+      {
+        q: 'Can recovered leads route to the right location automatically?',
+        a: 'Yes. Leads route based on which site they came from, and they push into whatever CRM that location uses. If you run one system across the whole group, they land in one place with the location tagged.',
+      },
+      {
+        q: 'What does this cost for a multi-location group?',
+        a: 'Enterprise starts at one thousand nine hundred ninety-seven dollars a month and is priced per deployment rather than per location. What moves the number is the number of sites, the integrations required, and the reporting you need. A group with a lot of locations and simple requirements often costs less than a smaller group with complex routing and custom reporting.',
+      },
+    ],
+  },
+  {
     name: 'Integrations',
     faqs: [
       {
