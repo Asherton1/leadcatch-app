@@ -17,8 +17,36 @@ export const faqCategories: FAQCategory[] = [
         a: 'ReCapture watches every form on your site and detects when a visitor starts filling it out but leaves without submitting. We capture the email and partial info they entered, score the lead, and (on Pro) automatically reach out via SMS, email, or AI voice callback within 60 seconds — recovering revenue that would otherwise vanish.',
       },
       {
+        q: 'Does it actually work on mobile?',
+        a: 'Yes, and this is worth knowing because it is where most tools quietly fail. On iOS, a normal browser request gets killed the moment a page unloads \u2014 so when someone fills in a form on their phone and closes the tab, the capture is sent and then cancelled mid-flight. It looks like it works in testing and silently drops the lead in the real world. We found this in our own product and rebuilt the exit path around sendBeacon, which browsers are specifically built to complete after a page closes. If you are evaluating other recovery tools, test one on a phone before you believe the demo.',
+      },
+      {
+        q: 'Why does mobile matter so much?',
+        a: 'Because that is where the inquiries are. In most of the industries we serve, well over half of form starts happen on a phone, outside business hours, when nobody is at the desk. A recovery tool that works on desktop and fails on mobile is missing the majority of what it was bought to catch. The dashboard shows you your own mobile share rather than making you take our word for it.',
+      },
+      {
+        q: 'What happens if someone abandons the same form twice?',
+        a: 'They are matched to the existing record rather than creating a duplicate, and the follow-up logic accounts for what was already sent. Someone who came back and tried again is a stronger signal than a first abandonment, and their intent score reflects that.',
+      },
+      {
+        q: 'Does this work if we do not have much traffic?',
+        a: 'It depends on what a customer is worth to you, not on traffic volume. If you get forty form starts a month and lose twenty-five of them, recovering two or three is meaningful when a client is worth thousands. If your average customer is worth eighty dollars, this is the wrong product regardless of traffic. The honest test is your customer value, not your visitor count.',
+      },
+      {
         q: 'What is Live Visitors?',
         a: 'It shows who is on your site right now — what page they are on, where they came from, what device, and an intent score that climbs as they engage. When someone opens your form, you see it happen. When they leave without submitting, you already know who they were. Most recovery tools tell you about someone after they are gone. This is the part before that.',
+      },
+      {
+        q: 'What is the attention strip?',
+        a: 'When a high-intent inquiry from the last forty-eight hours has not been contacted, a strip appears at the top of the dashboard. It opens to show each person waiting, how long they have been waiting, and what the matter is worth. Work the list and it disappears. It is the only thing on the page that can be finished, which is the difference between a dashboard someone checks monthly and one an intake team opens every morning.',
+      },
+      {
+        q: 'What does the intent score actually mean?',
+        a: 'It reflects how far someone got and how long they spent before leaving. Someone who filled six fields over four minutes is a different prospect from someone who typed a name and closed the tab. The score bands them hot, warm, or cool so a team knows where to spend the hour they have rather than working a list top to bottom.',
+      },
+      {
+        q: 'What does your free form audit actually tell me?',
+        a: 'What we can measure and nothing more \u2014 how your form is built, how many fields it asks for, whether abandonment tracking exists, what analytics can and cannot see inside it, and how it compares to benchmarks for your industry. We deliberately do not estimate your lost revenue. We do not know your traffic or your average customer value, and those are numbers only you have. Most audits guess at that figure. We took ours out on purpose.',
       },
       {
         q: 'What does the dashboard actually show me?',
@@ -56,6 +84,14 @@ export const faqCategories: FAQCategory[] = [
       {
         q: 'Can I customize the AI voice script?',
         a: "Yes. Pro and Enterprise plans get full script editing in the dashboard. You set the greeting, the qualifying questions, the booking flow, and the closing. Marissa speaks your business's tone, knows your services, and respects your guardrails (for example: don't quote pricing on the call).",
+      },
+      {
+        q: 'Why offer AI voice at all if you tell law firms to turn it off?',
+        a: 'Because it is the right tool in some places and the wrong tool in others. For a med spa or a dealership, a callback within sixty seconds while someone is still deciding is enormously effective. For a Texas law firm, a live automated call runs into Rule 7.03 and we would rather disable it than defend it. Every channel is a switch. The judgment is in knowing which ones to leave off, and any vendor who tells you everything is always appropriate has not thought about it.',
+      },
+      {
+        q: 'Can I control when messages go out?',
+        a: 'Yes. You set the delay \u2014 anywhere from immediate to a couple of hours \u2014 and you set quiet hours, which suppress overnight sends entirely. An instant message to someone who reached out at a difficult moment is often the wrong instinct even where it is permitted. For sensitive verticals we default to a delay measured in hours rather than seconds.',
       },
       {
         q: 'Will this annoy my customers? Is it creepy?',
