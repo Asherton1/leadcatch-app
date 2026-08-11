@@ -33,28 +33,8 @@ export const faqCategories: FAQCategory[] = [
         a: 'It depends on what a customer is worth to you, not on traffic volume. If you get forty form starts a month and lose twenty-five of them, recovering two or three is meaningful when a client is worth thousands. If your average customer is worth eighty dollars, this is the wrong product regardless of traffic. The honest test is your customer value, not your visitor count.',
       },
       {
-        q: 'What is Live Visitors?',
-        a: 'It shows who is on your site right now — what page they are on, where they came from, what device, and an intent score that climbs as they engage. When someone opens your form, you see it happen. When they leave without submitting, you already know who they were. Most recovery tools tell you about someone after they are gone. This is the part before that.',
-      },
-      {
-        q: 'What is the attention strip?',
-        a: 'When a high-intent inquiry from the last forty-eight hours has not been contacted, a strip appears at the top of the dashboard. It opens to show each person waiting, how long they have been waiting, and what the matter is worth. Work the list and it disappears. It is the only thing on the page that can be finished, which is the difference between a dashboard someone checks monthly and one an intake team opens every morning.',
-      },
-      {
-        q: 'What does the intent score actually mean?',
-        a: 'It reflects how far someone got and how long they spent before leaving. Someone who filled six fields over four minutes is a different prospect from someone who typed a name and closed the tab. The score bands them hot, warm, or cool so a team knows where to spend the hour they have rather than working a list top to bottom.',
-      },
-      {
         q: 'What does your free form audit actually tell me?',
         a: 'What we can measure and nothing more \u2014 how your form is built, how many fields it asks for, whether abandonment tracking exists, what analytics can and cannot see inside it, and how it compares to benchmarks for your industry. We deliberately do not estimate your lost revenue. We do not know your traffic or your average customer value, and those are numbers only you have. Most audits guess at that figure. We took ours out on purpose.',
-      },
-      {
-        q: 'What does the dashboard actually show me?',
-        a: 'Ten metrics across two rows. The top row is what is happening now — live visitors, inquiries captured, how much of the form people finish, how long they spend, and what hour your inquiries actually arrive. The bottom row is what it is worth — pipeline at risk, recovered revenue, recovery rate, what share arrives outside business hours, and what share comes from a phone. Each one opens into the detail behind it, including a field-by-field breakdown of exactly where people quit.',
-      },
-      {
-        q: 'Can I export the data?',
-        a: 'Yes. Anything on screen exports to CSV with whatever filters you have applied, including the lead score, completion percentage, time on form, device, and whether a recovery message went out. You can also set the comparison window to whatever period you report on — seven days, fourteen, thirty, ninety, or the current month, with the prior period alongside it.',
       },
       {
         q: 'Does it work with my existing forms?',
@@ -67,6 +47,51 @@ export const faqCategories: FAQCategory[] = [
       {
         q: 'Will it slow down my website?',
         a: 'No. The ReCapture script is under 10KB, loads asynchronously, and adds zero measurable page load time. It does not block rendering, does not run on pages without forms, and has zero impact on Core Web Vitals or SEO.',
+      },
+    ],
+  },
+  {
+    name: 'The Dashboard',
+    faqs: [
+      {
+        q: 'What is Live Visitors?',
+        a: 'It shows who is on your site right now — what page they are on, where they came from, what device, and an intent score that climbs as they engage. When someone opens your form, you see it happen. When they leave without submitting, you already know who they were. Most recovery tools tell you about someone after they are gone. This is the part before that.',
+      },
+      {
+        q: 'What is the attention strip?',
+        a: 'When a high-intent inquiry from the last forty-eight hours has not been contacted, a strip appears at the top of the dashboard. It opens to show each person waiting, how long they have been waiting, and what the matter is worth. Work the list and it disappears. It is the only thing on the page that can be finished, which is the difference between a dashboard someone checks monthly and one an intake team opens every morning.',
+      },
+      {
+        q: 'What does the intent score actually mean?',
+        a: 'It reflects how far someone got and how long they spent before leaving. Someone who filled six fields over four minutes is a different prospect from someone who typed a name and closed the tab. The score bands them hot, warm, or cool so a team knows where to spend the hour they have rather than working a list top to bottom.',
+      },
+      {
+        q: 'What does the dashboard actually show me?',
+        a: 'Ten metrics across two rows. The top row is what is happening now — live visitors, inquiries captured, how much of the form people finish, how long they spend, and what hour your inquiries actually arrive. The bottom row is what it is worth — pipeline at risk, recovered revenue, recovery rate, what share arrives outside business hours, and what share comes from a phone. Each one opens into the detail behind it, including a field-by-field breakdown of exactly where people quit.',
+      },
+      {
+        q: 'Can I export the data?',
+        a: 'Yes. Anything on screen exports to CSV with whatever filters you have applied, including the lead score, completion percentage, time on form, device, and whether a recovery message went out. You can also set the comparison window to whatever period you report on — seven days, fourteen, thirty, ninety, or the current month, with the prior period alongside it.',
+      },
+      {
+        q: 'Can I see which field people quit at?',
+        a: 'Yes, and it is usually the most actionable thing on the dashboard. A field-by-field chart shows how many people completed each question. Everyone fills in a name. Fewer give a phone number. Almost nobody reaches an open text box asking them to describe their situation. The steepest fall is the field costing you the most, and removing it, reordering it, or making it optional is normally the fastest improvement available.',
+      },
+      {
+        q: 'Does it show when inquiries actually come in?',
+        a: 'A twenty-four hour breakdown split between business hours and after hours, with your busiest windows ranked underneath. For most high-consideration businesses the peak is well outside office hours, from a phone. If yours sits at nine in the evening, that is a staffing conversation rather than a marketing one, and this is the chart that starts it.',
+      },
+      {
+        q: 'Can I tell which captured leads are worth chasing first?',
+        a: 'The pipeline value splits into hot, warm, and cool based on how far each person got before leaving. Hot inquiries got furthest into the form and are the most likely to respond, so that is where a team should spend the hour they have rather than working a list top to bottom.',
+      },
+      {
+        q: 'Can I see how recovery is performing over time?',
+        a: 'The recovery funnel shows captured, then emailed, then contacted, then converted. Seeing them separately matters because the gaps mean different things \u2014 a gap between captured and contacted is a speed problem, and a gap between contacted and converted is a follow-up problem. One is fixed with automation, the other with a conversation.',
+      },
+      {
+        q: 'Can I change the reporting period?',
+        a: 'Every number on the dashboard responds to one control. Last seven days, fourteen, thirty, ninety, or the current calendar month, with the comparison against the prior period of the same length sitting beside it. Set it to whatever window you report on and the whole page follows.',
       },
     ],
   },
