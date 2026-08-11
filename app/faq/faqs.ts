@@ -252,6 +252,22 @@ export const faqCategories: FAQCategory[] = [
     name: 'Results & Support',
     faqs: [
       {
+        q: 'Are these actually good leads, or just people who changed their mind?',
+        a: 'This is the right thing to be skeptical about, so here is the honest version. Someone who typed their name, email, and phone number into your form and then left is not a browser. They are further into your funnel than almost anyone else who visited your site that day. Most abandonment is interruption rather than rejection \u2014 a phone rang, a child needed something, they got to a field they were not ready to answer. The intent score exists precisely so you can tell the difference. Someone who filled six fields over four minutes is a different prospect from someone who typed a name and closed the tab, and we band them so your team works the strong ones first.',
+      },
+      {
+        q: 'How do we know it is actually working?',
+        a: 'Because before ReCapture, those people had no record anywhere. There is no missed call, no partial submission, no line in a report. So every captured inquiry is by definition something you did not have. The dashboard tracks the full funnel \u2014 captured, contacted, converted \u2014 and everything exports to CSV, so you can reconcile it against your own booking system rather than taking our number for it.',
+      },
+      {
+        q: 'Who actually follows up with these leads?',
+        a: 'The automated message goes out on its own \u2014 that part requires nobody. What happens next is a decision. Some businesses let the email do the work and only get involved when someone replies. Others treat the dashboard as a call list and have their front desk work it each morning, which is what the attention strip is built for. The honest answer is that recovery rates go up when a human works the list, and the businesses that get the most out of this are the ones who give it fifteen minutes a day rather than none.',
+      },
+      {
+        q: 'How many customers do you have?',
+        a: 'We are early, and we are choosing partners deliberately rather than selling on volume. That means the businesses working with us now get direct access to the person who built the product, and the roadmap gets shaped around how they actually operate rather than around a guess. If that sounds like the wrong stage to be at, it probably is for some. If it sounds like the right one, we would rather have that conversation honestly than pad a customer count.',
+      },
+      {
         q: "What's a typical recovery rate?",
         a: 'Conservative benchmark: 10% of abandoned forms convert to qualified leads. Some verticals run higher (medical/wellness 12-15%) — depends on your offer, your follow-up speed, and AI voice activation. Most clients see ROI break-even within 60 days.',
       },
