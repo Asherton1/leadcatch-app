@@ -175,10 +175,10 @@ export default function BlogIndex() {
             </div>
             <div style={{ padding: '1.5rem 2rem 2rem' }}>
               <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Privacy</div>
-              <div style={{ fontSize: '0.8rem', color: '#666', marginBottom: '0.75rem' }}><span>August 14, 2026</span><span style={{ margin: '0 0.5rem' }}>\u00b7</span><span>6 min read</span></div>
+              <div style={{ fontSize: '0.8rem', color: '#666', marginBottom: '0.75rem' }}><span>August 14, 2026</span><span style={{ margin: '0 0.5rem' }}>&middot;</span><span>6 min read</span></div>
               <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>Is It Lead Recovery, or Is It a Keylogger? How to Tell the Difference</div>
               <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: 1.6, marginBottom: '1rem' }}>Recovery tools and keystroke loggers look identical in a demo. Four questions get you a straight answer from any vendor.</div>
-              <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Read article \u2192</span>
+              <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Read article &rarr;</span>
             </div>
           </Link>
           <Link href="/blog/the-form-abandonment-compliance-problem" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
