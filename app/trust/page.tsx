@@ -66,13 +66,13 @@ export default function TrustPage() {
           </h2>
           <div style={{ color: "#a1a1aa", lineHeight: 1.8, fontSize: "0.95rem" }}>
             <p>
-              When a visitor begins typing into a form on a customer’s website, ReCapture captures: name, email, phone number, free-text fields they have filled in, the time spent on the form, the device type, and the page URL.
+              When a visitor begins typing into a form on a customer’s website, ReCapture captures the contact details a visitor enters — name, email, and phone number — along with non-content metadata: the time spent on the form, the device type, and the page URL. It does not capture the contents of free-text fields such as a message or "describe your situation" box.
             </p>
             <p>
               We do not capture: passwords, payment card data, social security numbers, credit card CVVs, or any field marked sensitive by the customer or detected by our defensive filters.
             </p>
             <p>
-              Capture happens on every keystroke after the first character is entered, transmitted via heartbeat at 15-second intervals and on tab close, page navigation, and exit-intent. Visitors who never start typing are never captured.
+              ReCapture reads a field's value after the visitor finishes entering it — it does not log individual keystrokes and does not record or replay browsing sessions. Captured contact details are transmitted when a form is abandoned: on tab close, page navigation, exit-intent, or via a periodic check while the form sits incomplete. Visitors who never start a form are never captured.
             </p>
             <p>
               EU, UK, and Swiss visitors are blocked at the tracker level via IP geolocation. We do not capture data from these regions. If our IP detection fails, the tracker fails closed (no capture).

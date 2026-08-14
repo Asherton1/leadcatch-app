@@ -18,7 +18,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: 'Does it actually work on mobile?',
-        a: 'Yes, and this is worth knowing because it is where most tools quietly fail. On iOS, a normal browser request gets killed the moment a page unloads \u2014 so when someone fills in a form on their phone and closes the tab, the capture is sent and then cancelled mid-flight. It looks like it works in testing and silently drops the lead in the real world. We found this in our own product and rebuilt the exit path around sendBeacon, which browsers are specifically built to complete after a page closes. If you are evaluating other recovery tools, test one on a phone before you believe the demo.',
+        a: 'Yes, and this is worth knowing because it is where most tools quietly fail. On iOS, a normal browser request gets killed the moment a page unloads — so when someone fills in a form on their phone and closes the tab, the capture is sent and then cancelled mid-flight. It looks like it works in testing and silently drops the lead in the real world. We found this in our own product and rebuilt the exit path around sendBeacon, which browsers are specifically built to complete after a page closes. If you are evaluating other recovery tools, test one on a phone before you believe the demo.',
       },
       {
         q: 'Why does mobile matter so much?',
@@ -34,7 +34,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: 'What does your free form audit actually tell me?',
-        a: 'What we can measure and nothing more \u2014 how your form is built, how many fields it asks for, whether abandonment tracking exists, what analytics can and cannot see inside it, and how it compares to benchmarks for your industry. We deliberately do not estimate your lost revenue. We do not know your traffic or your average customer value, and those are numbers only you have. Most audits guess at that figure. We took ours out on purpose.',
+        a: 'What we can measure and nothing more — how your form is built, how many fields it asks for, whether abandonment tracking exists, what analytics can and cannot see inside it, and how it compares to benchmarks for your industry. We deliberately do not estimate your lost revenue. We do not know your traffic or your average customer value, and those are numbers only you have. Most audits guess at that figure. We took ours out on purpose.',
       },
       {
         q: 'Does it work with my existing forms?',
@@ -87,7 +87,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: 'Can I see how recovery is performing over time?',
-        a: 'The recovery funnel shows captured, then emailed, then contacted, then converted. Seeing them separately matters because the gaps mean different things \u2014 a gap between captured and contacted is a speed problem, and a gap between contacted and converted is a follow-up problem. One is fixed with automation, the other with a conversation.',
+        a: 'The recovery funnel shows captured, then emailed, then contacted, then converted. Seeing them separately matters because the gaps mean different things — a gap between captured and contacted is a speed problem, and a gap between contacted and converted is a follow-up problem. One is fixed with automation, the other with a conversation.',
       },
       {
         q: 'Can I change the reporting period?',
@@ -116,7 +116,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: 'Can I control when messages go out?',
-        a: 'Yes. You set the delay \u2014 anywhere from immediate to a couple of hours \u2014 and you set quiet hours, which suppress overnight sends entirely. An instant message to someone who reached out at a difficult moment is often the wrong instinct even where it is permitted. For sensitive verticals we default to a delay measured in hours rather than seconds.',
+        a: 'Yes. You set the delay — anywhere from immediate to a couple of hours — and you set quiet hours, which suppress overnight sends entirely. An instant message to someone who reached out at a difficult moment is often the wrong instinct even where it is permitted. For sensitive verticals we default to a delay measured in hours rather than seconds.',
       },
       {
         q: 'Will this annoy my customers? Is it creepy?',
@@ -232,7 +232,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: 'Do we need to mark messages as ADVERTISEMENT?',
-        a: 'That is your firm\u2019s call and we support either position. Rule 7.03(d)(2) requires solicitation communications to be plainly designated, and Comment 10 specifies that for e-mail the first word of the subject line must be ADVERTISEMENT in capital letters. A firm may reasonably conclude this is unnecessary because the message responds to a request for information. A firm may equally decide to mark it out of caution. It is a template setting on our end.',
+        a: "That is your firm's call and we support either position. Rule 7.03(d)(2) requires solicitation communications to be plainly designated, and Comment 10 specifies that for e-mail the first word of the subject line must be ADVERTISEMENT in capital letters. A firm may reasonably conclude this is unnecessary because the message responds to a request for information. A firm may equally decide to mark it out of caution. It is a template setting on our end.",
       },
       {
         q: 'Do you integrate with Clio and Lawmatics?',
@@ -278,15 +278,15 @@ export const faqCategories: FAQCategory[] = [
     faqs: [
       {
         q: 'Are these actually good leads, or just people who changed their mind?',
-        a: 'This is the right thing to be skeptical about, so here is the honest version. Someone who typed their name, email, and phone number into your form and then left is not a browser. They are further into your funnel than almost anyone else who visited your site that day. Most abandonment is interruption rather than rejection \u2014 a phone rang, a child needed something, they got to a field they were not ready to answer. The intent score exists precisely so you can tell the difference. Someone who filled six fields over four minutes is a different prospect from someone who typed a name and closed the tab, and we band them so your team works the strong ones first.',
+        a: 'This is the right thing to be skeptical about, so here is the honest version. Someone who typed their name, email, and phone number into your form and then left is not a browser. They are further into your funnel than almost anyone else who visited your site that day. Most abandonment is interruption rather than rejection — a phone rang, a child needed something, they got to a field they were not ready to answer. The intent score exists precisely so you can tell the difference. Someone who filled six fields over four minutes is a different prospect from someone who typed a name and closed the tab, and we band them so your team works the strong ones first.',
       },
       {
         q: 'How do we know it is actually working?',
-        a: 'Because before ReCapture, those people had no record anywhere. There is no missed call, no partial submission, no line in a report. So every captured inquiry is by definition something you did not have. The dashboard tracks the full funnel \u2014 captured, contacted, converted \u2014 and everything exports to CSV, so you can reconcile it against your own booking system rather than taking our number for it.',
+        a: 'Because before ReCapture, those people had no record anywhere. There is no missed call, no partial submission, no line in a report. So every captured inquiry is by definition something you did not have. The dashboard tracks the full funnel — captured, contacted, converted — and everything exports to CSV, so you can reconcile it against your own booking system rather than taking our number for it.',
       },
       {
         q: 'Who actually follows up with these leads?',
-        a: 'The automated message goes out on its own \u2014 that part requires nobody. What happens next is a decision. Some businesses let the email do the work and only get involved when someone replies. Others treat the dashboard as a call list and have their front desk work it each morning, which is what the attention strip is built for. The honest answer is that recovery rates go up when a human works the list, and the businesses that get the most out of this are the ones who give it fifteen minutes a day rather than none.',
+        a: 'The automated message goes out on its own — that part requires nobody. What happens next is a decision. Some businesses let the email do the work and only get involved when someone replies. Others treat the dashboard as a call list and have their front desk work it each morning, which is what the attention strip is built for. The honest answer is that recovery rates go up when a human works the list, and the businesses that get the most out of this are the ones who give it fifteen minutes a day rather than none.',
       },
       {
         q: 'How many customers do you have?',
