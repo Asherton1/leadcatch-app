@@ -75,7 +75,7 @@ export default function Post() {
       </div>
 
       <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
-        <Image src="/blog-compliance-problem.webp" alt="How to tell honest form-abandonment recovery from keystroke logging" fill style={{ objectFit: 'cover' }} />
+        <Image src="/blog-lead-recovery-keylogger.webp" alt="How to tell honest form-abandonment recovery from keystroke logging" fill style={{ objectFit: 'cover' }} />
       </div>
 
       <div className="blog-post-divider"><hr /></div>

@@ -50,19 +50,19 @@ export default function BlogIndex() {
       </section>
 
       <div className="blog-featured reveal">
-        <Link href="/blog/can-a-law-firm-follow-up-on-an-abandoned-intake-form" className="blog-featured-card">
+        <Link href="/blog/lead-recovery-or-keylogger" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
-            <Image src="/blog-rule-703.webp" alt="A single lit window at night" fill style={{ objectFit: 'cover' }} />
+            <Image src="/blog-lead-recovery-keylogger.webp" alt="Lead recovery versus keystroke logging" fill style={{ objectFit: 'cover' }} />
           </div>
           <div className="blog-featured-content">
-            <div className="blog-featured-tag">Legal Marketing</div>
+            <div className="blog-featured-tag">Privacy</div>
             <div className="blog-featured-meta">
-              <span className="blog-featured-date">August 9, 2026</span>
+              <span className="blog-featured-date">August 14, 2026</span>
               <span className="blog-featured-dot" />
-              <span className="blog-featured-readtime">8 min read</span>
+              <span className="blog-featured-readtime">6 min read</span>
             </div>
-            <div className="blog-featured-title">Can a Law Firm Follow Up on an Intake Form Nobody Submitted?</div>
-            <div className="blog-featured-excerpt">Texas Disciplinary Rule 7.03 restricts how lawyers may solicit. Before deploying to a Texas firm, we read the rule. Here is what it actually says about email, voice, and the conflict problem nobody is talking about.</div>
+            <div className="blog-featured-title">Is It Lead Recovery, or Is It a Keylogger? How to Tell the Difference</div>
+            <div className="blog-featured-excerpt">Form-abandonment recovery and keystroke logging can look identical in a demo. They are not the same thing, and the difference is where your legal exposure lives. Four questions get a straight answer from any vendor.</div>
             <span className="blog-featured-cta">Read article <span>→</span></span>
           </div>
         </Link>
@@ -169,15 +169,15 @@ export default function BlogIndex() {
               <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Read article →</span>
             </div>
           </Link>
-          <Link href="/blog/lead-recovery-or-keylogger" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
+          <Link href="/blog/can-a-law-firm-follow-up-on-an-abandoned-intake-form" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
             <div style={{ position: 'relative', width: '100%', height: '200px' }}>
-              <Image src="/blog-compliance-problem.webp" alt="Lead recovery versus keystroke logging" fill style={{ objectFit: 'cover' }} />
+              <Image src="/blog-rule-703.webp" alt="A single lit window at night" fill style={{ objectFit: 'cover' }} />
             </div>
             <div style={{ padding: '1.5rem 2rem 2rem' }}>
-              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Privacy</div>
-              <div style={{ fontSize: '0.8rem', color: '#666', marginBottom: '0.75rem' }}><span>August 14, 2026</span><span style={{ margin: '0 0.5rem' }}>&middot;</span><span>6 min read</span></div>
-              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>Is It Lead Recovery, or Is It a Keylogger? How to Tell the Difference</div>
-              <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: 1.6, marginBottom: '1rem' }}>Recovery tools and keystroke loggers look identical in a demo. Four questions get you a straight answer from any vendor.</div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Legal Marketing</div>
+              <div style={{ fontSize: '0.8rem', color: '#666', marginBottom: '0.75rem' }}><span>August 9, 2026</span><span style={{ margin: '0 0.5rem' }}>&middot;</span><span>8 min read</span></div>
+              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>Can a Law Firm Follow Up on an Intake Form Nobody Submitted?</div>
+              <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: 1.6, marginBottom: '1rem' }}>Texas Rule 7.03 restricts how lawyers may solicit. Before deploying to a Texas firm, we read the rule. Here is what it actually says.</div>
               <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Read article &rarr;</span>
             </div>
           </Link>
