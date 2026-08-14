@@ -426,6 +426,8 @@ const RELATIONS: Record<string, PageRelations> = {
     relatedTopics: {
       title: 'Related compliance docs',
       links: [
+        { name: 'Privacy & Data', href: '/privacy', description: 'Exactly what we capture and never capture' },
+        { name: 'Terms of Service', href: '/terms', description: 'The terms governing use of ReCapture' },
         { name: 'BAA & HIPAA', href: '/baa', description: 'Business Associate Agreement details' },
         { name: 'Privacy Template', href: '/legal/client-privacy-template', description: 'Privacy policy copy-paste language' },
         { name: 'Enterprise', href: '/enterprise', description: 'White-glove setup with BAA' },
