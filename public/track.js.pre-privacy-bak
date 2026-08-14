@@ -417,11 +417,8 @@
         } catch (e) { /* silent */ }
       }
       var key = el.name || el.id || el.getAttribute('data-name') || el.type;
-      // PRIVACY: only store fields we classify as contact info (name/email/phone).
-      // Free-text fields (e.g. "describe your legal matter" / symptom boxes) are
-      // intentionally NOT stored, transmitted, or forwarded anywhere.
+      if (key) self.formData[key] = val;
       var type = classifyField(el);
-      if (key && type !== 'other') self.formData[key] = val;
       if (type !== 'other' && val) {
         if (type === 'name') {
           // Forms often split first and last. Keep both instead of overwriting.
