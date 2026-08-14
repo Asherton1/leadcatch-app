@@ -42,7 +42,7 @@ const sections = [
   {
     id: "capture",
     heading: "What We Capture",
-    body: `When you begin typing into a form on our website, the following information may be captured before you submit the form: name, email address, phone number, free-text fields you have filled in, time spent on the form, device type, and the page URL.
+    body: `When you begin typing into a form on our website, the following information may be captured before you submit the form: name, email address, and phone number, along with non-content metadata such as time spent on the form, device type, and the page URL. Free-text fields you type (such as a message or \u201Cdescribe your situation\u201D box) are not captured.
 
 We do not capture passwords, payment card data, social security numbers, credit card security codes, or any other sensitive fields. Visitors who never start typing into a form are not captured.`,
   },
