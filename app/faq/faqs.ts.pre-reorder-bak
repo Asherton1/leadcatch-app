@@ -51,39 +51,6 @@ export const faqCategories: FAQCategory[] = [
     ],
   },
   {
-    name: 'Privacy & Compliance',
-    faqs: [
-      {
-        q: 'Is it legal to capture data from a form that was never submitted?',
-        a: 'Yes, and it is the same mechanism ecommerce has used for abandoned carts for over a decade. The visitor voluntarily entered the information on your site, into your form, for the purpose of contacting you. Nothing is taken from another site, nothing is purchased, and no tracking follows them anywhere else. The capture happens on your own property, on data the person chose to type there.',
-      },
-      {
-        q: 'What fields do you refuse to capture?',
-        a: 'Passwords, Social Security numbers, payment card fields, and anything matching those patterns are excluded before the data leaves the browser. This is enforced by field type and by pattern matching, not by configuration, so it cannot be accidentally switched off.',
-      },
-      {
-        q: 'How long do you keep captured data?',
-        a: 'You set the retention period. Records can be purged on a schedule or deleted individually on request. If someone asks to be removed, that removal is complete rather than a suppression flag. A data processing agreement is available.',
-      },
-      {
-        q: 'Do we need consent language on our form?',
-        a: 'For email recovery, the visitor entering their address on your form is the relevant act. If you enable SMS or voice, you need explicit consent language at the point of entry, and we provide template wording for that — though your own counsel should approve the final version. For regulated industries we would rather you over-document this than under-document it.',
-      },
-      {
-        q: 'Is my data really HIPAA-compliant?',
-        a: 'ReCapture is HIPAA-ready by design across all plans — our subprocessor stack and architecture support healthcare deployments. Business Associate Agreements (BAAs) are executed for Enterprise customers upon signed contract. If you handle PHI, contact hello@userecapture.com to discuss Enterprise deployment.',
-      },
-      {
-        q: 'Are you GDPR / CCPA compliant?',
-        a: 'Yes. ReCapture supports explicit consent flags, right-to-be-forgotten deletion within 72 hours, full audit logs, and zero third-party data sharing. We never sell or rent data. Ask about our DPA (Data Processing Agreement) if your business operates in the EU or California.',
-      },
-      {
-        q: 'Who owns the lead data?',
-        a: 'You do. 100%. ReCapture is the processor; you are the controller. All captured leads are exportable as CSV anytime. If you cancel, we delete all data within 30 days — or immediately on written request.',
-      },
-    ],
-  },
-  {
     name: 'The Dashboard',
     faqs: [
       {
@@ -270,6 +237,39 @@ export const faqCategories: FAQCategory[] = [
       {
         q: 'Do you integrate with Clio and Lawmatics?',
         a: 'Yes. Clio Grow has a lead inbox API built for exactly this — you generate a token in your settings and recovered inquiries land in the pipeline you already run. Lawmatics has several routes including Zapier and their REST API. Which one makes sense depends on how your intake actually works, so we would want to hear that before recommending a path rather than guessing at it.',
+      },
+    ],
+  },
+  {
+    name: 'Privacy & Compliance',
+    faqs: [
+      {
+        q: 'Is it legal to capture data from a form that was never submitted?',
+        a: 'Yes, and it is the same mechanism ecommerce has used for abandoned carts for over a decade. The visitor voluntarily entered the information on your site, into your form, for the purpose of contacting you. Nothing is taken from another site, nothing is purchased, and no tracking follows them anywhere else. The capture happens on your own property, on data the person chose to type there.',
+      },
+      {
+        q: 'What fields do you refuse to capture?',
+        a: 'Passwords, Social Security numbers, payment card fields, and anything matching those patterns are excluded before the data leaves the browser. This is enforced by field type and by pattern matching, not by configuration, so it cannot be accidentally switched off.',
+      },
+      {
+        q: 'How long do you keep captured data?',
+        a: 'You set the retention period. Records can be purged on a schedule or deleted individually on request. If someone asks to be removed, that removal is complete rather than a suppression flag. A data processing agreement is available.',
+      },
+      {
+        q: 'Do we need consent language on our form?',
+        a: 'For email recovery, the visitor entering their address on your form is the relevant act. If you enable SMS or voice, you need explicit consent language at the point of entry, and we provide template wording for that — though your own counsel should approve the final version. For regulated industries we would rather you over-document this than under-document it.',
+      },
+      {
+        q: 'Is my data really HIPAA-compliant?',
+        a: 'ReCapture is HIPAA-ready by design across all plans — our subprocessor stack and architecture support healthcare deployments. Business Associate Agreements (BAAs) are executed for Enterprise customers upon signed contract. If you handle PHI, contact hello@userecapture.com to discuss Enterprise deployment.',
+      },
+      {
+        q: 'Are you GDPR / CCPA compliant?',
+        a: 'Yes. ReCapture supports explicit consent flags, right-to-be-forgotten deletion within 72 hours, full audit logs, and zero third-party data sharing. We never sell or rent data. Ask about our DPA (Data Processing Agreement) if your business operates in the EU or California.',
+      },
+      {
+        q: 'Who owns the lead data?',
+        a: 'You do. 100%. ReCapture is the processor; you are the controller. All captured leads are exportable as CSV anytime. If you cancel, we delete all data within 30 days — or immediately on written request.',
       },
     ],
   },
