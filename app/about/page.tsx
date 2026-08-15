@@ -6,6 +6,7 @@ import '../blog/blog.css'
 import '../landing.css'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
+import StatCounter from '../components/StatCounter'
 import './about.css'
 
 export const metadata = {
@@ -79,7 +80,7 @@ export default function AboutPage() {
       <section className="about-story-v2">
         <div className="about-story-v2-inner">
 
-          <details className="about-story-v2-section reveal" data-num="01" open>
+          <details className="about-story-v2-section reveal" data-num="01">
             <summary className="about-story-v2-summary">
               <p className="about-story-v2-eyebrow">The problem</p>
               <h2 className="about-story-v2-headline">The thing that kept nagging me.</h2>
@@ -148,11 +149,12 @@ export default function AboutPage() {
         <div className="about-clients-inner">
           <p className="about-clients-eyebrow">The work</p>
           <h2 className="about-clients-headline">A decade in the trenches.</h2>
+          <p className="about-clients-lede">Before ReCapture, I spent ten years running paid acquisition for the kind of businesses where a single lead is worth thousands &mdash; med spas, dental groups, luxury real estate, high-end services. I watched the money go in and the leads come out, and I watched a huge share of them vanish in the gap nobody measured. ReCapture is what a decade of that gap taught me to build.</p>
+
+          <StatCounter />
 
           <p className="about-clients-closer">
-            $10M+ in managed ad spend. <span className="about-clients-closer-accent">38+ long-term client relationships.</span>
-            <br />
-            One ReCapture, born out of all of it.
+            <span className="about-clients-closer-accent">One ReCapture</span>, born out of all of it.
           </p>
         </div>
       </section>

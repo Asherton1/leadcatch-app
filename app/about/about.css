@@ -1007,3 +1007,69 @@
 @media (prefers-reduced-motion: reduce) {
   .about-story-v2-section .about-story-v2-body { transition: none; }
 }
+
+/* ===== The Work — animated stat block ===== */
+.about-clients-lede {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #b8b8b8;
+  max-width: 680px;
+  margin: 1.5rem 0 3rem;
+}
+@media (max-width: 768px) {
+  .about-clients-lede { text-align: center; margin-left: auto; margin-right: auto; }
+}
+
+.about-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,107,53,0.14);
+  border: 1px solid rgba(255,107,53,0.14);
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 0 0 3rem;
+}
+.about-stat-cell {
+  background: #0d0d0d;
+  padding: 2.25rem 1.5rem;
+  text-align: center;
+  position: relative;
+  transition: background 0.3s ease;
+}
+.about-stat-cell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(255,107,53,0.10), rgba(255,107,53,0) 65%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.about-stat-cell:hover { background: #111; }
+.about-stat-cell:hover::before { opacity: 1; }
+.about-stat-num {
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #fff;
+  background: linear-gradient(180deg, #fff 0%, #ff9d6b 140%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.6rem;
+  font-variant-numeric: tabular-nums;
+}
+.about-stat-label {
+  font-size: 0.82rem;
+  color: #888;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+@media (max-width: 768px) {
+  .about-stat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px) {
+  .about-stat-grid { grid-template-columns: 1fr; }
+}
