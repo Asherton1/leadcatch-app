@@ -1110,11 +1110,29 @@
   width: 100% !important;
   max-width: 820px !important;
   margin: 3.5rem auto !important;
-  animation: none !important;
 }
 /* Story sections must not depend on ScrollReveal either - stops sporadic behavior */
 .about-story-v2-section.reveal,
 .about-story-v2-section:not(.revealed) {
   opacity: 1 !important;
   transform: none !important;
+}
+
+/* Restore shimmer on every divider and force all of them visible */
+.about-story-v2-divider {
+  background: linear-gradient(90deg, transparent, rgba(255,107,53,0.12) 18%, rgba(255,107,53,0.6) 50%, rgba(255,107,53,0.12) 82%, transparent) !important;
+  background-size: 220% 100% !important;
+  animation: blog-divider-shimmer 5.5s ease-in-out infinite !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  height: 1px !important;
+  max-width: 820px !important;
+  margin: 3.5rem auto !important;
+}
+/* nth-child safeguard: ensure no divider is skipped by any sibling rule */
+.about-story-v2-inner > .about-story-v2-divider:nth-of-type(n) {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
 }
