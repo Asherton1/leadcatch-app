@@ -8,6 +8,7 @@ import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
 import StatCounter from '../components/StatCounter'
 import './about.css'
+import StoryAccordion from '../components/StoryAccordion'
 
 export const metadata = {
   title: 'About ReCapture — Form Abandonment Recovery Built in Dallas, TX',
@@ -37,6 +38,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="about-page">
+      <StoryAccordion />
       <BlogNav />
       <ScrollReveal />
 
