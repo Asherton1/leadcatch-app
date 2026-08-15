@@ -598,3 +598,30 @@
   .faq-cat-title,
   .faq-list { position: relative; z-index: 1; }
 }
+
+/* --- Jump-to-section: offset + flash highlight --- */
+/* Belt-and-suspenders offset in case the JS scroll is bypassed (e.g. hash links) */
+.faq-cat {
+  scroll-margin-top: 110px;
+}
+
+/* Temporary highlight when a category is jumped to, so it's obvious where you landed */
+.faq-cat-flash {
+  animation: faqCatFlash 1.6s ease-out;
+  border-radius: 12px;
+}
+
+@keyframes faqCatFlash {
+  0% {
+    background: rgba(255, 107, 53, 0.10);
+    box-shadow: inset 3px 0 0 0 #ff6b35;
+  }
+  70% {
+    background: rgba(255, 107, 53, 0.06);
+    box-shadow: inset 3px 0 0 0 #ff6b35;
+  }
+  100% {
+    background: transparent;
+    box-shadow: inset 3px 0 0 0 rgba(255, 107, 53, 0);
+  }
+}

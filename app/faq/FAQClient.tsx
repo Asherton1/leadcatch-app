@@ -93,7 +93,18 @@ export default function FAQClient() {
 
   const jump = (idx: number) => {
     setActive(idx)
-    sectionRefs.current[idx]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const el = sectionRefs.current[idx]
+    if (!el) return
+    // Offset for the sticky nav so the heading lands just below it, not under it.
+    const NAV_OFFSET = 110
+    const y = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET
+    window.scrollTo({ top: y, behavior: 'smooth' })
+    // Temporary highlight so it's obvious which section you landed on.
+    el.classList.remove('faq-cat-flash')
+    // force reflow so the animation restarts even on repeat clicks
+    void el.offsetWidth
+    el.classList.add('faq-cat-flash')
+    window.setTimeout(() => el.classList.remove('faq-cat-flash'), 1600)
   }
 
   const handleGlow = (e: MouseEvent<HTMLDivElement>) => {
