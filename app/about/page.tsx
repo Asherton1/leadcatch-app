@@ -47,7 +47,7 @@ export default function AboutPage() {
             <span className="about-hero-v2-headline-primary">The leads were always there.</span>{' '}
             <span className="about-hero-v2-headline-muted">Nobody was watching.</span>
           </h1>
-          <p className="about-hero-v2-sub">I spent over a decade running ad campaigns for high-ticket businesses and got tired of watching good money disappear into a black hole between the first keystroke and the submit button.</p>
+          <p className="about-hero-v2-sub">I spent over a decade running ad campaigns for high-ticket businesses and got tired of watching good money disappear into a black hole between the moment someone starts a form and the moment they submit it.</p>
         </div>
       </section>
 
@@ -86,7 +86,7 @@ export default function AboutPage() {
               <span className="about-story-v2-chevron" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
             </summary>
             <div className="about-story-v2-body">
-              <p>I&apos;ve managed over $100K in monthly ad spend across 38+ clients. Med spas, dental practices, luxury real estate, high-end service businesses &mdash; the kind of companies where a single lead is worth $1,500 to $10,000.</p>
+              <p>For over a decade I ran campaigns for med spas, dental practices, luxury real estate, and high-end service businesses &mdash; the kind of companies where a single lead is worth $1,500 to $10,000.</p>
               <p>The playbook was always the same: build the funnel, run the ads, optimize the landing page, watch the leads come in. And the leads did come in. But something always nagged at me.</p>
               <p>Google Analytics showed the traffic. The CRM showed the submissions. But neither one showed me the people in between &mdash; the ones who clicked the form, started typing their name, got distracted, and disappeared. Those people were invisible. And there were a LOT of them.</p>
             </div>
@@ -117,7 +117,7 @@ export default function AboutPage() {
               <span className="about-story-v2-chevron" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
             </summary>
             <div className="about-story-v2-body">
-              <p>ReCapture is the recovery layer for high-ticket service businesses. We started with form abandonment because it&apos;s the most tangible problem to solve &mdash; one script tag, capture every visitor who starts typing into your contact form, even if they never hit submit. No form migration. No complex setup.</p>
+              <p>ReCapture is the recovery layer for high-ticket service businesses. We started with form abandonment because it&apos;s the most tangible problem to solve &mdash; one script tag captures the contact details a visitor enters into your form &mdash; name, email, phone &mdash; even if they never hit submit. No form migration. No complex setup.</p>
               <p>You see every lead in a clean dashboard with their name, email, phone number, and the estimated dollar value they represent. Follow up manually, or let ReCapture send automated recovery emails on your behalf.</p>
               <p>But form abandonment is just the entry point. The underlying capability &mdash; capturing intent before it&apos;s lost and acting on it within 60 seconds &mdash; applies across the entire service business stack. Phone abandonment. Booking funnel drop-off. Quote requests. Live chat exits. Every recovery surface high-ticket businesses are losing right now.</p>
               <p>It&apos;s the platform I wished existed for the last ten years. Now it does.</p>
@@ -134,7 +134,7 @@ export default function AboutPage() {
             </summary>
             <div className="about-story-v2-body">
               <p>Most form abandonment tools were built between 2018 and 2023, before TCPA tightened in April 2025, before state privacy laws started enforcing meaningfully, before HIPAA enforcement actions started reaching marketing technology vendors. Most of them bolted compliance on after the fact, if at all.</p>
-              <p>I took the opposite approach. ReCapture has a master do-not-contact list that enforces opt-outs across SMS, email, and voice automatically. Our tracker geo-blocks 32 countries (EU, UK, Switzerland, EEA) at the IP level &mdash; we don&apos;t capture data we shouldn&apos;t have. Our AI voice agent identifies herself as automated within the first 15 seconds of every call. Every recovery email includes a CAN-SPAM-compliant footer with a one-click unsubscribe link signed against forgery. ReCapture is HIPAA-ready by design — architecture, subprocessor stack, and BAA template are in place. Healthcare deployments are activated for Enterprise customers upon signed commitment.</p>
+              <p>I took the opposite approach and built the guardrails in from the start: contact-fields-only capture (never keystrokes, never free-text), EU/UK/Switzerland geo-blocking, a master do-not-contact list that enforces opt-outs across SMS, email, and voice, and an AI voice agent that identifies itself as automated within the first 15 seconds of every call. ReCapture is HIPAA-ready by design, with a BAA available for Enterprise healthcare deployments.</p>
               <p>I built it that way because I&apos;ve sat across the table from enterprise legal teams. They have the same five questions every time. The vendors who can&apos;t answer those questions credibly don&apos;t close the deal. I wanted to be the vendor who could.</p>
               <p>Everything is published openly at our <Link href="/trust" style={{ color: '#ff6b35', textDecoration: 'none', fontWeight: 600 }}>trust page</Link> &mdash; what we capture, what we don&apos;t, our subprocessor list, our security posture, our retention policies. No NDAs. No sales calls required. Read it yourself.</p>
             </div>
