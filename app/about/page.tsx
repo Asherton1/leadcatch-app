@@ -147,26 +147,7 @@ export default function AboutPage() {
       <section className="about-clients reveal">
         <div className="about-clients-inner">
           <p className="about-clients-eyebrow">The work</p>
-          <h2 className="about-clients-headline">I&apos;ve built campaigns and lead systems for:</h2>
-
-          <div className="about-clients-list">
-            <div className="about-clients-row">
-              <span className="about-clients-name">ESD Health</span>
-              <span className="about-clients-desc">Pilot sleep diagnostics</span>
-            </div>
-            <div className="about-clients-row">
-              <span className="about-clients-name">HerScan</span>
-              <span className="about-clients-desc">Mobile breast ultrasound screening</span>
-            </div>
-            <div className="about-clients-row">
-              <span className="about-clients-name">DECA Dental</span>
-              <span className="about-clients-desc">Multi-location dental</span>
-            </div>
-            <div className="about-clients-row">
-              <span className="about-clients-name">Ideal Dental</span>
-              <span className="about-clients-desc">Multi-location dental</span>
-            </div>
-          </div>
+          <h2 className="about-clients-headline">A decade in the trenches.</h2>
 
           <p className="about-clients-closer">
             $10M+ in managed ad spend. <span className="about-clients-closer-accent">38+ long-term client relationships.</span>

@@ -910,3 +910,70 @@
     transform: translateX(-50%);
   }
 }
+
+/* ===== Founder photo — ambient glow-up ===== */
+
+/* Soft ambient bloom behind the frame so the portrait feels lit */
+.about-founder-v2-frame::after {
+  content: '';
+  position: absolute;
+  inset: -28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, rgba(255,107,53,0.22), rgba(255,107,53,0) 68%);
+  filter: blur(14px);
+  opacity: 0.55;
+  z-index: -1;
+  pointer-events: none;
+  animation: founderBloom 6s ease-in-out infinite;
+}
+
+@keyframes founderBloom {
+  0%, 100% { opacity: 0.42; transform: scale(1); }
+  50%      { opacity: 0.68; transform: scale(1.06); }
+}
+
+/* Gentle continuous float on the whole frame */
+.about-founder-v2-frame {
+  animation: founderFloat 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes founderFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-7px); }
+}
+
+/* Animated gradient edge on the image itself (layered over the existing frame border) */
+.about-founder-v2-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(255,107,53,0.9), rgba(255,107,53,0.1), rgba(255,107,53,0.7));
+  background-size: 200% 200%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: founderEdge 5s ease infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes founderEdge {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Richer lift on hover — deepen the existing warm */
+.about-founder-v2-image:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 0 0 1px rgba(255,107,53,0.6), 0 26px 70px rgba(255,107,53,0.20);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-founder-v2-frame,
+  .about-founder-v2-frame::after,
+  .about-founder-v2-image::after { animation: none; }
+}
