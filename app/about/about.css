@@ -1077,3 +1077,14 @@
 @media (max-width: 420px) {
   .about-stat-grid { grid-template-columns: 1fr; }
 }
+
+/* ===== FIX: ensure ALL story dividers render (were being clipped by collapse) ===== */
+.about-story-v2-divider {
+  display: block !important;
+  height: 1px !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  grid-template-rows: none !important;
+  margin: 4rem auto !important;
+  max-width: 820px !important;
+}
