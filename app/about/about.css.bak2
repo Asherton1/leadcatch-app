@@ -1070,25 +1070,79 @@
   .about-stat-grid { grid-template-columns: 1fr; }
 }
 
-/* ===== Story section dividers — single implementation ===== */
+/* ===== FIX: ensure ALL story dividers render (were being clipped by collapse) ===== */
+.about-story-v2-divider {
+  display: block !important;
+  height: 1px !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  grid-template-rows: none !important;
+  margin: 4rem auto !important;
+  max-width: 820px !important;
+}
+
+/* JS-driven accordion body */
+.about-story-v2-section .about-story-v2-body { overflow: hidden; height: 0; opacity: 0; transition: height 0.42s cubic-bezier(0.25,1,0.5,1), opacity 0.35s ease; }
+.about-story-v2-section[open] .about-story-v2-body { height: auto; opacity: 1; }
+
+/* Dividers must always occupy space, even when all sections are collapsed */
+.about-story-v2-divider {
+  display: block !important;
+  width: 100% !important;
+  min-height: 1px !important;
+  height: 1px !important;
+  flex: 0 0 1px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  margin: 3.5rem auto !important;
+  max-width: 820px !important;
+}
+
+/* Dividers must never depend on ScrollReveal - force fully visible always */
+.about-story-v2-divider,
+.about-story-v2-divider.reveal,
+.about-story-v2-divider:not(.revealed) {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+  display: block !important;
+  height: 1px !important;
+  width: 100% !important;
+  max-width: 820px !important;
+  margin: 3.5rem auto !important;
+}
+/* Story sections must not depend on ScrollReveal either - stops sporadic behavior */
+.about-story-v2-section.reveal,
+.about-story-v2-section:not(.revealed) {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Restore shimmer on every divider and force all of them visible */
+.about-story-v2-divider {
+  background: linear-gradient(90deg, transparent, rgba(255,107,53,0.12) 18%, rgba(255,107,53,0.6) 50%, rgba(255,107,53,0.12) 82%, transparent) !important;
+  background-size: 220% 100% !important;
+  animation: blog-divider-shimmer 5.5s ease-in-out infinite !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  height: 1px !important;
+  max-width: 820px !important;
+  margin: 3.5rem auto !important;
+}
+/* nth-child safeguard: ensure no divider is skipped by any sibling rule */
+.about-story-v2-inner > .about-story-v2-divider:nth-of-type(n) {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Divider as a border on the section itself - cannot be masked by sibling state */
 .about-story-v2-divider { display: none !important; }
 
-.about-story-v2-section + .about-story-v2-section {
-  position: relative;
-  padding-top: 3.5rem;
-  margin-top: 3.5rem;
-}
-.about-story-v2-section + .about-story-v2-section::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 820px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,107,53,0.12) 18%, rgba(255,107,53,0.6) 50%, rgba(255,107,53,0.12) 82%, transparent);
-  background-size: 220% 100%;
-  animation: blog-divider-shimmer 5.5s ease-in-out infinite;
-  pointer-events: none;
+.about-story-v2-section + .about-story-v2-section,
+.about-story-v2-section ~ .about-story-v2-section {
+  border-top: 1px solid rgba(255,107,53,0.28) !important;
+  padding-top: 3.5rem !important;
+  margin-top: 3.5rem !important;
 }
