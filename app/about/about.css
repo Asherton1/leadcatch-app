@@ -504,7 +504,7 @@
   line-height: 1.75;
   letter-spacing: -0.005em;
   color: #c4c4c4;
-  margin: 5rem auto 5rem;
+  margin: 0 auto;
   max-width: 580px;
   text-align: center;
   padding: 0 1.25rem;
@@ -813,18 +813,21 @@
 .about-story-v2-section::before {
   content: attr(data-num);
   position: absolute;
-  top: -1rem;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
   font-family: 'Inter', sans-serif;
-  font-size: clamp(5rem, 13vw, 10rem);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
   font-weight: 800;
   line-height: 1;
-  letter-spacing: -0.05em;
-  color: rgba(255, 107, 53, 0.06);
+  letter-spacing: -0.04em;
+  color: rgba(255, 107, 53, 0.22);
   pointer-events: none;
   user-select: none;
   z-index: 0;
+}
+@media (max-width: 900px) {
+  .about-story-v2-section::before { display: none; }
 }
 .about-story-v2-summary,
 .about-story-v2-body { position: relative; z-index: 1; }
@@ -1014,7 +1017,8 @@
   line-height: 1.8;
   color: #b8b8b8;
   max-width: 680px;
-  margin: 1.5rem 0 3rem;
+  margin: 1.5rem auto 3rem;
+  text-align: center;
 }
 @media (max-width: 768px) {
   .about-clients-lede { text-align: center; margin-left: auto; margin-right: auto; }
