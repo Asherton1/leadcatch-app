@@ -599,29 +599,54 @@
   .faq-list { position: relative; z-index: 1; }
 }
 
-/* --- Jump-to-section: offset + flash highlight --- */
-/* Belt-and-suspenders offset in case the JS scroll is bypassed (e.g. hash links) */
+/* --- Jump-to-section: landing spotlight --- */
+/* Offset so the heading lands just below the sticky nav, not under it */
 .faq-cat {
   scroll-margin-top: 110px;
+  position: relative;
 }
 
-/* Temporary highlight when a category is jumped to, so it's obvious where you landed */
+/* The section itself: a gentle lift-and-settle when landed on */
 .faq-cat-flash {
-  animation: faqCatFlash 1.6s ease-out;
-  border-radius: 12px;
+  animation: faqCatLift 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 14px;
 }
 
-@keyframes faqCatFlash {
-  0% {
-    background: rgba(255, 107, 53, 0.10);
-    box-shadow: inset 3px 0 0 0 #ff6b35;
-  }
-  70% {
-    background: rgba(255, 107, 53, 0.06);
-    box-shadow: inset 3px 0 0 0 #ff6b35;
-  }
-  100% {
-    background: transparent;
-    box-shadow: inset 3px 0 0 0 rgba(255, 107, 53, 0);
-  }
+/* A soft radial spotlight that blooms from the top and dissolves.
+   Rendered on ::before so it floats over the section without shifting layout. */
+.faq-cat-flash::before {
+  content: '';
+  position: absolute;
+  inset: -12px -16px;
+  border-radius: 18px;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(255, 107, 53, 0.16), rgba(255, 107, 53, 0) 60%);
+  box-shadow: 0 0 0 1px rgba(255, 107, 53, 0.18), 0 12px 40px -8px rgba(255, 107, 53, 0.22);
+  opacity: 0;
+  animation: faqCatBloom 1.8s ease-out forwards;
+}
+
+/* Keep content above the glow */
+.faq-cat-flash > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes faqCatLift {
+  0%   { transform: translateY(5px) scale(0.992); }
+  100% { transform: translateY(0)   scale(1); }
+}
+
+@keyframes faqCatBloom {
+  0%   { opacity: 0; }
+  18%  { opacity: 1; }
+  60%  { opacity: 0.85; }
+  100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-cat-flash,
+  .faq-cat-flash::before { animation: none; }
 }
