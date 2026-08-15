@@ -1136,3 +1136,13 @@
   visibility: visible !important;
   display: block !important;
 }
+
+/* Divider as a border on the section itself - cannot be masked by sibling state */
+.about-story-v2-divider { display: none !important; }
+
+.about-story-v2-section + .about-story-v2-section,
+.about-story-v2-section ~ .about-story-v2-section {
+  border-top: 1px solid rgba(255,107,53,0.28) !important;
+  padding-top: 3.5rem !important;
+  margin-top: 3.5rem !important;
+}
