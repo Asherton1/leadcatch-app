@@ -977,3 +977,33 @@
   .about-founder-v2-frame::after,
   .about-founder-v2-image::after { animation: none; }
 }
+
+/* ===== Smooth-animating story dropdowns (no JS) ===== */
+/* Wrap the body in a grid that animates from 0fr to 1fr on open */
+.about-story-v2-section .about-story-v2-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+              margin-top 0.45s ease,
+              opacity 0.4s ease;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0 !important;
+}
+.about-story-v2-section .about-story-v2-body > * {
+  min-height: 0; /* required for grid-rows collapse to work */
+}
+.about-story-v2-section[open] .about-story-v2-body {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 2rem !important;
+}
+
+/* Chevron gets a smoother rotate */
+.about-story-v2-chevron {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-story-v2-section .about-story-v2-body { transition: none; }
+}
