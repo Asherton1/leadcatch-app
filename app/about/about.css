@@ -1127,3 +1127,11 @@
 .about-story-v2-divider { display: none !important; }
 .about-story-v2-section[data-num="01"]::after { display: none !important; }
 .about-story-v2-section[data-num="01"] { padding-bottom: 0 !important; }
+
+/* Restore even vertical rhythm between story sections (dividers removed) */
+.about-story-v2-section + .about-story-v2-section {
+  margin-top: 4.5rem !important;
+}
+.about-story-v2-section {
+  padding-bottom: 0 !important;
+}
