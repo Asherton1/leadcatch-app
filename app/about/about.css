@@ -1070,3 +1070,20 @@
   .about-stat-grid { grid-template-columns: 1fr; }
 }
 
+
+/* Lines off */
+.about-story-v2-divider { display: none !important; }
+
+/* Even spacing where the dividers used to be */
+.about-story-v2-section + .about-story-v2-section { margin-top: 5rem !important; }
+
+/* Ghost number aligned to the heading row of its own section */
+.about-story-v2-section::before {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  bottom: auto !important;
+}
+.about-story-v2-section[open]::before {
+  top: 2.2rem !important;
+  transform: none !important;
+}
