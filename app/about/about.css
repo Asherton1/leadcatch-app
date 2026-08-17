@@ -1082,3 +1082,20 @@
   animation: blog-divider-shimmer 5.5s ease-in-out infinite;
   opacity: 1;
 }
+
+/* Keep dividers in flow and above expanding section content */
+.about-story-v2-divider {
+  position: relative;
+  z-index: 5;
+  flex-shrink: 0;
+  clear: both;
+}
+/* Ensure expanding sections cannot overlap the divider below them */
+.about-story-v2-section {
+  overflow: visible;
+  margin-bottom: 0;
+}
+.about-story-v2-section .about-story-v2-body {
+  position: relative;
+  z-index: 1;
+}
