@@ -9,7 +9,7 @@ export default function DemoBuilder() {
     if (document.getElementById('rc-tracker')) return
     const el = document.createElement('script')
     el.id = 'rc-tracker'
-    el.src = `https://www.userecapture.com/track.js?key=${API_KEY}`
+    el.src = 'https://www.userecapture.com/track.js?key=sk_live_prestonridge_8f3c21d9b47e0a56c8d2f91b6e4a7305'
     el.async = true
     document.body.appendChild(el)
   }, [])
