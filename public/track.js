@@ -275,7 +275,16 @@
     });
   }
 
-  var TRACK_URL      = baseUrl + '/api/track';
+  // Post to the PAGE's origin, not the script's. A page served from
+  // example.com loading the script from www.example.com would otherwise
+  // make a cross-origin POST that the browser silently drops.
+  var TRACK_URL = (function () {
+    try {
+      var h = win.location.hostname || '';
+      if (/(^|\.)userecapture\.com$/i.test(h)) return win.location.origin + '/api/track';
+    } catch (e) {}
+    return baseUrl + '/api/track';
+  })();
   var HEARTBEAT_MS   = 15000;
   var FIELD_SELECTOR = 'input:not([type=hidden]):not([type=submit]):not([type=button])' +
                        ':not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]),' +
@@ -547,6 +556,17 @@
     });
     observer.observe(doc.body || doc.documentElement, { childList: true, subtree: true });
   }
+
+  // Document-level fallback: if a form was never registered (SPA hydration
+  // timing, shadow DOM, late render), register it the moment a user types in it.
+  doc.addEventListener('input', function (e) {
+    try {
+      var el = e.target;
+      if (!el || !el.matches || !el.matches(FIELD_SELECTOR)) return;
+      var f = el.form || (el.closest && el.closest('form'));
+      if (f && !f._rcTracked) initForm(f);
+    } catch (err) {}
+  }, true);
 
   // --- Exit-intent detection ---
   // Fires when mouse moves toward top of viewport (toward browser chrome)
