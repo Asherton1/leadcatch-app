@@ -520,6 +520,19 @@
 
   doc.querySelectorAll('form').forEach(initForm);
 
+  // Re-scan repeatedly: SPA frameworks (Next.js/React) may hydrate forms after
+  // this script runs, and MutationObserver misses in-place hydration.
+  function rescanForms() {
+    try { doc.querySelectorAll('form').forEach(initForm); } catch (e) {}
+  }
+  if (doc.readyState !== 'complete') {
+    win.addEventListener('load', rescanForms);
+  }
+  setTimeout(rescanForms, 300);
+  setTimeout(rescanForms, 1000);
+  setTimeout(rescanForms, 2500);
+  win.setInterval(rescanForms, 5000);
+
   if (win.MutationObserver) {
     var observer = new MutationObserver(function (mutations) {
       mutations.forEach(function (m) {
