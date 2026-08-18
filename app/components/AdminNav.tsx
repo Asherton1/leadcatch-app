@@ -14,17 +14,29 @@ export default function AdminNav() {
   const router = useRouter()
   const [signingOut, setSigningOut] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
+  const [clientLabel, setClientLabel] = useState('Dashboard')
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user?.email && ADMIN_EMAILS.includes(data.user.email)) {
+    supabase.auth.getUser().then(async ({ data }) => {
+      const email = data.user?.email
+      if (email && ADMIN_EMAILS.includes(email)) {
         setIsAdmin(true)
+        return
+      }
+      if (data.user?.id) {
+        const { data: rows } = await supabase
+          .from('clients')
+          .select('company_name, name')
+          .eq('user_id', data.user.id)
+          .limit(1)
+        const c = rows?.[0]
+        if (c) setClientLabel(c.company_name || c.name || 'Dashboard')
       }
     })
   }, [])
 
   const allLinks = [
-    { href: '/dashboard', label: 'Dashboard', adminOnly: false },
+    { href: '/dashboard', label: clientLabel, adminOnly: false },
     { href: '/admin', label: 'Admin', adminOnly: true },
     { href: '/dashboard/outreach', label: 'Outreach', adminOnly: true },
     { href: '/admin/sms-templates', label: 'SMS', adminOnly: true },

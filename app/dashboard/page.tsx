@@ -1274,14 +1274,6 @@ export default function Dashboard() {
         <div className="logo">
           
             <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><Logo /></span>
-            {selectedClient && (
-              <>
-                <span style={{ width: '1px', height: '22px', background: 'rgba(255,255,255,0.15)', margin: '0 4px' }} />
-                <span style={{ fontSize: '1.05rem', fontWeight: 600, color: '#fff', letterSpacing: '-0.01em', whiteSpace: 'nowrap' }}>
-                  {displayName(selectedClient)}
-                </span>
-              </>
-            )}
         </div>
         <div className="header-right">
             <button className="logout-btn" onClick={handleLogout} disabled={loggingOut}>
