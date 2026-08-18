@@ -816,6 +816,20 @@ export default function Dashboard() {
       })
   }, [selectedClient?.id])
 
+  // ── Poll for new leads every 10s (real-time, no refresh needed) ───────────
+  useEffect(() => {
+    if (!selectedClient) return
+    const iv = setInterval(async () => {
+      const { data, error } = await supabase
+        .from('leads')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data')
+        .eq('client_id', selectedClient.id)
+        .order('created_at', { ascending: false })
+      if (!error && data) setLeads(data as Lead[])
+    }, 10000)
+    return () => clearInterval(iv)
+  }, [selectedClient?.id])
+
   // ── Logout ─────────────────────────────────────────────────────────────────
   async function handleLogout() {
     setLoggingOut(true)
