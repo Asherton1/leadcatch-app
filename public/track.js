@@ -285,6 +285,10 @@
 
   function isLoggedInAdmin() {
     try {
+      // Demo pages live on our own domain, so the dashboard auth cookie would
+      // otherwise block capture on every demo we run. Always capture there.
+      var dp = win.location.pathname || '';
+      if (dp.indexOf('/demo-') === 0) return false;
       var cookies = doc.cookie || '';
       // Supabase auth cookie => visitor is logged in to the dashboard (staff/owner)
       return /sb-[\w-]+-auth-token/.test(cookies);
