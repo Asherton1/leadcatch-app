@@ -404,3 +404,53 @@ html {
 
 /* Always reserve scrollbar space so layout doesn't shift between pages */
 html { scrollbar-gutter: stable; }
+
+/* ── Signal section (ad platform feed) ───────────────────────────────────── */
+.signal-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #ff6b35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+.signal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.25rem;
+  margin-top: 3.5rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.signal-col-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ff6b35;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+.signal-col-body {
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: #a1a1aa;
+  margin: 0;
+}
+.signal-close {
+  margin: 3.5rem 0 0;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: #fff;
+  max-width: 60ch;
+}
+@media (max-width: 860px) {
+  .signal-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2.25rem;
+  }
+  .signal-close { margin-top: 2.5rem; padding-top: 2rem; font-size: 1rem; }
+}

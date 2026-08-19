@@ -114,6 +114,48 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section className="lc-section signal-section reveal">
+        <p className="signal-eyebrow">The part nobody else does</p>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
+          Your ad platforms are learning from a fraction of your demand.
+        </h2>
+        <p className="section-subtitle">
+          Meta and Google only find out someone was interested when they press submit.
+        </p>
+
+        <div className="signal-grid">
+          <div className="signal-col">
+            <p className="signal-col-label">What they see</p>
+            <p className="signal-col-body">
+              The people who finished. Every optimization decision, every lookalike
+              audience, every dollar of budget allocation gets made from that group alone.
+            </p>
+          </div>
+          <div className="signal-col">
+            <p className="signal-col-label">What they miss</p>
+            <p className="signal-col-body">
+              Everyone who typed their name, their email, their phone number, and then
+              got pulled away. Real intent, demonstrated and then invisible.
+            </p>
+          </div>
+          <div className="signal-col">
+            <p className="signal-col-label">What we do</p>
+            <p className="signal-col-body">
+              ReCapture sends those people to Meta&apos;s Conversions API and Google Ads
+              as server-side conversion events, deduplicated against your existing pixel
+              so nothing is counted twice.
+            </p>
+          </div>
+        </div>
+
+        <p className="signal-close">
+          You keep running your campaigns exactly as you do now. The platforms just stop
+          working from the leftovers.
+        </p>
+      </section>
+
+      <div className="section-divider" />
+
       <section className="lc-section how-it-works-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Three Steps to Recovered Revenue</h2>
         <p className="section-subtitle">No complex setup. No dev team required. Just results.</p>
