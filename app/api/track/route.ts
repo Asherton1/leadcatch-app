@@ -516,7 +516,19 @@ export async function POST(request: NextRequest) {
   if (email || phone) {
     const conversionPromises: Promise<unknown>[] = []
 
-    if (client.meta_capi_enabled && client.meta_pixel_id && client.meta_access_token) {
+    // Fire conversions ONCE per lead, not on every heartbeat upsert.
+    // track.js re-sends every 15s while the visitor is on the page, so
+    // without this guard a single lead generates a stream of duplicate events.
+    const { data: convState } = await supabase
+      .from('leads')
+      .select('meta_conversion_sent, google_conversion_sent')
+      .eq('id', lead.id)
+      .single()
+
+    const metaAlreadySent = convState?.meta_conversion_sent === true
+    const googleAlreadySent = convState?.google_conversion_sent === true
+
+    if (!metaAlreadySent && client.meta_capi_enabled && client.meta_pixel_id && client.meta_access_token) {
       conversionPromises.push(
         sendMetaConversion({
           pixelId: client.meta_pixel_id,
@@ -535,6 +547,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (
+      !googleAlreadySent &&
       client.google_ads_enabled &&
       client.google_ads_customer_id &&
       client.google_ads_conversion_id &&
@@ -558,6 +571,26 @@ export async function POST(request: NextRequest) {
     // batch so logs appear in this request's runtime
     if (conversionPromises.length > 0) {
       await Promise.allSettled(conversionPromises)
+
+      // Mark as sent so subsequent heartbeat upserts for this same lead
+      // don't re-fire conversions. Guarded above by meta/google_conversion_sent.
+      const convUpdate: Record<string, boolean> = {}
+      if (!metaAlreadySent && client.meta_capi_enabled && client.meta_pixel_id && client.meta_access_token) {
+        convUpdate.meta_conversion_sent = true
+      }
+      if (
+        !googleAlreadySent &&
+        client.google_ads_enabled &&
+        client.google_ads_customer_id &&
+        client.google_ads_conversion_id &&
+        client.google_ads_conversion_label &&
+        client.google_ads_refresh_token
+      ) {
+        convUpdate.google_conversion_sent = true
+      }
+      if (Object.keys(convUpdate).length > 0) {
+        await supabase.from('leads').update(convUpdate).eq('id', lead.id)
+      }
     }
   }
 
