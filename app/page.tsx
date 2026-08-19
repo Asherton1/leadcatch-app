@@ -52,9 +52,11 @@ export default function LandingPage() {
               <span className="hero-highlight">Never Hit Submit.</span>
             </h1>
             <p className="hero-subtitle hero-animate-delay">
-              Most of them start the form at night, from a phone, right after something happened.
-              By the time anyone sees the inbox in the morning, they&apos;ve called someone else.
-              ReCapture catches them while it still matters.
+              They start the form at night, from a phone, and something pulls them away.
+              Your CRM never sees them. Neither does Meta or Google, so your campaigns
+              keep optimizing against a fraction of the real demand. ReCapture catches
+              those people, follows up while it still matters, and feeds them back to
+              your ad platforms as conversion events.
             </p>
             <div className="cta-group hero-animate-delay2">
               <Link href="/start-trial" className="cta-primary">Start your 7-day free trial</Link>
