@@ -444,3 +444,18 @@
 }
 .settings-color-custom::-webkit-color-swatch-wrapper { padding: 0; }
 .settings-color-custom::-webkit-color-swatch { border: none; border-radius: 50%; }
+
+/* Back to dashboard link */
+.settings-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: #8b8b8b;
+  text-decoration: none;
+  margin-bottom: 0.85rem;
+  letter-spacing: 0.01em;
+  transition: color 0.18s ease;
+}
+.settings-back:hover { color: #ff6b35; }
+.settings-back svg { flex-shrink: 0; }

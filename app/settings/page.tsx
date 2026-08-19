@@ -317,6 +317,10 @@ export default function SettingsPage() {
       <div className="settings-container">
         <div className="settings-header">
           <div>
+            <a href="/dashboard" className="settings-back">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              Back to dashboard
+            </a>
             <h1 className="settings-title">Settings</h1>
             <p className="settings-subtitle">Configure how ReCapture works for your business</p>
           </div>
