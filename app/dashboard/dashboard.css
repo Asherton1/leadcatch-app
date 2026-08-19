@@ -2744,3 +2744,24 @@ body:has(.modal-backdrop) {
   .intent-signals-body { gap: 2.25rem; }
   .intent-signal-value { font-size: 2.3rem; }
 }
+
+/* Intent Signals — enlarged */
+.intent-signals { margin: 3.5rem 0 2.75rem !important; padding: 2.5rem 0 2.25rem !important; }
+.intent-signals-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 0.85rem;
+  line-height: 1.25;
+}
+.intent-signals-sub { font-size: 0.98rem !important; line-height: 1.75 !important; max-width: 62ch !important; margin-bottom: 2.5rem !important; }
+.intent-signals-body { gap: 5rem !important; }
+.intent-signal-value { font-size: 4rem !important; }
+.intent-signal-label { font-size: 0.88rem !important; }
+.intent-signals-note { margin-top: 2.25rem !important; font-size: 0.79rem !important; }
+@media (max-width: 640px) {
+  .intent-signals-title { font-size: 1.25rem; }
+  .intent-signal-value { font-size: 3rem !important; }
+  .intent-signals-body { gap: 2.5rem !important; }
+}

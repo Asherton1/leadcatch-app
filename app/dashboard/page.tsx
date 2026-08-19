@@ -1630,9 +1630,15 @@ export default function Dashboard() {
         <div className="intent-signals">
           <div className="intent-signals-head">
             <span className="intent-signals-eyebrow">Intent Signals Sent</span>
+            <h2 className="intent-signals-title">
+              Signal your ad platforms could not see
+            </h2>
             <p className="intent-signals-sub">
-              People who started a form on your site and never submitted. Your ad platforms
-              had no record any of them existed.
+              Meta and Google only learn from the people who press submit. Everyone who
+              started a form on your site and left is invisible to them &mdash; so your
+              campaigns optimize against a fraction of the real demand. ReCapture sends
+              those people through as conversion events, so the platforms are working
+              from the full picture instead of the leftovers.
             </p>
           </div>
           <div className="intent-signals-body">
