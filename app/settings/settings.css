@@ -459,3 +459,16 @@
 }
 .settings-back:hover { color: #ff6b35; }
 .settings-back svg { flex-shrink: 0; }
+
+/* Settings header alignment fix */
+.settings-header {
+  align-items: flex-end !important;
+  padding-top: 2.25rem;
+}
+.settings-back {
+  margin-bottom: 1.15rem !important;
+  font-size: 0.78rem !important;
+}
+.settings-header .settings-save-btn {
+  margin-bottom: 0.35rem;
+}
