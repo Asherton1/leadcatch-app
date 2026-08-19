@@ -526,6 +526,7 @@ export async function POST(request: NextRequest) {
           leadPhone: (phone as string) ?? null,
           leadName: (name as string) ?? null,
           estimatedValue: estimated_value,
+          sessionId: (session_id as string) ?? null,
           eventSourceUrl: request.headers.get('referer') ?? undefined,
           ipAddress: request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? undefined,
           userAgent: request.headers.get('user-agent') ?? undefined,
