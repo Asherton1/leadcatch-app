@@ -26,6 +26,8 @@ interface Client {
 }
 
 interface Lead {
+  meta_conversion_sent?: boolean | null
+  google_conversion_sent?: boolean | null
   id: string
   session_id: string
   name: string | null
@@ -773,7 +775,7 @@ export default function Dashboard() {
     const poll = async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
 
@@ -806,7 +808,7 @@ export default function Dashboard() {
     setSearch('')
     supabase
       .from('leads')
-      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data')
+      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent')
       .eq('client_id', selectedClient.id)
       .order('created_at', { ascending: false })
       .then(({ data, error }) => {
@@ -822,7 +824,7 @@ export default function Dashboard() {
     const iv = setInterval(async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
       if (!error && data) setLeads(data as Lead[])
@@ -893,7 +895,9 @@ export default function Dashboard() {
     const avg_time_on_form = total_leads > 0
       ? Math.round(filteredLeads.reduce((s, l) => s + (l.time_on_form ?? 0), 0) / total_leads)
       : 0
-    return { total_leads, emails_deployed, total_revenue_lost, avg_completion_rate, avg_time_on_form }
+    const meta_signals   = filteredLeads.filter(l => l.meta_conversion_sent).length
+    const google_signals = filteredLeads.filter(l => l.google_conversion_sent).length
+    return { total_leads, emails_deployed, total_revenue_lost, avg_completion_rate, avg_time_on_form, meta_signals, google_signals }
   }, [filteredLeads])
 
   // ── Period comparison ─────────────────────────────────────────────────────
@@ -1620,6 +1624,36 @@ export default function Dashboard() {
         </button>
 
       </div>
+
+      {/* ── Intent Signals ──────────────────────────────────────────────────── */}
+      {(stats.meta_signals > 0 || stats.google_signals > 0) && (
+        <div className="intent-signals">
+          <div className="intent-signals-head">
+            <span className="intent-signals-eyebrow">Intent Signals Sent</span>
+            <p className="intent-signals-sub">
+              People who started a form on your site and never submitted. Your ad platforms
+              had no record any of them existed.
+            </p>
+          </div>
+          <div className="intent-signals-body">
+            {stats.meta_signals > 0 && (
+              <div className="intent-signal">
+                <div className="intent-signal-value">{stats.meta_signals}</div>
+                <div className="intent-signal-label">sent to Meta Conversions API</div>
+              </div>
+            )}
+            {stats.google_signals > 0 && (
+              <div className="intent-signal">
+                <div className="intent-signal-value">{stats.google_signals}</div>
+                <div className="intent-signal-label">sent to Google Ads</div>
+              </div>
+            )}
+          </div>
+          <p className="intent-signals-note">
+            Events are deduplicated against your existing pixel, so nothing is double counted.
+          </p>
+        </div>
+      )}
 
       {/* ── Status filter chips ─────────────────────────────────────────────── */}
       <div className="status-chips">
