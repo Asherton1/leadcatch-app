@@ -1718,7 +1718,13 @@ export default function Dashboard() {
       {/* ── Returning Visitors ──────────────────────────────────────────────── */}
       {stats.returning_people > 0 && (
         <div className="returning-panel returning-clickable" onClick={() => setReturningDrawerOpen(true)} role="button" tabIndex={0} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setReturningDrawerOpen(true) } }}>
-          <span className="returning-eyebrow">Returning Intent</span>
+          <div className="returning-head-row">
+            <span className="returning-eyebrow">Returning Intent</span>
+            <span className="returning-cta">
+              View all
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+          </div>
           <h2 className="returning-title">
             {stats.returning_people === 1
               ? 'One person came back and started again.'
