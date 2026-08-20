@@ -1803,10 +1803,10 @@ export default function Dashboard() {
                 <div className="intent-signal-label">sent to Meta Conversions API</div>
               </div>
             )}
-            {stats.meta_signals > 0 && (
+            {stats.returning_people > 0 && (
               <div className="intent-signal">
-                <div className="intent-signal-value">Weighted</div>
-                <div className="intent-signal-label">by observed intent, not flat-rated</div>
+                <div className="intent-signal-value"><CountUp to={stats.returning_attempts} /></div>
+                <div className="intent-signal-label">sent at elevated intent weight</div>
               </div>
             )}
             {stats.google_signals > 0 && (
