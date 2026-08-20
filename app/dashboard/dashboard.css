@@ -3196,3 +3196,13 @@ button.returning-cta:focus-visible {
 @media (max-width: 640px) {
   .attn-row-fresh { font-size: 0.62rem; }
 }
+
+/* Click-to-copy contact in attention strip */
+.attn-copy {
+  cursor: pointer;
+  border-bottom: 1px dashed rgba(255,255,255,0.18);
+  transition: color .15s ease, border-color .15s ease;
+}
+.attn-copy:hover { color: #ff6b35; border-bottom-color: rgba(255,107,53,0.5); }
+.attn-copy.copied { color: #22c55e; border-bottom-color: transparent; }
+.attn-copy:focus-visible { outline: 2px solid rgba(255,107,53,0.5); outline-offset: 2px; }

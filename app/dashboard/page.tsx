@@ -201,6 +201,37 @@ function scoreLead(lead: Lead, returnCount = 1): LeadScore {
 }
 
 
+function CopyContact({ value }: { value: string }) {
+  const [done, setDone] = useState(false)
+  return (
+    <span
+      role="button"
+      tabIndex={0}
+      className={'attn-copy' + (done ? ' copied' : '')}
+      title="Click to copy"
+      onClick={e => {
+        e.stopPropagation()
+        navigator.clipboard.writeText(value).then(() => {
+          setDone(true)
+          setTimeout(() => setDone(false), 1400)
+        }).catch(() => {})
+      }}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          e.stopPropagation()
+          navigator.clipboard.writeText(value).then(() => {
+            setDone(true)
+            setTimeout(() => setDone(false), 1400)
+          }).catch(() => {})
+        }
+      }}
+    >
+      {done ? 'Copied' : value}
+    </span>
+  )
+}
+
 type Freshness = { key: string; label: string; color: string }
 function freshnessOf(iso: string): Freshness {
   const mins = (Date.now() - new Date(iso).getTime()) / 60000
@@ -1634,7 +1665,11 @@ export default function Dashboard() {
                         {fr.key === 'live' && <span className="attn-pulse" aria-hidden="true" />}
                         {l.name || 'Unknown'}
                       </span>
-                      <span className="attn-row-contact">{l.email || l.phone || 'No contact captured'}</span>
+                      <span className="attn-row-contact">
+                        {(l.phone || l.email)
+                          ? <CopyContact value={(l.phone || l.email) as string} />
+                          : 'No contact captured'}
+                      </span>
                     </span>
                     <span className="attn-row-meta">
                       <span className="attn-row-fresh" style={{ color: fr.color }}>{fr.label}</span>
