@@ -1638,6 +1638,7 @@ export default function Dashboard() {
 
       </div>
 
+      <div className="signal-row">
       {/* ── Returning Visitors ──────────────────────────────────────────────── */}
       {stats.returning_people > 0 && (
         <div className="returning-panel">
@@ -1705,6 +1706,7 @@ export default function Dashboard() {
           </p>
         </div>
       )}
+      </div>
 
       {/* ── Status filter chips ─────────────────────────────────────────────── */}
       <div className="status-chips">
