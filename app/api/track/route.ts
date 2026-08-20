@@ -185,6 +185,49 @@ export async function POST(request: NextRequest) {
     : ''
   const estimated_value = TIER_VALUES[planTier] ?? client.avg_lead_value ?? 0
 
+  // ── Intent-weighted signal value ────────────────────────────────────────
+  // The stored estimated_value stays exactly what the client configured.
+  // What we send the ad platforms is that value modulated by observed intent,
+  // so the algorithm learns hardest from the strongest prospects instead of
+  // treating every abandoned form identically. Bounded 0.4x–2.5x so a client's
+  // reporting never sees a figure detached from their own number.
+  const priorStarts = await (async () => {
+    const ident = (email as string) || (phone as string) || ''
+    if (!ident) return 0
+    const col = email ? 'email' : 'phone'
+    const { count } = await supabase
+      .from('leads')
+      .select('id', { count: 'exact', head: true })
+      .eq('client_id', client.id)
+      .eq(col, ident)
+      .neq('session_id', session_id)
+    return count ?? 0
+  })()
+
+  const intentFactor = (() => {
+    let f = 1
+    const fc = Number(fields_completed ?? 0)
+    const tf = Number(total_fields ?? 0)
+    const pct = tf > 0 ? fc / tf : 0
+    if (pct >= 0.8) f += 0.5
+    else if (pct >= 0.6) f += 0.25
+    else if (pct < 0.3) f -= 0.3
+
+    const t = Number(time_on_form ?? 0)
+    if (t >= 90) f += 0.25
+    else if (t < 15) f -= 0.2
+
+    if (priorStarts >= 3) f += 0.9
+    else if (priorStarts === 2) f += 0.6
+    else if (priorStarts === 1) f += 0.35
+
+    if (email && phone) f += 0.15
+
+    return Math.max(0.4, Math.min(2.5, Number(f.toFixed(2))))
+  })()
+
+  const signal_value = Math.round(estimated_value * intentFactor)
+
   const payload = {
     client_id: client.id,
     session_id,
@@ -537,7 +580,7 @@ export async function POST(request: NextRequest) {
           leadEmail: (email as string) ?? null,
           leadPhone: (phone as string) ?? null,
           leadName: (name as string) ?? null,
-          estimatedValue: estimated_value,
+          estimatedValue: signal_value,
           sessionId: (session_id as string) ?? null,
           eventSourceUrl: request.headers.get('referer') ?? undefined,
           ipAddress: request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? undefined,
@@ -562,7 +605,7 @@ export async function POST(request: NextRequest) {
           conversionLabel: client.google_ads_conversion_label,
           leadEmail: (email as string) ?? null,
           leadPhone: (phone as string) ?? null,
-          estimatedValue: estimated_value,
+          estimatedValue: signal_value,
         }).catch(err => console.error('Google Ads dispatch error for lead', lead.id, err))
       )
     }
