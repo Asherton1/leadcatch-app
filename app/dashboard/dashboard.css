@@ -2812,3 +2812,55 @@ body:has(.modal-backdrop) {
   .returning-figures { gap: 2.25rem; }
   .returning-figure-value { font-size: 2.4rem; }
 }
+
+/* ── Returning + Intent panels as full-width cards ───────────────────────── */
+.returning-panel,
+.intent-signals {
+  background: linear-gradient(150deg, #1e1e1e 0%, #171717 55%, #131313 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.055) !important;
+  border-radius: 1.125rem !important;
+  padding: 2.5rem 2.5rem 2.25rem !important;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.045) inset,
+    0 2px 6px rgba(0,0,0,0.35),
+    0 8px 28px rgba(0,0,0,0.2);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.returning-panel { margin: 1.5rem 0 1.25rem !important; border-top: 1px solid rgba(255,255,255,0.055) !important; }
+.intent-signals   { margin: 1.25rem 0 2rem !important; border-top: 1px solid rgba(255,255,255,0.055) !important; border-bottom: 1px solid rgba(255,255,255,0.055) !important; }
+
+.returning-panel:hover,
+.intent-signals:hover {
+  border-color: rgba(255, 107, 53, 0.16) !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.05) inset,
+    0 2px 8px rgba(0,0,0,0.4),
+    0 12px 36px rgba(0,0,0,0.26);
+}
+
+/* hairline accent along the top edge, matching card language */
+.returning-panel::before,
+.intent-signals::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 2.5rem; right: 2.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,107,53,0.35), transparent);
+  opacity: 0.7;
+}
+
+/* figures sit on their own inset row */
+.returning-figures,
+.intent-signals-body {
+  padding-top: 1.75rem !important;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+@media (max-width: 640px) {
+  .returning-panel,
+  .intent-signals { padding: 1.75rem 1.5rem 1.5rem !important; border-radius: 0.875rem !important; }
+  .returning-panel::before,
+  .intent-signals::before { left: 1.5rem; right: 1.5rem; }
+}
