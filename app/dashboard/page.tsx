@@ -141,7 +141,7 @@ interface LeadScore {
   breakdown: ScoreBreakdownItem[]
 }
 
-function scoreLead(lead: Lead): LeadScore {
+function scoreLead(lead: Lead, returnCount = 1): LeadScore {
   const breakdown: ScoreBreakdownItem[] = []
   let score = 0
 
@@ -181,6 +181,19 @@ function scoreLead(lead: Lead): LeadScore {
   }
   score += dataPts
   breakdown.push({ label: 'Form detail richness', points: dataPts, maxPoints: 15 })
+
+  // Repeat intent (up to 25 points) — the strongest signal available, because
+  // it means the person came back on purpose after leaving once.
+  let returnPts = 0
+  if (returnCount >= 4) returnPts = 25
+  else if (returnCount === 3) returnPts = 20
+  else if (returnCount === 2) returnPts = 12
+  score += returnPts
+  breakdown.push({
+    label: returnCount > 1 ? `Returned ${returnCount} times` : 'Returning visitor',
+    points: returnPts,
+    maxPoints: 25,
+  })
 
   if (score >= 70) return { score, label: 'Hot', color: '#ef4444', bg: 'rgba(239,68,68,0.12)', breakdown }
   if (score >= 40) return { score, label: 'Warm', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)', breakdown }
@@ -890,11 +903,11 @@ export default function Dashboard() {
     }
     // Status filter chips: hot/warm/cold use score thresholds, contacted/converted match status field
     if (statusFilter === 'hot') {
-      rows = rows.filter(l => scoreLead(l).score >= 70)
+      rows = rows.filter(l => scoreLead(l, rcFor(l)).score >= 70)
     } else if (statusFilter === 'warm') {
-      rows = rows.filter(l => { const s = scoreLead(l).score; return s >= 50 && s < 70 })
+      rows = rows.filter(l => { const s = scoreLead(l, rcFor(l)).score; return s >= 50 && s < 70 })
     } else if (statusFilter === 'cold') {
-      rows = rows.filter(l => scoreLead(l).score < 50)
+      rows = rows.filter(l => scoreLead(l, rcFor(l)).score < 50)
     } else if (statusFilter === 'contacted') {
       rows = rows.filter(l => l.status === 'contacted')
     } else if (statusFilter === 'converted') {
@@ -942,6 +955,22 @@ export default function Dashboard() {
 
     return { total_leads, emails_deployed, total_revenue_lost, avg_completion_rate, avg_time_on_form, meta_signals, google_signals, returning_people, returning_attempts, most_attempts }
   }, [filteredLeads])
+
+  // Return count per identity — used to weight lead scoring.
+  const returnCounts = useMemo(() => {
+    const m = new Map<string, number>()
+    for (const l of leads) {
+      const key = (l.email ?? l.phone ?? '').trim().toLowerCase()
+      if (!key) continue
+      m.set(key, (m.get(key) ?? 0) + 1)
+    }
+    return m
+  }, [leads])
+
+  const rcFor = (l: Lead) => {
+    const key = (l.email ?? l.phone ?? '').trim().toLowerCase()
+    return key ? (returnCounts.get(key) ?? 1) : 1
+  }
 
   // ── Returning visitor detail (for the drawer) ─────────────────────────────
   const returningDetail = useMemo(() => {
@@ -1216,7 +1245,7 @@ export default function Dashboard() {
 
     const out = bands.map(b => {
       const matched = rows.filter(l => {
-        const sc = scoreLead(l).score
+        const sc = scoreLead(l, rcFor(l)).score
         return sc >= b.min && sc < b.max
       })
       const value = matched.reduce((sum, l) => sum + (l.estimated_value ?? 0), 0)
@@ -1237,7 +1266,7 @@ export default function Dashboard() {
     const rows = leads.filter(l => {
       const recent = new Date(l.created_at).getTime() >= cutoff
       const untouched = !['contacted', 'converted', 'lost'].includes(l.status ?? '')
-      const hot = scoreLead(l).score >= 70
+      const hot = scoreLead(l, rcFor(l)).score >= 70
       return recent && untouched && hot
     })
     const oldest = rows.length > 0
@@ -1320,7 +1349,7 @@ export default function Dashboard() {
     ]
 
     const rows = filteredLeads.map(l => {
-      const sc = scoreLead(l)
+      const sc = scoreLead(l, rcFor(l))
       const completion = l.total_fields > 0
         ? Math.round((l.fields_completed / l.total_fields) * 100)
         : 0
@@ -1443,7 +1472,7 @@ export default function Dashboard() {
           {attnOpen && (
             <div className="attn-body">
               {needsAttention.rows.map(l => {
-                const sc = scoreLead(l)
+                const sc = scoreLead(l, rcFor(l))
                 return (
                   <button key={l.id} className="attn-row" type="button" onClick={() => setModalLead(l)}>
                     <span className="attn-row-main">
