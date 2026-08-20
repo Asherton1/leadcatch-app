@@ -143,7 +143,8 @@ export default function LandingPage() {
             <p className="signal-col-body">
               ReCapture sends those people to Meta&apos;s Conversions API and Google Ads
               as server-side conversion events, deduplicated against your existing pixel
-              so nothing is counted twice.
+              so nothing is counted twice &mdash; and weighted by how much intent each one
+              actually showed, so a third-time returner does not look like a first-time bounce.
             </p>
           </div>
         </div>

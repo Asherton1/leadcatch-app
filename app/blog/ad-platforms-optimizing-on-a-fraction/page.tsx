@@ -134,6 +134,17 @@ export default function Post() {
           <strong>The events are genuinely incremental.</strong> This is the part that makes the whole argument hold. An abandoned form start, by definition, never fired a pixel &mdash; there was no submission to fire on. So every one of these events is signal the platform did not have. You are not inflating a number. You are filling a hole.
         </p>
 
+        <h2>Not every abandoned form is worth the same</h2>
+        <p>
+          There is a second-order point here that most implementations miss. Once you are sending these events, you have to decide what value to attach to them &mdash; and the lazy answer is to send the same number every time.
+        </p>
+        <p>
+          That throws away most of what you know. Someone who came back to your form a third time in eleven days, filled seven of eight fields, and selected your highest price tier is not the same prospect as someone who typed an email address and left after eight seconds. Flat-rating them tells the platform they are identical.
+        </p>
+        <p>
+          Both platforms support value-based optimization precisely so you can make that distinction. The constraint is that most advertisers have no behavioural data to grade with &mdash; the pixel only fires once, at submission, and knows nothing about the path that led there. Pre-submission capture changes that, because the return visits, the field progression, and the time spent are all observable before anyone converts.
+        </p>
+
         <h2>The honest boundary</h2>
         <p>
           It would be easy to end this by promising that your cost per lead drops by some percentage. We are not going to, and you should be skeptical of anyone who does.

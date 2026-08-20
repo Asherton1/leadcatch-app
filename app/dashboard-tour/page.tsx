@@ -130,6 +130,7 @@ export default function DashboardTour() {
             <p>Meta and Google only learn that someone was interested when they press submit. Everyone who started a form and left is invisible to them, which means every optimization decision and every lookalike audience gets built from a fraction of the people who actually wanted something.</p>
             <p>ReCapture sends the ones who did not finish to Meta&apos;s Conversions API and Google Ads as server-side conversion events. Contact fields only, hashed before they leave, and deduplicated against your existing pixel so nothing is counted twice.</p>
             <p>The panel shows how many went out over the window you have selected. That number is the part of your demand your ad platforms would otherwise never have seen.</p>
+            <p>Each event is also weighted rather than flat-rated. Someone who came back a third time and filled seven of eight fields carries a materially higher value than someone who typed an email and left after eight seconds. Both are worth sending. They are not worth the same, and telling the platform the difference is the point of value-based optimization.</p>
             <p>You keep running campaigns exactly as you do now. Whoever manages the account decides what to do with better data. We just make sure it gets there.</p>
           </div>
           <IntentSignals />

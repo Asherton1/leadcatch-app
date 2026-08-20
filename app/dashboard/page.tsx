@@ -1792,7 +1792,8 @@ export default function Dashboard() {
             <p className="intent-signals-sub">
               Meta and Google only learn from people who press submit. Everyone who started
               and left is invisible to them. ReCapture sends those people through as
-              conversion events, so campaigns optimize on the full picture.
+              conversion events &mdash; each one weighted by how much intent they actually
+              showed, so the platforms learn hardest from your strongest prospects.
             </p>
           </div>
           <div className="intent-signals-body">
@@ -1800,6 +1801,12 @@ export default function Dashboard() {
               <div className="intent-signal">
                 <div className="intent-signal-value"><CountUp to={stats.meta_signals} /></div>
                 <div className="intent-signal-label">sent to Meta Conversions API</div>
+              </div>
+            )}
+            {stats.meta_signals > 0 && (
+              <div className="intent-signal">
+                <div className="intent-signal-value">Weighted</div>
+                <div className="intent-signal-label">by observed intent, not flat-rated</div>
               </div>
             )}
             {stats.google_signals > 0 && (

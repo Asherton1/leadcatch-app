@@ -3080,3 +3080,16 @@ button.returning-cta:focus-visible {
   outline: 2px solid rgba(255,107,53,0.5);
   outline-offset: 2px;
 }
+
+/* Second intent figure sized to sit beside the count */
+.signal-row .intent-signal:nth-child(2) .intent-signal-value {
+  font-size: 1.35rem !important;
+  letter-spacing: -0.01em;
+  padding-top: 0.9rem;
+}
+@media (max-width: 640px) {
+  .signal-row .intent-signal:nth-child(2) .intent-signal-value {
+    font-size: 1.1rem !important;
+    padding-top: 0.5rem;
+  }
+}
