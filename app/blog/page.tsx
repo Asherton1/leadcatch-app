@@ -50,19 +50,19 @@ export default function BlogIndex() {
       </section>
 
       <div className="blog-featured reveal">
-        <Link href="/blog/lead-recovery-or-keylogger" className="blog-featured-card">
+        <Link href="/blog/ad-platforms-optimizing-on-a-fraction" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
-            <Image src="/blog-lead-recovery-keylogger.webp" alt="Lead recovery versus keystroke logging" fill style={{ objectFit: 'cover' }} />
+            <Image src="/blog-ad-platforms-fraction.webp" alt="Aerial view of a housing development at dusk with only a few lights on" fill style={{ objectFit: 'cover' }} />
           </div>
           <div className="blog-featured-content">
-            <div className="blog-featured-tag">Privacy</div>
+            <div className="blog-featured-tag">Paid Media</div>
             <div className="blog-featured-meta">
-              <span className="blog-featured-date">August 14, 2026</span>
+              <span className="blog-featured-date">August 20, 2026</span>
               <span className="blog-featured-dot" />
-              <span className="blog-featured-readtime">6 min read</span>
+              <span className="blog-featured-readtime">7 min read</span>
             </div>
-            <div className="blog-featured-title">Is It Lead Recovery, or Is It a Keylogger? How to Tell the Difference</div>
-            <div className="blog-featured-excerpt">Form-abandonment recovery and keystroke logging can look identical in a demo. They are not the same thing, and the difference is where your legal exposure lives. Four questions get a straight answer from any vendor.</div>
+            <div className="blog-featured-title">Your Ad Platforms Are Optimizing on a Fraction of Your Demand</div>
+            <div className="blog-featured-excerpt">Meta and Google only find out someone wanted what you sell when that person presses submit. Everyone who started your form and walked away is invisible to them. That gap is a training-data problem, and it compounds every day your campaigns run.</div>
             <span className="blog-featured-cta">Read article <span>→</span></span>
           </div>
         </Link>

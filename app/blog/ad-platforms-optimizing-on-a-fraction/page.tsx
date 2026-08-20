@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import Footer from '../../components/Footer'
 import BlogNav from '../../components/BlogNav'
 import '../blog.css'
@@ -63,6 +64,10 @@ export default function Post() {
         </div>
         <h1>Your Ad Platforms Are Optimizing on a Fraction of Your Demand</h1>
         <p className="post-subtitle">Meta and Google only find out that someone wanted what you sell when that person presses submit. Everyone who started your form and walked away is invisible to them. That gap is not a reporting problem &mdash; it is a training-data problem, and it compounds every day your campaigns keep running.</p>
+      </div>
+
+      <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
+        <Image src="/blog-ad-platforms-fraction.webp" alt="Aerial view of a housing development at dusk with only a few lights on" fill style={{ objectFit: 'cover' }} />
       </div>
 
       <div className="blog-post-divider"><hr /></div>
