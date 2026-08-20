@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import '../blog/blog.css'
 import '../landing.css'
 import './dashboard-tour.css'
-import { CardGrid, DropoffChart, TimingChart, AttentionStrip, PipelineBands, RecoveryFunnel } from './TourVisuals'
+import { CardGrid, DropoffChart, TimingChart, AttentionStrip, PipelineBands, RecoveryFunnel, IntentSignals, ReportingWindow } from './TourVisuals'
 
 export const metadata = {
   title: 'What You Actually Look At — ReCapture Dashboard',
@@ -132,6 +132,7 @@ export default function DashboardTour() {
             <p>The panel shows how many went out over the window you have selected. That number is the part of your demand your ad platforms would otherwise never have seen.</p>
             <p>You keep running campaigns exactly as you do now. Whoever manages the account decides what to do with better data. We just make sure it gets there.</p>
           </div>
+          <IntentSignals />
         </div>
       </section>
 
@@ -144,6 +145,7 @@ export default function DashboardTour() {
             <p>Whatever is on screen exports to CSV, and the export respects the filters you have applied. Sixteen columns including the lead score, completion percentage, time on form, device, and whether a recovery message went out.</p>
             <p>The point is that this does not become another dashboard someone has to remember to check. Pull the numbers into whatever you already report from.</p>
           </div>
+          <ReportingWindow />
         </div>
       </section>
 

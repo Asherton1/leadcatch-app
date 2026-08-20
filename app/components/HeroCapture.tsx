@@ -153,7 +153,7 @@ export default function HeroCapture() {
             </div>
             <div className="hc-ch-body">
               <b>AI callback</b>
-              <span>Books straight to your calendar</span>
+              <span>Books the consultation straight to your calendar</span>
             </div>
             <span className="hc-toggle" />
           </div>

@@ -254,3 +254,101 @@ export function RecoveryFunnel() {
     </div>
   )
 }
+
+/* ─── Intent signals sent to ad platforms ───────────── */
+export function IntentSignals() {
+  const { ref, seen } = useInView<HTMLDivElement>()
+  const rows = [
+    { platform: 'Meta Conversions API', to: 47, note: 'Server-side Lead events' },
+    { platform: 'Google Ads', to: 47, note: 'Offline conversion import' },
+  ]
+  return (
+    <div className="tv-frame" ref={ref}>
+      <div className="tv-frame-title">Intent Signals Sent</div>
+
+      <div className="tv-sig-compare">
+        <div className="tv-sig-side">
+          <div className="tv-sig-side-label">Submitted the form</div>
+          <div className="tv-sig-side-num tv-sig-dim"><Counter to={18} run={seen} /></div>
+          <div className="tv-sig-side-note">What your ad platforms already knew</div>
+        </div>
+        <div className="tv-sig-plus">+</div>
+        <div className="tv-sig-side">
+          <div className="tv-sig-side-label">Started and left</div>
+          <div className="tv-sig-side-num tv-sig-accent"><Counter to={47} run={seen} /></div>
+          <div className="tv-sig-side-note">What they never saw until now</div>
+        </div>
+      </div>
+
+      <div className="tv-sig-rows">
+        {rows.map((r, i) => (
+          <div className="tv-sig-row" key={r.platform} style={{ transitionDelay: i * 140 + 'ms', opacity: seen ? 1 : 0, transform: seen ? 'none' : 'translateY(6px)' }}>
+            <span className="tv-sig-dot" />
+            <span className="tv-sig-platform">{r.platform}</span>
+            <span className="tv-sig-note">{r.note}</span>
+            <span className="tv-sig-count"><Counter to={r.to} run={seen} /> sent</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="tv-sig-foot">Hashed before they leave. Deduplicated against your existing pixel.</div>
+    </div>
+  )
+}
+
+/* ─── Reporting window + export ─────────────────────── */
+export function ReportingWindow() {
+  const { ref, seen } = useInView<HTMLDivElement>()
+  const [active, setActive] = useState(2)
+  const windows = ['7d', '14d', '30d', '90d', 'MTD']
+  const data = [
+    { leads: 12, rate: 61, delta: '+9%' },
+    { leads: 24, rate: 58, delta: '+4%' },
+    { leads: 47, rate: 62, delta: '+18%' },
+    { leads: 138, rate: 60, delta: '+12%' },
+    { leads: 31, rate: 63, delta: '+7%' },
+  ]
+
+  useEffect(() => {
+    if (!seen) return
+    const seq = [0, 1, 2]
+    let i = 0
+    const iv = setInterval(() => { i += 1; setActive(seq[i % seq.length]) }, 1800)
+    return () => clearInterval(iv)
+  }, [seen])
+
+  const d = data[active]
+
+  return (
+    <div className="tv-frame" ref={ref}>
+      <div className="tv-frame-title">Reporting Window</div>
+
+      <div className="tv-rep-chips">
+        {windows.map((w, i) => (
+          <span key={w} className={'tv-rep-chip' + (i === active ? ' on' : '')}>{w}</span>
+        ))}
+      </div>
+
+      <div className="tv-rep-stats">
+        <div className="tv-rep-stat">
+          <div className="tv-rep-num">{d.leads}</div>
+          <div className="tv-rep-label">Leads captured</div>
+        </div>
+        <div className="tv-rep-stat">
+          <div className="tv-rep-num">{d.rate}%</div>
+          <div className="tv-rep-label">Avg completion</div>
+        </div>
+        <div className="tv-rep-stat">
+          <div className="tv-rep-num tv-rep-delta">{d.delta}</div>
+          <div className="tv-rep-label">vs prior period</div>
+        </div>
+      </div>
+
+      <div className="tv-rep-export">
+        <span className="tv-rep-export-label">Export</span>
+        <span className="tv-rep-export-file">leads_{windows[active].toLowerCase()}.csv</span>
+        <span className="tv-rep-export-cols">16 columns</span>
+      </div>
+    </div>
+  )
+}
