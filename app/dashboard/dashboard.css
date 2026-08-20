@@ -2924,3 +2924,21 @@ body:has(.modal-backdrop) {
   .signal-row .returning-figures,
   .signal-row .intent-signals-body { gap: 1.75rem !important; }
 }
+
+/* Align both cards on a shared baseline */
+.signal-row .returning-panel,
+.signal-row .intent-signals { position: relative; padding-bottom: 3.5rem !important; }
+.signal-row .returning-sub,
+.signal-row .intent-signals-sub { min-height: 4.4rem; margin-bottom: 1.5rem !important; }
+.signal-row .returning-figures,
+.signal-row .intent-signals-body { margin-top: auto !important; }
+.signal-row .intent-signals-note {
+  position: absolute;
+  left: 2rem; right: 2rem; bottom: 1.35rem;
+  margin: 0 !important;
+}
+@media (max-width: 640px) {
+  .signal-row .returning-sub,
+  .signal-row .intent-signals-sub { min-height: 0; }
+  .signal-row .intent-signals-note { left: 1.35rem; right: 1.35rem; }
+}
