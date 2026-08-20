@@ -3093,3 +3093,18 @@ button.returning-cta:focus-visible {
     padding-top: 0.5rem;
   }
 }
+
+/* Reset second intent figure to match the first exactly */
+.signal-row .intent-signal:nth-child(2) .intent-signal-value {
+  font-size: 2.5rem !important;
+  letter-spacing: -0.03em !important;
+  padding-top: 0 !important;
+  line-height: 1 !important;
+}
+.signal-row .intent-signals-body { align-items: flex-start !important; }
+.signal-row .intent-signal { display: flex; flex-direction: column; }
+@media (max-width: 640px) {
+  .signal-row .intent-signal:nth-child(2) .intent-signal-value {
+    font-size: 2rem !important;
+  }
+}
