@@ -201,6 +201,15 @@ function scoreLead(lead: Lead, returnCount = 1): LeadScore {
 }
 
 
+type Freshness = { key: string; label: string; color: string }
+function freshnessOf(iso: string): Freshness {
+  const mins = (Date.now() - new Date(iso).getTime()) / 60000
+  if (mins < 5)  return { key: 'live',    label: 'Call now',      color: '#ef4444' }
+  if (mins < 30) return { key: 'warm',    label: 'Still warm',    color: '#f59e0b' }
+  if (mins < 120) return { key: 'cooling', label: 'Cooling',      color: '#a3a3a3' }
+  return { key: 'cold', label: 'Cold', color: '#6b7280' }
+}
+
 function hostOf(u: string | null): string {
   if (!u) return 'Direct'
   try { return new URL(u).hostname.replace(/^www\./, '') } catch { return 'Direct' }
@@ -1617,13 +1626,18 @@ export default function Dashboard() {
             <div className="attn-body">
               {needsAttention.rows.map(l => {
                 const sc = scoreLead(l, rcFor(l))
+                const fr = freshnessOf(l.created_at)
                 return (
-                  <button key={l.id} className="attn-row" type="button" onClick={() => setModalLead(l)}>
+                  <button key={l.id} className={`attn-row attn-fresh-${fr.key}`} type="button" onClick={() => setModalLead(l)}>
                     <span className="attn-row-main">
-                      <span className="attn-row-name">{l.name || 'Unknown'}</span>
+                      <span className="attn-row-name">
+                        {fr.key === 'live' && <span className="attn-pulse" aria-hidden="true" />}
+                        {l.name || 'Unknown'}
+                      </span>
                       <span className="attn-row-contact">{l.email || l.phone || 'No contact captured'}</span>
                     </span>
                     <span className="attn-row-meta">
+                      <span className="attn-row-fresh" style={{ color: fr.color }}>{fr.label}</span>
                       <span className="attn-row-score" style={{ color: sc.color }}>{sc.label} {sc.score}</span>
                       <span className="attn-row-time">{formatRelativeTime(l.created_at)}</span>
                       <span className="attn-row-value">{formatCurrency(l.estimated_value ?? 0)}</span>
