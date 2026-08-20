@@ -2864,3 +2864,63 @@ body:has(.modal-backdrop) {
   .returning-panel::before,
   .intent-signals::before { left: 1.5rem; right: 1.5rem; }
 }
+
+/* ── Signal row: two-up dashboard cards ──────────────────────────────────── */
+.signal-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin: 1.5rem 0 2rem;
+  align-items: stretch;
+}
+.signal-row .returning-panel,
+.signal-row .intent-signals {
+  margin: 0 !important;
+  padding: 1.875rem 2rem 1.75rem !important;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(255,255,255,0.055) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.055) !important;
+}
+.signal-row .returning-title,
+.signal-row .intent-signals-title {
+  font-size: 1.18rem !important;
+  margin-bottom: 0.7rem !important;
+}
+.signal-row .returning-sub,
+.signal-row .intent-signals-sub {
+  font-size: 0.875rem !important;
+  line-height: 1.65 !important;
+  max-width: none !important;
+  margin-bottom: 1.75rem !important;
+}
+.signal-row .returning-figures,
+.signal-row .intent-signals-body {
+  gap: 2.5rem !important;
+  margin-top: auto;
+  padding-top: 1.5rem !important;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.signal-row .returning-figure-value,
+.signal-row .intent-signal-value {
+  font-size: 2.5rem !important;
+}
+.signal-row .returning-figure-label,
+.signal-row .intent-signal-label {
+  font-size: 0.75rem !important;
+}
+.signal-row .intent-signals-note {
+  margin-top: 1.25rem !important;
+  font-size: 0.72rem !important;
+}
+@media (max-width: 1100px) {
+  .signal-row { grid-template-columns: 1fr; gap: 1rem; }
+}
+@media (max-width: 640px) {
+  .signal-row .returning-panel,
+  .signal-row .intent-signals { padding: 1.5rem 1.35rem 1.35rem !important; }
+  .signal-row .returning-figure-value,
+  .signal-row .intent-signal-value { font-size: 2rem !important; }
+  .signal-row .returning-figures,
+  .signal-row .intent-signals-body { gap: 1.75rem !important; }
+}
