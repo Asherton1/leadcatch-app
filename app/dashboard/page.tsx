@@ -302,6 +302,7 @@ function LeadModal({
   const [saving, setSaving]               = useState(false)
   const [saved, setSaved]                 = useState(false)
   const [journey, setJourney] = useState<JourneyData | null>(null)
+  const [convValue, setConvValue] = useState<string>('')
 
   useEffect(() => {
     let cancelled = false
@@ -343,6 +344,27 @@ function LeadModal({
   async function handleSave() {
     if (!statusChanged) return
     setSaving(true)
+
+    // Converted with a real value: route through the API so the closed amount
+    // is also pushed to the ad platforms as a Purchase conversion.
+    const value = Number(convValue.replace(/[^0-9.]/g, ''))
+    if (pendingStatus === 'converted' && value > 0) {
+      try {
+        await fetch('/api/lead-converted', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lead_id: lead.id, converted_value: value }),
+        })
+        onStatusChange(lead.id, pendingStatus)
+        setSaved(true)
+        setTimeout(() => setSaved(false), 2000)
+      } catch (e) {
+        console.error('convert dispatch failed', e)
+      }
+      setSaving(false)
+      return
+    }
+
     const { error } = await supabase
       .from('leads')
       .update({ status: pendingStatus })
@@ -614,6 +636,31 @@ function LeadModal({
                 </button>
               ))}
             </div>
+
+            {pendingStatus === 'converted' && (
+              <div className="conv-value">
+                <label className="conv-value-label" htmlFor={`cv-${lead.id}`}>
+                  What did this end up being worth?
+                </label>
+                <div className="conv-value-row">
+                  <span className="conv-value-prefix">$</span>
+                  <input
+                    id={`cv-${lead.id}`}
+                    className="conv-value-input"
+                    type="text"
+                    inputMode="decimal"
+                    placeholder="0"
+                    value={convValue}
+                    onChange={e => setConvValue(e.target.value)}
+                  />
+                </div>
+                <p className="conv-value-hint">
+                  Sent to your connected ad platforms as a conversion with this value, so
+                  campaigns learn from the inquiries that actually closed &mdash; not just
+                  the ones that came in.
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Timeline */}

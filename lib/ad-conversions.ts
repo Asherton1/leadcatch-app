@@ -26,6 +26,7 @@ interface MetaConversionPayload {
   leadPhone: string | null
   leadName: string | null
   estimatedValue: number
+  eventName?: 'Lead' | 'Purchase'
   sessionId?: string | null
   eventSourceUrl?: string
   ipAddress?: string
@@ -36,6 +37,7 @@ export async function sendMetaConversion(payload: MetaConversionPayload) {
   const {
     pixelId, accessToken, testEventCode,
     leadEmail, leadPhone, leadName, estimatedValue, sessionId,
+    eventName = 'Lead',
     eventSourceUrl, ipAddress, userAgent,
   } = payload
 
@@ -63,11 +65,11 @@ export async function sendMetaConversion(payload: MetaConversionPayload) {
   // Deterministic event_id so Meta can dedupe against the client's browser
   // pixel and so retries never double-count. Same lead => same id, always.
   const eventId = sessionId
-    ? `rc_${crypto.createHash('sha256').update(sessionId).digest('hex').slice(0, 24)}`
+    ? `rc_${eventName === 'Purchase' ? 'p_' : ''}${crypto.createHash('sha256').update(eventName + ':' + sessionId).digest('hex').slice(0, 22)}`
     : `rc_${crypto.randomBytes(12).toString('hex')}`
 
   const eventData: Record<string, unknown> = {
-    event_name: 'Lead',
+    event_name: eventName,
     event_id: eventId,
     event_time: Math.floor(Date.now() / 1000),
     action_source: 'website',
@@ -76,7 +78,7 @@ export async function sendMetaConversion(payload: MetaConversionPayload) {
       currency: 'USD',
       value: estimatedValue,
       lead_event_source: 'ReCapture',
-      content_name: 'Pre-Submission Intent',
+      content_name: eventName === 'Purchase' ? 'Recovered Lead Converted' : 'Pre-Submission Intent',
     },
   }
   if (eventSourceUrl) eventData.event_source_url = eventSourceUrl
