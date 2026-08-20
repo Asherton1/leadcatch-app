@@ -560,6 +560,35 @@ function ClientSelector({
 
 // ── Main dashboard ────────────────────────────────────────────────────────────
 
+function CountUp({ to, suffix = '' }: { to: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement | null>(null)
+  const [v, setV] = useState(0)
+  const [run, setRun] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el || run) return
+    const io = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setRun(true); io.disconnect() } },
+      { threshold: 0.4 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [run])
+  useEffect(() => {
+    if (!run) return
+    let f = 0
+    const start = performance.now()
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / 850, 1)
+      setV(Math.round(to * (1 - Math.pow(1 - t, 3))))
+      if (t < 1) f = requestAnimationFrame(tick)
+    }
+    f = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(f)
+  }, [run, to])
+  return <span ref={ref}>{v}{suffix}</span>
+}
+
 export default function Dashboard() {
   const router = useRouter()
 
@@ -578,6 +607,7 @@ export default function Dashboard() {
   const [momPeriod, setMomPeriod] = useState<'7d' | '14d' | '30d' | '90d' | 'month'>('30d')
   const [liveDrawerOpen, setLiveDrawerOpen] = useState(false)
   const [hoursDrawerOpen, setHoursDrawerOpen] = useState(false)
+  const [returningDrawerOpen, setReturningDrawerOpen] = useState(false)
   const [fieldsDrawerOpen, setFieldsDrawerOpen] = useState(false)
   const [pipelineDrawerOpen, setPipelineDrawerOpen] = useState(false)
   const [attnOpen, setAttnOpen] = useState(false)
@@ -912,6 +942,52 @@ export default function Dashboard() {
 
     return { total_leads, emails_deployed, total_revenue_lost, avg_completion_rate, avg_time_on_form, meta_signals, google_signals, returning_people, returning_attempts, most_attempts }
   }, [filteredLeads])
+
+  // ── Returning visitor detail (for the drawer) ─────────────────────────────
+  const returningDetail = useMemo(() => {
+    const byIdentity = new Map<string, Lead[]>()
+    for (const l of filteredLeads) {
+      const key = (l.email ?? l.phone ?? '').trim().toLowerCase()
+      if (!key) continue
+      const arr = byIdentity.get(key) ?? []
+      arr.push(l)
+      byIdentity.set(key, arr)
+    }
+    return [...byIdentity.entries()]
+      .filter(([, arr]) => arr.length > 1)
+      .map(([key, arr]) => {
+        const sorted = [...arr].sort((a, b) => +new Date(a.created_at) - +new Date(b.created_at))
+        const first = sorted[0]
+        const last = sorted[sorted.length - 1]
+        const spanDays = Math.max(
+          0,
+          Math.round((+new Date(last.created_at) - +new Date(first.created_at)) / 86400000)
+        )
+        const devices = [...new Set(sorted.map(l => l.device_type).filter(Boolean))] as string[]
+        const bestFields = Math.max(...sorted.map(l => l.fields_completed ?? 0))
+        const interests = [...new Set(
+          sorted.map(l => (l.form_data as Record<string, unknown> | null)?.community).filter(Boolean)
+        )] as string[]
+        return {
+          key,
+          name: last.name ?? first.name ?? 'Unknown',
+          email: last.email ?? null,
+          phone: last.phone ?? null,
+          attempts: sorted.length,
+          spanDays,
+          devices,
+          bestFields,
+          totalFields: last.total_fields ?? 0,
+          interests,
+          value: last.estimated_value ?? 0,
+          firstSeen: first.created_at,
+          lastSeen: last.created_at,
+          leads: sorted,
+        }
+      })
+      .sort((a, b) => b.attempts - a.attempts)
+  }, [filteredLeads])
+
 
   // ── Period comparison ─────────────────────────────────────────────────────
   const PERIOD_LABELS: Record<string, string> = {
@@ -1641,7 +1717,7 @@ export default function Dashboard() {
       <div className="signal-row">
       {/* ── Returning Visitors ──────────────────────────────────────────────── */}
       {stats.returning_people > 0 && (
-        <div className="returning-panel">
+        <div className="returning-panel returning-clickable" onClick={() => setReturningDrawerOpen(true)} role="button" tabIndex={0} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setReturningDrawerOpen(true) } }}>
           <span className="returning-eyebrow">Returning Intent</span>
           <h2 className="returning-title">
             {stats.returning_people === 1
@@ -1655,15 +1731,15 @@ export default function Dashboard() {
           </p>
           <div className="returning-figures">
             <div className="returning-figure">
-              <div className="returning-figure-value">{stats.returning_people}</div>
+              <div className="returning-figure-value"><CountUp to={stats.returning_people} /></div>
               <div className="returning-figure-label">people returned</div>
             </div>
             <div className="returning-figure">
-              <div className="returning-figure-value">{stats.returning_attempts}</div>
+              <div className="returning-figure-value"><CountUp to={stats.returning_attempts} /></div>
               <div className="returning-figure-label">total form starts</div>
             </div>
             <div className="returning-figure">
-              <div className="returning-figure-value">{stats.most_attempts}&times;</div>
+              <div className="returning-figure-value"><CountUp to={stats.most_attempts} suffix="\u00d7" /></div>
               <div className="returning-figure-label">most attempts by one person</div>
             </div>
           </div>
@@ -1687,13 +1763,13 @@ export default function Dashboard() {
           <div className="intent-signals-body">
             {stats.meta_signals > 0 && (
               <div className="intent-signal">
-                <div className="intent-signal-value">{stats.meta_signals}</div>
+                <div className="intent-signal-value"><CountUp to={stats.meta_signals} /></div>
                 <div className="intent-signal-label">sent to Meta Conversions API</div>
               </div>
             )}
             {stats.google_signals > 0 && (
               <div className="intent-signal">
-                <div className="intent-signal-value">{stats.google_signals}</div>
+                <div className="intent-signal-value"><CountUp to={stats.google_signals} /></div>
                 <div className="intent-signal-label">sent to Google Ads</div>
               </div>
             )}
@@ -2097,6 +2173,73 @@ export default function Dashboard() {
                   <p className="hours-note">
                     Hot inquiries got furthest into the form and are the most likely to respond. That is where recovery effort returns the most.
                   </p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {returningDrawerOpen && (
+        <div className="live-drawer-backdrop" onClick={e => { if (e.target === e.currentTarget) setReturningDrawerOpen(false) }}>
+          <div className="live-drawer">
+            <div className="live-drawer-header">
+              <div className="live-drawer-title">
+                Returning Intent
+                <span className="live-drawer-count">{returningDetail.length}</span>
+              </div>
+              <button className="live-drawer-close" onClick={() => setReturningDrawerOpen(false)} type="button" aria-label="Close">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/>
+                </svg>
+              </button>
+            </div>
+            <div className="live-drawer-body">
+              {returningDetail.length === 0 ? (
+                <div className="live-drawer-empty">
+                  Nobody has returned yet.<br/>
+                  <span className="live-drawer-empty-sub">Repeat form starts appear here as they happen.</span>
+                </div>
+              ) : (
+                <>
+                  <p className="ret-drawer-intro">
+                    Each of these people started your form, left, and came back to try again.
+                    None of them submitted, so no CRM has any record that they were ever here.
+                  </p>
+                  {returningDetail.map(r => (
+                    <div className="ret-row" key={r.key}>
+                      <div className="ret-row-head">
+                        <div>
+                          <div className="ret-row-name">{r.name}</div>
+                          <div className="ret-row-contact">{r.email ?? r.phone ?? '\u2014'}</div>
+                        </div>
+                        <div className="ret-row-attempts">
+                          <span className="ret-row-attempts-n">{r.attempts}&times;</span>
+                          <span className="ret-row-attempts-l">form starts</span>
+                        </div>
+                      </div>
+                      <div className="ret-row-meta">
+                        <span>{r.spanDays === 0 ? 'Same day' : `Over ${r.spanDays} day${r.spanDays === 1 ? '' : 's'}`}</span>
+                        {r.devices.length > 0 && <span>{r.devices.join(' + ')}</span>}
+                        <span>Best attempt: {r.bestFields} of {r.totalFields} fields</span>
+                        {r.value > 0 && <span>{formatCurrency(r.value)} est. value</span>}
+                      </div>
+                      {r.interests.length > 0 && (
+                        <div className="ret-row-interest">
+                          <span className="ret-row-interest-label">Interested in</span>
+                          {r.interests.join(', ')}
+                        </div>
+                      )}
+                      <div className="ret-row-timeline">
+                        {r.leads.map((l, i) => (
+                          <span className="ret-tick" key={l.id}>
+                            <span className="ret-tick-dot" />
+                            Attempt {i + 1} &middot; {formatAbsoluteTime(l.created_at)} &middot; {l.fields_completed} fields
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </>
               )}
             </div>

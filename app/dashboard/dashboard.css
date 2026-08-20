@@ -2942,3 +2942,92 @@ body:has(.modal-backdrop) {
   .signal-row .intent-signals-sub { min-height: 0; }
   .signal-row .intent-signals-note { left: 1.35rem; right: 1.35rem; }
 }
+
+/* ── Returning card clickable state ──────────────────────────────────────── */
+.returning-clickable { cursor: pointer; }
+.returning-clickable:focus-visible {
+  outline: 2px solid rgba(255,107,53,0.5);
+  outline-offset: 2px;
+}
+
+/* ── Returning intent drawer ─────────────────────────────────────────────── */
+.ret-drawer-intro {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: #8b8b8b;
+  margin: 0 0 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.ret-row {
+  padding: 1.4rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.ret-row:last-child { border-bottom: none; }
+.ret-row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+.ret-row-name { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 0.2rem; }
+.ret-row-contact { font-size: 0.8rem; color: #7a7a7a; }
+.ret-row-attempts { text-align: right; flex-shrink: 0; }
+.ret-row-attempts-n {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ff6b35;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.ret-row-attempts-l {
+  font-size: 0.68rem;
+  color: #6b6b6b;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.ret-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  font-size: 0.78rem;
+  color: #8b8b8b;
+  margin-bottom: 0.85rem;
+}
+.ret-row-interest {
+  font-size: 0.82rem;
+  color: #d4d4d8;
+  margin-bottom: 0.9rem;
+}
+.ret-row-interest-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ff6b35;
+  font-weight: 600;
+  margin-right: 0.6rem;
+}
+.ret-row-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-left: 0.1rem;
+}
+.ret-tick {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.75rem;
+  color: #7a7a7a;
+}
+.ret-tick-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,107,53,0.6);
+  flex-shrink: 0;
+}
+@media (max-width: 640px) {
+  .ret-row-meta { gap: 0.35rem 0.9rem; font-size: 0.74rem; }
+  .ret-row-attempts-n { font-size: 1.25rem; }
+}
