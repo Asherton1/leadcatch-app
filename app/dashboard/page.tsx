@@ -1649,10 +1649,9 @@ export default function Dashboard() {
               : `${stats.returning_people} people came back and started again.`}
           </h2>
           <p className="returning-sub">
-            They began your form, left, and returned to try a second or third time &mdash;
-            {' '}{stats.returning_attempts} form starts between them. Nobody who only counts
-            submissions can see this, because none of them ever finished. Repeat starts are
-            the strongest intent signal a visitor can give you without ever becoming a lead.
+            {stats.returning_attempts} form starts between them. Nobody counting submissions
+            can see this, because none of them ever finished. Repeat starts are the strongest
+            intent a visitor gives you without becoming a lead.
           </p>
           <div className="returning-figures">
             <div className="returning-figure">
@@ -1680,11 +1679,9 @@ export default function Dashboard() {
               Signal your ad platforms could not see
             </h2>
             <p className="intent-signals-sub">
-              Meta and Google only learn from the people who press submit. Everyone who
-              started a form on your site and left is invisible to them &mdash; so your
-              campaigns optimize against a fraction of the real demand. ReCapture sends
-              those people through as conversion events, so the platforms are working
-              from the full picture instead of the leftovers.
+              Meta and Google only learn from people who press submit. Everyone who started
+              and left is invisible to them. ReCapture sends those people through as
+              conversion events, so campaigns optimize on the full picture.
             </p>
           </div>
           <div className="intent-signals-body">
@@ -1702,7 +1699,7 @@ export default function Dashboard() {
             )}
           </div>
           <p className="intent-signals-note">
-            Events are deduplicated against your existing pixel, so nothing is double counted.
+            Deduplicated against your existing pixel.
           </p>
         </div>
       )}
