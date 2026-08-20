@@ -3108,3 +3108,49 @@ button.returning-cta:focus-visible {
     font-size: 2rem !important;
   }
 }
+
+/* ── Session journey in lead modal ───────────────────────────────────────── */
+.journey-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.9rem 1.5rem;
+  margin-bottom: 1.4rem;
+  padding-bottom: 1.3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.journey-fact { display: flex; flex-direction: column; gap: 0.25rem; }
+.journey-fact-label {
+  font-size: 0.64rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  font-weight: 600;
+}
+.journey-fact-value {
+  font-size: 0.9rem;
+  color: #e4e4e7;
+  font-weight: 500;
+  word-break: break-word;
+}
+.journey-path { display: flex; flex-direction: column; gap: 0.55rem; }
+.journey-step {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.82rem;
+  color: #9a9a9a;
+}
+.journey-step-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  flex-shrink: 0;
+}
+.journey-step-dot-active { background: #ff6b35; box-shadow: 0 0 0 3px rgba(255,107,53,0.15); }
+.journey-step-page {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.journey-step-time { color: #6b6b6b; font-size: 0.75rem; flex-shrink: 0; }
+.journey-step-final .journey-step-page { color: #fff; font-weight: 600; }

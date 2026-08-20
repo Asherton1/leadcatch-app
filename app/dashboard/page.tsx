@@ -201,6 +201,52 @@ function scoreLead(lead: Lead, returnCount = 1): LeadScore {
 }
 
 
+function hostOf(u: string | null): string {
+  if (!u) return 'Direct'
+  try { return new URL(u).hostname.replace(/^www\./, '') } catch { return 'Direct' }
+}
+function pathOf(u: string | null): string {
+  if (!u) return ''
+  try { return new URL(u).pathname } catch { return u }
+}
+function formatTimeShort(iso: string): string {
+  try {
+    return new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
+  } catch { return '' }
+}
+function siteDuration(j: JourneyData): string {
+  const first = j.events[0]?.created_at || j.visitor?.created_at
+  const last = j.visitor?.last_ping_at || j.events[j.events.length - 1]?.created_at
+  if (!first || !last) return '\u2014'
+  const secs = Math.max(0, Math.round((+new Date(last) - +new Date(first)) / 1000))
+  if (secs < 60) return secs + 's'
+  const m = Math.floor(secs / 60)
+  return m + 'm ' + (secs % 60) + 's'
+}
+
+interface VisitorRow {
+  page_url: string | null
+  referrer: string | null
+  country: string | null
+  city: string | null
+  region: string | null
+  utm_source: string | null
+  utm_medium: string | null
+  utm_campaign: string | null
+  pages_visited: number | null
+  created_at: string
+  last_ping_at: string | null
+}
+interface JourneyEvent {
+  page_url: string | null
+  created_at: string
+  metadata: Record<string, unknown> | null
+}
+interface JourneyData {
+  visitor: VisitorRow | null
+  events: JourneyEvent[]
+}
+
 // ── Lead Detail Modal ─────────────────────────────────────────────────────────
 
 function LeadModal({
@@ -215,6 +261,27 @@ function LeadModal({
   const [pendingStatus, setPendingStatus] = useState<string>(lead.status ?? 'open')
   const [saving, setSaving]               = useState(false)
   const [saved, setSaved]                 = useState(false)
+  const [journey, setJourney] = useState<JourneyData | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    async function loadJourney() {
+      if (!lead.session_id) return
+      const vRes = await supabase.from('visitors')
+        .select('page_url, referrer, country, city, region, utm_source, utm_medium, utm_campaign, pages_visited, created_at, last_ping_at')
+        .eq('session_id', lead.session_id).limit(1).maybeSingle()
+      const eRes = await supabase.from('visitor_events')
+        .select('page_url, created_at, metadata')
+        .eq('session_id', lead.session_id)
+        .order('created_at', { ascending: true })
+        .limit(25)
+      if (!cancelled) {
+        setJourney({ visitor: vRes.data as VisitorRow | null, events: (eRes.data as JourneyEvent[]) || [] })
+      }
+    }
+    loadJourney()
+    return () => { cancelled = true }
+  }, [lead.session_id])
 
   // Lock body scroll while open
   useEffect(() => {
@@ -370,6 +437,83 @@ function LeadModal({
               </div>
             )
           })()}
+            {journey && (journey.visitor || journey.events.length > 0) && (
+              <div className="modal-section">
+                <div className="modal-section-label">Before They Started The Form</div>
+
+                <div className="journey-summary">
+                  {journey.visitor?.utm_source ? (
+                    <div className="journey-fact">
+                      <span className="journey-fact-label">Source</span>
+                      <span className="journey-fact-value">
+                        {journey.visitor.utm_source}
+                        {journey.visitor.utm_medium ? ' / ' + journey.visitor.utm_medium : ''}
+                      </span>
+                    </div>
+                  ) : journey.visitor?.referrer ? (
+                    <div className="journey-fact">
+                      <span className="journey-fact-label">Source</span>
+                      <span className="journey-fact-value">{hostOf(journey.visitor.referrer)}</span>
+                    </div>
+                  ) : (
+                    <div className="journey-fact">
+                      <span className="journey-fact-label">Source</span>
+                      <span className="journey-fact-value">Direct</span>
+                    </div>
+                  )}
+
+                  {journey.visitor?.utm_campaign && (
+                    <div className="journey-fact">
+                      <span className="journey-fact-label">Campaign</span>
+                      <span className="journey-fact-value">{journey.visitor.utm_campaign}</span>
+                    </div>
+                  )}
+
+                  <div className="journey-fact">
+                    <span className="journey-fact-label">Pages viewed</span>
+                    <span className="journey-fact-value">
+                      {journey.events.length || journey.visitor?.pages_visited || 1}
+                    </span>
+                  </div>
+
+                  {journey.visitor && (
+                    <div className="journey-fact">
+                      <span className="journey-fact-label">Time on site</span>
+                      <span className="journey-fact-value">{siteDuration(journey)}</span>
+                    </div>
+                  )}
+
+                  {(journey.visitor?.city || journey.visitor?.country) && (
+                    <div className="journey-fact">
+                      <span className="journey-fact-label">Location</span>
+                      <span className="journey-fact-value">
+                        {[journey.visitor?.city, journey.visitor?.region, journey.visitor?.country].filter(Boolean).join(', ')}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {journey.events.length > 0 && (
+                  <div className="journey-path">
+                    {journey.events.map((e, i) => (
+                      <div className="journey-step" key={i}>
+                        <span className="journey-step-dot" />
+                        <span className="journey-step-page">
+                          {(e.metadata && typeof e.metadata.title === 'string' && e.metadata.title) || pathOf(e.page_url) || 'Page'}
+                        </span>
+                        <span className="journey-step-time">{formatTimeShort(e.created_at)}</span>
+                      </div>
+                    ))}
+                    <div className="journey-step journey-step-final">
+                      <span className="journey-step-dot journey-step-dot-active" />
+                      <span className="journey-step-page">Started the form</span>
+                      <span className="journey-step-time">{formatTimeShort(lead.created_at)}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
           {/* Captured form fields */}
           {formFields.length > 0 && (
             <div className="modal-section">
