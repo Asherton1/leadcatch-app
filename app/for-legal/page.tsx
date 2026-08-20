@@ -29,7 +29,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Form Abandonment Recovery for Law Firms — ReCapture',
-    description: 'Law firms lose 71% of intake form starters. ReCapture recovers them in under five minutes.',
+    description: 'Most intake form starters never submit. ReCapture recovers them in under five minutes.',
     images: ['https://www.userecapture.com/api/og?title=Form%20Recovery%20for%20Law%20Firms&eyebrow=For%20Law%20Firms'],
   },
 }
@@ -45,7 +45,7 @@ const FAQS: { question: string; answer: string }[] = [
   { question: "What about TCPA for text and voice follow-up?", answer: "Prior express consent is established when a visitor voluntarily enters a phone number into the firm's intake form alongside clear consent language on the form. Quiet hours are enforced by default. The National Do Not Call Registry and the firm's internal DNC list are cross-referenced before any message is sent. AI voice callbacks disclose that they are automated and honor an in-call opt-out. Every communication is logged with a full consent audit trail." },
   { question: "Does ReCapture integrate with Lawmatics and Clio?", answer: "Yes. Recovered inquiries push into Lawmatics or Clio Grow as new leads with all captured fields — name, phone, email, matter type, and completed form data — via webhook or Zapier. The lead lands in the same intake pipeline the firm already uses, so no one has to change how they work or watch a second dashboard." },
   { question: "Is it appropriate to follow up on a family law inquiry?", answer: "Discretion is the default. Recovery messages never reference the practice area, the matter type, or anything the visitor typed about their situation. They reference only that the visitor reached out to the firm and offer a way to continue. For sensitive verticals, firms typically use email-only recovery and disable voice callback entirely — that is a per-firm setting." },
-  { question: "What recovery rate should a law firm expect?", answer: "Between 8% and 12% of abandoned intake form starters, depending on follow-up speed and channel mix. On a firm seeing roughly 340 form starts per month with 65% abandonment, that is 18 to 26 recovered inquiries monthly flowing into the existing consult pipeline." },
+  { question: "What recovery rate should a law firm expect?", answer: "Between 8% and 12% of abandoned intake form starters, depending on follow-up speed and channel mix. On a firm seeing roughly 340 form starts per month, that is 18 to 26 recovered inquiries monthly flowing into the existing consult pipeline." },
   { question: "Will our intake form change in any way?", answer: "No. ReCapture is a passive layer on top of the form you already have. It does not alter the UI, the validation, the routing, or the submission flow. Visitors who submit normally continue exactly as they do today. ReCapture only acts when someone abandons." },
 ]
 
@@ -128,10 +128,10 @@ export default function ForLegal() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '4rem', alignItems: 'center' }} className="math-grid">
             <div>
               <div style={{ fontSize: 'clamp(4rem, 10vw, 7rem)', fontWeight: 800, color: '#ff6b35', letterSpacing: '-0.04em', lineHeight: 0.9, marginBottom: '1rem' }}>
-                71%
+                60-70%
               </div>
               <div style={{ fontSize: '0.85rem', color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>
-                Family law intake form abandonment
+                Of form starts never submit (Baymard, 2024)
               </div>
               <div style={{ height: '1px', background: '#1a1a1a', margin: '2rem 0' }} />
               <div style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 800, color: '#fff', letterSpacing: '-0.03em', lineHeight: 0.9, marginBottom: '0.75rem' }}>

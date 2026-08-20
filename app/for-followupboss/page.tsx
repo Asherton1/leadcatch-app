@@ -10,12 +10,12 @@ import '../landing.css'
 
 export const metadata = {
   title: 'ReCapture for Follow Up Boss — Push Real Estate Leads Into Your Pipeline',
-  description: 'Follow Up Boss captures submitted leads. ReCapture captures the 70% of property inquiries that never submit. Push abandoned leads into Follow Up Boss in real-time via webhook.',
+  description: 'Follow Up Boss captures submitted leads. ReCapture captures the property inquiries that never submit. Push abandoned leads into Follow Up Boss in real-time via webhook.',
   keywords: 'Follow Up Boss form abandonment, FUB lead recovery, Follow Up Boss integration, real estate lead capture, IDX form abandonment, real estate Zapier',
   alternates: { canonical: '/for-followupboss' },
   openGraph: {
     title: 'ReCapture for Follow Up Boss — Real Estate Lead Recovery',
-    description: 'FUB captures submits. ReCapture catches the 70% of property inquiries that never submit. Real-time webhook into your FUB pipeline.',
+    description: 'FUB captures submits. ReCapture catches the property inquiries that never submit. Real-time webhook into your FUB pipeline.',
     url: 'https://www.userecapture.com/for-followupboss',
     siteName: 'ReCapture',
     type: 'website',
@@ -29,7 +29,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'ReCapture for Follow Up Boss — Real Estate Lead Recovery',
-    description: '70% of property inquiries never submit. ReCapture catches them and pushes them to FUB.',
+    description: 'Most property inquiries never submit. ReCapture catches them and pushes them to FUB.',
     images: ['https://www.userecapture.com/api/og?title=ReCapture%20for%20Follow%20Up%20Boss&eyebrow=Follow%20Up%20Boss'],
   },
 }
@@ -60,7 +60,7 @@ export default function ForFollowUpBoss() {
               For Real Estate Teams on Follow Up Boss
             </p>
             <h1 className="hero-h1" style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '1.5rem', color: '#fff' }}>
-              Follow Up Boss only sees the leads who finished. We get the 70% of property inquiries who didn't.
+              Follow Up Boss only sees the leads who finished. We get the property inquiries who didn't.
             </h1>
             <p className="hero-sub" style={{ fontSize: '1.0625rem', color: '#a1a1aa', lineHeight: 1.7, marginBottom: '2rem' }}>
               Baymard Institute's research shows 60-70% of website visitors abandon contact forms before submitting — and property inquiry forms run as high as 71%. Follow Up Boss sees only the ones who hit submit. ReCapture is the layer that captures the rest — and pushes them straight into Follow Up Boss in real-time.

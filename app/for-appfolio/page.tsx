@@ -10,12 +10,12 @@ import '../landing.css'
 
 export const metadata = {
   title: 'ReCapture for AppFolio — Push Leasing Prospects Into Your Pipeline',
-  description: 'AppFolio tracks submitted leasing inquiries. ReCapture captures the 70% who started an inquiry and never finished. Push abandoned prospects into AppFolio in real-time via webhook.',
+  description: 'AppFolio tracks submitted leasing inquiries. ReCapture captures the majority who start an inquiry and never finish. Push abandoned prospects into AppFolio in real-time via webhook.',
   keywords: 'AppFolio form abandonment, AppFolio lead recovery, AppFolio integration, multifamily lead capture, property management leasing forms, multifamily Zapier',
   alternates: { canonical: '/for-appfolio' },
   openGraph: {
     title: 'ReCapture for AppFolio — Multifamily Lead Recovery',
-    description: 'AppFolio tracks submitted inquiries. ReCapture catches the 70% who started and never finished. Real-time webhook into your AppFolio pipeline.',
+    description: 'AppFolio tracks submitted inquiries. ReCapture catches the ones who start and never finish. Real-time webhook into your AppFolio pipeline.',
     url: 'https://www.userecapture.com/for-appfolio',
     siteName: 'ReCapture',
     type: 'website',
@@ -29,7 +29,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'ReCapture for AppFolio — Multifamily Lead Recovery',
-    description: '70% of leasing inquiries never submit. ReCapture catches them and pushes them to AppFolio.',
+    description: 'Most leasing inquiries never submit. ReCapture catches them and pushes them to AppFolio.',
     images: ['https://www.userecapture.com/api/og?title=ReCapture%20for%20AppFolio&eyebrow=AppFolio'],
   },
 }
@@ -60,10 +60,10 @@ export default function ForAppFolio() {
               For Multifamily Property Managers on AppFolio
             </p>
             <h1 className="hero-h1" style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '1.5rem', color: '#fff' }}>
-              AppFolio tracks the prospects who hit submit. We capture the 70% of leasing inquiries who didn't.
+              AppFolio tracks the prospects who hit submit. We capture the leasing inquiries who didn't.
             </h1>
             <p className="hero-sub" style={{ fontSize: '1.0625rem', color: '#a1a1aa', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Baymard Institute's research shows 60-70% of website visitors abandon contact forms before submitting — and multifamily leasing inquiries run as high as 70%. AppFolio tracks the prospects who finish. ReCapture is the layer that captures the rest — and pushes them straight into AppFolio in real-time.
+              Baymard Institute's research shows 60-70% of website visitors abandon contact forms before submitting — and leasing inquiry forms sit squarely in that range. AppFolio tracks the prospects who finish. ReCapture is the layer that captures the rest — and pushes them straight into AppFolio in real-time.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
               <Link href="/signup?plan=pro" style={{ display: 'inline-block', background: '#ff6b35', color: '#0a0a0a', fontWeight: 700, padding: '0.875rem 1.75rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>
@@ -102,7 +102,7 @@ export default function ForAppFolio() {
               AppFolio is the operating system for property management companies of every size. It runs the leasing pipeline, the prospect tracking, the application flows, the lease signing, the resident communication, the accounting. It is genuinely excellent at converting prospects who submitted a leasing inquiry.
             </p>
             <p>
-              The problem: Baymard Institute's 2024 research shows 60-70% of website visitors who start a form never submit it — and multifamily leasing inquiries run higher, up to 70%. AppFolio never sees those people. They show up in your site analytics as bounce-rate or unattributed traffic. Your ad budget paid for the click. The prospect disappeared. Your unit stays vacant.
+              The problem: Baymard Institute's 2024 research shows 60-70% of website visitors who start a form never submit it — and leasing inquiry forms sit squarely in that range. AppFolio never sees those people. They show up in your site analytics as bounce-rate or unattributed traffic. Your ad budget paid for the click. The prospect disappeared. Your unit stays vacant.
             </p>
             <p>
               ReCapture is the layer that captures them — before they leave the site. One script tag per client. The lead lands in their dashboard. Recovery via SMS or AI voice callback fires automatically.
@@ -119,7 +119,7 @@ export default function ForAppFolio() {
             02 — The math
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '3rem', lineHeight: 1.25, letterSpacing: '-0.02em', maxWidth: '720px' }}>
-            70% of leasing inquiries are abandoned. AppFolio only sees the rest.
+            Most leasing inquiries are abandoned. AppFolio only sees the rest.
           </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '4rem', alignItems: 'center' }} className="math-grid">
