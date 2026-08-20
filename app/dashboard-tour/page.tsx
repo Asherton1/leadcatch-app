@@ -124,6 +124,19 @@ export default function DashboardTour() {
 
       <section className="dt-band reveal">
         <div className="dt-inner dt-narrow">
+          <p className="dt-section-eyebrow">Intent Signals</p>
+          <h2 className="dt-h2">What leaves the dashboard</h2>
+          <div className="dt-body">
+            <p>Meta and Google only learn that someone was interested when they press submit. Everyone who started a form and left is invisible to them, which means every optimization decision and every lookalike audience gets built from a fraction of the people who actually wanted something.</p>
+            <p>ReCapture sends the ones who did not finish to Meta&apos;s Conversions API and Google Ads as server-side conversion events. Contact fields only, hashed before they leave, and deduplicated against your existing pixel so nothing is counted twice.</p>
+            <p>The panel shows how many went out over the window you have selected. That number is the part of your demand your ad platforms would otherwise never have seen.</p>
+            <p>You keep running campaigns exactly as you do now. Whoever manages the account decides what to do with better data. We just make sure it gets there.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="dt-band reveal">
+        <div className="dt-inner dt-narrow">
           <p className="dt-section-eyebrow">Reporting</p>
           <h2 className="dt-h2">Set the window. Export the view.</h2>
           <div className="dt-body">
