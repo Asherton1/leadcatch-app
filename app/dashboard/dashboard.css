@@ -3062,3 +3062,21 @@ body:has(.modal-backdrop) {
 }
 .returning-clickable:hover .returning-cta svg { transform: translateX(2px); }
 .returning-cta svg { transition: transform .2s ease; }
+
+/* CTA is the button, card is not clickable */
+.returning-panel { cursor: default !important; }
+button.returning-cta {
+  cursor: pointer;
+  background: transparent;
+  font-family: inherit;
+}
+button.returning-cta:hover {
+  color: #ff6b35;
+  border-color: rgba(255,107,53,0.35);
+  background: rgba(255,107,53,0.07);
+}
+button.returning-cta:hover svg { transform: translateX(2px); }
+button.returning-cta:focus-visible {
+  outline: 2px solid rgba(255,107,53,0.5);
+  outline-offset: 2px;
+}

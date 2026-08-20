@@ -1717,13 +1717,13 @@ export default function Dashboard() {
       <div className="signal-row">
       {/* ── Returning Visitors ──────────────────────────────────────────────── */}
       {stats.returning_people > 0 && (
-        <div className="returning-panel returning-clickable" onClick={() => setReturningDrawerOpen(true)} role="button" tabIndex={0} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setReturningDrawerOpen(true) } }}>
+        <div className="returning-panel">
           <div className="returning-head-row">
             <span className="returning-eyebrow">Returning Intent</span>
-            <span className="returning-cta">
+            <button className="returning-cta" type="button" onClick={() => setReturningDrawerOpen(true)}>
               View all
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
+            </button>
           </div>
           <h2 className="returning-title">
             {stats.returning_people === 1
@@ -1745,7 +1745,7 @@ export default function Dashboard() {
               <div className="returning-figure-label">total form starts</div>
             </div>
             <div className="returning-figure">
-              <div className="returning-figure-value"><CountUp to={stats.most_attempts} suffix="\u00d7" /></div>
+              <div className="returning-figure-value"><CountUp to={stats.most_attempts} suffix="×" /></div>
               <div className="returning-figure-label">most attempts by one person</div>
             </div>
           </div>
