@@ -2765,3 +2765,50 @@ body:has(.modal-backdrop) {
   .intent-signal-value { font-size: 3rem !important; }
   .intent-signals-body { gap: 2.5rem !important; }
 }
+
+/* ── Returning visitors ──────────────────────────────────────────────────── */
+.returning-panel {
+  margin: 3.5rem 0 0;
+  padding: 2.5rem 0 2.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.returning-eyebrow {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ff6b35;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+}
+.returning-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 0.85rem;
+  line-height: 1.25;
+}
+.returning-sub {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #8b8b8b;
+  margin: 0 0 2.5rem;
+  max-width: 62ch;
+}
+.returning-figures { display: flex; gap: 5rem; flex-wrap: wrap; }
+.returning-figure-value {
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.returning-figure-label { font-size: 0.82rem; color: #8b8b8b; }
+@media (max-width: 640px) {
+  .returning-panel { margin-top: 2.5rem; padding: 2rem 0 1.75rem; }
+  .returning-title { font-size: 1.25rem; }
+  .returning-figures { gap: 2.25rem; }
+  .returning-figure-value { font-size: 2.4rem; }
+}

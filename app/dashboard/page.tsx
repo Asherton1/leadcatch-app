@@ -897,7 +897,20 @@ export default function Dashboard() {
       : 0
     const meta_signals   = filteredLeads.filter(l => l.meta_conversion_sent).length
     const google_signals = filteredLeads.filter(l => l.google_conversion_sent).length
-    return { total_leads, emails_deployed, total_revenue_lost, avg_completion_rate, avg_time_on_form, meta_signals, google_signals }
+
+    // Returning visitors: same contact identity across more than one form start.
+    // These never submitted, so no CRM has any record of the repeat behaviour.
+    const identityMap = new Map<string, number>()
+    for (const l of filteredLeads) {
+      const key = (l.email ?? l.phone ?? '').trim().toLowerCase()
+      if (!key) continue
+      identityMap.set(key, (identityMap.get(key) ?? 0) + 1)
+    }
+    const returning_people   = [...identityMap.values()].filter(n => n > 1).length
+    const returning_attempts = [...identityMap.values()].filter(n => n > 1).reduce((a, b) => a + b, 0)
+    const most_attempts      = identityMap.size > 0 ? Math.max(...identityMap.values()) : 0
+
+    return { total_leads, emails_deployed, total_revenue_lost, avg_completion_rate, avg_time_on_form, meta_signals, google_signals, returning_people, returning_attempts, most_attempts }
   }, [filteredLeads])
 
   // ── Period comparison ─────────────────────────────────────────────────────
@@ -1624,6 +1637,38 @@ export default function Dashboard() {
         </button>
 
       </div>
+
+      {/* ── Returning Visitors ──────────────────────────────────────────────── */}
+      {stats.returning_people > 0 && (
+        <div className="returning-panel">
+          <span className="returning-eyebrow">Returning Intent</span>
+          <h2 className="returning-title">
+            {stats.returning_people === 1
+              ? 'One person came back and started again.'
+              : `${stats.returning_people} people came back and started again.`}
+          </h2>
+          <p className="returning-sub">
+            They began your form, left, and returned to try a second or third time &mdash;
+            {' '}{stats.returning_attempts} form starts between them. Nobody who only counts
+            submissions can see this, because none of them ever finished. Repeat starts are
+            the strongest intent signal a visitor can give you without ever becoming a lead.
+          </p>
+          <div className="returning-figures">
+            <div className="returning-figure">
+              <div className="returning-figure-value">{stats.returning_people}</div>
+              <div className="returning-figure-label">people returned</div>
+            </div>
+            <div className="returning-figure">
+              <div className="returning-figure-value">{stats.returning_attempts}</div>
+              <div className="returning-figure-label">total form starts</div>
+            </div>
+            <div className="returning-figure">
+              <div className="returning-figure-value">{stats.most_attempts}&times;</div>
+              <div className="returning-figure-label">most attempts by one person</div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Intent Signals ──────────────────────────────────────────────────── */}
       {(stats.meta_signals > 0 || stats.google_signals > 0) && (
