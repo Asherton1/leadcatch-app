@@ -54,6 +54,11 @@ export default function PricingSection() {
       desc: "Automated recovery. Leads come back without lifting a finger.",
       hipaa: true,
       features: [
+        'Meta CAPI + Google Ads conversion signals',
+        'Intent-weighted conversion values',
+        'Returning visitor detection',
+        'Closed-won attribution back to ad platforms',
+        'Full session journey per lead',
         'AI voice callback within 60 seconds',
         'Automated lead recovery emails',
         'Instant SMS lead alerts',
