@@ -231,3 +231,83 @@ export async function sendGoogleConversion(payload: GoogleConversionPayload) {
     return { success: false, error: String(err) }
   }
 }
+
+// ─────────────────────────────────────────────────────────────────
+// META — Suppression audience for closed-won customers
+// ─────────────────────────────────────────────────────────────────
+// When a recovered lead converts, the client is still paying to show
+// ads to that person. Pushing them into a Custom Audience the client
+// excludes from their campaigns stops that spend. Requires an ad
+// account id and a token with ads_management scope.
+
+interface SuppressionPayload {
+  adAccountId: string
+  accessToken: string
+  audienceId?: string | null
+  audienceName?: string
+  email: string | null
+  phone: string | null
+}
+
+export async function addToSuppressionAudience(payload: SuppressionPayload) {
+  const { adAccountId, accessToken, audienceName = 'ReCapture — Converted (Exclude)' } = payload
+  let { audienceId } = payload
+
+  if (!adAccountId || !accessToken) {
+    return { success: false, error: 'missing_credentials' }
+  }
+  if (!payload.email && !payload.phone) {
+    return { success: false, error: 'no_identifier' }
+  }
+
+  const acct = adAccountId.startsWith('act_') ? adAccountId : `act_${adAccountId}`
+
+  try {
+    // Create the audience once, then reuse its id on every future convert.
+    if (!audienceId) {
+      const createRes = await fetch(
+        `https://graph.facebook.com/v19.0/${acct}/customaudiences?access_token=${encodeURIComponent(accessToken)}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: audienceName,
+            subtype: 'CUSTOM',
+            description: 'Leads recovered by ReCapture that went on to convert. Exclude from prospecting campaigns.',
+            customer_file_source: 'BOTH_USER_AND_PARTNER_PROVIDED',
+          }),
+        }
+      )
+      const created = await createRes.json()
+      if (!createRes.ok || !created.id) {
+        console.error('Suppression audience create failed:', createRes.status, JSON.stringify(created))
+        return { success: false, status: createRes.status, error: created }
+      }
+      audienceId = created.id as string
+    }
+
+    const schema: string[] = []
+    const row: string[] = []
+    if (payload.email) { schema.push('EMAIL'); row.push(sha256(payload.email) as string) }
+    if (payload.phone) { schema.push('PHONE'); row.push(hashPhone(payload.phone) as string) }
+
+    const addRes = await fetch(
+      `https://graph.facebook.com/v19.0/${audienceId}/users?access_token=${encodeURIComponent(accessToken)}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ payload: { schema, data: [row] } }),
+      }
+    )
+    const added = await addRes.json()
+    if (!addRes.ok) {
+      console.error('Suppression add failed:', addRes.status, JSON.stringify(added))
+      return { success: false, status: addRes.status, error: added, audienceId }
+    }
+
+    return { success: true, audienceId, received: added.num_received ?? 1 }
+  } catch (err) {
+    console.error('Suppression audience error:', err)
+    return { success: false, error: String(err) }
+  }
+}

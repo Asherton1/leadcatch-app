@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { sendMetaConversion, sendGoogleConversion } from '@/lib/ad-conversions'
+import { sendMetaConversion, sendGoogleConversion, addToSuppressionAudience } from '@/lib/ad-conversions'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
 
     const { data: client } = await supabase
       .from('clients')
-      .select('meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token')
+      .select('meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, meta_ad_account_id, meta_suppression_audience_id, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token')
       .eq('id', lead.client_id)
       .single()
 
@@ -87,6 +87,27 @@ export async function POST(request: Request) {
           estimatedValue: value,
         }).catch(e => console.error('Google purchase dispatch failed', lead.id, e))
       )
+    }
+
+    // Suppression: stop paying to advertise to someone who already converted.
+    if (client.meta_ad_account_id && client.meta_access_token && (lead.email || lead.phone)) {
+      try {
+        const sup = await addToSuppressionAudience({
+          adAccountId: client.meta_ad_account_id,
+          accessToken: client.meta_access_token,
+          audienceId: client.meta_suppression_audience_id,
+          email: lead.email,
+          phone: lead.phone,
+        })
+        if (sup.success) {
+          await supabase.from('leads').update({ suppressed_at: new Date().toISOString() }).eq('id', lead_id)
+          if (sup.audienceId && sup.audienceId !== client.meta_suppression_audience_id) {
+            await supabase.from('clients').update({ meta_suppression_audience_id: sup.audienceId }).eq('id', lead.client_id)
+          }
+        }
+      } catch (e) {
+        console.error('suppression failed', lead.id, e)
+      }
     }
 
     if (jobs.length > 0) {

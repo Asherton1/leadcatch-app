@@ -49,6 +49,7 @@ interface ClientSettings {
   meta_pixel_id: string | null
   meta_access_token: string | null
   meta_test_event_code: string | null
+  meta_ad_account_id: string | null
   meta_capi_enabled: boolean
   google_ads_conversion_id: string | null
   google_ads_conversion_label: string | null
@@ -215,6 +216,7 @@ export default function SettingsPage() {
         meta_pixel_id: settings.meta_pixel_id,
         meta_access_token: settings.meta_access_token,
         meta_test_event_code: settings.meta_test_event_code,
+        meta_ad_account_id: settings.meta_ad_account_id,
         meta_capi_enabled: settings.meta_capi_enabled,
         google_ads_conversion_id: settings.google_ads_conversion_id,
         google_ads_conversion_label: settings.google_ads_conversion_label,
@@ -791,6 +793,11 @@ export default function SettingsPage() {
                   <label className="settings-label">Test Event Code <span style={{ color: "#666", fontWeight: 400 }}>(optional)</span></label>
                   <input type="text" className="settings-input" value={settings.meta_test_event_code ?? ""} onChange={e => update("meta_test_event_code", e.target.value)} placeholder="TEST12345" />
                   <span className="settings-hint">Use only while testing — leave blank in production</span>
+                </div>
+                <div className="settings-field">
+                  <label className="settings-label">Ad Account ID <span style={{ color: "#666", fontWeight: 400 }}>(optional)</span></label>
+                  <input type="text" className="settings-input" value={settings.meta_ad_account_id ?? ""} onChange={e => update("meta_ad_account_id", e.target.value)} placeholder="act_1234567890" />
+                  <span className="settings-hint">Enables suppression: when a recovered lead converts, we add them to an exclusion audience so you stop paying to advertise to someone who already bought. Requires a token with ads_management access.</span>
                 </div>
               </div>
             )}
