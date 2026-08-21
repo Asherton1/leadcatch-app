@@ -335,7 +335,6 @@ export default function ForBoulevard() {
 
       </div>
 
-      <Footer />
 
       {/* Mobile responsive overrides */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -409,6 +408,8 @@ export default function ForBoulevard() {
 
       <FAQSection faqs={FAQS} />
       <RelatedPages page="for-boulevard" />
+
+      <Footer />
 
     </div>
   )

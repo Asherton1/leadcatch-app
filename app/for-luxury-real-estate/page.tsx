@@ -332,7 +332,6 @@ export default function ForLuxuryRealEstate() {
 
       </div>
 
-      <Footer />
 
       {/* Mobile responsive overrides */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -406,6 +405,8 @@ export default function ForLuxuryRealEstate() {
 
       <FAQSection faqs={FAQS} />
       <RelatedPages page="for-luxury-real-estate" />
+
+      <Footer />
 
     </div>
   )

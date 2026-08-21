@@ -335,7 +335,6 @@ export default function ForPlasticSurgery() {
 
       </div>
 
-      <Footer />
 
       {/* Mobile responsive overrides */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -409,6 +408,8 @@ export default function ForPlasticSurgery() {
 
       <FAQSection faqs={FAQS} />
       <RelatedPages page="for-plastic-surgery" />
+
+      <Footer />
 
     </div>
   )

@@ -334,7 +334,6 @@ export default function ForMedSpas() {
 
       </div>
 
-      <Footer />
 
       {/* Mobile responsive overrides */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -408,6 +407,8 @@ export default function ForMedSpas() {
 
       <FAQSection faqs={FAQS} />
       <RelatedPages page="for-med-spas" />
+
+      <Footer />
 
     </div>
   )

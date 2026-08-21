@@ -335,7 +335,6 @@ export default function ForFollowUpBoss() {
 
       </div>
 
-      <Footer />
 
       {/* Mobile responsive overrides */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -409,6 +408,8 @@ export default function ForFollowUpBoss() {
 
       <FAQSection faqs={FAQS} />
       <RelatedPages page="for-followupboss" />
+
+      <Footer />
 
     </div>
   )
