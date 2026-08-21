@@ -231,11 +231,56 @@ export default function ForLegal() {
 
       </div>
 
-      {/* SECTION 04 — specs */}
+      {/* SECTION 04 — intent layer */}
+      <section className="reveal" style={{ marginBottom: '3rem', paddingTop: '2rem' }}>
+        <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+          04 — The intent layer
+        </p>
+        <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
+          Your ad platforms think every case is worth the same.
+        </h2>
+        <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem', marginBottom: '2rem' }}>
+          <p>
+            Meta and Google only find out somebody needed a lawyer when that person presses submit. Every intake form that gets started and abandoned is, to them, indistinguishable from a bounce. So your campaigns are optimizing against a fraction of the people who actually reached out &mdash; and treating a wrongful death inquiry and a traffic citation as the identical event.
+          </p>
+          <p>
+            ReCapture sends the abandoned inquiries back to Meta&rsquo;s Conversions API and Google Ads as server-side conversion events. Identifiers are hashed before they leave. Events are deduplicated against your existing pixel. And each one carries a value weighted by how much intent the person actually showed, so the platforms stop treating every inquiry as interchangeable.
+          </p>
+        </div>
+
+        <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#fff', marginBottom: '0.875rem', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
+          Somebody who starts your intake form three times is deliberating
+        </h3>
+        <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem', marginBottom: '2rem' }}>
+          <p>
+            People do not fill out a family law intake form on a whim, and they rarely do it once. They start it at eleven at night, close the tab, think about it for four days, and start it again. Because none of those attempts ended in a submission, there is no record of the pattern anywhere in your firm &mdash; not in Clio, not in Lawmatics, not in analytics.
+          </p>
+          <p>
+            ReCapture surfaces the repeat visits, weights them into the lead score, and shows your intake team exactly who has been circling. In legal, that pattern is not noise. It is the signature of a real case.
+          </p>
+        </div>
+
+        <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#fff', marginBottom: '0.875rem', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
+          Optimize toward signed cases, not intake volume
+        </h3>
+        <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem', marginBottom: '1rem' }}>
+          <p>
+            Every firm running paid media has the same problem: the platforms optimize toward whatever you tell them a conversion is, and a conversion is usually a form fill. So the algorithm gets very good at producing intake volume, and your team spends its week disqualifying people.
+          </p>
+          <p>
+            When a recovered inquiry eventually signs, ReCapture pushes the actual matter value back to Meta and Google as a conversion. The platforms then learn which inquiries turn into fee revenue rather than which ones turn into phone calls. That is a distinction no pixel can make on its own, because the signing happens offline, weeks after the click.
+          </p>
+          <p style={{ fontSize: '0.85rem', color: '#666', fontStyle: 'italic', marginTop: '1.25rem' }}>
+            What your campaigns do with better data is your marketing team&rsquo;s call. Getting it there is ours.
+          </p>
+        </div>
+      </section>
+
+      {/* SECTION 05 — specs */}
       <section className="reveal specs-band" style={{ background: '#0d0d0d', borderTop: '1px solid #1a1a1a', borderBottom: '1px solid #1a1a1a', padding: '5rem 2rem', margin: '2rem 0' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-            04 — Built for legal specifics
+            05 — Built for legal specifics
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '3rem', lineHeight: 1.25, letterSpacing: '-0.02em', maxWidth: '720px' }}>
             After hours, on mobile, and discreet by default.
@@ -298,7 +343,7 @@ export default function ForLegal() {
 
         <section className="reveal" style={{ marginTop: '2rem', marginBottom: '3rem' }}>
           <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-            05 — Pricing
+            06 — Pricing
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem', lineHeight: 1.25, letterSpacing: '-0.02em' }}>
             $397 per month. 7-day free trial.
