@@ -27,6 +27,8 @@ interface Client {
 
 interface Lead {
   meta_conversion_sent?: boolean | null
+  suppressed_at?: string | null
+  converted_value?: number | null
   google_conversion_sent?: boolean | null
   id: string
   session_id: string
@@ -1049,7 +1051,7 @@ export default function Dashboard() {
     const poll = async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
 
@@ -1082,7 +1084,7 @@ export default function Dashboard() {
     setSearch('')
     supabase
       .from('leads')
-      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent')
+      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value')
       .eq('client_id', selectedClient.id)
       .order('created_at', { ascending: false })
       .then(({ data, error }) => {
@@ -1098,7 +1100,7 @@ export default function Dashboard() {
     const iv = setInterval(async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
       if (!error && data) setLeads(data as Lead[])
@@ -1180,11 +1182,12 @@ export default function Dashboard() {
       if (!key) continue
       identityMap.set(key, (identityMap.get(key) ?? 0) + 1)
     }
+    const suppressed_count = filteredLeads.filter(l => l.suppressed_at).length
     const returning_people   = [...identityMap.values()].filter(n => n > 1).length
     const returning_attempts = [...identityMap.values()].filter(n => n > 1).reduce((a, b) => a + b, 0)
     const most_attempts      = identityMap.size > 0 ? Math.max(...identityMap.values()) : 0
 
-    return { total_leads, emails_deployed, total_revenue_lost, avg_completion_rate, avg_time_on_form, meta_signals, google_signals, returning_people, returning_attempts, most_attempts }
+    return { total_leads, emails_deployed, total_revenue_lost, avg_completion_rate, avg_time_on_form, meta_signals, google_signals, returning_people, returning_attempts, most_attempts, suppressed_count }
   }, [filteredLeads])
 
   // Return count per identity — used to weight lead scoring.
@@ -2047,6 +2050,12 @@ export default function Dashboard() {
               <div className="intent-signal">
                 <div className="intent-signal-value"><CountUp to={stats.returning_attempts} /></div>
                 <div className="intent-signal-label">sent at elevated intent weight</div>
+              </div>
+            )}
+            {stats.suppressed_count > 0 && (
+              <div className="intent-signal">
+                <div className="intent-signal-value"><CountUp to={stats.suppressed_count} /></div>
+                <div className="intent-signal-label">excluded from further ad spend</div>
               </div>
             )}
             {stats.google_signals > 0 && (
