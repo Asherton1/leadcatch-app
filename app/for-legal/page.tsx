@@ -380,8 +380,6 @@ export default function ForLegal() {
 
       </div>
 
-      <Footer />
-
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes recovered-pulse {
           0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
@@ -405,6 +403,8 @@ export default function ForLegal() {
 
       <FAQSection faqs={FAQS} />
       <RelatedPages page="for-legal" />
+
+      <Footer />
 
     </div>
   )
