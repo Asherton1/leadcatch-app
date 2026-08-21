@@ -615,9 +615,30 @@ export async function POST(request: NextRequest) {
     if (conversionPromises.length > 0) {
       await Promise.allSettled(conversionPromises)
 
+      // Record which identifiers went with the event. Match quality is a
+      // function of how many strong keys the platform had to resolve against,
+      // so this is what lets us tell a client why their match rate is what it is.
+      const matchKeys: string[] = []
+      if (email) matchKeys.push('email')
+      if (phone) matchKeys.push('phone')
+      if (name) matchKeys.push('name')
+      if (request.headers.get('x-forwarded-for')) matchKeys.push('ip')
+      if (request.headers.get('user-agent')) matchKeys.push('user_agent')
+
+      // Weighted: email and phone are the keys that actually resolve people.
+      let strength = 0
+      if (email) strength += 40
+      if (phone) strength += 35
+      if (name) strength += 10
+      if (matchKeys.includes('ip')) strength += 8
+      if (matchKeys.includes('user_agent')) strength += 7
+
       // Mark as sent so subsequent heartbeat upserts for this same lead
       // don't re-fire conversions. Guarded above by meta/google_conversion_sent.
-      const convUpdate: Record<string, boolean> = {}
+      const convUpdate: Record<string, boolean | string[] | number> = {
+        match_keys: matchKeys,
+        match_strength: strength,
+      }
       if (!metaAlreadySent && client.meta_capi_enabled && client.meta_pixel_id && client.meta_access_token) {
         convUpdate.meta_conversion_sent = true
       }

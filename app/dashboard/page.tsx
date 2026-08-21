@@ -28,6 +28,8 @@ interface Client {
 interface Lead {
   meta_conversion_sent?: boolean | null
   suppressed_at?: string | null
+  match_keys?: string[] | null
+  match_strength?: number | null
   converted_value?: number | null
   google_conversion_sent?: boolean | null
   id: string
@@ -1051,7 +1053,7 @@ export default function Dashboard() {
     const poll = async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
 
@@ -1084,7 +1086,7 @@ export default function Dashboard() {
     setSearch('')
     supabase
       .from('leads')
-      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value')
+      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength')
       .eq('client_id', selectedClient.id)
       .order('created_at', { ascending: false })
       .then(({ data, error }) => {
@@ -1100,7 +1102,7 @@ export default function Dashboard() {
     const iv = setInterval(async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
       if (!error && data) setLeads(data as Lead[])
@@ -1183,11 +1185,20 @@ export default function Dashboard() {
       identityMap.set(key, (identityMap.get(key) ?? 0) + 1)
     }
     const suppressed_count = filteredLeads.filter(l => l.suppressed_at).length
+
+    // Match quality: how resolvable the events we sent actually were.
+    const scored = filteredLeads.filter(l => typeof l.match_strength === 'number')
+    const match_avg = scored.length > 0
+      ? Math.round(scored.reduce((a, l) => a + (l.match_strength ?? 0), 0) / scored.length)
+      : 0
+    const missing_phone = scored.filter(l => !(l.match_keys ?? []).includes('phone')).length
+    const missing_email = scored.filter(l => !(l.match_keys ?? []).includes('email')).length
+    const match_scored = scored.length
     const returning_people   = [...identityMap.values()].filter(n => n > 1).length
     const returning_attempts = [...identityMap.values()].filter(n => n > 1).reduce((a, b) => a + b, 0)
     const most_attempts      = identityMap.size > 0 ? Math.max(...identityMap.values()) : 0
 
-    return { total_leads, emails_deployed, total_revenue_lost, avg_completion_rate, avg_time_on_form, meta_signals, google_signals, returning_people, returning_attempts, most_attempts, suppressed_count }
+    return { total_leads, emails_deployed, total_revenue_lost, avg_completion_rate, avg_time_on_form, meta_signals, google_signals, returning_people, returning_attempts, most_attempts, suppressed_count, match_avg, match_scored, missing_phone, missing_email }
   }, [filteredLeads])
 
   // Return count per identity — used to weight lead scoring.
@@ -2065,6 +2076,24 @@ export default function Dashboard() {
               </div>
             )}
           </div>
+          {stats.match_scored > 0 && (
+            <div className="match-quality">
+              <div className="match-quality-head">
+                <span className="match-quality-value">{stats.match_avg}%</span>
+                <span className="match-quality-label">average match strength</span>
+              </div>
+              <div className="match-quality-bar">
+                <span className="match-quality-fill" style={{ width: `${Math.min(100, stats.match_avg)}%` }} />
+              </div>
+              <p className="match-quality-note">
+                {stats.missing_phone > 0
+                  ? `${stats.missing_phone} of ${stats.match_scored} events went without a phone number. Phone is the second strongest identifier after email — capturing it earlier in the form is the single biggest lift available to your match rate.`
+                  : stats.missing_email > 0
+                    ? `${stats.missing_email} of ${stats.match_scored} events went without an email address. Email is the strongest identifier the platforms resolve against.`
+                    : 'Every event carried both an email and a phone number. That is as resolvable as a server-side event gets.'}
+              </p>
+            </div>
+          )}
           <p className="intent-signals-note">
             Deduplicated against your existing pixel.
           </p>

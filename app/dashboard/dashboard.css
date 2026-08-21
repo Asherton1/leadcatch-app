@@ -3251,3 +3251,49 @@ button.returning-cta:focus-visible {
   margin: 0.75rem 0 0;
   max-width: 46ch;
 }
+
+/* ── Match quality ───────────────────────────────────────────────────────── */
+.match-quality {
+  margin-top: 1.5rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.match-quality-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin-bottom: 0.65rem;
+}
+.match-quality-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.match-quality-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  font-weight: 600;
+}
+.match-quality-bar {
+  height: 3px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.85rem;
+}
+.match-quality-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,107,53,0.5), #ff6b35);
+  border-radius: 2px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.match-quality-note {
+  font-size: 0.76rem;
+  line-height: 1.65;
+  color: #7a7a7a;
+  margin: 0;
+}
