@@ -127,7 +127,7 @@ export default function HowItWorksPage() {
             <h2>They Abandon the Form</h2>
             <p>Their phone buzzes. They switch tabs. They get distracted. They close the browser. Whatever the reason, they leave without submitting. Your CRM never sees them. Your analytics never records them.</p>
             <div className="hiw-abandon-stat">
-              <span className="hiw-abandon-number">60-80%</span>
+              <span className="hiw-abandon-number">60-70%</span>
               <span className="hiw-abandon-text">of visitors abandon before submitting</span>
             </div>
           </div>
@@ -281,9 +281,30 @@ export default function HowItWorksPage() {
           <div className="hiw-connector-dot hiw-connector-dot-green"></div>
         </div>
 
-        {/* Step 7 - Revenue recovered */}
+        {/* Step 7 - Signal returns to ad platforms */}
+        <div className="hiw-step hiw-step-capture reveal">
+          <div className="hiw-step-number hiw-step-number-orange">07</div>
+          <div className="hiw-step-content">
+            <div className="hiw-step-icon hiw-icon-orange-bg">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
+              </svg>
+            </div>
+            <h2>The Signal Goes Back to Your Ad Platforms</h2>
+            <p>This runs in parallel with the recovery, and it is the part no other tool does. Meta and Google only ever learn from the people who press submit, which means every optimization decision your campaigns make is derived from a fraction of the people who actually wanted something. ReCapture sends the ones who did not finish to Meta&apos;s Conversions API and Google Ads as server-side conversion events.</p>
+            <p>Identifiers are hashed before they leave. Events are deduplicated against your existing pixel so nothing is counted twice. And each one is weighted by how much intent the person actually showed &mdash; somebody returning for the third time and filling seven of eight fields carries a materially higher value than someone who typed an email and left after eight seconds.</p>
+            <p>When one of those recovered inquiries eventually closes, the real dollar amount goes back too. Your campaigns stop optimizing toward leads and start optimizing toward the leads that actually turn into revenue.</p>
+          </div>
+        </div>
+
+        <div className="hiw-connector reveal">
+          <div className="hiw-connector-line hiw-connector-green"></div>
+          <div className="hiw-connector-dot hiw-connector-dot-green"></div>
+        </div>
+
+        {/* Step 8 - Revenue recovered */}
         <div className="hiw-step hiw-step-final reveal">
-          <div className="hiw-step-number hiw-step-number-green">07</div>
+          <div className="hiw-step-number hiw-step-number-green">08</div>
           <div className="hiw-step-content">
             <div className="hiw-step-icon hiw-icon-green-bg">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
