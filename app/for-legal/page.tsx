@@ -229,8 +229,6 @@ export default function ForLegal() {
           </p>
         </section>
 
-      </div>
-
       {/* SECTION 04 — intent layer */}
       <section className="reveal" style={{ marginBottom: '3rem', paddingTop: '2rem' }}>
         <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
@@ -275,6 +273,8 @@ export default function ForLegal() {
           </p>
         </div>
       </section>
+
+      </div>
 
       {/* SECTION 05 — specs */}
       <section className="reveal specs-band" style={{ background: '#0d0d0d', borderTop: '1px solid #1a1a1a', borderBottom: '1px solid #1a1a1a', padding: '5rem 2rem', margin: '2rem 0' }}>
