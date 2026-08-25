@@ -978,6 +978,11 @@ export default function Dashboard() {
       const adminFlag = meRow?.is_admin === true
       setIsAdmin(adminFlag)
 
+      // Deep link from the agency console: /dashboard?client=<id>
+      const requestedClient = typeof window !== 'undefined'
+        ? new URLSearchParams(window.location.search).get('client')
+        : null
+
       if (adminFlag) {
         // Admin: fetch all clients
         const { data, error } = await supabase
@@ -989,8 +994,9 @@ export default function Dashboard() {
           setAllClients(rows)
           if (rows.length > 0) {
             // Default to ReCapture admin row when logged in as founder
+            const deepLinked = requestedClient ? rows.find(r => r.id === requestedClient) : null
             const recaptureRow = rows.find(r => r.name === 'ReCapture' || r.company_name === 'ReCapture')
-            setSelectedClient(recaptureRow ?? rows[0])
+            setSelectedClient(deepLinked ?? recaptureRow ?? rows[0])
           }
         }
       } else {

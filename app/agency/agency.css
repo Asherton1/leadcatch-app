@@ -147,3 +147,42 @@
   .ag-row-name { grid-column: 1 / -1; }
   .ag-row-arrow { display: none; }
 }
+
+/* Match dashboard card treatment */
+.ag-totals {
+  border: none !important;
+  padding: 2rem 2.5rem 0 !important;
+  gap: 1.25rem !important;
+}
+.ag-total {
+  background: linear-gradient(150deg, #1e1e1e 0%, #171717 55%, #131313 100%);
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 1.125rem;
+  padding: 1.875rem 2rem 1.75rem;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.045) inset,
+    0 2px 6px rgba(0,0,0,0.35),
+    0 8px 28px rgba(0,0,0,0.2);
+}
+.ag-total-label {
+  font-size: 0.7rem !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6b6b6b !important;
+  font-weight: 600;
+}
+.ag-list {
+  background: linear-gradient(150deg, #1e1e1e 0%, #171717 55%, #131313 100%);
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 1.125rem;
+  padding: 1.5rem 1.25rem 0.5rem !important;
+  margin-top: 1.25rem !important;
+  max-width: 1180px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.045) inset,
+    0 2px 6px rgba(0,0,0,0.35),
+    0 8px 28px rgba(0,0,0,0.2);
+}
+.ag-list-head { padding-bottom: 0.8rem; }
+.ag-row:last-of-type { border-bottom: none; }
+.ag-row { border-radius: 0.65rem; }
