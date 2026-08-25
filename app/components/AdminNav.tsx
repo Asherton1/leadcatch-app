@@ -15,6 +15,7 @@ export default function AdminNav() {
   const [signingOut, setSigningOut] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [clientLabel, setClientLabel] = useState('Dashboard')
+  const [isAgency, setIsAgency] = useState(false)
 
   useEffect(() => {
     supabase.auth.getUser().then(async ({ data }) => {
@@ -24,6 +25,13 @@ export default function AdminNav() {
         return
       }
       if (data.user?.id) {
+        const { data: ag } = await supabase
+          .from('agencies')
+          .select('id')
+          .eq('user_id', data.user.id)
+          .maybeSingle()
+        if (ag) setIsAgency(true)
+
         const { data: rows } = await supabase
           .from('clients')
           .select('company_name, name')
@@ -37,6 +45,7 @@ export default function AdminNav() {
 
   const allLinks = [
     { href: '/dashboard', label: clientLabel, adminOnly: false },
+    ...(isAgency ? [{ href: '/agency', label: 'Console', adminOnly: false }] : []),
     { href: '/admin', label: 'Admin', adminOnly: true },
     { href: '/dashboard/outreach', label: 'Outreach', adminOnly: true },
     { href: '/admin/sms-templates', label: 'SMS', adminOnly: true },
