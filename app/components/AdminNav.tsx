@@ -20,6 +20,17 @@ export default function AdminNav() {
   useEffect(() => {
     supabase.auth.getUser().then(async ({ data }) => {
       const email = data.user?.email
+
+      // Agency check runs for everyone, including admins.
+      if (data.user?.id) {
+        const { data: agRow } = await supabase
+          .from('agencies')
+          .select('id')
+          .eq('user_id', data.user.id)
+          .maybeSingle()
+        if (agRow) setIsAgency(true)
+      }
+
       if (email && ADMIN_EMAILS.includes(email)) {
         setIsAdmin(true)
         return
