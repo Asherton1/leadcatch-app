@@ -317,3 +317,15 @@
 .ag-foot,
 .ag-loading,
 .ag-none { max-width: 1600px !important; }
+
+/* Constrain nav contents to match the dashboard container width */
+.ag-wrap .admin-nav {
+  padding-left: max(2.5rem, calc((100vw - 1600px) / 2 + 2.5rem)) !important;
+  padding-right: max(2.5rem, calc((100vw - 1600px) / 2 + 2.5rem)) !important;
+}
+@media (max-width: 900px) {
+  .ag-wrap .admin-nav {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
