@@ -3327,3 +3327,12 @@ button.returning-cta:focus-visible {
   position: static !important;
   margin-top: 0.85rem !important;
 }
+
+/* Parent overflow:hidden was clipping the scrollable client list */
+.cs-menu { overflow: visible !important; }
+.cs-menu-list {
+  max-height: 320px !important;
+  overflow-y: auto !important;
+  border-bottom-left-radius: 0.875rem;
+  border-bottom-right-radius: 0.875rem;
+}
