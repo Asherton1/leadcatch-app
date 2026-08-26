@@ -2042,6 +2042,31 @@ export default function Dashboard() {
       )}
 
       {/* ── Intent Signals ──────────────────────────────────────────────────── */}
+      {!(stats.meta_signals > 0 || stats.google_signals > 0) && (
+        <div className="intent-signals intent-signals-empty">
+          <div className="intent-signals-head">
+            <span className="intent-signals-eyebrow">Intent Signals</span>
+            <h2 className="intent-signals-title">
+              Your ad platforms are not seeing these people yet
+            </h2>
+            <p className="intent-signals-sub">
+              Meta and Google only learn from visitors who press submit. Everyone captured
+              below started a form and left, so the platforms have no record any of them
+              existed. Connect your pixel and we will send them through as conversion
+              events &mdash; hashed, deduplicated, and weighted by how much intent each
+              one showed.
+            </p>
+          </div>
+          <a href="/settings" className="intent-empty-cta">
+            Connect Meta or Google
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+          <p className="intent-signals-note">
+            Takes about two minutes in Settings.
+          </p>
+        </div>
+      )}
+
       {(stats.meta_signals > 0 || stats.google_signals > 0) && (
         <div className="intent-signals">
           <div className="intent-signals-head">
