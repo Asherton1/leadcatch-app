@@ -121,12 +121,39 @@ export default function AgencyConsole() {
       return untouched && recent
     }).length
     const converted = rows.filter(l => l.status === 'converted')
+
+    const identity = new Map<string, number>()
+    for (const l of rows) {
+      const k = (l.email ?? l.phone ?? '').trim().toLowerCase()
+      if (!k) continue
+      identity.set(k, (identity.get(k) ?? 0) + 1)
+    }
+    const returning = [...identity.values()].filter(n => n > 1).length
+
+    const latest = rows.length > 0
+      ? rows.reduce((a, b) => new Date(a.created_at) > new Date(b.created_at) ? a : b).created_at
+      : null
+
     return {
       captured: rows.length,
       signals: rows.filter(l => l.meta_conversion_sent).length,
       recovered: converted.reduce((s, l) => s + (l.converted_value ?? l.estimated_value ?? 0), 0),
+      convertedCount: converted.length,
+      returning,
+      latest,
       hotWaiting,
     }
+  }
+
+  function ago(iso: string | null): string {
+    if (!iso) return 'no captures yet'
+    const mins = Math.floor((Date.now() - new Date(iso).getTime()) / 60000)
+    if (mins < 1) return 'just now'
+    if (mins < 60) return mins + 'm ago'
+    const hrs = Math.floor(mins / 60)
+    if (hrs < 24) return hrs + 'h ago'
+    const days = Math.floor(hrs / 24)
+    return days + (days === 1 ? ' day ago' : ' days ago')
   }
 
   if (loading) {
@@ -178,42 +205,60 @@ export default function AgencyConsole() {
         </div>
       </section>
 
-      <section className="ag-list">
-        <div className="ag-list-head">
-          <span>Client</span>
-          <span>Captured</span>
-          <span>Signals</span>
-          <span>Recovered</span>
-          <span>Waiting</span>
-          <span />
-        </div>
-
+      <section className="ag-clients">
         {clients.length === 0 && (
           <div className="ag-none">No clients attached to this agency yet.</div>
         )}
 
         {clients.map(c => {
-          const s = clientStats(c.id)
+          const st = clientStats(c.id)
           return (
             <button
               key={c.id}
-              className="ag-row"
+              className="ag-card"
               type="button"
               onClick={() => router.push(`/dashboard?client=${c.id}`)}
             >
-              <span className="ag-row-name">
-                {c.company_name || c.name || 'Unnamed client'}
-                {!c.active && <span className="ag-row-inactive">paused</span>}
-              </span>
-              <span className="ag-row-num">{s.captured}</span>
-              <span className="ag-row-num">{s.signals}</span>
-              <span className="ag-row-num">{money(s.recovered)}</span>
-              <span className={'ag-row-num' + (s.hotWaiting > 0 ? ' ag-row-waiting' : '')}>
-                {s.hotWaiting > 0 ? s.hotWaiting : '—'}
-              </span>
-              <span className="ag-row-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-              </span>
+              <div className="ag-card-top">
+                <div className="ag-card-name">
+                  <span className={'ag-dot' + (c.active ? ' on' : '')} />
+                  {c.company_name || c.name || 'Unnamed client'}
+                </div>
+                <span className="ag-card-open">
+                  Open
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </span>
+              </div>
+
+              <div className="ag-card-metrics">
+                <div className="ag-metric">
+                  <span className="ag-metric-value">{st.captured}</span>
+                  <span className="ag-metric-label">captured</span>
+                </div>
+                <div className="ag-metric">
+                  <span className="ag-metric-value">{st.signals}</span>
+                  <span className="ag-metric-label">signals sent</span>
+                </div>
+                <div className="ag-metric">
+                  <span className="ag-metric-value">{st.returning}</span>
+                  <span className="ag-metric-label">returning</span>
+                </div>
+                <div className="ag-metric">
+                  <span className="ag-metric-value">{money(st.recovered)}</span>
+                  <span className="ag-metric-label">
+                    recovered{st.convertedCount > 0 ? ` · ${st.convertedCount} closed` : ''}
+                  </span>
+                </div>
+              </div>
+
+              <div className="ag-card-foot">
+                <span className="ag-card-last">Last capture {ago(st.latest)}</span>
+                {st.hotWaiting > 0 && (
+                  <span className="ag-card-alert">
+                    {st.hotWaiting} inquir{st.hotWaiting === 1 ? 'y' : 'ies'} waiting on contact
+                  </span>
+                )}
+              </div>
             </button>
           )
         })}
