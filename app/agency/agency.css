@@ -330,12 +330,7 @@
   }
 }
 
-/* ── Cross-client attention strip ───────────────────────────────────────── */
-.ag-attn-wrap {
-  max-width: 1600px;
-  margin: 0 auto 1.25rem;
-  padding: 0 2.5rem;
-}
+
 .ag-attn-client {
   font-size: 0.68rem;
   font-weight: 700;
@@ -401,37 +396,16 @@
   .ag-attn-wrap .attn-strip { animation: none !important; }
 }
 
-/* Align attention strip to the console grid and match card polish */
-.ag-attn-wrap {
-  max-width: 1600px !important;
-  margin: 0 auto 1.25rem !important;
-  padding: 0 2.5rem !important;
-  width: 100% !important;
+
+
+/* Attention strip: outer container handles alignment, inner keeps the border */
+.ag-attn-outer {
+  max-width: 1600px;
+  margin: 0 auto 1.25rem;
+  padding: 0 2.5rem;
   box-sizing: border-box;
 }
-.ag-attn-wrap .attn-strip,
-.ag-attn-wrap .attn-body {
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 1.125rem;
-}
-.ag-attn-wrap.open .attn-strip {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.ag-attn-wrap .attn-body {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  margin: 0;
-  padding: 0.4rem 0.65rem 0.65rem;
-}
-.ag-attn-wrap .attn-row {
-  border-radius: 0.75rem;
-  margin: 0;
-}
-.ag-attn-wrap .attn-foot {
-  padding: 0.65rem 1rem 0.35rem;
-}
+.ag-attn-outer .attn-wrap { margin-bottom: 0; }
 @media (max-width: 900px) {
-  .ag-attn-wrap { padding: 0 1.5rem !important; }
+  .ag-attn-outer { padding: 0 1.5rem; }
 }

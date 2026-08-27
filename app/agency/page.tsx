@@ -217,7 +217,8 @@ export default function AgencyConsole() {
       </header>
 
       {waiting.count > 0 && (
-        <div className={'ag-attn-wrap attn-wrap' + (attnOpen ? ' open' : '')}>
+        <div className="ag-attn-outer">
+        <div className={'attn-wrap' + (attnOpen ? ' open' : '')}>
           <button className="attn-strip" type="button" onClick={() => setAttnOpen(o => !o)}>
             <span className="attn-pulse" />
             <span className="attn-text">
@@ -262,6 +263,7 @@ export default function AgencyConsole() {
               </div>
             </div>
           )}
+        </div>
         </div>
       )}
 
