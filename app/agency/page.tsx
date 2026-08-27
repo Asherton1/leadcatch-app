@@ -293,7 +293,7 @@ export default function AgencyConsole() {
           return (
             <button
               key={c.id}
-              className="ag-card"
+              className={'ag-card' + (st.hotWaiting > 0 ? ' ag-card-has-waiting' : '')}
               type="button"
               onClick={() => router.push(`/dashboard?client=${c.id}`)}
             >
