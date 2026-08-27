@@ -50,19 +50,20 @@ export default function BlogIndex() {
       </section>
 
       <div className="blog-featured reveal">
-        <Link href="/blog/ad-platforms-optimizing-on-a-fraction" className="blog-featured-card">
+        <Link href="/blog/thirty-clients-thirty-logins" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
-            <Image src="/blog-ad-platforms-fraction.webp" alt="Aerial view of a housing development at dusk with only a few lights on" fill style={{ objectFit: 'cover' }} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/api/og?title=Thirty+Clients+Thirty+Logins&amp;eyebrow=Blog" alt="Thirty clients, thirty logins" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div className="blog-featured-content">
-            <div className="blog-featured-tag">Paid Media</div>
+            <div className="blog-featured-tag">Agencies</div>
             <div className="blog-featured-meta">
-              <span className="blog-featured-date">August 20, 2026</span>
+              <span className="blog-featured-date">August 27, 2026</span>
               <span className="blog-featured-dot" />
-              <span className="blog-featured-readtime">7 min read</span>
+              <span className="blog-featured-readtime">6 min read</span>
             </div>
-            <div className="blog-featured-title">Your Ad Platforms Are Optimizing on a Fraction of Your Demand</div>
-            <div className="blog-featured-excerpt">Meta and Google only find out someone wanted what you sell when that person presses submit. Everyone who started your form and walked away is invisible to them. That gap is a training-data problem, and it compounds every day your campaigns run.</div>
+            <div className="blog-featured-title">Thirty Clients, Thirty Logins: Why Agencies Do Not Resell Software</div>
+            <div className="blog-featured-excerpt">Most agency owners would happily add a recurring revenue line to a book they already service. What stops them is not margin and it is not interest. It is the operational weight of running one more tool across thirty separate client accounts.</div>
             <span className="blog-featured-cta">Read article <span>→</span></span>
           </div>
         </Link>
@@ -73,6 +74,18 @@ export default function BlogIndex() {
       <div className="blog-more reveal" style={{ maxWidth: '960px', margin: '0 auto', padding: '0 2rem 5rem' }}>
         <h2 style={{ color: '#ff6b35', fontSize: '1.5rem', fontWeight: 700, margin: '0 0 2rem 0' }}>More Insights</h2>
         <div className="blog-bento">
+          <Link href="/blog/ad-platforms-optimizing-on-a-fraction" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+              <Image src="/blog-ad-platforms-fraction.webp" alt="Aerial view of a housing development at dusk" fill style={{ objectFit: 'cover' }} />
+            </div>
+            <div style={{ padding: '1.5rem 2rem 2rem' }}>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Paid Media</div>
+              <div style={{ fontSize: '0.8rem', color: '#666', marginBottom: '0.75rem' }}><span>August 20, 2026</span><span style={{ margin: '0 0.5rem' }}>&middot;</span><span>7 min read</span></div>
+              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>Your Ad Platforms Are Optimizing on a Fraction of Your Demand</div>
+              <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: 1.6, marginBottom: '1rem' }}>Meta and Google only learn from the people who press submit. Everyone who started your form and left is invisible to them, which means every optimization decision gets made from a fraction of your real demand.</div>
+              <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Read article &rarr;</span>
+            </div>
+          </Link>
           <Link href="/blog/lead-recovery-or-keylogger" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '0', textDecoration: 'none', transition: 'border-color 0.2s', overflow: 'hidden' }}>
             <div style={{ position: 'relative', width: '100%', height: '200px' }}>
               <Image src="/blog-lead-recovery-keylogger.webp" alt="Lead recovery versus keystroke logging" fill style={{ objectFit: 'cover' }} />
