@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import AdminNav from '../components/AdminNav'
+import '../dashboard/dashboard.css'
 import './agency.css'
 
 interface Agency {
