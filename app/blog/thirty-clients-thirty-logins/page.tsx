@@ -124,6 +124,13 @@ export default function Post() {
           The clients themselves keep their own logins if the agency wants them to have one. Some agencies work every account themselves; others prefer the client sees their own leads and the agency just monitors. Both work from the same setup.
         </p>
 
+        <div style={{ position: 'relative', width: '100%', borderRadius: '12px', overflow: 'hidden', margin: '2rem 0 0.75rem', border: '1px solid rgba(255,255,255,0.07)' }}>
+          <Image src="/blog-console-screenshot.webp" alt="The ReCapture agency console showing every client in one view" width={1600} height={900} style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
+        <p style={{ fontSize: '0.82rem', color: '#666', marginTop: 0 }}>
+          The console, with the alert expanded. Each waiting inquiry is tagged with the client it belongs to.
+        </p>
+
         <h2>The honest version</h2>
         <p>
           A console does not make a bad product worth reselling. If the underlying tool does not capture anything a client cares about, no amount of dashboard design fixes that.
