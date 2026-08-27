@@ -52,8 +52,7 @@ export default function BlogIndex() {
       <div className="blog-featured reveal">
         <Link href="/blog/thirty-clients-thirty-logins" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/api/og?title=Thirty+Clients+Thirty+Logins&amp;eyebrow=Blog" alt="Thirty clients, thirty logins" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+            <Image src="/blog-thirty-clients.webp" alt="A board of dozens of numbered keys" fill style={{ objectFit: 'cover' }} />
           </div>
           <div className="blog-featured-content">
             <div className="blog-featured-tag">Agencies</div>

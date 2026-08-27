@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import Footer from '../../components/Footer'
 import BlogNav from '../../components/BlogNav'
 import '../blog.css'
@@ -63,6 +64,10 @@ export default function Post() {
         </div>
         <h1>Thirty Clients, Thirty Logins: Why Agencies Do Not Resell Software</h1>
         <p className="post-subtitle">Most agency owners would happily add a recurring revenue line to a book they already service. What stops them usually is not margin, and it is not interest. It is the quiet operational weight of running one more tool across thirty separate client accounts.</p>
+      </div>
+
+      <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
+        <Image src="/blog-thirty-clients.webp" alt="A board of dozens of numbered keys" fill style={{ objectFit: 'cover' }} />
       </div>
 
       <div className="blog-post-divider"><hr /></div>
