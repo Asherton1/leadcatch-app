@@ -329,3 +329,26 @@
     padding-right: 1.5rem !important;
   }
 }
+
+/* ── Cross-client attention strip ───────────────────────────────────────── */
+.ag-attn-wrap {
+  max-width: 1600px;
+  margin: 0 auto 1.25rem;
+  padding: 0 2.5rem;
+}
+.ag-attn-client {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ff6b35;
+  background: rgba(255,107,53,0.09);
+  border: 1px solid rgba(255,107,53,0.22);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .ag-attn-wrap { padding: 0 1.5rem; }
+  .ag-attn-client { font-size: 0.62rem; padding: 0.15rem 0.45rem; }
+}

@@ -32,6 +32,8 @@ interface LeadRow {
   suppressed_at: string | null
   email: string | null
   phone: string | null
+  id?: string
+  name?: string | null
 }
 
 function money(n: number): string {
@@ -45,6 +47,7 @@ export default function AgencyConsole() {
   const [clients, setClients] = useState<ClientRow[]>([])
   const [leads, setLeads] = useState<LeadRow[]>([])
   const [notAgency, setNotAgency] = useState(false)
+  const [attnOpen, setAttnOpen] = useState(false)
 
   useEffect(() => {
     let cancelled = false
@@ -71,7 +74,7 @@ export default function AgencyConsole() {
       if (ids.length > 0) {
         const { data } = await supabase
           .from('leads')
-          .select('client_id, status, estimated_value, converted_value, created_at, meta_conversion_sent, suppressed_at, email, phone')
+          .select('id, client_id, name, status, estimated_value, converted_value, created_at, meta_conversion_sent, suppressed_at, email, phone')
           .in('client_id', ids)
         ld = (data ?? []) as LeadRow[]
       }
@@ -112,6 +115,32 @@ export default function AgencyConsole() {
     const returning = [...identity.values()].filter(n => n > 1).length
     return { captured, signals, suppressed, recovered, returning }
   }, [leads])
+
+  const waiting = useMemo(() => {
+    const nameFor = new Map(clients.map(c => [c.id, c.company_name || c.name || 'Client']))
+    const rows = leads
+      .filter(l => {
+        const untouched = !['contacted', 'converted', 'lost'].includes(l.status ?? '')
+        const recent = Date.now() - new Date(l.created_at).getTime() < 48 * 3600 * 1000
+        return untouched && recent && (l.email || l.phone)
+      })
+      .sort((a, b) => +new Date(a.created_at) - +new Date(b.created_at))
+      .map(l => ({ ...l, clientName: nameFor.get(l.client_id) ?? 'Client' }))
+    return {
+      count: rows.length,
+      value: rows.reduce((s, l) => s + (l.estimated_value ?? 0), 0),
+      rows,
+    }
+  }, [leads, clients])
+
+  function relTime(iso: string): string {
+    const mins = Math.floor((Date.now() - new Date(iso).getTime()) / 60000)
+    if (mins < 1) return 'just now'
+    if (mins < 60) return mins + 'm ago'
+    const h = Math.floor(mins / 60)
+    if (h < 24) return h + 'h ago'
+    return Math.floor(h / 24) + 'd ago'
+  }
 
   function clientStats(id: string) {
     const rows = byClient.get(id) ?? []
@@ -185,6 +214,55 @@ export default function AgencyConsole() {
           </p>
         </div>
       </header>
+
+      {waiting.count > 0 && (
+        <div className={'ag-attn-wrap attn-wrap' + (attnOpen ? ' open' : '')}>
+          <button className="attn-strip" type="button" onClick={() => setAttnOpen(o => !o)}>
+            <span className="attn-pulse" />
+            <span className="attn-text">
+              <b>{waiting.count} inquir{waiting.count === 1 ? 'y' : 'ies'}</b>
+              {' across your book from the last 48 hours '}
+              {waiting.count === 1 ? 'has' : 'have'} not been contacted
+              <span className="attn-value">{money(waiting.value)} in pipeline</span>
+            </span>
+            <span className="attn-cta">
+              {attnOpen ? 'Hide' : 'Review'}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: attnOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease' }}>
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </span>
+          </button>
+
+          {attnOpen && (
+            <div className="attn-body">
+              {waiting.rows.map(l => (
+                <button
+                  key={l.id ?? l.created_at}
+                  className="attn-row"
+                  type="button"
+                  onClick={() => router.push(`/dashboard?client=${l.client_id}`)}
+                >
+                  <span className="attn-row-main">
+                    <span className="attn-row-name">{l.name || 'Unknown'}</span>
+                    <span className="attn-row-contact">{l.email || l.phone}</span>
+                  </span>
+                  <span className="attn-row-meta">
+                    <span className="ag-attn-client">{l.clientName}</span>
+                    <span className="attn-row-time">{relTime(l.created_at)}</span>
+                    <span className="attn-row-value">{money(l.estimated_value ?? 0)}</span>
+                  </span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="attn-row-arrow">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </button>
+              ))}
+              <div className="attn-foot">
+                Oldest waiting {waiting.rows.length > 0 ? relTime(waiting.rows[0].created_at) : ''} &middot; opens that client&apos;s dashboard
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       <section className="ag-totals">
         <div className="ag-total">
