@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import '../blog/blog.css'
 import '../landing.css'
 import './dashboard-tour.css'
-import { CardGrid, DropoffChart, TimingChart, AttentionStrip, PipelineBands, RecoveryFunnel, IntentSignals, ReportingWindow } from './TourVisuals'
+import { CardGrid, DropoffChart, TimingChart, AttentionStrip, PipelineBands, RecoveryFunnel, IntentSignals, ReportingWindow, AgencyConsole } from './TourVisuals'
 
 export const metadata = {
   title: 'What You Actually Look At — ReCapture Dashboard',
@@ -134,6 +134,20 @@ export default function DashboardTour() {
             <p>You keep running campaigns exactly as you do now. Whoever manages the account decides what to do with better data. We just make sure it gets there.</p>
           </div>
           <IntentSignals />
+        </div>
+      </section>
+
+      <section className="dt-band reveal">
+        <div className="dt-inner dt-narrow">
+          <p className="dt-section-eyebrow">For Agencies</p>
+          <h2 className="dt-h2">Thirty clients, one screen</h2>
+          <div className="dt-body">
+            <p>If you run an agency, the dashboard above is the wrong unit. You are not managing one business, you are managing a book, and nobody is logging into thirty accounts to check whether a tool is working.</p>
+            <p>The console is one screen for the whole book. Rolled-up totals across every client, a card each with what was captured, what went to their ad platforms, and what has been recovered.</p>
+            <p>The line that matters most is at the top. When any client has inquiries nobody has contacted in the last forty-eight hours, it flags them by name. Click through and you land in that client&apos;s dashboard, on their queue, rather than hunting for the right account.</p>
+            <p>Your clients keep their own logins if you want them to. Some agencies work every account themselves, others prefer the client sees their own leads. Both run off the same setup.</p>
+          </div>
+          <AgencyConsole />
         </div>
       </section>
 

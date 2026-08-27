@@ -352,3 +352,61 @@ export function ReportingWindow() {
     </div>
   )
 }
+
+/* ─── Agency console: one screen, whole book ────────── */
+export function AgencyConsole() {
+  const { ref, seen } = useInView<HTMLDivElement>()
+  const clients = [
+    { name: 'Preston Ridge Homes', captured: 47, signals: 44, waiting: 3 },
+    { name: 'Whitmore Family Law', captured: 31, signals: 29, waiting: 0 },
+    { name: 'Sterling Dental Group', captured: 22, signals: 20, waiting: 1 },
+    { name: 'Bayview Aesthetics', captured: 18, signals: 16, waiting: 0 },
+  ]
+  const totalWaiting = clients.reduce((s, c) => s + c.waiting, 0)
+
+  return (
+    <div className="tv-frame" ref={ref}>
+      <div className="tv-frame-title">Agency Console</div>
+
+      <div className={'tv-ac-alert' + (seen ? ' in' : '')}>
+        <span className="tv-ac-alert-dot" />
+        <span><b>{totalWaiting} inquiries</b> across your book have not been contacted</span>
+      </div>
+
+      <div className="tv-ac-totals">
+        <div className="tv-ac-total">
+          <div className="tv-ac-total-num"><Counter to={118} run={seen} /></div>
+          <div className="tv-ac-total-lbl">captured</div>
+        </div>
+        <div className="tv-ac-total">
+          <div className="tv-ac-total-num"><Counter to={109} run={seen} /></div>
+          <div className="tv-ac-total-lbl">signals sent</div>
+        </div>
+        <div className="tv-ac-total">
+          <div className="tv-ac-total-num"><Counter to={4} run={seen} /></div>
+          <div className="tv-ac-total-lbl">clients</div>
+        </div>
+      </div>
+
+      <div className="tv-ac-rows">
+        {clients.map((c, i) => (
+          <div
+            className={'tv-ac-row' + (c.waiting > 0 ? ' flag' : '')}
+            key={c.name}
+            style={{ opacity: seen ? 1 : 0, transform: seen ? 'none' : 'translateY(6px)', transitionDelay: i * 110 + 'ms' }}
+          >
+            <span className="tv-ac-dot" />
+            <span className="tv-ac-name">{c.name}</span>
+            <span className="tv-ac-stat">{c.captured}</span>
+            <span className="tv-ac-stat">{c.signals}</span>
+            <span className="tv-ac-wait">
+              {c.waiting > 0 ? `${c.waiting} waiting` : '—'}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="tv-ac-foot">Click any client to open their dashboard.</div>
+    </div>
+  )
+}
