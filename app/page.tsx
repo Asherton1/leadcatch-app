@@ -6,7 +6,7 @@ import StatsBar from './components/StatsBar'
 import GSAPAnimations from './components/GSAPAnimations'
 import MobileNav from './components/MobileNav'
 import Footer from './components/Footer'
-import ProblemAccordion from './components/ProblemAccordion'
+import LeakRows from './components/LeakRows'
 import StepsFlow from './components/StepsFlow'
 import IndustryDrawers from './components/IndustryDrawers'
 import SignalCards from './components/SignalCards'
@@ -98,7 +98,7 @@ export default function LandingPage() {
       <section className="lc-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>The Invisible Revenue Leak</h2>
         <p className="section-subtitle">Baymard Institute puts form abandonment at 60-70%. Until now, you had no way to see who those people were.</p>
-        <ProblemAccordion />
+        <LeakRows />
       </section>
 
       <section className="manifesto reveal">
