@@ -5783,3 +5783,7 @@ select.audit-form-input option {
 @media (max-width: 900px) {
   .steps-flow-grid { padding: 0 1.5rem !important; }
 }
+
+/* Pin stat blocks to a shared baseline across all three cards */
+.steps-flow-text { flex: 1 1 auto !important; }
+.steps-flow-stat-label { white-space: nowrap; }
