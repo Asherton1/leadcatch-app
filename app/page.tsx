@@ -177,9 +177,8 @@ export default function LandingPage() {
 
 
 
-      <section className="lc-section">
       <section className="lc-section reveal">
-        <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 1.5rem' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }} className="lv-grid">
             <div>
               <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>
@@ -202,6 +201,7 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section className="lc-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Purpose-Built for High-Ticket Industries</h2>
         <p className="section-subtitle">ReCapture is not a generic form tool. Every feature was designed for businesses where a single recovered lead pays for the entire year.</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '3rem auto 0', padding: '0 2rem' }} className="industries-grid">
@@ -210,7 +210,7 @@ export default function LandingPage() {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M6.5 7 4 14h5z"/><path d="M17.5 7 15 14h5z"/><path d="M4 14a2.5 2.5 0 0 0 5 0"/><path d="M15 14a2.5 2.5 0 0 0 5 0"/><path d="M8 21h8"/></svg>
               <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Law Firms</span>
             </div>
-            <p style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', margin: '0 0 0.5rem 0', lineHeight: 1.3 }}>71% of intake forms are abandoned</p>
+            <p style={{ color: '#fff', fontWeight: 700, fontSize: '1.1rem', margin: '0 0 0.5rem 0', lineHeight: 1.3 }}>Most intake forms are never submitted</p>
             <p style={{ color: '#666', fontSize: '0.85rem', margin: '0 0 1rem 0', lineHeight: 1.6 }}>Avg. matter: $20,000. One recovered case covers the year fifty times over.</p>
             <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Learn more &rarr;</span>
           </a>

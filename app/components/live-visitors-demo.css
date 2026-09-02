@@ -92,3 +92,22 @@
 @media (prefers-reduced-motion: reduce) {
   .lvd-dot, .lvd-row { animation: none; }
 }
+
+/* Mobile: stack the Live Visitors grid instead of crushing it */
+@media (max-width: 900px) {
+  .lv-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+}
+@media (max-width: 640px) {
+  .lv-grid {
+    gap: 2rem !important;
+  }
+  .lv-grid > div:first-child h2 {
+    font-size: 1.5rem !important;
+  }
+  .lv-grid > div:first-child > div {
+    font-size: 0.97rem !important;
+  }
+}
