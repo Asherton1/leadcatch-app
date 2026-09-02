@@ -89,7 +89,11 @@
       return {
         utm_source: params.get('utm_source'),
         utm_medium: params.get('utm_medium'),
-        utm_campaign: params.get('utm_campaign')
+        utm_campaign: params.get('utm_campaign'),
+        utm_content: params.get('utm_content'),
+        utm_term: params.get('utm_term'),
+        gclid: params.get('gclid'),
+        fbclid: params.get('fbclid')
       };
     } catch (e) { return {}; }
   }
@@ -114,6 +118,10 @@
         utm_source: utm.utm_source,
         utm_medium: utm.utm_medium,
         utm_campaign: utm.utm_campaign,
+        utm_content: utm.utm_content,
+        utm_term: utm.utm_term,
+        gclid: utm.gclid,
+        fbclid: utm.fbclid,
         is_active: isActive
       });
       fetch(VISITOR_ENDPOINT, {

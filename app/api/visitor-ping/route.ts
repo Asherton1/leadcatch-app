@@ -42,7 +42,7 @@ async function lookupGeo(ip: string): Promise<{ country: string | null; city: st
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { api_key, session_id, page_url, referrer, utm_source, utm_medium, utm_campaign, is_active, mark_offline } = body
+    const { api_key, session_id, page_url, referrer, utm_source, utm_medium, utm_campaign, utm_content, utm_term, gclid, fbclid, is_active, mark_offline } = body
 
     if (!api_key || !session_id) {
       return NextResponse.json(
@@ -119,6 +119,10 @@ export async function POST(req: NextRequest) {
         utm_source: utm_source || null,
         utm_medium: utm_medium || null,
         utm_campaign: utm_campaign || null,
+        utm_content: utm_content || null,
+        utm_term: utm_term || null,
+        gclid: gclid || null,
+        fbclid: fbclid || null,
         is_active: is_active !== false,
       })
     }
