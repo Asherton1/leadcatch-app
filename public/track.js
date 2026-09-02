@@ -485,6 +485,7 @@
     return {
       api_key:          apiKey,
       session_id:       this.sessionId,
+      visitor_session_id: (typeof visitorSessionId !== 'undefined' ? visitorSessionId : null),
       name:             this.named.name,
       email:            this.named.email,
       phone:            this.named.phone,

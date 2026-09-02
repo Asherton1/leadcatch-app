@@ -80,6 +80,7 @@ export async function POST(request: NextRequest) {
   const {
     api_key,
     session_id,
+    visitor_session_id,
     name,
     email: rawEmail,
     phone: rawPhone,
@@ -231,6 +232,7 @@ export async function POST(request: NextRequest) {
   const payload = {
     client_id: client.id,
     session_id,
+    visitor_session_id: visitor_session_id ?? null,
     name: name ?? null,
     email: email ?? null,
     phone: phone ?? null,
