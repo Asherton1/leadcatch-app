@@ -14,8 +14,8 @@ const steps = [
     num: '02',
     title: 'Capture Every Lead',
     text: 'The instant a visitor types into your form, ReCapture captures their name, email, and phone — even if they close the tab, get distracted, or abandon halfway through.',
-    statValue: '100%',
-    statLabel: 'lead capture rate',
+    statValue: 'Every',
+    statLabel: 'field they complete',
   },
   {
     num: '03',
