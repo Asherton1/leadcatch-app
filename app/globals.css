@@ -576,3 +576,8 @@ html { scrollbar-gutter: stable; }
   padding-bottom: 0.85rem !important;
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
+
+/* Signal cards: collapsed, matching the steps treatment */
+.signal-col .sfl-toggle { margin-top: 0.35rem; }
+.signal-col .signal-col-body { margin: 0.9rem 0 0 !important; }
+.signal-col .signal-col-label { margin-bottom: 0.75rem !important; }

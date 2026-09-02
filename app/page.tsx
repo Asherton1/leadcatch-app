@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import ProblemAccordion from './components/ProblemAccordion'
 import StepsFlow from './components/StepsFlow'
 import IndustryDrawers from './components/IndustryDrawers'
+import SignalCards from './components/SignalCards'
 import LiveVisitorsDemo from './components/LiveVisitorsDemo'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
@@ -127,42 +128,7 @@ export default function LandingPage() {
 
         <SignalFlow />
 
-        <div className="signal-grid">
-          <div className="signal-col">
-            <p className="signal-col-kicker">The platforms</p>
-            <p className="signal-col-label">What they see</p>
-            <p className="signal-col-body">
-              The people who finished. Every optimization decision, every lookalike
-              audience, every dollar of budget gets made from that group alone.
-            </p>
-          </div>
-          <div className="signal-col">
-            <p className="signal-col-kicker">The platforms</p>
-            <p className="signal-col-label">What they miss</p>
-            <p className="signal-col-body">
-              Everyone who typed their name, their email, their phone number, and then
-              got pulled away. Real intent, demonstrated and then invisible.
-            </p>
-          </div>
-          <div className="signal-col">
-            <p className="signal-col-kicker">ReCapture</p>
-            <p className="signal-col-label">What we do</p>
-            <p className="signal-col-body">
-              We send them to Meta and Google as server-side conversion events &mdash;
-              hashed, deduplicated against your existing pixel, and weighted by how much
-              intent each one showed. A third-time returner does not look like a bounce.
-            </p>
-          </div>
-          <div className="signal-col">
-            <p className="signal-col-kicker">Your dashboard</p>
-            <p className="signal-col-label">What you see</p>
-            <p className="signal-col-body">
-              Every inquiry attributed to the channel that produced it &mdash; paid search,
-              paid social, organic, referral, direct &mdash; broken out by campaign. Including
-              the ones that never submitted.
-            </p>
-          </div>
-        </div>
+        <SignalCards />
 
         <p className="signal-close">
           You keep running your campaigns exactly as you do now. The platforms just stop
