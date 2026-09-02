@@ -58,6 +58,7 @@ export default function PricingSection() {
         'Intent-weighted conversion values',
         'Returning visitor detection',
         'Closed-won attribution back to ad platforms',
+        'Channel and campaign attribution reporting',
         'Full session journey per lead',
         'AI voice callback within 60 seconds',
         'Automated lead recovery emails',

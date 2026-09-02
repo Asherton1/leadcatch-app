@@ -139,6 +139,10 @@ export default function WhyUsPage() {
         <h3 className="reveal">What they did first</h3>
         <p className="reveal">The pages they read, how long they spent, whether they came from a paid campaign or a search, which page finally pushed them to the form. Context that turns a follow-up from a cold call into a conversation that starts where they left off.</p>
 
+        <h3 className="reveal">Which channel actually produced them</h3>
+        <p className="reveal">Every report you get today counts submissions. So when you ask which campaign is working, the answer is built from the minority of people who finished a form &mdash; and the channels that produce hesitant, high-consideration prospects look worse than they are.</p>
+        <p className="reveal">We attribute every captured inquiry back to the channel that produced it, whether or not it was ever submitted. Paid search, paid social, organic, referral, direct, broken out by campaign name across Google and Meta. Untagged traffic is handled too: Local Services Ads and anything without UTM parameters get attributed by platform rather than dropped, which matters if somebody else is managing your tagging.</p>
+
         <h3 className="reveal">And what your ad platforms get back</h3>
         <p className="reveal">Every recovered inquiry is sent to Meta&apos;s Conversions API and Google Ads as a server-side conversion event &mdash; hashed, deduplicated against your existing pixel, and weighted by how much intent the person actually showed. Your campaigns stop optimizing against the fraction who finished and start learning from the full picture. What you do with better data is your team&apos;s call. Getting it there is ours.</p>
 

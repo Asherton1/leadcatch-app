@@ -410,3 +410,42 @@ export function AgencyConsole() {
     </div>
   )
 }
+
+/* ─── Channel attribution ───────────────────────────── */
+export function ChannelAttribution() {
+  const { ref, seen } = useInView<HTMLDivElement>()
+  const rows = [
+    { name: 'Paid Search', pct: 41, count: 19, tone: 'a' },
+    { name: 'Organic Search', pct: 27, count: 13, tone: 'b' },
+    { name: 'Paid Social', pct: 19, count: 9, tone: 'a' },
+    { name: 'Direct', pct: 9, count: 4, tone: 'c' },
+    { name: 'Referral', pct: 4, count: 2, tone: 'c' },
+  ]
+  return (
+    <div className="tv-frame" ref={ref}>
+      <div className="tv-frame-title">Where Inquiries Came From</div>
+
+      {rows.map((r, i) => (
+        <div className="tv-att-row" key={r.name}>
+          <div className="tv-att-head">
+            <span className="tv-att-name">{r.name}</span>
+            <span className="tv-att-count">
+              <Counter to={r.count} run={seen} /> inquiries
+            </span>
+          </div>
+          <div className="tv-att-track">
+            <span
+              className={'tv-att-bar tv-att-' + r.tone}
+              style={{ width: seen ? r.pct + '%' : '0%', transitionDelay: i * 110 + 'ms' }}
+            />
+          </div>
+        </div>
+      ))}
+
+      <div className="tv-att-foot">
+        Paid rows include people who started a form and never submitted &mdash; inquiries
+        no campaign report you receive today accounts for.
+      </div>
+    </div>
+  )
+}

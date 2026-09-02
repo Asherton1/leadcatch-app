@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import '../blog/blog.css'
 import '../landing.css'
 import './dashboard-tour.css'
-import { CardGrid, DropoffChart, TimingChart, AttentionStrip, PipelineBands, RecoveryFunnel, IntentSignals, ReportingWindow, AgencyConsole } from './TourVisuals'
+import { CardGrid, DropoffChart, TimingChart, AttentionStrip, PipelineBands, RecoveryFunnel, IntentSignals, ReportingWindow, AgencyConsole, ChannelAttribution } from './TourVisuals'
 
 export const metadata = {
   title: 'What You Actually Look At — ReCapture Dashboard',
@@ -119,6 +119,19 @@ export default function DashboardTour() {
             <p>A gap between captured and contacted is a speed problem. A gap between contacted and converted is a follow-up problem. One is fixed with automation, the other with a conversation.</p>
           </div>
           <RecoveryFunnel />
+        </div>
+      </section>
+
+      <section className="dt-band reveal">
+        <div className="dt-inner dt-narrow">
+          <p className="dt-section-eyebrow">Attribution</p>
+          <h2 className="dt-h2">Which channel actually produced them</h2>
+          <div className="dt-body">
+            <p>Every report you get today counts submissions. So when you ask which campaign is working, the answer is assembled from the minority of people who finished a form &mdash; and the channels that produce hesitant, high-consideration prospects look worse than they actually are.</p>
+            <p>Every captured inquiry is attributed back to the channel that produced it, whether or not anything was ever submitted. Paid search, paid social, organic, referral, direct, with volume, lead quality, pipeline value and what has actually been recovered beside each one.</p>
+            <p>Beneath that it breaks out by individual campaign name across Google and Meta. Untagged traffic is handled rather than dropped &mdash; Local Services Ads and anything missing UTM parameters get attributed by platform, which matters when somebody else is managing your tagging.</p>
+          </div>
+          <ChannelAttribution />
         </div>
       </section>
 
