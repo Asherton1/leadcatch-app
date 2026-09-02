@@ -862,6 +862,7 @@ export default function Dashboard() {
   const [liveDrawerOpen, setLiveDrawerOpen] = useState(false)
   const [hoursDrawerOpen, setHoursDrawerOpen] = useState(false)
   const [returningDrawerOpen, setReturningDrawerOpen] = useState(false)
+  const [campaignRows, setCampaignRows] = useState<{ session_id: string; utm_source: string | null; utm_medium: string | null; utm_campaign: string | null; gclid: string | null; fbclid: string | null; page_url: string | null }[]>([])
   const [fieldsDrawerOpen, setFieldsDrawerOpen] = useState(false)
   const [pipelineDrawerOpen, setPipelineDrawerOpen] = useState(false)
   const [attnOpen, setAttnOpen] = useState(false)
@@ -1228,6 +1229,60 @@ export default function Dashboard() {
     const key = (l.email ?? l.phone ?? '').trim().toLowerCase()
     return key ? (returnCounts.get(key) ?? 1) : 1
   }
+
+  // ── Campaign attribution: pull visitor rows for the leads we have ─────────
+  useEffect(() => {
+    let cancelled = false
+    async function loadCampaigns() {
+      const ids = leads.map(l => l.visitor_session_id).filter(Boolean) as string[]
+      if (ids.length === 0) { if (!cancelled) setCampaignRows([]); return }
+      const { data } = await supabase
+        .from('visitors')
+        .select('session_id, utm_source, utm_medium, utm_campaign, gclid, fbclid, page_url')
+        .in('session_id', ids.slice(0, 500))
+      if (!cancelled) setCampaignRows((data as never) ?? [])
+    }
+    loadCampaigns()
+    return () => { cancelled = true }
+  }, [leads])
+
+  const campaigns = useMemo(() => {
+    const bySession = new Map(campaignRows.map(r => [r.session_id, r]))
+    const groups = new Map<string, { name: string; platform: string; leads: Lead[] }>()
+
+    for (const l of filteredLeads) {
+      const v = l.visitor_session_id ? bySession.get(l.visitor_session_id) : null
+      if (!v) continue
+
+      let platform = 'Other'
+      const src = (v.utm_source || '').toLowerCase()
+      if (v.gclid || src.includes('google')) platform = 'Google Ads'
+      else if (v.fbclid || src.includes('facebook') || src.includes('meta') || src === 'ig' || src.includes('instagram')) platform = 'Meta'
+      else if (src) platform = v.utm_source as string
+
+      const name = v.utm_campaign || (v.gclid ? 'Google Ads (untagged)' : v.fbclid ? 'Meta (untagged)' : null)
+      if (!name) continue
+
+      const key = platform + '||' + name
+      const g = groups.get(key) ?? { name, platform, leads: [] }
+      g.leads.push(l)
+      groups.set(key, g)
+    }
+
+    return [...groups.values()]
+      .map(g => {
+        const converted = g.leads.filter(l => l.status === 'converted')
+        return {
+          name: g.name,
+          platform: g.platform,
+          count: g.leads.length,
+          avgScore: Math.round(g.leads.reduce((a, l) => a + scoreLead(l, rcFor(l)).score, 0) / g.leads.length),
+          recovered: converted.reduce((a, l) => a + (l.converted_value ?? l.estimated_value ?? 0), 0),
+          pipeline: g.leads.reduce((a, l) => a + (l.estimated_value ?? 0), 0),
+        }
+      })
+      .sort((a, b) => b.count - a.count)
+  }, [filteredLeads, campaignRows, returnCounts])
 
   // ── Returning visitor detail (for the drawer) ─────────────────────────────
   const returningDetail = useMemo(() => {
@@ -2137,6 +2192,40 @@ export default function Dashboard() {
         </div>
       )}
       </div>
+
+      {/* ── Campaign attribution ────────────────────────────────────────────── */}
+      {campaigns.length > 0 && (
+        <div className="camp-panel">
+          <div className="camp-head">
+            <span className="camp-eyebrow">Campaign Attribution</span>
+            <h2 className="camp-title">Which campaigns are actually producing inquiries</h2>
+            <p className="camp-sub">
+              Including the people who started a form and never submitted &mdash; inquiries
+              your ad platforms have no record of, attributed back to the campaign that paid for them.
+            </p>
+          </div>
+          <div className="camp-table">
+            <div className="camp-row camp-row-head">
+              <span>Campaign</span>
+              <span>Platform</span>
+              <span>Inquiries</span>
+              <span>Avg score</span>
+              <span>Pipeline</span>
+              <span>Recovered</span>
+            </div>
+            {campaigns.map(c => (
+              <div className="camp-row" key={c.platform + c.name}>
+                <span className="camp-name">{c.name}</span>
+                <span className={'camp-plat camp-plat-' + c.platform.toLowerCase().replace(/[^a-z]/g, '')}>{c.platform}</span>
+                <span className="camp-num">{c.count}</span>
+                <span className="camp-num">{c.avgScore}</span>
+                <span className="camp-num">{formatCurrency(c.pipeline)}</span>
+                <span className="camp-num camp-rec">{c.recovered > 0 ? formatCurrency(c.recovered) : '\u2014'}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* ── Status filter chips ─────────────────────────────────────────────── */}
       <div className="status-chips">

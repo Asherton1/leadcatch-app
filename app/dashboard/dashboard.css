@@ -3336,3 +3336,54 @@ button.returning-cta:focus-visible {
   border-bottom-left-radius: 0.875rem;
   border-bottom-right-radius: 0.875rem;
 }
+
+/* ── Campaign attribution ────────────────────────────────────────────────── */
+.camp-panel {
+  background: linear-gradient(150deg, #1e1e1e 0%, #171717 55%, #131313 100%);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-radius: 1.125rem;
+  padding: 1.875rem 2rem 1.5rem;
+  margin: 0 0 2rem;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.045) inset, 0 2px 6px rgba(0,0,0,0.35), 0 8px 28px rgba(0,0,0,0.2);
+}
+.camp-eyebrow {
+  display: block; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #ff6b35; font-weight: 600; margin-bottom: 0.65rem;
+}
+.camp-title {
+  font-size: 1.35rem; font-weight: 700; color: #fff; letter-spacing: -0.02em;
+  margin: 0 0 0.7rem; line-height: 1.25;
+}
+.camp-sub {
+  font-size: 0.9rem; line-height: 1.7; color: #8b8b8b; margin: 0 0 1.6rem; max-width: 68ch;
+}
+.camp-table { display: flex; flex-direction: column; }
+.camp-row {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 0.7fr 0.7fr 1fr 1fr;
+  gap: 1rem; align-items: center;
+  padding: 0.85rem 0.4rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.9rem;
+}
+.camp-row:last-child { border-bottom: none; }
+.camp-row-head {
+  font-size: 0.64rem; letter-spacing: 0.13em; text-transform: uppercase;
+  color: #6b6b6b; font-weight: 600; padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+}
+.camp-name { color: #fff; font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
+.camp-plat {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+  padding: 0.2rem 0.55rem; border-radius: 999px; width: fit-content;
+  border: 1px solid rgba(255,255,255,0.12); color: #8b8b8b;
+}
+.camp-plat-googleads { color: #60a5fa; border-color: rgba(96,165,250,0.3); background: rgba(96,165,250,0.08); }
+.camp-plat-meta { color: #a78bfa; border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.08); }
+.camp-num { color: #a1a1aa; font-variant-numeric: tabular-nums; }
+.camp-rec { color: #22c55e; font-weight: 600; }
+@media (max-width: 900px) {
+  .camp-panel { padding: 1.5rem 1.35rem 1.25rem; }
+  .camp-row { grid-template-columns: 1.6fr 0.6fr 0.9fr; }
+  .camp-row > span:nth-child(4), .camp-row > span:nth-child(5) { display: none; }
+}
