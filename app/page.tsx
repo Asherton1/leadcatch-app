@@ -16,6 +16,7 @@ import ParticleNetwork from './components/ParticleNetwork'
 import PhantomCapture from './components/PhantomCapture'
 import HeroCapture from './components/HeroCapture'
 import LedgerFeed from './components/LedgerFeed'
+import LedgerHeadline from './components/LedgerHeadline'
 import Logo from './components/Logo'
 import IntegrationMarquee from './components/IntegrationMarquee'
 import TestimonialSpotlight from './components/TestimonialSpotlight'
@@ -79,11 +80,7 @@ export default function LandingPage() {
       </section>
 
       <section className="lc-section ledger-section">
-        <p className="ledger-eyebrow">The proof</p>
-        <h2 className="ledger-headline">
-          <span className="ledger-headline-primary">Every lost lead. Every dollar.</span>{' '}
-          <span className="ledger-headline-muted">Right in front of you, every morning.</span>
-        </h2>
+        <LedgerHeadline />
 
         <LedgerFeed />
       </section>

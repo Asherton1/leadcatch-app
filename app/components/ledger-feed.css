@@ -170,3 +170,14 @@
   .lf-scan, .lf-pip { animation: none !important; }
   .lf-stat, .lf-row { transition: none !important; }
 }
+
+/* Clip the scan sweep to the panel so it cannot bleed below the card */
+.lf { overflow: hidden; padding-top: 1px; }
+.lf-scan { top: 0; bottom: 0; height: 110px; }
+.lf-on .lf-scan { animation: lf-scan-clip 2.1s cubic-bezier(0.4,0,0.2,1) 0.2s 1; }
+@keyframes lf-scan-clip {
+  0%   { opacity: 0; transform: translateY(-110px); }
+  12%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(100%); }
+}
