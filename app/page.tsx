@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import SignalFlow from './components/SignalFlow'
 import Image from 'next/image'
 import './landing.css'
 import StatsBar from './components/StatsBar'
@@ -123,12 +124,14 @@ export default function LandingPage() {
           Meta and Google only find out someone was interested when they press submit.
         </p>
 
+        <SignalFlow />
+
         <div className="signal-grid">
           <div className="signal-col">
             <p className="signal-col-label">What they see</p>
             <p className="signal-col-body">
               The people who finished. Every optimization decision, every lookalike
-              audience, every dollar of budget allocation gets made from that group alone.
+              audience, every dollar of budget gets made from that group alone.
             </p>
           </div>
           <div className="signal-col">
@@ -141,19 +144,17 @@ export default function LandingPage() {
           <div className="signal-col">
             <p className="signal-col-label">What we do</p>
             <p className="signal-col-body">
-              ReCapture sends those people to Meta&apos;s Conversions API and Google Ads
-              as server-side conversion events, deduplicated against your existing pixel
-              so nothing is counted twice &mdash; and weighted by how much intent each one
-              actually showed, so a third-time returner does not look like a first-time bounce.
+              We send them to Meta and Google as server-side conversion events &mdash;
+              hashed, deduplicated against your existing pixel, and weighted by how much
+              intent each one showed. A third-time returner does not look like a bounce.
             </p>
           </div>
           <div className="signal-col">
             <p className="signal-col-label">And what you see</p>
             <p className="signal-col-body">
-              Every captured inquiry attributed back to the channel that produced it &mdash;
-              paid search, paid social, organic, referral, direct &mdash; broken out by
-              campaign name. Including the ones that never submitted, which no report you
-              get today accounts for.
+              Every inquiry attributed to the channel that produced it &mdash; paid search,
+              paid social, organic, referral, direct &mdash; broken out by campaign. Including
+              the ones that never submitted.
             </p>
           </div>
         </div>

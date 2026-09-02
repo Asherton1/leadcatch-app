@@ -472,3 +472,46 @@ html { scrollbar-gutter: stable; }
 @media (max-width: 640px) {
   .signal-grid { grid-template-columns: 1fr !important; gap: 2.25rem !important; }
 }
+
+/* Signal columns as equal-height cards */
+.signal-grid {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1.25rem !important;
+  border-top: none !important;
+  padding-top: 0 !important;
+  align-items: stretch;
+}
+.signal-col {
+  background: linear-gradient(150deg, #1e1e1e 0%, #171717 55%, #131313 100%);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-radius: 1.125rem;
+  padding: 1.6rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.045) inset, 0 2px 6px rgba(0,0,0,0.35), 0 8px 28px rgba(0,0,0,0.2);
+  transition: border-color .22s ease, transform .22s ease;
+}
+.signal-col:hover { border-color: rgba(255,107,53,0.2); transform: translateY(-2px); }
+.signal-col-label {
+  font-size: 0.66rem !important;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ff6b35;
+  font-weight: 700;
+  margin: 0 0 0.85rem !important;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.signal-col-body {
+  font-size: 0.9rem !important;
+  line-height: 1.7 !important;
+  color: #a1a1aa;
+  margin: 0 !important;
+}
+@media (max-width: 1100px) {
+  .signal-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 640px) {
+  .signal-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+  .signal-col { padding: 1.35rem 1.35rem 1.25rem; }
+}
