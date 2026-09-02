@@ -147,11 +147,20 @@ export default function LandingPage() {
               actually showed, so a third-time returner does not look like a first-time bounce.
             </p>
           </div>
+          <div className="signal-col">
+            <p className="signal-col-label">And what you see</p>
+            <p className="signal-col-body">
+              Every captured inquiry attributed back to the channel that produced it &mdash;
+              paid search, paid social, organic, referral, direct &mdash; broken out by
+              campaign name. Including the ones that never submitted, which no report you
+              get today accounts for.
+            </p>
+          </div>
         </div>
 
         <p className="signal-close">
           You keep running your campaigns exactly as you do now. The platforms just stop
-          working from the leftovers.
+          working from the leftovers &mdash; and you finally know which ones are working.
         </p>
       </section>
 
