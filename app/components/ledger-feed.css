@@ -208,3 +208,33 @@
   .lh { padding: 0 1.15rem 0 2.9rem !important; }
   .lh-title { font-size: clamp(1.6rem, 8vw, 2.1rem) !important; }
 }
+
+/* ── Names hard-left, pills fixed width ──────────────────────────────────── */
+.lf-name {
+  justify-self: start !important;
+  text-align: left !important;
+}
+.lf-email {
+  justify-self: start !important;
+  text-align: left !important;
+}
+.lf-status {
+  width: 104px !important;
+  min-width: 104px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+  padding: 0.28rem 0 !important;
+}
+@media (max-width: 820px) {
+  .lf-name, .lf-email {
+    justify-self: start !important;
+    text-align: left !important;
+  }
+  .lf-status {
+    width: 96px !important;
+    min-width: 96px !important;
+  }
+}
