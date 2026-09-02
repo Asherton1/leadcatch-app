@@ -554,3 +554,25 @@ html { scrollbar-gutter: stable; }
   transition: opacity .25s ease;
 }
 .home-industry-card:hover::before { opacity: 1; }
+
+/* Signal cards: small kicker, prominent title */
+.signal-col-kicker {
+  font-size: 0.63rem !important;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b6b6b !important;
+  font-weight: 700;
+  margin: 0 0 0.4rem !important;
+  padding: 0 !important;
+  border: none !important;
+}
+.signal-col-label {
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: none !important;
+  color: #fff !important;
+  margin: 0 0 0.9rem !important;
+  padding-bottom: 0.85rem !important;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}

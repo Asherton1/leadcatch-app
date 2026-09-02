@@ -129,6 +129,7 @@ export default function LandingPage() {
 
         <div className="signal-grid">
           <div className="signal-col">
+            <p className="signal-col-kicker">The platforms</p>
             <p className="signal-col-label">What they see</p>
             <p className="signal-col-body">
               The people who finished. Every optimization decision, every lookalike
@@ -136,6 +137,7 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="signal-col">
+            <p className="signal-col-kicker">The platforms</p>
             <p className="signal-col-label">What they miss</p>
             <p className="signal-col-body">
               Everyone who typed their name, their email, their phone number, and then
@@ -143,6 +145,7 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="signal-col">
+            <p className="signal-col-kicker">ReCapture</p>
             <p className="signal-col-label">What we do</p>
             <p className="signal-col-body">
               We send them to Meta and Google as server-side conversion events &mdash;
@@ -151,7 +154,8 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="signal-col">
-            <p className="signal-col-label">And what you see</p>
+            <p className="signal-col-kicker">Your dashboard</p>
+            <p className="signal-col-label">What you see</p>
             <p className="signal-col-body">
               Every inquiry attributed to the channel that produced it &mdash; paid search,
               paid social, organic, referral, direct &mdash; broken out by campaign. Including

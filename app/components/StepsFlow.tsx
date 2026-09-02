@@ -33,6 +33,7 @@ const STEPS = [
 export default function StepsFlow() {
   const ref = useRef<HTMLDivElement | null>(null)
   const [on, setOn] = useState(false)
+  const [open, setOpen] = useState<string | null>(null)
 
   useEffect(() => {
     const el = ref.current
@@ -60,10 +61,27 @@ export default function StepsFlow() {
             <div className="sfl-num">{s.num}</div>
             <div className="sfl-kicker">{s.kicker}</div>
             <h3 className="sfl-title">{s.title}</h3>
-            <p className="sfl-text">{s.text}</p>
             <div className="sfl-stat">
               <span className="sfl-stat-num">{s.stat}</span>
               <span className="sfl-stat-label">{s.statLabel}</span>
+            </div>
+            <button
+              className="sfl-toggle"
+              type="button"
+              aria-expanded={open === s.num}
+              onClick={() => setOpen(open === s.num ? null : s.num)}
+            >
+              <span className="sfl-toggle-label">{open === s.num ? 'Close' : 'How it works'}</span>
+              <span className={'sfl-chev' + (open === s.num ? ' up' : '')} aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </span>
+            </button>
+            <div className="sfl-drawer" style={{ gridTemplateRows: open === s.num ? '1fr' : '0fr' }}>
+              <div className="sfl-drawer-inner">
+                <p className="sfl-text">{s.text}</p>
+              </div>
             </div>
           </div>
         ))}
