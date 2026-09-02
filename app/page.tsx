@@ -52,9 +52,11 @@ export default function LandingPage() {
               <span className="hero-highlight">Never Hit Submit.</span>
             </h1>
             <p className="hero-subtitle hero-animate-delay">
-              They start the form at night, from a phone, and something pulls them away.
-              Your CRM never sees them. Neither does Meta or Google. ReCapture catches
-              those people and follows up while it still matters.
+              You paid for the click. You paid for the landing page. Then they typed their
+              name, their email, and something pulled them away &mdash; and every system you
+              own forgot they existed. ReCapture keeps them. Contact fields only, never
+              keystrokes, sent back to your ad platforms as real signal. So the people who
+              almost became clients get a second chance to.
             </p>
             <div className="cta-group hero-animate-delay2">
               <Link href="/start-trial" className="cta-primary">Start your 7-day free trial</Link>
