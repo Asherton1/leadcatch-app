@@ -15,8 +15,7 @@ import ScrollReveal from './components/ScrollReveal'
 import ParticleNetwork from './components/ParticleNetwork'
 import PhantomCapture from './components/PhantomCapture'
 import HeroCapture from './components/HeroCapture'
-import LedgerStats from './components/LedgerStats'
-import LedgerRows from './components/LedgerRows'
+import LedgerFeed from './components/LedgerFeed'
 import Logo from './components/Logo'
 import IntegrationMarquee from './components/IntegrationMarquee'
 import TestimonialSpotlight from './components/TestimonialSpotlight'
@@ -86,11 +85,7 @@ export default function LandingPage() {
           <span className="ledger-headline-muted">Right in front of you, every morning.</span>
         </h2>
 
-        <LedgerStats />
-
-        <div className="ledger-divider" />
-
-        <LedgerRows />
+        <LedgerFeed />
       </section>
 
       <div className="section-divider" />
