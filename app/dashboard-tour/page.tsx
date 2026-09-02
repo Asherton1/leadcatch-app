@@ -80,6 +80,48 @@ export default function DashboardTour() {
 
       <section className="dt-band reveal">
         <div className="dt-inner dt-narrow">
+          <p className="dt-section-eyebrow">Attribution</p>
+          <h2 className="dt-h2">Which channel actually produced them</h2>
+          <div className="dt-body">
+            <p>Every report you get today counts submissions. So when you ask which campaign is working, the answer is assembled from the minority of people who finished a form &mdash; and the channels that produce hesitant, high-consideration prospects look worse than they actually are.</p>
+            <p>Every captured inquiry is attributed back to the channel that produced it, whether or not anything was ever submitted. Paid search, paid social, organic, referral, direct, with volume, lead quality, pipeline value and what has actually been recovered beside each one.</p>
+            <p>Beneath that it breaks out by individual campaign name across Google and Meta. Untagged traffic is handled rather than dropped &mdash; Local Services Ads and anything missing UTM parameters get attributed by platform, which matters when somebody else is managing your tagging.</p>
+          </div>
+          <ChannelAttribution />
+        </div>
+      </section>
+
+      <section className="dt-band reveal">
+        <div className="dt-inner dt-narrow">
+          <p className="dt-section-eyebrow">Intent Signals</p>
+          <h2 className="dt-h2">What leaves the dashboard</h2>
+          <div className="dt-body">
+            <p>Meta and Google only learn that someone was interested when they press submit. Everyone who started a form and left is invisible to them, which means every optimization decision and every lookalike audience gets built from a fraction of the people who actually wanted something.</p>
+            <p>ReCapture sends the ones who did not finish to Meta&apos;s Conversions API and Google Ads as server-side conversion events. Contact fields only, hashed before they leave, and deduplicated against your existing pixel so nothing is counted twice.</p>
+            <p>The panel shows how many went out over the window you have selected. That number is the part of your demand your ad platforms would otherwise never have seen.</p>
+            <p>Each event is also weighted rather than flat-rated. Someone who came back a third time and filled seven of eight fields carries a materially higher value than someone who typed an email and left after eight seconds. Both are worth sending. They are not worth the same, and telling the platform the difference is the point of value-based optimization.</p>
+            <p>You keep running campaigns exactly as you do now. Whoever manages the account decides what to do with better data. We just make sure it gets there.</p>
+          </div>
+          <IntentSignals />
+        </div>
+      </section>
+
+      <section className="dt-band reveal">
+        <div className="dt-inner dt-narrow">
+          <p className="dt-section-eyebrow">For Agencies</p>
+          <h2 className="dt-h2">Thirty clients, one screen</h2>
+          <div className="dt-body">
+            <p>If you run an agency, the dashboard above is the wrong unit. You are not managing one business, you are managing a book, and nobody is logging into thirty accounts to check whether a tool is working.</p>
+            <p>The console is one screen for the whole book. Rolled-up totals across every client, a card each with what was captured, what went to their ad platforms, and what has been recovered.</p>
+            <p>The line that matters most is at the top. When any client has inquiries nobody has contacted in the last forty-eight hours, it flags them by name. Click through and you land in that client&apos;s dashboard, on their queue, rather than hunting for the right account.</p>
+            <p>Your clients keep their own logins if you want them to. Some agencies work every account themselves, others prefer the client sees their own leads. Both run off the same setup.</p>
+          </div>
+          <AgencyConsole />
+        </div>
+      </section>
+
+      <section className="dt-band reveal">
+        <div className="dt-inner dt-narrow">
           <div className="dt-caption dt-caption-lead">
             <h2 className="dt-h2">Where the form is losing people</h2>
             <p>Everyone fills in a name. Fewer give a phone number. Almost nobody reaches an open text box at the bottom asking them to describe their situation.</p>
@@ -119,48 +161,6 @@ export default function DashboardTour() {
             <p>A gap between captured and contacted is a speed problem. A gap between contacted and converted is a follow-up problem. One is fixed with automation, the other with a conversation.</p>
           </div>
           <RecoveryFunnel />
-        </div>
-      </section>
-
-      <section className="dt-band reveal">
-        <div className="dt-inner dt-narrow">
-          <p className="dt-section-eyebrow">Attribution</p>
-          <h2 className="dt-h2">Which channel actually produced them</h2>
-          <div className="dt-body">
-            <p>Every report you get today counts submissions. So when you ask which campaign is working, the answer is assembled from the minority of people who finished a form &mdash; and the channels that produce hesitant, high-consideration prospects look worse than they actually are.</p>
-            <p>Every captured inquiry is attributed back to the channel that produced it, whether or not anything was ever submitted. Paid search, paid social, organic, referral, direct, with volume, lead quality, pipeline value and what has actually been recovered beside each one.</p>
-            <p>Beneath that it breaks out by individual campaign name across Google and Meta. Untagged traffic is handled rather than dropped &mdash; Local Services Ads and anything missing UTM parameters get attributed by platform, which matters when somebody else is managing your tagging.</p>
-          </div>
-          <ChannelAttribution />
-        </div>
-      </section>
-
-      <section className="dt-band reveal">
-        <div className="dt-inner dt-narrow">
-          <p className="dt-section-eyebrow">Intent Signals</p>
-          <h2 className="dt-h2">What leaves the dashboard</h2>
-          <div className="dt-body">
-            <p>Meta and Google only learn that someone was interested when they press submit. Everyone who started a form and left is invisible to them, which means every optimization decision and every lookalike audience gets built from a fraction of the people who actually wanted something.</p>
-            <p>ReCapture sends the ones who did not finish to Meta&apos;s Conversions API and Google Ads as server-side conversion events. Contact fields only, hashed before they leave, and deduplicated against your existing pixel so nothing is counted twice.</p>
-            <p>The panel shows how many went out over the window you have selected. That number is the part of your demand your ad platforms would otherwise never have seen.</p>
-            <p>Each event is also weighted rather than flat-rated. Someone who came back a third time and filled seven of eight fields carries a materially higher value than someone who typed an email and left after eight seconds. Both are worth sending. They are not worth the same, and telling the platform the difference is the point of value-based optimization.</p>
-            <p>You keep running campaigns exactly as you do now. Whoever manages the account decides what to do with better data. We just make sure it gets there.</p>
-          </div>
-          <IntentSignals />
-        </div>
-      </section>
-
-      <section className="dt-band reveal">
-        <div className="dt-inner dt-narrow">
-          <p className="dt-section-eyebrow">For Agencies</p>
-          <h2 className="dt-h2">Thirty clients, one screen</h2>
-          <div className="dt-body">
-            <p>If you run an agency, the dashboard above is the wrong unit. You are not managing one business, you are managing a book, and nobody is logging into thirty accounts to check whether a tool is working.</p>
-            <p>The console is one screen for the whole book. Rolled-up totals across every client, a card each with what was captured, what went to their ad platforms, and what has been recovered.</p>
-            <p>The line that matters most is at the top. When any client has inquiries nobody has contacted in the last forty-eight hours, it flags them by name. Click through and you land in that client&apos;s dashboard, on their queue, rather than hunting for the right account.</p>
-            <p>Your clients keep their own logins if you want them to. Some agencies work every account themselves, others prefer the client sees their own leads. Both run off the same setup.</p>
-          </div>
-          <AgencyConsole />
         </div>
       </section>
 
