@@ -192,3 +192,8 @@
 @media (prefers-reduced-motion: reduce) {
   .sfl-chev { animation: none !important; }
 }
+
+/* Flex children default to min-height:auto, which stops the drawer collapsing */
+.sfl-drawer { min-height: 0; }
+.sfl-drawer-inner { min-height: 0; }
+.sfl-card, .signal-col { min-height: 0; }
