@@ -28,6 +28,7 @@ interface Client {
 interface Lead {
   meta_conversion_sent?: boolean | null
   suppressed_at?: string | null
+  visitor_session_id?: string | null
   match_keys?: string[] | null
   match_strength?: number | null
   converted_value?: number | null
@@ -277,6 +278,10 @@ interface VisitorRow {
   utm_source: string | null
   utm_medium: string | null
   utm_campaign: string | null
+  utm_content: string | null
+  utm_term: string | null
+  gclid: string | null
+  fbclid: string | null
   pages_visited: number | null
   created_at: string
   last_ping_at: string | null
@@ -311,13 +316,14 @@ function LeadModal({
   useEffect(() => {
     let cancelled = false
     async function loadJourney() {
-      if (!lead.session_id) return
+      const vsid = lead.visitor_session_id || lead.session_id
+      if (!vsid) return
       const vRes = await supabase.from('visitors')
-        .select('page_url, referrer, country, city, region, utm_source, utm_medium, utm_campaign, pages_visited, created_at, last_ping_at')
-        .eq('session_id', lead.session_id).limit(1).maybeSingle()
+        .select('page_url, referrer, country, city, region, utm_source, utm_medium, utm_campaign, utm_content, utm_term, gclid, fbclid, pages_visited, created_at, last_ping_at')
+        .eq('session_id', vsid).limit(1).maybeSingle()
       const eRes = await supabase.from('visitor_events')
         .select('page_url, created_at, metadata')
-        .eq('session_id', lead.session_id)
+        .eq('session_id', vsid)
         .order('created_at', { ascending: true })
         .limit(25)
       if (!cancelled) {
@@ -326,7 +332,7 @@ function LeadModal({
     }
     loadJourney()
     return () => { cancelled = true }
-  }, [lead.session_id])
+  }, [lead.session_id, lead.visitor_session_id])
 
   // Lock body scroll while open
   useEffect(() => {
@@ -1059,7 +1065,7 @@ export default function Dashboard() {
     const poll = async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
 
@@ -1092,7 +1098,7 @@ export default function Dashboard() {
     setSearch('')
     supabase
       .from('leads')
-      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength')
+      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id')
       .eq('client_id', selectedClient.id)
       .order('created_at', { ascending: false })
       .then(({ data, error }) => {
@@ -1108,7 +1114,7 @@ export default function Dashboard() {
     const iv = setInterval(async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
       if (!error && data) setLeads(data as Lead[])
