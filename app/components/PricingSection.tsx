@@ -59,6 +59,7 @@ export default function PricingSection() {
         'Returning visitor detection',
         'Closed-won attribution back to ad platforms',
         'Channel and campaign attribution reporting',
+        'One website \u2014 every page and form included',
         'Full session journey per lead',
         'AI voice callback within 60 seconds',
         'Automated lead recovery emails',

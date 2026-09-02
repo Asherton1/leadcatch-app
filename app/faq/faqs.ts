@@ -165,6 +165,10 @@ export const faqCategories: FAQCategory[] = [
     name: 'Multi-Location & Franchise',
     faqs: [
       {
+        q: 'What does the Pro plan actually cover?',
+        a: 'One website. Every page on it, every form on it, and every landing page under that domain is included \u2014 the script is installed once and covers the whole site. If you are running ten landing pages for different practice areas or campaigns, those are all part of the same plan. Pro is scoped to a single domain; a second website or multiple physical locations is where Enterprise starts.',
+      },
+      {
         q: 'How does this work across multiple locations?',
         a: 'It deploys once at the account level and runs across every site you own. For a group with fifteen practices or forty franchise locations, that is one implementation rather than forty. Each location gets its own view, and reporting rolls up so you can see the whole system or drill into a single site.',
       },
