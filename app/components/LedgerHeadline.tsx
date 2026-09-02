@@ -29,14 +29,14 @@ export default function LedgerHeadline() {
         <span className="lh-line" style={{ transitionDelay: '0ms' }}>
           Every lost lead.
         </span>
-        <span className="lh-line lh-line-accent" style={{ transitionDelay: '110ms' }}>
+        <span className="lh-line lh-line-accent" style={{ transitionDelay: '260ms' }}>
           Every dollar.
           <span className="lh-underline" aria-hidden="true" />
         </span>
-        <span className="lh-line lh-line-muted" style={{ transitionDelay: '240ms' }}>
+        <span className="lh-line lh-line-muted" style={{ transitionDelay: '560ms' }}>
           Sitting in front of you
         </span>
-        <span className="lh-line lh-line-muted" style={{ transitionDelay: '320ms' }}>
+        <span className="lh-line lh-line-muted" style={{ transitionDelay: '820ms' }}>
           every single morning.
         </span>
       </h2>

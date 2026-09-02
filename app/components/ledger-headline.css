@@ -82,3 +82,10 @@
 @media (prefers-reduced-motion: reduce) {
   .lh-line, .lh-underline, .lh-rail-line { transition: none !important; }
 }
+
+/* Slower, more deliberate reveal */
+.lh-line {
+  transition: opacity 1.15s ease, transform 1.15s cubic-bezier(0.22,1,0.36,1) !important;
+}
+.lh-rail-line { transition: transform 1.6s cubic-bezier(0.22,1,0.36,1) !important; }
+.lh-underline { transition: transform 1.5s cubic-bezier(0.22,1,0.36,1) 1.1s !important; }
