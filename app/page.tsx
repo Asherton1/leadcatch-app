@@ -11,7 +11,6 @@ import StepsFlow from './components/StepsFlow'
 import IndustryDrawers from './components/IndustryDrawers'
 import SignalCards from './components/SignalCards'
 import LiveVisitorsDemo from './components/LiveVisitorsDemo'
-import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
 import ParticleNetwork from './components/ParticleNetwork'
 import PhantomCapture from './components/PhantomCapture'
@@ -177,7 +176,6 @@ export default function LandingPage() {
         <p className="section-subtitle">ReCapture is not a generic form tool. Every feature was designed for businesses where a single recovered lead pays for the entire year.</p>
         <IndustryDrawers />
 
-        <IndustriesAccordion />
       </section>
 
 
