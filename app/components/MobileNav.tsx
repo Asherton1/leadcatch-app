@@ -60,13 +60,13 @@ export default function MobileNav() {
       >
         <div style={{ padding: '1rem 0' }} onClick={() => setOpen(false)}>
           <Link href="/about" className={isActive('/about') ? 'mobile-link-active' : ''}>About</Link>
-          <Link href="/blog" className={isActive('/blog') ? 'mobile-link-active' : ''}>Insights</Link>
-          <Link href="/pricing" className={isActive('/pricing') ? 'mobile-link-active' : ''}>Pricing</Link>
           <Link href="/why-us" className={isActive('/why-us') ? 'mobile-link-active' : ''}>Why Us</Link>
-          <Link href="/demo" className={isActive('/demo') ? 'mobile-link-active' : ''}><span className="live-demo-dot" style={{ marginRight: '9px', verticalAlign: 'middle' }} />Live Demo</Link>
           <Link href="/how-it-works" className={isActive('/how-it-works') ? 'mobile-link-active' : ''}>How It Works</Link>
           <Link href="/dashboard-tour" className={isActive('/dashboard-tour') ? 'mobile-link-active' : ''}>Dashboard</Link>
+          <Link href="/demo" className={isActive('/demo') ? 'mobile-link-active' : ''}><span className="live-demo-dot" style={{ marginRight: '9px', verticalAlign: 'middle' }} />Live Demo</Link>
           <Link href="/integrations" className={isActive('/integrations') ? 'mobile-link-active' : ''}>Integrations</Link>
+          <Link href="/pricing" className={isActive('/pricing') ? 'mobile-link-active' : ''}>Pricing</Link>
+          <Link href="/blog" className={isActive('/blog') ? 'mobile-link-active' : ''}>Insights</Link>
           <div style={{ borderTop: '1px solid #1e1e1e', marginTop: '0.25rem' }}>
             <button
               onClick={(e) => { e.stopPropagation(); setToolsOpen(!toolsOpen) }}
