@@ -197,3 +197,14 @@
 .sfl-drawer { min-height: 0; }
 .sfl-drawer-inner { min-height: 0; }
 .sfl-card, .signal-col { min-height: 0; }
+
+/* Cards size to their own content, not the tallest sibling */
+.signal-grid,
+.sfl-grid {
+  align-items: start !important;
+}
+.signal-col,
+.sfl-card {
+  height: auto !important;
+  align-self: start !important;
+}
