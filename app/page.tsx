@@ -7,7 +7,7 @@ import GSAPAnimations from './components/GSAPAnimations'
 import MobileNav from './components/MobileNav'
 import Footer from './components/Footer'
 import ProblemAccordion from './components/ProblemAccordion'
-import StepsAccordion from './components/StepsAccordion'
+import StepsFlow from './components/StepsFlow'
 import LiveVisitorsDemo from './components/LiveVisitorsDemo'
 import IndustriesAccordion from './components/IndustriesAccordion'
 import ScrollReveal from './components/ScrollReveal'
@@ -170,7 +170,7 @@ export default function LandingPage() {
       <section className="lc-section how-it-works-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Three Steps to Recovered Revenue</h2>
         <p className="section-subtitle">No complex setup. No dev team required. Just results.</p>
-        <StepsAccordion />
+        <StepsFlow />
       </section>
 
       <div className="section-divider" />
