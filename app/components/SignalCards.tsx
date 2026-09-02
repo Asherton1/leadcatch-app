@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import './steps-flow.css'
 
 const CARDS = [
   {
