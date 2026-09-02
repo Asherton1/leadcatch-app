@@ -1246,42 +1246,84 @@ export default function Dashboard() {
     return () => { cancelled = true }
   }, [leads])
 
-  const campaigns = useMemo(() => {
+  // Classify a visitor session into a channel. Works even when the client's
+  // agency has not tagged the URL, which is the common case.
+  const classify = (v: { utm_source: string | null; utm_medium: string | null; utm_campaign: string | null; gclid: string | null; fbclid: string | null; page_url: string | null } | null,
+                    referrer: string | null) => {
+    if (!v) return { channel: 'Direct', platform: 'Direct', campaign: null as string | null }
+
+    const src = (v.utm_source || '').toLowerCase()
+    const med = (v.utm_medium || '').toLowerCase()
+    const url = (v.page_url || '').toLowerCase()
+    const ref = (referrer || '').toLowerCase()
+
+    // Local Services Ads carry their own parameters and never a utm_campaign
+    if (url.includes('lsa') || url.includes('gad_source') && url.includes('local') || src.includes('lsa')) {
+      return { channel: 'Paid Search', platform: 'Local Services Ads', campaign: v.utm_campaign }
+    }
+    if (v.gclid || src === 'google' && (med === 'cpc' || med === 'ppc' || med === 'paid')) {
+      return { channel: 'Paid Search', platform: 'Google Ads', campaign: v.utm_campaign }
+    }
+    if (v.fbclid || src === 'facebook' || src === 'meta' || src === 'ig' || src === 'instagram') {
+      const paid = med.includes('cpc') || med.includes('paid') || !!v.fbclid
+      return { channel: paid ? 'Paid Social' : 'Organic Social', platform: 'Meta', campaign: v.utm_campaign }
+    }
+    if (med.includes('cpc') || med.includes('ppc') || med.includes('paid')) {
+      return { channel: 'Paid', platform: v.utm_source || 'Paid', campaign: v.utm_campaign }
+    }
+    if (med.includes('email')) return { channel: 'Email', platform: v.utm_source || 'Email', campaign: v.utm_campaign }
+    if (med.includes('organic') || ref.includes('google.') || ref.includes('bing.') || ref.includes('duckduckgo')) {
+      return { channel: 'Organic Search', platform: 'Search', campaign: v.utm_campaign }
+    }
+    if (src) return { channel: 'Referral', platform: v.utm_source as string, campaign: v.utm_campaign }
+    if (ref) return { channel: 'Referral', platform: ref.replace(/^https?:\/\//, '').split('/')[0], campaign: null }
+    return { channel: 'Direct', platform: 'Direct', campaign: null }
+  }
+
+  const attribution = useMemo(() => {
     const bySession = new Map(campaignRows.map(r => [r.session_id, r]))
-    const groups = new Map<string, { name: string; platform: string; leads: Lead[] }>()
+
+    const chan = new Map<string, Lead[]>()
+    const camp = new Map<string, { name: string; platform: string; channel: string; leads: Lead[] }>()
 
     for (const l of filteredLeads) {
-      const v = l.visitor_session_id ? bySession.get(l.visitor_session_id) : null
-      if (!v) continue
+      const v = l.visitor_session_id ? bySession.get(l.visitor_session_id) ?? null : null
+      const c = classify(v as never, null)
 
-      let platform = 'Other'
-      const src = (v.utm_source || '').toLowerCase()
-      if (v.gclid || src.includes('google')) platform = 'Google Ads'
-      else if (v.fbclid || src.includes('facebook') || src.includes('meta') || src === 'ig' || src.includes('instagram')) platform = 'Meta'
-      else if (src) platform = v.utm_source as string
+      const ca = chan.get(c.channel) ?? []
+      ca.push(l)
+      chan.set(c.channel, ca)
 
-      const name = v.utm_campaign || (v.gclid ? 'Google Ads (untagged)' : v.fbclid ? 'Meta (untagged)' : null)
-      if (!name) continue
-
-      const key = platform + '||' + name
-      const g = groups.get(key) ?? { name, platform, leads: [] }
+      // Untagged paid traffic still gets a row rather than vanishing
+      const label = c.campaign
+        ? c.campaign
+        : (c.channel.startsWith('Paid') ? c.platform + ' \u2014 untagged' : null)
+      if (!label) continue
+      const key = c.platform + '||' + label
+      const g = camp.get(key) ?? { name: label, platform: c.platform, channel: c.channel, leads: [] }
       g.leads.push(l)
-      groups.set(key, g)
+      camp.set(key, g)
     }
 
-    return [...groups.values()]
-      .map(g => {
-        const converted = g.leads.filter(l => l.status === 'converted')
-        return {
-          name: g.name,
-          platform: g.platform,
-          count: g.leads.length,
-          avgScore: Math.round(g.leads.reduce((a, l) => a + scoreLead(l, rcFor(l)).score, 0) / g.leads.length),
-          recovered: converted.reduce((a, l) => a + (l.converted_value ?? l.estimated_value ?? 0), 0),
-          pipeline: g.leads.reduce((a, l) => a + (l.estimated_value ?? 0), 0),
-        }
-      })
+    const shape = (leadsIn: Lead[]) => {
+      const converted = leadsIn.filter(l => l.status === 'converted')
+      return {
+        count: leadsIn.length,
+        avgScore: leadsIn.length ? Math.round(leadsIn.reduce((a, l) => a + scoreLead(l, rcFor(l)).score, 0) / leadsIn.length) : 0,
+        recovered: converted.reduce((a, l) => a + (l.converted_value ?? l.estimated_value ?? 0), 0),
+        pipeline: leadsIn.reduce((a, l) => a + (l.estimated_value ?? 0), 0),
+      }
+    }
+
+    const channels = [...chan.entries()]
+      .map(([name, rows]) => ({ name, ...shape(rows) }))
       .sort((a, b) => b.count - a.count)
+
+    const campaigns = [...camp.values()]
+      .map(g => ({ name: g.name, platform: g.platform, channel: g.channel, ...shape(g.leads) }))
+      .sort((a, b) => b.count - a.count)
+
+    return { channels, campaigns, total: filteredLeads.length }
   }, [filteredLeads, campaignRows, returnCounts])
 
   // ── Returning visitor detail (for the drawer) ─────────────────────────────
@@ -2193,37 +2235,72 @@ export default function Dashboard() {
       )}
       </div>
 
-      {/* ── Campaign attribution ────────────────────────────────────────────── */}
-      {campaigns.length > 0 && (
+      {/* ── Attribution ─────────────────────────────────────────────────────── */}
+      {attribution.channels.length > 0 && (
         <div className="camp-panel">
           <div className="camp-head">
-            <span className="camp-eyebrow">Campaign Attribution</span>
-            <h2 className="camp-title">Which campaigns are actually producing inquiries</h2>
+            <span className="camp-eyebrow">Where Your Inquiries Come From</span>
+            <h2 className="camp-title">Including the ones that never submitted</h2>
             <p className="camp-sub">
-              Including the people who started a form and never submitted &mdash; inquiries
-              your ad platforms have no record of, attributed back to the campaign that paid for them.
+              Every inquiry captured, attributed back to the channel that produced it &mdash;
+              paid search, paid social, organic, referral, or direct. Your ad platforms only
+              ever see the people who pressed submit. This is all of them.
             </p>
           </div>
+
           <div className="camp-table">
             <div className="camp-row camp-row-head">
-              <span>Campaign</span>
-              <span>Platform</span>
+              <span>Channel</span>
               <span>Inquiries</span>
+              <span>Share</span>
               <span>Avg score</span>
               <span>Pipeline</span>
               <span>Recovered</span>
             </div>
-            {campaigns.map(c => (
-              <div className="camp-row" key={c.platform + c.name}>
+            {attribution.channels.map(c => (
+              <div className="camp-row" key={c.name}>
                 <span className="camp-name">{c.name}</span>
-                <span className={'camp-plat camp-plat-' + c.platform.toLowerCase().replace(/[^a-z]/g, '')}>{c.platform}</span>
                 <span className="camp-num">{c.count}</span>
+                <span className="camp-num">
+                  {attribution.total > 0 ? Math.round((c.count / attribution.total) * 100) : 0}%
+                </span>
                 <span className="camp-num">{c.avgScore}</span>
                 <span className="camp-num">{formatCurrency(c.pipeline)}</span>
                 <span className="camp-num camp-rec">{c.recovered > 0 ? formatCurrency(c.recovered) : '\u2014'}</span>
               </div>
             ))}
           </div>
+
+          {attribution.campaigns.length > 0 && (
+            <>
+              <div className="camp-divider" />
+              <div className="camp-subhead">By campaign</div>
+              <div className="camp-table">
+                <div className="camp-row camp-row-head camp-row-c">
+                  <span>Campaign</span>
+                  <span>Platform</span>
+                  <span>Inquiries</span>
+                  <span>Avg score</span>
+                  <span>Pipeline</span>
+                  <span>Recovered</span>
+                </div>
+                {attribution.campaigns.map(c => (
+                  <div className="camp-row camp-row-c" key={c.platform + c.name}>
+                    <span className="camp-name">{c.name}</span>
+                    <span className={'camp-plat camp-plat-' + c.platform.toLowerCase().replace(/[^a-z]/g, '')}>{c.platform}</span>
+                    <span className="camp-num">{c.count}</span>
+                    <span className="camp-num">{c.avgScore}</span>
+                    <span className="camp-num">{formatCurrency(c.pipeline)}</span>
+                    <span className="camp-num camp-rec">{c.recovered > 0 ? formatCurrency(c.recovered) : '\u2014'}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="camp-foot">
+                Untagged paid traffic still appears here. Local Services Ads and campaigns
+                without UTM parameters are grouped by platform rather than dropped.
+              </p>
+            </>
+          )}
         </div>
       )}
 
