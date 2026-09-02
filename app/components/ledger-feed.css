@@ -181,3 +181,30 @@
   80%  { opacity: 1; }
   100% { opacity: 0; transform: translateY(100%); }
 }
+
+/* ── Mobile row: clean two-line block ────────────────────────────────────── */
+@media (max-width: 820px) {
+  .lf-row {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    grid-template-areas:
+      "name   status"
+      "email  value" !important;
+    row-gap: 0.35rem !important;
+    column-gap: 0.85rem !important;
+    align-items: center !important;
+    padding: 1.05rem 1.15rem !important;
+  }
+  .lf-time { display: none !important; }
+  .lf-name   { grid-area: name;   font-size: 0.95rem; }
+  .lf-status { grid-area: status; justify-self: end; align-self: center; }
+  .lf-email  { grid-area: email;  font-size: 0.78rem; text-align: left; }
+  .lf-value  { grid-area: value;  text-align: right !important; font-size: 0.9rem; }
+
+  .lf-stat { padding: 1.4rem 1rem 1.2rem !important; text-align: left; }
+  .lf-stat-label { font-size: 0.58rem !important; letter-spacing: 0.1em !important; }
+  .lf-stat-num { font-size: 1.6rem !important; }
+
+  .lh { padding: 0 1.15rem 0 2.9rem !important; }
+  .lh-title { font-size: clamp(1.6rem, 8vw, 2.1rem) !important; }
+}
