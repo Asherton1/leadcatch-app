@@ -1117,3 +1117,129 @@
   transition: opacity .6s ease;
 }
 .about-founder-v2-image:hover::after { opacity: 0.55; }
+
+/* ══ STORY SECTIONS — timeline rail ═════════════════════════════════════ */
+.about-story-v2-inner { position: relative; }
+
+/* continuous rail behind the numbers */
+.about-story-v2-inner::before {
+  content: '';
+  position: absolute;
+  left: 21px;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  width: 1px;
+  background: linear-gradient(180deg,
+    rgba(255,107,53,0.45) 0%,
+    rgba(255,107,53,0.16) 45%,
+    rgba(255,255,255,0.05) 100%);
+  z-index: 0;
+}
+
+.about-story-v2-section {
+  position: relative !important;
+  padding-left: 4.25rem !important;
+  border: none !important;
+  background: transparent !important;
+  transition: padding-left .45s cubic-bezier(0.22,1,0.36,1);
+}
+.about-story-v2-section:hover { padding-left: 4.75rem !important; }
+
+/* numbered node sitting on the rail */
+.about-story-v2-section::before {
+  content: attr(data-num);
+  position: absolute;
+  left: 0;
+  top: 1.35rem;
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #131313;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #5f5f5f;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  z-index: 1;
+  transition: color .35s ease, border-color .35s ease,
+              background .35s ease, box-shadow .35s ease, transform .45s cubic-bezier(0.34,1.4,0.64,1);
+}
+.about-story-v2-section:hover::before {
+  color: #ff6b35;
+  border-color: rgba(255,107,53,0.4);
+}
+.about-story-v2-section[open]::before {
+  color: #fff;
+  background: #ff6b35;
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 5px rgba(255,107,53,0.12), 0 6px 20px rgba(255,107,53,0.28);
+  transform: scale(1.06);
+}
+
+/* kill the old ghost numeral if it exists */
+.about-story-v2-section::after { display: none !important; }
+
+.about-story-v2-summary {
+  padding: 1.25rem 0 1.25rem !important;
+  cursor: pointer;
+  list-style: none;
+}
+.about-story-v2-summary::-webkit-details-marker { display: none; }
+
+.about-story-v2-eyebrow {
+  font-size: 0.63rem !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase;
+  color: #ff6b35 !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
+}
+.about-story-v2-headline {
+  font-size: clamp(1.2rem, 3vw, 1.65rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.2 !important;
+  color: #fff !important;
+  margin: 0 !important;
+  transition: color .3s ease;
+}
+.about-story-v2-section[open] .about-story-v2-headline { color: #fff !important; }
+
+.about-story-v2-chevron {
+  position: absolute;
+  right: 0;
+  top: 1.65rem;
+  transition: transform .4s cubic-bezier(0.22,1,0.36,1), opacity .3s ease;
+  opacity: 0.5;
+}
+.about-story-v2-section:hover .about-story-v2-chevron { opacity: 1; }
+.about-story-v2-section[open] .about-story-v2-chevron { transform: rotate(180deg); opacity: 1; }
+
+.about-story-v2-body {
+  padding: 0.35rem 2.5rem 2rem 0 !important;
+}
+.about-story-v2-body p {
+  font-size: 0.95rem !important;
+  line-height: 1.85 !important;
+  color: #a1a1aa !important;
+  margin: 0 0 1.05rem !important;
+}
+.about-story-v2-body p:last-child { margin-bottom: 0 !important; }
+
+/* dividers are redundant now the rail connects everything */
+.about-story-v2-divider { display: none !important; }
+
+@media (max-width: 760px) {
+  .about-story-v2-inner::before { left: 16px; }
+  .about-story-v2-section { padding-left: 3.15rem !important; }
+  .about-story-v2-section:hover { padding-left: 3.15rem !important; }
+  .about-story-v2-section::before { width: 33px; height: 33px; font-size: 0.68rem; top: 1.15rem; }
+  .about-story-v2-chevron { display: none; }
+  .about-story-v2-body { padding-right: 0 !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-story-v2-section, .about-story-v2-section::before,
+  .about-story-v2-chevron { transition: none !important; }
+}
