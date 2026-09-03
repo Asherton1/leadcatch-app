@@ -81,3 +81,9 @@
   padding: 0 !important;
 }
 .td-section .td-grid { margin-top: 2.25rem !important; }
+
+/* Match the takedown section's left edge to the page container */
+.td-section { padding: 0 2rem !important; }
+@media (max-width: 900px) {
+  .td-section { padding: 0 1.5rem !important; }
+}
