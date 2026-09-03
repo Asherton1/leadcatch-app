@@ -1087,3 +1087,33 @@
   top: 2.2rem !important;
   transform: none !important;
 }
+
+/* ── Founder photo: warmer, matched to the site's rounding ───────────────── */
+.about-founder-v2-frame { position: relative; }
+.about-founder-v2-image {
+  position: relative;
+  border-radius: 1.125rem;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35), 0 18px 48px rgba(0,0,0,0.3);
+}
+.founder-photo {
+  border-radius: 0 !important;
+  filter: grayscale(72%) contrast(1.04) brightness(0.96);
+  transition: filter .6s ease, transform .6s cubic-bezier(0.22,1,0.36,1);
+  display: block;
+}
+.about-founder-v2-image:hover .founder-photo {
+  filter: grayscale(15%) contrast(1.02) brightness(1);
+  transform: scale(1.02);
+}
+/* warm gradient wash so it sits in the brand rather than reading as stock */
+.about-founder-v2-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(255,107,53,0.11) 0%, transparent 45%, rgba(0,0,0,0.34) 100%);
+  pointer-events: none;
+  transition: opacity .6s ease;
+}
+.about-founder-v2-image:hover::after { opacity: 0.55; }
