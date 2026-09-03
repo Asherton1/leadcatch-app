@@ -149,3 +149,18 @@
   .fc-bio { padding: 1.35rem 1.1rem 1.4rem !important; }
   .fc-bio p { font-size: 0.92rem; line-height: 1.8; }
 }
+
+/* Mobile type sizing — override whatever about.css is scaling up */
+@media (max-width: 760px) {
+  .fc .fc-bio p {
+    font-size: 0.9rem !important;
+    line-height: 1.72 !important;
+    margin-bottom: 0.95rem !important;
+  }
+  .fc .fc-intro {
+    font-size: 0.88rem !important;
+    line-height: 1.7 !important;
+  }
+  .fc .fc-name { font-size: 1.3rem !important; }
+  .fc .fc-loc { font-size: 0.76rem !important; }
+}
