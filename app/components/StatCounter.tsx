@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from 'react'
 type Stat = { value: number; prefix?: string; suffix?: string; label: string }
 
 const STATS: Stat[] = [
-  { value: 10,  prefix: '$', suffix: 'M+', label: 'in managed ad spend' },
+  { value: 1,   prefix: '$', suffix: 'M+', label: 'in managed ad spend' },
   { value: 38,  suffix: '+',  label: 'long-term client relationships' },
-  { value: 100, prefix: '$', suffix: 'K/mo', label: 'peak monthly ad budget' },
+  { value: 12,  suffix: '+', label: 'verticals served' },
   { value: 10,  suffix: ' yrs', label: 'in high-ticket marketing' },
 ]
 
