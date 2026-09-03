@@ -5,6 +5,7 @@ import ScrollReveal from '../components/ScrollReveal'
 import '../blog/blog.css'
 import '../landing.css'
 import Footer from '../components/Footer'
+import Knowables from '../components/Knowables'
 import RelatedPages from '../components/RelatedPages'
 import WhyUsAccordion from "../components/WhyUsAccordion"
 import TakedownCards from "../components/TakedownCards"
@@ -130,21 +131,7 @@ export default function WhyUsPage() {
         <p className="reveal">A CRM records the people who finished. Analytics counts the ones who arrived. Your ad platforms only ever learn from the ones who converted. Every one of those tools begins at the same instant &mdash; the moment somebody presses the button. Which means the majority of people who wanted what you sell are, to every system you own, indistinguishable from someone who landed on the wrong page and left.</p>
         <p className="reveal">ReCapture starts one step earlier. That single shift changes what is knowable about your demand.</p>
 
-        <h3 className="reveal">What they typed before they left</h3>
-        <p className="reveal">Name, email, phone &mdash; the contact fields, captured as they are completed rather than when the form is sent. Never keystrokes, never free-text boxes. Someone who fills four fields and gets interrupted is a real inquiry that no other system in your stack will ever record.</p>
-
-        <h3 className="reveal">Whether they have been back</h3>
-        <p className="reveal">Somebody who starts your form three times across two weeks is telling you something a first-time visitor is not. Because none of those attempts ended in a submission, no CRM has any record of the pattern. We surface the repeat visits, weight them into the lead score, and show you exactly who is circling.</p>
-
-        <h3 className="reveal">What they did first</h3>
-        <p className="reveal">The pages they read, how long they spent, whether they came from a paid campaign or a search, which page finally pushed them to the form. Context that turns a follow-up from a cold call into a conversation that starts where they left off.</p>
-
-        <h3 className="reveal">Which channel actually produced them</h3>
-        <p className="reveal">Every report you get today counts submissions. So when you ask which campaign is working, the answer is built from the minority of people who finished a form &mdash; and the channels that produce hesitant, high-consideration prospects look worse than they are.</p>
-        <p className="reveal">We attribute every captured inquiry back to the channel that produced it, whether or not it was ever submitted. Paid search, paid social, organic, referral, direct, broken out by campaign name across Google and Meta. Untagged traffic is handled too: Local Services Ads and anything without UTM parameters get attributed by platform rather than dropped, which matters if somebody else is managing your tagging.</p>
-
-        <h3 className="reveal">And what your ad platforms get back</h3>
-        <p className="reveal">Every recovered inquiry is sent to Meta&apos;s Conversions API and Google Ads as a server-side conversion event &mdash; hashed, deduplicated against your existing pixel, and weighted by how much intent the person actually showed. Your campaigns stop optimizing against the fraction who finished and start learning from the full picture. What you do with better data is your team&apos;s call. Getting it there is ours.</p>
+        <Knowables />
 
         <h2 className="reveal">What Sets Us Apart</h2>
         <p className="reveal">Every competitor in this space tells you <em>where</em> people drop off. None of them give you <em>who</em> dropped off — with their name, email, phone number, and what they were looking for. And none of them do what comes next.</p>
