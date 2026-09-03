@@ -223,3 +223,24 @@
   .st::before { background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px; }
   .st::after { background-image: none; }
 }
+
+/* Grid spans the full viewport width, not just the content column */
+.st::before,
+.st::after {
+  left: 50% !important;
+  right: auto !important;
+  width: 100vw !important;
+  transform: translateX(-50%);
+}
+.st::before {
+  inset-block: -4rem !important;
+  mask-image: radial-gradient(ellipse 62% 74% at 50% 50%, #000 45%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 62% 74% at 50% 50%, #000 45%, transparent 100%);
+}
+.st::after {
+  inset-block: 0 !important;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+}
+.st { overflow: visible; }
+.about-story-v2, .about-story-v2-inner { overflow: visible; }
