@@ -189,12 +189,15 @@ function Card({ data, index }: { data: Takedown; index: number }) {
 
 export default function TakedownCards() {
   return (
-    <section className="lc-section reveal">
+    <section className="lc-section reveal td-section">
       <h2 className="section-title" style={{ fontSize: 'clamp(1.5rem, 3.4vw, 2.1rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.2, marginBottom: '0.75rem', textAlign: 'left' }}>
-        What They Don&apos;t Tell You
+        What Sets Us Apart
       </h2>
+      <p className="section-subtitle" style={{ textAlign: 'left', maxWidth: '68ch', margin: '0 0 0.9rem' }}>
+        Every competitor in this space tells you <em>where</em> people drop off. None of them give you <em>who</em> dropped off &mdash; with their name, email, phone number, and what they were looking for. And none of them do what comes next.
+      </p>
       <p className="section-subtitle" style={{ textAlign: 'left', maxWidth: '68ch', margin: 0 }}>
-        Three tools your clients are evaluating right now. Here&apos;s what their sales reps won&apos;t mention on the demo call.
+        Here are the three tools your clients are evaluating right now, and what their sales reps will not mention on the demo call.
       </p>
 
       <div className="td-grid">

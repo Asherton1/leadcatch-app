@@ -73,3 +73,11 @@
 .blog-post-body > h2 { color: #ff6b35 !important; }
 .takedown-heading,
 .lc-section.reveal > h2.section-title { color: #ff6b35 !important; }
+
+/* Takedown section aligned to the page container */
+.td-section {
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+.td-section .td-grid { margin-top: 2.25rem !important; }
