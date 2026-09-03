@@ -179,93 +179,47 @@
   .st-node, .st-card, .st-chev, .st-drawer, .st-connector { transition: none !important; }
 }
 
-/* ══ BLUEPRINT TREATMENT ═══════════════════════════════════════════════════ */
 
-/* Faint drafting grid behind the whole thing */
+/* ══ Schematic backdrop — background only, cards untouched ═══════════════ */
 .st::before {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: -2rem 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
-  background-size: 28px 28px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, #000 40%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, #000 40%, transparent 100%);
+    /* fine grid */
+    linear-gradient(rgba(255,255,255,0.014) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.014) 1px, transparent 1px),
+    /* coarse grid */
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 26px 26px, 26px 26px, 130px 130px, 130px 130px;
+  mask-image: radial-gradient(ellipse 78% 62% at 50% 50%, #000 35%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 50%, #000 35%, transparent 100%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* Rail becomes a drafting centreline */
-.st-rail {
-  background: none !important;
-  border-left: 1px dashed rgba(255,107,53,0.32) !important;
-  width: 0 !important;
-}
-
-/* Connectors dashed like a leader line */
-.st-connector {
-  background: none !important;
-  border-top: 1px dashed rgba(255,255,255,0.16);
-  transition: border-color .35s ease;
-}
-.st-chapter:hover .st-connector,
-.st-open .st-connector { border-top-color: rgba(255,107,53,0.55); }
-
-/* Node reads as a technical marker */
-.st-node {
-  border-radius: 3px !important;
-  transform: rotate(45deg);
-  transition: background .35s ease, border-color .35s ease,
-              box-shadow .35s ease, transform .5s cubic-bezier(0.34,1.35,0.64,1);
-}
-.st-node-num {
-  transform: rotate(-45deg);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.66rem !important;
-  letter-spacing: 0.02em;
-}
-.st-open .st-node { transform: rotate(45deg) scale(1.06) !important; }
-
-/* Cards get drafting corners instead of soft rounding */
-.st-card {
-  border-radius: 3px !important;
-  position: relative;
-}
-.st-card::before,
-.st-card::after {
+/* Faint horizontal rules running across, like a drawing sheet */
+.st::after {
   content: '';
   position: absolute;
-  width: 9px;
-  height: 9px;
-  border-color: rgba(255,107,53,0.4);
-  border-style: solid;
-  opacity: 0;
-  transition: opacity .3s ease;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 158px,
+    rgba(255,107,53,0.055) 158px,
+    rgba(255,107,53,0.055) 159px
+  );
+  mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
   pointer-events: none;
+  z-index: 0;
 }
-.st-card::before { top: 7px; left: 7px; border-width: 1px 0 0 1px; }
-.st-card::after  { bottom: 7px; right: 7px; border-width: 0 1px 1px 0; }
-.st-chapter:hover .st-card::before,
-.st-chapter:hover .st-card::after,
-.st-open .st-card::before,
-.st-open .st-card::after { opacity: 1; }
 
-/* Labels in monospace, like annotations */
-.st-eyebrow {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
-  font-size: 0.58rem !important;
-  letter-spacing: 0.16em !important;
-}
-.st-eyebrow::before { content: '// '; opacity: 0.5; }
-.st-cue {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
-  font-size: 0.66rem !important;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.st-body { border-top: 1px dashed rgba(255,255,255,0.09) !important; }
+.st-chapter { z-index: 1; }
 
 @media (max-width: 820px) {
-  .st::before { background-size: 22px 22px; }
+  .st::before { background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px; }
+  .st::after { background-image: none; }
 }
