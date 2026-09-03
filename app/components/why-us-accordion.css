@@ -87,3 +87,6 @@
 @media (max-width: 900px) {
   .td-section { padding: 0 1.5rem !important; }
 }
+
+/* Inside the page container now — no separate box */
+.td-section { padding: 0 !important; max-width: none !important; margin: 3.5rem 0 !important; }

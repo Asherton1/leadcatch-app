@@ -124,7 +124,7 @@ export default function WhyUsPage() {
         </div>
       </section>
 
-      <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '0 2rem 3rem' }}>
+      <div className="blog-post-body" style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 2rem 3rem' }}>
 
         {/* ── What Sets Us Apart ──────────────────────────────────────── */}
         <h2 className="reveal">Everything Else Starts at Submit</h2>
@@ -133,12 +133,7 @@ export default function WhyUsPage() {
 
         <Knowables />
 
-
-      </div>
-
-      <TakedownCards />
-
-      <div className="blog-post-body" style={{ maxWidth: '720px', margin: '0 auto', padding: '0 2rem 3rem' }}>
+        <TakedownCards />
 
         <WhyUsAccordion />
 
