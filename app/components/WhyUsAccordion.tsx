@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import './why-us-accordion.css'
 
 interface FeatureItem {
   icon: React.ReactNode
@@ -14,7 +15,7 @@ function AccordionItem({ item }: { item: FeatureItem }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: 12, margin: '1.25rem 0', overflow: 'hidden' }}>
+    <div className={'wu-card' + (open ? ' wu-open' : '')}>
       <button
         onClick={() => setOpen(!open)}
         style={{
@@ -230,6 +231,30 @@ const features: FeatureItem[] = [
   },
   {
     icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+    ),
+    title: 'Channel &amp; Campaign Attribution',
+    description: 'Every report you get today counts submissions, which quietly penalises the channels producing your most considered prospects. We attribute every captured inquiry back to the channel that produced it \u2014 paid search, paid social, organic, referral, direct \u2014 broken out by campaign name across Google and Meta, submitted or not. Untagged traffic is handled rather than dropped: Local Services Ads and anything missing UTM parameters get attributed by platform, which matters when somebody else manages your tagging.',
+    visual: null,
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+    ),
+    title: 'Intent Signals to Meta &amp; Google',
+    description: 'Meta and Google only ever learn from people who press submit, so your campaigns optimise against a fraction of real demand. Every recovered inquiry goes back as a server-side conversion event \u2014 hashed, deduplicated against your existing pixel, and weighted by how much intent the person actually showed, so a third-time returner does not look like a first-time bounce. When one of those inquiries eventually closes, the real value goes back too. No other tool in this comparison feeds the ad platforms anything at all.',
+    visual: null,
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+    ),
+    title: 'Returning Visitor Detection',
+    description: 'Somebody who starts your form three times across two weeks is telling you something a first-time visitor is not. Because none of those attempts ended in a submission, no CRM has any record of the pattern. We surface the repeat visits, show which device and when, weight them into the lead score, and put the people who are circling at the top of the queue.',
+    visual: null,
+  },
+  {
+    icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
       </svg>
@@ -242,7 +267,7 @@ const features: FeatureItem[] = [
 
 export default function WhyUsAccordion() {
   return (
-    <div>
+    <div className="wu-grid">
       {features.map((item, i) => (
         <AccordionItem key={i} item={item} />
       ))}

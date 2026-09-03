@@ -1,0 +1,35 @@
+.wu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+  margin: 2.5rem 0 3rem;
+  width: calc(100vw - 4rem);
+  max-width: 1100px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.wu-card {
+  background: linear-gradient(150deg, #1c1c1c 0%, #161616 55%, #121212 100%);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-radius: 1.125rem;
+  overflow: hidden;
+  margin: 0 !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 10px 32px rgba(0,0,0,0.22);
+  transition: border-color .22s ease, transform .22s ease;
+}
+.wu-card:hover { border-color: rgba(255,107,53,0.2); transform: translateY(-2px); }
+.wu-card.wu-open { border-color: rgba(255,107,53,0.3); }
+@media (max-width: 1000px) {
+  .wu-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .wu-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+    left: auto;
+    transform: none;
+  }
+}
