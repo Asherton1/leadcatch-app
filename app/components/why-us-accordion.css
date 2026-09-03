@@ -68,3 +68,8 @@
 @media (max-width: 900px) {
   .blog-post-body { padding: 0 1.5rem 2.5rem !important; }
 }
+
+/* Section headings in brand orange */
+.blog-post-body > h2 { color: #ff6b35 !important; }
+.takedown-heading,
+.lc-section.reveal > h2.section-title { color: #ff6b35 !important; }
