@@ -85,7 +85,7 @@ const CHAPTERS: Chapter[] = [
 ]
 
 export default function StoryTimeline() {
-  const [open, setOpen] = useState<string | null>('problem')
+  const [open, setOpen] = useState<string | null>(null)
 
   return (
     <div className="st">
