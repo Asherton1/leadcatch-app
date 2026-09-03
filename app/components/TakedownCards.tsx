@@ -190,10 +190,10 @@ function Card({ data, index }: { data: Takedown; index: number }) {
 export default function TakedownCards() {
   return (
     <section className="lc-section reveal">
-      <h2 className="section-title" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.5rem)', lineHeight: 1.2, marginBottom: '0.75rem', textAlign: 'center' }}>
+      <h2 className="section-title" style={{ fontSize: 'clamp(1.5rem, 3.4vw, 2.1rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.2, marginBottom: '0.75rem', textAlign: 'left' }}>
         What They Don&apos;t Tell You
       </h2>
-      <p className="section-subtitle" style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto' }}>
+      <p className="section-subtitle" style={{ textAlign: 'left', maxWidth: '68ch', margin: 0 }}>
         Three tools your clients are evaluating right now. Here&apos;s what their sales reps won&apos;t mention on the demo call.
       </p>
 
