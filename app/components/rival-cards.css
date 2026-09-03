@@ -72,3 +72,15 @@
   .rv { grid-template-columns: 1fr; gap: 1rem; }
   .rv-card { padding: 1.4rem 1.35rem 1.25rem; }
 }
+
+/* Break the cards out of the 720px prose column */
+.rv, .kn {
+  width: calc(100vw - 4rem);
+  max-width: 1100px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media (max-width: 900px) {
+  .rv, .kn { width: 100%; left: auto; transform: none; }
+}
