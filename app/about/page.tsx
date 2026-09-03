@@ -7,6 +7,7 @@ import '../landing.css'
 import Footer from '../components/Footer'
 import RelatedPages from '../components/RelatedPages'
 import StatCounter from '../components/StatCounter'
+import FounderCard from '../components/FounderCard'
 import './about.css'
 import StoryAccordion from '../components/StoryAccordion'
 
@@ -57,28 +58,10 @@ export default function AboutPage() {
       {/* FOUNDER — moved up to position 2, redesigned */}
       <section className="about-founder-v2 reveal">
         <div className="about-founder-v2-inner">
-          <p className="about-founder-v2-eyebrow">Founder</p>
-          <div className="about-founder-v2-grid">
-            <div className="about-founder-v2-frame">
-              <div className="about-founder-v2-image">
-                <Image src="/founder.png" alt="Asherton Chraibi — Founder of ReCapture" width={400} height={400} className="founder-photo" style={{ objectFit: 'cover', width: '100%', height: 'auto' }} />
-              </div>
-            </div>
-            <div className="about-founder-v2-info">
-              <h2 className="about-founder-v2-name">Asherton Chraibi</h2>
-              <div className="about-founder-v2-location">
-                <span className="about-founder-v2-dot"></span>
-                Dallas, Texas
-              </div>
-              <p className="about-founder-v2-bio">I started in art and design with a minor in marketing and business — and spent the next decade running digital campaigns for high-ticket businesses. Med spas. Dental practices. Luxury real estate. Property management. I&apos;ve managed roughly $1M in ad spend across 38+ long-term client relationships. Not an agency. Not a freelancer. A partner who stays.</p>
-              <p className="about-founder-v2-bio">I&apos;m equal parts creative and analytical &mdash; the kind of person who sees most of a form&apos;s traffic vanish before submit and can&apos;t sleep until I understand why. Then builds the system to fix it. I&apos;m obsessed with the intersection of technology, behavioral psychology, and design that actually converts.</p>
-              <p className="about-founder-v2-bio">Dallas became home &mdash; not because it was planned, but because the city matched the energy. Most mornings start on the Katy Trail. Every other weekend I&apos;ll try a restaurant I haven&apos;t been to yet or get lost in a conversation that goes longer than it should. The rest of the time, I&apos;m building. That same restless curiosity is what built ReCapture &mdash; a decade of watching leads slip through the cracks and finally deciding to do something about it.</p>
-            </div>
-          </div>
+          <FounderCard />
         </div>
       </section>
 
-      {/* STORY V2 — first-person, numbered eyebrows, hairline dividers */}
       <section className="about-story-v2">
         <div className="about-story-v2-inner">
 
