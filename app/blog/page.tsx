@@ -52,8 +52,7 @@ export default function BlogIndex() {
       <div className="blog-featured reveal">
         <Link href="/blog/your-best-channel-looks-like-your-worst" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/api/og?title=Your+Best+Channel+Might+Look+Like+Your+Worst&amp;eyebrow=Blog" alt="Your best channel might look like your worst one" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+            <Image src="/blog-best-channel.webp" alt="A crowd in near darkness, only a few faces catching the light" fill style={{ objectFit: 'cover' }} />
           </div>
           <div className="blog-featured-content">
             <div className="blog-featured-tag">Attribution</div>

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import Footer from '../../components/Footer'
 import BlogNav from '../../components/BlogNav'
 import '../blog.css'
@@ -59,6 +60,10 @@ export default function Post() {
         </div>
         <h1>Your Best Channel Might Look Like Your Worst One</h1>
         <p className="post-subtitle">Every attribution report you have ever read counts submissions. That sounds neutral until you notice what it does to channels that attract careful, expensive, slow-moving buyers &mdash; the ones who think before they type, and often stop halfway.</p>
+      </div>
+
+      <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '12px', overflow: 'hidden', margin: '0 0 2rem 0' }}>
+        <Image src="/blog-best-channel.webp" alt="A crowd in near darkness, only a few faces catching the light" fill style={{ objectFit: 'cover' }} />
       </div>
 
       <div className="blog-post-divider"><hr /></div>
