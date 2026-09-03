@@ -164,3 +164,4 @@
   .fc .fc-name { font-size: 1.3rem !important; }
   .fc .fc-loc { font-size: 0.76rem !important; }
 }
+.fc-bio p { font-size: inherit !important; line-height: inherit !important; }

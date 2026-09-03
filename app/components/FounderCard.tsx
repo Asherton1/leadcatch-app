@@ -50,7 +50,7 @@ export default function FounderCard() {
 
       <div className="fc-drawer" style={{ gridTemplateRows: open ? '1fr' : '0fr' }}>
         <div className="fc-drawer-inner">
-          <div className="fc-bio">
+          <div className="fc-bio" style={{ fontSize: '0.9rem', lineHeight: 1.72 }}>
             <p>I started in art and design with a minor in marketing and business, then spent the next decade running digital campaigns for high-ticket businesses. Med spas. Dental practices. Luxury real estate. Property management.</p>
             <p>I am equal parts creative and analytical &mdash; the kind of person who sees most of a form&rsquo;s traffic vanish before submit and cannot sleep until I understand why. Then builds the system to fix it. I am obsessed with the intersection of technology, behavioural psychology, and design that actually converts.</p>
             <p>Dallas became home, not because it was planned but because the city matched the energy. Most mornings start on the Katy Trail. Every other weekend I will try a restaurant I have not been to yet, or get lost in a conversation that goes longer than it should. The rest of the time, I am building. That same restless curiosity is what built ReCapture.</p>
