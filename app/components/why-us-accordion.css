@@ -33,3 +33,38 @@
     transform: none;
   }
 }
+
+/* ── Why-us: one rhythm for the whole page ───────────────────────────────── */
+
+/* All prose and headings share the same measure */
+.blog-post-body { max-width: 1100px !important; padding: 0 2rem 3rem !important; }
+.blog-post-body > p,
+.blog-post-body > ul,
+.blog-post-body > ol { max-width: 68ch; }
+
+/* Every section heading gets the same weight and alignment */
+.blog-post-body > h2 {
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem) !important;
+  font-weight: 800 !important;
+  color: #fff !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.2 !important;
+  margin: 4rem 0 1rem !important;
+  text-align: left !important;
+}
+.blog-post-body > h2:first-of-type { margin-top: 1rem !important; }
+
+/* Component headings match, instead of centering at a different size */
+.takedown-heading, .takedown-sub,
+.wu-heading, .wu-sub {
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Components already break out; keep them to the same 1100px measure */
+.wu-grid, .kn { width: 100% !important; left: auto !important; transform: none !important; }
+
+@media (max-width: 900px) {
+  .blog-post-body { padding: 0 1.5rem 2.5rem !important; }
+}
