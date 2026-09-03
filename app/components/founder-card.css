@@ -165,3 +165,10 @@
   .fc .fc-loc { font-size: 0.76rem !important; }
 }
 .fc-bio p { font-size: inherit !important; line-height: inherit !important; }
+
+/* Mobile: centre the bio and intro copy */
+@media (max-width: 760px) {
+  .fc .fc-intro { text-align: center !important; }
+  .fc .fc-bio { text-align: center !important; }
+  .fc .fc-bio p { text-align: center !important; }
+}
