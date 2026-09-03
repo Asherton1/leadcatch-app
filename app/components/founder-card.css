@@ -130,3 +130,6 @@
 @media (prefers-reduced-motion: reduce) {
   .fc-img, .fc-chev, .fc-drawer { transition: none !important; }
 }
+
+/* Bio paragraphs fill the card width */
+.fc-bio p { max-width: none !important; }
