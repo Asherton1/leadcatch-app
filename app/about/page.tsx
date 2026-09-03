@@ -126,6 +126,22 @@ export default function AboutPage() {
             </div>
           </details>
 
+          <div className="about-story-v2-divider" />
+
+          <details className="about-story-v2-section reveal" data-num="05">
+            <summary className="about-story-v2-summary">
+              <p className="about-story-v2-eyebrow">The part I did not expect</p>
+              <h2 className="about-story-v2-headline">It turned out to be a data problem.</h2>
+              <span className="about-story-v2-chevron" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+            </summary>
+            <div className="about-story-v2-body">
+              <p>I built ReCapture to recover leads. That was the whole idea &mdash; catch the people who start a form and leave, follow up before the intent goes cold. It worked, and for a while I thought that was the product.</p>
+              <p>Then something occurred to me that I should have seen a decade earlier. Meta and Google only ever learn from people who press submit. Every campaign I had ever run, for every client, had been optimising against a fraction of the people who actually wanted something &mdash; and the channels producing careful, high-consideration prospects had been scoring worst the whole time, because hesitation looks like failure on a report that only counts submissions.</p>
+              <p>So ReCapture sends those people back. Every recovered inquiry goes to Meta&rsquo;s Conversions API and Google Ads as a server-side conversion event, hashed and deduplicated, weighted by how much intent the person actually showed. And every inquiry is attributed to the channel that produced it, submitted or not, so you can finally see which campaigns are working rather than which ones happened to attract people who finish forms.</p>
+              <p>That part was not in the plan. It came out of ten years of buying media and finally being in a position to fix something I had been living with the whole time.</p>
+            </div>
+          </details>
+
         </div>
       </section>
 
