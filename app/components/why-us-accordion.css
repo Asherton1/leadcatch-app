@@ -90,3 +90,13 @@
 
 /* Inside the page container now — no separate box */
 .td-section { padding: 0 !important; max-width: none !important; margin: 3.5rem 0 !important; }
+
+/* .lc-section carries !important padding in a media query — override it */
+.blog-post-body section.lc-section.td-section,
+section.td-section.lc-section.reveal {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
