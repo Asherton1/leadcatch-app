@@ -133,8 +133,6 @@ export default function WhyUsPage() {
 
         <Knowables />
 
-        <h2 className="reveal">What Sets Us Apart</h2>
-        <p className="reveal">Every competitor in this space tells you <em>where</em> people drop off. None of them give you <em>who</em> dropped off — with their name, email, phone number, and what they were looking for. And none of them do what comes next.</p>
 
       </div>
 
