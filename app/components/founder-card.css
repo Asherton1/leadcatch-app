@@ -143,3 +143,9 @@
   .fc-cue { justify-content: center; }
   .fc-intro { text-align: left; }
 }
+
+/* Mobile bio: tighter side padding so text uses the width */
+@media (max-width: 760px) {
+  .fc-bio { padding: 1.35rem 1.1rem 1.4rem !important; }
+  .fc-bio p { font-size: 0.92rem; line-height: 1.8; }
+}
