@@ -133,3 +133,13 @@
 
 /* Bio paragraphs fill the card width */
 .fc-bio p { max-width: none !important; }
+
+/* Mobile: centre the photo, name and location; body copy stays left */
+@media (max-width: 760px) {
+  .fc-top { justify-items: center; text-align: center; }
+  .fc-photo { margin: 0 auto; }
+  .fc-head { align-items: center; text-align: center; }
+  .fc-loc { justify-content: center; }
+  .fc-cue { justify-content: center; }
+  .fc-intro { text-align: left; }
+}
