@@ -811,3 +811,27 @@
 @media (max-width: 560px) {
   .blog-bento { grid-template-columns: 1fr; }
 }
+
+/* ── Why-us: bring legacy inline boxes up to the card system ─────────────── */
+.blog-post-body > div[style*="border-left"],
+.blog-post-body > div[style*="borderLeft"] {
+  background: linear-gradient(150deg, #1c1c1c 0%, #161616 55%, #121212 100%) !important;
+  border: 1px solid rgba(255,255,255,0.055) !important;
+  border-left: 3px solid #ff6b35 !important;
+  border-radius: 0 1.125rem 1.125rem 0 !important;
+  padding: 1.75rem 2rem !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 10px 32px rgba(0,0,0,0.22) !important;
+}
+.blog-post-body > div[style*="text-align: center"],
+.blog-post-body > div[style*="textAlign"] {
+  background: linear-gradient(150deg, #1c1c1c 0%, #161616 55%, #121212 100%) !important;
+  border: 1px solid rgba(255,255,255,0.055) !important;
+  border-radius: 1.125rem !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 10px 32px rgba(0,0,0,0.22) !important;
+  transition: border-color .22s ease, transform .22s ease;
+}
+.blog-post-body > div[style*="text-align: center"]:hover,
+.blog-post-body > div[style*="textAlign"]:hover {
+  border-color: rgba(255,107,53,0.22) !important;
+  transform: translateY(-2px);
+}
