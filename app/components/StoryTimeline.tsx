@@ -89,6 +89,15 @@ export default function StoryTimeline() {
 
   return (
     <div className="st">
+      <div className="st-marks" aria-hidden="true">
+        <span className="st-reg st-reg-tl" />
+        <span className="st-reg st-reg-tr" />
+        <span className="st-reg st-reg-bl" />
+        <span className="st-reg st-reg-br" />
+        <span className="st-ruler st-ruler-l" />
+        <span className="st-ruler st-ruler-r" />
+      </div>
+
       <span className="st-rail" aria-hidden="true" />
 
       {CHAPTERS.map((c, i) => {
