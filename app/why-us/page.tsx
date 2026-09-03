@@ -6,6 +6,7 @@ import '../blog/blog.css'
 import '../landing.css'
 import Footer from '../components/Footer'
 import Knowables from '../components/Knowables'
+import RivalCards from '../components/RivalCards'
 import RelatedPages from '../components/RelatedPages'
 import WhyUsAccordion from "../components/WhyUsAccordion"
 import TakedownCards from "../components/TakedownCards"
@@ -218,14 +219,10 @@ export default function WhyUsPage() {
 
         <h2 className="reveal">The Honest Breakdown</h2>
 
-        <p><strong style={{ color: '#fff' }}>Podium ($399-599/mo)</strong> is a strong tool for messaging, reviews, and payments — things multi-location businesses already pay for. What it doesn&apos;t do: capture partial form data, score abandoned leads, send recovery emails, or tell you who almost booked. Businesses that use Podium and ReCapture together get the full picture. Those that only use Podium are leaving invisible pipeline on the table.</p>
-
-        <p><strong style={{ color: '#fff' }}>GoHighLevel ($97-497/mo)</strong> is an all-in-one agency platform with CRM, funnels, and automation built for marketing agencies reselling to clients. It added partial survey capture in 2025 — but only for multi-step surveys where email is collected on page 1. No exit-intent. No mid-field capture. No recovery UX. HIPAA compliance is a $297/mo add-on. For agencies who need form abandonment on top of GHL, ReCapture is the purpose-built upgrade.</p>
-
-        <p><strong style={{ color: '#fff' }}>CartStack ($39-169/mo)</strong> is the closest form-abandonment tool to ReCapture — but built for e-commerce carts and hotel bookings, not high-ticket service forms. It recovers ~20% of abandoned shopping carts via email, SMS, and push notifications. What it doesn&apos;t do: instant SMS alerts to your staff, AI voice callback, lead scoring for service intent, multi-location dashboards across franchises, or HIPAA compliance. CartStack converts cart abandoners. ReCapture recovers $5,000 dental consults and $50,000 luxury condo leads.</p>
+        <RivalCards />
 
         <h2 className="reveal">Who ReCapture Is Built For</h2>
-        <p>Any business with a contact form and more than one location losing leads every day. A dental group with 8 offices. A med spa franchise with 15 locations. A property management company with 200 units. A luxury real estate team covering three markets. The common thread: high-ticket services where a single recovered lead is worth $1,500 to $10,000 — and where 60-70% of people who start a form never finish it.</p>
+        <p>Any business with a contact form and more than one location losing leads every day. A dental group with 8 offices. A med spa franchise with 15 locations. A property management company with 200 units. A luxury real estate team covering three markets. The common thread: high-ticket services where a single recovered lead is worth $1,500 to $10,000 — and where Baymard Institute puts form abandonment at 60-70%.</p>
         <p>ReCapture captures every partial submission, scores each lead by intent, alerts your team in real time, and automatically sends a branded recovery email — across every location, under one dashboard. No other tool does all four. Not Podium. Not GoHighLevel. Not CartStack.</p>
 
         <h2 className="reveal">The Bottom Line</h2>
