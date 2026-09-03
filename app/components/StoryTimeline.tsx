@@ -91,35 +91,44 @@ export default function StoryTimeline() {
     <div className="st">
       <span className="st-rail" aria-hidden="true" />
 
-      {CHAPTERS.map(c => {
+      {CHAPTERS.map((c, i) => {
         const isOpen = open === c.id
+        const side = i % 2 === 0 ? 'st-left' : 'st-right'
         return (
-          <div className={'st-chapter' + (isOpen ? ' st-open' : '')} key={c.id}>
-            <button
-              className="st-trigger"
-              type="button"
-              aria-expanded={isOpen}
-              onClick={() => setOpen(isOpen ? null : c.id)}
-            >
-              <span className="st-node" aria-hidden="true">
-                <span className="st-node-num">{c.num}</span>
-              </span>
+          <div
+            className={'st-chapter ' + side + (isOpen ? ' st-open' : '')}
+            key={c.id}
+          >
+            <span className="st-connector" aria-hidden="true" />
+            <span className="st-node" aria-hidden="true">
+              <span className="st-node-num">{c.num}</span>
+            </span>
 
-              <span className="st-head">
-                <span className="st-eyebrow">{c.eyebrow}</span>
-                <span className="st-title">{c.title}</span>
-              </span>
+            <div className="st-card">
+              <button
+                className="st-trigger"
+                type="button"
+                aria-expanded={isOpen}
+                onClick={() => setOpen(isOpen ? null : c.id)}
+              >
+                <span className="st-head">
+                  <span className="st-eyebrow">{c.eyebrow}</span>
+                  <span className="st-title">{c.title}</span>
+                </span>
+                <span className="st-cue">
+                  {isOpen ? 'Close' : 'Read'}
+                  <span className={'st-chev' + (isOpen ? ' st-chev-up' : '')} aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </span>
+                </span>
+              </button>
 
-              <span className="st-chev" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </span>
-            </button>
-
-            <div className="st-drawer" style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}>
-              <div className="st-drawer-inner">
-                <div className="st-body">{c.body}</div>
+              <div className="st-drawer" style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}>
+                <div className="st-drawer-inner">
+                  <div className="st-body">{c.body}</div>
+                </div>
               </div>
             </div>
           </div>
