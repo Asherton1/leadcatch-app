@@ -6,7 +6,6 @@ import '../blog/blog.css'
 import '../landing.css'
 import Footer from '../components/Footer'
 import Knowables from '../components/Knowables'
-import RivalCards from '../components/RivalCards'
 import RelatedPages from '../components/RelatedPages'
 import WhyUsAccordion from "../components/WhyUsAccordion"
 import TakedownCards from "../components/TakedownCards"
@@ -216,10 +215,6 @@ export default function WhyUsPage() {
             </div>
           ))}
         </div>
-
-        <h2 className="reveal">The Honest Breakdown</h2>
-
-        <RivalCards />
 
         <h2 className="reveal">Who ReCapture Is Built For</h2>
         <p>Any business with a contact form and more than one location losing leads every day. A dental group with 8 offices. A med spa franchise with 15 locations. A property management company with 200 units. A luxury real estate team covering three markets. The common thread: high-ticket services where a single recovered lead is worth $1,500 to $10,000 — and where Baymard Institute puts form abandonment at 60-70%.</p>

@@ -93,3 +93,15 @@
 @media (prefers-reduced-motion: reduce) {
   .kn-row::before, .kn-trigger, .kn-mark, .kn-mark-v, .kn-drawer { transition: none !important; }
 }
+
+/* Break out of the 720px prose column */
+.kn {
+  width: calc(100vw - 4rem);
+  max-width: 1100px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media (max-width: 900px) {
+  .kn { width: 100%; left: auto; transform: none; }
+}
