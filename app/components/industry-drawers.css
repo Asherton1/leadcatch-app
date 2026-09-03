@@ -133,3 +133,19 @@
 @media (prefers-reduced-motion: reduce) {
   .ind-drawer, .ind-chev { transition: none !important; }
 }
+
+/* Equal heights across a row while collapsed; the trigger fills, the drawer grows */
+.ind-grid { align-items: stretch !important; }
+.ind-card {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch !important;
+  height: auto !important;
+}
+.ind-trigger { flex: 1 1 auto; }
+.ind-value { margin-bottom: 1.1rem; flex: 1 1 auto; }
+.ind-more { margin-top: auto; }
+@media (max-width: 900px) {
+  .ind-grid { align-items: start !important; }
+  .ind-card { align-self: start !important; }
+}
