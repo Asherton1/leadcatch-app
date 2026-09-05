@@ -10,9 +10,22 @@ type Step = {
   right: React.ReactNode
 }
 
-const Empty = ({ label }: { label: string }) => (
-  <div className="sp-empty">
-    <span className="sp-empty-mark" aria-hidden="true" />
+const Empty = ({ label, variant }: { label: string; variant: 'blip' | 'ghost' | 'gone' }) => (
+  <div className={'sp-empty sp-empty-' + variant}>
+    <span className="sp-empty-vis" aria-hidden="true">
+      {variant === 'blip' && <span className="sp-blip" />}
+      {variant === 'ghost' && (
+        <span className="sp-ghost">
+          <i /><i /><i /><i /><i /><i /><i /><i />
+          <span className="sp-caret" />
+        </span>
+      )}
+      {variant === 'gone' && (
+        <span className="sp-gone">
+          <i /><i /><i /><i /><i /><i />
+        </span>
+      )}
+    </span>
     <span className="sp-empty-label">{label}</span>
   </div>
 )
@@ -23,21 +36,21 @@ const STEPS: Step[] = [
     title: 'A visitor lands on your site',
     body: 'They arrive from Google, an ad, a referral, or social. They navigate to your contact form, consultation request, or booking page.',
     visible: false,
-    right: <Empty label="One anonymous pageview. No identity, no intent." />,
+    right: <Empty variant="blip" label="One anonymous pageview. No identity, no intent." />,
   },
   {
     num: '02',
     title: 'They start filling it in',
     body: 'Name. Email. Phone. Maybe a service selection. Real information, typed by a real person who wants something from you.',
     visible: false,
-    right: <Empty label="Still nothing. Analytics does not watch inside a form." />,
+    right: <Empty variant="ghost" label="Still nothing. Analytics does not watch inside a form." />,
   },
   {
     num: '03',
     title: 'Something pulls them away',
     body: 'Their phone rings. They switch tabs. They lose their nerve. Whatever the reason, they leave without pressing submit.',
     visible: false,
-    right: <Empty label="This person is now indistinguishable from a bounce." />,
+    right: <Empty variant="gone" label="This person is now indistinguishable from a bounce." />,
   },
   {
     num: '04',
