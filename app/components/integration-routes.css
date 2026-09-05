@@ -272,3 +272,37 @@
   .ir-origin-pip, .ir-packet { animation: none !important; opacity: 0; }
   .ir-route, .ir-node, .ir-chev, .ir-drawer { transition: none !important; }
 }
+
+/* ══ Brand correction: one accent, differentiated by intensity ═══════════ */
+.ir-tone-amber  { --tone: #ff6b35; --glow: rgba(255,107,53,0.16); --dim: rgba(255,107,53,0.55); }
+.ir-tone-blue   { --tone: #ff6b35; --glow: rgba(255,107,53,0.16); --dim: rgba(255,107,53,0.55); }
+.ir-tone-violet { --tone: #ff6b35; --glow: rgba(255,107,53,0.16); --dim: rgba(255,107,53,0.55); }
+.ir-tone-green  { --tone: #ff6b35; --glow: rgba(255,107,53,0.16); --dim: rgba(255,107,53,0.55); }
+
+/* Closed lanes sit quiet — the accent only arrives on hover or open */
+.ir-route { border-left-color: rgba(255,255,255,0.09); }
+.ir-route-label { color: #6b6b6b; transition: color .3s ease; }
+.ir-node { border-color: rgba(255,255,255,0.16); }
+.ir-chev { color: #5f5f5f; }
+.ir-count b { color: #a1a1aa; }
+.ir-elbow { background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.14)); }
+
+/* Hover and open bring the orange in */
+.ir-route:hover, .ir-open { border-left-color: #ff6b35; }
+.ir-route:hover .ir-route-label, .ir-open .ir-route-label { color: #ff6b35; }
+.ir-route:hover .ir-node, .ir-open .ir-node { border-color: #ff6b35; }
+.ir-route:hover .ir-chev, .ir-open .ir-chev { color: #ff6b35; }
+.ir-route:hover .ir-count b, .ir-open .ir-count b { color: #ff6b35; }
+.ir-route:hover .ir-elbow, .ir-open .ir-elbow {
+  background: linear-gradient(90deg, rgba(255,107,53,0.25), #ff6b35);
+  opacity: 1;
+}
+.ir-open .ir-node { box-shadow: 0 0 0 5px rgba(255,107,53,0.13); }
+.ir-item:hover { border-color: rgba(255,107,53,0.26); }
+.ir-route:hover, .ir-open {
+  border-top-color: rgba(255,107,53,0.2);
+  border-right-color: rgba(255,107,53,0.2);
+  border-bottom-color: rgba(255,107,53,0.2);
+}
+
+/* Status badges keep their semantic colours — those carry meaning, not brand */
