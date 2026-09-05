@@ -307,16 +307,16 @@ export default function HowItWorksPage() {
             <p>The lead comes back, books the appointment, signs up for the service. Revenue that would have vanished is now in your pipeline. Every Monday at 8am, you receive a performance report with leads captured, revenue at risk, and recovery metrics.</p>
             <div className="hiw-roi-card">
               <div className="hiw-roi-line">
-                <span className="hiw-roi-label">Avg. leads recovered per month</span>
-                <span className="hiw-roi-value">3-8 leads</span>
+                <span className="hiw-roi-label">If you recover just five a month</span>
+                <span className="hiw-roi-value">5 leads</span>
               </div>
               <div className="hiw-roi-line">
-                <span className="hiw-roi-label">Avg. client value</span>
+                <span className="hiw-roi-label">At a typical high-ticket client value</span>
                 <span className="hiw-roi-value">$1,500 - $10,000</span>
               </div>
               <div className="hiw-roi-line hiw-roi-total">
-                <span className="hiw-roi-label">Monthly revenue recovered</span>
-                <span className="hiw-roi-value">$4,500 - $80,000</span>
+                <span className="hiw-roi-label">That is worth</span>
+                <span className="hiw-roi-value">$7,500 - $50,000</span>
               </div>
             </div>
           </div>
