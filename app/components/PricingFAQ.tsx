@@ -20,7 +20,7 @@ const faqs = [
     a: 'You get full access to every feature on the Pro plan for 7 days. A card is required to start (so there\u2019s no friction when you decide to continue), but you can cancel anytime in your dashboard before day 7 and you won\u2019t be charged. After day 7, billing starts automatically at $397/mo.',
   },
   {
-    q: 'Is my data really HIPAA-compliant?',
+    q: 'Can we use ReCapture if we handle PHI?',
     a: 'ReCapture is HIPAA-ready by design across all plans — our subprocessor stack and architecture support healthcare deployments. Business Associate Agreements (BAAs) are executed for Enterprise customers upon signed contract. If you handle Protected Health Information, contact hello@userecapture.com to discuss Enterprise deployment.',
   },
   {

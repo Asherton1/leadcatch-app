@@ -70,7 +70,7 @@ export const faqCategories: FAQCategory[] = [
         a: 'For email recovery, the visitor entering their address on your form is the relevant act. If you enable SMS or voice, you need explicit consent language at the point of entry, and we provide template wording for that — though your own counsel should approve the final version. For regulated industries we would rather you over-document this than under-document it.',
       },
       {
-        q: 'Is my data really HIPAA-compliant?',
+        q: 'Can we use ReCapture if we handle PHI?',
         a: 'ReCapture is HIPAA-ready by design across all plans — our subprocessor stack and architecture support healthcare deployments. Business Associate Agreements (BAAs) are executed for Enterprise customers upon signed contract. If you handle PHI, contact hello@userecapture.com to discuss Enterprise deployment.',
       },
       {
