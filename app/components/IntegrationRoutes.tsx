@@ -88,6 +88,25 @@ const PATHS = [
   'M 500 0 C 500 46, 875 44, 875 96',
 ]
 
+function Panel({ d }: { d: Dest }) {
+  return (
+    <>
+      <p className="ir-blurb">{d.blurb}</p>
+      <div className="ir-items">
+        {d.items.map((it, n) => (
+          <div className={'ir-item ir-item-' + it.status} key={it.name} style={{ ['--n' as string]: n }}>
+            <div className="ir-item-top">
+              <span className="ir-item-name">{it.name}</span>
+              <span className={'ir-badge ir-badge-' + it.status}>{LABEL[it.status]}</span>
+            </div>
+            <p className="ir-item-desc">{it.desc}</p>
+          </div>
+        ))}
+      </div>
+    </>
+  )
+}
+
 export default function IntegrationRoutes() {
   const ref = useRef<HTMLDivElement | null>(null)
   const [on, setOn] = useState(false)
@@ -137,8 +156,8 @@ export default function IntegrationRoutes() {
         {DESTS.map((d, i) => {
           const live = d.items.filter(x => x.status === 'live').length
           return (
+            <div className="ir-slot" key={d.id}>
             <button
-              key={d.id}
               className={'ir-dest' + (open === d.id ? ' ir-active' : '')}
               style={{ ['--i' as string]: i }}
               onClick={() => setOpen(d.id)}
@@ -148,24 +167,19 @@ export default function IntegrationRoutes() {
               <span className="ir-dest-headline">{d.headline}</span>
               <span className="ir-dest-count"><b>{live}</b> live &middot; {d.items.length} total</span>
             </button>
+            {open === d.id && (
+              <div className="ir-panel ir-panel-inline">
+                <Panel d={d} />
+              </div>
+            )}
+            </div>
           )
         })}
       </div>
 
-      {/* The detail */}
-      <div className="ir-panel" key={active.id}>
-        <p className="ir-blurb">{active.blurb}</p>
-        <div className="ir-items">
-          {active.items.map((it, n) => (
-            <div className={'ir-item ir-item-' + it.status} key={it.name} style={{ ['--n' as string]: n }}>
-              <div className="ir-item-top">
-                <span className="ir-item-name">{it.name}</span>
-                <span className={'ir-badge ir-badge-' + it.status}>{LABEL[it.status]}</span>
-              </div>
-              <p className="ir-item-desc">{it.desc}</p>
-            </div>
-          ))}
-        </div>
+      {/* Detail — desktop position, below the row */}
+      <div className="ir-panel ir-panel-below" key={active.id}>
+        <Panel d={active} />
       </div>
 
       <div className="ir-extras">

@@ -422,3 +422,20 @@
 @media (max-width: 640px) and (prefers-reduced-motion: reduce) {
   .ir-dests::after { animation: none !important; opacity: 0; }
 }
+
+/* ══ Panel placement: below the row on desktop, inline on mobile ═════════ */
+.ir-panel-inline { display: none; }
+.ir-slot { display: contents; }
+
+@media (max-width: 640px) {
+  .ir-slot { display: block; position: relative; }
+  .ir-panel-below { display: none; }
+  .ir-panel-inline {
+    display: block;
+    margin: 0.7rem 0 0;
+    padding: 1.2rem 1.15rem 1.25rem;
+  }
+  /* the spine stub only attaches to the button, not the panel */
+  .ir-slot .ir-dest::before,
+  .ir-slot .ir-dest::after { left: -1.9rem; }
+}
