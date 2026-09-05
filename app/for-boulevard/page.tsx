@@ -42,7 +42,7 @@ const SAMPLE_LEADS = [
 
 const FAQS: { question: string; answer: string }[] = [
   { question: "How does the Boulevard integration work?", answer: "Native integration. When someone abandons a consultation form, ReCapture creates a new Lead in Boulevard with captured data (name, email, phone, services of interest, completed fields). The lead appears in your booking pipeline ready for your team to convert into a booked consultation." },
-  { question: "Will recovery messages mention specific services from the form?", answer: "Yes — recovery emails and SMS pull from the services the visitor selected on the form. A lead who selected Botox sees consultation copy referencing the treatment specifically. This personalization typically increases reply rates by 30-50% over generic recovery copy." },
+  { question: "Will recovery messages mention specific services from the form?", answer: "Yes — recovery emails and SMS pull from the services the visitor selected on the form. A lead who selected Botox sees consultation copy referencing the treatment specifically. Personalised copy tends to outperform generic recovery messages, though the size of that gap depends on your list and your offer." },
   { question: "Does ReCapture work for solo aesthetic providers, not just multi-location?", answer: "Yes — Pro plan ($397/mo) is designed for solo through multi-location aesthetic providers using Boulevard. You get full form abandonment tracking, AI voice callback within 60 seconds, recovery emails + SMS, and the Boulevard integration." },
 ]
 

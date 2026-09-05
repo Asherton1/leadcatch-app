@@ -42,7 +42,7 @@ const SAMPLE_LEADS = [
 
 const FAQS: { question: string; answer: string }[] = [
   { question: "How does ReCapture work for multifamily leasing inquiries?", answer: "Tour request and contact forms on property websites typically see 65-75% abandonment. ReCapture captures the name, email, phone, and property of interest from anyone who starts the form. Recovery sequence (email, SMS, AI voice callback) fires within 60 seconds." },
-  { question: "What recovery rate should a property management company expect?", answer: "60%+ of renters request a tour within 24 hours of discovering a property, and 41% prefer automated booking. ReCapture clients in property management recover 8-12% of abandoned tour requests within 30 days. For a 200-unit portfolio averaging 100 form abandonments per month, that is 50+ recovered leasing leads monthly." },
+  { question: "What recovery rate should a property management company expect?", answer: "Recovery rate depends on how quickly your leasing team follows up and how far renters got before leaving, so any number quoted before you have run it is a guess. Here is the arithmetic instead. A 200-unit portfolio seeing 100 form abandonments a month, recovering 10% of them, is ten additional tour requests you would not otherwise have known about. Run the trial and the number will be yours." },
   { question: "Does ReCapture integrate with AppFolio, Yardi, or RentCafe?", answer: "AppFolio is a native integration — abandoned leads push directly into your AppFolio pipeline with property metadata included. For Yardi and RentCafe, we support webhook integration. Most multifamily teams complete setup in under 10 minutes." },
 ]
 

@@ -42,7 +42,7 @@ const SAMPLE_LEADS = [
 
 const FAQS: { question: string; answer: string }[] = [
   { question: "Is ReCapture HIPAA compliant for plastic surgery practices?", answer: "Yes — HIPAA-eligible on Enterprise plans with a Business Associate Agreement (BAA). Cosmetic surgery consultation forms collect highly sensitive PHI (areas of concern, body imaging interest, medical history). ReCapture handles that with the same standards as your EMR." },
-  { question: "How much revenue can a plastic surgery practice expect to recover?", answer: "Plastic surgery practices spend an average of $100+ per lead with only 22% converting to procedures. ReCapture clients in this vertical recover 6-10% of abandoned consultation form starters. For a single-location practice with 100 form abandonments per month and average procedure value of $15,000, that is $90,000-$150,000 in monthly recovery." },
+  { question: "How much revenue can a plastic surgery practice expect to recover?", answer: "Recovery rate depends on follow-up speed, your consultation process, and how far people got before leaving, so anyone quoting you a figure before you have run it is guessing. Here is the arithmetic instead. A practice seeing 100 form abandonments a month, recovering 8% of them, at an average procedure value of $15,000, is $120,000. Run the trial and you will have your own number." },
   { question: "Will my consultation forms still work the same way?", answer: "Yes, exactly the same. ReCapture is a passive tracking layer — it does not alter your form UI, validation, or submission flow. Visitors who complete the form still route to your booking system. ReCapture only acts when someone abandons." },
 ]
 

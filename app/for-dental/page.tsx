@@ -42,7 +42,7 @@ const SAMPLE_LEADS = [
 
 const FAQS: { question: string; answer: string }[] = [
   { question: "Is ReCapture HIPAA compliant for dental practices?", answer: "Yes — HIPAA-eligible on Enterprise plans with a Business Associate Agreement (BAA). Dental appointment forms collect PHI (treatment needs, insurance details, medical history). ReCapture handles that data with the same standards as your practice management software." },
-  { question: "What is the typical recovery rate for dental appointment forms?", answer: "Dental practices typically see 32% of phone inquiries go unanswered and only 44% appointment confirmation rates. ReCapture clients in dental recover 7-10% of abandoned appointment requests within the first 30 days. For a single-location practice averaging 80 form abandonments per month with average case value of $1,800, that is $10,000-$14,000 in monthly recovery." },
+  { question: "What is the typical recovery rate for dental appointment forms?", answer: "Recovery rate depends on your follow-up speed, your offer, and how far people got in the form before leaving, so any number quoted before you have run it is a guess. Here is the arithmetic instead. A single-location practice seeing 80 form abandonments a month, recovering even 8% of them, at an average case value of $1,800, is $11,500 a month. Run the trial and you will have your own number rather than ours." },
   { question: "Does ReCapture integrate with Dentrix, Eaglesoft, or Open Dental?", answer: "ReCapture pushes abandoned leads via webhook to any practice management system. For Dentrix and Eaglesoft specifically, leads route through your CRM (HubSpot, Salesforce, or similar). For Open Dental, we support direct webhook integration. Setup takes under 10 minutes." },
 ]
 
