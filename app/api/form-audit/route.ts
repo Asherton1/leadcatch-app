@@ -475,7 +475,7 @@ export async function POST(request: NextRequest) {
           '<table style="width:100%;border-collapse:collapse;"><tr>' +
             '<td style="vertical-align:middle;">' +
               '<span style="color:#22c55e;font-size:13px;font-weight:600;">&#9679;</span>' +
-              '<span style="color:#aaa;font-size:13px;margin-left:6px;">HIPAA Compliant</span>' +
+              '<span style="color:#aaa;font-size:13px;margin-left:6px;">HIPAA-Ready</span>' +
               '<span style="color:#444;padding:0 10px;">&middot;</span>' +
               '<a href="https://userecapture.com/baa" style="color:#888;font-size:13px;text-decoration:none;">BAA Available</a>' +
             '</td>' +

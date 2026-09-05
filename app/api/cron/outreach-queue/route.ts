@@ -79,7 +79,7 @@ ${psHtml(company)}
 
 <p>Following up on my note from earlier this week — wanted to make sure it didn't get buried.</p>
 
-<p>Quick recap: 67% of consultation forms on ${c}'s site get abandoned before submit. ReCapture captures every consultation that didn't finish and pushes it into Boulevard (or Mindbody, Aesthetic Record, Vagaro) within 60 seconds.</p>
+<p>Quick recap: most consultation forms on ${c}'s site get abandoned before submit. ReCapture captures every consultation that didn't finish and pushes it into Boulevard (or Mindbody, Aesthetic Record, Vagaro) within 60 seconds.</p>
 
 <p>At a $2,800 average first treatment, even a 10% recovery rate is typically $30K-$80K in monthly bookings.</p>
 
@@ -112,7 +112,7 @@ ${psHtml(company)}
 
 <p>Following up on my note from earlier this week.</p>
 
-<p>Quick recap: 67% of cosmetic consultation forms on ${c}'s site get abandoned before submit. ReCapture captures every veneer, implant, or smile-makeover inquiry and pushes it into your practice management software via webhook, with a HIPAA-compliant AI voice callback within 60 seconds. BAA available.</p>
+<p>Quick recap: most cosmetic consultation forms on ${c}'s site get abandoned before submit. ReCapture captures every veneer, implant, or smile-makeover inquiry and pushes it into your practice management software via webhook, with a AI voice callback within 60 seconds. BAA available.</p>
 
 <p>At $4K-$50K per case, even one recovered patient per month moves the needle.</p>
 
@@ -128,7 +128,7 @@ ${psHtml(company)}
 
 <p>Following up on my note from earlier this week.</p>
 
-<p>Quick recap: 67% of consultation forms on ${c}'s site get abandoned before submit. ReCapture captures every rhinoplasty, breast, or body-contouring inquiry and pushes it into Nextech (or your PMS) via webhook, with a HIPAA-compliant AI voice callback within 60 seconds. BAA available.</p>
+<p>Quick recap: most consultation forms on ${c}'s site get abandoned before submit. ReCapture captures every rhinoplasty, breast, or body-contouring inquiry and pushes it into Nextech (or your PMS) via webhook, with a AI voice callback within 60 seconds. BAA available.</p>
 
 <p>At $8K-$30K per procedure, even one recovered patient per month is six figures in surgical revenue.</p>
 
@@ -144,7 +144,7 @@ ${psHtml(company)}
 
 <p>Following up on my note from earlier this week.</p>
 
-<p>Quick recap: 67% of cosmetic consultation forms on ${c}'s site get abandoned before submit. ReCapture captures every Botox, laser, or aesthetic-treatment inquiry and pushes it into Nextech (or your PMS) via webhook, with a HIPAA-compliant AI voice callback within 60 seconds. BAA available.</p>
+<p>Quick recap: most cosmetic consultation forms on ${c}'s site get abandoned before submit. ReCapture captures every Botox, laser, or aesthetic-treatment inquiry and pushes it into Nextech (or your PMS) via webhook, with a AI voice callback within 60 seconds. BAA available.</p>
 
 <p>For practices running paid ads to cosmetic landing pages, this typically recovers 15-30 additional qualified consultations per month.</p>
 
@@ -180,7 +180,7 @@ ${psHtml(company)}
 
 <p>Quick recap: fertility prospects are some of the most research-intensive in healthcare. Industry data shows 70%+ of initial consultation inquiries get abandoned before submit — these are couples who are anxious, comparing three or four clinics, and second-guessing every click. The cost of one lost cycle inquiry isn't $200 — it's $15-30K plus lifetime patient value across multiple cycles.</p>
 
-<p>ReCapture captures every started-but-not-submitted inquiry on ${c}'s site and pushes it to your patient coordinator within 60 seconds, with a HIPAA-compliant AI voice callback for high-intent prospects. BAA available. Built specifically so anxious patients get a warm, human-feeling response within minutes — not the 24-48 hour delay that sends them to the next clinic.</p>
+<p>ReCapture captures every started-but-not-submitted inquiry on ${c}'s site and pushes it to your patient coordinator within 60 seconds, with a AI voice callback for high-intent prospects. BAA available. Built specifically so anxious patients get a warm, human-feeling response within minutes — not the 24-48 hour delay that sends them to the next clinic.</p>
 
 <p>15-minute walkthrough this week?</p>
 
@@ -244,7 +244,7 @@ ${psHtml(company)}
 
 <p>Following up on my note from earlier this week.</p>
 
-<p>Quick recap: concierge-medicine prospects research carefully, and many start a membership inquiry on ${c}'s site without finishing. ReCapture captures every unfinished inquiry within 60 seconds so you can reach them while they're still deciding, with a HIPAA-compliant AI voice callback. BAA available.</p>
+<p>Quick recap: concierge-medicine prospects research carefully, and many start a membership inquiry on ${c}'s site without finishing. ReCapture captures every unfinished inquiry within 60 seconds so you can reach them while they're still deciding, with a AI voice callback. BAA available.</p>
 
 <p>At annual membership values, even one or two recovered members a month is meaningful recurring revenue.</p>
 

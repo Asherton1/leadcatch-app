@@ -75,7 +75,7 @@ export default function Footer() {
       <div className="footer-trust">
         <div className="footer-trust-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="#22c55e"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"/></svg>
-          <span>HIPAA Compliant</span>
+          <span>HIPAA-Ready</span>
         </div>
         <span className="footer-trust-sep">|</span>
         <Link href="/baa" className="footer-trust-item footer-trust-link">
