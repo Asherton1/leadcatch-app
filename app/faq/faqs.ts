@@ -74,8 +74,8 @@ export const faqCategories: FAQCategory[] = [
         a: 'ReCapture is HIPAA-ready by design across all plans — our subprocessor stack and architecture support healthcare deployments. Business Associate Agreements (BAAs) are executed for Enterprise customers upon signed contract. If you handle PHI, contact hello@userecapture.com to discuss Enterprise deployment.',
       },
       {
-        q: 'Are you GDPR / CCPA compliant?',
-        a: 'Yes. ReCapture supports explicit consent flags, right-to-be-forgotten deletion within 72 hours, full audit logs, and zero third-party data sharing. We never sell or rent data. Ask about our DPA (Data Processing Agreement) if your business operates in the EU or California.',
+        q: 'How do you handle GDPR and CCPA?',
+        a: 'ReCapture blocks EU, UK, and Swiss visitors entirely, so no data from those regions is captured in the first place. For California and elsewhere: we honour recognised consent platforms including OneTrust, Cookiebot, and CookieYes, support deletion requests within 72 hours, keep full audit logs, and never sell, rent, or share captured data with third parties. A DPA is available. We are not lawyers and this is not legal advice \u2014 if you operate in a regulated jurisdiction, have your counsel review our trust page.',
       },
       {
         q: 'Who owns the lead data?',
