@@ -47,11 +47,11 @@ function Icon({ type }: { type: string }) {
 }
 
 const categoryDescriptions: Record<string, string> = {
-  'Alerts & Notifications': 'Speed to lead is everything. Research shows responding within 60 seconds makes you 391% more likely to convert. When someone abandons your form, your front desk gets an instant alert with their name, email, phone, and lead score. They pick up the phone while the prospect is still thinking about you — before they book with your competitor down the street.',
+  'Alerts & Notifications': 'Speed to lead is everything. Lead response research has consistently found that contacting someone within the first minute converts dramatically better than waiting even an hour. When someone abandons your form, your front desk gets an instant alert with their name, email, phone, and lead score. They pick up the phone while the prospect is still thinking about you — before they book with your competitor down the street.',
   'CRM & Sales': 'Recovered leads flow directly into your existing sales pipeline. No copy-pasting, no CSV imports, no manual data entry. Your team works from the tools they already know — the lead just appears, ready to follow up.',
   'Scheduling & Booking': 'Drop your booking link into ReCapture once. Every recovery email becomes a direct path to a booked appointment — no back-and-forth, no scheduling tag.',
   'Ad Platforms': 'Google and Meta only ever learn from the people who press submit, so campaigns optimize against a fraction of the real demand. ReCapture sends the ones who did not finish back as server-side conversion events — hashed, deduplicated against your existing pixel, and weighted by how much intent each person actually showed.',
-  'Practice Management': 'Your PMS is where patients and clients actually live. Native integrations mean recovered leads appear directly in your booking system, not in a separate dashboard your team has to check.',
+  'Practice Management': 'Your PMS is where patients and clients actually live. Boulevard and AppFolio connect today via webhook, which pushes recovered leads straight into your system in real time. The rest are on the roadmap \u2014 and if you need one of them, tell us and it moves up.',
   'Automation': 'Connect ReCapture to any tool in your stack. Webhooks fire in real time, APIs give you full control, and platforms like Zapier let you build any workflow without writing code.',
 }
 
@@ -62,7 +62,7 @@ const integrations = [
       { name: 'Slack', desc: 'Instant lead alerts in your team channels with one-click actions', status: 'live', icon: 'slack' },
       { name: 'SMS Alerts', desc: 'Text alerts the moment a high-value lead abandons', status: 'live', icon: 'sms' },
       { name: 'Email (Resend)', desc: 'Automated branded recovery emails on your behalf', status: 'live', icon: 'email' },
-      { name: 'AI Voice Callback', desc: 'AI calls abandoned leads back within 60 seconds on your behalf', status: 'live', icon: 'callrail' },
+      { name: 'AI Voice Callback', desc: 'AI calls abandoned leads back within 60 seconds on your behalf. Built and tested, not yet run on live traffic.', status: 'beta', icon: 'callrail' },
       { name: 'Microsoft Teams', desc: 'Instant lead alerts in your Teams channels', status: 'live', icon: 'teams' },
       { name: 'WhatsApp Business', desc: 'Recovery messages for international luxury buyers', status: 'coming', icon: 'whatsapp' },
       { name: 'Telegram', desc: 'Direct alerts for international and high-net-worth client base', status: 'coming', icon: 'telegram' },
@@ -115,7 +115,7 @@ const integrations = [
       { name: 'Make (Integromat)', desc: 'Advanced workflow automation via webhooks — fires in real time', status: 'live', icon: 'make' },
       { name: 'Webhooks', desc: 'Send lead data to any endpoint in real time', status: 'live', icon: 'webhook' },
       { name: 'REST API', desc: 'Full API access for custom integrations', status: 'live', icon: 'api' },
-      { name: 'AI Voice Callback', desc: 'Trigger automated AI callbacks via API when leads abandon forms', status: 'live', icon: 'callrail' },
+      { name: 'AI Voice Callback', desc: 'Trigger automated AI callbacks via API when leads abandon forms. Built and tested, not yet run on live traffic.', status: 'beta', icon: 'callrail' },
     ]
   },
 ]
@@ -159,10 +159,10 @@ function CategorySection({ group }: { group: typeof integrations[0] }) {
                 padding: '3px 8px',
                 borderRadius: '4px',
                 whiteSpace: 'nowrap' as const,
-                background: item.status === 'live' ? 'rgba(34,197,94,0.1)' : item.status === 'webhook' ? 'rgba(255,107,53,0.1)' : 'transparent',
-                color: item.status === 'live' ? '#22c55e' : item.status === 'webhook' ? '#ff6b35' : '#555',
-                border: item.status === 'live' ? '1px solid rgba(34,197,94,0.2)' : item.status === 'webhook' ? '1px solid rgba(255,107,53,0.2)' : '1px solid #333',
-              }}>{item.status === 'live' ? 'Live' : item.status === 'webhook' ? 'Via Webhook' : 'Coming Soon'}</span>
+                background: item.status === 'live' ? 'rgba(34,197,94,0.1)' : item.status === 'webhook' ? 'rgba(255,107,53,0.1)' : item.status === 'beta' ? 'rgba(245,158,11,0.1)' : 'transparent',
+                color: item.status === 'live' ? '#22c55e' : item.status === 'webhook' ? '#ff6b35' : item.status === 'beta' ? '#f59e0b' : '#555',
+                border: item.status === 'live' ? '1px solid rgba(34,197,94,0.2)' : item.status === 'webhook' ? '1px solid rgba(255,107,53,0.2)' : item.status === 'beta' ? '1px solid rgba(245,158,11,0.25)' : '1px solid #333',
+              }}>{item.status === 'live' ? 'Live' : item.status === 'webhook' ? 'Via Webhook' : item.status === 'beta' ? 'Beta' : 'Coming Soon'}</span>
             </div>
             <p style={{ fontSize: '0.8125rem', color: '#666', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
           </div>
