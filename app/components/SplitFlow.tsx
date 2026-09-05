@@ -1,5 +1,6 @@
 'use client'
 
+import EmptyPanel from './EmptyPanel'
 import './split-flow.css'
 
 type Step = {
@@ -10,36 +11,9 @@ type Step = {
   right: React.ReactNode
 }
 
-const Empty = ({ label, variant }: { label: string; variant: 'blip' | 'ghost' | 'gone' }) => (
-  <div className={'sp-empty sp-empty-' + variant}>
-    <div className="sp-mock" aria-hidden="true">
-      <div className="sp-mock-head">
-        <span className="sp-mock-dot" /><span className="sp-mock-dot" /><span className="sp-mock-dot" />
-        <span className="sp-mock-title">Your CRM</span>
-      </div>
-
-      {variant === 'blip' && (
-        <div className="sp-mock-body">
-          <span className="sp-mock-empty">No records</span>
-        </div>
-      )}
-
-      {variant === 'ghost' && (
-        <div className="sp-mock-body">
-          <div className="sp-fields">
-            <span className="sp-field"><b>Name</b><i className="sp-typing">Sarah Whitfi<span className="sp-caret" /></i></span>
-            <span className="sp-field"><b>Email</b><i>s.whitfield@gm</i></span>
-          </div>
-          <span className="sp-mock-empty">Still no records</span>
-        </div>
-      )}
-
-      {variant === 'gone' && (
-        <div className="sp-mock-body">
-          <span className="sp-mock-empty sp-mock-fade">No records</span>
-        </div>
-      )}
-    </div>
+const Empty = ({ label, variant }: { label: string; variant: 'arrive' | 'typing' | 'gone' }) => (
+  <div className="sp-empty">
+    <EmptyPanel variant={variant} />
     <span className="sp-empty-label">{label}</span>
   </div>
 )
@@ -50,14 +24,14 @@ const STEPS: Step[] = [
     title: 'A visitor lands on your site',
     body: 'They arrive from Google, an ad, a referral, or social. They navigate to your contact form, consultation request, or booking page.',
     visible: false,
-    right: <Empty variant="blip" label="One anonymous pageview. No identity, no intent." />,
+    right: <Empty variant="arrive" label="One anonymous pageview. No identity, no intent." />,
   },
   {
     num: '02',
     title: 'They start filling it in',
     body: 'Name. Email. Phone. Maybe a service selection. Real information, typed by a real person who wants something from you.',
     visible: false,
-    right: <Empty variant="ghost" label="Still nothing. Analytics does not watch inside a form." />,
+    right: <Empty variant="typing" label="Still nothing. Analytics does not watch inside a form." />,
   },
   {
     num: '03',
