@@ -7,6 +7,7 @@ type Status = 'live' | 'webhook' | 'beta' | 'coming'
 type Item = { name: string; desc: string; status: Status }
 type Route = {
   id: string
+  tone: string
   label: string
   headline: string
   blurb: string
@@ -16,6 +17,7 @@ type Route = {
 const ROUTES: Route[] = [
   {
     id: 'team',
+    tone: 'amber',
     label: 'Your team',
     headline: 'Somebody picks up the phone',
     blurb: 'The faster a person hears from you, the better this works. Alerts fire the moment an inquiry is captured, carrying the name, the contact details, and the intent score.',
@@ -31,6 +33,7 @@ const ROUTES: Route[] = [
   },
   {
     id: 'crm',
+    tone: 'blue',
     label: 'Your CRM',
     headline: 'The record lands where your team works',
     blurb: 'No copy-pasting, no CSV imports. The inquiry appears in the system your team already has open, usually within a minute of capture.',
@@ -54,6 +57,7 @@ const ROUTES: Route[] = [
   },
   {
     id: 'calendar',
+    tone: 'violet',
     label: 'Your calendar',
     headline: 'They book without a back-and-forth',
     blurb: 'Drop your booking link in once. Every recovery message becomes a direct path to a held appointment rather than an email thread.',
@@ -64,6 +68,7 @@ const ROUTES: Route[] = [
   },
   {
     id: 'ads',
+    tone: 'green',
     label: 'Your ad platforms',
     headline: 'The campaign learns from it',
     blurb: 'Meta and Google only ever see the people who press submit. We send them the ones who did not, hashed and deduplicated against your existing pixel, weighted by how much intent each person showed.',
@@ -95,33 +100,43 @@ export default function IntegrationRoutes() {
 
   return (
     <div className="ir">
-      {/* Origin */}
-      <div className="ir-origin">
-        <span className="ir-origin-pip" aria-hidden="true" />
-        <span className="ir-origin-label">An inquiry is captured</span>
+      <div className="ir-hub">
+        <div className="ir-origin">
+          <span className="ir-origin-pip" aria-hidden="true" />
+          <span className="ir-origin-label">An inquiry is captured</span>
+        </div>
+        <div className="ir-spine" aria-hidden="true">
+          <span className="ir-packet" />
+          <span className="ir-packet ir-packet-2" />
+        </div>
       </div>
 
-      <div className="ir-fan" aria-hidden="true">
-        <span /><span /><span /><span />
-      </div>
-
-      {/* Routes */}
       <div className="ir-routes">
-        {ROUTES.map(r => {
+        {ROUTES.map((r, i) => {
           const isOpen = open === r.id
-          const liveCount = r.items.filter(i => i.status === 'live').length
+          const liveCount = r.items.filter(i2 => i2.status === 'live').length
           return (
-            <div className={'ir-route' + (isOpen ? ' ir-open' : '')} key={r.id}>
+            <div
+              className={'ir-route ir-tone-' + r.tone + (isOpen ? ' ir-open' : '')}
+              key={r.id}
+              style={{ ['--i' as string]: i }}
+            >
+              <span className="ir-elbow" aria-hidden="true" />
+              <span className="ir-node" aria-hidden="true" />
+
               <button
                 className="ir-trigger"
                 type="button"
                 aria-expanded={isOpen}
                 onClick={() => setOpen(isOpen ? null : r.id)}
               >
-                <span className="ir-route-label">{r.label}</span>
-                <span className="ir-route-headline">{r.headline}</span>
+                <span className="ir-head">
+                  <span className="ir-route-label">{r.label}</span>
+                  <span className="ir-route-headline">{r.headline}</span>
+                </span>
                 <span className="ir-route-meta">
-                  {liveCount} live &middot; {r.items.length} total
+                  <span className="ir-count"><b>{liveCount}</b> live</span>
+                  <span className="ir-count ir-count-dim">{r.items.length} total</span>
                   <span className={'ir-chev' + (isOpen ? ' up' : '')}>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                   </span>
@@ -133,13 +148,13 @@ export default function IntegrationRoutes() {
                   <div className="ir-drawer-body">
                     <p className="ir-blurb">{r.blurb}</p>
                     <div className="ir-items">
-                      {r.items.map(i => (
-                        <div className={'ir-item ir-item-' + i.status} key={i.name}>
+                      {r.items.map(it => (
+                        <div className={'ir-item ir-item-' + it.status} key={it.name}>
                           <div className="ir-item-top">
-                            <span className="ir-item-name">{i.name}</span>
-                            <Badge s={i.status} />
+                            <span className="ir-item-name">{it.name}</span>
+                            <Badge s={it.status} />
                           </div>
-                          <p className="ir-item-desc">{i.desc}</p>
+                          <p className="ir-item-desc">{it.desc}</p>
                         </div>
                       ))}
                     </div>
@@ -151,14 +166,13 @@ export default function IntegrationRoutes() {
         })}
       </div>
 
-      {/* Anything else */}
       <div className="ir-extras">
         <div className="ir-extras-head">And anything else you run</div>
         <div className="ir-extras-grid">
-          {EXTRAS.map(i => (
-            <div className="ir-extra" key={i.name}>
-              <span className="ir-extra-name">{i.name}</span>
-              <span className="ir-extra-desc">{i.desc}</span>
+          {EXTRAS.map(it => (
+            <div className="ir-extra" key={it.name}>
+              <span className="ir-extra-name">{it.name}</span>
+              <span className="ir-extra-desc">{it.desc}</span>
             </div>
           ))}
         </div>
