@@ -211,3 +211,105 @@
   .ir-card, .ir-arrival-note, .ir-path, .ir-dot, .ir-dest { transition: none !important; opacity: 1 !important; transform: none !important; }
   .ir-card-pip, .ir-panel, .ir-item { animation: none !important; }
 }
+
+/* ══ BRAND PASS — instrument, not brochure ══════════════════════════════ */
+
+/* Data reads as data. Monospace everywhere a machine produced the value. */
+.ir-card-meta,
+.ir-card-time,
+.ir-dest-count,
+.ir-badge {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  font-feature-settings: "tnum" 1;
+}
+.ir-card-meta { font-size: 0.72rem; letter-spacing: -0.01em; color: #8b8b8b; }
+.ir-card-time { font-size: 0.58rem; }
+.ir-dest-count { font-size: 0.64rem; letter-spacing: 0.02em; }
+
+/* The captured card reads like a system notification, not a marketing card */
+.ir-card {
+  border-radius: 0.625rem;
+  border-color: rgba(255,107,53,0.4);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.05) inset,
+    0 0 0 1px rgba(255,107,53,0.06),
+    0 20px 50px rgba(0,0,0,0.5);
+}
+.ir-card-head {
+  font-size: 0.56rem;
+  letter-spacing: 0.24em;
+}
+.ir-card-name {
+  font-size: 1.32rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+/* Destination headlines carry the weight */
+.ir-dest {
+  border-radius: 0.625rem;
+  padding: 1.25rem 1.2rem 1.15rem;
+}
+.ir-dest-label { font-size: 0.56rem; letter-spacing: 0.24em; }
+.ir-dest-headline {
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: -0.028em;
+  line-height: 1.25;
+}
+
+/* Active destination gets a hard top rule rather than a soft glow */
+.ir-active {
+  box-shadow: inset 0 2px 0 0 #ff6b35, 0 12px 34px rgba(0,0,0,0.34) !important;
+  background: linear-gradient(150deg, #1f1a17 0%, #171514 55%, #131211 100%) !important;
+}
+
+/* Panel: squarer, tighter, more product surface */
+.ir-panel { border-radius: 0.75rem; border-color: rgba(255,255,255,0.07); }
+.ir-blurb {
+  font-size: 0.95rem;
+  color: #b4b4b8;
+  padding-left: 0.9rem;
+  border-left: 2px solid rgba(255,107,53,0.5);
+  max-width: 68ch;
+}
+.ir-item { border-radius: 0.5rem; }
+.ir-item-name { font-size: 0.86rem; letter-spacing: -0.012em; }
+
+/* Badges: squared, technical */
+.ir-badge {
+  border-radius: 3px;
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  padding: 0.18rem 0.4rem;
+}
+
+/* Section labels get the ReCapture rule mark */
+.ir-extras { border-radius: 0.75rem; }
+.ir-extras-head { position: relative; padding-left: 0.85rem; }
+.ir-extras-head::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  width: 3px; height: 11px;
+  margin-top: -5.5px;
+  background: #ff6b35;
+  border-radius: 1px;
+}
+.ir-extra-name { letter-spacing: -0.012em; }
+
+/* Arrival note reads as a stated fact, not a caption */
+.ir-arrival-note {
+  font-size: 0.88rem;
+  color: #8b8b8b;
+  max-width: 52ch;
+  line-height: 1.7;
+}
+
+/* Sharper path — less decorative, more schematic */
+.ir-path { stroke-width: 1; stroke: rgba(255,107,53,0.38); }
+.ir-dot { r: 3; }
+
+@media (max-width: 860px) {
+  .ir-dest-headline { font-size: 0.95rem; }
+}
