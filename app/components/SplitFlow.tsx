@@ -12,20 +12,34 @@ type Step = {
 
 const Empty = ({ label, variant }: { label: string; variant: 'blip' | 'ghost' | 'gone' }) => (
   <div className={'sp-empty sp-empty-' + variant}>
-    <span className="sp-empty-vis" aria-hidden="true">
-      {variant === 'blip' && <span className="sp-blip" />}
+    <div className="sp-mock" aria-hidden="true">
+      <div className="sp-mock-head">
+        <span className="sp-mock-dot" /><span className="sp-mock-dot" /><span className="sp-mock-dot" />
+        <span className="sp-mock-title">Your CRM</span>
+      </div>
+
+      {variant === 'blip' && (
+        <div className="sp-mock-body">
+          <span className="sp-mock-empty">No records</span>
+        </div>
+      )}
+
       {variant === 'ghost' && (
-        <span className="sp-ghost">
-          <i /><i /><i /><i /><i /><i /><i /><i />
-          <span className="sp-caret" />
-        </span>
+        <div className="sp-mock-body">
+          <div className="sp-fields">
+            <span className="sp-field"><b>Name</b><i className="sp-typing">Sarah Whitfi<span className="sp-caret" /></i></span>
+            <span className="sp-field"><b>Email</b><i>s.whitfield@gm</i></span>
+          </div>
+          <span className="sp-mock-empty">Still no records</span>
+        </div>
       )}
+
       {variant === 'gone' && (
-        <span className="sp-gone">
-          <i /><i /><i /><i /><i /><i />
-        </span>
+        <div className="sp-mock-body">
+          <span className="sp-mock-empty sp-mock-fade">No records</span>
+        </div>
       )}
-    </span>
+    </div>
     <span className="sp-empty-label">{label}</span>
   </div>
 )

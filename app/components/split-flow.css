@@ -415,3 +415,80 @@
 @media (prefers-reduced-motion: reduce) {
   .sp-blip, .sp-blip::after, .sp-ghost i, .sp-caret, .sp-gone i { animation: none !important; opacity: 0.35; }
 }
+
+/* ══ Literal empty states — an actual empty CRM ════════════════════════════ */
+.sp-empty { flex-direction: column; align-items: stretch; gap: 1rem; padding: 0; border: none; background: none; }
+.sp-empty-vis, .sp-blip, .sp-ghost, .sp-gone { display: none !important; }
+
+.sp-mock {
+  border: 1px dashed rgba(255,255,255,0.1);
+  border-radius: 1.125rem;
+  background: rgba(255,255,255,0.008);
+  overflow: hidden;
+}
+.sp-mock-head {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px dashed rgba(255,255,255,0.08);
+}
+.sp-mock-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+.sp-mock-title {
+  margin-left: 0.5rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #4a4a4a;
+}
+.sp-mock-body {
+  min-height: 74px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: 1.1rem 0.9rem;
+}
+.sp-mock-empty {
+  font-size: 0.8rem;
+  color: #4a4a4a;
+  letter-spacing: 0.02em;
+}
+.sp-mock-fade { animation: sp-fadeout 4s ease-in-out infinite; }
+@keyframes sp-fadeout {
+  0%, 30%  { opacity: 1; }
+  55%, 75% { opacity: 0.18; }
+  100%     { opacity: 1; }
+}
+
+/* Step 02 — a form filling in on the left, CRM still empty */
+.sp-fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px dashed rgba(255,255,255,0.07);
+}
+.sp-field { display: flex; align-items: baseline; gap: 0.6rem; font-size: 0.78rem; }
+.sp-field b { color: #4a4a4a; font-weight: 600; min-width: 42px; }
+.sp-field i { color: #8b8b8b; font-style: normal; }
+.sp-typing { position: relative; }
+.sp-caret {
+  display: inline-block;
+  width: 1px; height: 11px;
+  background: #ff6b35;
+  margin-left: 1px;
+  vertical-align: -1px;
+  animation: sp-blink 1s steps(1) infinite;
+}
+@keyframes sp-blink { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
+
+@media (max-width: 860px) {
+  .sp-mock-body { min-height: 62px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sp-mock-fade, .sp-caret { animation: none !important; }
+}
