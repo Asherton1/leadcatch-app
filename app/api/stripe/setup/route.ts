@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     firstName   = body.firstName   ?? undefined
     lastName    = body.lastName    ?? undefined
     companyName = body.companyName ?? undefined
-    plan = body.plan === 'essentials' ? 'essentials' : 'pro'
+    plan = body.plan === 'group' ? 'group' : 'pro'
     if (!token)           throw new Error('missing token')
     if (!paymentMethodId) throw new Error('missing paymentMethodId')
   } catch (err) {
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
   try {
     subscription = await stripe.subscriptions.create({
       customer: customer.id,
-      items: [{ price: plan === 'essentials' ? process.env.STRIPE_PRICE_ID_ESSENTIALS! : process.env.STRIPE_PRICE_ID! }],
+      items: [{ price: plan === 'group' ? process.env.STRIPE_PRICE_ID_GROUP! : process.env.STRIPE_PRICE_ID! }],
       trial_period_days: 7,
       payment_settings: {
         payment_method_types: ['card'],
@@ -153,7 +153,7 @@ export async function POST(req: NextRequest) {
     <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #1e1e1e;border-radius:12px;">
       <tr><td style="padding:24px;">
         <p style="font-size:11px;font-weight:700;color:#ff6b35;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px 0;">Your plan</p>
-        <p style="font-size:24px;font-weight:700;color:#fff;margin:0 0 6px 0;">${plan === 'essentials' ? 'Essentials' : 'Pro'} — $${plan === 'essentials' ? '197' : '397'}/mo</p>
+        <p style="font-size:24px;font-weight:700;color:#fff;margin:0 0 6px 0;">${plan === 'group' ? 'Group' : 'Pro'} — $${plan === 'group' ? '897' : '397'}/mo</p>
         <p style="font-size:14px;color:#666;margin:0;line-height:1.6;">7-day free trial active. Your card will not be charged until <strong style="color:#bbb;">${trialEndDate}</strong>.</p>
       </td></tr>
     </table>
@@ -226,7 +226,7 @@ export async function POST(req: NextRequest) {
           <tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> Automated branded recovery emails</td></tr>
           <tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> Revenue-at-risk dashboard</td></tr>
           <tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> Weekly performance reports</td></tr>
-          ${plan !== 'essentials' ? '<tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> Instant SMS alerts</td></tr><tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> HIPAA-ready with BAA included</td></tr>' : ''}
+          ${true ? '<tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> Instant SMS alerts</td></tr><tr><td style="padding:6px 0;font-size:13px;color:#bbb;"><span style="color:#22c55e;margin-right:8px;">&#10003;</span> HIPAA-ready with BAA included</td></tr>' : ''}
         </table>
       </td></tr>
     </table>
