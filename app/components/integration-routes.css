@@ -439,3 +439,21 @@
   .ir-slot .ir-dest::before,
   .ir-slot .ir-dest::after { left: -1.9rem; }
 }
+
+/* Clearance and matched width for the section after the flow */
+.ir { margin-bottom: 3.5rem; }
+.ir + section,
+.ir ~ section {
+  max-width: 1000px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+@media (max-width: 640px) {
+  .ir { margin-bottom: 2.5rem; }
+  .ir + section, .ir ~ section {
+    padding-left: 1.1rem !important;
+    padding-right: 1.1rem !important;
+  }
+}
