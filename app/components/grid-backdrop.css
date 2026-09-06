@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-/* ── Drafting grid ─────────────────────────────────────────────────────── */
+/* ── Drafting grid, drifting ───────────────────────────────────────────── */
 .gb-grid {
   position: absolute;
   inset: -160px;
@@ -23,102 +23,115 @@
   100% { transform: translate(150px,150px); }
 }
 
-/* ── Edge rulers ───────────────────────────────────────────────────────── */
-.gb-ruler {
+/* ── Instrument rails, strictly in the gutters ─────────────────────────── */
+.gb-rail {
   position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 46px;
+  mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+}
+.gb-rail-l { left: 22px; }
+.gb-rail-r { right: 22px; transform: scaleX(-1); }
+
+/* fixed reference ticks */
+.gb-ticks {
+  position: absolute;
+  left: 0;
   top: 0; bottom: 0;
-  width: 10px;
+  width: 7px;
   background-image: repeating-linear-gradient(
     180deg,
-    rgba(255,255,255,0.09) 0,
-    rgba(255,255,255,0.09) 1px,
+    rgba(255,255,255,0.1) 0,
+    rgba(255,255,255,0.1) 1px,
     transparent 1px,
-    transparent 26px
+    transparent 28px
   );
-  mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
 }
-.gb-ruler-l { left: 18px; }
-.gb-ruler-r { right: 18px; transform: scaleX(-1); }
 
-/* ── The reticle ───────────────────────────────────────────────────────── */
-.gb-reticle {
+/* the travelling line */
+.gb-line {
   position: absolute;
-  left: 8%;
-  top: 18%;
-  width: 84%;
-  height: 46%;
-  animation: gb-hunt 26s cubic-bezier(0.65,0,0.35,1) infinite;
-}
-.gb-reticle-2 {
-  left: 22%;
-  top: 54%;
-  width: 56%;
-  height: 34%;
-  animation: gb-hunt-2 34s cubic-bezier(0.65,0,0.35,1) infinite 8s;
+  left: 13px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg,
+    transparent,
+    rgba(255,107,53,0.16) 20%,
+    rgba(255,107,53,0.16) 80%,
+    transparent);
 }
 
-/* the frame travels and resizes, like something searching */
-@keyframes gb-hunt {
-  0%   { left: 6%;  top: 12%; width: 88%; height: 52%; opacity: 0; }
+/* a bracket that travels the rail and narrows when it finds something */
+.gb-bracket {
+  position: absolute;
+  left: 6px;
+  width: 22px;
+  height: 120px;
+  animation: gb-travel 32s cubic-bezier(0.6,0,0.4,1) infinite;
+}
+.gb-rail-r .gb-bracket { animation-delay: 11s; }
+
+.gb-b {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 9px;
+  border-left: 1px solid rgba(255,107,53,0.5);
+  transition: none;
+}
+.gb-b-t { top: 0;    border-top: 1px solid rgba(255,107,53,0.5); }
+.gb-b-b { bottom: 0; border-bottom: 1px solid rgba(255,107,53,0.5); }
+
+@keyframes gb-travel {
+  0%   { top: -12%; height: 140px; opacity: 0; }
   6%   { opacity: 1; }
-  22%  { left: 6%;  top: 12%; width: 88%; height: 52%; }
-  /* narrows in — acquiring */
-  34%  { left: 28%; top: 26%; width: 40%; height: 26%; }
-  44%  { left: 30%; top: 28%; width: 36%; height: 22%; }
-  56%  { left: 30%; top: 28%; width: 36%; height: 22%; }
-  /* releases */
-  70%  { left: 10%; top: 40%; width: 78%; height: 44%; }
-  92%  { left: 10%; top: 40%; width: 78%; height: 44%; opacity: 1; }
-  100% { left: 6%;  top: 12%; width: 88%; height: 52%; opacity: 0; }
-}
-@keyframes gb-hunt-2 {
-  0%   { left: 40%; top: 58%; width: 46%; height: 30%; opacity: 0; }
-  8%   { opacity: 0.7; }
-  30%  { left: 14%; top: 62%; width: 62%; height: 26%; }
-  50%  { left: 52%; top: 50%; width: 30%; height: 20%; }
-  74%  { left: 20%; top: 66%; width: 58%; height: 28%; }
-  94%  { opacity: 0.7; }
-  100% { left: 40%; top: 58%; width: 46%; height: 30%; opacity: 0; }
+  /* drifts down, scanning */
+  30%  { top: 34%;  height: 140px; }
+  /* narrows — found something */
+  40%  { top: 44%;  height: 46px; }
+  52%  { top: 44%;  height: 46px; }
+  /* releases, moves on */
+  62%  { top: 52%;  height: 140px; }
+  90%  { top: 96%;  height: 140px; opacity: 1; }
+  100% { top: 108%; height: 140px; opacity: 0; }
 }
 
-/* corner brackets */
-.gb-c {
+/* two small marks that pulse when the bracket locks */
+.gb-mark {
   position: absolute;
-  width: 26px;
-  height: 26px;
-  border-color: rgba(255,107,53,0.42);
-  border-style: solid;
-}
-.gb-c-tl { top: 0;    left: 0;    border-width: 1px 0 0 1px; }
-.gb-c-tr { top: 0;    right: 0;   border-width: 1px 1px 0 0; }
-.gb-c-bl { bottom: 0; left: 0;    border-width: 0 0 1px 1px; }
-.gb-c-br { bottom: 0; right: 0;   border-width: 0 1px 1px 0; }
-.gb-reticle-2 .gb-c { width: 18px; height: 18px; border-color: rgba(255,255,255,0.14); }
-
-/* crosshair lines that appear only while locked on */
-.gb-cross {
-  position: absolute;
-  background: rgba(255,107,53,0.22);
+  left: 11px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ff6b35;
   opacity: 0;
-  animation: gb-lock 26s ease-in-out infinite;
 }
-.gb-cross-h { left: 0; right: 0; top: 50%; height: 1px; }
-.gb-cross-v { top: 0; bottom: 0; left: 50%; width: 1px; }
-@keyframes gb-lock {
-  0%, 30%   { opacity: 0; }
-  40%, 56%  { opacity: 1; }
-  66%, 100% { opacity: 0; }
+.gb-mark-1 { animation: gb-ping 32s ease-out infinite; }
+.gb-mark-2 { animation: gb-ping-2 32s ease-out infinite; }
+.gb-rail-r .gb-mark-1 { animation-delay: 11s; }
+.gb-rail-r .gb-mark-2 { animation-delay: 11s; }
+
+@keyframes gb-ping {
+  0%, 40%   { top: 46%; opacity: 0; transform: scale(0.5); }
+  44%       { opacity: 0.9; transform: scale(1); }
+  56%, 100% { top: 46%; opacity: 0; transform: scale(1.6); }
+}
+@keyframes gb-ping-2 {
+  0%, 76%   { top: 78%; opacity: 0; transform: scale(0.5); }
+  80%       { opacity: 0.7; transform: scale(1); }
+  90%, 100% { top: 78%; opacity: 0; transform: scale(1.6); }
 }
 
+/* Gutters vanish on narrow screens — grid only */
+@media (max-width: 1180px) {
+  .gb-rail { display: none; }
+}
 @media (max-width: 720px) {
   .gb-grid { background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px; }
-  .gb-ruler-l { left: 8px; }
-  .gb-ruler-r { right: 8px; }
-  .gb-c { width: 18px; height: 18px; }
-  .gb-reticle-2 { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .gb-grid, .gb-reticle, .gb-reticle-2, .gb-cross { animation: none !important; }
-  .gb-cross { opacity: 0; }
+  .gb-grid, .gb-bracket, .gb-mark { animation: none !important; }
+  .gb-mark { opacity: 0; }
 }
