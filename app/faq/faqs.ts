@@ -129,11 +129,11 @@ export const faqCategories: FAQCategory[] = [
     ],
   },
   {
-    name: 'The AI Voice Callback',
+    name: 'The AI Voice Callback (Beta)',
     faqs: [
       {
         q: 'How does the AI voice callback work?',
-        a: 'When a high-value lead abandons your form, our AI agent calls them within 60 seconds using the phone number they entered. The voice is natural, the script is custom to your business, and the goal is to either book the appointment on the call or warm them up for your team. Most clients see a 3-5x increase in lead-to-booking conversion.',
+        a: 'This feature is currently in beta. When a high-value lead abandons your form, our AI agent calls them within 60 seconds using the phone number they entered. The voice is natural, the script is custom to your business, and the goal is to either book the appointment on the call or warm them up for your team. The feature is in beta \u2014 built and tested, but not yet run on live traffic, so we are not going to quote you a conversion figure we cannot stand behind.',
       },
       {
         q: 'What exactly does Marissa say to my leads?',
@@ -298,7 +298,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: "What's a typical recovery rate?",
-        a: 'Conservative benchmark: 10% of abandoned forms convert to qualified leads. Some verticals run higher (medical/wellness 12-15%) — depends on your offer, your follow-up speed, and AI voice activation. Most clients see ROI break-even within 60 days.',
+        a: 'Honestly, nobody can tell you before you run it \u2014 recovery rate depends on your offer, how fast you follow up, and how far people got in the form before they left. Anyone quoting you a number up front is guessing. Run the trial and you will have your own figure rather than someone else\u2019s.',
       },
       {
         q: "Who's behind ReCapture?",
