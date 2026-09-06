@@ -42,7 +42,7 @@ function SignupForm() {
   const [loading, setLoading] = useState(false)
   const [baaAccepted, setBaaAccepted] = useState(false)
   const searchParams = useSearchParams()
-  const [plan, setPlan] = useState<'pro'>('pro')
+  const [plan, setPlan] = useState<'pro' | 'group'>('pro')
 
   useEffect(() => {
     const p = searchParams.get('plan')
