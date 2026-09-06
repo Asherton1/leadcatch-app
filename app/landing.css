@@ -5939,3 +5939,54 @@ select.audit-form-input option {
   .pricing-row-price { min-height: 0; padding-top: 1rem; }
   .pricing-row-desc, .pricing-row > p { min-height: 0; }
 }
+
+/* ══ Pricing CTA — proper button, not a text link ══════════════════════ */
+.pricing-row-cta,
+.pricing-row a[href^="/"],
+.pricing-row a[href^="http"],
+.pricing-row button[type="button"] {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.95rem 1.25rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.86rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.005em;
+  text-decoration: none !important;
+  border: 1px solid rgba(255,107,53,0.35) !important;
+  background: rgba(255,107,53,0.07) !important;
+  color: #ff6b35 !important;
+  transition: background .22s ease, border-color .22s ease, transform .22s ease;
+}
+.pricing-row-cta:hover,
+.pricing-row a[href^="/"]:hover,
+.pricing-row a[href^="http"]:hover,
+.pricing-row button[type="button"]:hover {
+  background: rgba(255,107,53,0.14) !important;
+  border-color: rgba(255,107,53,0.6) !important;
+  transform: translateY(-1px);
+}
+
+/* Pro gets the solid treatment — it is the default path */
+.pricing-row-pro .pricing-row-cta,
+.pricing-row-pro a[href^="/"],
+.pricing-row-pro button[type="button"] {
+  background: #ff6b35 !important;
+  border-color: #ff6b35 !important;
+  color: #0a0a0a !important;
+}
+.pricing-row-pro .pricing-row-cta:hover,
+.pricing-row-pro a[href^="/"]:hover,
+.pricing-row-pro button[type="button"]:hover {
+  background: #ff7d4d !important;
+  border-color: #ff7d4d !important;
+}
+
+/* arrow sits right, slides on hover */
+.pricing-row-cta svg,
+.pricing-row a svg { transition: transform .22s ease; flex-shrink: 0; }
+.pricing-row-cta:hover svg,
+.pricing-row a:hover svg { transform: translateX(3px); }
