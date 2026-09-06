@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-/* Drafting grid, drifting very slowly */
+/* ── Drafting grid ─────────────────────────────────────────────────────── */
 .gb-grid {
   position: absolute;
   inset: -160px;
@@ -16,78 +16,109 @@
     linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
   background-size: 30px 30px, 30px 30px, 150px 150px, 150px 150px;
-  animation: gb-drift 120s linear infinite;
+  animation: gb-drift 140s linear infinite;
 }
 @keyframes gb-drift {
-  0%   { transform: translate(0, 0); }
-  100% { transform: translate(150px, 150px); }
+  0%   { transform: translate(0,0); }
+  100% { transform: translate(150px,150px); }
 }
 
-/* ── The field of visitors ─────────────────────────────────────────────
-   Most arrive, linger, and vanish without a trace.
-   A few get caught.                                                     */
-.gb-field { position: absolute; inset: 0; }
-
-.gb-v {
+/* ── Edge rulers ───────────────────────────────────────────────────────── */
+.gb-ruler {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.5);
-  opacity: 0;
-  animation: gb-lost 17s ease-in-out infinite;
+  top: 0; bottom: 0;
+  width: 10px;
+  background-image: repeating-linear-gradient(
+    180deg,
+    rgba(255,255,255,0.09) 0,
+    rgba(255,255,255,0.09) 1px,
+    transparent 1px,
+    transparent 26px
+  );
+  mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
 }
+.gb-ruler-l { left: 18px; }
+.gb-ruler-r { right: 18px; transform: scaleX(-1); }
 
-/* Arrives, drifts upward, fades out — nothing left behind */
-@keyframes gb-lost {
-  0%      { opacity: 0; transform: translateY(6px) scale(0.6); }
-  8%      { opacity: 0.55; transform: translateY(0) scale(1); }
-  26%     { opacity: 0.55; transform: translateY(-2px) scale(1); }
-  42%     { opacity: 0; transform: translateY(-14px) scale(0.5); filter: blur(2px); }
-  100%    { opacity: 0; }
-}
-
-/* Caught: arrives, holds, turns orange, throws a ring, stays a beat longer */
-.gb-v-caught {
-  background: rgba(255,255,255,0.5);
-  animation: gb-caught 17s ease-in-out infinite;
-}
-@keyframes gb-caught {
-  0%    { opacity: 0; transform: translateY(6px) scale(0.6); background: rgba(255,255,255,0.5); }
-  7%    { opacity: 0.6; transform: translateY(0) scale(1); background: rgba(255,255,255,0.5); }
-  20%   { opacity: 0.6; background: rgba(255,255,255,0.5); }
-  26%   { opacity: 1; transform: scale(1.5); background: #ff6b35; }
-  55%   { opacity: 1; transform: scale(1.15); background: #ff6b35; }
-  72%   { opacity: 0; transform: scale(0.9); background: #ff6b35; }
-  100%  { opacity: 0; }
-}
-
-/* The ring that fires the moment one is caught */
-.gb-ring {
+/* ── The reticle ───────────────────────────────────────────────────────── */
+.gb-reticle {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 4px;
-  height: 4px;
-  margin: -2px 0 0 -2px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,107,53,0.55);
-  opacity: 0;
-  animation: gb-ring 17s ease-out infinite;
+  left: 8%;
+  top: 18%;
+  width: 84%;
+  height: 46%;
+  animation: gb-hunt 26s cubic-bezier(0.65,0,0.35,1) infinite;
 }
-@keyframes gb-ring {
-  0%, 24%  { opacity: 0; transform: scale(1); }
-  27%      { opacity: 0.8; transform: scale(1); }
-  44%      { opacity: 0; transform: scale(9); }
-  100%     { opacity: 0; transform: scale(9); }
+.gb-reticle-2 {
+  left: 22%;
+  top: 54%;
+  width: 56%;
+  height: 34%;
+  animation: gb-hunt-2 34s cubic-bezier(0.65,0,0.35,1) infinite 8s;
+}
+
+/* the frame travels and resizes, like something searching */
+@keyframes gb-hunt {
+  0%   { left: 6%;  top: 12%; width: 88%; height: 52%; opacity: 0; }
+  6%   { opacity: 1; }
+  22%  { left: 6%;  top: 12%; width: 88%; height: 52%; }
+  /* narrows in — acquiring */
+  34%  { left: 28%; top: 26%; width: 40%; height: 26%; }
+  44%  { left: 30%; top: 28%; width: 36%; height: 22%; }
+  56%  { left: 30%; top: 28%; width: 36%; height: 22%; }
+  /* releases */
+  70%  { left: 10%; top: 40%; width: 78%; height: 44%; }
+  92%  { left: 10%; top: 40%; width: 78%; height: 44%; opacity: 1; }
+  100% { left: 6%;  top: 12%; width: 88%; height: 52%; opacity: 0; }
+}
+@keyframes gb-hunt-2 {
+  0%   { left: 40%; top: 58%; width: 46%; height: 30%; opacity: 0; }
+  8%   { opacity: 0.7; }
+  30%  { left: 14%; top: 62%; width: 62%; height: 26%; }
+  50%  { left: 52%; top: 50%; width: 30%; height: 20%; }
+  74%  { left: 20%; top: 66%; width: 58%; height: 28%; }
+  94%  { opacity: 0.7; }
+  100% { left: 40%; top: 58%; width: 46%; height: 30%; opacity: 0; }
+}
+
+/* corner brackets */
+.gb-c {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-color: rgba(255,107,53,0.42);
+  border-style: solid;
+}
+.gb-c-tl { top: 0;    left: 0;    border-width: 1px 0 0 1px; }
+.gb-c-tr { top: 0;    right: 0;   border-width: 1px 1px 0 0; }
+.gb-c-bl { bottom: 0; left: 0;    border-width: 0 0 1px 1px; }
+.gb-c-br { bottom: 0; right: 0;   border-width: 0 1px 1px 0; }
+.gb-reticle-2 .gb-c { width: 18px; height: 18px; border-color: rgba(255,255,255,0.14); }
+
+/* crosshair lines that appear only while locked on */
+.gb-cross {
+  position: absolute;
+  background: rgba(255,107,53,0.22);
+  opacity: 0;
+  animation: gb-lock 26s ease-in-out infinite;
+}
+.gb-cross-h { left: 0; right: 0; top: 50%; height: 1px; }
+.gb-cross-v { top: 0; bottom: 0; left: 50%; width: 1px; }
+@keyframes gb-lock {
+  0%, 30%   { opacity: 0; }
+  40%, 56%  { opacity: 1; }
+  66%, 100% { opacity: 0; }
 }
 
 @media (max-width: 720px) {
   .gb-grid { background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px; }
-  .gb-v { width: 3px; height: 3px; }
+  .gb-ruler-l { left: 8px; }
+  .gb-ruler-r { right: 8px; }
+  .gb-c { width: 18px; height: 18px; }
+  .gb-reticle-2 { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .gb-grid, .gb-v, .gb-ring { animation: none !important; }
-  .gb-v { opacity: 0.18; }
-  .gb-ring { opacity: 0; }
+  .gb-grid, .gb-reticle, .gb-reticle-2, .gb-cross { animation: none !important; }
+  .gb-cross { opacity: 0; }
 }
