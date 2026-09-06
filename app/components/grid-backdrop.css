@@ -6,80 +6,88 @@
   overflow: hidden;
 }
 
-/* Two-level drafting grid, drifting slowly */
+/* Drafting grid, drifting very slowly */
 .gb-grid {
   position: absolute;
-  inset: -120px;
+  inset: -160px;
   background-image:
     linear-gradient(rgba(255,255,255,0.011) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.011) 1px, transparent 1px),
     linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-  background-size: 28px 28px, 28px 28px, 140px 140px, 140px 140px;
-  animation: gb-drift 90s linear infinite;
+  background-size: 30px 30px, 30px 30px, 150px 150px, 150px 150px;
+  animation: gb-drift 120s linear infinite;
 }
 @keyframes gb-drift {
   0%   { transform: translate(0, 0); }
-  100% { transform: translate(140px, 140px); }
+  100% { transform: translate(150px, 150px); }
 }
 
-/* A slow horizontal sweep, like a plotter pass */
-.gb-scan {
-  position: absolute;
-  left: 0; right: 0;
-  height: 260px;
-  background: linear-gradient(180deg,
-    transparent,
-    rgba(255,107,53,0.022) 45%,
-    rgba(255,107,53,0.032) 50%,
-    rgba(255,107,53,0.022) 55%,
-    transparent);
-  animation: gb-sweep 22s cubic-bezier(0.45,0,0.55,1) infinite;
-}
-@keyframes gb-sweep {
-  0%   { top: -260px; opacity: 0; }
-  12%  { opacity: 1; }
-  88%  { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
-}
+/* ── The field of visitors ─────────────────────────────────────────────
+   Most arrive, linger, and vanish without a trace.
+   A few get caught.                                                     */
+.gb-field { position: absolute; inset: 0; }
 
-/* Two very soft orange fields breathing at opposite corners */
-.gb-glow {
+.gb-v {
   position: absolute;
-  width: 60vw;
-  height: 60vw;
-  max-width: 900px;
-  max-height: 900px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.35;
-}
-.gb-glow-a {
-  top: -18%;
-  right: -14%;
-  background: radial-gradient(circle, rgba(255,107,53,0.09), transparent 68%);
-  animation: gb-breathe 26s ease-in-out infinite;
-}
-.gb-glow-b {
-  bottom: -22%;
-  left: -16%;
-  background: radial-gradient(circle, rgba(255,107,53,0.06), transparent 68%);
-  animation: gb-breathe 32s ease-in-out infinite 6s;
-}
-@keyframes gb-breathe {
-  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.3; }
-  50%      { transform: scale(1.18) translate(2%, -3%); opacity: 0.5; }
+  background: rgba(255,255,255,0.5);
+  opacity: 0;
+  animation: gb-lost 17s ease-in-out infinite;
 }
 
-/* Everything on the page sits above it */
-.lc-page > *, body > div > * { position: relative; }
+/* Arrives, drifts upward, fades out — nothing left behind */
+@keyframes gb-lost {
+  0%      { opacity: 0; transform: translateY(6px) scale(0.6); }
+  8%      { opacity: 0.55; transform: translateY(0) scale(1); }
+  26%     { opacity: 0.55; transform: translateY(-2px) scale(1); }
+  42%     { opacity: 0; transform: translateY(-14px) scale(0.5); filter: blur(2px); }
+  100%    { opacity: 0; }
+}
+
+/* Caught: arrives, holds, turns orange, throws a ring, stays a beat longer */
+.gb-v-caught {
+  background: rgba(255,255,255,0.5);
+  animation: gb-caught 17s ease-in-out infinite;
+}
+@keyframes gb-caught {
+  0%    { opacity: 0; transform: translateY(6px) scale(0.6); background: rgba(255,255,255,0.5); }
+  7%    { opacity: 0.6; transform: translateY(0) scale(1); background: rgba(255,255,255,0.5); }
+  20%   { opacity: 0.6; background: rgba(255,255,255,0.5); }
+  26%   { opacity: 1; transform: scale(1.5); background: #ff6b35; }
+  55%   { opacity: 1; transform: scale(1.15); background: #ff6b35; }
+  72%   { opacity: 0; transform: scale(0.9); background: #ff6b35; }
+  100%  { opacity: 0; }
+}
+
+/* The ring that fires the moment one is caught */
+.gb-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,107,53,0.55);
+  opacity: 0;
+  animation: gb-ring 17s ease-out infinite;
+}
+@keyframes gb-ring {
+  0%, 24%  { opacity: 0; transform: scale(1); }
+  27%      { opacity: 0.8; transform: scale(1); }
+  44%      { opacity: 0; transform: scale(9); }
+  100%     { opacity: 0; transform: scale(9); }
+}
 
 @media (max-width: 720px) {
-  .gb-grid { background-size: 22px 22px, 22px 22px, 110px 110px, 110px 110px; }
-  .gb-scan { display: none; }
-  .gb-glow { filter: blur(90px); opacity: 0.28; }
+  .gb-grid { background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px; }
+  .gb-v { width: 3px; height: 3px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .gb-grid, .gb-scan, .gb-glow { animation: none !important; }
-  .gb-scan { opacity: 0; }
+  .gb-grid, .gb-v, .gb-ring { animation: none !important; }
+  .gb-v { opacity: 0.18; }
+  .gb-ring { opacity: 0; }
 }
