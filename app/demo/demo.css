@@ -1,0 +1,27 @@
+
+/* ══ Demo page onto the site system ═══════════════════════════════════ */
+.demo-form-col > div,
+.demo-dash-col > div {
+  background: linear-gradient(150deg, #1c1c1c 0%, #161616 55%, #121212 100%) !important;
+  border: 1px solid rgba(255,255,255,0.055) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 14px 40px rgba(0,0,0,0.26) !important;
+}
+
+/* Inputs read as instrument fields */
+.demo-form-col input,
+.demo-form-col select,
+.demo-form-col textarea {
+  background: #0f0f0f !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.92rem !important;
+  transition: border-color .2s ease, box-shadow .2s ease !important;
+}
+.demo-form-col input:focus,
+.demo-form-col select:focus,
+.demo-form-col textarea:focus {
+  border-color: rgba(255,107,53,0.5) !important;
+  box-shadow: 0 0 0 4px rgba(255,107,53,0.07) !important;
+  outline: none !important;
+}
