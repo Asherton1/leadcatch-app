@@ -76,7 +76,7 @@ export default function PricingSection() {
       isPro: false,
     },
     {
-      name: 'ENTERPRISE',
+      name: 'GROUP',
       price: null,
       priceLeader: 'from',
       priceDisplay: '897',
@@ -96,7 +96,7 @@ export default function PricingSection() {
         'Executive roll-up reports',
         'Dedicated account manager',
       ],
-      cta: { label: 'Contact Sales', href: '', isModal: true },
+      cta: { label: 'Start your 7-day free trial', href: '/start-trial', isModal: false },
       isPro: true,
     },
   ]
