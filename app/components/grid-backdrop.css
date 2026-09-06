@@ -1,0 +1,85 @@
+.gb {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Two-level drafting grid, drifting slowly */
+.gb-grid {
+  position: absolute;
+  inset: -120px;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.011) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.011) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 28px 28px, 28px 28px, 140px 140px, 140px 140px;
+  animation: gb-drift 90s linear infinite;
+}
+@keyframes gb-drift {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(140px, 140px); }
+}
+
+/* A slow horizontal sweep, like a plotter pass */
+.gb-scan {
+  position: absolute;
+  left: 0; right: 0;
+  height: 260px;
+  background: linear-gradient(180deg,
+    transparent,
+    rgba(255,107,53,0.022) 45%,
+    rgba(255,107,53,0.032) 50%,
+    rgba(255,107,53,0.022) 55%,
+    transparent);
+  animation: gb-sweep 22s cubic-bezier(0.45,0,0.55,1) infinite;
+}
+@keyframes gb-sweep {
+  0%   { top: -260px; opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Two very soft orange fields breathing at opposite corners */
+.gb-glow {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  max-width: 900px;
+  max-height: 900px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+}
+.gb-glow-a {
+  top: -18%;
+  right: -14%;
+  background: radial-gradient(circle, rgba(255,107,53,0.09), transparent 68%);
+  animation: gb-breathe 26s ease-in-out infinite;
+}
+.gb-glow-b {
+  bottom: -22%;
+  left: -16%;
+  background: radial-gradient(circle, rgba(255,107,53,0.06), transparent 68%);
+  animation: gb-breathe 32s ease-in-out infinite 6s;
+}
+@keyframes gb-breathe {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.3; }
+  50%      { transform: scale(1.18) translate(2%, -3%); opacity: 0.5; }
+}
+
+/* Everything on the page sits above it */
+.lc-page > *, body > div > * { position: relative; }
+
+@media (max-width: 720px) {
+  .gb-grid { background-size: 22px 22px, 22px 22px, 110px 110px, 110px 110px; }
+  .gb-scan { display: none; }
+  .gb-glow { filter: blur(90px); opacity: 0.28; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gb-grid, .gb-scan, .gb-glow { animation: none !important; }
+  .gb-scan { opacity: 0; }
+}

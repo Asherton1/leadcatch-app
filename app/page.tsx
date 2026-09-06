@@ -18,6 +18,7 @@ import HeroCapture from './components/HeroCapture'
 import LedgerFeed from './components/LedgerFeed'
 import LedgerHeadline from './components/LedgerHeadline'
 import Logo from './components/Logo'
+import GridBackdrop from './components/GridBackdrop'
 import IntegrationMarquee from './components/IntegrationMarquee'
 import TestimonialSpotlight from './components/TestimonialSpotlight'
 
@@ -32,6 +33,8 @@ export default function LandingPage() {
       <div className="ambient-bg" />
       <GSAPAnimations />
       <ScrollReveal />
+
+      <GridBackdrop />
 
       <nav className="lc-nav">
         <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
