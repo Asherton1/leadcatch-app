@@ -87,15 +87,18 @@ export default function MobileNav() {
                 margin: 0,
               }}
             >
-              <span style={{ color: priceOpen || isActive('/pricing') || isActive('/enterprise') ? '#ff6b35' : '#ccc', fontSize: '0.95rem', fontWeight: 500, transition: 'color 0.3s' }}>Pricing</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={priceOpen ? '#ff6b35' : '#666'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: priceOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s ease' }}><polyline points="6 9 12 15 18 9"/></svg>
+              <span style={{ color: priceOpen ? '#ff6b35' : '#ccc', fontSize: '0.95rem', fontWeight: 500, transition: 'color 0.3s' }}>Pricing</span>
+              <span style={{ color: priceOpen ? '#ff6b35' : '#555', fontSize: '1.1rem', transition: 'transform 0.3s, color 0.3s', transform: priceOpen ? 'rotate(45deg)' : 'none' }}>+</span>
             </button>
-            {priceOpen && (
-              <div style={{ paddingLeft: '1rem' }}>
-                <Link href="/pricing" className={isActive('/pricing') ? 'mobile-link-active' : ''}>Plans &amp; pricing</Link>
-                <Link href="/enterprise" className={isActive('/enterprise') ? 'mobile-link-active' : ''}>Multi-location</Link>
-              </div>
-            )}
+            <div style={{
+              maxHeight: priceOpen ? '200px' : '0',
+              opacity: priceOpen ? 1 : 0,
+              overflow: 'hidden',
+              transition: 'max-height 0.3s ease, opacity 0.2s ease',
+            }}>
+              <Link href="/pricing" className={isActive('/pricing') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Plans &amp; pricing</Link>
+              <Link href="/enterprise" className={isActive('/enterprise') ? 'mobile-link-active' : ''} style={{ paddingLeft: '2.5rem' }}>Multi-location</Link>
+            </div>
           </div>
           <Link href="/blog" className={isActive('/blog') ? 'mobile-link-active' : ''}>Insights</Link>
           <div style={{ borderTop: '1px solid #1e1e1e', marginTop: '0.25rem' }}>
