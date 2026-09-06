@@ -6,132 +6,64 @@
   overflow: hidden;
 }
 
-/* ── Drafting grid, drifting ───────────────────────────────────────────── */
+/* ── 1. A soft field of warmth. Large, slow, barely there. ─────────────── */
+.gb-field {
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(50% 40% at 22% 18%,  rgba(255,107,53,0.055), transparent 70%),
+    radial-gradient(45% 45% at 82% 62%,  rgba(255,107,53,0.035), transparent 70%),
+    radial-gradient(60% 50% at 50% 108%, rgba(255,107,53,0.030), transparent 70%);
+  animation: gb-float 48s ease-in-out infinite alternate;
+}
+@keyframes gb-float {
+  from { transform: translate3d(0,0,0) scale(1); }
+  to   { transform: translate3d(-2.5%, -2%, 0) scale(1.07); }
+}
+
+/* ── 2. The drafting grid, static and precise. ─────────────────────────── */
 .gb-grid {
   position: absolute;
-  inset: -160px;
+  inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.011) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.011) 1px, transparent 1px),
-    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-  background-size: 30px 30px, 30px 30px, 150px 150px, 150px 150px;
-  animation: gb-drift 140s linear infinite;
-}
-@keyframes gb-drift {
-  0%   { transform: translate(0,0); }
-  100% { transform: translate(150px,150px); }
+    linear-gradient(rgba(255,255,255,0.013) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.013) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 32px 32px, 32px 32px, 160px 160px, 160px 160px;
+  mask-image: radial-gradient(120% 90% at 50% 32%, #000 20%, rgba(0,0,0,0.35) 65%, transparent 100%);
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 32%, #000 20%, rgba(0,0,0,0.35) 65%, transparent 100%);
 }
 
-/* ── Instrument rails, strictly in the gutters ─────────────────────────── */
-.gb-rail {
+/* ── 3. Vignette. Pulls the eye to the middle. ─────────────────────────── */
+.gb-vignette {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 46px;
-  mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+  inset: 0;
+  background: radial-gradient(130% 100% at 50% 40%, transparent 45%, rgba(0,0,0,0.55) 100%);
 }
-.gb-rail-l { left: 22px; }
-.gb-rail-r { right: 22px; transform: scaleX(-1); }
 
-/* fixed reference ticks */
-.gb-ticks {
+/* ── 4. Grain. This is the part that makes it feel like a surface. ─────── */
+.gb-grain {
   position: absolute;
-  left: 0;
-  top: 0; bottom: 0;
-  width: 7px;
-  background-image: repeating-linear-gradient(
-    180deg,
-    rgba(255,255,255,0.1) 0,
-    rgba(255,255,255,0.1) 1px,
-    transparent 1px,
-    transparent 28px
-  );
+  inset: -100%;
+  width: 300%;
+  height: 300%;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: gb-grain 1.2s steps(4) infinite;
+}
+@keyframes gb-grain {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-2%, 1%); }
+  50%  { transform: translate(1%, -2%); }
+  75%  { transform: translate(-1%, -1%); }
+  100% { transform: translate(0, 0); }
 }
 
-/* the travelling line */
-.gb-line {
-  position: absolute;
-  left: 13px;
-  top: 0; bottom: 0;
-  width: 1px;
-  background: linear-gradient(180deg,
-    transparent,
-    rgba(255,107,53,0.16) 20%,
-    rgba(255,107,53,0.16) 80%,
-    transparent);
-}
-
-/* a bracket that travels the rail and narrows when it finds something */
-.gb-bracket {
-  position: absolute;
-  left: 6px;
-  width: 22px;
-  height: 120px;
-  animation: gb-travel 32s cubic-bezier(0.6,0,0.4,1) infinite;
-}
-.gb-rail-r .gb-bracket { animation-delay: 11s; }
-
-.gb-b {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 9px;
-  border-left: 1px solid rgba(255,107,53,0.5);
-  transition: none;
-}
-.gb-b-t { top: 0;    border-top: 1px solid rgba(255,107,53,0.5); }
-.gb-b-b { bottom: 0; border-bottom: 1px solid rgba(255,107,53,0.5); }
-
-@keyframes gb-travel {
-  0%   { top: -12%; height: 140px; opacity: 0; }
-  6%   { opacity: 1; }
-  /* drifts down, scanning */
-  30%  { top: 34%;  height: 140px; }
-  /* narrows — found something */
-  40%  { top: 44%;  height: 46px; }
-  52%  { top: 44%;  height: 46px; }
-  /* releases, moves on */
-  62%  { top: 52%;  height: 140px; }
-  90%  { top: 96%;  height: 140px; opacity: 1; }
-  100% { top: 108%; height: 140px; opacity: 0; }
-}
-
-/* two small marks that pulse when the bracket locks */
-.gb-mark {
-  position: absolute;
-  left: 11px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #ff6b35;
-  opacity: 0;
-}
-.gb-mark-1 { animation: gb-ping 32s ease-out infinite; }
-.gb-mark-2 { animation: gb-ping-2 32s ease-out infinite; }
-.gb-rail-r .gb-mark-1 { animation-delay: 11s; }
-.gb-rail-r .gb-mark-2 { animation-delay: 11s; }
-
-@keyframes gb-ping {
-  0%, 40%   { top: 46%; opacity: 0; transform: scale(0.5); }
-  44%       { opacity: 0.9; transform: scale(1); }
-  56%, 100% { top: 46%; opacity: 0; transform: scale(1.6); }
-}
-@keyframes gb-ping-2 {
-  0%, 76%   { top: 78%; opacity: 0; transform: scale(0.5); }
-  80%       { opacity: 0.7; transform: scale(1); }
-  90%, 100% { top: 78%; opacity: 0; transform: scale(1.6); }
-}
-
-/* Gutters vanish on narrow screens — grid only */
-@media (max-width: 1180px) {
-  .gb-rail { display: none; }
-}
 @media (max-width: 720px) {
-  .gb-grid { background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px; }
+  .gb-grid { background-size: 26px 26px, 26px 26px, 130px 130px, 130px 130px; }
+  .gb-grain { opacity: 0.026; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .gb-grid, .gb-bracket, .gb-mark { animation: none !important; }
-  .gb-mark { opacity: 0; }
+  .gb-field, .gb-grain { animation: none !important; }
 }
