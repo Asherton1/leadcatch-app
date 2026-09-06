@@ -7,6 +7,7 @@ import Link from 'next/link'
 export default function MobileNav() {
   const [open, setOpen] = useState(false)
   const [toolsOpen, setToolsOpen] = useState(false)
+  const [priceOpen, setPriceOpen] = useState(false)
   const path = usePathname()
 
   const isActive = (href: string) => {
@@ -71,8 +72,31 @@ export default function MobileNav() {
           <Link href="/dashboard-tour" className={isActive('/dashboard-tour') ? 'mobile-link-active' : ''}>Dashboard</Link>
           <Link href="/demo" className={isActive('/demo') ? 'mobile-link-active' : ''}><span className="live-demo-dot" style={{ marginRight: '9px', verticalAlign: 'middle' }} />Live Demo</Link>
           <Link href="/integrations" className={isActive('/integrations') ? 'mobile-link-active' : ''}>Integrations</Link>
-          <Link href="/pricing" className={isActive('/pricing') ? 'mobile-link-active' : ''}>Pricing</Link>
-          <Link href="/enterprise" className={isActive('/enterprise') ? 'mobile-link-active' : ''}>Pricing &mdash; Multi-location</Link>
+          <div>
+            <button
+              onClick={(e) => { e.stopPropagation(); setPriceOpen(!priceOpen) }}
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '0.875rem 2rem',
+                margin: 0,
+              }}
+            >
+              <span style={{ color: priceOpen || isActive('/pricing') || isActive('/enterprise') ? '#ff6b35' : '#ccc', fontSize: '0.95rem', fontWeight: 500, transition: 'color 0.3s' }}>Pricing</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={priceOpen ? '#ff6b35' : '#666'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: priceOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s ease' }}><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            {priceOpen && (
+              <div style={{ paddingLeft: '1rem' }}>
+                <Link href="/pricing" className={isActive('/pricing') ? 'mobile-link-active' : ''}>Plans &amp; pricing</Link>
+                <Link href="/enterprise" className={isActive('/enterprise') ? 'mobile-link-active' : ''}>Multi-location</Link>
+              </div>
+            )}
+          </div>
           <Link href="/blog" className={isActive('/blog') ? 'mobile-link-active' : ''}>Insights</Link>
           <div style={{ borderTop: '1px solid #1e1e1e', marginTop: '0.25rem' }}>
             <button
