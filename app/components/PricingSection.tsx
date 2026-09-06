@@ -162,6 +162,11 @@ export default function PricingSection() {
         ))}
       </div>
 
+      <p className="pricing-ladder-note">
+        More than four locations? Plans run from $1,997 for five to eight sites, up through
+        franchise systems and groups. <a href="/enterprise">See every plan &rarr;</a>
+      </p>
+
       {showEnterprise && (
         <div className="enterprise-overlay" onClick={(e) => { if (e.target === e.currentTarget) setShowEnterprise(false) }}>
           <div className="enterprise-modal">

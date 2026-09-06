@@ -24,6 +24,7 @@ export default function MobileNav() {
         <Link href="/demo" className={isActive('/demo') ? 'nav-link nav-active' : 'nav-link'} style={{ display: 'inline-flex', alignItems: 'center', gap: '7px' }}><span className="live-demo-dot" />Live Demo</Link>
         <Link data-label="Integrations" href="/integrations" className={isActive('/integrations') ? 'nav-link nav-active' : 'nav-link'}>Integrations</Link>
         <Link data-label="Pricing" href="/pricing" className={isActive('/pricing') ? 'nav-link nav-active' : 'nav-link'}>Pricing</Link>
+        <Link data-label="Enterprise" href="/enterprise" className={isActive('/enterprise') ? 'nav-link nav-active' : 'nav-link'}>Enterprise</Link>
         <Link data-label="Insights" href="/blog" className={isActive('/blog') ? 'nav-link nav-active' : 'nav-link'}>Insights</Link>
         <div className="nav-dropdown-wrapper">
           <span className="nav-link" style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>Resources <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
@@ -66,6 +67,7 @@ export default function MobileNav() {
           <Link href="/demo" className={isActive('/demo') ? 'mobile-link-active' : ''}><span className="live-demo-dot" style={{ marginRight: '9px', verticalAlign: 'middle' }} />Live Demo</Link>
           <Link href="/integrations" className={isActive('/integrations') ? 'mobile-link-active' : ''}>Integrations</Link>
           <Link href="/pricing" className={isActive('/pricing') ? 'mobile-link-active' : ''}>Pricing</Link>
+          <Link href="/enterprise" className={isActive('/enterprise') ? 'mobile-link-active' : ''}>Enterprise</Link>
           <Link href="/blog" className={isActive('/blog') ? 'mobile-link-active' : ''}>Insights</Link>
           <div style={{ borderTop: '1px solid #1e1e1e', marginTop: '0.25rem' }}>
             <button
