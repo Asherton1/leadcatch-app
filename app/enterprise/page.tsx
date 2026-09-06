@@ -10,18 +10,36 @@ import '../landing.css'
 import './enterprise.css'
 
 const STRIPE_LINKS = {
+  group:   'https://buy.stripe.com/8x2bJ37Yh7Tdh2Z1MJd7q07',
   starter: '#enterprise-inquiry',
   growth:  '#enterprise-inquiry',
-  scale:   '#enterprise-inquiry',
+  scale:   'https://buy.stripe.com/5kQaEZ3I13CX8wtfDzd7q08',
   custom:  '#enterprise-inquiry',
 }
 
 const TIERS = [
   {
+    key: 'group',
+    name: 'Group',
+    price: '$897',
+    locations: '2 to 4 locations',
+    headline: 'For practices that outgrew a single site.',
+    href: STRIPE_LINKS.group,
+    bullets: [
+      'Multi-location dashboard',
+      'Per-location reporting',
+      'One rolled-up view across every site',
+      'Recovery email, SMS and Slack alerts',
+      'Campaign attribution across locations',
+      'Intent signals to Meta and Google',
+      'Email support',
+    ],
+  },
+  {
     key: 'starter',
     name: 'Starter',
     price: '$1,997',
-    locations: '5 to 10 locations',
+    locations: '5 to 8 locations',
     headline: 'For groups stepping into multi-location.',
     href: STRIPE_LINKS.starter,
     bullets: [
@@ -39,7 +57,7 @@ const TIERS = [
     key: 'growth',
     name: 'Growth',
     price: '$3,997',
-    locations: '11 to 25 locations',
+    locations: '9 to 16 locations',
     headline: 'For established multi-location practices.',
     featured: true,
     href: STRIPE_LINKS.growth,
@@ -57,8 +75,8 @@ const TIERS = [
   {
     key: 'scale',
     name: 'Scale',
-    price: '$7,997',
-    locations: '25 to 50 locations',
+    price: '$6,997',
+    locations: '17 to 30 locations',
     headline: 'For franchise systems and large groups.',
     href: STRIPE_LINKS.scale,
     bullets: [
@@ -74,8 +92,8 @@ const TIERS = [
   {
     key: 'custom',
     name: 'Custom',
-    price: '$15,000+',
-    locations: '50+ locations',
+    price: 'Custom',
+    locations: '31+ locations',
     headline: 'For enterprise systems and franchises with national reach.',
     href: STRIPE_LINKS.custom,
     bullets: [
