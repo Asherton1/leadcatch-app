@@ -70,6 +70,13 @@ function isWithinCallHours(start: string | null, end: string | null): boolean {
 }
 
 export async function POST(request: NextRequest) {
+  // TEMP: verify Vercel geo headers are present on this route
+  console.log('[geo-probe]', {
+    country: request.headers.get('x-vercel-ip-country'),
+    region: request.headers.get('x-vercel-ip-country-region'),
+    city: request.headers.get('x-vercel-ip-city'),
+  })
+
   let body: Record<string, unknown>
   try {
     body = await request.json()
