@@ -96,7 +96,7 @@ export default function PricingSection() {
         'Executive roll-up reports',
         'Dedicated account manager',
       ],
-      cta: { label: 'Get started', href: 'https://buy.stripe.com/8x2bJ37Yh7Tdh2Z1MJd7q07', isModal: false },
+      cta: { label: 'Start your 7-day free trial', href: '/signup?plan=group', isModal: false },
       isPro: true,
     },
   ]

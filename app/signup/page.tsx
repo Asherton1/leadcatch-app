@@ -46,11 +46,15 @@ function SignupForm() {
 
   useEffect(() => {
     const p = searchParams.get('plan')
-    if (p === 'pro') setPlan(p)
+    if (p === 'pro' || p === 'group') setPlan(p)
   }, [searchParams])
 
-  const planPrice = 397
-  const planName = 'Pro'
+  const isGroup = plan === 'group'
+  const planPrice = isGroup ? 897 : 397
+  const planName = isGroup ? 'Group' : 'Pro'
+  const planBlurb = isGroup
+    ? 'Two to four locations, one rolled-up dashboard'
+    : 'Automated recovery, campaign attribution, HIPAA-ready'
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -88,7 +92,7 @@ function SignupForm() {
         </span>
       </div>
       <div style={s.card}>
-        <button style={s.closeBtn} onClick={() => router.push('/')}>✕</button>
+        <button style={s.closeBtn} onClick={() => router.push('/pricing')}>✕</button>
         <div style={s.cardHeader}>
           <h1 style={s.title}>Create your account</h1>
           <p style={s.subtitle}>Start your 7-day free trial — no charge today</p>
@@ -137,10 +141,10 @@ function SignupForm() {
           <div style={s.divider} />
           <p style={s.sectionLabel}>Your Plan</p>
           <div style={{ padding: '1.25rem', background: '#0d0d0d', border: '2px solid #ff6b35', borderRadius: '10px', textAlign: 'center' as const, marginBottom: '0.25rem', position: 'relative' as const }}>
-            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase' as const, letterSpacing: '0.08em', marginBottom: '0.4rem' }}>Pro Plan</div>
-            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>$397<span style={{ fontSize: '0.875rem', color: '#666', fontWeight: 400 }}>/mo</span></div>
-            <div style={{ fontSize: '0.8125rem', color: '#888', marginTop: '0.5rem' }}>AI voice callback, automated recovery, HIPAA-ready</div>
-            <div style={{ fontSize: '0.6875rem', color: '#666', marginTop: '0.5rem' }}>Multi-location? <a href="/pricing" style={{ color: '#ff6b35', textDecoration: 'none' }}>See Enterprise →</a></div>
+            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#ff6b35', textTransform: 'uppercase' as const, letterSpacing: '0.08em', marginBottom: '0.4rem' }}>{planName} Plan</div>
+            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>${planPrice}<span style={{ fontSize: '0.875rem', color: '#666', fontWeight: 400 }}>/mo</span></div>
+            <div style={{ fontSize: '0.8125rem', color: '#888', marginTop: '0.5rem' }}>{planBlurb}</div>
+            <div style={{ fontSize: '0.6875rem', color: '#666', marginTop: '0.5rem' }}>{isGroup ? 'More than four locations? ' : 'More than one location? '}<a href="/enterprise" style={{ color: '#ff6b35', textDecoration: 'none' }}>See all plans →</a></div>
           </div>
           <div style={s.divider} />
           <p style={s.sectionLabel}>Payment Method</p>
