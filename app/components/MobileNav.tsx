@@ -90,7 +90,7 @@ export default function MobileNav() {
               <span style={{ color: priceOpen ? '#ff6b35' : '#ccc', fontSize: '0.95rem', fontWeight: 500, transition: 'color 0.3s' }}>Pricing</span>
               <span style={{ color: priceOpen ? '#ff6b35' : '#555', fontSize: '1.1rem', transition: 'transform 0.3s, color 0.3s', transform: priceOpen ? 'rotate(45deg)' : 'none' }}>+</span>
             </button>
-            <div style={{
+            <div className="nav-submenu" style={{
               maxHeight: priceOpen ? '200px' : '0',
               opacity: priceOpen ? 1 : 0,
               overflow: 'hidden',
@@ -119,7 +119,7 @@ export default function MobileNav() {
               <span style={{ color: toolsOpen ? '#ff6b35' : '#ccc', fontSize: '0.95rem', fontWeight: 500, transition: 'color 0.3s' }}>Resources</span>
               <span style={{ color: toolsOpen ? '#ff6b35' : '#555', fontSize: '1.1rem', transition: 'transform 0.3s, color 0.3s', transform: toolsOpen ? 'rotate(45deg)' : 'none' }}>+</span>
             </button>
-            <div style={{
+            <div className="nav-submenu" style={{
               maxHeight: toolsOpen ? '200px' : '0',
               opacity: toolsOpen ? 1 : 0,
               overflow: 'hidden',

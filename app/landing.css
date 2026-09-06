@@ -6086,3 +6086,20 @@ select.audit-form-input option {
   /* keep every fixed backdrop underneath */
   .gb, .about-page::before, .faq-page::before { z-index: 0 !important; }
 }
+
+/* ══ Mobile drawer: expanded submenus read as nested ═══════════════════ */
+@media (max-width: 900px) {
+  .nav-mobile-menu .nav-submenu {
+    background: rgba(255,255,255,0.028);
+    box-shadow: inset 2px 0 0 0 rgba(255,107,53,0.45);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-mobile-menu .nav-submenu a {
+    font-size: 0.9rem !important;
+    color: #9a9a9a !important;
+    border-bottom-color: rgba(255,255,255,0.04) !important;
+  }
+  .nav-mobile-menu .nav-submenu a:last-child { border-bottom: none !important; }
+  .nav-mobile-menu .nav-submenu a.mobile-link-active { color: #ff6b35 !important; }
+}
