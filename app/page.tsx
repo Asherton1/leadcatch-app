@@ -95,16 +95,23 @@ export default function LandingPage() {
 
       <section className="manifesto reveal">
         <div className="manifesto-inner">
-          <p className="manifesto-eyebrow">our position</p>
-          <p className="manifesto-body manifesto-body-emphasis">
-            Form abandonment isn&apos;t a UX problem. It&apos;s a business problem.
+          <p className="manifesto-eyebrow">Our position</p>
+
+          <p className="mf-lead">
+            Form abandonment isn&apos;t a UX problem.<br />
+            <span className="mf-lead-accent">It&apos;s a business problem.</span>
           </p>
-          <p className="manifesto-body">
-            Every prospect who started typing was telling you something: that they&apos;re interested, that they need what you sell, that they were ready, until life interrupted. We don&apos;t believe a kid screaming in the background should cost you a $30,000 client.
+
+          <p className="mf-body">
+            Every prospect who started typing was telling you something. That they were interested.
+            That they needed what you sell. That they were ready &mdash; until life interrupted.
           </p>
-          <p className="manifesto-body manifesto-body-emphasis">
-            ReCapture catches the intent the moment it appears.
+
+          <p className="mf-pull">
+            A kid screaming in the background<br />should not cost you a $30,000 client.
           </p>
+
+          <p className="mf-close">ReCapture catches the intent the moment it appears.</p>
         </div>
       </section>
 
