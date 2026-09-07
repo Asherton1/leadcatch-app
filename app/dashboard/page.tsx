@@ -963,6 +963,39 @@ export default function Dashboard() {
   // ── Fetch clients (admin sees all, customers see only their own) ──────────
   const [isAdmin, setIsAdmin] = useState(false)
 
+  // ── Audit: record admin access to a customer's data ───────────────────────
+  // Fires when an admin opens a client that is not ReCapture's own record.
+  // A customer viewing their own dashboard is not logged.
+  const loggedClientRef = useRef<string | null>(null)
+  useEffect(() => {
+    if (!isAdmin || !selectedClient) return
+    const isOwnRecord =
+      selectedClient.name === 'ReCapture' || selectedClient.company_name === 'ReCapture'
+    if (isOwnRecord) return
+    if (loggedClientRef.current === selectedClient.id) return
+    loggedClientRef.current = selectedClient.id
+
+    ;(async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession()
+        if (!session?.access_token) return
+        await fetch('/api/audit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            token: session.access_token,
+            action: 'view_client_dashboard',
+            clientId: selectedClient.id,
+            notes: selectedClient.company_name || selectedClient.name || null,
+          }),
+        })
+      } catch {
+        // Audit failures must never interrupt the dashboard.
+      }
+    })()
+  }, [isAdmin, selectedClient])
+
+
   useEffect(() => {
     if (!authed) return
     setClientsLoading(true)
