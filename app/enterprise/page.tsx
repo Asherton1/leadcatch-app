@@ -10,7 +10,7 @@ import '../landing.css'
 import './enterprise.css'
 
 const STRIPE_LINKS = {
-  group:   'https://buy.stripe.com/8x2bJ37Yh7Tdh2Z1MJd7q07',
+  group:   '/signup?plan=group',
   starter: '#enterprise-inquiry',
   growth:  '#enterprise-inquiry',
   scale:   'https://buy.stripe.com/5kQaEZ3I13CX8wtfDzd7q08',
