@@ -3508,3 +3508,11 @@ button.returning-cta:focus-visible {
   flex-wrap: wrap;
 }
 .select-count { margin-left: auto; }
+
+/* Toolbar inset to match the table's own padding */
+.lead-tools {
+  padding: 1rem 1.5rem 0.9rem !important;
+}
+@media (max-width: 900px) {
+  .lead-tools { padding: 0.85rem 1.15rem 0.75rem !important; }
+}
