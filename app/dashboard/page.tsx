@@ -977,6 +977,10 @@ export default function Dashboard() {
   const [filter, setFilter]                     = useState<Filter>('all')
   const [search, setSearch]                     = useState('')
   const [modalLead, setModalLead]               = useState<Lead | null>(null)
+  const [selectMode, setSelectMode]             = useState(false)
+  const [selectedIds, setSelectedIds]           = useState<Set<string>>(new Set())
+  const [bulkDeleting, setBulkDeleting]         = useState(false)
+  const [confirmBulk, setConfirmBulk]           = useState(false)
 
   // ── Auth gate ──────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -1293,6 +1297,30 @@ export default function Dashboard() {
   const rcFor = (l: Lead) => {
     const key = (l.email ?? l.phone ?? '').trim().toLowerCase()
     return key ? (returnCounts.get(key) ?? 1) : 1
+  }
+
+  async function handleBulkDelete() {
+    if (selectedIds.size === 0) return
+    if (!confirmBulk) { setConfirmBulk(true); return }
+    setBulkDeleting(true)
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session?.access_token) { setBulkDeleting(false); return }
+      const ids = Array.from(selectedIds)
+      const res = await fetch('/api/leads/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: session.access_token, leadIds: ids }),
+      })
+      if (res.ok) {
+        setLeads(prev => prev.filter(l => !selectedIds.has(l.id)))
+        setSelectedIds(new Set())
+        setSelectMode(false)
+      }
+    } finally {
+      setBulkDeleting(false)
+      setConfirmBulk(false)
+    }
   }
 
   // ── Campaign attribution: pull visitor rows for the leads we have ─────────
@@ -2414,7 +2442,56 @@ export default function Dashboard() {
 
       {/* ── Leads Table ─────────────────────────────────────────────────────── */}
       <div className="table-container">
-        <div className="table-header">
+        <div className="lead-tools">
+          <button
+            className={'select-toggle' + (selectMode ? ' is-on' : '')}
+            type="button"
+            onClick={() => {
+              setSelectMode(m => !m)
+              setSelectedIds(new Set())
+              setConfirmBulk(false)
+            }}
+          >
+            {selectMode ? 'Done' : 'Select'}
+          </button>
+
+          {selectMode && (
+            <>
+              <button
+                className="select-all"
+                type="button"
+                onClick={() => {
+                  setConfirmBulk(false)
+                  setSelectedIds(prev =>
+                    prev.size === filteredLeads.length
+                      ? new Set()
+                      : new Set(filteredLeads.map(l => l.id))
+                  )
+                }}
+              >
+                {selectedIds.size === filteredLeads.length && filteredLeads.length > 0 ? 'Clear all' : 'Select all'}
+              </button>
+              <span className="select-count">
+                {selectedIds.size} selected
+              </span>
+              <button
+                className={'bulk-delete' + (confirmBulk ? ' is-confirming' : '')}
+                type="button"
+                disabled={selectedIds.size === 0 || bulkDeleting}
+                onClick={handleBulkDelete}
+              >
+                {bulkDeleting
+                  ? 'Deleting…'
+                  : confirmBulk
+                    ? `Delete ${selectedIds.size} permanently?`
+                    : 'Delete selected'}
+              </button>
+            </>
+          )}
+        </div>
+
+        <div className={'table-header' + (selectMode ? ' has-check' : '')}>
+          {selectMode && <div className="table-header-cell" />}
           <div className="table-header-cell">Lead Info</div>
           <div className="table-header-cell">Fields Completed</div>
           <div className="table-header-cell">Time on Form</div>
@@ -2483,7 +2560,23 @@ export default function Dashboard() {
           {!isLoading && filteredLeads.map((lead, i) => {
             const pct = lead.total_fields > 0 ? (lead.fields_completed / lead.total_fields) * 100 : 0
             return (
-              <div key={lead.id} className={`table-row${i === 0 ? ' new-entry' : ''}`}>
+              <div key={lead.id} className={`table-row${i === 0 ? ' new-entry' : ''}${selectMode && selectedIds.has(lead.id) ? ' row-selected' : ''}`}>
+                {selectMode && (
+                  <label className="row-check">
+                    <input
+                      type="checkbox"
+                      checked={selectedIds.has(lead.id)}
+                      onChange={() => {
+                        setSelectedIds(prev => {
+                          const next = new Set(prev)
+                          if (next.has(lead.id)) next.delete(lead.id); else next.add(lead.id)
+                          return next
+                        })
+                        setConfirmBulk(false)
+                      }}
+                    />
+                  </label>
+                )}
                 <div className="lead-info">
                   <div className="lead-name">{lead.name ?? '—'}</div>
                   {lead.email && <div className="lead-email">{lead.email}</div>}

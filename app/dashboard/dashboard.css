@@ -3436,3 +3436,47 @@ button.returning-cta:focus-visible {
   color: #fff;
 }
 .modal-delete-btn:disabled { opacity: 0.6; cursor: default; }
+
+/* ── Lead selection ──────────────────────────────────────────────────── */
+.lead-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 0 0.85rem;
+}
+.select-toggle, .select-all, .bulk-delete {
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: #a1a1aa;
+  transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+.select-toggle:hover, .select-all:hover { border-color: rgba(255,107,53,0.4); color: #ff6b35; }
+.select-toggle.is-on { border-color: rgba(255,107,53,0.45); color: #ff6b35; background: rgba(255,107,53,0.07); }
+.select-count { font-size: 0.78rem; color: #6b6b6b; margin-left: auto; }
+.bulk-delete {
+  border-color: rgba(239,68,68,0.28);
+  color: #ef4444;
+}
+.bulk-delete:hover:not(:disabled) { background: rgba(239,68,68,0.09); border-color: rgba(239,68,68,0.5); }
+.bulk-delete.is-confirming { background: #ef4444; border-color: #ef4444; color: #fff; }
+.bulk-delete:disabled { opacity: 0.4; cursor: default; }
+
+.row-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 0.5rem;
+}
+.row-check input {
+  width: 16px; height: 16px;
+  accent-color: #ff6b35;
+  cursor: pointer;
+}
+.table-row.row-selected { background: rgba(255,107,53,0.05); }
+.table-header.has-check, .table-row:has(.row-check) { }

@@ -10,16 +10,20 @@ import { logAdminAccess, auditContext } from '@/lib/audit'
  * comes from the access token, never from the request body.
  */
 export async function POST(request: NextRequest) {
-  let body: { token?: string; leadId?: string }
+  let body: { token?: string; leadId?: string; leadIds?: string[] }
   try {
     body = await request.json()
   } catch {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  const { token, leadId } = body
-  if (!token || !leadId) {
-    return NextResponse.json({ error: 'token and leadId are required' }, { status: 400 })
+  const { token } = body
+  const ids = (body.leadIds && body.leadIds.length ? body.leadIds : body.leadId ? [body.leadId] : [])
+    .filter(v => typeof v === 'string' && v.length > 0)
+    .slice(0, 200)
+
+  if (!token || ids.length === 0) {
+    return NextResponse.json({ error: 'token and at least one lead id are required' }, { status: 400 })
   }
 
   const supabase = createClient(
@@ -35,15 +39,22 @@ export async function POST(request: NextRequest) {
   const user = userData.user
 
   // What client does this lead belong to?
-  const { data: lead, error: leadErr } = await supabaseAdmin
+  const { data: rows, error: leadErr } = await supabaseAdmin
     .from('leads')
     .select('id, client_id, name, email')
-    .eq('id', leadId)
-    .single()
+    .in('id', ids)
 
-  if (leadErr || !lead) {
-    return NextResponse.json({ error: 'Lead not found' }, { status: 404 })
+  if (leadErr || !rows || rows.length === 0) {
+    return NextResponse.json({ error: 'Leads not found' }, { status: 404 })
   }
+
+  // Every lead must belong to one client. Refuse mixed batches rather than
+  // authorising against one client and deleting another's data.
+  const clientIds = Array.from(new Set(rows.map(r => r.client_id)))
+  if (clientIds.length !== 1) {
+    return NextResponse.json({ error: 'Batch spans multiple clients' }, { status: 400 })
+  }
+  const lead = { client_id: clientIds[0] }
 
   // Authorise: admin, or the owner of that client record.
   const { data: me } = await supabaseAdmin
@@ -70,7 +81,7 @@ export async function POST(request: NextRequest) {
   const { error: delErr } = await supabaseAdmin
     .from('leads')
     .delete()
-    .eq('id', leadId)
+    .in('id', rows.map(r => r.id))
 
   if (delErr) {
     console.error('[lead-delete] failed:', delErr)
@@ -81,14 +92,14 @@ export async function POST(request: NextRequest) {
   await logAdminAccess({
     actorEmail: user.email ?? null,
     actorId: user.id,
-    action: 'delete_lead',
+    action: rows.length > 1 ? 'delete_leads_batch' : 'delete_lead',
     clientId: lead.client_id,
     resource: 'leads',
-    resourceId: leadId,
-    notes: lead.email || lead.name || null,
+    resourceId: rows.map(r => r.id).join(','),
+    notes: rows.length > 1 ? `${rows.length} leads deleted` : (rows[0].email || rows[0].name || null),
     ip: ctx.ip,
     userAgent: ctx.userAgent,
   })
 
-  return NextResponse.json({ ok: true })
+  return NextResponse.json({ ok: true, deleted: rows.length })
 }
