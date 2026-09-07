@@ -2491,7 +2491,6 @@ export default function Dashboard() {
         </div>
 
         <div className={'table-header' + (selectMode ? ' has-check' : '')}>
-          {selectMode && <div className="table-header-cell" />}
           <div className="table-header-cell">Lead Info</div>
           <div className="table-header-cell">Fields Completed</div>
           <div className="table-header-cell">Time on Form</div>

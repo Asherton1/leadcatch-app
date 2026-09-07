@@ -3480,3 +3480,31 @@ button.returning-cta:focus-visible {
 }
 .table-row.row-selected { background: rgba(255,107,53,0.05); }
 .table-header.has-check, .table-row:has(.row-check) { }
+
+/* ── Select mode: shift the row rather than adding a grid column ─────── */
+.table-header.has-check,
+.table-row:has(.row-check) {
+  position: relative;
+  padding-left: 2.6rem;
+  transition: padding-left .2s ease;
+}
+.row-check {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  margin: 0;
+  z-index: 2;
+}
+.row-check input { width: 17px; height: 17px; accent-color: #ff6b35; cursor: pointer; }
+
+/* Toolbar sits on its own line, aligned with the table */
+.lead-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 0 0.9rem;
+  flex-wrap: wrap;
+}
+.select-count { margin-left: auto; }
