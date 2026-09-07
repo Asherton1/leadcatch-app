@@ -75,7 +75,7 @@ export default function TrustPage() {
               ReCapture reads a field's value after the visitor finishes entering it — it does not log individual keystrokes and does not record or replay browsing sessions. Captured contact details are transmitted when a form is abandoned: on tab close, page navigation, exit-intent, or via a periodic check while the form sits incomplete. Visitors who never start a form are never captured.
             </p>
             <p>
-              EU, UK, and Swiss visitors are blocked at the tracker level via IP geolocation. We do not capture data from these regions. If our IP detection fails, the tracker fails closed (no capture).
+              EU, UK, and Swiss visitors are blocked, and the block is enforced twice. In the browser, the tracker resolves the visitor&apos;s country before anything is transmitted; if that lookup is unavailable it falls back to the browser timezone rather than capturing by default. On our side, every capture request is independently checked against the country of the originating connection and refused before the payload is parsed or stored. A request that arrives without a resolvable country is refused as well. Both checks fail closed: when we cannot establish where a visitor is, we do not capture.
             </p>
             <p>
               Visitors on customer sites with active cookie consent platforms (OneTrust, Cookiebot, CookieYes) are only tracked when consent has been granted.
