@@ -214,6 +214,22 @@
   var euBlocked = null; // null = unknown, true = blocked, false = allowed
   var euCheckPromise = null;
 
+  // Timezone is available synchronously and needs no network. Used when the
+  // IP lookup fails so we fail closed rather than capturing by default.
+  function timezoneLooksEU() {
+    try {
+      var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+      if (!tz) return true; // no signal at all -> refuse
+      if (tz.indexOf('Europe/') === 0) return true;
+      if (tz === 'Atlantic/Reykjavik' || tz === 'Atlantic/Canary' ||
+          tz === 'Atlantic/Madeira' || tz === 'Atlantic/Azores' ||
+          tz === 'Atlantic/Faroe') return true;
+      return false;
+    } catch (e) {
+      return true; // Intl unavailable -> refuse
+    }
+  }
+
   function checkEUStatus() {
     if (euCheckPromise) return euCheckPromise;
     euCheckPromise = new Promise(function (resolve) {
@@ -226,20 +242,20 @@
             var country = (xhr.responseText || '').trim().toUpperCase();
             euBlocked = EU_COUNTRIES.indexOf(country) !== -1;
           } else {
-            // Lookup unavailable tells us nothing about location. Blocking here
-            // silently drops mobile traffic, which is where most inquiries occur.
-            euBlocked = false;
+            // Lookup unavailable. Fall back to the browser timezone rather than
+            // capturing by default.
+            euBlocked = timezoneLooksEU();
           }
           resolve(euBlocked);
         };
         xhr.onerror = xhr.ontimeout = function () {
-          euBlocked = false;
-          resolve(false);
+          euBlocked = timezoneLooksEU();
+          resolve(euBlocked);
         };
         xhr.send();
       } catch (e) {
-        euBlocked = false;
-        resolve(false);
+        euBlocked = timezoneLooksEU();
+        resolve(euBlocked);
       }
     });
     return euCheckPromise;
