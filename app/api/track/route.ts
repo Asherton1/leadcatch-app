@@ -8,25 +8,32 @@ import { sendMetaConversion, sendGoogleConversion } from '@/lib/ad-conversions'
 
 // Check do_not_contact list before firing recovery actions
 async function isOptedOut(clientId: string, phone: string | null, email: string | null): Promise<boolean> {
-  const identifiers: Array<{ type: string; value: string }> = []
+  const values: string[] = []
   if (phone) {
     const cleanPhone = phone.replace(/\D/g, '')
-    if (cleanPhone) identifiers.push({ type: 'phone', value: cleanPhone })
+    if (cleanPhone) values.push(cleanPhone)
   }
   if (email) {
-    identifiers.push({ type: 'email', value: email.toLowerCase().trim() })
+    const cleanEmail = email.toLowerCase().trim()
+    if (cleanEmail) values.push(cleanEmail)
   }
-  if (identifiers.length === 0) return false
+  if (values.length === 0) return false
 
-  const { data } = await supabase
+  // Scoped to the client who owns the lead, and matched with .in() so the
+  // values are parameterised rather than interpolated into a filter string.
+  const { data, error } = await supabase
     .from('do_not_contact')
     .select('id')
-    .or(
-      identifiers
-        .map(i => `and(identifier_type.eq.${i.type},identifier_value.eq.${i.value})`)
-        .join(',')
-    )
+    .eq('client_id', clientId)
+    .in('identifier_value', values)
     .limit(1)
+
+  // Fail closed. If we cannot confirm someone has NOT opted out, we treat them
+  // as opted out rather than contacting them.
+  if (error) {
+    console.error('[opt-out] lookup failed, treating as opted out:', error)
+    return true
+  }
 
   return !!(data && data.length > 0)
 }
