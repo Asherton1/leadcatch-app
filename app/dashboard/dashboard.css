@@ -3410,3 +3410,29 @@ button.returning-cta:focus-visible {
   padding-top: 0.9rem;
   border-top: 1px solid rgba(255,255,255,0.05);
 }
+
+/* Delete button — sits apart from the primary actions */
+.modal-footer-actions { display: flex; align-items: center; gap: 0.65rem; }
+.modal-delete-btn {
+  margin-right: auto;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(239,68,68,0.28);
+  background: transparent;
+  color: #ef4444;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+.modal-delete-btn:hover {
+  background: rgba(239,68,68,0.09);
+  border-color: rgba(239,68,68,0.5);
+}
+.modal-delete-btn.is-confirming {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #fff;
+}
+.modal-delete-btn:disabled { opacity: 0.6; cursor: default; }

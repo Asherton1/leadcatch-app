@@ -302,12 +302,16 @@ function LeadModal({
   lead,
   onClose,
   onStatusChange,
+  onDeleted,
 }: {
   lead: Lead
   onClose: () => void
   onStatusChange: (id: string, status: string) => void
+  onDeleted?: (id: string) => void
 }) {
   const [pendingStatus, setPendingStatus] = useState<string>(lead.status ?? 'open')
+  const [confirmDelete, setConfirmDelete] = useState(false)
+  const [deleting, setDeleting]           = useState(false)
   const [saving, setSaving]               = useState(false)
   const [saved, setSaved]                 = useState(false)
   const [journey, setJourney] = useState<JourneyData | null>(null)
@@ -350,6 +354,26 @@ function LeadModal({
   }, [onClose])
 
   const statusChanged = pendingStatus !== (lead.status ?? 'open')
+
+  async function handleDelete() {
+    if (!confirmDelete) { setConfirmDelete(true); return }
+    setDeleting(true)
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session?.access_token) { setDeleting(false); return }
+      const res = await fetch('/api/leads/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: session.access_token, leadId: lead.id }),
+      })
+      if (!res.ok) { setDeleting(false); setConfirmDelete(false); return }
+      onDeleted?.(lead.id)
+      onClose()
+    } catch {
+      setDeleting(false)
+      setConfirmDelete(false)
+    }
+  }
 
   async function handleSave() {
     if (!statusChanged) return
@@ -721,7 +745,15 @@ function LeadModal({
             {lead.fields_completed}/{lead.total_fields} fields · {formatDuration(lead.time_on_form)} on form
           </div>
           <div className="modal-footer-actions">
-            <button className="modal-cancel-btn" onClick={onClose} type="button">Cancel</button>
+            <button
+              className={'modal-delete-btn' + (confirmDelete ? ' is-confirming' : '')}
+              onClick={handleDelete}
+              disabled={deleting}
+              type="button"
+            >
+              {deleting ? 'Deleting…' : confirmDelete ? 'Delete permanently?' : 'Delete'}
+            </button>
+            <button className="modal-cancel-btn" onClick={() => { setConfirmDelete(false); onClose() }} type="button">Cancel</button>
             <button
               className="modal-save-btn"
               onClick={handleSave}
@@ -2506,6 +2538,7 @@ export default function Dashboard() {
         <LeadModal
           lead={modalLead}
           onClose={() => setModalLead(null)}
+          onDeleted={(id) => setLeads(prev => prev.filter(l => l.id !== id))}
           onStatusChange={handleStatusChange}
         />
       )}
