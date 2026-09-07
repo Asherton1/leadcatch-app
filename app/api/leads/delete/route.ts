@@ -47,10 +47,10 @@ export async function POST(request: NextRequest) {
 
   // Authorise: admin, or the owner of that client record.
   const { data: me } = await supabaseAdmin
-    .from('users')
+    .from('clients')
     .select('is_admin')
-    .eq('id', user.id)
-    .single()
+    .eq('user_id', user.id)
+    .maybeSingle()
 
   let allowed = me?.is_admin === true
   if (!allowed) {
