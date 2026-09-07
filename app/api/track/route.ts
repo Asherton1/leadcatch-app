@@ -69,13 +69,28 @@ function isWithinCallHours(start: string | null, end: string | null): boolean {
   return currentHour >= startHour && currentHour < endHour
 }
 
+// EEA + UK + Switzerland. Capture is refused for these origins.
+const BLOCKED_COUNTRIES = new Set([
+  'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT',
+  'LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE',
+  'IS','LI','NO',
+  'GB','CH',
+])
+
 export async function POST(request: NextRequest) {
-  // TEMP: verify Vercel geo headers are present on this route
-  console.log('[geo-probe]', {
-    country: request.headers.get('x-vercel-ip-country'),
-    region: request.headers.get('x-vercel-ip-country-region'),
-    city: request.headers.get('x-vercel-ip-city'),
-  })
+  // ── Geographic gate ───────────────────────────────────────────────────
+  // Authoritative block on EU/UK/Swiss traffic, read from the connection IP.
+  // Runs before any parsing or persistence. If the header is absent we treat
+  // that as unknown and refuse the capture rather than guessing.
+  {
+    const country = (request.headers.get('x-vercel-ip-country') || '').toUpperCase()
+    if (!country || BLOCKED_COUNTRIES.has(country)) {
+      return NextResponse.json(
+        { ok: true, captured: false },
+        { status: 200, headers: { 'Access-Control-Allow-Origin': '*' } }
+      )
+    }
+  }
 
   let body: Record<string, unknown>
   try {
