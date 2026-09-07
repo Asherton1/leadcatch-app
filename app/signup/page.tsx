@@ -92,7 +92,7 @@ function SignupForm() {
         </span>
       </div>
       <div style={s.card}>
-        <button style={s.closeBtn} onClick={() => router.push('/pricing')}>✕</button>
+        <button style={s.closeBtn} onClick={() => { if (typeof window !== 'undefined' && window.history.length > 1) router.back(); else router.push('/pricing') }}>✕</button>
         <div style={s.cardHeader}>
           <h1 style={s.title}>Create your account</h1>
           <p style={s.subtitle}>Start your 7-day free trial — no charge today</p>
