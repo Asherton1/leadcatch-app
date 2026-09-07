@@ -134,7 +134,7 @@ export default function TrustPage() {
               Multi-tenant isolation is enforced at the database level via row-level security policies. A customer can only ever read or write data tied to their own account. API keys are scoped per-customer and revocable from the dashboard.
             </p>
             <p>
-              We log all administrative access. We do not access individual customer lead data without a documented support request from the customer.
+              We log all administrative access. Every time a member of our team opens a customer&apos;s dashboard, we record who accessed it, which account, when, and from where. We do not access individual customer lead data without a documented support request. Any customer can request their own access log at any time and we will provide it.
             </p>
             <p>
               SOC 2 Type II audit is on the roadmap for late 2026. We are happy to share our security questionnaire with enterprise prospects under NDA.
