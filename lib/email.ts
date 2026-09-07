@@ -98,7 +98,7 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
   // ── 1. Fetch lead ──────────────────────────────────────────────────────────
   const { data: lead, error: leadError } = await supabase
     .from('leads')
-    .select('id, name, email, email_sent, form_data, client_id')
+    .select('id, name, email, phone, email_sent, form_data, client_id')
     .eq('id', leadId)
     .single()
 
@@ -107,6 +107,36 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
   if (leadError || !lead) return { success: false, error: 'Lead not found' }
   if (!lead.email)      return { success: false, error: 'Lead has no email address' }
   if (lead.email_sent)  return { success: true, skipped: true }
+
+  // ── 1b. Do-not-contact gate ────────────────────────────────────────────────
+  // One list, enforced across channels: an SMS STOP or a voice opt-out
+  // suppresses email for the same person, and vice versa. Checked on every
+  // identifier we hold for the lead, scoped to the client who owns it.
+  {
+    const identifiers = [lead.email, (lead as { phone?: string | null }).phone]
+      .filter((v): v is string => typeof v === 'string' && v.trim().length > 0)
+      .map(v => v.trim().toLowerCase())
+
+    if (identifiers.length > 0) {
+      const { data: dnc, error: dncError } = await supabase
+        .from('do_not_contact')
+        .select('identifier_value')
+        .eq('client_id', lead.client_id)
+        .in('identifier_value', identifiers)
+        .limit(1)
+
+      // If the lookup itself fails we do not send. Failing open here would mean
+      // contacting someone who asked us not to.
+      if (dncError) {
+        console.error('[dnc] lookup failed, refusing send:', dncError)
+        return { success: false, error: 'Suppression check unavailable' }
+      }
+      if (dnc && dnc.length > 0) {
+        console.log('[dnc] suppressed:', leadId)
+        return { success: true, skipped: true }
+      }
+    }
+  }
 
   // ── 2. Fetch client ────────────────────────────────────────────────────────
   const { data: client, error: clientError } = await supabase
