@@ -52,13 +52,13 @@ export async function OPTIONS() {
 
 
 // Check if current time is within quiet hours
-function isQuietHours(start: string | null, end: string | null): boolean {
+function isQuietHours(start: string | null, end: string | null, tz?: string | null): boolean {
   // Unconfigured means we cannot prove the hour is permitted. TCPA restricts
   // calls to 8am-9pm local, so an unset window falls back to that rather than
   // allowing calls around the clock.
   if (!start || !end) { start = '21:00'; end = '08:00' }
   const now = new Date()
-  const cst = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }))
+  const cst = new Date(now.toLocaleString('en-US', { timeZone: tz || 'America/Chicago' }))
   const currentHour = cst.getHours()
   const startHour = parseInt(start.split(':')[0])
   const endHour = parseInt(end.split(':')[0])
@@ -69,12 +69,12 @@ function isQuietHours(start: string | null, end: string | null): boolean {
 }
 
 // Check if current time is within call hours
-function isWithinCallHours(start: string | null, end: string | null): boolean {
+function isWithinCallHours(start: string | null, end: string | null, tz?: string | null): boolean {
   // Unconfigured falls back to the TCPA-safe window rather than allowing
   // calls at any hour.
   if (!start || !end) { start = '08:00'; end = '21:00' }
   const now = new Date()
-  const cst = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }))
+  const cst = new Date(now.toLocaleString('en-US', { timeZone: tz || 'America/Chicago' }))
   const currentHour = cst.getHours()
   const startHour = parseInt(start.split(':')[0])
   const endHour = parseInt(end.split(':')[0])
@@ -141,7 +141,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, teams_webhook_url, ghl_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, first_lead_email_sent, email, first_name')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, teams_webhook_url, ghl_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, first_lead_email_sent, email, first_name, timezone')
     .eq('api_key', api_key)
     .single()
 
@@ -721,7 +721,7 @@ export async function POST(request: NextRequest) {
   // --- AUTO-RECOVERY EMAIL ---
 
     // AI Voice Callback (Retell)
-    if (client.ai_callback_enabled && phone && process.env.RETELL_API_KEY && !isQuietHours(client.quiet_hours_start, client.quiet_hours_end) && isWithinCallHours(client.ai_call_hours_start, client.ai_call_hours_end) && !optedOut) {
+    if (client.ai_callback_enabled && phone && process.env.RETELL_API_KEY && !isQuietHours(client.quiet_hours_start, client.quiet_hours_end, client.timezone) && isWithinCallHours(client.ai_call_hours_start, client.ai_call_hours_end, client.timezone) && !optedOut) {
       try {
         const agentId = client.retell_agent_id || 'agent_f0c3170df59b32221bfebd7c7f'
         const phoneClean = String(phone).replace(/[^+\d]/g, '')
