@@ -53,7 +53,10 @@ export async function OPTIONS() {
 
 // Check if current time is within quiet hours
 function isQuietHours(start: string | null, end: string | null): boolean {
-  if (!start || !end) return false
+  // Unconfigured means we cannot prove the hour is permitted. TCPA restricts
+  // calls to 8am-9pm local, so an unset window falls back to that rather than
+  // allowing calls around the clock.
+  if (!start || !end) { start = '21:00'; end = '08:00' }
   const now = new Date()
   const cst = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }))
   const currentHour = cst.getHours()
@@ -67,7 +70,9 @@ function isQuietHours(start: string | null, end: string | null): boolean {
 
 // Check if current time is within call hours
 function isWithinCallHours(start: string | null, end: string | null): boolean {
-  if (!start || !end) return true // no restriction = always allowed
+  // Unconfigured falls back to the TCPA-safe window rather than allowing
+  // calls at any hour.
+  if (!start || !end) { start = '08:00'; end = '21:00' }
   const now = new Date()
   const cst = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }))
   const currentHour = cst.getHours()
