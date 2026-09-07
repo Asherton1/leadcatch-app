@@ -392,23 +392,23 @@ export default function EnterprisePage() {
 
       <section className="enterprise-tiers reveal">
         <div className="enterprise-tiers-inner">
-          <p className="enterprise-tiers-eyebrow">The four enterprise tiers</p>
+          <p className="enterprise-tiers-eyebrow">Plans that scale with you</p>
           <h2 className="enterprise-tiers-headline">Every plan is bespoke. Pricing scales with your locations and integration needs.</h2>
 
           <div className="enterprise-tiers-grid">
             {TIERS.map(tier => (
               <div
                 key={tier.key}
-                className={`enterprise-tier-card ${tier.featured ? 'enterprise-tier-card-featured' : ''}`}
+                className={`enterprise-tier-card ${tier.featured ? 'enterprise-tier-card-featured' : ''} ${tier.key === 'custom' ? 'enterprise-tier-card-custom' : ''}`}
               >
                 {tier.featured && <div className="enterprise-tier-badge">Most popular</div>}
                 <div className="enterprise-tier-name">{tier.name}</div>
                 <div className="enterprise-tier-locations">{tier.locations}</div>
                 <div className="enterprise-tier-price">
-                  <span className="enterprise-tier-price-currency">$</span>
+                  {tier.price !== 'Custom' && <span className="enterprise-tier-price-currency">$</span>}
                   <span className="enterprise-tier-price-amount">{tier.price.replace('$','').replace('+','')}</span>
                   {tier.price.includes('+') && <span className="enterprise-tier-price-plus">+</span>}
-                  <span className="enterprise-tier-price-period">/ mo</span>
+                  {tier.price !== 'Custom' && <span className="enterprise-tier-price-period">/ mo</span>}
                 </div>
                 <p className="enterprise-tier-headline">{tier.headline}</p>
                 <ul className="enterprise-tier-bullets">

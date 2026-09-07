@@ -703,3 +703,34 @@
   .enterprise-concierge-band { padding: 3rem 1.25rem; }
   .enterprise-testimonials { padding: 4rem 1.25rem; }
 }
+
+
+/* ══ Custom as a full-width band rather than an orphan column ══════════ */
+.enterprise-tier-card-custom {
+  grid-column: 1 / -1 !important;
+  display: grid !important;
+  grid-template-columns: 260px 1fr auto !important;
+  gap: 2.5rem !important;
+  align-items: center !important;
+  padding: 1.9rem 2rem !important;
+}
+.enterprise-tier-card-custom ul {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  column-gap: 2.25rem !important;
+  row-gap: 0.4rem !important;
+  border-top: none !important;
+  padding-top: 0 !important;
+  margin: 0 !important;
+}
+.enterprise-tier-card-custom .enterprise-tier-price-amount { font-size: 2rem !important; }
+.enterprise-tier-card-custom a,
+.enterprise-tier-card-custom button { margin-top: 0 !important; white-space: nowrap; }
+
+@media (max-width: 1000px) {
+  .enterprise-tier-card-custom {
+    grid-template-columns: 1fr !important;
+    gap: 1.4rem !important;
+  }
+  .enterprise-tier-card-custom ul { grid-template-columns: 1fr !important; }
+}
