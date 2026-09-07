@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     siteName: 'ReCapture',
     type: 'website',
     images: [{
-        url: 'https://www.userecapture.com/api/og?title=ReCapture%20Pricing%20%E2%80%94%20Plans%20from%20%24397/mo%20with%207-Day%20Free%20Trial&eyebrow=Pricing',
+        url: 'https://www.userecapture.com/api/og?title=Pricing%20that%20scales%20with%20your%20locations.%20Starts%20at%20%24397.&eyebrow=Pricing',
         width: 1200,
         height: 630,
         alt: 'ReCapture',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'ReCapture Pricing — Pro from $397/mo, Enterprise from $1,997/mo',
     description: 'Pro at $397/mo includes AI voice callback. Enterprise from $1,997/mo for HIPAA + BAA, unlimited sites.',
-    images: ['https://www.userecapture.com/api/og?title=ReCapture%20Pricing%20%E2%80%94%20Plans%20from%20%24397/mo%20with%207-Day%20Free%20Trial&eyebrow=Pricing'],
+    images: ['https://www.userecapture.com/api/og?title=Pricing%20that%20scales%20with%20your%20locations.%20Starts%20at%20%24397.&eyebrow=Pricing'],
   },
 }
 

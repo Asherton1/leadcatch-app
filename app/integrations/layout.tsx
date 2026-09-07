@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     siteName: 'ReCapture',
     type: 'website',
     images: [{
-        url: 'https://www.userecapture.com/api/og?title=ReCapture%20Integrations%20%E2%80%94%20HubSpot%2C%20Boulevard%2C%20AppFolio%2C%20FUB%20%2B%20More&eyebrow=Integrations',
+        url: 'https://www.userecapture.com/api/og?title=Every%20place%20a%20recovered%20inquiry%20goes%2C%20the%20moment%20it%20is%20captured&eyebrow=Integrations',
         width: 1200,
         height: 630,
         alt: 'ReCapture',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'ReCapture Integrations — CRM, Ad Platforms, Webhooks & Zapier',
     description: 'Native GoHighLevel and Slack, real-time webhooks into every major CRM, plus Zapier and a REST API.',
-    images: ['https://www.userecapture.com/api/og?title=ReCapture%20Integrations%20%E2%80%94%20HubSpot%2C%20Boulevard%2C%20AppFolio%2C%20FUB%20%2B%20More&eyebrow=Integrations'],
+    images: ['https://www.userecapture.com/api/og?title=Every%20place%20a%20recovered%20inquiry%20goes%2C%20the%20moment%20it%20is%20captured&eyebrow=Integrations'],
   },
 }
 

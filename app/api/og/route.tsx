@@ -22,8 +22,28 @@ export async function GET(req: NextRequest) {
         display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
         background: '#0a0a0a', padding: '80px',
         fontFamily: 'Inter',
+        position: 'relative',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', fontSize: 64, fontWeight: 700, letterSpacing: '-0.03em', fontFamily: 'Inter' }}>
+        <div style={{
+          position: 'absolute', top: 0, left: 0, width: '1200px', height: '630px',
+          display: 'flex',
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),' +
+            'linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px),' +
+            'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),' +
+            'linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+          backgroundSize: '40px 40px, 40px 40px, 200px 200px, 200px 200px',
+        }} />
+        <div style={{
+          position: 'absolute', top: '-160px', right: '-160px',
+          width: '620px', height: '620px', display: 'flex', borderRadius: '310px',
+          background: 'radial-gradient(circle, rgba(255,107,53,0.13), rgba(255,107,53,0) 70%)',
+        }} />
+        <div style={{ position: 'absolute', top: '40px', left: '40px', width: '26px', height: '26px', display: 'flex', borderTop: '2px solid rgba(255,107,53,0.4)', borderLeft: '2px solid rgba(255,107,53,0.4)' }} />
+        <div style={{ position: 'absolute', top: '40px', right: '40px', width: '26px', height: '26px', display: 'flex', borderTop: '2px solid rgba(255,107,53,0.4)', borderRight: '2px solid rgba(255,107,53,0.4)' }} />
+        <div style={{ position: 'absolute', bottom: '40px', left: '40px', width: '26px', height: '26px', display: 'flex', borderBottom: '2px solid rgba(255,107,53,0.4)', borderLeft: '2px solid rgba(255,107,53,0.4)' }} />
+        <div style={{ position: 'absolute', bottom: '40px', right: '40px', width: '26px', height: '26px', display: 'flex', borderBottom: '2px solid rgba(255,107,53,0.4)', borderRight: '2px solid rgba(255,107,53,0.4)' }} />
+        <div style={{ display: 'flex', alignItems: 'center', fontSize: 64, fontWeight: 700, letterSpacing: '-0.03em', fontFamily: 'Inter' , position: 'relative' }}>
           <svg width="56" height="56" viewBox="0 0 24 24" style={{ marginRight: '12px' }} xmlns="http://www.w3.org/2000/svg">
             <path d="M12 5V19" stroke="#ff6b35" strokeWidth="3.5" strokeLinecap="round" />
             <path d="M5 12H19" stroke="#ff6b35" strokeWidth="3.5" strokeLinecap="round" />
@@ -32,7 +52,7 @@ export async function GET(req: NextRequest) {
           <span style={{ color: '#ff6b35', fontFamily: 'Inter' }}>Capture</span>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', flexDirection: 'column' , position: 'relative' }}>
           {eyebrow ? (
             <div style={{ color: '#ff6b35', fontSize: 22, fontWeight: 700, letterSpacing: '0.14em',
                           textTransform: 'uppercase', marginBottom: '28px', display: 'flex', fontFamily: 'Inter' }}>
@@ -50,7 +70,7 @@ export async function GET(req: NextRequest) {
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', color: '#888888', fontSize: 22, fontWeight: 700, fontFamily: 'Inter' }}>
+        <div style={{ display: 'flex', alignItems: 'center', color: '#888888', fontSize: 22, fontWeight: 700, fontFamily: 'Inter' , position: 'relative' }}>
           <div style={{ width: '72px', height: '4px', background: '#ff6b35', marginRight: '18px', display: 'flex' }} />
           userecapture.com
         </div>
