@@ -328,6 +328,31 @@
     } catch (e) { return false; }
   }
 
+  // A field no human sees. Bots that fill every input will fill this one.
+  var HP_NAME = 'rc_hp_' + Math.random().toString(36).slice(2, 8);
+  function plantHoneypot(form) {
+    try {
+      if (!form || form.querySelector('[data-rc-hp]')) return;
+      var wrap = doc.createElement('div');
+      wrap.setAttribute('aria-hidden', 'true');
+      wrap.style.cssText = 'position:absolute!important;left:-9999px!important;top:-9999px!important;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;';
+      var input = doc.createElement('input');
+      input.type = 'text';
+      input.name = HP_NAME;
+      input.tabIndex = -1;
+      input.autocomplete = 'off';
+      input.setAttribute('data-rc-hp', '1');
+      wrap.appendChild(input);
+      form.appendChild(wrap);
+    } catch (e) { /* never break the host page */ }
+  }
+  function readHoneypot(form) {
+    try {
+      var el = form && form.querySelector('[data-rc-hp]');
+      return el ? el.value : '';
+    } catch (e) { return ''; }
+  }
+
   function isValidEmail(s) {
     return typeof s === 'string' && /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(s.trim());
   }
@@ -413,6 +438,7 @@
 
   function FormTracker(form) {
     this.form      = form;
+    plantHoneypot(form);
     this.sessionId = pageSession + (trackerCount > 0 ? '_' + trackerCount : '');
     this.startTime = null;
     this.touched   = false;
@@ -502,6 +528,7 @@
       api_key:          apiKey,
       session_id:       this.sessionId,
       visitor_session_id: (typeof visitorSessionId !== 'undefined' ? visitorSessionId : null),
+      hp:               (function () { try { return readHoneypot(this && this.form); } catch (e) { return ''; } }).call(this),
       name:             this.named.name,
       email:            this.named.email,
       phone:            this.named.phone,

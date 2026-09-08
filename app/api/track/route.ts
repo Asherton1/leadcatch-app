@@ -89,6 +89,55 @@ const BLOCKED_COUNTRIES = new Set([
   'GB','CH',
 ])
 
+// Domains that exist to be thrown away. A recovery email here reaches nobody.
+const DISPOSABLE_DOMAINS = new Set([
+  'mailinator.com','guerrillamail.com','10minutemail.com','tempmail.com',
+  'throwawaymail.com','yopmail.com','trashmail.com','sharklasers.com',
+  'getnada.com','maildrop.cc','dispostable.com','fakeinbox.com',
+  'temp-mail.org','mohmal.com','emailondeck.com','spamgourmet.com',
+])
+
+/**
+ * Heuristics for automated submissions. Deliberately conservative: a false
+ * positive means a real inquiry is hidden from the customer, which is worse
+ * than a bot slipping through.
+ */
+function detectBot(input: {
+  email: string | null
+  name: string | null
+  timeOnForm: number
+  fieldsCompleted: number
+  honeypot?: unknown
+}): { isBot: boolean; reason: string | null } {
+  // A hidden field only a script would fill.
+  if (typeof input.honeypot === 'string' && input.honeypot.trim().length > 0) {
+    return { isBot: true, reason: 'honeypot' }
+  }
+
+  // Nobody types three real fields in under two seconds.
+  if (input.fieldsCompleted >= 3 && input.timeOnForm > 0 && input.timeOnForm < 2) {
+    return { isBot: true, reason: 'submitted_too_fast' }
+  }
+
+  if (input.email) {
+    const domain = input.email.split('@')[1]?.toLowerCase()
+    if (domain && DISPOSABLE_DOMAINS.has(domain)) {
+      return { isBot: true, reason: 'disposable_email' }
+    }
+    // Long runs of consonants with no vowels are keyboard mashing.
+    const local = input.email.split('@')[0] ?? ''
+    if (local.length >= 8 && !/[aeiou]/i.test(local)) {
+      return { isBot: true, reason: 'nonsense_email' }
+    }
+  }
+
+  if (input.name && /^([a-z])\1{3,}$/i.test(input.name.trim())) {
+    return { isBot: true, reason: 'repeated_character_name' }
+  }
+
+  return { isBot: false, reason: null }
+}
+
 export async function POST(request: NextRequest) {
   // ── Geographic gate ───────────────────────────────────────────────────
   // Authoritative block on EU/UK/Swiss traffic, read from the connection IP.
@@ -263,6 +312,13 @@ export async function POST(request: NextRequest) {
 
   const signal_value = Math.round(estimated_value * intentFactor)
 
+  const botVerdict = detectBot({
+    email,
+    name: (name as string) ?? null,
+    timeOnForm: Number(time_on_form ?? 0),
+    fieldsCompleted: Number(fields_completed ?? 0),
+    honeypot: (body as Record<string, unknown>).hp,
+  })
   const payload = {
     client_id: client.id,
     session_id,
@@ -270,6 +326,8 @@ export async function POST(request: NextRequest) {
     name: name ?? null,
     email: email ?? null,
     phone: phone ?? null,
+    suspected_bot: botVerdict.isBot,
+    bot_reason: botVerdict.reason,
     fields_completed: Number(fields_completed ?? 0),
     total_fields: Number(total_fields ?? 0),
     time_on_form: Number(time_on_form ?? 0),
@@ -721,7 +779,7 @@ export async function POST(request: NextRequest) {
   // --- AUTO-RECOVERY EMAIL ---
 
     // AI Voice Callback (Retell)
-    if (client.ai_callback_enabled && phone && process.env.RETELL_API_KEY && !isQuietHours(client.quiet_hours_start, client.quiet_hours_end, client.timezone) && isWithinCallHours(client.ai_call_hours_start, client.ai_call_hours_end, client.timezone) && !optedOut) {
+    if (client.ai_callback_enabled && phone && process.env.RETELL_API_KEY && !isQuietHours(client.quiet_hours_start, client.quiet_hours_end, client.timezone) && isWithinCallHours(client.ai_call_hours_start, client.ai_call_hours_end, client.timezone) && !optedOut && !botVerdict.isBot) {
       try {
         const agentId = client.retell_agent_id || 'agent_f0c3170df59b32221bfebd7c7f'
         const phoneClean = String(phone).replace(/[^+\d]/g, '')
@@ -751,7 +809,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-  if (client.auto_email_enabled && email && client.plan !== 'essentials' && !optedOut) {
+  if (client.auto_email_enabled && email && client.plan !== 'essentials' && !optedOut && !botVerdict.isBot) {
     const delayMinutes = client.email_delay_minutes ?? 0
 
     if (delayMinutes > 0) {
