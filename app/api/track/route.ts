@@ -114,8 +114,10 @@ function detectBot(input: {
     return { isBot: true, reason: 'honeypot' }
   }
 
-  // Nobody types three real fields in under two seconds.
-  if (input.fieldsCompleted >= 3 && input.timeOnForm > 0 && input.timeOnForm < 2) {
+  // Timing is the weakest signal here: browser autofill can populate several
+  // fields almost instantly, and flagging a real person is worse than missing
+  // a bot. Only a very large burst with effectively no elapsed time counts.
+  if (input.fieldsCompleted >= 5 && input.timeOnForm > 0 && input.timeOnForm < 1) {
     return { isBot: true, reason: 'submitted_too_fast' }
   }
 
@@ -126,7 +128,9 @@ function detectBot(input: {
     }
     // Long runs of consonants with no vowels are keyboard mashing.
     const local = input.email.split('@')[0] ?? ''
-    if (local.length >= 8 && !/[aeiou]/i.test(local)) {
+    // Long, vowel-free and not separated by dots or dashes. Initials and
+    // abbreviations usually contain separators, so require none.
+    if (local.length >= 12 && !/[aeiou]/i.test(local) && !/[._-]/.test(local)) {
       return { isBot: true, reason: 'nonsense_email' }
     }
   }
