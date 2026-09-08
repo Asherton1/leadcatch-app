@@ -31,6 +31,8 @@ interface Lead {
   visitor_session_id?: string | null
   match_keys?: string[] | null
   match_strength?: number | null
+  suspected_bot?: boolean | null
+  bot_reason?: string | null
   converted_value?: number | null
   google_conversion_sent?: boolean | null
   id: string
@@ -978,6 +980,7 @@ export default function Dashboard() {
   const [search, setSearch]                     = useState('')
   const [modalLead, setModalLead]               = useState<Lead | null>(null)
   const [selectMode, setSelectMode]             = useState(false)
+  const [showBots, setShowBots]                 = useState(false)
   const [selectedIds, setSelectedIds]           = useState<Set<string>>(new Set())
   const [bulkDeleting, setBulkDeleting]         = useState(false)
   const [confirmBulk, setConfirmBulk]           = useState(false)
@@ -1135,7 +1138,7 @@ export default function Dashboard() {
     const poll = async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
 
@@ -1168,7 +1171,7 @@ export default function Dashboard() {
     setSearch('')
     supabase
       .from('leads')
-      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id')
+      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason')
       .eq('client_id', selectedClient.id)
       .order('created_at', { ascending: false })
       .then(({ data, error }) => {
@@ -1184,7 +1187,7 @@ export default function Dashboard() {
     const iv = setInterval(async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
       if (!error && data) setLeads(data as Lead[])
@@ -1208,8 +1211,12 @@ export default function Dashboard() {
   }
 
   // ── Derived ────────────────────────────────────────────────────────────────
+  const botCount = useMemo(() => leads.filter(l => l.suspected_bot).length, [leads])
+
   const filteredLeads = useMemo(() => {
     let rows = filterByDate(leads, filter)
+    // Automated submissions are hidden unless explicitly requested.
+    if (!showBots) rows = rows.filter(l => !l.suspected_bot)
     if (search.trim()) {
       const q = search.toLowerCase()
       rows = rows.filter(l =>
@@ -1243,7 +1250,7 @@ export default function Dashboard() {
       rows = rows.filter(l => l.email_sent === true)
     }
     return rows
-  }, [leads, filter, search, statusFilter, cardFilter])
+  }, [leads, filter, search, statusFilter, cardFilter, showBots])
 
   const stats = useMemo(() => {
     const total_leads        = filteredLeads.length
@@ -2443,6 +2450,19 @@ export default function Dashboard() {
       {/* ── Leads Table ─────────────────────────────────────────────────────── */}
       <div className="table-container">
         <div className="lead-tools">
+          {botCount > 0 && (
+            <button
+              className={'bot-toggle' + (showBots ? ' is-on' : '')}
+              type="button"
+              onClick={() => setShowBots(v => !v)}
+              title="Submissions that look automated are hidden by default"
+            >
+              {showBots
+                ? `Hiding nothing \u00b7 ${botCount} flagged`
+                : `${botCount} filtered as automated`}
+            </button>
+          )}
+
           <button
             className={'select-toggle' + (selectMode ? ' is-on' : '')}
             type="button"
