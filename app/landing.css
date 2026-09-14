@@ -6573,3 +6573,41 @@ select.audit-form-input option {
   .pricing-menu .pf-tip { display: none; }
   .pricing-menu li.has-info .pf-label { border-bottom: none; }
 }
+
+/* Kill the rail for good */
+.pricing-menu .pricing-feature-list::before,
+.pricing-feature-list::before { display: none !important; content: none !important; }
+
+/* Tooltips must sit above the header and the CTA */
+.pricing-menu .pricing-row { overflow: visible !important; }
+.pricing-menu .pricing-drawer,
+.pricing-menu .pricing-drawer-inner { overflow: visible !important; }
+.pricing-menu .pricing-feature-list { overflow: visible !important; }
+
+.pricing-menu .pf-tip { z-index: 200 !important; }
+.pricing-menu li.has-info:hover { z-index: 210; position: relative; }
+
+.pricing-menu .pricing-drawer-toggle { z-index: 1; position: relative; }
+.pricing-menu .pricing-row-cta-wrap { z-index: 1; position: relative; }
+
+/* First four flip below, last four flip above, so nothing clips */
+.pricing-menu .pricing-feature-list li:nth-child(-n+4) .pf-tip {
+  bottom: auto !important;
+  top: calc(100% + 8px) !important;
+}
+.pricing-menu .pricing-feature-list li:nth-child(-n+4) .pf-tip::after {
+  top: auto !important;
+  bottom: 100% !important;
+  border-top-color: transparent !important;
+  border-bottom-color: rgba(255,107,53,0.3) !important;
+}
+.pricing-menu .pricing-feature-list li:nth-last-child(-n+4) .pf-tip {
+  top: auto !important;
+  bottom: calc(100% + 8px) !important;
+}
+.pricing-menu .pricing-feature-list li:nth-last-child(-n+4) .pf-tip::after {
+  bottom: auto !important;
+  top: 100% !important;
+  border-bottom-color: transparent !important;
+  border-top-color: rgba(255,107,53,0.3) !important;
+}
