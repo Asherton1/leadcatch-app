@@ -6258,3 +6258,53 @@ select.audit-form-input option {
 @media (max-width: 820px) {
   .pricing-row-desc { min-height: 0; }
 }
+
+/* ════ PRICING FINAL ════ */
+
+/* CTA — both solid, no exceptions */
+.pricing-menu .pricing-row a.pricing-row-cta,
+.pricing-menu .pricing-row button.pricing-row-cta,
+.pricing-menu .pricing-row-pro a.pricing-row-cta,
+.pricing-menu .pricing-row-pro button.pricing-row-cta {
+  background: #ff6b35 !important;
+  background-color: #ff6b35 !important;
+  background-image: none !important;
+  border: 1px solid #ff6b35 !important;
+  color: #0a0a0a !important;
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+/* Toggle — no fill on any state */
+.pricing-menu .pricing-row .pricing-drawer-toggle,
+.pricing-menu .pricing-row .pricing-drawer-toggle:hover,
+.pricing-menu .pricing-row .pricing-drawer-toggle:active,
+.pricing-menu .pricing-row .pricing-drawer-toggle:focus,
+.pricing-menu .pricing-row .pricing-drawer-toggle:focus-visible,
+.pricing-menu .pricing-row .pricing-drawer-toggle.is-open,
+.pricing-menu .pricing-row .pricing-drawer-toggle.is-open:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(255,255,255,0.07) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Rows align: description fixed, toggle pinned above the CTA */
+.pricing-menu .pricing-row {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.pricing-menu .pricing-row-desc {
+  min-height: 8.5rem !important;
+  margin-bottom: 0 !important;
+}
+.pricing-menu .pricing-drawer-toggle { margin-top: 0 !important; }
+.pricing-menu .pricing-drawer { flex: 0 0 auto; }
+.pricing-menu .pricing-row-cta-wrap { margin-top: auto !important; padding-top: 1.25rem !important; }
+
+@media (max-width: 820px) {
+  .pricing-menu .pricing-row-desc { min-height: 0 !important; }
+}
