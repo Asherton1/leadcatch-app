@@ -6184,3 +6184,32 @@ select.audit-form-input option {
 
 /* the old joined paragraph is gone */
 .pricing-row-features { display: none !important; }
+
+/* Drawer toggle must not inherit CTA button styles */
+.pricing-row .pricing-drawer-toggle,
+.pricing-row button.pricing-drawer-toggle {
+  display: flex !important;
+  width: 100% !important;
+  background: none !important;
+  border: none !important;
+  border-top: 1px solid rgba(255,255,255,0.07) !important;
+  border-radius: 0 !important;
+  padding: 0.9rem 0 !important;
+  margin: 0.5rem 0 0 !important;
+  color: #a1a1aa !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  justify-content: flex-start !important;
+  transform: none !important;
+}
+.pricing-row .pricing-drawer-toggle:hover { color: #fff !important; background: none !important; }
+.pricing-row .pricing-drawer-toggle.is-open { color: #ff6b35 !important; }
+.pricing-row-pro .pricing-drawer-toggle { color: #a1a1aa !important; }
+
+/* CTA back to full width at the bottom of the card */
+.pricing-row-cta-wrap { margin-top: auto; padding-top: 1.1rem; }
+.pricing-row .pricing-row-cta {
+  width: 100% !important;
+  justify-content: center !important;
+  align-self: stretch !important;
+}
