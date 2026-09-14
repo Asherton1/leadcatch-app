@@ -5,6 +5,7 @@ import Link from 'next/link'
 export default function PricingSection() {
   const [annual, setAnnual] = useState(false)
   const [showEnterprise, setShowEnterprise] = useState(false)
+  const [openTier, setOpenTier] = useState<number | null>(null)
   const [formData, setFormData] = useState({ name: '', email: '', company: '', locations: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
@@ -143,9 +144,28 @@ export default function PricingSection() {
 
             <p className="pricing-row-desc">{t.desc}</p>
 
-            <p className="pricing-row-features">
-              {t.features.join(' \u2014 ')}
-            </p>
+            <button
+              className={'pricing-drawer-toggle' + (openTier === i ? ' is-open' : '')}
+              type="button"
+              onClick={() => setOpenTier(openTier === i ? null : i)}
+              aria-expanded={openTier === i}
+            >
+              <span>What&apos;s included</span>
+              <span className="pricing-drawer-count">{t.features.length}</span>
+              <span className="pricing-drawer-chev">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+
+            <div className="pricing-drawer" style={{ gridTemplateRows: openTier === i ? '1fr' : '0fr' }}>
+              <div className="pricing-drawer-inner">
+                <ul className="pricing-feature-list">
+                  {t.features.map((f, fi) => (
+                    <li key={fi}>{f}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
             <div className="pricing-row-cta-wrap">
               {t.cta.isModal ? (

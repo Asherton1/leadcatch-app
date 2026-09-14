@@ -6103,3 +6103,84 @@ select.audit-form-input option {
   .nav-mobile-menu .nav-submenu a:last-child { border-bottom: none !important; }
   .nav-mobile-menu .nav-submenu a.mobile-link-active { color: #ff6b35 !important; }
 }
+
+/* ══ Pricing feature drawer ════════════════════════════════════════════ */
+.pricing-drawer-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.85rem 0;
+  margin: 0.25rem 0 0;
+  background: none;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #a1a1aa;
+  transition: color .22s ease;
+}
+.pricing-drawer-toggle:hover { color: #fff; }
+.pricing-drawer-toggle.is-open { color: #ff6b35; }
+
+.pricing-drawer-count {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #6b6b6b;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 3px;
+  padding: 0.1rem 0.35rem;
+}
+.pricing-drawer-toggle.is-open .pricing-drawer-count {
+  color: #ff6b35;
+  border-color: rgba(255,107,53,0.3);
+}
+.pricing-drawer-chev {
+  margin-left: auto;
+  display: grid;
+  place-items: center;
+  color: inherit;
+  transition: transform .35s cubic-bezier(0.22,1,0.36,1);
+}
+.pricing-drawer-toggle.is-open .pricing-drawer-chev { transform: rotate(180deg); }
+
+.pricing-drawer {
+  display: grid;
+  grid-template-rows: 0fr;
+  min-height: 0;
+  transition: grid-template-rows .42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pricing-drawer-inner { overflow: hidden; min-height: 0; }
+
+.pricing-feature-list {
+  list-style: none;
+  margin: 0 0 1.35rem;
+  padding: 0.35rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.62rem;
+}
+.pricing-feature-list li {
+  position: relative;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: #a1a1aa;
+  padding-left: 1.4rem;
+}
+.pricing-feature-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.16);
+}
+.pricing-row-pro .pricing-feature-list li::before { background: rgba(255,107,53,0.65); }
+
+/* the old joined paragraph is gone */
+.pricing-row-features { display: none !important; }
