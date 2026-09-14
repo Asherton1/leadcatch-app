@@ -141,6 +141,13 @@ export default function Post() {
         <p>
           If you run an agency and this describes a conversation you have had internally, you can see how the console works on the <Link href="/dashboard-tour" style={{ color: '#ff6b35' }}>dashboard tour</Link>, or read what ReCapture actually captures on our <Link href="/privacy" style={{ color: '#ff6b35' }}>privacy page</Link>.
         </p>
+
+        <div className="blog-post-cta">
+          <h3>One console, every client</h3>
+          <p>ReCapture was built so an agency can run recovery across every client account from a single dashboard, without thirty separate logins or thirty separate invoices.</p>
+          <Link href="/agency" className="blog-post-cta-btn">See the agency console</Link>
+        </div>
+
       </article>
 
       <Footer />

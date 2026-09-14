@@ -136,6 +136,13 @@ export default function Post() {
         <p>
           If you want to see the shape of it, the <Link href="/dashboard-tour" style={{ color: '#ff6b35' }}>dashboard tour</Link> walks through the attribution view, and our <Link href="/privacy" style={{ color: '#ff6b35' }}>privacy page</Link> covers exactly what gets captured.
         </p>
+
+        <div className="blog-post-cta">
+          <h3>See which campaigns are actually producing demand</h3>
+          <p>ReCapture attributes every captured inquiry back to the channel and campaign that produced it, submitted or not, so your reporting stops penalising the channels bringing you careful buyers.</p>
+          <Link href="/dashboard-tour" className="blog-post-cta-btn">See the attribution view</Link>
+        </div>
+
       </article>
 
       <Footer />

@@ -169,6 +169,13 @@ export default function Post() {
         <p>
           You can read more about what we capture and how we handle it on our <Link href="/privacy" style={{ color: '#ff6b35' }}>privacy page</Link>, or see how the data appears in practice on the <Link href="/dashboard-tour" style={{ color: '#ff6b35' }}>dashboard tour</Link>.
         </p>
+
+        <div className="blog-post-cta">
+          <h3>Give Meta and Google the other half of your demand</h3>
+          <p>Every recovered inquiry goes back as a server-side conversion event, hashed and deduplicated against your existing pixel and weighted by how much intent each person actually showed.</p>
+          <Link href="/demo" className="blog-post-cta-btn">Try the live demo</Link>
+        </div>
+
       </article>
 
       <Footer />
