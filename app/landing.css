@@ -6611,3 +6611,6 @@ select.audit-form-input option {
   border-bottom-color: transparent !important;
   border-top-color: rgba(255,107,53,0.3) !important;
 }
+
+/* Breathing room above the CTA */
+.pricing-menu .pricing-row-cta-wrap { padding-top: 2rem !important; }
