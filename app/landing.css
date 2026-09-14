@@ -6509,3 +6509,67 @@ select.audit-form-input option {
   .pricing-menu .pricing-feature-list li,
   .pricing-menu .pricing-feature-list li::before { transition: none !important; transform: none !important; opacity: 1 !important; }
 }
+
+/* ════ Feature hover tooltip ════ */
+.pricing-menu .pricing-feature-list li.has-info { position: relative; cursor: help; }
+
+.pricing-menu .pf-tip {
+  position: absolute;
+  left: 1.6rem;
+  bottom: calc(100% + 8px);
+  z-index: 40;
+  width: max-content;
+  max-width: 260px;
+  padding: 0.7rem 0.85rem;
+  background: #0f0f0f;
+  border: 1px solid rgba(255,107,53,0.3);
+  border-radius: 0.5rem;
+  box-shadow: 0 12px 34px rgba(0,0,0,0.55);
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: #c4c4c8;
+  letter-spacing: -0.003em;
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s cubic-bezier(0.22,1,0.36,1);
+}
+.pricing-menu li.has-info:hover .pf-tip {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .12s;
+}
+
+/* little arrow */
+.pricing-menu .pf-tip::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 100%;
+  border: 6px solid transparent;
+  border-top-color: rgba(255,107,53,0.3);
+}
+
+/* underline hint so people know there is something to hover */
+.pricing-menu li.has-info .pf-label {
+  border-bottom: 1px dotted rgba(255,255,255,0.14);
+  transition: border-color .2s ease;
+}
+.pricing-menu li.has-info:hover .pf-label { border-bottom-color: rgba(255,107,53,0.5); }
+
+/* last few rows flip below so the tip does not clip off the top */
+.pricing-menu .pricing-feature-list li:nth-last-child(-n+3) .pf-tip {
+  bottom: auto;
+  top: calc(100% + 8px);
+}
+.pricing-menu .pricing-feature-list li:nth-last-child(-n+3) .pf-tip::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: rgba(255,107,53,0.3);
+}
+
+@media (max-width: 820px) {
+  .pricing-menu .pf-tip { display: none; }
+  .pricing-menu li.has-info .pf-label { border-bottom: none; }
+}

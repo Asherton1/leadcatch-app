@@ -2,6 +2,38 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
+
+const FEATURE_INFO: Record<string, string> = {
+  'Meta CAPI + Google Ads conversion signals': 'Recovered inquiries go back to Meta and Google as server-side conversion events, hashed and deduplicated against your existing pixel so nothing double counts.',
+  'Intent-weighted conversion values': 'Someone who filled five fields is worth more than someone who filled two. Each event carries a value reflecting how far they actually got.',
+  'Returning visitor detection': 'Spots when the same person starts your form more than once across days or weeks, and weights their score accordingly.',
+  'Closed-won attribution back to ad platforms': 'When a recovered lead becomes a customer, the real revenue goes back to Meta and Google so campaigns optimise toward money rather than form fills.',
+  'Channel and campaign attribution reporting': 'Every captured inquiry traced to the channel and campaign that produced it, including untagged and Local Services traffic.',
+  'One website — every page and form included': 'No per-form or per-page limits. One script tag covers the whole site, subdomains included.',
+  'Full session journey per lead': 'See every page someone visited before they started your form, in order, with time on each.',
+  'AI voice callback within 60 seconds': 'An AI agent calls the abandoned lead back and identifies itself as automated. Currently in beta.',
+  'Automated lead recovery emails': 'A branded email goes out on your behalf on whatever delay you set, from your own sender name.',
+  'Instant SMS lead alerts': 'A text to your team the moment a high-intent inquiry abandons, with the name and contact details attached.',
+  'Instant Slack lead alerts': 'Lead alerts posted straight into your team channel, with one-click actions.',
+  'Custom sender name & branding': 'Recovery emails come from your business, not from us. Your logo, your colours, your reply-to address.',
+  'Configurable send delay timing': 'Choose how long to wait before recovery fires. Immediate for high-intent categories, longer where a fast follow-up would feel intrusive.',
+  'Outbound webhooks (Zapier, Make)': 'Push every captured lead to any endpoint in real time, or into Zapier and Make for anything else you run.',
+  'Weekly reports with trend analytics': 'A weekly summary of what was captured, what was recovered, and how it moved against previous weeks.',
+  'HIPAA-ready data handling + BAA available': 'Contact fields only, never free text. Sensitive fields hard excluded at the code level. BAA available for healthcare deployments.',
+  'Priority support': 'Direct access rather than a ticket queue, with same-day response on anything blocking.',
+  'Everything in Pro': 'Every capability from the Pro plan, applied across all of your locations.',
+  'One dashboard across every location': 'All sites in one view, with the ability to drill into any single location without switching accounts.',
+  'HIPAA BAA included': 'A Business Associate Agreement executed as part of the plan rather than an add-on.',
+  'Unlimited websites & locations': 'No cap on sites within your plan tier. Add a location without adding a subscription.',
+  'Centralized multi-location dashboard': 'Rolled-up numbers across every site, with attention flags on the locations that have inquiries waiting.',
+  'Per-location reporting & analytics': 'Capture and recovery broken out by site, so you can see which locations are converting and which are not.',
+  'White-glove onboarding & installation': 'We install the tracker and configure every form ourselves rather than handing you documentation.',
+  'Custom-branded recovery emails per site': 'Each location sends under its own name and branding, not a single corporate template.',
+  'Free Form Audit reports for your clients': 'A written audit of any form on your sites, covering what it captures, where it leaks, and what to change.',
+  'Executive roll-up reports': 'A single report across every location, built for someone who needs the number rather than the detail.',
+  'Dedicated account manager': 'One named person who knows your account, rather than whoever picks up the ticket.',
+}
+
 export default function PricingSection() {
   const [annual, setAnnual] = useState(false)
   const [showEnterprise, setShowEnterprise] = useState(false)
@@ -160,9 +192,15 @@ export default function PricingSection() {
             <div className="pricing-drawer" style={{ gridTemplateRows: openTier === i ? '1fr' : '0fr' }}>
               <div className="pricing-drawer-inner">
                 <ul className="pricing-feature-list">
-                  {t.features.map((f, fi) => (
-                    <li key={fi}>{f}</li>
-                  ))}
+                  {t.features.map((f, fi) => {
+                    const info = FEATURE_INFO[f]
+                    return (
+                      <li key={fi} className={info ? 'has-info' : ''}>
+                        <span className="pf-label">{f}</span>
+                        {info && <span className="pf-tip" role="tooltip">{info}</span>}
+                      </li>
+                    )
+                  })}
                 </ul>
               </div>
             </div>
