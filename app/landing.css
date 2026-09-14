@@ -6308,3 +6308,78 @@ select.audit-form-input option {
 @media (max-width: 820px) {
   .pricing-menu .pricing-row-desc { min-height: 0 !important; }
 }
+
+/* ════ PRICING DRAWER — independent heights, orange marks, better header ════ */
+
+/* Cards size to their own content, not to each other */
+.pricing-menu { align-items: start !important; }
+.pricing-menu .pricing-row { height: auto !important; }
+
+/* Orange marks on both tiers */
+.pricing-menu .pricing-feature-list li::before {
+  background: #ff6b35 !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  top: 0.6em !important;
+  opacity: 0.85;
+}
+
+/* Header reads as a section, not a form row */
+.pricing-menu .pricing-drawer-toggle {
+  padding: 1.1rem 0 0.95rem !important;
+  font-size: 0.66rem !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  color: #6b6b6b !important;
+  gap: 0.7rem !important;
+}
+.pricing-menu .pricing-drawer-toggle:hover { color: #a1a1aa !important; }
+.pricing-menu .pricing-drawer-toggle.is-open { color: #ff6b35 !important; }
+
+.pricing-menu .pricing-drawer-count {
+  font-size: 0.6rem !important;
+  letter-spacing: 0.04em !important;
+  padding: 0.14rem 0.38rem !important;
+  border-radius: 3px !important;
+}
+
+.pricing-menu .pricing-drawer-toggle::after {
+  font-size: 1.15rem !important;
+  font-weight: 400;
+  color: #5f5f5f !important;
+}
+
+/* Expanded list sits on its own inset surface */
+.pricing-menu .pricing-feature-list {
+  padding: 1.05rem 1.1rem 1.15rem !important;
+  margin: 0 0 0.25rem !important;
+  background: rgba(255,255,255,0.016);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-left: 2px solid rgba(255,107,53,0.45);
+  border-radius: 0 0.5rem 0.5rem 0;
+  gap: 0.55rem !important;
+}
+.pricing-menu .pricing-feature-list li {
+  font-size: 0.82rem !important;
+  padding-left: 1.15rem !important;
+  color: #a1a1aa !important;
+}
+
+/* Each item fades in as the drawer opens */
+.pricing-menu .pricing-feature-list li {
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .3s ease, transform .3s cubic-bezier(0.22,1,0.36,1);
+}
+.pricing-menu .pricing-drawer[style*="1fr"] .pricing-feature-list li {
+  opacity: 1;
+  transform: none;
+}
+.pricing-menu .pricing-drawer[style*="1fr"] .pricing-feature-list li:nth-child(1)  { transition-delay: .06s }
+.pricing-menu .pricing-drawer[style*="1fr"] .pricing-feature-list li:nth-child(2)  { transition-delay: .09s }
+.pricing-menu .pricing-drawer[style*="1fr"] .pricing-feature-list li:nth-child(3)  { transition-delay: .12s }
+.pricing-menu .pricing-drawer[style*="1fr"] .pricing-feature-list li:nth-child(4)  { transition-delay: .15s }
+.pricing-menu .pricing-drawer[style*="1fr"] .pricing-feature-list li:nth-child(5)  { transition-delay: .18s }
+.pricing-menu .pricing-drawer[style*="1fr"] .pricing-feature-list li:nth-child(n+6) { transition-delay: .21s }
