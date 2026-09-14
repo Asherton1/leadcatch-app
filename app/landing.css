@@ -6213,3 +6213,48 @@ select.audit-form-input option {
   justify-content: center !important;
   align-self: stretch !important;
 }
+
+/* ── Drawer toggle: never a button, plus/minus not chevron ─────────────── */
+.pricing-row .pricing-drawer-toggle,
+.pricing-row .pricing-drawer-toggle:hover,
+.pricing-row .pricing-drawer-toggle:focus,
+.pricing-row-pro .pricing-drawer-toggle,
+.pricing-row-pro .pricing-drawer-toggle:hover {
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-top: 1px solid rgba(255,255,255,0.07) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.pricing-drawer-chev { display: none !important; }
+.pricing-drawer-toggle::after {
+  content: '+';
+  margin-left: auto;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: #6b6b6b;
+  transition: transform .35s cubic-bezier(0.22,1,0.36,1), color .22s ease;
+}
+.pricing-drawer-toggle:hover::after { color: #ff6b35; }
+.pricing-drawer-toggle.is-open::after { transform: rotate(45deg); color: #ff6b35; }
+
+/* ── Both CTAs identical ───────────────────────────────────────────────── */
+.pricing-row .pricing-row-cta,
+.pricing-row-pro .pricing-row-cta {
+  background: #ff6b35 !important;
+  border: 1px solid #ff6b35 !important;
+  color: #0a0a0a !important;
+}
+.pricing-row .pricing-row-cta:hover,
+.pricing-row-pro .pricing-row-cta:hover {
+  background: #ff7d4d !important;
+  border-color: #ff7d4d !important;
+  transform: translateY(-1px);
+}
+
+/* ── Description block equalised so the rule lines up ──────────────────── */
+.pricing-row-desc { min-height: 7.5rem; }
+@media (max-width: 820px) {
+  .pricing-row-desc { min-height: 0; }
+}
