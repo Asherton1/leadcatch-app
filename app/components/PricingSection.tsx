@@ -52,7 +52,7 @@ export default function PricingSection() {
       price: pro,
       priceDisplay: `$${pro}`,
       period: '/ mo',
-      desc: "Automated recovery. Leads come back without lifting a finger.",
+      desc: "Everything you need on one website. Partial inquiries captured the moment someone abandons your form, scored by intent, with recovery running automatically and every lead attributed back to the campaign that produced it.",
       hipaa: true,
       features: [
         'Meta CAPI + Google Ads conversion signals',
