@@ -33,7 +33,7 @@ export default function PaidMediaPage() {
           <p className="canon-hero-eyebrow">Consulting</p>
           <h1 className="canon-hero-headline">
             <span className="canon-hero-headline-primary">Somebody has to actually be in the account.</span>{' '}
-            <span className="canon-hero-headline-muted">I run Google and Meta campaigns for businesses where one client is worth thousands. A small list on purpose, so the person you talk to is the person doing the work.</span>
+            <span className="canon-hero-headline-muted">I run Google and Meta campaigns for businesses where one client is worth thousands. No account team, no coordinator relaying messages. You email me, I am the one in the account.</span>
           </h1>
         </div>
       </section>
@@ -61,6 +61,26 @@ export default function PaidMediaPage() {
         <p>If you are already spending, I will look at the account and tell you what I see. No charge and no obligation attached to it.</p>
         <p>You get two documents. A teardown of what is working, what is not, and where the money is going. Then a written strategy for what I would change and why, including whether the budget belongs on the platform it currently sits on.</p>
         <p>If it turns out everything is running well, I will say so. That happens occasionally and it is a useful thing to know.</p>
+
+        <h2>What a month looks like</h2>
+        <p>Accounts get reviewed several times a week, not once a month before a report is due. Most of the work is small and continuous: search terms that should be excluded, bids that have drifted, creative that has fatigued, budget sitting in a campaign that stopped earning it.</p>
+        <p>You get a written report monthly covering spend, what it produced, and what changed. If something meaningful happens in between, you hear about it then rather than four weeks later.</p>
+        <p>And when you email, you get me. Not a ticket, not an account coordinator, and not a Monday morning status call that exists to fill an hour.</p>
+
+        <h2>What I do not do</h2>
+        <div className="pm-not">
+          <span>SEO</span>
+          <span>Website builds</span>
+          <span>Social media management</span>
+          <span>Content calendars</span>
+          <span>Branding</span>
+          <span>Email marketing</span>
+        </div>
+        <p>All useful, none of it what I am good at. Paid media is a full discipline on its own and the people who claim all six are usually doing one of them properly. If you need the rest, I would rather point you at someone than pretend.</p>
+
+        <h2>The honest constraint</h2>
+        <p>I keep the client list small because the work does not scale the way an agency needs it to. Running an account properly takes real attention, and attention is the thing that runs out first.</p>
+        <p>Which means there are stretches where I have no capacity at all. If you reach out and the timing is wrong, I will tell you that rather than take the retainer and stretch myself across one more account.</p>
 
         <div className="pm-divider" />
 
