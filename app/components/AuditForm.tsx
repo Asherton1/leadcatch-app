@@ -75,6 +75,8 @@ export default function AuditForm() {
             <span className="af-read-title">Your cheapest leads are probably your most expensive clients</span>
             <span className="af-read-sub">The argument this audit usually ends up making &rarr;</span>
           </a>
+
+          <a href="/" className="af-home">Back to ReCapture</a>
         </div>
       </div>
     )

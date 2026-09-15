@@ -263,3 +263,15 @@
   display: block;
   font-size: 0.78rem; color: #7a7a7a; line-height: 1.55;
 }
+
+.af-home {
+  display: inline-block;
+  margin-top: 1.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #6b6b6b;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.af-home::before { content: '← '; }
+.af-home:hover { color: #ff6b35; }
