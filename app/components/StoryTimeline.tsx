@@ -79,6 +79,7 @@ const CHAPTERS: Chapter[] = [
         <p>Then something occurred to me that I should have seen a decade earlier. Meta and Google only ever learn from people who press submit. Every campaign I had ever run had been optimising against a fraction of the people who actually wanted something &mdash; and the channels producing careful, high-consideration prospects had been scoring worst the whole time, because hesitation looks like failure on a report that only counts submissions.</p>
         <p>So ReCapture sends those people back. Every recovered inquiry goes to Meta&rsquo;s Conversions API and Google Ads as a server-side conversion, hashed and deduplicated, weighted by how much intent the person showed. And every inquiry is attributed to the channel that produced it, submitted or not.</p>
         <p>That part was not in the plan. It came out of ten years of buying media and finally being in a position to fix something I had been living with the whole time.</p>
+        <p>I still run campaigns for a small number of clients, and that work is where most of this comes from. If it is relevant to you, the <Link href="/paid-media" className="st-link">paid media side</Link> explains how I approach it.</p>
       </>
     ),
   },
