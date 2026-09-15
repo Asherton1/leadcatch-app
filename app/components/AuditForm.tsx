@@ -68,7 +68,13 @@ export default function AuditForm() {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
           <h2>Got it.</h2>
-          <p>I will reply personally within a day with exactly what to export and how to send it. Nothing automated, and nothing else will be sent to you.</p>
+          <p>I will reply personally, usually within a few hours, with exactly what to export and how to send it. Nothing automated, and nothing else will be sent to you.</p>
+
+          <a href="/blog/cheapest-leads-most-expensive-clients" className="af-read">
+            <span className="af-read-label">While you wait</span>
+            <span className="af-read-title">Your cheapest leads are probably your most expensive clients</span>
+            <span className="af-read-sub">The argument this audit usually ends up making &rarr;</span>
+          </a>
         </div>
       </div>
     )
