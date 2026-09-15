@@ -63,7 +63,7 @@ export default function ForBoulevard() {
               Boulevard books the consultations that submit. We capture the 67% of inquiry forms that don't.
             </h1>
             <p className="hero-sub" style={{ fontSize: '1.0625rem', color: '#a1a1aa', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Baymard Institute's research shows 60-70% of website visitors abandon contact forms before submitting — and med spa consultation forms run as high as 67%. Boulevard books the consultations that submit. ReCapture is the layer that captures the rest — and pushes them straight into Boulevard in real-time.
+              Baymard Institute's research shows Baymard Institute puts form abandonment at 60-70%. Boulevard books the consultations that submit. ReCapture is the layer that captures the rest — and pushes them straight into Boulevard in real-time.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
               <Link href="/signup?plan=pro" style={{ display: 'inline-block', background: '#ff6b35', color: '#0a0a0a', fontWeight: 700, padding: '0.875rem 1.75rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>
@@ -102,7 +102,7 @@ export default function ForBoulevard() {
               Boulevard is the operating system for the best med spas, plastic surgery practices, and dermatology offices in North America. It runs the booking flow, the front desk, the POS, the client profiles, the memberships, the consultation scheduling. It is genuinely excellent at converting clients who submitted a consultation request.
             </p>
             <p>
-              The problem: Baymard Institute's 2024 research shows 60-70% of website visitors who start a form never submit it — and med spa consultation forms run as high as 67%. Boulevard never sees those people. They show up in your site analytics as bounce-rate or unattributed traffic. Your Meta or Google ad spend paid for the click. The client disappeared. Your treatment chair sits empty.
+              The problem: Baymard Institute's 2024 research shows Baymard Institute puts form abandonment at 60-70%. Boulevard never sees those people. They show up in your site analytics as bounce-rate or unattributed traffic. Your Meta or Google ad spend paid for the click. The client disappeared. Your treatment chair sits empty.
             </p>
             <p>
               ReCapture is the layer that captures them — before they leave the site. One script tag per client. The lead lands in their dashboard. Recovery via SMS or AI voice callback fires automatically.

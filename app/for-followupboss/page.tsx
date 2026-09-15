@@ -63,7 +63,7 @@ export default function ForFollowUpBoss() {
               Follow Up Boss only sees the leads who finished. We get the property inquiries who didn't.
             </h1>
             <p className="hero-sub" style={{ fontSize: '1.0625rem', color: '#a1a1aa', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Baymard Institute's research shows 60-70% of website visitors abandon contact forms before submitting — and property inquiry forms run as high as 71%. Follow Up Boss sees only the ones who hit submit. ReCapture is the layer that captures the rest — and pushes them straight into Follow Up Boss in real-time.
+              Baymard Institute's research shows Baymard Institute puts form abandonment at 60-70%. Follow Up Boss sees only the ones who hit submit. ReCapture is the layer that captures the rest — and pushes them straight into Follow Up Boss in real-time.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
               <Link href="/signup?plan=pro" style={{ display: 'inline-block', background: '#ff6b35', color: '#0a0a0a', fontWeight: 700, padding: '0.875rem 1.75rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>
@@ -102,7 +102,7 @@ export default function ForFollowUpBoss() {
               Follow Up Boss is the operating system for high-performing real estate teams. It runs the CRM, the lead routing, the action plans, the agent assignments, the drip campaigns. It is genuinely excellent at converting leads who submitted a property inquiry.
             </p>
             <p>
-              The problem: Baymard Institute's 2024 research shows 60-70% of website visitors who start a form never submit it — and property inquiry forms run higher, up to 71%. Follow Up Boss never sees those people. They show up in your IDX analytics as bounce-rate or unattributed traffic. You paid for the click. The lead disappeared into a black hole.
+              The problem: Baymard Institute's 2024 research shows Baymard Institute puts form abandonment at 60-70%. Follow Up Boss never sees those people. They show up in your IDX analytics as bounce-rate or unattributed traffic. You paid for the click. The lead disappeared into a black hole.
             </p>
             <p>
               ReCapture is the layer that captures them — before they leave the site. One script tag per client. The lead lands in their dashboard. Recovery via SMS or AI voice callback fires automatically.

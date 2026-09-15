@@ -63,7 +63,7 @@ export default function ForAppFolio() {
               AppFolio tracks the prospects who hit submit. We capture the leasing inquiries who didn't.
             </h1>
             <p className="hero-sub" style={{ fontSize: '1.0625rem', color: '#a1a1aa', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Baymard Institute's research shows 60-70% of website visitors abandon contact forms before submitting — and leasing inquiry forms sit squarely in that range. AppFolio tracks the prospects who finish. ReCapture is the layer that captures the rest — and pushes them straight into AppFolio in real-time.
+              Baymard Institute's research shows Baymard Institute puts form abandonment at 60-70%. AppFolio tracks the prospects who finish. ReCapture is the layer that captures the rest — and pushes them straight into AppFolio in real-time.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
               <Link href="/signup?plan=pro" style={{ display: 'inline-block', background: '#ff6b35', color: '#0a0a0a', fontWeight: 700, padding: '0.875rem 1.75rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>
@@ -102,7 +102,7 @@ export default function ForAppFolio() {
               AppFolio is the operating system for property management companies of every size. It runs the leasing pipeline, the prospect tracking, the application flows, the lease signing, the resident communication, the accounting. It is genuinely excellent at converting prospects who submitted a leasing inquiry.
             </p>
             <p>
-              The problem: Baymard Institute's 2024 research shows 60-70% of website visitors who start a form never submit it — and leasing inquiry forms sit squarely in that range. AppFolio never sees those people. They show up in your site analytics as bounce-rate or unattributed traffic. Your ad budget paid for the click. The prospect disappeared. Your unit stays vacant.
+              The problem: Baymard Institute's 2024 research shows Baymard Institute puts form abandonment at 60-70%. AppFolio never sees those people. They show up in your site analytics as bounce-rate or unattributed traffic. Your ad budget paid for the click. The prospect disappeared. Your unit stays vacant.
             </p>
             <p>
               ReCapture is the layer that captures them — before they leave the site. One script tag per client. The lead lands in their dashboard. Recovery via SMS or AI voice callback fires automatically.

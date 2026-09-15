@@ -63,7 +63,7 @@ export default function ForHubSpot() {
               HubSpot only sees the leads who finished. We get the 60-70% who didn't.
             </h1>
             <p className="hero-sub" style={{ fontSize: '1.0625rem', color: '#a1a1aa', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Baymard Institute's research shows 60-70% of website visitors abandon contact forms before submitting. HubSpot sees only the ones who hit submit. ReCapture is the layer that captures the rest — and pushes them straight into your HubSpot pipeline in real-time.
+              Baymard Institute's research shows Baymard Institute puts form abandonment at 60-70%. HubSpot sees only the ones who hit submit. ReCapture is the layer that captures the rest — and pushes them straight into your HubSpot pipeline in real-time.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
               <Link href="/signup?plan=pro" style={{ display: 'inline-block', background: '#ff6b35', color: '#0a0a0a', fontWeight: 700, padding: '0.875rem 1.75rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>
@@ -102,7 +102,7 @@ export default function ForHubSpot() {
               HubSpot is the operating system for hundreds of thousands of marketing and sales teams. It runs the CRM, the marketing automation, the sequences, the deals, the reporting. It is genuinely excellent at converting leads who submitted a form.
             </p>
             <p>
-              The problem: Baymard Institute's 2024 research shows 60-70% of website visitors who start a form never submit it. HubSpot never sees those people. They show up in your analytics as bounce-rate or unattributed traffic. You paid for the click. The lead disappeared into a black hole.
+              The problem: Baymard Institute's 2024 research shows Baymard Institute puts form abandonment at 60-70%. HubSpot never sees those people. They show up in your analytics as bounce-rate or unattributed traffic. You paid for the click. The lead disappeared into a black hole.
             </p>
             <p>
               ReCapture is the layer that captures them — before they leave the site. One script tag per client. The lead lands in their dashboard. Recovery via SMS or AI voice callback fires automatically.
@@ -119,7 +119,7 @@ export default function ForHubSpot() {
             02 — The math
           </p>
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#fff', marginBottom: '3rem', lineHeight: 1.25, letterSpacing: '-0.02em', maxWidth: '720px' }}>
-            60-70% of contact form starters never submit. HubSpot only sees the rest.
+            Baymard Institute puts form abandonment at 60-70%. HubSpot only sees the rest.
           </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '4rem', alignItems: 'center' }} className="math-grid">
