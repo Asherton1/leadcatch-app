@@ -3,6 +3,7 @@ import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
 import MediaPanel from '../components/MediaPanel'
 import PhaseFlow from '../components/PhaseFlow'
+import AuditPreview from '../components/AuditPreview'
 import './paid-media.css'
 import '../landing.css'
 
@@ -49,7 +50,7 @@ export default function PaidMediaPage() {
         <p className="pm-caption">Same spend, same campaigns, same month. The only thing that changed was that the measurement started working.</p>
 
         <h2 className="pm-reveal">What I actually do</h2>
-        <p className="pm-reveal">Campaign management across Google Ads and Meta primarily, with TikTok, Microsoft and X where they fit. Most accounts do not need five platforms. Most accounts need two run properly.</p>
+        <p className="pm-reveal">Roughly $1M in managed ad spend across 38 long-term client relationships over ten plus years. Campaign management across Google Ads and Meta primarily, with TikTok, Microsoft and X where they fit. Most accounts do not need five platforms. Most accounts need two run properly.</p>
         <p className="pm-reveal">Before anything gets restructured, the measurement gets fixed. Conversion tracking that fires on the actions that matter, values attached to them, and reporting that separates cost per lead from cost per client. Those two numbers frequently point in opposite directions, and the gap between them is where budgets quietly disappear.</p>
         <p className="pm-reveal">Then the account gets rebuilt around what the data actually shows rather than what the previous structure assumed.</p>
 
@@ -68,22 +69,7 @@ export default function PaidMediaPage() {
 
         <h2 className="pm-reveal">The audit</h2>
         <p className="pm-reveal">If you are already spending, I will look at the account and tell you what I see. No charge and no obligation attached to it.</p>
-        <div className="pm-docs">
-          <div className="pm-doc" style={{ ['--i' as string]: 0 }}>
-            <span className="pm-doc-num">01</span>
-            <div>
-              <h4>The teardown</h4>
-              <p className="pm-reveal">What is working, what is not, and where the money is actually going. Channel by channel, with the numbers behind each call.</p>
-            </div>
-          </div>
-          <div className="pm-doc" style={{ ['--i' as string]: 1 }}>
-            <span className="pm-doc-num">02</span>
-            <div>
-              <h4>The strategy</h4>
-              <p className="pm-reveal">What I would change and why, including whether the budget belongs on the platform it currently sits on.</p>
-            </div>
-          </div>
-        </div>
+        <AuditPreview />
         <p className="pm-reveal">If it turns out everything is running well, I will say so. That happens occasionally and it is a useful thing to know.</p>
 
         <h2 className="pm-reveal">What a month looks like</h2>
