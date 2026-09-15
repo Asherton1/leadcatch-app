@@ -304,10 +304,10 @@ export default function ForLegal() {
                 CRM integration
               </p>
               <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#fff', marginBottom: '0.875rem', letterSpacing: '-0.01em', lineHeight: 1.3 }}>
-                Lawmatics and Clio, natively.
+                Into the intake system you already run.
               </h3>
               <p style={{ color: '#a1a1aa', fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
-                Recovered inquiries push straight into the intake pipeline the firm already runs, carrying every captured field. No second dashboard to watch, no manual export, no change to how the intake team works.
+                Recovered inquiries push into your intake pipeline by webhook in real time, carrying every captured field. That covers Lawmatics, Clio, Filevine, MyCase and anything else that accepts an inbound webhook. No second dashboard to watch, no manual export, and no change to how the intake team works.
               </p>
             </div>
 
