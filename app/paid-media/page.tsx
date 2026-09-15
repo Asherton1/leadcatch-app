@@ -2,6 +2,7 @@ import Link from 'next/link'
 import BlogNav from '../components/BlogNav'
 import Footer from '../components/Footer'
 import MediaPanel from '../components/MediaPanel'
+import PhaseFlow from '../components/PhaseFlow'
 import './paid-media.css'
 import '../landing.css'
 
@@ -68,18 +69,7 @@ export default function PaidMediaPage() {
         <p>ReCapture exists because of the consulting work, not alongside it. After a decade of buying media I kept running into the same wall: every number an ad platform learns from starts at the moment somebody presses submit. The people who filled in half a form and left were invisible to every system — the CRM, the analytics, and the platforms doing the optimising.</p>
         <p>So the campaigns were being optimised against a fraction of real demand, and there was no way to fix that from inside an ad account. It had to be built.</p>
 
-        <div className="pm-phases">
-          <div className="pm-phase">
-            <span className="pm-phase-num">Phase one</span>
-            <h3>Fix the measurement, then the media</h3>
-            <p>Conversion tracking that works, reporting that separates leads from clients, and an account structure built on what the numbers actually say. This is the consulting engagement and it stands on its own.</p>
-          </div>
-          <div className="pm-phase">
-            <span className="pm-phase-num">Phase two</span>
-            <h3>Recover what the forms are losing</h3>
-            <p>Once the measurement is sound and you can see the abandonment rate, ReCapture captures the inquiries that never reached you and feeds them back to Meta and Google as real signal.</p>
-          </div>
-        </div>
+        <PhaseFlow />
 
         <p className="pm-note">The order matters. Installing recovery software on top of broken tracking captures nothing useful and tells you nothing true. The plumbing comes first.</p>
 
