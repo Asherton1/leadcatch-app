@@ -734,3 +734,120 @@
   }
   .enterprise-tier-card-custom ul { grid-template-columns: 1fr !important; }
 }
+
+/* ════ Match the pricing page treatment ════ */
+
+/* Cards */
+.enterprise-tier-card {
+  background: linear-gradient(150deg, #1a1a1a 0%, #151515 55%, #121212 100%) !important;
+  border: 1px solid rgba(255,255,255,0.055) !important;
+  border-radius: 0.625rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: border-color .25s ease, transform .25s cubic-bezier(0.22,1,0.36,1) !important;
+}
+.enterprise-tier-card:hover {
+  border-color: rgba(255,107,53,0.24) !important;
+  transform: translateY(-2px);
+}
+.enterprise-tier-card-featured {
+  border-color: rgba(255,107,53,0.45) !important;
+  box-shadow: inset 0 2px 0 0 #ff6b35, 0 12px 34px rgba(0,0,0,0.34) !important;
+  background: linear-gradient(150deg, #1f1a17 0%, #171514 55%, #131211 100%) !important;
+}
+
+/* Labels and figures */
+.enterprise-tier-name {
+  font-size: 0.56rem !important;
+  letter-spacing: 0.24em !important;
+  font-weight: 700 !important;
+}
+.enterprise-tier-locations {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem !important;
+  color: #6b6b6b !important;
+}
+.enterprise-tier-price {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-feature-settings: 'tnum' 1;
+}
+.enterprise-tier-price-amount {
+  font-size: clamp(1.9rem, 4vw, 2.4rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.05em !important;
+}
+.enterprise-tier-price-currency { font-size: 1rem !important; color: #8b8b8b !important; }
+.enterprise-tier-price-period { font-size: 0.7rem !important; color: #5f5f5f !important; }
+
+/* Feature rows as a spec sheet with checks */
+.enterprise-tier-card ul {
+  list-style: none !important;
+  margin: 0 0 1.4rem !important;
+  padding: 0.35rem 0 0 !important;
+  flex: 1 1 auto;
+  display: flex; flex-direction: column;
+  border-top: 1px solid rgba(255,255,255,0.055);
+}
+.enterprise-tier-card li {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.6rem 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.81rem !important;
+  line-height: 1.5 !important;
+  color: #b4b4b8 !important;
+  transition: transform .22s cubic-bezier(0.22,1,0.36,1), color .22s ease;
+}
+.enterprise-tier-card li:last-child { border-bottom: none; }
+.enterprise-tier-card li:hover { transform: translateX(3px); color: #fff !important; }
+
+.enterprise-tier-card li::before {
+  content: '' !important;
+  flex: 0 0 13px;
+  width: 13px !important; height: 13px !important;
+  margin-top: 0.18em;
+  background: none !important;
+  border-radius: 0 !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff6b35' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") !important;
+  background-size: 13px 13px !important;
+  background-repeat: no-repeat !important;
+  opacity: 0.9;
+}
+
+/* CTAs all identical and pinned to the bottom */
+.enterprise-tier-card a,
+.enterprise-tier-card button {
+  margin-top: auto !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem;
+  padding: 0.85rem 1.25rem !important;
+  background: #ff6b35 !important;
+  border: 1px solid #ff6b35 !important;
+  border-radius: 0.5rem !important;
+  color: #0a0a0a !important;
+  font-size: 0.86rem !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  transition: background .22s ease, transform .22s ease !important;
+}
+.enterprise-tier-card a:hover,
+.enterprise-tier-card button:hover {
+  background: #ff7d4d !important;
+  border-color: #ff7d4d !important;
+  transform: translateY(-1px);
+}
+
+/* Most popular badge */
+.enterprise-tier-badge {
+  font-size: 0.56rem !important;
+  letter-spacing: 0.16em !important;
+  font-weight: 700 !important;
+  border-radius: 3px !important;
+}
+
+/* Custom band keeps the same language */
+.enterprise-tier-card-custom .enterprise-tier-price-amount { font-size: 1.75rem !important; }
