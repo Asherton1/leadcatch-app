@@ -110,7 +110,7 @@ export default function PaidMediaPage() {
         <div className="pm-cta">
           <h3>Want an outside read on your account?</h3>
           <p className="pm-reveal">Send exports for whatever period you are comfortable sharing. You will get the teardown and the strategy back, at no cost and with nothing attached.</p>
-          <Link href="/contact" className="pm-cta-btn">Request the audit</Link>
+          <Link href="/audit" className="pm-cta-btn">Request the audit</Link>
         </div>
 
       </div>

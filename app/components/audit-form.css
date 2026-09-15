@@ -1,0 +1,132 @@
+.af-page { background: #0a0a0a; min-height: 100vh; }
+.af-wrap { max-width: 720px; margin: 0 auto; padding: 0 2rem 5rem; }
+
+.af-card {
+  background: linear-gradient(150deg, #1c1c1c 0%, #161616 55%, #121212 100%);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 0.75rem;
+  padding: 2rem 2rem 1.85rem;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 18px 48px rgba(0,0,0,0.3);
+}
+
+.af-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+
+.af-field { display: flex; flex-direction: column; gap: 0.45rem; }
+.af-field-full { margin-bottom: 1.35rem; }
+.af-field span {
+  font-size: 0.68rem; letter-spacing: 0.13em; text-transform: uppercase;
+  font-weight: 700; color: #6b6b6b;
+}
+.af-field input, .af-field textarea {
+  background: #0f0f0f;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 0.5rem;
+  padding: 0.75rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: #fff;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.af-field textarea { resize: vertical; line-height: 1.65; }
+.af-field input::placeholder, .af-field textarea::placeholder { color: #4a4a4a; }
+.af-field input:focus, .af-field textarea:focus {
+  outline: none;
+  border-color: rgba(255,107,53,0.5);
+  box-shadow: 0 0 0 4px rgba(255,107,53,0.07);
+}
+
+.af-block { margin-bottom: 1.5rem; }
+.af-label {
+  display: block;
+  font-size: 0.68rem; letter-spacing: 0.13em; text-transform: uppercase;
+  font-weight: 700; color: #6b6b6b; margin-bottom: 0.7rem;
+}
+.af-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.af-chip {
+  font-family: inherit;
+  font-size: 0.83rem; font-weight: 600; color: #8b8b8b;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+.af-chip:hover { border-color: rgba(255,107,53,0.3); color: #a1a1aa; }
+.af-chip.is-on {
+  color: #ff6b35;
+  border-color: rgba(255,107,53,0.5);
+  background: rgba(255,107,53,0.07);
+}
+.af-hint { font-size: 0.76rem; color: #5f5f5f; margin: 0.7rem 0 0; line-height: 1.6; }
+
+.af-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.af-err {
+  font-size: 0.83rem; color: #ef4444; margin: 0 0 1rem;
+  padding: 0.7rem 0.9rem;
+  background: rgba(239,68,68,0.07);
+  border: 1px solid rgba(239,68,68,0.22);
+  border-radius: 0.5rem;
+}
+
+.af-submit {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  width: 100%;
+  padding: 0.95rem 1.5rem;
+  background: #ff6b35;
+  border: 1px solid #ff6b35;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 0.92rem; font-weight: 700; color: #0a0a0a;
+  cursor: pointer;
+  transition: background .22s ease, transform .22s ease;
+}
+.af-submit:hover:not(:disabled) { background: #ff7d4d; transform: translateY(-1px); }
+.af-submit:disabled { opacity: 0.6; cursor: default; }
+.af-submit span { transition: transform .22s ease; }
+.af-submit:hover:not(:disabled) span { transform: translateX(3px); }
+
+.af-foot {
+  font-size: 0.78rem; line-height: 1.7; color: #5f5f5f;
+  margin: 1.1rem 0 0; text-align: center;
+}
+
+/* Done state */
+.af-done {
+  text-align: center;
+  padding: 3.5rem 2rem;
+  background: linear-gradient(150deg, #1c1c1c 0%, #161616 55%, #121212 100%);
+  border: 1px solid rgba(255,107,53,0.22);
+  border-radius: 0.75rem;
+}
+.af-done-mark {
+  display: grid; place-items: center;
+  width: 48px; height: 48px;
+  margin: 0 auto 1.35rem;
+  border-radius: 50%;
+  background: rgba(255,107,53,0.12);
+  border: 1px solid rgba(255,107,53,0.4);
+  color: #ff6b35;
+  animation: af-pop .5s cubic-bezier(0.34,1.4,0.64,1);
+}
+.af-done-mark svg { width: 22px; height: 22px; }
+@keyframes af-pop { from { transform: scale(0.6); opacity: 0 } to { transform: none; opacity: 1 } }
+.af-done h2 {
+  font-size: 1.6rem; font-weight: 800; color: #fff;
+  letter-spacing: -0.03em; margin: 0 0 0.75rem;
+}
+.af-done p {
+  font-size: 0.95rem; line-height: 1.8; color: #a1a1aa;
+  max-width: 46ch; margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .af-wrap { padding: 0 1.25rem 3.5rem; }
+  .af-card { padding: 1.5rem 1.35rem 1.4rem; }
+  .af-grid { grid-template-columns: 1fr; gap: 0.9rem; }
+  .af-done { padding: 2.5rem 1.35rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .af-done-mark { animation: none !important; }
+}
