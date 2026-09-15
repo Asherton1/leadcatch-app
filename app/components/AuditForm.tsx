@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './audit-form.css'
 
 const PLATFORMS = ['Google Ads', 'Meta', 'TikTok', 'Microsoft Ads', 'X Ads', 'Not sure']
@@ -18,6 +18,25 @@ export default function AuditForm() {
   const [sending, setSending] = useState(false)
   const [done, setDone] = useState(false)
   const [err, setErr] = useState('')
+  const [stage, setStage] = useState(0)
+  const nextRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const el = nextRef.current
+    if (!el) return
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return
+      io.disconnect()
+      const t = [
+        setTimeout(() => setStage(1), 350),
+        setTimeout(() => setStage(2), 900),
+        setTimeout(() => setStage(3), 1450),
+      ]
+      return () => t.forEach(clearTimeout)
+    }, { threshold: 0.4 })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
 
   function toggle(p: string) {
     setPlatforms(prev => prev.includes(p) ? prev.filter(x => x !== p) : [...prev, p])
@@ -128,13 +147,25 @@ export default function AuditForm() {
           {!sending && <span>&rarr;</span>}
         </button>
 
-        <div className="af-next">
+        <div className="af-next" ref={nextRef}>
           <span className="af-next-label">What happens next</span>
-          <ol className="af-next-list">
-            <li><b>I reply personally</b><i>Within a day, from my own address. Nothing automated.</i></li>
-            <li><b>You send exports</b><i>I will tell you exactly which reports and how to pull them. Usually two exports and about ten minutes of your time.</i></li>
-            <li><b>You get both documents</b><i>The teardown and the strategy, typically within a few days.</i></li>
-          </ol>
+          <div className="af-steps">
+            {[
+              ['I reply personally', 'Within a day, from my own address. Nothing automated.'],
+              ['You send exports', 'I will tell you exactly which reports and how to pull them. Usually two exports and about ten minutes of your time.'],
+              ['You get both documents', 'The teardown and the strategy, typically within a few days.'],
+            ].map(([h, d], i) => (
+              <div className={'af-step' + (stage > i ? ' af-done-step' : '')} key={h}>
+                <span className="af-step-mark">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <span className="af-step-text">
+                  <b>{h}</b>
+                  <i>{d}</i>
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
         <p className="af-foot">No charge, no obligation, and I will not add you to anything. If the account turns out to be in good shape I will tell you that.</p>
