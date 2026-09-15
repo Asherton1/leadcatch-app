@@ -79,3 +79,124 @@
   transition: color .2s ease, border-color .2s ease;
 }
 .pm-not span:hover { color: #7a7a7a; border-color: rgba(255,255,255,0.12); }
+
+/* ── Scroll reveal ────────────────────────────────────────────── */
+.pm-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: pm-in .7s cubic-bezier(0.22,1,0.36,1) forwards;
+  animation-timeline: view();
+  animation-range: entry 5% cover 22%;
+}
+@keyframes pm-in { to { opacity: 1; transform: none; } }
+@supports not (animation-timeline: view()) {
+  .pm-reveal { opacity: 1; transform: none; animation: none; }
+}
+
+/* ── Who this is for ──────────────────────────────────────────── */
+.pm-verticals {
+  display: flex; flex-wrap: wrap; gap: 0.55rem;
+  margin: 1.35rem 0 1.6rem;
+}
+.pm-verticals span {
+  font-size: 0.84rem; font-weight: 600; color: #a1a1aa;
+  background: rgba(255,255,255,0.022);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.95rem;
+  opacity: 0; transform: translateY(8px) scale(0.97);
+  animation: pm-chip .55s cubic-bezier(0.34,1.35,0.64,1) forwards;
+  animation-delay: calc(var(--i) * 0.07s);
+  animation-timeline: view();
+  animation-range: entry 0% cover 25%;
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.pm-verticals span:hover {
+  color: #fff; border-color: rgba(255,107,53,0.35); background: rgba(255,107,53,0.05);
+}
+@keyframes pm-chip { to { opacity: 1; transform: none; } }
+@supports not (animation-timeline: view()) {
+  .pm-verticals span { opacity: 1; transform: none; animation: none; }
+}
+
+/* ── The audit deliverables ───────────────────────────────────── */
+.pm-docs { display: flex; flex-direction: column; gap: 0.85rem; margin: 1.5rem 0 1.6rem; }
+.pm-doc {
+  display: flex; align-items: flex-start; gap: 1.1rem;
+  background: linear-gradient(150deg, #1c1c1c 0%, #161616 55%, #121212 100%);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-left: 2px solid #ff6b35;
+  border-radius: 0 0.6rem 0.6rem 0;
+  padding: 1.25rem 1.4rem;
+  opacity: 0; transform: translateX(-10px);
+  animation: pm-doc-in .6s cubic-bezier(0.22,1,0.36,1) forwards;
+  animation-delay: calc(var(--i) * 0.14s);
+  animation-timeline: view();
+  animation-range: entry 0% cover 28%;
+  transition: border-color .22s ease, transform .22s ease;
+}
+.pm-doc:hover { border-top-color: rgba(255,107,53,0.2); border-right-color: rgba(255,107,53,0.2); border-bottom-color: rgba(255,107,53,0.2); }
+@keyframes pm-doc-in { to { opacity: 1; transform: none; } }
+@supports not (animation-timeline: view()) {
+  .pm-doc { opacity: 1; transform: none; animation: none; }
+}
+.pm-doc-num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem; font-weight: 800; color: #ff6b35;
+  letter-spacing: 0.05em; padding-top: 0.15rem; flex-shrink: 0;
+}
+.pm-doc h4 {
+  font-size: 0.98rem; font-weight: 700; color: #fff;
+  letter-spacing: -0.02em; margin: 0 0 0.4rem;
+}
+.pm-doc p { font-size: 0.86rem !important; line-height: 1.7 !important; margin: 0 !important; }
+
+/* ── The monthly cadence ──────────────────────────────────────── */
+.pm-cadence {
+  display: flex; flex-direction: column;
+  margin: 1.5rem 0 1.6rem;
+  border-left: 1px dashed rgba(255,107,53,0.3);
+  padding-left: 1.5rem;
+}
+.pm-beat {
+  position: relative;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.045);
+  opacity: 0; transform: translateX(-8px);
+  animation: pm-beat-in .55s cubic-bezier(0.22,1,0.36,1) forwards;
+  animation-delay: calc(var(--i) * 0.12s);
+  animation-timeline: view();
+  animation-range: entry 0% cover 28%;
+}
+.pm-beat:last-child { border-bottom: none; }
+@keyframes pm-beat-in { to { opacity: 1; transform: none; } }
+@supports not (animation-timeline: view()) {
+  .pm-beat { opacity: 1; transform: none; animation: none; }
+}
+.pm-beat::before {
+  content: '';
+  position: absolute;
+  left: calc(-1.5rem - 4px);
+  top: 1.25rem;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #0a0a0a;
+  border: 1.5px solid #ff6b35;
+}
+.pm-beat b {
+  display: block; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 700; color: #ff6b35; margin-bottom: 0.35rem;
+}
+.pm-beat i {
+  font-style: normal; font-size: 0.88rem; line-height: 1.7; color: #a1a1aa;
+}
+
+@media (max-width: 760px) {
+  .pm-doc { padding: 1.1rem 1.15rem; gap: 0.85rem; }
+  .pm-cadence { padding-left: 1.15rem; }
+  .pm-beat::before { left: calc(-1.15rem - 4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pm-reveal, .pm-verticals span, .pm-doc, .pm-beat {
+    animation: none !important; opacity: 1 !important; transform: none !important;
+  }
+}
