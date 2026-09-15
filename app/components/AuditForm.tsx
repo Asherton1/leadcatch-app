@@ -128,6 +128,15 @@ export default function AuditForm() {
           {!sending && <span>&rarr;</span>}
         </button>
 
+        <div className="af-next">
+          <span className="af-next-label">What happens next</span>
+          <ol className="af-next-list">
+            <li><b>I reply personally</b><i>Within a day, from my own address. Nothing automated.</i></li>
+            <li><b>You send exports</b><i>I will tell you exactly which reports and how to pull them. Usually two exports and about ten minutes of your time.</i></li>
+            <li><b>You get both documents</b><i>The teardown and the strategy, typically within a few days.</i></li>
+          </ol>
+        </div>
+
         <p className="af-foot">No charge, no obligation, and I will not add you to anything. If the account turns out to be in good shape I will tell you that.</p>
       </div>
     </div>
