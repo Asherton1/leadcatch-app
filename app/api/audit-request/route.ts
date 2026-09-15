@@ -44,5 +44,33 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Could not save' }, { status: 500 })
   }
 
+  // Alert by SMS. Resend is unavailable, and a text reaches me faster anyway.
+  try {
+    const sid = process.env.TWILIO_ACCOUNT_SID
+    const token = process.env.TWILIO_AUTH_TOKEN
+    const from = process.env.TWILIO_PHONE_NUMBER
+    const to = process.env.AUDIT_ALERT_PHONE
+
+    if (sid && token && from && to) {
+      const lines = [
+        'Audit request',
+        `${name}${body.business ? ' \u00b7 ' + body.business : ''}`,
+        email,
+        platforms.length ? platforms.join(', ') : 'platforms not given',
+        typeof body.monthlySpend === 'string' && body.monthlySpend ? body.monthlySpend : 'spend not given',
+      ]
+      await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Basic ' + Buffer.from(`${sid}:${token}`).toString('base64'),
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({ From: from, To: to, Body: lines.join('\n') }),
+      })
+    }
+  } catch (e) {
+    console.error('[audit-request] alert failed:', e)
+  }
+
   return NextResponse.json({ ok: true })
 }
