@@ -27,9 +27,9 @@ export default function DemoFirm() {
             </span>
           </a>
           <nav className="wfl-nav-links">
-            <a href="#">Practice Areas</a>
-            <a href="#">Attorneys</a>
-            <a href="#">Results</a>
+            <a href="#">Collections</a>
+            <a href="#">Our Story</a>
+            <a href="#">Showroom</a>
             <a href="#" className="wfl-nav-phone">(214) 555-0188</a>
           </nav>
         </div>
@@ -39,8 +39,8 @@ export default function DemoFirm() {
         <div className="wfl-grid">
 
           <section className="wfl-intro">
-            <p className="wfl-eyebrow">Confidential Consultation</p>
-            <h1 className="wfl-h1">You do not have to decide anything today.</h1>
+            <p className="wfl-eyebrow">Design Consultation</p>
+            <h1 className="wfl-h1">No pressure, no obligation.</h1>
             <p className="wfl-lede">
               Most people who contact us are reaching out at the hardest point of a very difficult year.
               A consultation is a conversation, not a commitment. Tell us as much or as little as you want.
@@ -48,12 +48,12 @@ export default function DemoFirm() {
 
             <div className="wfl-trust">
               <div className="wfl-trust-item">
-                <div className="wfl-trust-num">Board</div>
-                <div className="wfl-trust-lbl">Certified in Family Law<br/>Texas Board of Legal Specialization</div>
+                <div className="wfl-trust-num">Family</div>
+                <div className="wfl-trust-lbl">Owned since 2001<br/>Texas Family of Legal Specialization</div>
               </div>
               <div className="wfl-trust-item">
                 <div className="wfl-trust-num">24 yrs</div>
-                <div className="wfl-trust-lbl">Representing families<br/>across North Texas</div>
+                <div className="wfl-trust-lbl">Furnishing homes<br/>across North Texas</div>
               </div>
             </div>
 
