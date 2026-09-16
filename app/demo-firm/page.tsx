@@ -22,7 +22,7 @@ export default function DemoFirm() {
           <a href="#" className="wfl-logo">
             <span className="wfl-logo-mark">W</span>
             <span className="wfl-logo-text">
-              <span className="wfl-logo-name">Whitmore</span>
+              <span className="wfl-logo-name">Northgate</span>
               <span className="wfl-logo-sub">Family Law</span>
             </span>
           </a>
@@ -92,20 +92,20 @@ export default function DemoFirm() {
               </div>
 
               <div className="wfl-field">
-                <label htmlFor="matterType">Type of Matter</label>
+                <label htmlFor="matterType">What are you looking for?</label>
                 <select id="matterType" name="matterType" defaultValue="">
                   <option value="" disabled>Select one</option>
-                  <option>Divorce</option>
-                  <option>Child Custody</option>
-                  <option>Custody Modification</option>
-                  <option>Property Division</option>
-                  <option>Prenuptial Agreement</option>
+                  <option>Living room</option>
+                  <option>Dining room</option>
+                  <option>Bedroom</option>
+                  <option>Home office</option>
+                  <option>Outdoor</option>
                   <option>Other</option>
                 </select>
               </div>
 
               <div className="wfl-field">
-                <label htmlFor="county">County</label>
+                <label htmlFor="county">Delivery area</label>
                 <select id="county" name="county" defaultValue="">
                   <option value="" disabled>Select one</option>
                   <option>Dallas</option>
@@ -145,7 +145,7 @@ export default function DemoFirm() {
 
       <footer className="wfl-footer">
         <div className="wfl-footer-inner">
-          <div>Whitmore Family Law &middot; 2100 Ross Avenue, Suite 900 &middot; Dallas, Texas 75201</div>
+          <div>Northgate Furniture Co &middot; 2100 Ross Avenue, Suite 900 &middot; Dallas, Texas 75201</div>
           <div className="wfl-footer-meta">Demonstration environment</div>
         </div>
       </footer>
