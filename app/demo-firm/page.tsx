@@ -20,10 +20,10 @@ export default function DemoFirm() {
       <header className="wfl-nav">
         <div className="wfl-nav-inner">
           <a href="#" className="wfl-logo">
-            <span className="wfl-logo-mark">W</span>
+            <span className="wfl-logo-mark">N</span>
             <span className="wfl-logo-text">
               <span className="wfl-logo-name">Northgate</span>
-              <span className="wfl-logo-sub">Family Law</span>
+              <span className="wfl-logo-sub">Furniture Co</span>
             </span>
           </a>
           <nav className="wfl-nav-links">
@@ -48,7 +48,7 @@ export default function DemoFirm() {
 
             <div className="wfl-trust">
               <div className="wfl-trust-item">
-                <div className="wfl-trust-num">Family</div>
+                <div className="wfl-trust-num">Est.</div>
                 <div className="wfl-trust-lbl">Owned since 2001<br/>Four generations in North Texas</div>
               </div>
               <div className="wfl-trust-item">
