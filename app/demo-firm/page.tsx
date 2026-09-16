@@ -49,7 +49,7 @@ export default function DemoFirm() {
             <div className="wfl-trust">
               <div className="wfl-trust-item">
                 <div className="wfl-trust-num">Family</div>
-                <div className="wfl-trust-lbl">Owned since 2001<br/>Texas Family of Legal Specialization</div>
+                <div className="wfl-trust-lbl">Owned since 2001<br/>Four generations in North Texas</div>
               </div>
               <div className="wfl-trust-item">
                 <div className="wfl-trust-num">24 yrs</div>
