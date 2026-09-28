@@ -63,7 +63,7 @@ Every plan starts with a seven day free trial and can be cancelled at any time.
 
 ## Things you must never say
 
-${never.map(n => `- ${n.body}`).join('\n')}
+${never.map(n => `- ${n.name}: ${n.body}`).join('\n')}
 
 If a caller asks something these rules cover, give the accurate version. Never guess at a
 number, a result, or an integration.
