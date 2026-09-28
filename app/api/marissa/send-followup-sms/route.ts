@@ -11,6 +11,7 @@ const RESEND_KEY = process.env.RESEND_API_KEY ?? ''
 const TWILIO_SID = process.env.TWILIO_ACCOUNT_SID ?? ''
 const TWILIO_TOKEN = process.env.TWILIO_AUTH_TOKEN ?? ''
 const TWILIO_FROM = process.env.TWILIO_PHONE_NUMBER ?? ''
+const ALERT_PHONE = process.env.AUDIT_ALERT_PHONE ?? ''
 
 const VALID_TOPICS = ['pricing', 'trial', 'enterprise', 'form_audit', 'general']
 
@@ -178,6 +179,7 @@ export async function POST(req: NextRequest) {
     // Send SMS via Twilio (using existing sms.ts infrastructure adapted)
     let smsId: string | null = null
     let smsSuccess = false
+    let smsError: string | null = null
     if (TWILIO_SID && TWILIO_TOKEN && TWILIO_FROM) {
       try {
         const url = `https://api.twilio.com/2010-04-01/Accounts/${TWILIO_SID}/Messages.json`
@@ -201,13 +203,35 @@ export async function POST(req: NextRequest) {
           console.log('[marissa-sms] SMS sent to', phone, 'sid:', smsId)
         } else {
           const errText = await res.text()
+          smsError = `Twilio ${res.status}: ${errText.slice(0, 300)}`
           console.error('[marissa-sms] SMS failed:', res.status, errText)
         }
       } catch (err) {
+        smsError = `Exception: ${String(err).slice(0, 300)}`
         console.error('[marissa-sms] SMS exception:', err)
       }
     } else {
+      smsError = 'Twilio credentials missing in this environment'
       console.error('[marissa-sms] Twilio creds missing')
+    }
+
+    // A failed send used to pass silently, so Marissa told the caller a text
+    // was on the way when nothing had been sent. Alert on failure instead.
+    if (!smsSuccess && ALERT_PHONE && TWILIO_SID && TWILIO_TOKEN && TWILIO_FROM) {
+      try {
+        await fetch(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_SID}/Messages.json`, {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Basic ' + Buffer.from(`${TWILIO_SID}:${TWILIO_TOKEN}`).toString('base64'),
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            From: TWILIO_FROM,
+            To: ALERT_PHONE,
+            Body: `Marissa SMS FAILED\nTo: ${phone}\n${smsError ?? 'unknown'}`,
+          }),
+        })
+      } catch { /* alerting must never break the handler */ }
     }
 
     // Update link row with SMS status
@@ -297,13 +321,14 @@ ${call_id ? `<tr><td style="padding:8px 0;color:#888;">Call ID</td><td style="pa
     }
 
     return NextResponse.json({
-      ok: true,
+      ok: smsSuccess,
       message: smsSuccess
         ? `Link sent to ${phone}`
-        : `Link created but SMS failed for ${phone}`,
+        : `Could not send the text to ${phone}. Do not tell the caller it was sent.`,
       sms_sent: smsSuccess,
+      error: smsError,
       link: shortLink,
-    })
+    }, { status: smsSuccess ? 200 : 502 })
   } catch (err) {
     console.error('[marissa-sms] handler error:', err)
     return NextResponse.json({ ok: false, error: 'Server error' }, { status: 500 })
