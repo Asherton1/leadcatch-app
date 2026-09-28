@@ -21,62 +21,67 @@ function templateForTopic(topic: string, name: string) {
 
   const templates: Record<string, { subject: string; body: string; cta: { label: string; url: string } | null }> = {
     pricing: {
-      subject: 'Your ReCapture pricing — as promised',
-      body: `Thanks for calling earlier. Here's the pricing breakdown we discussed.
+      subject: 'Your ReCapture pricing, as promised',
+      body: `Thanks for calling earlier. Here is the breakdown.
 
-<strong>Pro — $397/month</strong>
-See every lead you're losing. Manual follow-up tools. Lead dashboard with hot/warm/cold scoring.
+<strong>Pro &mdash; $397/month</strong>
+One website. Every form and page included. Captured inquiries scored by intent, campaign attribution, automated recovery, SMS and Slack alerts, and conversion signals sent back to Meta and Google.
 
-<strong>Pro — $397/month</strong>
-AI voice callback within 60 seconds, automated recovery emails, instant SMS alerts to your team, and Slack notifications. HIPAA-ready with BAA available.
+<strong>Group &mdash; $897/month</strong>
+Two to four locations, with one rolled-up dashboard across every site plus per-location reporting.
 
-<strong>Enterprise — from $1,997/month</strong>
-For multi-location practices, franchise systems, and high-volume operations. Custom-priced based on your locations and integration needs.
+<strong>Multi-location</strong>
+$1,997 for five to eight locations, $3,997 for nine to sixteen, $6,997 for seventeen to thirty. Beyond that we price it to your setup.
 
-Pro comes with a 7-day free trial. Cancel anytime.`,
+Every plan starts with a seven day free trial and you can cancel any time.`,
       cta: { label: 'Start your 7-day free trial', url: 'https://www.userecapture.com/start-trial' },
     },
     trial: {
-      subject: 'Your 7-day free trial — ready when you are',
-      body: `Thanks for calling earlier. As promised, here's your trial link.
+      subject: 'Your 7-day free trial, ready when you are',
+      body: `Thanks for calling earlier. Here is your trial link.
 
-You'll get full access to every Pro plan feature for 7 days — AI voice callback, automated recovery emails, SMS alerts, Slack alerts, the works.
+Setup is one line of JavaScript on your site, the same way you would add Google Analytics. It covers every form you have, and you will start seeing captured inquiries in the dashboard as soon as people use them.
 
-Setup takes about 60 seconds. Drop one line of JavaScript on your site and you'll see your first abandoned leads come through within an hour.
+During the trial you get everything on the Pro plan: intent scoring on each inquiry, campaign attribution so you can see which channel produced them, automated recovery emails under your own branding, SMS and Slack alerts, and conversion signals going back to Meta and Google.
 
-Most clients recover their first lead in week one — that single recovered lead usually pays for the entire year of ReCapture.`,
+Nothing changes about how your forms work or where your submitted leads go.`,
       cta: { label: 'Start your 7-day free trial', url: 'https://www.userecapture.com/start-trial' },
     },
     enterprise: {
-      subject: 'Enterprise inquiry — next steps',
-      body: `Thanks for calling earlier. Based on what you shared, our enterprise team will reach out within 24 hours to scope a tailored proposal.
+      subject: 'Multi-location pricing and next steps',
+      body: `Thanks for calling earlier. Here is the overview for multi-location setups.
 
-In the meantime, here's our enterprise overview with the four tier breakdowns and what's included at each level. Every enterprise deployment is custom-priced based on locations, integrations, and reporting needs.
+Pricing runs by number of locations: $897 for two to four, $1,997 for five to eight, $3,997 for nine to sixteen, and $6,997 for seventeen to thirty. Past thirty we price it to your setup.
 
-If anything else comes up before our team reaches out, just reply to this email — someone will personally check every message.`,
-      cta: { label: 'Review enterprise tiers', url: 'https://www.userecapture.com/enterprise' },
+Every multi-location plan includes one rolled-up dashboard across all your sites, reporting broken out per location, custom-branded recovery emails for each site, and a BAA where you need one.
+
+Reply to this email if you want to walk through your specific setup and I will get back to you personally.`,
+      cta: { label: 'Review the plans', url: 'https://www.userecapture.com/enterprise' },
     },
     form_audit: {
-      subject: 'Your free form audit — request the report',
-      body: `Thanks for calling earlier. Here's the link to our free form audit.
+      subject: 'Your free form audit',
+      body: `Thanks for calling earlier. Here is the link to the free form audit.
 
-We'll scan your site and send you a detailed report covering form field count, mobile UX issues, tracking gaps, industry-specific abandonment benchmarks, and exactly how much revenue your forms are leaking every month.
+We look at your forms and send back a written report covering field count, how they behave on mobile, where the tracking has gaps, and where people are most likely dropping out before they submit.
 
-It's the most thorough form analysis in the industry. Completely free. No card required.`,
+Free, no card, no obligation.`,
       cta: { label: 'Request your free form audit', url: 'https://www.userecapture.com/form-audit' },
     },
     general: {
-      subject: 'ReCapture — info as promised',
-      body: `Thanks for calling earlier. Here's the overview I promised.
+      subject: 'ReCapture, info as promised',
+      body: `Thanks for calling earlier. Here is the overview.
 
-ReCapture is the recovery layer for high-ticket service businesses. We capture the leads that start filling out your contact forms but never hit submit — sixty to seventy percent of high-intent visitors do this every day.
+When somebody starts filling in a form on your site and leaves without pressing submit, that inquiry disappears. Your CRM never sees it, your analytics never sees it, and nobody follows up because nobody knows it happened. Baymard Institute puts form abandonment at 60 to 70 percent.
 
-We capture their name, email, and phone the moment they start typing, score the lead by intent, and reach out automatically through SMS alerts, AI voice callbacks within 60 seconds, branded recovery emails, or Slack notifications.
+ReCapture captures the contact details they already entered, scores each one by how far they got, and shows them in a dashboard alongside the inquiries that did come through. From there you can follow up yourself or let automated recovery handle it.
 
-Most clients recover their first lead in week one — usually pays for the entire year.`,
+It also traces every captured inquiry back to the campaign that produced it, and sends those inquiries to Meta and Google as conversion events so your advertising is optimising on real demand rather than a fraction of it.
+
+Setup is one line of code and nothing changes about how your forms work.`,
       cta: { label: 'See the platform in action', url: 'https://www.userecapture.com/demo' },
     },
   }
+
 
   const t = templates[topic] || templates.general
   return { greeting, ...t }
