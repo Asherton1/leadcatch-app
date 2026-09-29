@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { supabaseAdmin } from '@/lib/supabase-admin'
 import LeakEstimate from '@/app/components/LeakEstimate'
+import CallFlow from '@/app/components/CallFlow'
 import BlogNav from '../../components/BlogNav'
 import Footer from '../../components/Footer'
 import '../../landing.css'
@@ -216,32 +217,12 @@ export default async function ShortLinkPage({ params }: PageProps) {
         </>
       )}
 
-      {/* WHAT ACTUALLY HAPPENS */}
-      <section className="sl-social-proof">
+      {/* HOW IT WORKS, ONE FLOW */}
+      <section className="sl-section">
         <div className="sl-section-inner">
-          <p className="sl-eyebrow">What happens when someone abandons your form</p>
-          <ol className="sl-sequence">
-            <li>
-              <strong>It gets captured</strong>
-              <span>Whatever they typed before leaving. Name, email, phone, and how far through the form they got.</span>
-            </li>
-            <li>
-              <strong>It gets scored</strong>
-              <span>Someone who filled six fields and came back twice is not the same as someone who typed an email and left. Each one carries a value that reflects that.</span>
-            </li>
-            <li>
-              <strong>Your team hears about it</strong>
-              <span>An SMS or a Slack message the moment a high-intent inquiry drops, with the contact details attached.</span>
-            </li>
-            <li>
-              <strong>Recovery goes out</strong>
-              <span>A branded email from your own sender name, on whatever delay you set.</span>
-            </li>
-            <li>
-              <strong>Meta and Google find out too</strong>
-              <span>The inquiry goes back to both platforms as a conversion event, weighted by intent, so your campaigns optimise on real demand rather than a fraction of it.</span>
-            </li>
-          </ol>
+          <p className="sl-eyebrow">How it works</p>
+          <h2 className="sl-section-headline">What happens when someone abandons your form.</h2>
+          <CallFlow />
         </div>
       </section>
 
@@ -401,38 +382,6 @@ function PricingContent({ industry, quotedPlan, locationCount }: { firstName: st
         </div>
       </section>
 
-      {/* WHAT THE FIRST WEEK LOOKS LIKE */}
-      <section className="sl-section">
-        <div className="sl-section-inner sl-week-inner">
-          <p className="sl-eyebrow">What the first week looks like</p>
-          <h2 className="sl-section-headline">You stop guessing in about seven days.</h2>
-
-          <ol className="sl-week">
-            <li>
-              <span className="sl-week-when">Day one</span>
-              <strong>One line of code goes on your site</strong>
-              <span className="sl-week-what">Same as adding Google Analytics. Your developer does it in a few minutes, or we do it for you. Nothing changes about how your forms work.</span>
-            </li>
-            <li>
-              <span className="sl-week-when">Day one or two</span>
-              <strong>The first captured inquiry appears</strong>
-              <span className="sl-week-what">Somebody starts a form, leaves, and shows up in your dashboard with whatever they had typed. For most people this is the moment it stops being theoretical.</span>
-            </li>
-            <li>
-              <span className="sl-week-when">Day two or three</span>
-              <strong>Recovery starts going out</strong>
-              <span className="sl-week-what">Branded emails from your own sender name, on whatever delay you choose. Alerts to your team the moment a high-intent inquiry drops.</span>
-            </li>
-            <li>
-              <span className="sl-week-when">End of week one</span>
-              <strong>You know your actual number</strong>
-              <span className="sl-week-what">Not an industry estimate. How many people are starting your forms and leaving, which pages they do it on, and where they came from.</span>
-            </li>
-          </ol>
-
-          <p className="sl-week-note">The trial runs seven days for exactly this reason. Long enough to see the real number, short enough that nobody has to think hard about it.</p>
-        </div>
-      </section>
     </>
   )
 }
