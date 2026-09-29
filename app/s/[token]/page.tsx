@@ -306,29 +306,26 @@ function PricingContent({ industry }: { firstName: string; industry: ReturnType<
         </div>
       </section>
 
-      {/* ROI CALCULATOR */}
+      {/* THE ARITHMETIC */}
       <section className="sl-roi">
         <div className="sl-section-inner">
-          <p className="sl-eyebrow">ROI math</p>
-          <h2 className="sl-section-headline">Here&apos;s what one recovered lead is worth to you.</h2>
-
-          <div className="sl-roi-grid">
-            <div className="sl-roi-card">
-              <div className="sl-roi-num">{industry.label}</div>
-              <div className="sl-roi-label">Your industry benchmark</div>
-            </div>
-            <div className="sl-roi-card sl-roi-card-highlight">
-              <div className="sl-roi-num">${industry.avgLeadValue.toLocaleString()}</div>
-              <div className="sl-roi-label">Average lead value</div>
-            </div>
-            <div className="sl-roi-card">
-              <div className="sl-roi-num">{Math.ceil(397 / industry.avgLeadValue * 12 * 100) / 100 < 1 ? '1 lead' : `${Math.ceil(397 * 12 / industry.avgLeadValue)} leads`}</div>
-              <div className="sl-roi-label">Covers a year at Pro</div>
-            </div>
-          </div>
+          <p className="sl-eyebrow">The arithmetic</p>
+          <h2 className="sl-section-headline">You already know what a customer is worth to you.</h2>
 
           <p className="sl-roi-conclusion">
-            For a {industry.label.toLowerCase()}, recovering even <strong>one lead</strong> from form abandonment in your first month covers <strong>{Math.floor(industry.avgLeadValue / 397)} months of Pro</strong>. Most clients recover 5-15 leads in their first month.
+            We are not going to tell you what your average {industry.label.toLowerCase()} customer
+            is worth, because you know that number and we do not. Take it, and work out how many
+            you would need to recover in a year to cover four thousand seven hundred and sixty
+            four dollars, which is what Pro costs annually.
+          </p>
+          <p className="sl-roi-conclusion">
+            For most of the businesses we built this for, the answer is one. Sometimes two. That
+            is the whole case, and it does not need a chart.
+          </p>
+          <p className="sl-roi-footnote">
+            Baymard Institute puts form abandonment at 60 to 70 percent. How much of that is
+            happening on your forms specifically is something you would find out in the first
+            week of the trial.
           </p>
         </div>
       </section>

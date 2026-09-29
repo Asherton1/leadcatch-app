@@ -914,3 +914,11 @@
   line-height: 1.7;
   color: #a1a1aa;
 }
+
+.sl-roi-footnote {
+  font-size: 0.84rem;
+  line-height: 1.75;
+  color: #6b6b6b;
+  max-width: 62ch;
+  margin: 1.5rem 0 0;
+}
