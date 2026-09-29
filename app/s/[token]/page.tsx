@@ -9,12 +9,11 @@ interface PageProps {
   params: Promise<{ token: string }>
 }
 
-// Industry detection from notes — used to pick testimonial + ROI defaults
+// Industry detection from notes, used to pick the ROI defaults
 function detectIndustry(notes: string | null): {
   key: string
   label: string
   avgLeadValue: number
-  testimonial: { quote: string; author: string; role: string }
 } {
   const n = (notes || '').toLowerCase()
   if (n.includes('med spa') || n.includes('medspa') || n.includes('aesthetic')) {
@@ -22,11 +21,6 @@ function detectIndustry(notes: string | null): {
       key: 'med_spa',
       label: 'Med Spa',
       avgLeadValue: 2800,
-      testimonial: {
-        quote: 'We were losing 60% of our consultation requests. ReCapture got us 40 of them back in the first month. The AI callback alone closed three $8K treatment packages.',
-        author: 'Sarah M.',
-        role: 'Owner, Premier Med Spa Group',
-      },
     }
   }
   if (n.includes('dental') || n.includes('dentist') || n.includes('orthodont')) {
@@ -34,11 +28,6 @@ function detectIndustry(notes: string | null): {
       key: 'dental',
       label: 'Dental Practice',
       avgLeadValue: 1900,
-      testimonial: {
-        quote: 'A single recovered Invisalign consultation paid for our annual subscription. The text-back automation feels concierge — patients constantly tell us they appreciate the immediate follow-up.',
-        author: 'Dr. James R.',
-        role: 'Smile Studio Dental',
-      },
     }
   }
   if (n.includes('plastic') || n.includes('cosmetic surg')) {
@@ -46,11 +35,6 @@ function detectIndustry(notes: string | null): {
       key: 'plastic_surgery',
       label: 'Plastic Surgery',
       avgLeadValue: 6500,
-      testimonial: {
-        quote: 'High-ticket consults need high-touch follow-up. ReCapture gives us that without hiring three more coordinators. We recovered $84K in our first quarter.',
-        author: 'Dr. Priya K.',
-        role: 'Aesthetic Surgery Institute',
-      },
     }
   }
   if (n.includes('real estate') || n.includes('realtor') || n.includes('luxury home')) {
@@ -58,11 +42,6 @@ function detectIndustry(notes: string | null): {
       key: 'real_estate',
       label: 'Luxury Real Estate',
       avgLeadValue: 12000,
-      testimonial: {
-        quote: 'Luxury buyers fill out forms when they\'re serious. Missing one is a quarter-million-dollar miss. ReCapture caught three high-intent buyers our team had no idea we lost.',
-        author: 'Michael T.',
-        role: 'Principal Broker, Bayshore Properties',
-      },
     }
   }
   if (n.includes('property mgmt') || n.includes('property management') || n.includes('apartment')) {
@@ -70,11 +49,6 @@ function detectIndustry(notes: string | null): {
       key: 'property_mgmt',
       label: 'Property Management',
       avgLeadValue: 3200,
-      testimonial: {
-        quote: 'When a prospective resident bounces from our application, we lose $3K+ in annual rent. ReCapture\'s instant SMS callback fills units 4 days faster on average.',
-        author: 'Lisa W.',
-        role: 'Director of Leasing, Crestwood Communities',
-      },
     }
   }
   if (n.includes('luxury auto') || n.includes('porsche') || n.includes('mercedes') || n.includes('dealer')) {
@@ -82,22 +56,12 @@ function detectIndustry(notes: string | null): {
       key: 'luxury_auto',
       label: 'Luxury Auto',
       avgLeadValue: 8500,
-      testimonial: {
-        quote: 'Test drive requests are gold. ReCapture made sure we never miss one — every form-starter gets a personal call within 60 seconds. Conversion lifted 38%.',
-        author: 'Carlos H.',
-        role: 'GM, Premier European Motors',
-      },
     }
   }
   return {
     key: 'general',
     label: 'High-ticket service',
     avgLeadValue: 4500,
-    testimonial: {
-      quote: 'The first lead we recovered through ReCapture closed at $11,400. That single deal paid for two years of the platform. It just works.',
-      author: 'Patricia D.',
-      role: 'COO, Multi-Location Service Group',
-    },
   }
 }
 
@@ -199,17 +163,32 @@ export default async function ShortLinkPage({ params }: PageProps) {
       {link.topic === 'form_audit' && <FormAuditContent firstName={firstName} />}
       {(link.topic === 'general' || !['pricing', 'trial', 'enterprise', 'form_audit'].includes(link.topic)) && <GeneralContent firstName={firstName} industry={industry} />}
 
-      {/* SOCIAL PROOF — Industry-matched testimonial */}
+      {/* WHAT ACTUALLY HAPPENS */}
       <section className="sl-social-proof">
         <div className="sl-section-inner">
-          <p className="sl-eyebrow">From a customer in your industry</p>
-          <blockquote className="sl-testimonial">
-            <p className="sl-testimonial-quote">&ldquo;{industry.testimonial.quote}&rdquo;</p>
-            <footer className="sl-testimonial-author">
-              <strong>{industry.testimonial.author}</strong>
-              <span>{industry.testimonial.role}</span>
-            </footer>
-          </blockquote>
+          <p className="sl-eyebrow">What happens when someone abandons your form</p>
+          <ol className="sl-sequence">
+            <li>
+              <strong>It gets captured</strong>
+              <span>Whatever they typed before leaving. Name, email, phone, and how far through the form they got.</span>
+            </li>
+            <li>
+              <strong>It gets scored</strong>
+              <span>Someone who filled six fields and came back twice is not the same as someone who typed an email and left. Each one carries a value that reflects that.</span>
+            </li>
+            <li>
+              <strong>Your team hears about it</strong>
+              <span>An SMS or a Slack message the moment a high-intent inquiry drops, with the contact details attached.</span>
+            </li>
+            <li>
+              <strong>Recovery goes out</strong>
+              <span>A branded email from your own sender name, on whatever delay you set.</span>
+            </li>
+            <li>
+              <strong>Meta and Google find out too</strong>
+              <span>The inquiry goes back to both platforms as a conversion event, weighted by intent, so your campaigns optimise on real demand rather than a fraction of it.</span>
+            </li>
+          </ol>
         </div>
       </section>
 
@@ -300,7 +279,7 @@ function PricingContent({ industry }: { firstName: string; industry: ReturnType<
               <ul className="sl-plan-features">
                 <li>Lead capture from every form on your site</li>
                 <li>Hot/warm/cold lead scoring</li>
-                <li><strong>AI voice callback within 60 seconds</strong></li>
+                <li><strong>Intent signals to Meta and Google</strong></li>
                 <li>Automated branded recovery emails</li>
                 <li>Instant SMS alerts to your team</li>
                 <li>HIPAA-ready with BAA available</li>
@@ -310,18 +289,18 @@ function PricingContent({ industry }: { firstName: string; industry: ReturnType<
             </div>
 
             <div className="sl-plan-card">
-              <div className="sl-plan-name">Enterprise</div>
-              <div className="sl-plan-price"><span className="sl-plan-amount">From $1,997</span><span className="sl-plan-period">/mo</span></div>
-              <p className="sl-plan-tagline">Multi-location, franchise systems, white-glove onboarding.</p>
+              <div className="sl-plan-name">Multi-location</div>
+              <div className="sl-plan-price"><span className="sl-plan-amount">From $897</span><span className="sl-plan-period">/mo</span></div>
+              <p className="sl-plan-tagline">Two locations or thirty, priced by how many sites you run.</p>
               <ul className="sl-plan-features">
-                <li>Everything in Pro</li>
-                <li>Per-location reporting</li>
-                <li>Dedicated success engineer</li>
-                <li>Custom AI agent per location</li>
-                <li>BAA included by default</li>
-                <li>Slack Connect with our team</li>
+                <li>Everything in Pro, across every location</li>
+                <li>One rolled-up dashboard for all sites</li>
+                <li>Per-location reporting and analytics</li>
+                <li>Custom-branded recovery emails per site</li>
+                <li>White-glove onboarding and installation</li>
+                <li>BAA included</li>
               </ul>
-              <a href="/enterprise" className="sl-plan-cta">Review enterprise tiers</a>
+              <a href="/enterprise" className="sl-plan-cta">See the plans</a>
             </div>
           </div>
         </div>
@@ -344,7 +323,7 @@ function PricingContent({ industry }: { firstName: string; industry: ReturnType<
             </div>
             <div className="sl-roi-card">
               <div className="sl-roi-num">{Math.ceil(397 / industry.avgLeadValue * 12 * 100) / 100 < 1 ? '1 lead' : `${Math.ceil(397 * 12 / industry.avgLeadValue)} leads`}</div>
-              <div className="sl-roi-label">Pays for full year of Pro</div>
+              <div className="sl-roi-label">Covers a year at Pro</div>
             </div>
           </div>
 

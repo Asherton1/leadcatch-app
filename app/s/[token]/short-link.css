@@ -867,3 +867,50 @@
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
   }
 }
+/* Sequence list replacing the old testimonial block */
+.sl-sequence {
+  list-style: none;
+  counter-reset: sq;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 640px;
+}
+.sl-sequence li {
+  counter-increment: sq;
+  position: relative;
+  padding-left: 2.6rem;
+}
+.sl-sequence li::before {
+  content: counter(sq);
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  width: 1.7rem;
+  height: 1.7rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255,107,53,0.35);
+  background: rgba(255,107,53,0.08);
+  color: #ff6b35;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+.sl-sequence strong {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.018em;
+  margin-bottom: 0.3rem;
+}
+.sl-sequence span {
+  display: block;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: #a1a1aa;
+}
