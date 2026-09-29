@@ -409,3 +409,37 @@
   .cf-bar i { transition: none !important; }
   .cf-signal-state { opacity: 1 !important; transition: none !important; }
 }
+
+/* Rows are gated on .revealed in split-flow.css, which this page never adds */
+.cf .sp-rows .sp-row {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .5s ease, transform .5s cubic-bezier(0.22,1,0.36,1);
+}
+.cf .sp-step.cf-in .sp-rows .sp-row {
+  opacity: 1;
+  transform: none;
+}
+.cf .sp-step.cf-in .sp-rows .sp-row:nth-child(1) { transition-delay: .30s }
+.cf .sp-step.cf-in .sp-rows .sp-row:nth-child(2) { transition-delay: .38s }
+.cf .sp-step.cf-in .sp-rows .sp-row:nth-child(3) { transition-delay: .46s }
+.cf .sp-step.cf-in .sp-rows .sp-row:nth-child(4) { transition-delay: .54s }
+
+/* Card internals gated the same way */
+.cf .sp-step .sp-card,
+.cf .sp-step .sp-card-head,
+.cf .sp-step .cf-score,
+.cf .sp-step .cf-bar,
+.cf .sp-step .cf-mail,
+.cf .sp-step .cf-mail-body,
+.cf .sp-step .cf-signals,
+.cf .sp-step .cf-sms,
+.cf .sp-step .sp-empty {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf .sp-rows .sp-row { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
