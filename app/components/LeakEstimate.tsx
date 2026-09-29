@@ -4,12 +4,13 @@ import { useState } from 'react'
 import './leak-estimate.css'
 
 export default function LeakEstimate({ locationCount }: { locationCount: number | null }) {
-  const [perMonth, setPerMonth] = useState(locationCount ? locationCount * 25 : 50)
+  const [perMonth, setPerMonth] = useState(locationCount ? locationCount * 10 : 25)
 
-  // Baymard puts form abandonment at 60 to 70 percent. We show the range rather
-  // than a single invented number.
-  const lowLost = Math.round(perMonth * 0.6)
-  const highLost = Math.round(perMonth * 0.7)
+  // They know their submissions. They cannot know how many started, which is the
+  // whole point. So work backwards: if 60 to 70 percent abandon, submissions are
+  // the remaining 30 to 40 percent of everyone who started.
+  const lowLost = Math.round(perMonth / 0.4 - perMonth)   // at 60% abandonment
+  const highLost = Math.round(perMonth / 0.3 - perMonth)  // at 70% abandonment
 
   return (
     <div className="le">
@@ -20,7 +21,7 @@ export default function LeakEstimate({ locationCount }: { locationCount: number 
 
       <div className="le-body">
         <label className="le-label" htmlFor="le-range">
-          Roughly how many people start a form on your site each month
+          Roughly how many form submissions do you get each month
           {locationCount ? <span className="le-hint"> across all {locationCount} locations</span> : null}?
         </label>
 
@@ -40,13 +41,14 @@ export default function LeakEstimate({ locationCount }: { locationCount: number 
 
         <div className="le-result">
           <div className="le-result-num">{lowLost.toLocaleString()} to {highLost.toLocaleString()}</div>
-          <div className="le-result-label">never press submit, every month</div>
+          <div className="le-result-label">more started a form and never finished it</div>
         </div>
 
         <p className="le-note">
-          That range is Baymard Institute&apos;s figure for form abandonment, applied to your
-          number. It is not a measurement of your site. The point of the trial is that after
-          a week you stop estimating and know exactly how many it is.
+          You know your submissions. You cannot know how many people started and left,
+          because nothing currently records them. This works backwards from Baymard
+          Institute&apos;s 60 to 70 percent abandonment figure. It is arithmetic, not a
+          measurement of your site. After a week of the trial you stop estimating.
         </p>
       </div>
     </div>
