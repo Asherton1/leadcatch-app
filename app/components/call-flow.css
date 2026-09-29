@@ -117,3 +117,28 @@
   .cf-week-list li:first-child::before { top: 0.45rem; }
   .cf-panel { padding: 1.15rem 1.15rem; }
 }
+
+/* This page has no ScrollReveal, so reveal must not hide anything */
+.cf .reveal,
+.cf.reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* Reveal on scroll natively instead */
+.cf .sp-step {
+  animation: cf-rise .7s cubic-bezier(0.22,1,0.36,1) both;
+  animation-timeline: view();
+  animation-range: entry 5% cover 28%;
+}
+@keyframes cf-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+@supports not (animation-timeline: view()) {
+  .cf .sp-step { animation: none; opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cf .sp-step { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
