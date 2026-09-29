@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { supabaseAdmin } from '@/lib/supabase-admin'
+import LeakEstimate from '@/app/components/LeakEstimate'
 import BlogNav from '../../components/BlogNav'
 import Footer from '../../components/Footer'
 import '../../landing.css'
@@ -396,11 +397,40 @@ function PricingContent({ industry, quotedPlan, locationCount }: { firstName: st
             For most of the businesses we built this for, the answer is one. Sometimes two. That
             is the whole case, and it does not need a chart.
           </p>
-          <p className="sl-roi-footnote">
-            Baymard Institute puts form abandonment at 60 to 70 percent. How much of that is
-            happening on your forms specifically is something you would find out in the first
-            week of the trial.
-          </p>
+          <LeakEstimate locationCount={locationCount} />
+        </div>
+      </section>
+
+      {/* WHAT THE FIRST WEEK LOOKS LIKE */}
+      <section className="sl-section">
+        <div className="sl-section-inner sl-week-inner">
+          <p className="sl-eyebrow">What the first week looks like</p>
+          <h2 className="sl-section-headline">You stop guessing in about seven days.</h2>
+
+          <ol className="sl-week">
+            <li>
+              <span className="sl-week-when">Day one</span>
+              <strong>One line of code goes on your site</strong>
+              <span className="sl-week-what">Same as adding Google Analytics. Your developer does it in a few minutes, or we do it for you. Nothing changes about how your forms work.</span>
+            </li>
+            <li>
+              <span className="sl-week-when">Day one or two</span>
+              <strong>The first captured inquiry appears</strong>
+              <span className="sl-week-what">Somebody starts a form, leaves, and shows up in your dashboard with whatever they had typed. For most people this is the moment it stops being theoretical.</span>
+            </li>
+            <li>
+              <span className="sl-week-when">Day two or three</span>
+              <strong>Recovery starts going out</strong>
+              <span className="sl-week-what">Branded emails from your own sender name, on whatever delay you choose. Alerts to your team the moment a high-intent inquiry drops.</span>
+            </li>
+            <li>
+              <span className="sl-week-when">End of week one</span>
+              <strong>You know your actual number</strong>
+              <span className="sl-week-what">Not an industry estimate. How many people are starting your forms and leaving, which pages they do it on, and where they came from.</span>
+            </li>
+          </ol>
+
+          <p className="sl-week-note">The trial runs seven days for exactly this reason. Long enough to see the real number, short enough that nobody has to think hard about it.</p>
         </div>
       </section>
     </>

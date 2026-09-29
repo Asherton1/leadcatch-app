@@ -1327,3 +1327,90 @@
   .sl-quoted { padding: 1.6rem 1.35rem 1.4rem; margin: 1.5rem auto 2rem; }
   .sl-quoted-cta { width: 100%; justify-content: center; }
 }
+
+/* ══ First week timeline ══════════════════════════════════════════════ */
+.sl-week-inner { text-align: center; }
+
+.sl-week {
+  list-style: none;
+  margin: 2rem auto 0;
+  padding: 0 0 0 1.75rem;
+  max-width: 660px;
+  text-align: left;
+  position: relative;
+  border-left: 1px dashed rgba(255,107,53,0.3);
+}
+.sl-week li {
+  position: relative;
+  padding: 0 0 1.85rem;
+}
+.sl-week li:last-child { padding-bottom: 0.25rem; }
+
+.sl-week li::before {
+  content: '';
+  position: absolute;
+  left: calc(-1.75rem - 5px);
+  top: 0.45rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #0a0a0a;
+  border: 2px solid #ff6b35;
+}
+
+.sl-week-when {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ff6b35;
+  margin-bottom: 0.4rem;
+}
+.sl-week strong {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.018em;
+  line-height: 1.35;
+  margin-bottom: 0.35rem;
+}
+.sl-week-what {
+  display: block;
+  font-size: 0.86rem;
+  line-height: 1.75;
+  color: #a1a1aa;
+  max-width: 56ch;
+}
+.sl-week-note {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: #6b6b6b;
+  max-width: 52ch;
+  margin: 1.75rem auto 0;
+}
+
+/* Steps reveal as they scroll in */
+.sl-week li {
+  animation: sl-rise .6s cubic-bezier(0.22,1,0.36,1) both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+.sl-week li:nth-child(1) { animation-delay: .04s }
+.sl-week li:nth-child(2) { animation-delay: .12s }
+.sl-week li:nth-child(3) { animation-delay: .20s }
+.sl-week li:nth-child(4) { animation-delay: .28s }
+@supports not (animation-timeline: view()) {
+  .sl-week li { animation: none; opacity: 1; transform: none; }
+}
+
+@media (max-width: 620px) {
+  .sl-week { padding-left: 1.3rem; }
+  .sl-week li::before { left: calc(-1.3rem - 5px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sl-week li { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .le-pip { animation: none !important; }
+}
