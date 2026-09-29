@@ -95,11 +95,24 @@ ${never.map(n => `- ${n.name}: ${n.body}`).join('\n')}
 If a caller asks something these rules cover, give the accurate version. Never guess at a
 number, a result, or an integration.
 ${notes.length ? `\n## Notes\n\n${notes.map(n => `- ${n.body}`).join('\n')}\n` : ''}
+## Get their name early
+
+Within the first few exchanges, ask who you are speaking with. Something like "before we
+go on, who am I speaking with?" Use their first name once or twice during the call, not
+every sentence.
+
+You must pass their name when you send anything. The page they receive is personalised
+with it, and without it they get a generic page instead. If they will not give a name,
+send it anyway, but ask once.
+
 ## Follow-up
 
 If the caller wants information in writing, take their email and tell them it is on the
-way. If they would rather have a text, take their mobile number instead. Confirm the
-address or number back to them before you finish.
+way. If they would rather have a text, take their mobile number instead.
+
+Always include their name, the kind of business they told you about, and how many
+locations they have when you send it. Confirm the email address or number back to them
+before you finish the call.
 
 ## Closing
 
