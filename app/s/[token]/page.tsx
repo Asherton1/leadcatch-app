@@ -74,6 +74,42 @@ function formatCallDate(date: Date): string {
   })
 }
 
+
+// Work out which plan they were quoted from what they told Marissa, so the page
+// shows the same number they heard on the call rather than a generic ladder.
+const WORD_NUMBERS: Record<string, number> = {
+  one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9,
+  ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15,
+  sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20,
+  thirty: 30, forty: 40, fifty: 50,
+}
+
+function locationCountFrom(notes: string | null): number | null {
+  if (!notes) return null
+  const text = notes.toLowerCase()
+  const digits = text.match(/(\d+)\s*(?:locations?|sites?|stores?|offices?|branches?)/)
+  if (digits) return parseInt(digits[1], 10)
+  const words = text.match(/\b([a-z]+)\s*(?:locations?|sites?|stores?|offices?|branches?)/)
+  if (words && WORD_NUMBERS[words[1]] !== undefined) return WORD_NUMBERS[words[1]]
+  if (/\bsingle\s*(?:location|site|store)/.test(text)) return 1
+  if (/\bone\s*(?:location|site|store)/.test(text)) return 1
+  return null
+}
+
+const PLAN_LADDER = [
+  { max: 1,   name: 'Pro',     price: '$397',   period: '/mo', scope: 'One website, every form and page included' },
+  { max: 4,   name: 'Group',   price: '$897',   period: '/mo', scope: 'Two to four locations' },
+  { max: 8,   name: 'Starter', price: '$1,997', period: '/mo', scope: 'Five to eight locations' },
+  { max: 16,  name: 'Growth',  price: '$3,997', period: '/mo', scope: 'Nine to sixteen locations' },
+  { max: 30,  name: 'Scale',   price: '$6,997', period: '/mo', scope: 'Seventeen to thirty locations' },
+  { max: 9999, name: 'Custom', price: 'Custom', period: '',    scope: 'Thirty-one or more locations' },
+]
+
+function planFor(count: number | null) {
+  if (count === null) return null
+  return PLAN_LADDER.find(p => count <= p.max) ?? PLAN_LADDER[PLAN_LADDER.length - 1]
+}
+
 export default async function ShortLinkPage({ params }: PageProps) {
   const { token } = await params
 
@@ -121,6 +157,8 @@ export default async function ShortLinkPage({ params }: PageProps) {
   const callTime = link.created_at ? new Date(link.created_at) : new Date()
   const callDate = formatCallDate(callTime)
   const firstName = link.name || 'there'
+  const locationCount = locationCountFrom(link.notes)
+  const quotedPlan = planFor(locationCount)
 
   return (
     <div className="landing" style={{ minHeight: '100vh', background: '#0a0a0a' }}>
@@ -166,14 +204,14 @@ export default async function ShortLinkPage({ params }: PageProps) {
       </section>
 
       {/* TOPIC-SPECIFIC CONTENT */}
-      {link.topic === 'pricing' && <PricingContent firstName={firstName} industry={industry} />}
+      {link.topic === 'pricing' && <PricingContent firstName={firstName} industry={industry} quotedPlan={quotedPlan} locationCount={locationCount} />}
       {link.topic === 'trial' && <TrialContent firstName={firstName} />}
       {link.topic === 'enterprise' && <EnterpriseContent firstName={firstName} industry={industry} notes={link.notes} />}
       {link.topic === 'form_audit' && <FormAuditContent firstName={firstName} />}
       {(link.topic === 'general' || !['pricing', 'trial', 'enterprise', 'form_audit'].includes(link.topic)) && (
         <>
           <GeneralContent firstName={firstName} industry={industry} />
-          <PricingContent firstName={firstName} industry={industry} />
+          <PricingContent firstName={firstName} industry={industry} quotedPlan={quotedPlan} locationCount={locationCount} />
         </>
       )}
 
@@ -277,13 +315,35 @@ export default async function ShortLinkPage({ params }: PageProps) {
 // TOPIC COMPONENTS
 // ─────────────────────────────────────────────────────────────
 
-function PricingContent({ industry }: { firstName: string; industry: ReturnType<typeof detectIndustry> }) {
+function PricingContent({ industry, quotedPlan, locationCount }: { firstName: string; industry: ReturnType<typeof detectIndustry>, quotedPlan: { name: string; price: string; period: string; scope: string } | null, locationCount: number | null }) {
   return (
     <>
       <section className="sl-section">
         <div className="sl-section-inner">
-          <p className="sl-eyebrow">Plans</p>
-          <h2 className="sl-section-headline">Pick the plan that fits your stage.</h2>
+          <p className="sl-eyebrow">{quotedPlan ? 'Your plan' : 'Plans'}</p>
+          <h2 className="sl-section-headline">
+            {quotedPlan
+              ? `Based on ${locationCount === 1 ? 'your single location' : `your ${locationCount} locations`}, this is the plan we talked about.`
+              : 'Pick the plan that fits your stage.'}
+          </h2>
+
+          {quotedPlan ? (
+            <div className="sl-quoted">
+              <div className="sl-quoted-head">
+                <span className="sl-quoted-name">{quotedPlan.name}</span>
+                <span className="sl-quoted-badge">Quoted on your call</span>
+              </div>
+              <div className="sl-quoted-price">
+                <span className="sl-quoted-amount">{quotedPlan.price}</span>
+                {quotedPlan.period ? <span className="sl-quoted-period">{quotedPlan.period}</span> : null}
+              </div>
+              <p className="sl-quoted-scope">{quotedPlan.scope}. Covers every form on every site, with one dashboard across all of them.</p>
+              <a href="/start-trial" className="sl-quoted-cta">Start your 7-day trial</a>
+              <p className="sl-quoted-note">Seven day free trial on every plan. Cancel any time.</p>
+            </div>
+          ) : null}
+
+          {quotedPlan ? <p className="sl-plans-other">If your setup changes, here is the rest of the range.</p> : null}
 
           <div className="sl-plans-grid">
             <div className="sl-plan-card sl-plan-featured">
