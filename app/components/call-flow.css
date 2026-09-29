@@ -142,3 +142,42 @@
 @media (prefers-reduced-motion: reduce) {
   .cf .sp-step { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
+
+/* ══ Visible without ScrollReveal ═════════════════════════════════════ */
+.cf .sp-step,
+.cf .sp-step .sp-left,
+.cf .sp-step .sp-right {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Reveal on scroll natively instead */
+.cf .sp-step {
+  animation: cf-rise .7s cubic-bezier(0.22,1,0.36,1) both;
+  animation-timeline: view();
+  animation-range: entry 5% cover 26%;
+}
+@supports not (animation-timeline: view()) {
+  .cf .sp-step { animation: none; }
+}
+
+/* ══ Week block reads as the end of the same flow ═════════════════════ */
+.cf-week {
+  margin: 0 !important;
+  padding: 2.25rem 0 0 !important;
+  background: none !important;
+  border: none !important;
+  border-top: 1px solid rgba(255,255,255,0.07) !important;
+  border-radius: 0 !important;
+}
+.cf-week-label {
+  margin-bottom: 1.5rem !important;
+}
+.cf-week-list {
+  padding-left: 1.6rem !important;
+  max-width: 720px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf .sp-step { animation: none !important; }
+}
