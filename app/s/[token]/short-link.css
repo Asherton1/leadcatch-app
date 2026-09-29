@@ -1110,3 +1110,8 @@
 @media (max-width: 720px) {
   .sl-sequence { padding: 1.35rem 1.25rem 1.15rem !important; }
 }
+
+/* Step labels under the numerals in orange */
+.sl-how-step h3,
+.sl-how-title,
+.sl-step-title { color: #ff6b35 !important; }

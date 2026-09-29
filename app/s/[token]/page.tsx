@@ -568,7 +568,7 @@ function GeneralContent({ industry }: { firstName: string; industry: ReturnType<
             <div className="sl-how-card">
               <div className="sl-how-num">01</div>
               <div className="sl-how-title">Capture</div>
-              <p className="sl-how-desc">Our tracking script watches every form on your site. The moment a visitor types, we capture name, email, and phone — even if they never hit submit.</p>
+              <p className="sl-how-desc">Our script reads each contact field once the visitor has finished entering it, so their name, email and phone are captured even when they never press submit.</p>
             </div>
             <div className="sl-how-card">
               <div className="sl-how-num">02</div>
@@ -578,7 +578,7 @@ function GeneralContent({ industry }: { firstName: string; industry: ReturnType<
             <div className="sl-how-card">
               <div className="sl-how-num">03</div>
               <div className="sl-how-title">Recover</div>
-              <p className="sl-how-desc">Multi-channel automated recovery: AI voice callback within 60 seconds, branded recovery emails, instant SMS to your team, Slack alerts.</p>
+              <p className="sl-how-desc">Branded recovery emails from your own sender name, instant SMS and Slack alerts to your team, and the inquiry sent back to Meta and Google as a conversion signal.</p>
             </div>
           </div>
         </div>
