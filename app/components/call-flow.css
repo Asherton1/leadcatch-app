@@ -181,3 +181,46 @@
 @media (prefers-reduced-motion: reduce) {
   .cf .sp-step { animation: none !important; }
 }
+
+/* ══ Let the animation own opacity on the step itself ═════════════════ */
+.cf .sp-step {
+  opacity: 1;
+  transform: none;
+  animation: cf-rise .75s cubic-bezier(0.22,1,0.36,1) both;
+  animation-timeline: view();
+  animation-range: entry 2% cover 30%;
+}
+/* children stay pinned visible, the parent does the moving */
+.cf .sp-step .sp-left,
+.cf .sp-step .sp-right {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+@supports not (animation-timeline: view()) {
+  .cf .sp-step { animation: none; opacity: 1; }
+}
+
+/* Week block rises in too */
+.cf-week {
+  animation: cf-rise .75s cubic-bezier(0.22,1,0.36,1) both;
+  animation-timeline: view();
+  animation-range: entry 2% cover 30%;
+}
+.cf-week-list li {
+  animation: cf-rise .6s cubic-bezier(0.22,1,0.36,1) both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 32%;
+}
+.cf-week-list li:nth-child(1) { animation-delay: .05s }
+.cf-week-list li:nth-child(2) { animation-delay: .13s }
+.cf-week-list li:nth-child(3) { animation-delay: .21s }
+.cf-week-list li:nth-child(4) { animation-delay: .29s }
+@supports not (animation-timeline: view()) {
+  .cf-week, .cf-week-list li { animation: none; opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cf .sp-step, .cf-week, .cf-week-list li {
+    animation: none !important; opacity: 1 !important; transform: none !important;
+  }
+}
