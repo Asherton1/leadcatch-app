@@ -1214,3 +1214,12 @@
 @media (max-width: 860px) {
   .sl-briefing-col-notes { max-width: none; }
 }
+
+/* Centre everything in the arithmetic section */
+.sl-roi .sl-section-inner { text-align: center; }
+.sl-roi-conclusion { margin-left: auto !important; margin-right: auto !important; }
+.sl-roi-footnote {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center;
+}
