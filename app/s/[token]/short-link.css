@@ -1115,3 +1115,16 @@
 .sl-how-step h3,
 .sl-how-title,
 .sl-step-title { color: #ff6b35 !important; }
+
+/* Numerals orange, labels back to white */
+.sl-how-num { color: #ff6b35 !important; }
+.sl-how-title { color: #fff !important; }
+
+/* Centre the whole sequence section */
+.sl-social-proof .sl-section-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.sl-social-proof .sl-sequence { text-align: left; }
