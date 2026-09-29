@@ -1042,3 +1042,71 @@
   }
   .sl-plan-card:hover { transform: none; }
 }
+
+/* ══ Sequence rebuilt to match the site's phase-flow treatment ══════════ */
+.sl-sequence {
+  list-style: none !important;
+  counter-reset: sq;
+  margin: 1.75rem 0 0 !important;
+  padding: 1.6rem 1.75rem 1.4rem !important;
+  max-width: 660px;
+  background: linear-gradient(150deg, #1c1c1c 0%, #161616 55%, #121212 100%);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-left: 2px solid #ff6b35;
+  border-radius: 0 0.6rem 0.6rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0 !important;
+}
+.sl-sequence::after { display: none !important; }
+
+.sl-sequence li {
+  counter-increment: sq;
+  position: relative;
+  display: flex !important;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.8rem 0 !important;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.sl-sequence li:first-child { border-top: none; padding-top: 0 !important; }
+
+.sl-sequence li::before {
+  content: '' !important;
+  position: static !important;
+  flex: 0 0 19px;
+  width: 19px !important;
+  height: 19px !important;
+  margin-top: 0.12rem;
+  border-radius: 50% !important;
+  border: 1px solid #ff6b35 !important;
+  background: rgba(255,107,53,0.14) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff6b35' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") !important;
+  background-size: 11px 11px !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  font-size: 0 !important;
+  color: transparent !important;
+}
+
+.sl-sequence li > div,
+.sl-sequence li > span:last-of-type { flex: 1; }
+
+.sl-sequence strong {
+  display: block;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.25rem !important;
+}
+.sl-sequence span {
+  display: block;
+  font-size: 0.85rem !important;
+  line-height: 1.7 !important;
+  color: #a1a1aa !important;
+}
+
+@media (max-width: 720px) {
+  .sl-sequence { padding: 1.35rem 1.25rem 1.15rem !important; }
+}
