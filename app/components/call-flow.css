@@ -224,3 +224,43 @@
     animation: none !important; opacity: 1 !important; transform: none !important;
   }
 }
+
+/* ══ Observer-driven reveal, works in every browser ═══════════════════ */
+.cf .sp-step,
+.cf .cf-week,
+.cf .cf-week-list li {
+  animation: none !important;
+  animation-timeline: auto !important;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .7s cubic-bezier(0.22,1,0.36,1), transform .7s cubic-bezier(0.22,1,0.36,1);
+}
+.cf .sp-step.cf-in,
+.cf .cf-week.cf-in,
+.cf .cf-week-list li.cf-in {
+  opacity: 1;
+  transform: none;
+}
+.cf .cf-week-list li { transform: translateY(10px); }
+
+/* the two columns follow the step, slightly offset */
+.cf .sp-step .sp-left,
+.cf .sp-step .sp-right {
+  opacity: 0 !important;
+  transform: translateX(-10px) !important;
+  transition: opacity .65s ease, transform .65s cubic-bezier(0.22,1,0.36,1) !important;
+}
+.cf .sp-step .sp-right { transform: translateX(10px) !important; }
+.cf .sp-step.cf-in .sp-left,
+.cf .sp-step.cf-in .sp-right {
+  opacity: 1 !important;
+  transform: none !important;
+}
+.cf .sp-step.cf-in .sp-right { transition-delay: .18s !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cf .sp-step, .cf .cf-week, .cf .cf-week-list li,
+  .cf .sp-step .sp-left, .cf .sp-step .sp-right {
+    opacity: 1 !important; transform: none !important; transition: none !important;
+  }
+}

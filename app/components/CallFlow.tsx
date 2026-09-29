@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import './call-flow.css'
 import '../components/split-flow.css'
 
@@ -62,8 +63,29 @@ const WEEK = [
 ]
 
 export default function CallFlow() {
+  const root = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const el = root.current
+    if (!el) return
+    const targets = el.querySelectorAll('.sp-step, .cf-week, .cf-week-list li')
+    const io = new IntersectionObserver(
+      entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('cf-in')
+            io.unobserve(e.target)
+          }
+        })
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -8% 0px' }
+    )
+    targets.forEach(t => io.observe(t))
+    return () => io.disconnect()
+  }, [])
+
   return (
-    <div className="sp cf">
+    <div className="sp cf" ref={root}>
       <div className="sp-headrow">
         <div className="sp-headcol">What actually happens</div>
         <div className="sp-headcol sp-headcol-r">What you see</div>
