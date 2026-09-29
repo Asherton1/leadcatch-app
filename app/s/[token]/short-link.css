@@ -1202,3 +1202,15 @@
     column-gap: 0.75rem;
   }
 }
+
+/* What they told Marissa, read back to them */
+.sl-briefing-col-notes { max-width: 300px; }
+.sl-briefing-col-notes .sl-briefing-sub {
+  color: #ff6b35;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+@media (max-width: 860px) {
+  .sl-briefing-col-notes { max-width: none; }
+}

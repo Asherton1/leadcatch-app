@@ -145,6 +145,15 @@ export default async function ShortLinkPage({ params }: PageProps) {
               <span className="sl-briefing-key">Marissa</span>
               <span className="sl-briefing-sub">ReCapture AI Concierge</span>
             </div>
+            {link.notes ? (
+              <>
+                <div className="sl-briefing-divider"></div>
+                <div className="sl-briefing-col sl-briefing-col-notes">
+                  <span className="sl-briefing-key">What you told us</span>
+                  <span className="sl-briefing-sub">{link.notes}</span>
+                </div>
+              </>
+            ) : null}
           </div>
           <h1 className="sl-hero-headline">
             <span className="sl-hero-headline-primary">Hi {firstName}, here&apos;s everything we discussed.</span>{' '}
@@ -161,7 +170,12 @@ export default async function ShortLinkPage({ params }: PageProps) {
       {link.topic === 'trial' && <TrialContent firstName={firstName} />}
       {link.topic === 'enterprise' && <EnterpriseContent firstName={firstName} industry={industry} notes={link.notes} />}
       {link.topic === 'form_audit' && <FormAuditContent firstName={firstName} />}
-      {(link.topic === 'general' || !['pricing', 'trial', 'enterprise', 'form_audit'].includes(link.topic)) && <GeneralContent firstName={firstName} industry={industry} />}
+      {(link.topic === 'general' || !['pricing', 'trial', 'enterprise', 'form_audit'].includes(link.topic)) && (
+        <>
+          <GeneralContent firstName={firstName} industry={industry} />
+          <PricingContent firstName={firstName} industry={industry} />
+        </>
+      )}
 
       {/* WHAT ACTUALLY HAPPENS */}
       <section className="sl-social-proof">
