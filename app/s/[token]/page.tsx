@@ -197,7 +197,7 @@ export default async function ShortLinkPage({ params }: PageProps) {
           </div>
           <h1 className="sl-hero-headline">
             <span className="sl-hero-headline-primary">Hi {firstName}, here&apos;s everything we discussed.</span>{' '}
-            <span className="sl-hero-headline-muted">{link.notes ? `Tailored for your ${industry.label.toLowerCase()} operation. ` : `Tailored just for you. `}Everything below was prepared after our call.</span>
+            <span className="sl-hero-headline-muted">{link.notes ? `Tailored for your ${industry.label.toLowerCase()} operation. ` : `Tailored just for you. `}Everything below is built from what you just told Marissa.</span>
           </h1>
           <p className="sl-hero-fineprint">
             If anything looks off, just call us back at <a href="tel:+18886060630">(888) 606-0630</a> — Marissa will pick up.
