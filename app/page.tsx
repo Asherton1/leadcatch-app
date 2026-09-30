@@ -75,9 +75,17 @@ export default function LandingPage() {
 
       <section className="concierge-callout reveal">
         <div className="concierge-callout-inner">
-          <p className="concierge-callout-eyebrow">Want to skip the form?</p>
+          <p className="concierge-callout-eyebrow">Or skip the form entirely</p>
           <p className="concierge-callout-line">
-            Call <a href="tel:+18886060630" className="concierge-callout-number">(888) 606-0630</a> — our AI concierge answers your questions and texts you a tailored proposal for your business in 60 seconds.
+            Call <a href="tel:+18886060630" className="concierge-callout-number">(888) 606-0630</a> and talk to Marissa. She is our AI concierge, and she will say so.
+          </p>
+          <ul className="concierge-callout-list">
+            <li>Answers what ReCapture does, how it installs, and what it will and will not do</li>
+            <li>Works out which plan fits your number of locations, and quotes that one</li>
+            <li>Texts you a page built around what you told her, before you hang up</li>
+          </ul>
+          <p className="concierge-callout-foot">
+            No hold music, no queue, and nobody will call you back unless you ask.
           </p>
         </div>
       </section>
