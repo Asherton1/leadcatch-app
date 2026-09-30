@@ -6655,3 +6655,8 @@ select.audit-form-input option {
 @media (max-width: 620px) {
   .concierge-callout-list { padding: 0 0.5rem; }
 }
+
+.concierge-callout-foot { max-width: none; white-space: nowrap; }
+@media (max-width: 720px) {
+  .concierge-callout-foot { white-space: normal; max-width: 44ch; }
+}
