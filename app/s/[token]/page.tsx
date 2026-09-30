@@ -18,6 +18,24 @@ function detectIndustry(notes: string | null): {
   avgLeadValue: number
 } {
   const n = (notes || '').toLowerCase()
+  if (n.includes('furniture') || n.includes('home goods') || n.includes('showroom')) {
+    return { key: 'furniture', label: 'Furniture Retail', avgLeadValue: 6500 }
+  }
+  if (n.includes('builder') || n.includes('custom home') || n.includes('construction')) {
+    return { key: 'builder', label: 'Custom Home Building', avgLeadValue: 12000 }
+  }
+  if (n.includes('law') || n.includes('attorney') || n.includes('legal')) {
+    return { key: 'legal', label: 'Legal', avgLeadValue: 8500 }
+  }
+  if (n.includes('furniture') || n.includes('home goods') || n.includes('showroom')) {
+    return { key: 'furniture', label: 'Furniture Retail', avgLeadValue: 6500 }
+  }
+  if (n.includes('builder') || n.includes('custom home') || n.includes('construction')) {
+    return { key: 'builder', label: 'Custom Home Building', avgLeadValue: 12000 }
+  }
+  if (n.includes('law') || n.includes('attorney') || n.includes('legal')) {
+    return { key: 'legal', label: 'Legal', avgLeadValue: 8500 }
+  }
   if (n.includes('med spa') || n.includes('medspa') || n.includes('aesthetic')) {
     return {
       key: 'med_spa',
@@ -197,7 +215,7 @@ export default async function ShortLinkPage({ params }: PageProps) {
           </div>
           <h1 className="sl-hero-headline">
             <span className="sl-hero-headline-primary">Hi {firstName}, here&apos;s everything we discussed.</span>{' '}
-            <span className="sl-hero-headline-muted">{link.notes ? `Tailored for your ${industry.label.toLowerCase()} operation. ` : `Tailored just for you. `}Everything below is built from what you just told Marissa.</span>
+            <span className="sl-hero-headline-muted">{industry.key !== 'general' && link.notes ? `Built around your ${industry.label.toLowerCase()} setup. ` : ``}Everything below comes from what you just told Marissa.</span>
           </h1>
           <p className="sl-hero-fineprint">
             If anything looks off, just call us back at <a href="tel:+18886060630">(888) 606-0630</a> — Marissa will pick up.
