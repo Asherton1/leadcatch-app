@@ -77,7 +77,7 @@ export default function LandingPage() {
         <div className="concierge-callout-inner">
           <p className="concierge-callout-eyebrow">Or skip the form entirely</p>
           <p className="concierge-callout-line">
-            Call <a href="tel:+18886060630" className="concierge-callout-number">(888) 606-0630</a> and talk to Marissa. She is our AI concierge, and she will say so.
+            Call <a href="tel:+18886060630" className="concierge-callout-number">(888) 606-0630</a> and talk to Marissa, our AI concierge.
           </p>
           <ul className="concierge-callout-list">
             <li>Answers what ReCapture does, how it installs, and what it will and will not do</li>
