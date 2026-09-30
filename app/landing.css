@@ -6682,3 +6682,20 @@ select.audit-form-input option {
   .concierge-callout-line { max-width: none; }
   .concierge-callout-foot { padding-left: 1.7rem; }
 }
+
+/* Desktop: nothing wraps */
+@media (min-width: 860px) {
+  .concierge-callout-line { max-width: none; white-space: nowrap; }
+  .concierge-callout-list { max-width: none; width: fit-content; }
+  .concierge-callout-list li { white-space: nowrap; }
+  .concierge-callout-foot { max-width: none; width: fit-content; white-space: nowrap; }
+}
+
+/* Mobile: footer centres, no left rail */
+@media (max-width: 859px) {
+  .concierge-callout-foot {
+    text-align: center;
+    padding-left: 0;
+    max-width: 40ch;
+  }
+}
