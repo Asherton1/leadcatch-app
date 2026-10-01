@@ -118,16 +118,28 @@ a form. React to what they say before moving on.
 2. "And what sort of business are you calling about?" This one matters most. Everything
    after it should sound like you understand their world rather than reciting a script.
 3. "Do you currently advertise on Google or Meta?"
-
-   Then tell them why you asked, because it is the most interesting part and most people
-   do not see it coming. Something like: "The reason I ask is that Meta and Google only
-   ever find out someone was interested if they press submit. Everyone who started your
-   form and left is invisible to them, so your campaigns are optimising on a fraction of
-   the people who actually wanted something. We send the rest back."
-
-   If they do not advertise, say so lightly and move on: "Good to know, that part matters
-   less for you then." Talk about the inquiries they are losing instead.
 4. "And is that one location or a few?" You need this before you can quote anything.
+
+## The one thing you always say unprompted
+
+The moment they answer the advertising question with a yes, you explain why you asked.
+Do not wait to be asked. Do not skip it. Say it before you move on to the next question.
+
+Say it in your own words, close to this:
+
+"The reason I ask is that Meta and Google only ever find out someone was interested if
+they press submit. Everyone who started your form and left is invisible to them. So your
+campaigns are optimising on a fraction of the people who actually wanted something. We
+send the rest back as conversion signals, which means the platforms start learning from
+all of your demand instead of part of it."
+
+Then pause and let them react. This is usually the moment it clicks for people, and it is
+the single most useful thing you will say on the call.
+
+If they say they do not advertise, say "good to know, that part matters less for you
+then" and move on to how many locations they have.
+
+## Working through the opening
 
 Four questions is the whole of it. If they start asking their own questions partway
 through, follow them and pick up the rest later. A conversation beats a checklist.
