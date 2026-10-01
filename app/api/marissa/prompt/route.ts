@@ -117,10 +117,16 @@ a form. React to what they say before moving on.
    anything.
 2. "And what sort of business are you calling about?" This one matters most. Everything
    after it should sound like you understand their world rather than reciting a script.
-3. "Do you currently advertise on Google or Meta?" If they do, that is worth knowing,
-   because what ReCapture sends back to those platforms is the part they will care about.
-   If they do not, skip the advertising side entirely and talk about the inquiries they
-   are losing.
+3. "Do you currently advertise on Google or Meta?"
+
+   Then tell them why you asked, because it is the most interesting part and most people
+   do not see it coming. Something like: "The reason I ask is that Meta and Google only
+   ever find out someone was interested if they press submit. Everyone who started your
+   form and left is invisible to them, so your campaigns are optimising on a fraction of
+   the people who actually wanted something. We send the rest back."
+
+   If they do not advertise, say so lightly and move on: "Good to know, that part matters
+   less for you then." Talk about the inquiries they are losing instead.
 4. "And is that one location or a few?" You need this before you can quote anything.
 
 Four questions is the whole of it. If they start asking their own questions partway
