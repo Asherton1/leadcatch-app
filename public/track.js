@@ -291,12 +291,23 @@
   }
 
   // Combined gate -- check before EVERY send
+  // Resolve the geo check once, on load, and cache it. Waiting on a promise at
+  // send time means nothing ever sends on mobile: iOS suspends the page the
+  // moment it is hidden, so the callback never runs.
+  var euBlocked = null;
+  checkEUStatus().then(function (blocked) {
+    euBlocked = !!blocked;
+  }).catch(function () {
+    // If the lookup fails we cannot prove they are outside the EU, so we do not send.
+    euBlocked = true;
+  });
+
   function complianceAllows(callback) {
-    checkEUStatus().then(function (blocked) {
-      if (blocked) { callback(false); return; }
-      if (!hasTrackingConsent()) { callback(false); return; }
-      callback(true);
-    });
+    // Still resolving. Fail closed rather than guess at someone's location.
+    if (euBlocked === null) { callback(false); return; }
+    if (euBlocked) { callback(false); return; }
+    if (!hasTrackingConsent()) { callback(false); return; }
+    callback(true);
   }
 
   // Post to the PAGE's origin, not the script's. A page served from
