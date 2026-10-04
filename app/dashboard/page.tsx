@@ -2405,6 +2405,9 @@ export default function Dashboard() {
         </div>
       )}
 
+      {/* ── Breakpoint ──────────────────────────────────────────────────────── */}
+      <BreakpointPanel clientId={selectedClient?.id ?? null} />
+
       {/* ── Status filter chips ─────────────────────────────────────────────── */}
       <div className="status-chips">
         {([
@@ -2450,8 +2453,6 @@ export default function Dashboard() {
 
       {/* ── Leads Table ─────────────────────────────────────────────────────── */}
       <div className="table-container">
-        <BreakpointPanel clientId={selectedClient?.id ?? null} />
-
 
         <div className="lead-tools">
           {botCount > 0 && (
