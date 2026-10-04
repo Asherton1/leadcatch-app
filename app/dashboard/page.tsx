@@ -2970,38 +2970,53 @@ export default function Dashboard() {
                           {r.interests.join(', ')}
                         </div>
                       )}
-                      <div className="ret-row-timeline">
-                        {r.leads.map((l, i) => {
-                          const sc = scoreLead(l, i + 1)
-                          const prev = i > 0 ? scoreLead(r.leads[i - 1], i) : null
-                          const delta = prev ? sc.peak - prev.peak : 0
-                          return (
-                            <span className="ret-tick" key={l.id}>
-                              <span className="ret-tick-dot" />
-                              Attempt {i + 1} &middot; {formatAbsoluteTime(l.created_at)} &middot; {l.fields_completed} fields
-                              <span className="ret-tick-score" style={{ color: sc.color }}>
-                                {sc.label} <b>{sc.peak}</b>
-                              </span>
-                              {delta !== 0 && (
-                                <span className={'ret-tick-delta ' + (delta > 0 ? 'is-up' : 'is-down')}>
-                                  {delta > 0 ? `${delta} more interested` : `${Math.abs(delta)} less interested`}
-                                </span>
-                              )}
-                            </span>
-                          )
-                        })}
-                      </div>
+                      <table className="ret-table">
+                        <thead>
+                          <tr>
+                            <th>Visit</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Fields</th>
+                            <th>Interest</th>
+                            <th>Change</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {r.leads.map((l, i) => {
+                            const sc = scoreLead(l, i + 1)
+                            const prev = i > 0 ? scoreLead(r.leads[i - 1], i) : null
+                            const delta = prev ? sc.peak - prev.peak : 0
+                            const d = new Date(l.created_at)
+                            return (
+                              <tr key={l.id}>
+                                <td className="ret-td-n">{i + 1}</td>
+                                <td>{d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</td>
+                                <td>{d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' })}</td>
+                                <td>{l.fields_completed} of {l.total_fields}</td>
+                                <td>
+                                  <span className="ret-td-temp" style={{ color: sc.color, background: sc.bg, borderColor: sc.color + '40' }}>
+                                    {sc.label} {sc.peak}
+                                  </span>
+                                </td>
+                                <td className={'ret-td-delta' + (delta > 0 ? ' is-up' : delta < 0 ? ' is-down' : '')}>
+                                  {delta > 0 ? `+${delta}` : delta < 0 ? `${delta}` : '\u2014'}
+                                </td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
+
                       {r.leads.length > 1 && (() => {
                         const first = scoreLead(r.leads[0], 1).peak
                         const last = scoreLead(r.leads[r.leads.length - 1], r.leads.length).peak
-                        const dir = last > first ? 'climbing' : last < first ? 'falling away' : 'holding steady'
                         return (
                           <div className={'ret-row-verdict is-' + (last > first ? 'up' : last < first ? 'down' : 'flat')}>
                             {last > first
-                              ? `They are getting more serious each time they come back, and still nobody has their details but you.`
+                              ? 'They are getting more serious each time they come back, and still nobody has their details but you.'
                               : last < first
-                                ? `They were most interested on the first visit and have cooled since.`
-                                : `Same level of interest each time they come back.`}
+                                ? 'They were most interested on the first visit and have cooled since.'
+                                : 'Same level of interest each time they come back.'}
                           </div>
                         )
                       })()}

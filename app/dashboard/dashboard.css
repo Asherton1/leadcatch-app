@@ -3624,3 +3624,60 @@ button.returning-cta:focus-visible {
 .ret-tick-score { font-weight: 600; }
 .ret-tick-score b { font-weight: 800; }
 .ret-tick-delta { font-family: inherit !important; font-size: 0.7rem !important; }
+
+/* ══ Returning visit table ════════════════════════════════════════════ */
+.ret-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.9rem 0 0;
+  font-size: 0.8rem;
+}
+.ret-table thead th {
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #5f5f5f;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  white-space: nowrap;
+}
+.ret-table tbody td {
+  padding: 0.6rem 0.65rem;
+  color: #a1a1aa;
+  border-bottom: 1px solid rgba(255,255,255,0.035);
+  white-space: nowrap;
+}
+.ret-table tbody tr:last-child td { border-bottom: none; }
+.ret-table tbody tr:hover td { background: rgba(255,255,255,0.016); }
+
+.ret-td-n {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 700;
+  color: #6b6b6b;
+  width: 44px;
+}
+.ret-td-temp {
+  display: inline-block;
+  padding: 0.14rem 0.45rem;
+  border-radius: 9999px;
+  border: 1px solid;
+  font-size: 0.7rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.ret-td-delta {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 700;
+  color: #5f5f5f;
+  text-align: right;
+}
+.ret-td-delta.is-up { color: #ef4444; }
+.ret-td-delta.is-down { color: #6b7280; }
+
+@media (max-width: 620px) {
+  .ret-table { font-size: 0.74rem; }
+  .ret-table thead th, .ret-table tbody td { padding: 0.45rem 0.4rem; }
+  .ret-table th:nth-child(3), .ret-table td:nth-child(3) { display: none; }
+}
