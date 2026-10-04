@@ -365,3 +365,6 @@
     margin-left: 0 !important;
   }
 }
+
+.bp-strip .bp-pip { display: none !important; }
+.bp-strip { gap: 0 !important; }
