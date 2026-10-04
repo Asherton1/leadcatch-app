@@ -119,7 +119,7 @@ export default function WhyUsPage() {
           <p className="canon-hero-eyebrow">Why Us</p>
           <h1 className="canon-hero-headline">
             <span className="canon-hero-headline-primary">Built for multi-location businesses.</span>{' '}
-            <span className="canon-hero-headline-muted">Podium and GoHighLevel charge hundreds per month and still don&apos;t recover the leads your forms are losing. ReCapture does &mdash; across every location, every form, every industry.</span>
+            <span className="canon-hero-headline-muted">Podium and GoHighLevel are built around the leads that reach you. Neither captures what someone typed into a form before abandoning it, because neither sits inside the form. That is the gap ReCapture was built for, across every location and every form you run.</span>
           </h1>
         </div>
       </section>
