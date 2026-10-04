@@ -416,7 +416,7 @@ export default function EnterprisePage() {
                   {tier.bullets.map(b => <li key={b}>{b}</li>)}
                 </ul>
                 <a className="enterprise-tier-cta" href={tier.href}>
-                  Talk to enterprise →
+                  {tier.price === 'Custom' ? 'Talk to us' : 'Start your 7-day trial'} →
                 </a>
               </div>
             ))}
