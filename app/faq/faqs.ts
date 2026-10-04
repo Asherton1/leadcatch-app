@@ -71,7 +71,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: 'Can we use ReCapture if we handle PHI?',
-        a: 'ReCapture is HIPAA-ready by design across all plans — our subprocessor stack and architecture support healthcare deployments. Business Associate Agreements (BAAs) are executed for Enterprise customers upon signed contract. If you handle PHI, contact hello@userecapture.com to discuss Enterprise deployment.',
+        a: 'ReCapture is HIPAA-ready by design across every plan. We capture contact fields only, never free text, and sensitive fields are excluded at the code level. A Business Associate Agreement is available on any plan and is executed on request. From the Group plan upward it is part of standard onboarding rather than something you have to ask for. If you handle PHI, email hello@userecapture.com and we will send the agreement.',
       },
       {
         q: 'How do you handle GDPR and CCPA?',
@@ -224,7 +224,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: "What's the difference between Pro and Enterprise?",
-        a: 'Pro ($397/mo) — form capture, dashboard, AI voice callback within 60 seconds, lead scoring, email/SMS/Slack alerts, weekly performance reports, branded recovery emails, webhook integrations, 3 websites. Enterprise (from $1,997/mo) — unlimited websites, HIPAA + BAA, dedicated account manager, white-glove setup, custom integrations, per-location dashboards.',
+        a: 'Pro at $397/mo covers one website with every form and page on it: capture, intent scoring, the dashboard, campaign attribution, conversion signals to Meta and Google, branded recovery emails, SMS and Slack alerts, Breakpoint diagnostics and webhooks. A BAA is available on request. Multi-location pricing runs by number of sites, starting at $897 for two to four locations and $1,997 for five to eight, and adds one rolled-up dashboard across every site, per-location reporting, white-glove onboarding, a BAA as standard and a dedicated account manager.',
       },
       {
         q: 'Do you offer an annual discount?',
