@@ -444,6 +444,9 @@
     this.touched   = false;
     this.submitted = false;
     this.named     = { name: null, email: null, phone: null };
+    this.lastField      = null;
+    this.lastFieldIndex = -1;
+    this.filledFields   = [];
     this.nameParts = { first: null, last: null, full: null };
     this.formData  = {};
     trackerCount++;
@@ -464,6 +467,21 @@
       if (isSensitiveField(el)) return; // never capture passwords, SSN, CVV, etc.
       if (el.closest('[data-recapture="ignore"]')) return; // opt-out for demo/mockup forms
       var val = (el.value || '').trim();
+
+      // Breakpoint: remember the last field they engaged with, even if they typed
+      // very little. This is what tells us where a form loses people.
+      try {
+        var fname = el.name || el.id || (el.getAttribute && el.getAttribute('placeholder')) || null;
+        if (fname) {
+          self.lastField = fname;
+          var fieldsNow = self._fields();
+          self.lastFieldIndex = fieldsNow.indexOf(el);
+          if (val.length >= 2 && self.filledFields.indexOf(fname) === -1) {
+            self.filledFields.push(fname);
+          }
+        }
+      } catch (e) { /* never break capture for diagnostics */ }
+
       if (val.length < 2) return; // require real content, not single chars or whitespace
       if (!self.touched) {
         self.touched   = true;
@@ -533,6 +551,22 @@
       email:            this.named.email,
       phone:            this.named.phone,
       fields_completed: completed,
+
+      // Breakpoint diagnostics. Field names and positions only, never values.
+      bp: (function () {
+        try {
+          var order = this._fields().map(function (f) {
+            return f.name || f.id || (f.getAttribute && f.getAttribute('placeholder')) || null;
+          }).filter(Boolean);
+          return {
+            field_order: order,
+            filled_fields: (this.filledFields || []).slice(0, 40),
+            last_field: this.lastField || null,
+            last_field_index: typeof this.lastFieldIndex === 'number' ? this.lastFieldIndex : -1,
+            form_id: this.form.id || this.form.getAttribute('name') || null,
+          };
+        } catch (e) { return null; }
+      }).call(this),
       total_fields:     fields.length,
       time_on_form:     this.startTime ? Math.round((Date.now() - this.startTime) / 1000) : 0,
       device_type:      deviceType(),

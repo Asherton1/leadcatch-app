@@ -194,7 +194,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, teams_webhook_url, ghl_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, first_lead_email_sent, email, first_name, timezone')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, teams_webhook_url, ghl_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, first_lead_email_sent, email, first_name, timezone, breakpoint_enabled')
     .eq('api_key', api_key)
     .single()
 
@@ -316,6 +316,16 @@ export async function POST(request: NextRequest) {
 
   const signal_value = Math.round(estimated_value * intentFactor)
 
+  // Breakpoint diagnostics, written separately so a failure here can never
+  // affect lead capture.
+  const bp = (body as Record<string, unknown>).bp as {
+    field_order?: string[]
+    filled_fields?: string[]
+    last_field?: string | null
+    last_field_index?: number
+    form_id?: string | null
+  } | null | undefined
+
   const botVerdict = detectBot({
     email,
     name: (name as string) ?? null,
@@ -400,6 +410,30 @@ export async function POST(request: NextRequest) {
 
   // --- SMS ALERT (Pro plan only) ---
   // Check DNC before firing any recovery action that touches the lead
+  // Write the breakpoint row. Wrapped and awaited-but-ignored so nothing here can
+  // break capture, which is the thing clients actually pay for.
+  if (bp && client.breakpoint_enabled !== false) {
+    try {
+      await supabase.from('form_events').insert({
+        client_id: client.id,
+        session_id: (session_id as string) ?? null,
+        lead_id: lead?.id ?? null,
+        form_id: bp.form_id ?? null,
+        device_type: (device_type as string) ?? null,
+        total_fields: Number(total_fields ?? 0) || (bp.field_order?.length ?? null),
+        fields_filled: Number(fields_completed ?? 0),
+        field_order: bp.field_order ?? null,
+        filled_fields: bp.filled_fields ?? null,
+        last_field: bp.last_field ?? null,
+        last_field_index: typeof bp.last_field_index === 'number' ? bp.last_field_index : null,
+        seconds_on_form: Number(time_on_form ?? 0) || null,
+        outcome: 'abandoned',
+      })
+    } catch (e) {
+      console.error('[breakpoint] write failed:', e)
+    }
+  }
+
   const optedOut = await isOptedOut(
     client.id,
     (phone as string) ?? null,
