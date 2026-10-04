@@ -928,6 +928,15 @@ export default function Dashboard() {
   const [liveDrawerOpen, setLiveDrawerOpen] = useState(false)
   const [hoursDrawerOpen, setHoursDrawerOpen] = useState(false)
   const [returningDrawerOpen, setReturningDrawerOpen] = useState(false)
+
+  // Lock the page behind the drawer, otherwise the wheel scrolls the dashboard
+  // underneath instead of the drawer contents.
+  useEffect(() => {
+    if (!returningDrawerOpen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prev }
+  }, [returningDrawerOpen])
   const [campaignRows, setCampaignRows] = useState<{ session_id: string; utm_source: string | null; utm_medium: string | null; utm_campaign: string | null; gclid: string | null; fbclid: string | null; page_url: string | null }[]>([])
   const [fieldsDrawerOpen, setFieldsDrawerOpen] = useState(false)
   const [pipelineDrawerOpen, setPipelineDrawerOpen] = useState(false)
