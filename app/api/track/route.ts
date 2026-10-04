@@ -415,7 +415,9 @@ export async function POST(request: NextRequest) {
   // break capture, which is the thing clients actually pay for.
   if (bp && client.breakpoint_enabled !== false) {
     try {
-      const { error: bpError } = await supabase.from('form_events').insert({
+      // One row per session. The tracker fires on several triggers, so without
+      // this a single person leaving would be counted three or four times.
+      const { error: bpError } = await supabase.from('form_events').upsert({
         client_id: client.id,
         session_id: (session_id as string) ?? null,
         lead_id: lead?.id ?? null,
@@ -429,7 +431,7 @@ export async function POST(request: NextRequest) {
         last_field_index: typeof bp.last_field_index === 'number' ? bp.last_field_index : null,
         seconds_on_form: Number(time_on_form ?? 0) || null,
         outcome: bp.submitted ? 'submitted' : 'abandoned',
-      })
+      }, { onConflict: 'session_id' })
       if (bpError) console.error('[breakpoint] insert error:', JSON.stringify(bpError))
     } catch (e) {
       console.error('[breakpoint] write threw:', JSON.stringify(e))
