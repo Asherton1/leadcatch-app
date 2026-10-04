@@ -3674,3 +3674,9 @@ button.returning-cta:focus-visible {
   .ret-table thead th, .ret-table tbody td { padding: 0.45rem 0.4rem; }
   .ret-table th:nth-child(3), .ret-table td:nth-child(3) { display: none; }
 }
+
+/* The table must not force the drawer wider or taller than it can be */
+.live-drawer-body { min-height: 0; }
+.ret-table { table-layout: fixed; width: 100%; }
+.ret-table th, .ret-table td { overflow: hidden; text-overflow: ellipsis; }
+.ret-row { min-width: 0; }
