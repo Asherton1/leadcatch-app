@@ -6,17 +6,17 @@ import '../blog.css'
 import '../../landing.css'
 
 export const metadata = {
-  title: 'Why AI Voice Callbacks Convert 391% More Abandoned Leads',
+  title: 'The First Minute Is Worth More Than the Next Hour',
   description: 'Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts. Here is why AI voice callbacks are the future of lead recovery.',
   alternates: { canonical: '/blog/ai-voice-callbacks-form-abandonment' },
   openGraph: {
-    title: 'Why AI Voice Callbacks Convert 391% More Abandoned Leads',
+    title: 'The First Minute Is Worth More Than the Next Hour',
     description: 'Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts. Here is why AI voice callbacks are the future of lead recovery.',
     url: 'https://www.userecapture.com/blog/ai-voice-callbacks-form-abandonment',
     siteName: 'ReCapture',
     type: 'article',
     images: [{
-      url: 'https://www.userecapture.com/api/og?title=Why+AI+Voice+Callbacks+Convert+391%25+More&eyebrow=Blog',
+      url: 'https://www.userecapture.com/api/og?title=The+First+Minute+Is+Worth+More+Than+the+Next+Hour&eyebrow=Blog',
       width: 1200,
       height: 630,
       alt: 'ReCapture',
@@ -24,9 +24,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Why AI Voice Callbacks Convert 391% More Abandoned Leads',
+    title: 'The First Minute Is Worth More Than the Next Hour',
     description: 'Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts. Here is why AI voice callbacks are the fu',
-    images: ['https://www.userecapture.com/api/og?title=Why+AI+Voice+Callbacks+Convert+391%25+More&eyebrow=Blog'],
+    images: ['https://www.userecapture.com/api/og?title=The+First+Minute+Is+Worth+More+Than+the+Next+Hour&eyebrow=Blog'],
   },
 }
 
@@ -40,9 +40,9 @@ export default function Post() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Article',
-            headline: 'Why AI Voice Callbacks Convert 391% More Abandoned Leads',
+            headline: 'The First Minute Is Worth More Than the Next Hour',
             description: 'Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts. Here is why AI voice callbacks are the future of lead recovery.',
-            image: 'https://www.userecapture.com/api/og?title=Why+AI+Voice+Callbacks+Convert+391%25+More&eyebrow=Blog',
+            image: 'https://www.userecapture.com/api/og?title=The+First+Minute+Is+Worth+More+Than+the+Next+Hour&eyebrow=Blog',
             datePublished: '2026-04-22T00:00:00Z',
             dateModified: '2026-05-27T00:00:00Z',
             author: {
@@ -74,7 +74,7 @@ export default function Post() {
           <span className="blog-post-dot" />
           <span className="blog-post-readtime">6 min read</span>
         </div>
-        <h1>Why AI Voice Callbacks Convert 391% More Abandoned Leads</h1>
+        <h1>The First Minute Is Worth More Than the Next Hour</h1>
         <p className="post-subtitle">Your leads are abandoning forms right now. By the time your team follows up, they have already booked with someone else. What if you could call them back in 60 seconds&mdash;automatically?</p>
       </div>
 

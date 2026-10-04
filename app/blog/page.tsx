@@ -264,7 +264,7 @@ export default function BlogIndex() {
                 <span style={{ margin: '0 0.5rem' }}>&middot;</span>
                 <span>6 min read</span>
               </div>
-              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>Why AI Voice Callbacks Convert 391% More Abandoned Leads</div>
+              <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginBottom: '0.75rem' }}>The First Minute Is Worth More Than the Next Hour</div>
               <div style={{ fontSize: '0.9rem', color: '#888', lineHeight: 1.6, marginBottom: '1rem' }}>Emails get ignored. Texts get swiped. But a phone call within 60 seconds of form abandonment? That converts.</div>
               <span style={{ color: '#ff6b35', fontSize: '0.85rem', fontWeight: 600 }}>Read article <span>&rarr;</span></span>
             </div>
