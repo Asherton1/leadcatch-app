@@ -157,7 +157,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: 'What about Do Not Call lists and TCPA compliance?',
-        a: 'ReCapture checks every callback against the FTC DNC registry before dialing. We respect state-level DNC, internal Do Not Contact flags, and one-keypress opt-outs. AI callbacks only fire when a prospect actively started your contact form — express interest is documented for TCPA compliance.',
+        a: 'AI callbacks only fire when someone actively started your contact form, so there is a documented inquiry behind every call. Calls run inside the call-hours window you set and never during your configured quiet hours, both enforced in your own timezone. Every opt-out goes to a single do-not-contact list that suppresses email, SMS and voice together, and one-keypress opt-out is honoured on calls. ReCapture does not itself screen numbers against the national Do Not Call registry, and firms with their own registry obligations should keep their existing process. We are not your TCPA compliance layer, and we do not claim to be.',
       },
     ],
   },
@@ -273,7 +273,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: 'Do you integrate with Clio and Lawmatics?',
-        a: 'Yes. Clio Grow has a lead inbox API built for exactly this — you generate a token in your settings and recovered inquiries land in the pipeline you already run. Lawmatics has several routes including Zapier and their REST API. Which one makes sense depends on how your intake actually works, so we would want to hear that before recommending a path rather than guessing at it.',
+        a: 'By webhook, yes. ReCapture pushes every captured inquiry to any endpoint in real time with all the fields attached, and both Clio Grow and Lawmatics accept inbound webhooks, directly or through Zapier. To be precise about what that means: we have not built a purpose-made Clio or Lawmatics connector, so there is no button in your settings that says connect. Someone configures the webhook once at your end or ours, and from then on it runs. Which route makes sense depends on how your intake actually works, so we would want to hear that before recommending one.',
       },
     ],
   },

@@ -161,7 +161,7 @@ export default function TrustPage() {
               Our AI concierge recognizes 14 opt-out trigger phrases (“stop,” “do not call,” “remove me,” “unsubscribe,” and similar). When detected, the call ends immediately and the phone number is added to our master Do Not Contact list, enforced across all channels (voice, SMS, email) for that visitor going forward.
             </p>
             <p>
-              Calls are placed only during the customer-configured call hours window and never during configured quiet hours. We do not place calls to numbers on the National Do Not Call Registry where the customer has indicated registry checking is required.
+              Calls are placed only during the customer-configured call hours window and never during configured quiet hours. ReCapture does not screen numbers against the National Do Not Call Registry. Customers with registry obligations of their own should keep their existing screening process in place.
             </p>
           </div>
         </section>
