@@ -6,17 +6,17 @@ import '../../landing.css'
 import Image from 'next/image'
 
 export const metadata = {
-  title: 'Your Form Has a Field That Kills People. You Cannot See Which One.',
+  title: 'There Is One Field on Your Form Doing Most of the Damage',
   description: 'Analytics stops at the pageview. Your CRM starts at the submission. The part in between, where people actually give up, is invisible to every tool you own.',
   alternates: { canonical: '/blog/the-field-that-kills-your-form' },
   openGraph: {
-    title: 'Your Form Has a Field That Kills People. You Cannot See Which One.',
+    title: 'There Is One Field on Your Form Doing Most of the Damage',
     description: 'Analytics stops at the pageview. Your CRM starts at the submission. The part in between, where people actually give up, is invisible to every tool you own.',
     url: 'https://www.userecapture.com/blog/the-field-that-kills-your-form',
     siteName: 'ReCapture',
     type: 'article',
     images: [{
-      url: 'https://www.userecapture.com/api/og?title=The+Field+That+Kills+Your+Form&eyebrow=Blog',
+      url: 'https://www.userecapture.com/api/og?title=One+Field+Is+Doing+Most+of+the+Damage&eyebrow=Blog',
       width: 1200,
       height: 630,
       alt: 'ReCapture',
@@ -24,9 +24,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Your Form Has a Field That Kills People. You Cannot See Which One.',
+    title: 'There Is One Field on Your Form Doing Most of the Damage',
     description: 'Analytics stops at the pageview. Your CRM starts at the submission. The part where people give up is invisible to every tool you own.',
-    images: ['https://www.userecapture.com/api/og?title=The+Field+That+Kills+Your+Form&eyebrow=Blog'],
+    images: ['https://www.userecapture.com/api/og?title=One+Field+Is+Doing+Most+of+the+Damage&eyebrow=Blog'],
   },
 }
 
@@ -41,7 +41,7 @@ export default function Post() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'BlogPosting',
-            headline: 'Your Form Has a Field That Kills People. You Cannot See Which One.',
+            headline: 'There Is One Field on Your Form Doing Most of the Damage',
             datePublished: '2026-10-04',
             author: { '@type': 'Person', name: 'Asherton Chraibi' },
             publisher: {
@@ -65,7 +65,7 @@ export default function Post() {
           <span className="blog-post-dot" />
           <span className="blog-post-readtime">7 min read</span>
         </div>
-        <h1>Your Form Has a Field That Kills People. You Cannot See Which One.</h1>
+        <h1>There Is One Field on Your Form Doing Most of the Damage</h1>
         <p className="post-subtitle">Analytics stops at the pageview. Your CRM starts at the submission. The part in between, where people give up and leave, is invisible to every tool you own. We built something that looks at it.</p>
       </div>
 
@@ -119,7 +119,7 @@ export default function Post() {
         <h2>The Honest Summary</h2>
         <p>Most form advice is generic. Use fewer fields. Do not ask for a phone number. Put the submit button above the fold.</p>
         <p>Some of that is right some of the time, and all of it is guesswork applied to your specific form. Breakpoint replaces the guess with the field name. It is a small thing to build on top of data we already had, and it answers a question that has been unanswerable since forms existed.</p>
-        <p>Your form has a field that kills people. It takes about a week of real traffic to find out which one.</p>
+        <p>One field on your form is doing most of the damage. It takes about a week of real traffic to find out which one.</p>
 
         <div className="blog-post-cta">
           <h3>Find your breakpoint</h3>

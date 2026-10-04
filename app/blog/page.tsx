@@ -61,7 +61,7 @@ export default function BlogIndex() {
               <span className="blog-featured-dot" />
               <span className="blog-featured-readtime">7 min read</span>
             </div>
-            <div className="blog-featured-title">Your Form Has a Field That Kills People. You Cannot See Which One.</div>
+            <div className="blog-featured-title">There Is One Field on Your Form Doing Most of the Damage</div>
             <div className="blog-featured-excerpt">Analytics stops at the pageview. Your CRM starts at the submission. The part in between, where people give up and leave, is invisible to every tool you own.</div>
             <span className="blog-featured-cta">Read article <span>→</span></span>
           </div>
