@@ -63,12 +63,18 @@ export default function BreakpointPanel({ clientId }: { clientId: string | null 
   const canonical = [...orderCounts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0]?.split('|') ?? []
 
   const stats: FieldStat[] = canonical.map((name, i) => {
-    const stoppedHere = scoped.filter(r => r.outcome === 'abandoned' && r.last_field === name).length
-    // anyone whose last field is at this index or later reached this field
+    const stoppedHere = scoped.filter(
+      r => r.outcome === 'abandoned' && r.last_field === name
+    ).length
+
+    // Anyone who submitted got through every field. Anyone who abandoned got as
+    // far as the field they stopped on. Both count as having reached this one.
     const reached = scoped.filter(r => {
+      if (r.outcome === 'submitted') return true
       const idx = r.field_order?.indexOf(r.last_field ?? '') ?? -1
       return idx >= i
     }).length
+
     return {
       name,
       reached,
@@ -146,6 +152,7 @@ export default function BreakpointPanel({ clientId }: { clientId: string | null 
           </div>
 
           <p className="bp-foot">
+            {scoped.filter(r => r.outcome === 'submitted').length} of {total} finished.{' '}
             Based on {total} form session{total === 1 ? '' : 's'}
             {device !== 'all' ? ` on ${device}` : ''}. Field names only, never what anyone typed.
           </p>
