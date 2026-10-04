@@ -347,7 +347,8 @@ export default function EnterprisePage() {
       <section className="enterprise-roi reveal">
         <div className="enterprise-roi-inner">
           <p className="enterprise-roi-eyebrow">The ROI math at scale</p>
-          <h2 className="enterprise-roi-headline">A 30-location dental group sees roughly $7.2M in annual recovery potential.</h2>
+          <h2 className="enterprise-roi-headline">Run the arithmetic on your own numbers.</h2>
+          <p className="enterprise-roi-intro">Here is the shape of it for a thirty-location group. Swap in what you know about your own business and the method holds.</p>
           <div className="enterprise-roi-grid">
             <div className="enterprise-roi-cell">
               <div className="enterprise-roi-num">30</div>
@@ -355,18 +356,18 @@ export default function EnterprisePage() {
             </div>
             <div className="enterprise-roi-cell">
               <div className="enterprise-roi-num">60</div>
-              <div className="enterprise-roi-label">Abandoned leads / location / month</div>
+              <div className="enterprise-roi-label">Abandoned inquiries per location each month</div>
             </div>
             <div className="enterprise-roi-cell">
               <div className="enterprise-roi-num">$4,000</div>
               <div className="enterprise-roi-label">Average procedure value</div>
             </div>
             <div className="enterprise-roi-cell enterprise-roi-cell-highlight">
-              <div className="enterprise-roi-num">$7.2M</div>
-              <div className="enterprise-roi-label">Annual recovery potential</div>
+              <div className="enterprise-roi-num">$8.64M</div>
+              <div className="enterprise-roi-label">At a 10% recovery rate, annually</div>
             </div>
           </div>
-          <p className="enterprise-roi-fineprint">Math assumes 10% recovery rate. Most enterprise clients exceed this within the first 90 days.</p>
+          <p className="enterprise-roi-fineprint">30 locations &times; 60 inquiries &times; 12 months &times; 10% recovered &times; $4,000 = $8,640,000. The recovery rate is the one number we cannot know for you, and it depends on your follow-up more than on our software. We have used ten percent here because it is conservative, not because it is a result we are claiming.</p>
         </div>
       </section>
 

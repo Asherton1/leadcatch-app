@@ -735,3 +735,11 @@
   .enterprise-tier-card-custom ul { grid-template-columns: 1fr !important; }
 }
 
+
+.enterprise-roi-intro {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: #8b8b8b;
+  max-width: 56ch;
+  margin: 0.75rem 0 0;
+}
