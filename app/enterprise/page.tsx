@@ -348,7 +348,7 @@ export default function EnterprisePage() {
             </div>
             <div className="enterprise-roi-cell">
               <div className="enterprise-roi-num">$4,000</div>
-              <div className="enterprise-roi-label">Average procedure value</div>
+              <div className="enterprise-roi-label">Average case value for this example</div>
             </div>
             <div className="enterprise-roi-cell enterprise-roi-cell-highlight">
               <div className="enterprise-roi-num">$8.64M</div>
