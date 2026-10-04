@@ -416,7 +416,7 @@ export default function EnterprisePage() {
       <section className="enterprise-testimonials reveal">
         <div className="enterprise-testimonials-inner">
           <p className="enterprise-testimonials-eyebrow">From operations teams like yours</p>
-          <h2 className="enterprise-testimonials-headline">Trusted by multi-location operations.</h2>
+          <h2 className="enterprise-testimonials-headline">From the people using it.</h2>
 
           <div className="enterprise-testimonials-grid">
             <blockquote className="enterprise-testimonial-card">
