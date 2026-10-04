@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'HIPAA Business Associate Agreement (BAA) — ReCapture',
-  description: 'ReCapture HIPAA Business Associate Agreement (BAA) for med spas, dental practices, plastic surgery, and other HIPAA-eligible businesses on Enterprise plans.',
+  description: 'The ReCapture HIPAA Business Associate Agreement, available on request for any plan and executed as part of onboarding from the Group plan upward.',
   robots: 'noindex',
   alternates: { canonical: '/baa' },
   openGraph: {
