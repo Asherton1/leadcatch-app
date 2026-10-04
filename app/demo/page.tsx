@@ -298,7 +298,7 @@ export default function TestForm() {
                 </div>
                 <div style={{ padding: '1.25rem 1.5rem' }}>
                   <div style={{ fontSize: '0.65rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: '0.5rem' }}>Fields Captured</div>
-                  <div style={{ fontSize: '1.75rem', fontWeight: 800, color: dashActive ? '#fff' : '#333', transition: 'color 0.4s ease' }}>{dashActive ? fieldsCapture : 0}<span style={{ fontSize: '0.875rem', color: '#555', fontWeight: 500 }}> / 5</span></div>
+                  <div style={{ fontSize: '1.75rem', fontWeight: 800, color: dashActive ? '#fff' : '#333', transition: 'color 0.4s ease' }}>{dashActive ? fieldsCapture : 0}<span style={{ fontSize: '0.875rem', color: '#555', fontWeight: 500 }}> / 6</span></div>
                 </div>
               </div>
 

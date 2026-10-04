@@ -120,7 +120,7 @@ export default function Post() {
           Speed is the single biggest factor in lead conversion. The data is clear:
         </p>
         <p>
-          Responding within one minute increases conversion rates by 391% compared to waiting even two minutes. Within five minutes, you are still in a strong position. After 30 minutes, your odds have dropped by over 21x. After an hour, most leads are effectively gone.
+          The Lead Response Management study, run out of MIT and later replicated in Harvard Business Review, found that responding within one minute increases conversion rates by 391% compared with waiting even two minutes. Within five minutes you are still in a strong position. After 30 minutes the odds drop by more than 21 times. After an hour, most leads are effectively gone.
         </p>
         <p>
           The AI voice callback eliminates the response gap entirely. There is no delay for your front desk to check their email. No delay for a sales rep to see a notification. The system fires automatically, every time, within 60 seconds.

@@ -228,7 +228,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: 'Do you offer an annual discount?',
-        a: 'Yes — 2 months free on annual plans for Pro and Enterprise. Email hello@userecapture.com to set it up.',
+        a: 'Yes — roughly 15% off on annual plans for Pro and Enterprise. Email hello@userecapture.com to set it up.',
       },
       {
         q: 'What if I have multiple websites?',
