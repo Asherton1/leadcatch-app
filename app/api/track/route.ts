@@ -324,6 +324,7 @@ export async function POST(request: NextRequest) {
     last_field?: string | null
     last_field_index?: number
     form_id?: string | null
+    submitted?: boolean
   } | null | undefined
 
   const botVerdict = detectBot({
@@ -427,7 +428,7 @@ export async function POST(request: NextRequest) {
         last_field: bp.last_field ?? null,
         last_field_index: typeof bp.last_field_index === 'number' ? bp.last_field_index : null,
         seconds_on_form: Number(time_on_form ?? 0) || null,
-        outcome: 'abandoned',
+        outcome: bp.submitted ? 'submitted' : 'abandoned',
       })
       if (bpError) console.error('[breakpoint] insert error:', JSON.stringify(bpError))
     } catch (e) {

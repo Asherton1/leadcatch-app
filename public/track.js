@@ -567,6 +567,7 @@
             last_field: this.lastField || null,
             last_field_index: typeof this.lastFieldIndex === 'number' ? this.lastFieldIndex : -1,
             form_id: this.form.id || this.form.getAttribute('name') || null,
+            submitted: !!this.submitted,
           };
         } catch (e) { return null; }
       }).call(this),
