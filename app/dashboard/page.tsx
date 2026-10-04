@@ -8,6 +8,7 @@ import './dashboard.css'
 import Footer from '../components/Footer'
 import '../landing.css'
 import AdminNav from '../components/AdminNav'
+import BreakpointPanel from '../components/BreakpointPanel'
 import Logo from '../components/Logo'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -2449,6 +2450,10 @@ export default function Dashboard() {
 
       {/* ── Leads Table ─────────────────────────────────────────────────────── */}
       <div className="table-container">
+        <BreakpointPanel clientId={selectedClient?.id ?? null} />
+
+        <BreakpointPanel clientId={selectedClient?.id ?? null} />
+
         <div className="lead-tools">
           {botCount > 0 && (
             <button
