@@ -626,11 +626,6 @@
   }
 
   function sendAll(useBeacon) {
-    // Temporary mobile diagnostic. Remove once capture is confirmed working.
-    try {
-      navigator.sendBeacon(TRACK_URL.replace('/api/track', '/api/track-debug'),
-        JSON.stringify({ stage: 'sendAll', euBlocked: euBlocked, trackers: trackers.length, ua: navigator.userAgent.slice(0, 80) }));
-    } catch (e) {}
     complianceAllows(function (allowed) {
       if (!allowed) return; // EU visitor, or consent rejected
       trackers.forEach(function (t) { t.send(useBeacon); });
