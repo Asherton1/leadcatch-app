@@ -929,13 +929,37 @@ export default function Dashboard() {
   const [hoursDrawerOpen, setHoursDrawerOpen] = useState(false)
   const [returningDrawerOpen, setReturningDrawerOpen] = useState(false)
 
-  // Lock the page behind the drawer, otherwise the wheel scrolls the dashboard
-  // underneath instead of the drawer contents.
+  // The wheel reaches the page behind the drawer because the cursor is over the
+  // backdrop, not over the scrollable body. Catch it at the window and drive the
+  // drawer body directly, then cancel it so nothing scrolls underneath.
   useEffect(() => {
     if (!returningDrawerOpen) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => { document.body.style.overflow = prev }
+
+    const scrollTop = window.scrollY
+    const body = document.body
+    const prevPos = body.style.position
+    const prevTop = body.style.top
+    const prevWidth = body.style.width
+
+    body.style.position = 'fixed'
+    body.style.top = `-${scrollTop}px`
+    body.style.width = '100%'
+
+    const onWheel = (e: WheelEvent) => {
+      const panel = document.querySelector('.live-drawer-body')
+      if (!panel) return
+      panel.scrollTop += e.deltaY
+      e.preventDefault()
+    }
+    window.addEventListener('wheel', onWheel, { passive: false })
+
+    return () => {
+      window.removeEventListener('wheel', onWheel)
+      body.style.position = prevPos
+      body.style.top = prevTop
+      body.style.width = prevWidth
+      window.scrollTo(0, scrollTop)
+    }
   }, [returningDrawerOpen])
   const [campaignRows, setCampaignRows] = useState<{ session_id: string; utm_source: string | null; utm_medium: string | null; utm_campaign: string | null; gclid: string | null; fbclid: string | null; page_url: string | null }[]>([])
   const [fieldsDrawerOpen, setFieldsDrawerOpen] = useState(false)
