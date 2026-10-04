@@ -96,26 +96,18 @@ export default function BreakpointPanel({ clientId }: { clientId: string | null 
       <button className="bp-strip" type="button" onClick={() => setOpen(o => !o)}>
         <span className="bp-pip" aria-hidden="true" />
         <span className="bp-strip-text">
-          <span className="bp-strip-label">Breakpoint</span>
           {worst && total >= 5 ? (
             <>
-              <span className="bp-strip-head">
-                This form loses most people at <em>{prettify(worst.name)}</em>
-              </span>
-              <span className="bp-strip-stats">
-                <span><b>{worst.stoppedHere}</b> of {worst.reached} stopped there</span>
-                <span className="bp-strip-dot" aria-hidden="true" />
-                <span><b>{worst.dropRate}%</b> drop at that field</span>
-                <span className="bp-strip-dot" aria-hidden="true" />
-                <span><b>{scoped.filter(r => r.outcome === 'submitted').length}</b> of {total} finished the form</span>
-              </span>
+              <b>This form loses most people at {prettify(worst.name)}</b>
+              {' — '}
+              {worst.stoppedHere} of {worst.reached} who reached it stopped there
+              <span className="bp-strip-value">{worst.dropRate}% drop</span>
             </>
           ) : (
             <>
-              <span className="bp-strip-head">Where this form loses people</span>
-              <span className="bp-strip-stats">
-                <span>Watching {total} form session{total === 1 ? '' : 's'}. The pattern appears once there are a few more.</span>
-              </span>
+              <b>Breakpoint</b>
+              {' is watching ' + total + ' form session' + (total === 1 ? '' : 's')}
+              {' — the pattern appears once there are a few more'}
             </>
           )}
         </span>
