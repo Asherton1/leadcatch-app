@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import BreakpointSim from '../components/BreakpointSim'
 import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
@@ -123,13 +124,13 @@ export default function DashboardTour() {
       <section className="dt-band reveal">
         <div className="dt-inner dt-narrow">
           <div className="dt-caption dt-caption-lead">
-            <p className="dt-eyebrow">Breakpoint</p>
+            <p className="dt-section-eyebrow">Breakpoint</p>
             <h2 className="dt-h2">Which field your form dies on</h2>
             <p>Everyone fills in a name. Fewer give a phone number. Almost nobody reaches an open text box at the bottom asking them to describe their situation.</p>
             <p>Breakpoint names the field where most people give up, split by mobile and desktop, and it does it using the sessions that never submitted. Analytics stops at the pageview. Your CRM starts at the submission. The part in between, where people actually quit, is invisible to every other tool you own.</p>
             <p>The steepest fall is the field costing you the most. Removing it, moving it, or making it optional is usually the fastest win available, and until you can see this it is guesswork.</p>
           </div>
-          <DropoffChart />
+          <BreakpointSim />
         </div>
       </section>
 
