@@ -137,6 +137,7 @@ export default function DashboardTour() {
       <section className="dt-band dt-band-alt reveal">
         <div className="dt-inner dt-narrow">
           <div className="dt-caption dt-caption-lead">
+            <p className="dt-section-eyebrow">Timing</p>
             <h2 className="dt-h2">When inquiries actually arrive</h2>
             <p>For most high-consideration businesses the answer is nights and weekends, from a phone, at the moment something happened. Not Tuesday at ten in the morning.</p>
             <p>If your peak sits at nine in the evening, that is not a marketing insight. It is a staffing conversation, and this is the chart that starts it.</p>
@@ -148,6 +149,7 @@ export default function DashboardTour() {
       <section className="dt-band reveal">
         <div className="dt-inner dt-narrow">
           <div className="dt-caption dt-caption-lead">
+            <p className="dt-section-eyebrow">Pipeline</p>
             <h2 className="dt-h2">Which money is actually worth chasing</h2>
             <p>Not every abandoned inquiry is equal. Someone who filled six fields and spent four minutes is a different prospect from someone who typed a name and left.</p>
             <p>Value split by intent tells your team where to spend the hour they have, rather than working a list top to bottom.</p>
@@ -159,6 +161,7 @@ export default function DashboardTour() {
       <section className="dt-band dt-band-alt reveal">
         <div className="dt-inner dt-narrow">
           <div className="dt-caption dt-caption-lead">
+            <p className="dt-section-eyebrow">Recovery</p>
             <h2 className="dt-h2">Where recovery is working and where it is not</h2>
             <p>Captured, emailed, contacted, converted. Seeing them separately matters, because the gaps mean different things.</p>
             <p>A gap between captured and contacted is a speed problem. A gap between contacted and converted is a follow-up problem. One is fixed with automation, the other with a conversation.</p>
