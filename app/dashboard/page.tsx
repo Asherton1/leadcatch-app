@@ -2452,7 +2452,6 @@ export default function Dashboard() {
       <div className="table-container">
         <BreakpointPanel clientId={selectedClient?.id ?? null} />
 
-        <BreakpointPanel clientId={selectedClient?.id ?? null} />
 
         <div className="lead-tools">
           {botCount > 0 && (
