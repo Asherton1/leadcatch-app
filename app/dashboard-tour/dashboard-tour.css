@@ -222,3 +222,10 @@
   .dt-hero { padding: 5rem 0 2.5rem; }
   .dt-caption-lead { margin-bottom: 1.5rem; }
 }
+
+/* Consistent gap between the copy and the card that follows it */
+.dt-caption, .dt-body { margin-bottom: 2.5rem; }
+.dt-caption:last-child, .dt-body:last-child { margin-bottom: 0; }
+@media (max-width: 760px) {
+  .dt-caption, .dt-body { margin-bottom: 1.75rem; }
+}
