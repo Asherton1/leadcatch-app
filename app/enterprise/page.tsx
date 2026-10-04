@@ -99,11 +99,8 @@ const TIERS = [
     bullets: [
       'Everything in Scale',
       'White-label dashboard with your branding',
-      'On-premise deployment options',
       'Custom integrations (any platform)',
       'Executive SLA with named contacts',
-      'Dedicated infrastructure',
-      'Custom data residency',
       'Quarterly business reviews',
     ],
   },
@@ -132,7 +129,6 @@ const FEATURE_GROUPS: FeatureGroup[] = [
       { feature: 'Per-location reporting',           tiers: [true, true, true, true] },
       { feature: 'Quarterly executive reviews',      tiers: [false, true, true, true] },
       { feature: 'Executive roll-up reports',        tiers: [false, false, true, true] },
-      { feature: 'Custom data residency',            tiers: [false, false, false, true] },
     ],
   },
   {
