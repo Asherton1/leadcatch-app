@@ -141,8 +141,14 @@ interface ScoreBreakdownItem {
   maxPoints: number
 }
 
+type Trajectory = 'climbing' | 'flat' | 'cooling'
+
 interface LeadScore {
   score: number
+  peak: number
+  trajectory: Trajectory
+  daysSince: number
+  returnCount: number
   label: string
   color: string
   bg: string
@@ -203,9 +209,33 @@ function scoreLead(lead: Lead, returnCount = 1): LeadScore {
     maxPoints: 25,
   })
 
-  if (score >= 70) return { score, label: 'Hot', color: '#ef4444', bg: 'rgba(239,68,68,0.12)', breakdown }
-  if (score >= 40) return { score, label: 'Warm', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)', breakdown }
-  return { score, label: 'Cold', color: '#6b7280', bg: 'rgba(107,114,128,0.12)', breakdown }
+  // ── Trajectory ───────────────────────────────────────────────────────────
+  // The score above is a snapshot of one session. What a person is actually
+  // worth depends on where they are heading: somebody on their third visit in
+  // a fortnight is a different prospect from somebody who filled six fields
+  // once and has not been seen since. We never touch the stored score or
+  // anything already sent to the ad platforms, only how this ranks on screen.
+  const daysSince = lead.created_at
+    ? Math.max(0, Math.floor((Date.now() - new Date(lead.created_at).getTime()) / 86400000))
+    : 0
+
+  // Roughly two points a week, floored so a strong lead never reads as dead.
+  const decay = Math.min(Math.round(daysSince * 0.28), Math.round(score * 0.35))
+  const current = Math.max(score - decay, 0)
+
+  let trajectory: Trajectory = 'flat'
+  if (returnCount >= 2) trajectory = 'climbing'
+  else if (daysSince >= 10) trajectory = 'cooling'
+
+  if (decay > 0) {
+    breakdown.push({ label: `Cooling over ${daysSince} days`, points: -decay, maxPoints: 0 })
+  }
+
+  const base = { score: current, peak: score, trajectory, daysSince, returnCount, breakdown }
+
+  if (current >= 70) return { ...base, label: 'Hot', color: '#ef4444', bg: 'rgba(239,68,68,0.12)' }
+  if (current >= 40) return { ...base, label: 'Warm', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' }
+  return { ...base, label: 'Cold', color: '#6b7280', bg: 'rgba(107,114,128,0.12)' }
 }
 
 
@@ -2611,7 +2641,7 @@ export default function Dashboard() {
                     {(lead.status ?? 'open').charAt(0).toUpperCase() + (lead.status ?? 'open').slice(1)}
                   </div>
                   {/* Lead score badge */}
-                  {(() => { const s = scoreLead(lead); return (
+                  {(() => { const s = scoreLead(lead, rcFor(lead)); return (
                     <div className="lead-score-pill" style={{ color: s.color, borderColor: s.color + "40", background: s.bg, display: "inline-flex", alignItems: "center", gap: "4px", padding: "2px 8px", borderRadius: "9999px", fontSize: "0.7rem", fontWeight: 700, border: "1px solid", marginTop: "4px" }}>
                       <span style={{ width: 6, height: 6, borderRadius: "50%", background: s.color, display: "inline-block" }} /> {s.label} ({s.score})
                     </div>
