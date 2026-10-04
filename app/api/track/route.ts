@@ -416,7 +416,7 @@ export async function POST(request: NextRequest) {
 
   if (bp && client.breakpoint_enabled !== false) {
     try {
-      await supabase.from('form_events').insert({
+      const { error: bpError } = await supabase.from('form_events').insert({
         client_id: client.id,
         session_id: (session_id as string) ?? null,
         lead_id: lead?.id ?? null,
@@ -431,8 +431,9 @@ export async function POST(request: NextRequest) {
         seconds_on_form: Number(time_on_form ?? 0) || null,
         outcome: 'abandoned',
       })
+      if (bpError) console.error('[breakpoint] insert error:', JSON.stringify(bpError))
     } catch (e) {
-      console.error('[breakpoint] write failed:', e)
+      console.error('[breakpoint] write threw:', JSON.stringify(e))
     }
   }
 
