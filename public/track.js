@@ -474,7 +474,7 @@
         var fname = el.name || el.id || (el.getAttribute && el.getAttribute('placeholder')) || null;
         if (fname) {
           self.lastField = fname;
-          var fieldsNow = self._fields();
+          var fieldsNow = self._getFields();
           self.lastFieldIndex = fieldsNow.indexOf(el);
           if (val.length >= 2 && self.filledFields.indexOf(fname) === -1) {
             self.filledFields.push(fname);
@@ -555,7 +555,7 @@
       // Breakpoint diagnostics. Field names and positions only, never values.
       bp: (function () {
         try {
-          var order = this._fields().map(function (f) {
+          var order = fields.map(function (f) {
             return f.name || f.id || (f.getAttribute && f.getAttribute('placeholder')) || null;
           }).filter(Boolean);
           return {
