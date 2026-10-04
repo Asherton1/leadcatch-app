@@ -3550,3 +3550,23 @@ button.returning-cta:focus-visible {
   border-radius: 3px;
   margin-top: 0.3rem;
 }
+
+/* Trajectory on the score pill */
+.traj {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  padding: 0 0.22rem;
+  border-radius: 3px;
+  margin-left: 0.1rem;
+  cursor: help;
+}
+.traj-up {
+  color: #ef4444;
+  background: rgba(239,68,68,0.16);
+}
+.traj-down {
+  color: #6b7280;
+  background: rgba(107,114,128,0.16);
+}

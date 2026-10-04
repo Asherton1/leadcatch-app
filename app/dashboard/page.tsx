@@ -2644,6 +2644,11 @@ export default function Dashboard() {
                   {(() => { const s = scoreLead(lead, rcFor(lead)); return (
                     <div className="lead-score-pill" style={{ color: s.color, borderColor: s.color + "40", background: s.bg, display: "inline-flex", alignItems: "center", gap: "4px", padding: "2px 8px", borderRadius: "9999px", fontSize: "0.7rem", fontWeight: 700, border: "1px solid", marginTop: "4px" }}>
                       <span style={{ width: 6, height: 6, borderRadius: "50%", background: s.color, display: "inline-block" }} /> {s.label} ({s.score})
+                      {s.trajectory === 'climbing' ? (
+                        <span className="traj traj-up" title={`Back ${s.returnCount} times, and going further each visit`}>&uarr;{s.returnCount}</span>
+                      ) : s.trajectory === 'cooling' ? (
+                        <span className="traj traj-down" title={`Peaked at ${s.peak}, ${s.daysSince} days ago`}>&darr;</span>
+                      ) : null}
                     </div>
                   ); })()}
                   </div>
