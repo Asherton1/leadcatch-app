@@ -3614,13 +3614,6 @@ button.returning-cta:focus-visible {
 }
 
 /* Drawer scrolls on its own */
-.live-drawer-backdrop { overscroll-behavior: contain; }
-.live-drawer-body {
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  max-height: calc(100vh - 140px);
-  -webkit-overflow-scrolling: touch;
-}
 .ret-tick-score { font-weight: 600; }
 .ret-tick-score b { font-weight: 800; }
 .ret-tick-delta { font-family: inherit !important; font-size: 0.7rem !important; }
