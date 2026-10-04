@@ -303,3 +303,65 @@
     border-left: none;
   }
 }
+
+/* ══ Kicker plus one line, matching the cards above ═══════════════════ */
+.bp-strip { align-items: flex-start !important; padding: 1.15rem 1.4rem !important; }
+.bp-strip .bp-pip { margin-top: 0.4rem !important; }
+
+.bp-strip-text {
+  display: flex !important;
+  flex-direction: column;
+  gap: 0.55rem;
+  flex: 1;
+}
+
+/* same treatment as WHERE YOUR INQUIRIES COME FROM */
+.bp-kicker {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ff6b35;
+}
+
+.bp-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  color: #c4c4c8;
+  line-height: 1.5;
+}
+
+/* the field itself, set off rather than shouted */
+.bp-field {
+  color: #fff;
+  font-weight: 700;
+  padding-left: 0.6rem;
+  border-left: 2px solid #ff6b35;
+  letter-spacing: -0.01em;
+}
+
+.bp-detail {
+  color: #7a7a7a;
+  font-size: 0.82rem;
+  padding-left: 0.6rem;
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+
+.bp-strip-value {
+  margin-left: 0 !important;
+  padding-left: 0.6rem !important;
+  border-left: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+@media (max-width: 760px) {
+  .bp-line { gap: 0.45rem; }
+  .bp-detail, .bp-strip-value {
+    width: 100%;
+    padding-left: 0 !important;
+    border-left: none !important;
+    margin-left: 0 !important;
+  }
+}

@@ -96,19 +96,21 @@ export default function BreakpointPanel({ clientId }: { clientId: string | null 
       <button className="bp-strip" type="button" onClick={() => setOpen(o => !o)}>
         <span className="bp-pip" aria-hidden="true" />
         <span className="bp-strip-text">
+          <span className="bp-kicker">Breakpoint</span>
           {worst && total >= 5 ? (
-            <>
-              <b>This form loses most people at {prettify(worst.name)}</b>
-              {' — '}
-              {worst.stoppedHere} of {worst.reached} who reached it stopped there
+            <span className="bp-line">
+              This form loses most people at
+              <span className="bp-field">{prettify(worst.name)}</span>
+              <span className="bp-detail">
+                {worst.stoppedHere} of {worst.reached} who reached it stopped there
+              </span>
               <span className="bp-strip-value">{worst.dropRate}% drop</span>
-            </>
+            </span>
           ) : (
-            <>
-              <b>Breakpoint</b>
-              {' is watching ' + total + ' form session' + (total === 1 ? '' : 's')}
-              {' — the pattern appears once there are a few more'}
-            </>
+            <span className="bp-line">
+              Watching {total} form session{total === 1 ? '' : 's'}
+              <span className="bp-detail">The pattern appears once there are a few more</span>
+            </span>
           )}
         </span>
         <span className="bp-cta">
