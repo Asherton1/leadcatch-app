@@ -103,32 +103,32 @@ export default function PartnersPage() {
           <p className="partners-math-eyebrow">Run the numbers</p>
           <h2 className="partners-math-headline">Passive recurring revenue, on top of your existing book.</h2>
           <p className="partners-math-sub">
-            Based on the Pro plan at $200/mo. Most agencies install on their full client list within 90 days.
+            Based on the Pro plan at $397/mo, which is $79.40 per client per month to you. Larger multi-location clients pay more, so these are the floor rather than the average.
           </p>
           <div className="partners-math-grid">
             <div className="partners-math-card">
               <p className="partners-math-card-clients">5 clients</p>
               <div className="partners-math-card-number">
-                $200<span className="partners-math-card-period">/mo</span>
+                $397<span className="partners-math-card-period">/mo</span>
               </div>
               <div className="partners-math-card-divider" />
-              <p className="partners-math-card-annual"><strong>$2,400</strong> annually</p>
+              <p className="partners-math-card-annual"><strong>$4,764</strong> annually</p>
             </div>
             <div className="partners-math-card">
               <p className="partners-math-card-clients">15 clients</p>
               <div className="partners-math-card-number">
-                $600<span className="partners-math-card-period">/mo</span>
+                $1,191<span className="partners-math-card-period">/mo</span>
               </div>
               <div className="partners-math-card-divider" />
-              <p className="partners-math-card-annual"><strong>$7,200</strong> annually</p>
+              <p className="partners-math-card-annual"><strong>$14,292</strong> annually</p>
             </div>
             <div className="partners-math-card">
               <p className="partners-math-card-clients">30 clients</p>
               <div className="partners-math-card-number">
-                $1,200<span className="partners-math-card-period">/mo</span>
+                $2,382<span className="partners-math-card-period">/mo</span>
               </div>
               <div className="partners-math-card-divider" />
-              <p className="partners-math-card-annual"><strong>$14,400</strong> annually</p>
+              <p className="partners-math-card-annual"><strong>$28,584</strong> annually</p>
             </div>
           </div>
           <p className="partners-math-footnote">
