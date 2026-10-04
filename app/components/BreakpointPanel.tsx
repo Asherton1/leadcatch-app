@@ -29,6 +29,7 @@ export default function BreakpointPanel({ clientId }: { clientId: string | null 
   const [rows, setRows] = useState<Row[]>([])
   const [loading, setLoading] = useState(true)
   const [device, setDevice] = useState<'all' | 'mobile' | 'desktop'>('all')
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     if (!clientId) return
@@ -91,13 +92,28 @@ export default function BreakpointPanel({ clientId }: { clientId: string | null 
   if (!clientId) return null
 
   return (
-    <div className="bp-panel">
+    <div className={'bp-panel' + (open ? ' open' : '')}>
+      <button className="bp-strip" type="button" onClick={() => setOpen(o => !o)}>
+        <span className="bp-pip" aria-hidden="true" />
+        <span className="bp-strip-text">
+          <b>Breakpoint</b>
+          <span className="bp-sub">
+            {worst && total >= 5
+              ? `This form loses most people at ${prettify(worst.name)}`
+              : 'Where this form loses people'}
+          </span>
+        </span>
+        <span className="bp-cta">
+          {open ? 'Hide' : 'Review'}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease' }}>
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </span>
+      </button>
+
+      {open && (
+      <div className="bp-body">
       <div className="bp-head">
-        <div className="bp-head-left">
-          <span className="bp-pip" aria-hidden="true" />
-          <span className="bp-title">Breakpoint</span>
-          <span className="bp-sub">Where this form loses people</span>
-        </div>
         <div className="bp-tabs">
           {(['all', 'mobile', 'desktop'] as const).map(d => (
             <button
@@ -157,6 +173,8 @@ export default function BreakpointPanel({ clientId }: { clientId: string | null 
             {device !== 'all' ? ` on ${device}` : ''}. Field names only, never what anyone typed.
           </p>
         </>
+      )}
+      </div>
       )}
     </div>
   )
