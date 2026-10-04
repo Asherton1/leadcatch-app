@@ -120,7 +120,7 @@ const FEATURE_GROUPS: FeatureGroup[] = [
     name: 'Reporting & Analytics',
     features: [
       { feature: 'Per-location reporting',           tiers: [true, true, true, true] },
-      { feature: 'Quarterly executive reviews',      tiers: [false, true, true, true] },
+      { feature: 'Quarterly executive reviews',      tiers: [false, false, true, true] },
       { feature: 'Executive roll-up reports',        tiers: [false, false, true, true] },
     ],
   },
@@ -129,8 +129,8 @@ const FEATURE_GROUPS: FeatureGroup[] = [
     features: [
       { feature: 'AI voice callback',                tiers: [true, true, true, true] },
       { feature: 'Custom AI agent per location',     tiers: [false, false, true, true] },
-      { feature: 'Custom-branded recovery emails',   tiers: [false, true, true, true] },
-      { feature: 'Priority API access',              tiers: [false, true, true, true] },
+      { feature: 'Custom-branded recovery emails',   tiers: [true, true, true, true] },
+      { feature: 'Priority API access',              tiers: [false, false, true, true] },
       { feature: 'Custom integration builds',        tiers: [false, false, true, true] },
     ],
   },
@@ -138,10 +138,9 @@ const FEATURE_GROUPS: FeatureGroup[] = [
     name: 'White-Glove Service',
     features: [
       { feature: 'Dedicated success engineer',       tiers: [false, false, true, true] },
-      { feature: 'Slack Connect with our team',      tiers: [false, true, true, true] },
+      { feature: 'Slack Connect with our team',      tiers: [false, false, true, true] },
       { feature: 'Monthly strategy calls',           tiers: [false, false, true, true] },
       { feature: 'White-label dashboard',            tiers: [false, false, false, true] },
-      { feature: 'On-premise deployment',            tiers: [false, false, false, true] },
       { feature: 'Executive SLA with named contacts',tiers: [false, false, false, true] },
     ],
   },
