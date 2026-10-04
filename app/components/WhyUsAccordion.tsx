@@ -167,8 +167,8 @@ const features: FeatureItem[] = [
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
     ),
-    title: 'Field-Level Drop-Off',
-    description: 'Everyone fills in a name. Fewer give a phone number. Almost nobody reaches an open text box asking them to describe their situation. ReCapture shows you the exact field where people quit, and how many you lose at each step. The steepest fall is the field costing you the most — and until you can see it, changing your form is guesswork. Podium, GoHighLevel, and CartStack tell you a form was abandoned. None of them tell you where.',
+    title: 'Breakpoint: Field-Level Drop-Off',
+    description: 'Everyone fills in a name. Fewer give a phone number. Almost nobody reaches an open text box asking them to describe their situation. ReCapture shows you the exact field where people quit, and how many you lose at each step. Breakpoint splits it by mobile and desktop, which is usually where the answer is: a phone input that rejects a space costs you nothing on a laptop and a third of your inquiries on a phone. The steepest fall is the field costing you the most, and until you can see it, changing your form is guesswork. Podium, GoHighLevel, and CartStack tell you a form was abandoned. None of them tell you where.',
     visual: null,
   },
   {
