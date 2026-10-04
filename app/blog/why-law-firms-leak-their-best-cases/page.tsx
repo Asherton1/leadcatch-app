@@ -137,7 +137,7 @@ export default function Post() {
 
         <p>Take the low end of that range at 65 percent. That means <strong>260 form starts per month never become submitted intakes.</strong> They do not appear anywhere in the firm&apos;s CRM. They do not generate a missed call. They do not become a callback list. They simply do not exist on paper.</p>
 
-        <p>At an 8 percent recovery rate — a realistic floor for a properly deployed recovery layer — that is 21 recovered intakes a month. If the firm&apos;s case acceptance rate is 15 percent and the average fee per accepted case is $150,000, the annualized recovery opportunity is <strong>roughly $5.6 million per year</strong> in cases sitting in a blind spot. On the same $30,000 monthly ad spend that produced the visible pipeline.</p>
+        <p>At an 8 percent recovery rate, which is a figure to test rather than one we can promise, that is 21 recovered intakes a month. If the firm&apos;s case acceptance rate is 15 percent and the average fee per accepted case is $150,000, the annualized recovery opportunity is <strong>roughly $5.6 million per year</strong> in cases sitting in a blind spot. On the same $30,000 monthly ad spend that produced the visible pipeline.</p>
 
         <p>That number is not a projection of what perfect execution looks like. It is the floor of what a recovery layer generates on a firm running normal paid media budgets against a broken intake form.</p>
 

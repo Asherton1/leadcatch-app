@@ -140,7 +140,7 @@ export default function ForBoulevard() {
             </div>
             <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
               <p>
-                For a med spa practice with 3,000 monthly site visitors and 40 consultation form starts per day, that's roughly <strong style={{ color: '#fff' }}>800-900 abandoned consultation inquiries per month</strong>. Even at a conservative 10% recovery rate, you're capturing <strong style={{ color: '#fff' }}>80-90 additional qualified leads monthly</strong> — at an average $2,800 first treatment, that's <strong style={{ color: '#fff' }}>$200K+ in monthly revenue pipeline</strong> that would never have entered Boulevard otherwise.
+                For a med spa practice with 3,000 monthly site visitors and 40 consultation form starts per day, that's roughly <strong style={{ color: '#fff' }}>800-900 abandoned consultation inquiries per month</strong>. At a 10% recovery rate, a figure worth testing rather than assuming, you would be capturing <strong style={{ color: '#fff' }}>80-90 additional qualified leads monthly</strong> — at an average $2,800 first treatment, that's <strong style={{ color: '#fff' }}>$200K+ in monthly revenue pipeline</strong> that would never have entered Boulevard otherwise.
               </p>
               <p>
                 ReCapture pushes captured leads directly into Boulevard via webhook. One install on your practice site, real-time sync, and your existing Boulevard automations fire as if the consultation form submitted normally. No automation rebuild, no migration, no platform switch.

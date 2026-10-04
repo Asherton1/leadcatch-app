@@ -140,7 +140,7 @@ export default function ForFollowUpBoss() {
             </div>
             <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
               <p>
-                For a real estate team with 3,000 monthly site visitors and 30 property inquiry starters per day, that's roughly <strong style={{ color: '#fff' }}>600-700 abandoned inquiries per month</strong>. Even at a conservative 10% recovery rate, you're capturing <strong style={{ color: '#fff' }}>60-70 additional qualified buyers/sellers monthly</strong> — at an average $12K commission, that's <strong style={{ color: '#fff' }}>$720K+ in annual pipeline</strong> that would never have entered Follow Up Boss otherwise.
+                For a real estate team with 3,000 monthly site visitors and 30 property inquiry starters per day, that's roughly <strong style={{ color: '#fff' }}>600-700 abandoned inquiries per month</strong>. At a 10% recovery rate, a figure worth testing rather than assuming, you would be capturing <strong style={{ color: '#fff' }}>60-70 additional qualified buyers/sellers monthly</strong> — at an average $12K commission, that's <strong style={{ color: '#fff' }}>$720K+ in annual pipeline</strong> that would never have entered Follow Up Boss otherwise.
               </p>
               <p>
                 ReCapture pushes captured leads directly into Follow Up Boss via webhook. One install on your IDX/MLS site, real-time sync, and your existing Follow Up Boss action plans fire as if the lead submitted the form normally. No automation rebuild, no migration, no platform switch.

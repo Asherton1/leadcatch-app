@@ -140,7 +140,7 @@ export default function ForHubSpot() {
             </div>
             <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
               <p>
-                For a high-ticket service business with 5,000 monthly visitors and 50 form starters per day, that's roughly <strong style={{ color: '#fff' }}>1,000-1,500 abandoned form starts per month</strong>. Even at a conservative 10% recovery rate, you're capturing <strong style={{ color: '#fff' }}>100-150 additional qualified leads monthly</strong> — leads that would never have entered your HubSpot pipeline otherwise.
+                For a high-ticket service business with 5,000 monthly visitors and 50 form starters per day, that's roughly <strong style={{ color: '#fff' }}>1,000-1,500 abandoned form starts per month</strong>. At a 10% recovery rate, a figure worth testing rather than assuming, you would be capturing <strong style={{ color: '#fff' }}>100-150 additional qualified leads monthly</strong> — leads that would never have entered your HubSpot pipeline otherwise.
               </p>
               <p>
                 ReCapture pushes captured leads directly into your HubSpot CRM via webhook. One install on your site, real-time sync, and your existing HubSpot workflows fire as if the lead submitted the form normally. No automation rebuild, no migration, no platform switch.

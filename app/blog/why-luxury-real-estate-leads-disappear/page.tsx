@@ -141,7 +141,7 @@ export default function Post() {
 
         <p>At a 62% abandonment rate — consistent with industry data on high-ticket service forms — <strong>186 of those form starts never become submitted inquiries</strong>. They evaporate before the brokerage ever knows they existed.</p>
 
-        <p>At an 8% recovery rate — a realistic floor for a properly deployed recovery layer — that is 15 recovered leads per month. At $12,000 average commission value and a 20% lead-to-close rate, the annualized recovery opportunity is roughly <strong>$432,000 in commissions</strong> sitting in a blind spot.</p>
+        <p>At an 8% recovery rate, which is a figure to test rather than one we can promise, that is 15 recovered leads per month. At $12,000 average commission value and a 20% lead-to-close rate, the annualized recovery opportunity is roughly <strong>$432,000 in commissions</strong> sitting in a blind spot.</p>
 
         <p>That number does not include the submitted-but-slow-responded leads that went to a competitor. It is only the leads that disappeared before the inquiry was ever logged.</p>
 

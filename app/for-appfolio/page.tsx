@@ -140,7 +140,7 @@ export default function ForAppFolio() {
             </div>
             <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '1rem' }}>
               <p>
-                For a multifamily portfolio with 200 units and ~800 monthly leasing inquiry starters across your site, that's roughly <strong style={{ color: '#fff' }}>500-560 abandoned inquiries per month</strong>. Even at a conservative 10% recovery rate, you're capturing <strong style={{ color: '#fff' }}>50-56 additional qualified prospects monthly</strong> — feeding the top of your AppFolio leasing pipeline with applicants who would otherwise have disappeared into your bounce rate.
+                For a multifamily portfolio with 200 units and ~800 monthly leasing inquiry starters across your site, that's roughly <strong style={{ color: '#fff' }}>500-560 abandoned inquiries per month</strong>. At a 10% recovery rate, a figure worth testing rather than assuming, you would be capturing <strong style={{ color: '#fff' }}>50-56 additional qualified prospects monthly</strong> — feeding the top of your AppFolio leasing pipeline with applicants who would otherwise have disappeared into your bounce rate.
               </p>
               <p>
                 ReCapture pushes captured prospects directly into AppFolio via webhook. One install on your leasing site, real-time sync, and your existing AppFolio prospect workflows fire as if the inquiry submitted normally. No automation rebuild, no migration, no platform switch.

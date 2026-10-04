@@ -113,7 +113,7 @@ export default function Post() {
 
         <p>At a 62% abandonment rate, <strong>2,480 of those people never submit</strong>. They typed their name. They picked a procedure interest. They bounced before submitting.</p>
 
-        <p>The conservative first-year value of a new dental patient is roughly $1,900. Even at an 8% recovery rate — a realistic floor for a properly-deployed recovery layer — that&apos;s 198 patients per month at $1,900 each. <strong>$377,000 in annual revenue</strong>, sitting in a blind spot.</p>
+        <p>The conservative first-year value of a new dental patient is roughly $1,900. Pick a recovery rate you believe. At 8%, that is 198 patients per month at $1,900 each. We have no basis for telling you what your rate would be, because it depends far more on how fast your front desk follows up than on the software. <strong>$377,000 in annual revenue</strong>, sitting in a blind spot.</p>
 
         <p>At 10 locations, you can still feel each office individually. The Cleveland office manager could probably name patients she remembers calling. You haven&apos;t yet built the systems where this revenue disappears into corporate-level abstraction. You can see what&apos;s missing if you go looking.</p>
 
@@ -125,7 +125,7 @@ export default function Post() {
 
         <p>100 locations, 400 form starts each, 62% abandonment = <strong>24,800 lost form starts per month</strong>.</p>
 
-        <p>At $1,900 per recovered dental patient, the annualized opportunity at an 8% recovery rate sits north of <strong>$4.5 million</strong>. For an aesthetic chain at $2,800 average client value across the first visit and retention tail, the number gets closer to <strong>$6.6 million</strong>.</p>
+        <p>At $1,900 per recovered dental patient, at an 8% recovery rate, the annualised opportunity would be north of <strong>$4.5 million</strong>. For an aesthetic chain at $2,800 average client value across the first visit and retention tail, the number gets closer to <strong>$6.6 million</strong>.</p>
 
         <p>But the more important shift at 100 locations isn&apos;t financial. It&apos;s operational.</p>
 
