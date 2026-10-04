@@ -46,7 +46,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: 'Will it slow down my website?',
-        a: 'No. The ReCapture script is under 10KB, loads asynchronously, and adds zero measurable page load time. It does not block rendering, does not run on pages without forms, and has zero impact on Core Web Vitals or SEO.',
+        a: 'No. The script is 26KB raw and 8.5KB gzipped, which is what actually travels over the wire. It loads asynchronously and does not block rendering, so it sits outside the critical path your Core Web Vitals are measured on. It does load on every page, because the visitor journey and live visitor view need to know where someone has been, but it only starts watching fields when it finds a form on the page. On a page with no form it costs you the download and nothing else.',
       },
     ],
   },
