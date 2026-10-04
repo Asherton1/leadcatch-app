@@ -3680,3 +3680,23 @@ button.returning-cta:focus-visible {
 .ret-table { table-layout: fixed; width: 100%; }
 .ret-table th, .ret-table td { overflow: hidden; text-overflow: ellipsis; }
 .ret-row { min-width: 0; }
+
+/* ══ Returning drawer scroll, forced ══════════════════════════════════ */
+.live-drawer-backdrop {
+  overflow: hidden !important;
+  align-items: flex-start !important;
+}
+.live-drawer {
+  max-height: calc(100vh - 3rem) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  margin: auto !important;
+}
+.live-drawer-header { flex: 0 0 auto !important; }
+.live-drawer-body {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: scroll !important;
+  overscroll-behavior: contain !important;
+}
