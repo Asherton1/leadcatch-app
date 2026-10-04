@@ -555,7 +555,10 @@
       // Breakpoint diagnostics. Field names and positions only, never values.
       bp: (function () {
         try {
-          var order = fields.map(function (f) {
+          var order = fields.filter(function (f) {
+            // never report our own honeypot as one of their fields
+            return !(f.hasAttribute && f.hasAttribute('data-rc-hp'));
+          }).map(function (f) {
             return f.name || f.id || (f.getAttribute && f.getAttribute('placeholder')) || null;
           }).filter(Boolean);
           return {

@@ -412,8 +412,6 @@ export async function POST(request: NextRequest) {
   // Check DNC before firing any recovery action that touches the lead
   // Write the breakpoint row. Wrapped and awaited-but-ignored so nothing here can
   // break capture, which is the thing clients actually pay for.
-  console.log('[breakpoint] bp present:', !!bp, 'enabled:', client.breakpoint_enabled, 'last_field:', bp?.last_field ?? 'none')
-
   if (bp && client.breakpoint_enabled !== false) {
     try {
       const { error: bpError } = await supabase.from('form_events').insert({
