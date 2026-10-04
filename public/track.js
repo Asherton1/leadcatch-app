@@ -340,7 +340,13 @@
       input.type = 'text';
       input.name = HP_NAME;
       input.tabIndex = -1;
-      input.autocomplete = 'off';
+      // Browsers ignore autocomplete="off" on text inputs and will autofill a
+      // hidden field, which flags real people as bots. These three together stop it.
+      input.autocomplete = 'new-password';
+      input.setAttribute('aria-hidden', 'true');
+      input.setAttribute('data-form-type', 'other');
+      input.readOnly = true;
+      setTimeout(function () { try { input.readOnly = false; } catch (e) {} }, 500);
       input.setAttribute('data-rc-hp', '1');
       wrap.appendChild(input);
       form.appendChild(wrap);
