@@ -85,7 +85,7 @@ function SmsMockup() {
         </div>
         <div style={{ marginTop: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid #1e1e1e', fontSize: '0.7rem', color: '#ff6b35', fontWeight: 600 }}>Form abandoned — follow up now</div>
       </div>
-      <div style={{ textAlign: 'center', marginTop: '0.75rem', fontSize: '0.65rem', color: '#444' }}>Delivered within 60 seconds of form abandonment</div>
+      <div style={{ textAlign: 'center', marginTop: '0.75rem', fontSize: '0.65rem', color: '#444' }}>Delivered within 60 seconds of form abandonment. Voice callback is in beta.</div>
     </div>
   )
 }
@@ -185,8 +185,8 @@ const features: FeatureItem[] = [
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
       </svg>
     ),
-    title: 'AI Voice Callback in 60 Seconds',
-    description: 'This is the feature nobody else has. When someone abandons your form and leaves a phone number, ReCapture\'s AI calls them back within 60 seconds. Not an email. Not a text. A real phone call with a warm, natural-sounding voice that introduces itself as your front desk, offers to help, and collects their booking preferences. Responding within one minute makes you 391% more likely to convert. No other form recovery tool on the market does this.',
+    title: 'AI Voice Callback in 60 Seconds (Beta)',
+    description: 'Currently in beta and not yet running on live client traffic. When someone abandons your form and leaves a phone number, ReCapture can call them back within a minute. A real phone call, with a voice that identifies itself as an AI assistant calling on behalf of the business, offers to help, and collects their booking preferences. The MIT Lead Response Management study found that responding within one minute makes you 391% more likely to convert. We will take the beta label off when it has run on live traffic, not before.',
     visual: null,
   },
   {
