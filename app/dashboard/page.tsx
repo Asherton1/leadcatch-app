@@ -231,7 +231,8 @@ function scoreLead(lead: Lead, returnCount = 1): LeadScore {
     breakdown.push({ label: `Cooling over ${daysSince} days`, points: -decay, maxPoints: 0 })
   }
 
-  const base = { score: current, peak: score, trajectory, daysSince, returnCount, breakdown }
+  const capped = Math.min(score, 100)
+  const base = { score: Math.min(current, 100), peak: capped, trajectory, daysSince, returnCount, breakdown }
 
   if (current >= 70) return { ...base, label: 'Hot', color: '#ef4444', bg: 'rgba(239,68,68,0.12)' }
   if (current >= 40) return { ...base, label: 'Warm', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' }
@@ -2942,6 +2943,8 @@ export default function Dashboard() {
                   <p className="ret-drawer-intro">
                     Each of these people started your form, left, and came back to try again.
                     None of them submitted, so no CRM has any record that they were ever here.
+                    The number beside each attempt is how interested they looked that time, out of 100,
+                    based on how much they filled in, how long they spent, and how often they have been back.
                   </p>
                   {returningDetail.map(r => (
                     <div className="ret-row" key={r.key}>
@@ -2976,10 +2979,12 @@ export default function Dashboard() {
                             <span className="ret-tick" key={l.id}>
                               <span className="ret-tick-dot" />
                               Attempt {i + 1} &middot; {formatAbsoluteTime(l.created_at)} &middot; {l.fields_completed} fields
-                              <span className="ret-tick-score" style={{ color: sc.color }}>{sc.peak}</span>
+                              <span className="ret-tick-score" style={{ color: sc.color }}>
+                                {sc.label} <b>{sc.peak}</b>
+                              </span>
                               {delta !== 0 && (
                                 <span className={'ret-tick-delta ' + (delta > 0 ? 'is-up' : 'is-down')}>
-                                  {delta > 0 ? '+' : ''}{delta}
+                                  {delta > 0 ? `${delta} more interested` : `${Math.abs(delta)} less interested`}
                                 </span>
                               )}
                             </span>
@@ -2993,10 +2998,10 @@ export default function Dashboard() {
                         return (
                           <div className={'ret-row-verdict is-' + (last > first ? 'up' : last < first ? 'down' : 'flat')}>
                             {last > first
-                              ? `Each visit goes further. ${first} to ${last} across ${r.attempts} attempts, and still nobody has their details but you.`
+                              ? `They are getting more serious each time they come back, and still nobody has their details but you.`
                               : last < first
-                                ? `Interest is ${dir}. Peaked at ${first}, now ${last}.`
-                                : `Holding at ${last} across ${r.attempts} attempts.`}
+                                ? `They were most interested on the first visit and have cooled since.`
+                                : `Same level of interest each time they come back.`}
                           </div>
                         )
                       })()}
