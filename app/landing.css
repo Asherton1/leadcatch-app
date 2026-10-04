@@ -6712,3 +6712,7 @@ select.audit-form-input option {
 /* Break only on mobile, one line on desktop */
 .brk-mobile { display: none; }
 @media (max-width: 760px) { .brk-mobile { display: block; } }
+
+/* Breakpoint section on the home page */
+.breakpoint-section .bs { max-width: 860px; margin-left: auto; margin-right: auto; }
+.breakpoint-section .signal-close { margin-top: 2rem; }

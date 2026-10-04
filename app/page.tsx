@@ -15,6 +15,7 @@ import ScrollReveal from './components/ScrollReveal'
 import ParticleNetwork from './components/ParticleNetwork'
 import PhantomCapture from './components/PhantomCapture'
 import HeroCapture from './components/HeroCapture'
+import BreakpointSim from './components/BreakpointSim'
 import LedgerFeed from './components/LedgerFeed'
 import LedgerHeadline from './components/LedgerHeadline'
 import Logo from './components/Logo'
@@ -142,6 +143,27 @@ export default function LandingPage() {
         <p className="signal-close">
           You keep running your campaigns exactly as you do now. The platforms just stop
           working from the leftovers &mdash; and you finally know which ones are working.
+        </p>
+      </section>
+
+      <div className="section-divider" />
+
+      <section className="lc-section breakpoint-section reveal">
+        <p className="signal-eyebrow">Breakpoint</p>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
+          You know your forms leak. You do not know where.
+        </h2>
+        <p className="section-subtitle">
+          Analytics stops at the pageview. Your CRM starts at the submission. The part in
+          between, where people actually give up, is invisible to every tool you own.
+        </p>
+
+        <BreakpointSim />
+
+        <p className="signal-close">
+          Breakpoint names the field, split by mobile and desktop, using the sessions that
+          never submitted. One broken phone input on a mobile layout can cost a third of
+          your inquiries, and nothing else you run would ever tell you.
         </p>
       </section>
 
