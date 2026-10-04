@@ -41,6 +41,14 @@ export default function BreakpointSim() {
         <div className="bs-form-head">
           <span className="bs-dot" /><span className="bs-dot" /><span className="bs-dot" />
           <span className="bs-form-title">Consultation request</span>
+          <span className="bs-form-legend">
+            <span>Lost here</span>
+            <span>Still filling</span>
+          </span>
+        </div>
+
+        <div className="bs-startline">
+          <span>100 people start this form</span>
         </div>
 
         {FIELDS.map((f, i) => {
