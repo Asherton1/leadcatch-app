@@ -8,11 +8,11 @@ import Image from 'next/image'
 export const metadata = {
   title: 'There Is One Field on Your Form Doing Most of the Damage',
   description: 'Analytics stops at the pageview. Your CRM starts at the submission. The part in between, where people actually give up, is invisible to every tool you own.',
-  alternates: { canonical: '/blog/the-field-that-kills-your-form' },
+  alternates: { canonical: '/blog/one-field-doing-most-of-the-damage' },
   openGraph: {
     title: 'There Is One Field on Your Form Doing Most of the Damage',
     description: 'Analytics stops at the pageview. Your CRM starts at the submission. The part in between, where people actually give up, is invisible to every tool you own.',
-    url: 'https://www.userecapture.com/blog/the-field-that-kills-your-form',
+    url: 'https://www.userecapture.com/blog/one-field-doing-most-of-the-damage',
     siteName: 'ReCapture',
     type: 'article',
     images: [{
@@ -51,7 +51,7 @@ export default function Post() {
             },
             mainEntityOfPage: {
               '@type': 'WebPage',
-              '@id': 'https://www.userecapture.com/blog/the-field-that-kills-your-form',
+              '@id': 'https://www.userecapture.com/blog/one-field-doing-most-of-the-damage',
             },
           }),
         }}

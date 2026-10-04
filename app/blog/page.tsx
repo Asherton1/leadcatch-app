@@ -50,7 +50,7 @@ export default function BlogIndex() {
       </section>
 
       <div className="blog-featured reveal">
-        <Link href="/blog/the-field-that-kills-your-form" className="blog-featured-card">
+        <Link href="/blog/one-field-doing-most-of-the-damage" className="blog-featured-card">
           <div className="blog-featured-visual" style={{ position: 'relative', overflow: 'hidden' }}>
             <Image src="/blog-breakpoint.webp" alt="A form with one field lit in the dark" fill style={{ objectFit: 'cover' }} />
           </div>
