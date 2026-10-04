@@ -2644,11 +2644,7 @@ export default function Dashboard() {
                   {(() => { const s = scoreLead(lead, rcFor(lead)); return (
                     <div className="lead-score-pill" style={{ color: s.color, borderColor: s.color + "40", background: s.bg, display: "inline-flex", alignItems: "center", gap: "4px", padding: "2px 8px", borderRadius: "9999px", fontSize: "0.7rem", fontWeight: 700, border: "1px solid", marginTop: "4px" }}>
                       <span style={{ width: 6, height: 6, borderRadius: "50%", background: s.color, display: "inline-block" }} /> {s.label} ({s.score})
-                      {s.trajectory === 'climbing' ? (
-                        <span className="traj traj-up" title={`Back ${s.returnCount} times, and going further each visit`}>&uarr;{s.returnCount}</span>
-                      ) : s.trajectory === 'cooling' ? (
-                        <span className="traj traj-down" title={`Peaked at ${s.peak}, ${s.daysSince} days ago`}>&darr;</span>
-                      ) : null}
+
                     </div>
                   ); })()}
                   </div>
@@ -2972,13 +2968,38 @@ export default function Dashboard() {
                         </div>
                       )}
                       <div className="ret-row-timeline">
-                        {r.leads.map((l, i) => (
-                          <span className="ret-tick" key={l.id}>
-                            <span className="ret-tick-dot" />
-                            Attempt {i + 1} &middot; {formatAbsoluteTime(l.created_at)} &middot; {l.fields_completed} fields
-                          </span>
-                        ))}
+                        {r.leads.map((l, i) => {
+                          const sc = scoreLead(l, i + 1)
+                          const prev = i > 0 ? scoreLead(r.leads[i - 1], i) : null
+                          const delta = prev ? sc.peak - prev.peak : 0
+                          return (
+                            <span className="ret-tick" key={l.id}>
+                              <span className="ret-tick-dot" />
+                              Attempt {i + 1} &middot; {formatAbsoluteTime(l.created_at)} &middot; {l.fields_completed} fields
+                              <span className="ret-tick-score" style={{ color: sc.color }}>{sc.peak}</span>
+                              {delta !== 0 && (
+                                <span className={'ret-tick-delta ' + (delta > 0 ? 'is-up' : 'is-down')}>
+                                  {delta > 0 ? '+' : ''}{delta}
+                                </span>
+                              )}
+                            </span>
+                          )
+                        })}
                       </div>
+                      {r.leads.length > 1 && (() => {
+                        const first = scoreLead(r.leads[0], 1).peak
+                        const last = scoreLead(r.leads[r.leads.length - 1], r.leads.length).peak
+                        const dir = last > first ? 'climbing' : last < first ? 'falling away' : 'holding steady'
+                        return (
+                          <div className={'ret-row-verdict is-' + (last > first ? 'up' : last < first ? 'down' : 'flat')}>
+                            {last > first
+                              ? `Each visit goes further. ${first} to ${last} across ${r.attempts} attempts, and still nobody has their details but you.`
+                              : last < first
+                                ? `Interest is ${dir}. Peaked at ${first}, now ${last}.`
+                                : `Holding at ${last} across ${r.attempts} attempts.`}
+                          </div>
+                        )
+                      })()}
                     </div>
                   ))}
                 </>
