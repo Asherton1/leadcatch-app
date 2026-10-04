@@ -119,7 +119,7 @@ export default function LandingPage() {
           </p>
 
           <p className="mf-pull">
-            A kid screaming in the background<br />should not cost you a $30,000 client.
+            A kid screaming in the background<br className="brk-mobile" /> should not cost you a $30,000 client.
           </p>
 
           <p className="mf-close">ReCapture catches the intent the moment it appears.</p>
