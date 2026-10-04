@@ -6708,3 +6708,7 @@ select.audit-form-input option {
     margin-right: auto;
   }
 }
+
+/* Break only on mobile, one line on desktop */
+.brk-mobile { display: none; }
+@media (max-width: 760px) { .brk-mobile { display: block; } }
