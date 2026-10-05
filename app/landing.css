@@ -6724,3 +6724,8 @@ select.audit-form-input option {
 .signal-section .section-title,
 .leakmap-section .section-title,
 .breakpoint-section .section-title { color: #fff; }
+
+/* The second half must be white, not inherit the section title colour */
+.signal-section .section-title,
+.leakmap-section .section-title,
+.breakpoint-section .section-title { color: #fff; }
