@@ -6719,3 +6719,8 @@ select.audit-form-input option {
 
 /* Two-tone section headlines, matching the manifesto treatment */
 .title-muted { color: #6b6b6b; }
+
+/* The second half must be white, not inherit the section title colour */
+.signal-section .section-title,
+.leakmap-section .section-title,
+.breakpoint-section .section-title { color: #fff; }
