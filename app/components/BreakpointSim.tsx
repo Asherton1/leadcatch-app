@@ -3,86 +3,108 @@
 import { useEffect, useRef, useState } from 'react'
 import './breakpoint-sim.css'
 
+const SCRIPT = [
+  { label: 'First name', value: 'Megan', speed: 90 },
+  { label: 'Last name',  value: 'Whitfield', speed: 85 },
+  { label: 'Email',      value: 'm.whitfield84@gmail.com', speed: 55 },
+  { label: 'Phone',      value: '214', speed: 320, stall: true },
+  { label: 'What are you looking for?', value: '', speed: 0 },
+  { label: 'Tell us more', value: '', speed: 0 },
+]
+
 export default function BreakpointSim() {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [b, setB] = useState(0)
+  const [started, setStarted] = useState(false)
+  const [field, setField] = useState(0)
+  const [typed, setTyped] = useState<string[]>(SCRIPT.map(() => ''))
+  const [stalled, setStalled] = useState(false)
+  const [gone, setGone] = useState(false)
 
   useEffect(() => {
     const el = ref.current
-    if (!el) return
-    const timers: ReturnType<typeof setTimeout>[] = []
+    if (!el || started) return
     const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return
-      io.disconnect()
-      const beats = [700, 1500, 2400, 3400, 4400, 5400, 6500]
-      beats.forEach((ms, i) => timers.push(setTimeout(() => setB(i + 1), ms)))
-    }, { threshold: 0.35 })
+      if (e.isIntersecting) { setStarted(true); io.disconnect() }
+    }, { threshold: 0.4 })
     io.observe(el)
-    return () => { io.disconnect(); timers.forEach(clearTimeout) }
-  }, [])
+    return () => io.disconnect()
+  }, [started])
 
-  const Form = ({ mobile }: { mobile: boolean }) => {
-    const phone = mobile ? (b >= 3 ? '214 555 0199' : '') : (b >= 3 ? '(214) 555-0199' : '')
-    const phoneBad = mobile && b >= 4
-    const sent = !mobile && b >= 5
-    const gone = mobile && b >= 7
+  useEffect(() => {
+    if (!started) return
+    let cancelled = false
+    const timeouts: ReturnType<typeof setTimeout>[] = []
+    const wait = (ms: number) => new Promise<void>(r => timeouts.push(setTimeout(r, ms)))
 
-    return (
-      <div className="bk-form">
-        <div className="bk-form-head">Request a consultation</div>
-        <div className={'bk-f' + (b === 1 ? ' is-active' : '')}>
-          <span className="bk-f-label">Name</span>
-          <span className="bk-f-in">{b >= 1 ? 'Megan Whitfield' : ''}</span>
-        </div>
-        <div className={'bk-f' + (b === 2 ? ' is-active' : '')}>
-          <span className="bk-f-label">Email</span>
-          <span className="bk-f-in">{b >= 2 ? 'm.whitfield84@gmail.com' : ''}</span>
-        </div>
-        <div className={'bk-f' + (b === 3 ? ' is-active' : '') + (phoneBad ? ' is-bad' : '')}>
-          <span className="bk-f-label">Phone</span>
-          <span className="bk-f-in">{phone}</span>
-          {phoneBad && (
-            <span className="bk-err">{b >= 6 ? 'Still not accepted' : 'Enter a valid phone number'}</span>
-          )}
-        </div>
-        <div className={'bk-submit' + (sent ? ' is-sent' : '')}>{sent ? 'Sent' : 'Submit'}</div>
-        {gone && <div className="bk-gone">Left without submitting</div>}
-      </div>
-    )
-  }
+    ;(async () => {
+      for (let f = 0; f < SCRIPT.length; f++) {
+        const s = SCRIPT[f]
+        if (!s.value) break
+        if (cancelled) return
+        setField(f)
+        await wait(420)
+        for (let c = 0; c < s.value.length; c++) {
+          if (cancelled) return
+          setTyped(prev => {
+            const next = [...prev]
+            next[f] = s.value.slice(0, c + 1)
+            return next
+          })
+          await wait(s.speed + Math.random() * 60)
+        }
+        if (s.stall) {
+          if (cancelled) return
+          setStalled(true)
+          await wait(3200)
+          if (cancelled) return
+          setGone(true)
+          return
+        }
+        await wait(260)
+      }
+    })()
+
+    return () => { cancelled = true; timeouts.forEach(clearTimeout) }
+  }, [started])
 
   return (
-    <div className="bk" ref={ref}>
-      <div className="bk-pair">
-        <div className="bk-device bk-desktop">
-          <div className="bk-chrome">
-            <span className="bk-cd" /><span className="bk-cd" /><span className="bk-cd" />
-            <span className="bk-dev-tag">Desktop</span>
-          </div>
-          <div className="bk-screen"><Form mobile={false} /></div>
-          <div className={'bk-stamp is-good' + (b >= 5 ? ' is-on' : '')}>Submitted</div>
+    <div className="bs" ref={ref}>
+      <div className={'bs-form' + (gone ? ' is-gone' : '')}>
+        <div className="bs-form-head">
+          <span className="bs-dot" /><span className="bs-dot" /><span className="bs-dot" />
+          <span className="bs-form-title">Consultation request</span>
         </div>
 
-        <div className="bk-device bk-mobile">
-          <div className="bk-notch" />
-          <div className="bk-screen bk-screen-m">
-            <span className="bk-dev-tag bk-dev-tag-m">Mobile</span>
-            <Form mobile={true} />
-          </div>
-          <div className={'bk-stamp is-bad' + (b >= 7 ? ' is-on' : '')}>Lost</div>
+        {SCRIPT.map((s, i) => {
+          const active = field === i && !gone
+          const filled = typed[i].length > 0
+          return (
+            <div
+              className={'bs-field' + (active ? ' is-active' : '') + (filled ? ' is-filled' : '')}
+              key={s.label}
+            >
+              <span className="bs-label">{s.label}</span>
+              <span className="bs-input">
+                <span className="bs-typed">{typed[i]}</span>
+                {active ? <span className={'bs-caret' + (stalled ? ' is-stalled' : '')} /> : null}
+              </span>
+            </div>
+          )
+        })}
+
+        <div className="bs-form-foot">
+          <span className="bs-submit">Request consultation</span>
         </div>
       </div>
 
-      <div className={'bk-verdict' + (b >= 7 ? ' is-on' : '')}>
+      <div className={'bs-verdict' + (gone ? ' is-on' : '')}>
         <p>
-          <strong>Same form. Same person. One field.</strong> The mobile keyboard puts a
-          space in the number and the validation rejects it. She tries twice and leaves.
-          On your laptop that field has never failed once, which is why nobody has ever
-          found it.
+          She never pressed submit, so nothing recorded her. No row in the CRM, no
+          conversion in Meta or Google, nobody to follow up.
         </p>
-        <p className="bk-verdict-sub">
-          Breakpoint names the field and splits it by device, from the sessions that never
-          submitted. That is the only place this answer exists.
+        <p className="bs-verdict-line">
+          <strong>Phone is where this form loses people.</strong> Not a guess. The field
+          itself, named, from the sessions that never finished.
         </p>
       </div>
     </div>
