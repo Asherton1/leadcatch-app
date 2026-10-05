@@ -17,6 +17,7 @@ import PhantomCapture from './components/PhantomCapture'
 import HeroCapture from './components/HeroCapture'
 import BreakpointSim from './components/BreakpointSim'
 import LeakFlow from './components/LeakFlow'
+import SignalShift from './components/SignalShift'
 import LedgerFeed from './components/LedgerFeed'
 import LedgerHeadline from './components/LedgerHeadline'
 import Logo from './components/Logo'
@@ -138,7 +139,7 @@ export default function LandingPage() {
           Meta and Google only find out someone was interested when they press submit.
         </p>
 
-        <SignalFlow />
+        <SignalShift />
 
         <SignalCards />
 
