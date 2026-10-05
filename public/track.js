@@ -199,6 +199,68 @@
   // Expose for internal use — form_started event fires when user first touches a form
   win.__rcSendVisitorEvent = sendVisitorEvent;
 
+  // ── Leak Map ──────────────────────────────────────────────────────────────
+  // A form abandon is only one way an inquiry escapes. On mobile the commonest
+  // is a tap on the phone number at a time nobody is there to answer. These
+  // carry intent but no identity, so they are intelligence only: they never
+  // create a contactable lead and never trigger an outbound message.
+  (function () {
+    var seen = {};
+
+    function once(key, fn) {
+      if (seen[key]) return;
+      seen[key] = true;
+      fn();
+      setTimeout(function () { seen[key] = false; }, 30000);
+    }
+
+    doc.addEventListener('click', function (e) {
+      try {
+        var el = e.target && e.target.closest ? e.target.closest('a[href^="tel:"], a[href^="sms:"], a[href^="mailto:"]') : null;
+        if (!el) return;
+        var href = el.getAttribute('href') || '';
+        var kind = href.indexOf('tel:') === 0 ? 'tel_tap'
+                 : href.indexOf('sms:') === 0 ? 'sms_tap'
+                 : 'mailto_tap';
+        once(kind, function () {
+          sendVisitorEvent(kind, {
+            // the destination, never anything about the visitor
+            target: href.replace(/^(tel|sms|mailto):/, '').slice(0, 40),
+            label: (el.textContent || '').trim().slice(0, 60),
+            hour: new Date().getHours()
+          });
+        });
+      } catch (err) { /* never break the page for a diagnostic */ }
+    }, true);
+
+    // Booking widgets render in an iframe. A blur on the window while an
+    // embedded scheduler is on the page is the only reliable signal that
+    // somebody interacted with it.
+    var BOOKING = 'iframe[src*="calendly"], iframe[src*="cal.com"], iframe[src*="acuity"], iframe[src*="squarespace-scheduling"], iframe[src*="zenoti"], iframe[src*="mindbody"], iframe[src*="boulevard"]';
+    var bookingOpened = false;
+
+    win.addEventListener('blur', function () {
+      try {
+        if (!doc.querySelector(BOOKING)) return;
+        if (doc.activeElement && doc.activeElement.tagName === 'IFRAME') {
+          bookingOpened = true;
+          once('booking_opened', function () {
+            sendVisitorEvent('booking_opened', { hour: new Date().getHours() });
+          });
+        }
+      } catch (err) {}
+    });
+
+    // If they engaged with the scheduler and then left the page without a form
+    // submit, that is a booking they started and did not finish.
+    win.addEventListener('pagehide', function () {
+      try {
+        if (!bookingOpened) return;
+        sendVisitorEvent('booking_abandoned', { hour: new Date().getHours() });
+      } catch (err) {}
+    });
+  })();
+
 
   // --- EU Geo-Block ---
   // GDPR exposure is real and complex. Until we can afford a full EU compliance
