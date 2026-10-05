@@ -6716,3 +6716,6 @@ select.audit-form-input option {
 /* Breakpoint section on the home page */
 .breakpoint-section .bs { max-width: 860px; margin-left: auto; margin-right: auto; }
 .breakpoint-section .signal-close { margin-top: 2rem; }
+
+/* Two-tone section headlines, matching the manifesto treatment */
+.title-muted { color: #6b6b6b; }

@@ -131,7 +131,8 @@ export default function LandingPage() {
       <section className="lc-section signal-section reveal">
         <p className="signal-eyebrow">The part nobody else does</p>
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
-          Your ad platforms are learning from a fraction of your demand.
+          <span className="title-muted">Your ad platforms are learning</span><br />
+          from a fraction of your demand.
         </h2>
         <p className="section-subtitle">
           Meta and Google only find out someone was interested when they press submit.
@@ -152,7 +153,8 @@ export default function LandingPage() {
       <section className="lc-section leakmap-section reveal">
         <p className="signal-eyebrow">Leak Map</p>
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
-          A form is only one way people give up on you.
+          <span className="title-muted">A form is only one way</span><br />
+          people give up on you.
         </h2>
         <p className="section-subtitle">
           They tap your number at nine at night and nobody answers. They open your
@@ -168,7 +170,8 @@ export default function LandingPage() {
       <section className="lc-section breakpoint-section reveal">
         <p className="signal-eyebrow">Breakpoint</p>
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
-          You know your forms leak. You do not know where.
+          <span className="title-muted">You know your forms leak.</span><br />
+          You do not know where.
         </h2>
         <p className="section-subtitle">
           Analytics stops at the pageview. Your CRM starts at the submission. The part in
