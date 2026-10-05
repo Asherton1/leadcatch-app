@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import BreakpointSim from '../components/BreakpointSim'
+import LeakFlow from '../components/LeakFlow'
 import BlogNav from '../components/BlogNav'
 import ScrollReveal from '../components/ScrollReveal'
 import Footer from '../components/Footer'
@@ -118,6 +119,18 @@ export default function DashboardTour() {
             <p>Your clients keep their own logins if you want them to. Some agencies work every account themselves, others prefer the client sees their own leads. Both run off the same setup.</p>
           </div>
           <AgencyConsole />
+        </div>
+      </section>
+
+      <section className="dt-band dt-band-alt reveal">
+        <div className="dt-inner dt-narrow">
+          <p className="dt-section-eyebrow">Leak Map</p>
+          <div className="dt-caption dt-caption-lead">
+            <h2 className="dt-h2">Every way an inquiry leaves without becoming a lead</h2>
+            <p>A form is one of them. On a phone it is rarely the most common one. Somebody taps your number at nine at night and nobody picks up. Somebody opens your booking page, sees a three week wait, and closes it. Both of those people wanted to talk to you.</p>
+            <p>Neither leaves a name or an email, so there is nobody to follow up with. What it tells you is how many people tried and did not get through, and which route is costing you the most. If most of your call taps land outside business hours, that is a staffing conversation rather than a marketing one.</p>
+          </div>
+          <LeakFlow />
         </div>
       </section>
 
