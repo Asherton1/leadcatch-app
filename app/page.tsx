@@ -16,6 +16,7 @@ import ParticleNetwork from './components/ParticleNetwork'
 import PhantomCapture from './components/PhantomCapture'
 import HeroCapture from './components/HeroCapture'
 import BreakpointSim from './components/BreakpointSim'
+import LeakFlow from './components/LeakFlow'
 import LedgerFeed from './components/LedgerFeed'
 import LedgerHeadline from './components/LedgerHeadline'
 import Logo from './components/Logo'
@@ -144,6 +145,22 @@ export default function LandingPage() {
           You keep running your campaigns exactly as you do now. The platforms just stop
           working from the leftovers &mdash; and you finally know which ones are working.
         </p>
+      </section>
+
+      <div className="section-divider" />
+
+      <section className="lc-section leakmap-section reveal">
+        <p className="signal-eyebrow">Leak Map</p>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
+          A form is only one way people give up on you.
+        </h2>
+        <p className="section-subtitle">
+          They tap your number at nine at night and nobody answers. They open your
+          booking page and see a three week wait. Every one of those is somebody who
+          wanted to talk to you, and nothing you own records a single one.
+        </p>
+
+        <LeakFlow />
       </section>
 
       <div className="section-divider" />
