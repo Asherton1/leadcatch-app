@@ -64,8 +64,9 @@ export default function SignalShift() {
       </div>
 
       <p className="ss-caption">
-        Same campaigns, same budget, same audience. The only thing that changed is how
-        much of your actual demand the platform can see.
+        Same campaigns, same budget, same audience. The only thing that changes is how
+        much of your actual demand the platform can see. The figures above are an
+        illustration of the shape, not results from a specific account.
       </p>
     </div>
   )

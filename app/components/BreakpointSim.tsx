@@ -3,110 +3,73 @@
 import { useEffect, useRef, useState } from 'react'
 import './breakpoint-sim.css'
 
-const SCRIPT = [
-  { label: 'First name', value: 'Megan', speed: 90 },
-  { label: 'Last name',  value: 'Whitfield', speed: 85 },
-  { label: 'Email',      value: 'm.whitfield84@gmail.com', speed: 55 },
-  { label: 'Phone',      value: '214', speed: 320, stall: true },
-  { label: 'What are you looking for?', value: '', speed: 0 },
-  { label: 'Tell us more', value: '', speed: 0 },
+const FIELDS = [
+  { name: 'First name', all: 100, mobile: 100 },
+  { name: 'Last name',  all: 94,  mobile: 93 },
+  { name: 'Email',      all: 81,  mobile: 78 },
+  { name: 'Phone',      all: 32,  mobile: 19, breaks: true },
+  { name: 'What are you looking for?', all: 28, mobile: 17 },
+  { name: 'Tell us more', all: 19, mobile: 11 },
 ]
 
 export default function BreakpointSim() {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [started, setStarted] = useState(false)
-  const [field, setField] = useState(0)
-  const [typed, setTyped] = useState<string[]>(SCRIPT.map(() => ''))
-  const [stalled, setStalled] = useState(false)
-  const [gone, setGone] = useState(false)
+  const [on, setOn] = useState(false)
+  const [view, setView] = useState<'all' | 'mobile'>('all')
 
   useEffect(() => {
     const el = ref.current
-    if (!el || started) return
+    if (!el) return
     const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { setStarted(true); io.disconnect() }
+      if (e.isIntersecting) { setOn(true); io.disconnect() }
     }, { threshold: 0.4 })
     io.observe(el)
     return () => io.disconnect()
-  }, [started])
+  }, [])
 
-  useEffect(() => {
-    if (!started) return
-    let cancelled = false
-    const timeouts: ReturnType<typeof setTimeout>[] = []
-    const wait = (ms: number) => new Promise<void>(r => timeouts.push(setTimeout(r, ms)))
-
-    ;(async () => {
-      for (let f = 0; f < SCRIPT.length; f++) {
-        const s = SCRIPT[f]
-        if (!s.value) break
-        if (cancelled) return
-        setField(f)
-        await wait(420)
-        for (let c = 0; c < s.value.length; c++) {
-          if (cancelled) return
-          setTyped(prev => {
-            const next = [...prev]
-            next[f] = s.value.slice(0, c + 1)
-            return next
-          })
-          await wait(s.speed + Math.random() * 60)
-        }
-        if (s.stall) {
-          if (cancelled) return
-          setStalled(true)
-          await wait(3200)
-          if (cancelled) return
-          setGone(true)
-          return
-        }
-        await wait(260)
-      }
-    })()
-
-    return () => { cancelled = true; timeouts.forEach(clearTimeout) }
-  }, [started])
+  const key = view === 'all' ? 'all' : 'mobile'
 
   return (
-    <div className="bs" ref={ref}>
-      <div className={'bs-form' + (gone ? ' is-gone' : '')}>
-        <div className="bs-form-head">
-          <span className="bs-dot" /><span className="bs-dot" /><span className="bs-dot" />
-          <span className="bs-form-title">Consultation request</span>
+    <div className="bp2" ref={ref}>
+      <div className="bp2-card">
+        <div className="bp2-head">
+          <span className="bp2-title">Where this form loses people</span>
+          <span className="bp2-tabs">
+            <button type="button" className={view === 'all' ? 'is-on' : ''} onClick={() => setView('all')}>All</button>
+            <button type="button" className={view === 'mobile' ? 'is-on' : ''} onClick={() => setView('mobile')}>Mobile</button>
+          </span>
         </div>
 
-        {SCRIPT.map((s, i) => {
-          const active = field === i && !gone
-          const filled = typed[i].length > 0
-          return (
-            <div
-              className={'bs-field' + (active ? ' is-active' : '') + (filled ? ' is-filled' : '')}
-              key={s.label}
-            >
-              <span className="bs-label">{s.label}</span>
-              <span className="bs-input">
-                <span className="bs-typed">{typed[i]}</span>
-                {active ? <span className={'bs-caret' + (stalled ? ' is-stalled' : '')} /> : null}
-              </span>
-            </div>
-          )
-        })}
+        <div className="bp2-rows">
+          {FIELDS.map((f, i) => {
+            const pct = f[key as 'all' | 'mobile']
+            const prev = i > 0 ? FIELDS[i - 1][key as 'all' | 'mobile'] : 100
+            const drop = prev - pct
+            return (
+              <div className={'bp2-row' + (f.breaks ? ' is-break' : '')} key={f.name}>
+                <span className="bp2-name">{f.name}</span>
+                <span className="bp2-bar">
+                  <i style={{ width: on ? `${pct}%` : '0%', transitionDelay: `${i * 110}ms` }} />
+                </span>
+                <span className="bp2-pct">{on ? pct : 0}</span>
+                <span className="bp2-drop">{drop > 0 ? `\u2212${drop}` : ''}</span>
+              </div>
+            )
+          })}
+        </div>
 
-        <div className="bs-form-foot">
-          <span className="bs-submit">Request consultation</span>
+        <div className={'bp2-finding' + (on ? ' is-on' : '')}>
+          <span className="bp2-finding-label">The finding</span>
+          {view === 'all'
+            ? 'Phone is where this form loses most people. Half of everyone who reached it stopped there.'
+            : 'On mobile it is worse. Four out of five people who reach the phone field never get past it.'}
         </div>
       </div>
 
-      <div className={'bs-verdict' + (gone ? ' is-on' : '')}>
-        <p>
-          She never pressed submit, so nothing recorded her. No row in the CRM, no
-          conversion in Meta or Google, nobody to follow up.
-        </p>
-        <p className="bs-verdict-line">
-          <strong>Phone is where this form loses people.</strong> Not a guess. The field
-          itself, named, from the sessions that never finished.
-        </p>
-      </div>
+      <p className="bp2-caption">
+        Field names only, never what anyone typed. The split by device is usually where
+        the answer is hiding.
+      </p>
     </div>
   )
 }
