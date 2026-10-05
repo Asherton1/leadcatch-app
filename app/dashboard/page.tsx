@@ -9,6 +9,7 @@ import Footer from '../components/Footer'
 import '../landing.css'
 import AdminNav from '../components/AdminNav'
 import BreakpointPanel from '../components/BreakpointPanel'
+import LeakMap from '../components/LeakMap'
 import Logo from '../components/Logo'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -24,6 +25,7 @@ interface Client {
   company_name: string | null
   api_key: string
   active: boolean
+  avg_lead_value?: number | null
 }
 
 interface Lead {
@@ -1131,7 +1133,7 @@ export default function Dashboard() {
         // Admin: fetch all clients
         const { data, error } = await supabase
           .from('clients')
-          .select('id, name, first_name, last_name, company_name, api_key, active')
+          .select('id, name, first_name, last_name, company_name, api_key, active, avg_lead_value')
           .order('name')
         if (!error && data) {
           const rows = data as Client[]
@@ -1147,7 +1149,7 @@ export default function Dashboard() {
         // Customer: fetch ONLY their own client
         const { data, error } = await supabase
           .from('clients')
-          .select('id, name, first_name, last_name, company_name, api_key, active')
+          .select('id, name, first_name, last_name, company_name, api_key, active, avg_lead_value')
           .eq('user_id', user.id)
           .single()
         if (!error && data) {
@@ -2470,6 +2472,8 @@ export default function Dashboard() {
       )}
 
       {/* ── Breakpoint ──────────────────────────────────────────────────────── */}
+      <LeakMap clientId={selectedClient?.id ?? null} avgValue={selectedClient?.avg_lead_value ?? 0} />
+
       <BreakpointPanel clientId={selectedClient?.id ?? null} />
 
       {/* ── Status filter chips ─────────────────────────────────────────────── */}
