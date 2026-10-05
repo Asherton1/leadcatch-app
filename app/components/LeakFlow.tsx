@@ -3,103 +3,174 @@
 import { useEffect, useRef, useState } from 'react'
 import './leak-flow.css'
 
-type Exit = { at: number; label: string; sub: string; lose: number }
-
-const EXITS: Exit[] = [
-  { at: 22, label: 'Tapped your number, nobody answered', sub: 'No name, no record, nothing in your CRM', lose: 26 },
-  { at: 44, label: 'Opened booking, saw a three week wait', sub: 'Closed the tab and went looking elsewhere', lose: 19 },
-  { at: 66, label: 'Started your form and left', sub: 'This is the only one anyone used to catch', lose: 32 },
+const SCENES = [
+  { key: 'call', heading: 'They tap your number', recorded: 'Nothing. No name, no number, no record.' },
+  { key: 'book', heading: 'They open your booking page', recorded: 'Nothing. A page view, filed as a bounce.' },
+  { key: 'form', heading: 'They start your form', recorded: 'Nothing, unless somebody is watching inside the form.' },
 ]
 
 export default function LeakFlow() {
   const ref = useRef<HTMLDivElement | null>(null)
   const [run, setRun] = useState(false)
-  const [stage, setStage] = useState(-1)
+  const [scene, setScene] = useState(0)
+  const [beat, setBeat] = useState(0)
 
   useEffect(() => {
     const el = ref.current
     if (!el || run) return
     const io = new IntersectionObserver(([e]) => {
       if (e.isIntersecting) { setRun(true); io.disconnect() }
-    }, { threshold: 0.35 })
+    }, { threshold: 0.4 })
     io.observe(el)
     return () => io.disconnect()
   }, [run])
 
   useEffect(() => {
     if (!run) return
-    const t = EXITS.map((_, i) => setTimeout(() => setStage(i), 1400 + i * 1500))
-    const last = setTimeout(() => setStage(EXITS.length), 1400 + EXITS.length * 1500)
-    return () => { t.forEach(clearTimeout); clearTimeout(last) }
+    let cancelled = false
+    const timers: ReturnType<typeof setTimeout>[] = []
+    const wait = (ms: number) => new Promise<void>(r => timers.push(setTimeout(r, ms)))
+
+    ;(async () => {
+      for (let s = 0; s < SCENES.length; s++) {
+        if (cancelled) return
+        setScene(s)
+        for (let b = 1; b <= 5; b++) {
+          if (cancelled) return
+          setBeat(b)
+          await wait(b === 5 ? 1800 : 1100)
+        }
+      }
+      if (!cancelled) { setScene(SCENES.length); setBeat(5) }
+    })()
+
+    return () => { cancelled = true; timers.forEach(clearTimeout) }
   }, [run])
 
-  const lost = EXITS.slice(0, Math.max(stage + 1, 0)).reduce((a, e) => a + e.lose, 0)
-  const left = 100 - lost
-
-  // 100 dots, each assigned the exit it peels off at
-  const dots = Array.from({ length: 100 }, (_, i) => {
-    let acc = 0
-    for (let e = 0; e < EXITS.length; e++) {
-      acc += EXITS[e].lose
-      if (i < acc) return e
-    }
-    return -1 // made it all the way through
-  })
+  const done = scene >= SCENES.length
 
   return (
-    <div className="lf" ref={ref}>
-      <div className="lf-head">
-        <span className="lf-count">{run ? left : 100}</span>
-        <span className="lf-count-label">
-          of 100 people still trying to reach you
-        </span>
-      </div>
+    <div className="lk" ref={ref}>
+      <div className="lk-stage">
 
-      <div className="lf-track">
-        {EXITS.map((e, i) => (
-          <div
-            className={'lf-exit' + (stage >= i ? ' is-on' : '')}
-            style={{ top: `${e.at}%` }}
-            key={e.label}
-          >
-            <span className="lf-exit-rule" />
-            <span className="lf-exit-text">
-              <b>{e.label}</b>
-              <span>{e.sub}</span>
-            </span>
-            <span className="lf-exit-n">&minus;{e.lose}</span>
+        <div className={'lk-phone' + (run ? ' is-live' : '')}>
+          <div className="lk-notch" />
+          <div className="lk-screen">
+
+            <div className={'lk-scene' + (scene === 0 ? ' is-on' : '')}>
+              <div className="lk-site">
+                <div className="lk-site-bar">
+                  <span className="lk-site-dot" /><span className="lk-site-dot" /><span className="lk-site-dot" />
+                </div>
+                <div className="lk-site-body">
+                  <div className="lk-skel lk-skel-lg" />
+                  <div className="lk-skel" />
+                  <div className="lk-skel lk-skel-sm" />
+                  <div className={'lk-telbar' + (scene === 0 && beat >= 1 ? ' is-hit' : '')}>
+                    (214) 555-0199
+                  </div>
+                  {scene === 0 && beat >= 1 && <span className="lk-tap" />}
+                </div>
+              </div>
+
+              <div className={'lk-call' + (scene === 0 && beat >= 2 ? ' is-on' : '')}>
+                <div className="lk-call-av">N</div>
+                <div className="lk-call-num">(214) 555-0199</div>
+                <div className="lk-call-state">
+                  {beat === 2 && <span className="lk-ring">calling<i/><i/><i/></span>}
+                  {beat === 3 && <span className="lk-ring">ringing<i/><i/><i/></span>}
+                  {beat >= 4 && <span className="lk-missed">No answer</span>}
+                </div>
+                <div className="lk-call-keys">
+                  <span /><span /><span /><span /><span /><span />
+                </div>
+                <div className={'lk-call-end' + (beat >= 4 ? ' is-hit' : '')} />
+              </div>
+            </div>
+
+            <div className={'lk-scene' + (scene === 1 ? ' is-on' : '')}>
+              <div className="lk-book">
+                <div className="lk-book-head">Book a consultation</div>
+                <div className="lk-book-grid">
+                  {Array.from({ length: 21 }, (_, i) => {
+                    const free = i === 19 || i === 20
+                    return (
+                      <span
+                        key={i}
+                        className={'lk-day' + (free ? ' is-free' : ' is-full')}
+                        style={{ transitionDelay: `${i * 22}ms` }}
+                      >
+                        {i + 1}
+                      </span>
+                    )
+                  })}
+                </div>
+                <div className={'lk-book-note' + (scene === 1 && beat >= 3 ? ' is-on' : '')}>
+                  Next availability in 20 days
+                </div>
+                <div className={'lk-book-close' + (scene === 1 && beat >= 4 ? ' is-on' : '')}>
+                  Tab closed
+                </div>
+              </div>
+            </div>
+
+            <div className={'lk-scene' + (scene >= 2 ? ' is-on' : '')}>
+              <div className="lk-form">
+                <div className="lk-form-head">Request a consultation</div>
+                {[
+                  { label: 'Name', value: 'Megan Whitfield', at: 1, stall: false },
+                  { label: 'Email', value: 'm.whitfield84@gmail.com', at: 2, stall: false },
+                  { label: 'Phone', value: '214', at: 3, stall: true },
+                  { label: 'What are you looking for?', value: '', at: 9, stall: false },
+                ].map(f => {
+                  const active = scene >= 2 && beat === f.at
+                  const filled = scene >= 2 && beat >= f.at && f.value
+                  return (
+                    <div className={'lk-field' + (active ? ' is-active' : '')} key={f.label}>
+                      <span className="lk-field-label">{f.label}</span>
+                      <span className="lk-field-input">
+                        {filled ? <span className="lk-typed">{f.value}</span> : null}
+                        {active ? <span className={'lk-caret' + (f.stall && beat >= 3 ? ' is-stalled' : '')} /> : null}
+                      </span>
+                    </div>
+                  )
+                })}
+                <div className={'lk-form-gone' + (scene >= 2 && beat >= 4 ? ' is-on' : '')}>
+                  Left without submitting
+                </div>
+              </div>
+            </div>
+
           </div>
-        ))}
-
-        <div className="lf-dots">
-          {dots.map((exit, i) => {
-            const gone = exit >= 0 && stage >= exit
-            const top = gone ? EXITS[exit].at : 94
-            return (
-              <span
-                className={'lf-dot' + (gone ? ' is-gone' : '') + (exit === -1 ? ' is-through' : '')}
-                key={i}
-                style={{
-                  left: `${6 + (i % 20) * 4.4}%`,
-                  transitionDelay: `${(i % 20) * 18}ms`,
-                  top: run ? `${top}%` : '-4%',
-                }}
-              />
-            )
-          })}
         </div>
-      </div>
 
-      <div className={'lf-foot' + (stage >= EXITS.length ? ' is-on' : '')}>
-        <p>
-          <strong>{left} of them submitted something.</strong> The other {lost} wanted
-          to talk to you and left no trace at all. Your analytics counted them as
-          bounces. Your CRM never knew they existed.
-        </p>
-        <p className="lf-foot-sub">
-          ReCapture records every one of these exits, so you can see which one is
-          costing you the most.
-        </p>
+        <div className="lk-caption">
+          {SCENES.map((sc, i) => (
+            <div className={'lk-cap' + (scene === i ? ' is-on' : scene > i ? ' is-past' : '')} key={sc.key}>
+              <span className="lk-cap-n">{String(i + 1).padStart(2, '0')}</span>
+              <div className="lk-cap-text">
+                <b>{sc.heading}</b>
+                <span className="lk-cap-rec">
+                  <span className="lk-cap-rec-label">What you recorded</span>
+                  {sc.recorded}
+                </span>
+              </div>
+            </div>
+          ))}
+
+          <div className={'lk-verdict' + (done ? ' is-on' : '')}>
+            <p>
+              <strong>Three attempts. One person. Nothing on file.</strong> Your analytics
+              counted a bounce. Your CRM has no row. Nobody on your team knows this
+              happened, so nobody follows up.
+            </p>
+            <p className="lk-verdict-sub">
+              ReCapture records all three, and the form one comes with their name,
+              email and phone attached.
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
   )
