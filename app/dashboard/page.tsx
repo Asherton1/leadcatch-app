@@ -36,6 +36,8 @@ interface Lead {
   match_strength?: number | null
   suspected_bot?: boolean | null
   bot_reason?: string | null
+  disqualified_at?: string | null
+  disqualified_reason?: string | null
   converted_value?: number | null
   google_conversion_sent?: boolean | null
   id: string
@@ -692,6 +694,36 @@ function LeadModal({
 
           {/* Status */}
           <div className="modal-section">
+            <div className="modal-section-label">Not a real lead?</div>
+            <p className="dq-note">
+              Marking this as junk tells Meta this person was worth nothing, so your
+              campaigns stop looking for more like them. It does not delete the lead.
+            </p>
+            <button
+              type="button"
+              className={'dq-btn' + (lead.disqualified_at ? ' is-on' : '')}
+              onClick={async () => {
+                const undo = !!lead.disqualified_at
+                try {
+                  await fetch('/api/leads/disqualify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ lead_id: lead.id, undo }),
+                  })
+                  onClose()
+                } catch (e) {
+                  console.error('disqualify failed', e)
+                }
+              }}
+            >
+              {lead.disqualified_at ? 'Marked as junk. Undo' : 'Mark as junk'}
+            </button>
+            {lead.disqualified_at && lead.disqualified_reason !== 'marked_by_client' && (
+              <span className="dq-auto">Flagged automatically: {lead.disqualified_reason?.replace('_', ' ')}</span>
+            )}
+          </div>
+
+          <div className="modal-section">
             <div className="modal-section-label">Lead Status</div>
             <div className="modal-status-grid">
               {STATUS_OPTIONS.map(opt => (
@@ -1205,7 +1237,7 @@ export default function Dashboard() {
     const poll = async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason, disqualified_at, disqualified_reason')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
 
@@ -1238,7 +1270,7 @@ export default function Dashboard() {
     setSearch('')
     supabase
       .from('leads')
-      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason')
+      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason, disqualified_at, disqualified_reason')
       .eq('client_id', selectedClient.id)
       .order('created_at', { ascending: false })
       .then(({ data, error }) => {
@@ -1254,7 +1286,7 @@ export default function Dashboard() {
     const iv = setInterval(async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason, disqualified_at, disqualified_reason')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
       if (!error && data) setLeads(data as Lead[])

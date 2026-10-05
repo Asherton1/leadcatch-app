@@ -26,7 +26,7 @@ interface MetaConversionPayload {
   leadPhone: string | null
   leadName: string | null
   estimatedValue: number
-  eventName?: 'Lead' | 'Purchase'
+  eventName?: 'Lead' | 'Purchase' | 'DisqualifiedLead'
   sessionId?: string | null
   eventSourceUrl?: string
   ipAddress?: string

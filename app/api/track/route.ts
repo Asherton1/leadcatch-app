@@ -438,6 +438,26 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  // Exclusion signals. A bot or a four-second single-field bounce is noise, and
+  // the ad platforms will keep chasing that pattern unless something tells them
+  // not to. Deliberately conservative: anything less obvious waits for a human
+  // to mark it in the dashboard.
+  const autoJunk =
+    botVerdict.isBot ? 'bot'
+    : (Number(time_on_form ?? 0) <= 4 && Number(fields_completed ?? 0) <= 1) ? 'instant_bounce'
+    : null
+
+  if (autoJunk && lead?.id) {
+    try {
+      await supabase
+        .from('leads')
+        .update({ disqualified_at: new Date().toISOString(), disqualified_reason: autoJunk })
+        .eq('id', lead.id)
+    } catch (e) {
+      console.error('[exclusion] auto-flag failed:', e)
+    }
+  }
+
   const optedOut = await isOptedOut(
     client.id,
     (phone as string) ?? null,
