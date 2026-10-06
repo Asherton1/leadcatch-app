@@ -7,13 +7,13 @@ const CARDS = [
   {
     id: 'see',
     kicker: 'Today',
-    title: 'What Meta and Google see',
+    title: 'What they see',
     body: 'The people who finished. Every optimization decision, every lookalike audience, every dollar of budget gets made from that group alone.',
   },
   {
     id: 'miss',
     kicker: 'The gap',
-    title: 'What they never find out',
+    title: 'What they miss',
     body: 'Everyone who typed their name, their email, their phone number, and then got pulled away. Real intent, demonstrated and then invisible.',
   },
   {
