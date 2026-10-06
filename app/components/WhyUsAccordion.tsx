@@ -167,6 +167,22 @@ const features: FeatureItem[] = [
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
     ),
+    title: 'Leak Map: Every Way an Inquiry Escapes',
+    description: 'A form is one way somebody gives up on you. On a phone it is rarely the most common one. They tap your number at nine at night and nobody answers. They open your booking page, see a three week wait, and close it. Every one of those people wanted to talk to you, and nothing you own records a single one. Leak Map captures the lot: phone taps, email and text taps, booking pages opened and abandoned, alongside the form starts. There is no name attached to a phone tap, so these are not leads to chase. What they tell you is how many people tried to reach you and failed, and which route is costing you most. If most of your call taps land outside business hours, that is a staffing conversation rather than a marketing one.',
+    visual: null,
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    ),
+    title: 'Exclusion Signals: Tell the Platforms What Not to Want',
+    description: 'Every tool in this category only ever sends positive signal. You feed Meta and Google your conversions, they go and find more people like that, and nothing ever tells them what a bad lead looks like. So they keep finding those too, and you keep paying for them. ReCapture sends the other half. Bots and instant bounces are flagged automatically, and anything else your team marks as junk goes back to the platforms as a disqualified signal. Meta gets a zero-value event so value-based optimisation learns the pattern is worthless. Google gets a retraction, which removes the conversion outright so Smart Bidding stops counting it as a win. Nobody else can do this, because nobody else sees the session before it reaches a CRM.',
+    visual: null,
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    ),
     title: 'Breakpoint: Field-Level Drop-Off',
     description: 'Everyone fills in a name. Fewer give a phone number. Almost nobody reaches an open text box asking them to describe their situation. ReCapture shows you the exact field where people quit, and how many you lose at each step. Breakpoint splits it by mobile and desktop, which is usually where the answer is: a phone input that rejects a space costs you nothing on a laptop and a third of your inquiries on a phone. The steepest fall is the field costing you the most, and until you can see it, changing your form is guesswork. Podium, GoHighLevel, and CartStack tell you a form was abandoned. None of them tell you where.',
     visual: null,
