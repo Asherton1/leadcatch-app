@@ -6729,3 +6729,51 @@ select.audit-form-input option {
 .signal-section .section-title,
 .leakmap-section .section-title,
 .breakpoint-section .section-title { color: #fff; }
+
+/* Response Guard escalation ladder */
+.rg-ladder {
+  max-width: 640px;
+  margin: 2.25rem auto 0;
+  padding-left: 1.75rem;
+  border-left: 1px dashed rgba(255,107,53,0.3);
+  text-align: left;
+}
+.rg-step {
+  position: relative;
+  padding: 0 0 1.5rem;
+}
+.rg-step-last { padding-bottom: 0.25rem; }
+.rg-step::before {
+  content: '';
+  position: absolute;
+  left: calc(-1.75rem - 5px);
+  top: 0.35rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #0a0a0a;
+  border: 2px solid #ff6b35;
+}
+.rg-step-last::before { border-color: #ef4444; background: #ef4444; }
+.rg-when {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ff6b35;
+  margin-bottom: 0.45rem;
+}
+.rg-step-last .rg-when { color: #ef4444; }
+.rg-msg {
+  display: block;
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: #a1a1aa;
+  max-width: 56ch;
+}
+@media (max-width: 620px) {
+  .rg-ladder { padding-left: 1.3rem; }
+  .rg-step::before { left: calc(-1.3rem - 5px); }
+}

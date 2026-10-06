@@ -250,6 +250,43 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section className="lc-section guard-section reveal">
+        <p className="signal-eyebrow">Response Guard</p>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
+          <span className="title-muted">Catching the lead</span><br />
+          was the easy part.
+        </h2>
+        <p className="section-subtitle">
+          The alert arrives, the front desk is busy, it scrolls up the channel, and an
+          inquiry worth thousands sits there for three days. Response Guard puts a clock
+          on it.
+        </p>
+
+        <div className="rg-ladder">
+          <div className="rg-step">
+            <span className="rg-when">5 minutes</span>
+            <span className="rg-msg">Still waiting: Megan Whitfield, worth about $6,500, came in five minutes ago and nobody has picked it up.</span>
+          </div>
+          <div className="rg-step">
+            <span className="rg-when">15 minutes</span>
+            <span className="rg-msg">Megan Whitfield has been sitting for fifteen minutes. Speed matters more than anything else here.</span>
+          </div>
+          <div className="rg-step rg-step-last">
+            <span className="rg-when">30 minutes</span>
+            <span className="rg-msg">Megan Whitfield has gone thirty minutes with no contact. This one is going cold.</span>
+          </div>
+        </div>
+
+        <p className="signal-close">
+          The money is the part that works. Three uncontacted leads is easy to ignore.
+          Nineteen thousand dollars waiting is not. The clock only runs during your own
+          opening hours, so nothing is overdue at midnight, and it stops the moment
+          somebody marks the lead contacted.
+        </p>
+      </section>
+
+      <div className="section-divider" />
+
       <section className="pricing-band reveal">
         <div className="pricing-band-inner">
           <p className="pricing-band-eyebrow">Simple, transparent pricing</p>
