@@ -5,51 +5,68 @@ import { supabaseAdmin } from '@/lib/supabase-admin'
  *
  * Every other recovery tool sends a link and asks the person to start again.
  * Most will not, because restarting a form is worse than never beginning one.
- * This lets them finish inside the text message instead: they reply with the
- * one thing that was missing and the submission completes on our side.
+ * This lets them finish inside the text message: we ask the question they
+ * stalled on, they reply in plain words, and it lands on the lead.
  *
  * Only runs when the client has switched it on AND confirmed the consent line
- * is on their form, because this sends an unsolicited text to someone who never
- * pressed submit.
+ * is on their form, because this texts somebody who never pressed submit.
  */
 
-export const FINISH_FIELDS = ['phone', 'email'] as const
-export type FinishField = (typeof FINISH_FIELDS)[number]
-
-const ASK: Record<FinishField, string> = {
-  phone: 'the best number to reach you on',
-  email: 'the best email for you',
+/** Turn "matterType" or "matter_type" into "matter type". */
+export function prettify(name: string) {
+  return name
+    .replace(/[_-]+/g, ' ')
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .toLowerCase()
+    .trim()
 }
 
-export function missingFields(lead: {
-  email?: string | null
-  phone?: string | null
-}): FinishField[] {
-  const out: FinishField[] = []
-  if (!lead.phone) out.push('phone')
-  if (!lead.email) out.push('email')
-  return out
+/** Tidy a form label into something that reads inside a sentence. */
+export function asQuestion(label: string | null, name: string) {
+  const text = (label ?? '').replace(/\*/g, '').replace(/\s*:\s*$/, '').trim()
+  if (text && text.length >= 3) return text
+  return prettify(name)
 }
 
-/** Does this reply look like the thing we asked for? */
-export function parseReply(field: FinishField, body: string): string | null {
-  const text = (body ?? '').trim()
-  if (!text) return null
+/**
+ * The first thing they did not answer. Contact fields are skipped: we already
+ * have a phone to text them on, and chasing an email by SMS is a worse use of
+ * the one message we get.
+ */
+const CONTACTISH = /(first|last|full)?\s*name|email|phone|mobile|tel|zip|postcode/i
 
-  if (field === 'email') {
-    const m = text.match(/[^\s@]+@[^\s@]+\.[a-z]{2,}/i)
-    return m ? m[0].toLowerCase() : null
+export function nextUnanswered(
+  fieldOrder: string[] | null,
+  fieldLabels: (string | null)[] | null,
+  filled: string[] | null
+): { name: string; label: string | null } | null {
+  if (!fieldOrder?.length) return null
+  const done = new Set(filled ?? [])
+  for (let i = 0; i < fieldOrder.length; i++) {
+    const name = fieldOrder[i]
+    if (done.has(name)) continue
+    if (CONTACTISH.test(name)) continue
+    const label = fieldLabels?.[i] ?? null
+    if (label && CONTACTISH.test(label)) continue
+    return { name, label }
   }
-
-  // phone: pull the digits and sanity check the length
-  const digits = text.replace(/\D/g, '')
-  if (digits.length === 10) return digits
-  if (digits.length === 11 && digits.startsWith('1')) return digits.slice(1)
   return null
 }
 
 export function isStop(body: string) {
-  return /^\s*(stop|unsubscribe|cancel|end|quit)\s*$/i.test(body ?? '')
+  return /^\s*(stop|unsubscribe|cancel|end|quit|stopall|revoke)\s*$/i.test(body ?? '')
+}
+
+/**
+ * A reply is freeform, so we take what they send rather than pattern matching.
+ * We only reject things that are obviously not an answer.
+ */
+export function acceptAnswer(body: string): string | null {
+  const text = (body ?? '').trim().replace(/\s+/g, ' ')
+  if (text.length < 2) return null
+  if (text.length > 300) return text.slice(0, 300)
+  if (/^(ok|okay|k|yes|no|y|n|thanks|ty|\?+)$/i.test(text)) return null
+  return text
 }
 
 async function sendText(to: string, body: string) {
@@ -57,7 +74,6 @@ async function sendText(to: string, body: string) {
   const token = process.env.TWILIO_AUTH_TOKEN
   const from = process.env.TWILIO_PHONE_NUMBER
   if (!sid || !token || !from) return false
-
   try {
     const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
       method: 'POST',
@@ -78,18 +94,15 @@ async function sendText(to: string, body: string) {
   }
 }
 
-/** Opens a session and sends the first message. */
 export async function openFinishSession(opts: {
   clientId: string
   leadId: string
   phone: string
   businessName: string
-  needed: FinishField[]
+  question: { name: string; label: string | null }
 }) {
-  const { clientId, leadId, phone, businessName, needed } = opts
-  if (!needed.length) return { started: false, reason: 'nothing_missing' }
+  const { clientId, leadId, phone, businessName, question } = opts
 
-  // Never open a second session for someone who already has one open.
   const { data: existing } = await supabaseAdmin
     .from('finish_sessions')
     .select('id')
@@ -97,10 +110,7 @@ export async function openFinishSession(opts: {
     .is('completed_at', null)
     .gt('expires_at', new Date().toISOString())
     .maybeSingle()
-
   if (existing) return { started: false, reason: 'already_open' }
-
-  const first = needed[0]
 
   const { data: session, error } = await supabaseAdmin
     .from('finish_sessions')
@@ -108,8 +118,9 @@ export async function openFinishSession(opts: {
       client_id: clientId,
       lead_id: leadId,
       phone,
-      awaiting_field: first,
-      fields_needed: needed,
+      awaiting_field: question.name,
+      fields_needed: [question.name],
+      collected: { _label: question.label ?? '' },
       prompts_sent: 1,
     })
     .select('id')
@@ -120,20 +131,21 @@ export async function openFinishSession(opts: {
     return { started: false, reason: 'db_error' }
   }
 
+  const ask = asQuestion(question.label, question.name)
   const body =
-    `Hi, it's ${businessName}. You started getting in touch with us and did not quite finish. ` +
-    `No need to go back to the site, just reply here with ${ASK[first]} and we will take it from there. ` +
+    `Hi, it's ${businessName}. You started getting in touch and did not quite finish. ` +
+    `No need to go back to the site, just reply here and tell us: ${ask}. ` +
     `Reply STOP to opt out.`
 
   const sent = await sendText(phone, body)
   return { started: sent, sessionId: session.id }
 }
 
-/** Handles an inbound reply. Returns the text to send back, or null to stay quiet. */
+/** Handles an inbound reply. Returns text to send back, or null to stay quiet. */
 export async function handleFinishReply(fromPhone: string, body: string) {
   const { data: session } = await supabaseAdmin
     .from('finish_sessions')
-    .select('id, client_id, lead_id, awaiting_field, fields_needed, collected, prompts_sent')
+    .select('id, client_id, lead_id, awaiting_field, collected, prompts_sent')
     .eq('phone', fromPhone)
     .is('completed_at', null)
     .gt('expires_at', new Date().toISOString())
@@ -150,15 +162,15 @@ export async function handleFinishReply(fromPhone: string, body: string) {
     return 'You will not hear from us again. Sorry for the interruption.'
   }
 
-  const field = session.awaiting_field as FinishField
-  const value = parseReply(field, body)
+  const answer = acceptAnswer(body)
+  const stored = (session.collected ?? {}) as Record<string, string>
 
-  if (!value) {
-    // One clarification, then we stop. Nobody wants a bot arguing with them.
-    if ((session.prompts_sent ?? 0) >= 2) {
+  if (!answer) {
+    // One nudge, then we stop. Nobody wants a bot arguing with them.
+    if ((session.prompts_sent ?? 1) >= 2) {
       await supabaseAdmin
         .from('finish_sessions')
-        .update({ completed_at: new Date().toISOString(), closed_reason: 'unparseable' })
+        .update({ completed_at: new Date().toISOString(), closed_reason: 'no_answer' })
         .eq('id', session.id)
       return null
     }
@@ -166,35 +178,37 @@ export async function handleFinishReply(fromPhone: string, body: string) {
       .from('finish_sessions')
       .update({ prompts_sent: (session.prompts_sent ?? 1) + 1 })
       .eq('id', session.id)
-    return field === 'email'
-      ? 'Sorry, that did not look like an email address. Could you send it again?'
-      : 'Sorry, that did not look like a phone number. Could you send it again?'
+    const ask = asQuestion(stored._label ?? null, session.awaiting_field ?? '')
+    return `Sorry, could you tell us ${ask}?`
   }
 
-  const collected = { ...(session.collected as Record<string, string>), [field]: value }
-  const remaining = (session.fields_needed as FinishField[]).filter(f => !collected[f])
+  // Put the answer on the lead, alongside whatever they typed on the site.
+  if (session.lead_id && session.awaiting_field) {
+    const { data: lead } = await supabaseAdmin
+      .from('leads')
+      .select('form_data')
+      .eq('id', session.lead_id)
+      .maybeSingle()
 
-  // Write what we learned straight onto the lead.
-  if (session.lead_id) {
+    const form = { ...((lead?.form_data ?? {}) as Record<string, unknown>) }
+    form[session.awaiting_field] = answer
+    form._finished_by_text = true
+
     await supabaseAdmin
       .from('leads')
-      .update({ [field]: value })
+      .update({ form_data: form })
       .eq('id', session.lead_id)
-  }
-
-  if (remaining.length) {
-    const next = remaining[0]
-    await supabaseAdmin
-      .from('finish_sessions')
-      .update({ collected, awaiting_field: next, prompts_sent: 1 })
-      .eq('id', session.id)
-    return `Got it. And ${ASK[next]}?`
   }
 
   await supabaseAdmin
     .from('finish_sessions')
-    .update({ collected, awaiting_field: null, completed_at: new Date().toISOString(), closed_reason: 'completed' })
+    .update({
+      collected: { ...stored, [session.awaiting_field ?? 'answer']: answer },
+      awaiting_field: null,
+      completed_at: new Date().toISOString(),
+      closed_reason: 'completed',
+    })
     .eq('id', session.id)
 
-  return 'Perfect, that is everything. Someone will be in touch shortly.'
+  return 'Perfect, that is everything we needed. Someone will be in touch shortly.'
 }

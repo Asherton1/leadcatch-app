@@ -634,14 +634,34 @@
       // Breakpoint diagnostics. Field names and positions only, never values.
       bp: (function () {
         try {
-          var order = fields.filter(function (f) {
+          var real = fields.filter(function (f) {
             // never report our own honeypot as one of their fields
             return !(f.hasAttribute && f.hasAttribute('data-rc-hp'));
-          }).map(function (f) {
+          });
+          var order = real.map(function (f) {
             return f.name || f.id || (f.getAttribute && f.getAttribute('placeholder')) || null;
           }).filter(Boolean);
+
+          // The human wording of each field, so a follow-up message can ask the
+          // question the way the form asked it rather than saying "matterType".
+          var labels = real.map(function (f) {
+            try {
+              var lab = null;
+              if (f.id) {
+                var el = doc.querySelector('label[for="' + f.id + '"]');
+                if (el) lab = el.textContent;
+              }
+              if (!lab && f.closest) {
+                var wrap = f.closest('label');
+                if (wrap) lab = wrap.textContent;
+              }
+              if (!lab) lab = f.getAttribute('aria-label') || f.getAttribute('placeholder');
+              return lab ? String(lab).replace(/\s+/g, ' ').trim().slice(0, 60) : null;
+            } catch (e) { return null; }
+          });
           return {
             field_order: order,
+            field_labels: labels,
             filled_fields: (this.filledFields || []).slice(0, 40),
             last_field: this.lastField || null,
             last_field_index: typeof this.lastFieldIndex === 'number' ? this.lastFieldIndex : -1,

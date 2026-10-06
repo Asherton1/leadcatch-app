@@ -5,7 +5,7 @@ import { sendSmsAlert } from '@/lib/sms'
 import { sendFirstLeadCelebration } from '@/lib/onboarding-emails'
 import { sendEmailAlert } from '@/lib/email-alert'
 import { sendMetaConversion, sendGoogleConversion } from '@/lib/ad-conversions'
-import { openFinishSession, missingFields } from '@/lib/finish-anywhere'
+import { openFinishSession, nextUnanswered } from '@/lib/finish-anywhere'
 
 // Check do_not_contact list before firing recovery actions
 async function isOptedOut(clientId: string, phone: string | null, email: string | null): Promise<boolean> {
@@ -322,6 +322,7 @@ export async function POST(request: NextRequest) {
   const bp = (body as Record<string, unknown>).bp as {
     field_order?: string[]
     filled_fields?: string[]
+    field_labels?: (string | null)[]
     last_field?: string | null
     last_field_index?: number
     form_id?: string | null
@@ -490,15 +491,20 @@ export async function POST(request: NextRequest) {
     !botVerdict.isBot &&
     intentFactor >= 1.3
   ) {
-    const needed = missingFields({ email: email as string | null, phone: phone as string | null })
-    if (needed.length) {
+    // Ask the question they stalled on, not for a contact detail we already have.
+    const question = nextUnanswered(
+      bp?.field_order ?? null,
+      bp?.field_labels ?? null,
+      bp?.filled_fields ?? null
+    )
+    if (question) {
       try {
         await openFinishSession({
           clientId: client.id,
           leadId: lead.id,
           phone: phone as string,
           businessName: client.company_name || client.name || 'us',
-          needed,
+          question,
         })
       } catch (e) {
         console.error('[finish] open failed:', e)
