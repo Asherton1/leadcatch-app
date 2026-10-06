@@ -281,6 +281,14 @@ export const faqCategories: FAQCategory[] = [
     name: 'Results & Support',
     faqs: [
       {
+        q: 'What is Leak Map?',
+        a: 'A form is one way somebody gives up on reaching you, and on a phone it is rarely the most common one. People tap your phone number and nobody answers. They open your booking page, see the next slot is three weeks out, and close it. Leak Map records all of those alongside the form starts, so you can see every route somebody tried and which one is losing you the most. A phone tap carries no name or email, so these are not leads to follow up. They are intelligence. If most of your call taps happen outside business hours, that tells you something no analytics product can.',
+      },
+      {
+        q: 'What are exclusion signals?',
+        a: 'Meta and Google only ever learn from your conversions. Nothing tells them what a bad lead looks like, so they keep finding more of those as well as the good ones. ReCapture sends the other half of the picture. Bots and instant bounces are flagged automatically, and anything else your team marks as junk goes back to the platforms as a disqualified signal. Meta receives a zero-value event, so value-based optimisation learns the pattern is worthless. Google receives a retraction, which removes the conversion from the account outright. We call them exclusion signals rather than negative conversions, because nothing is being damaged: the platforms are simply being told the truth about which leads were worth having.',
+      },
+      {
         q: 'Are these actually good leads, or just people who changed their mind?',
         a: 'This is the right thing to be skeptical about, so here is the honest version. Someone who typed their name, email, and phone number into your form and then left is not a browser. They are further into your funnel than almost anyone else who visited your site that day. Most abandonment is interruption rather than rejection — a phone rang, a child needed something, they got to a field they were not ready to answer. The intent score exists precisely so you can tell the difference. Someone who filled six fields over four minutes is a different prospect from someone who typed a name and closed the tab, and we band them so your team works the strong ones first.',
       },
