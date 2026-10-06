@@ -51,7 +51,7 @@ const TIERS = [
   },
   {
     key: 'growth',
-    name: 'Growth',
+    name: 'Enterprise',
     price: '$3,997',
     locations: '9 to 16 locations',
     headline: 'For established multi-location practices.',
@@ -67,7 +67,7 @@ const TIERS = [
   },
   {
     key: 'scale',
-    name: 'Scale',
+    name: 'Enterprise',
     price: '$6,997',
     locations: '17 to 30 locations',
     headline: 'For franchise systems and large groups.',
