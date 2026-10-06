@@ -10,13 +10,13 @@ import './feature-showcase.css'
 
 type Key = 'signals' | 'leak' | 'breakpoint' | 'live' | 'finish' | 'guard'
 
-const TABS: { key: Key; name: string }[] = [
-  { key: 'signals', name: 'Intent Signals' },
-  { key: 'leak', name: 'Leak Map' },
-  { key: 'breakpoint', name: 'Breakpoint' },
-  { key: 'live', name: 'Live Visitors' },
-  { key: 'finish', name: 'Finish Anywhere' },
-  { key: 'guard', name: 'Response Guard' },
+const TABS: { key: Key; n: string; name: string }[] = [
+  { key: 'signals', n: '01', name: 'Intent Signals' },
+  { key: 'leak', n: '02', name: 'Leak Map' },
+  { key: 'breakpoint', n: '03', name: 'Breakpoint' },
+  { key: 'live', n: '04', name: 'Live Visitors' },
+  { key: 'finish', n: '05', name: 'Finish Anywhere' },
+  { key: 'guard', n: '06', name: 'Response Guard' },
 ]
 
 export default function FeatureShowcase() {
@@ -32,6 +32,7 @@ export default function FeatureShowcase() {
             className={'fs-tab' + (open === t.key ? ' is-on' : '')}
             onClick={() => setOpen(t.key)}
           >
+            <span className="fs-tab-n">{t.n}</span>
             <span className="fs-tab-name">{t.name}</span>
           </button>
         ))}
