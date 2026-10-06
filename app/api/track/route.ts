@@ -194,7 +194,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, teams_webhook_url, ghl_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, first_lead_email_sent, email, first_name, timezone, breakpoint_enabled')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, teams_webhook_url, ghl_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, first_lead_email_sent, email, first_name, timezone, breakpoint_enabled, response_guard_enabled')
     .eq('api_key', api_key)
     .single()
 
@@ -455,6 +455,25 @@ export async function POST(request: NextRequest) {
         .eq('id', lead.id)
     } catch (e) {
       console.error('[exclusion] auto-flag failed:', e)
+    }
+  }
+
+  // Response Guard. The clock only runs on leads worth chasing, and only while
+  // the client is actually open, so nobody is marked overdue at midnight.
+  if (lead?.id && client.response_guard_enabled !== false && !autoJunk && !botVerdict.isBot) {
+    // intentFactor runs 0.4 to 2.5 and already weighs field completion, time on
+    // form, repeat visits and whether we got both email and phone. Above 1.3
+    // means they did at least one of those things properly.
+    const isHot = intentFactor >= 1.3
+    if (isHot) {
+      try {
+        await supabase
+          .from('leads')
+          .update({ guard_started_at: new Date().toISOString(), guard_level: 0 })
+          .eq('id', lead.id)
+      } catch (e) {
+        console.error('[guard] start failed:', e)
+      }
     }
   }
 
