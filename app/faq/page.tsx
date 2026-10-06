@@ -3,12 +3,12 @@ import FAQClient from './FAQClient'
 import { faqCategories } from './faqs'
 
 export const metadata: Metadata = {
-  title: 'FAQ — Common Questions About ReCapture | Lead Recovery, AI Voice, HIPAA',
+  title: 'FAQ | Common Questions About ReCapture | Lead Recovery, AI Voice, HIPAA',
   description: 'Everything you need to know about ReCapture: how we capture abandoned form leads, how the AI voice callback works, HIPAA / GDPR compliance, how leads reach your CRM by webhook, pricing, and what the 7-day trial includes.',
   keywords: 'ReCapture FAQ, lead recovery FAQ, AI voice callback, HIPAA compliance, form abandonment recovery, CRM integration',
   alternates: { canonical: '/faq' },
   openGraph: {
-    title: 'ReCapture FAQ — Common Questions About Lead Recovery',
+    title: 'ReCapture FAQ | Common Questions About Lead Recovery',
     description: 'Everything you need to know about ReCapture and how the recovery layer works.',
     url: 'https://www.userecapture.com/faq',
     siteName: 'ReCapture',
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ReCapture FAQ — Common Questions About Lead Recovery',
+    title: 'ReCapture FAQ | Common Questions About Lead Recovery',
     description: 'How we capture abandoned form leads, what the compliance posture is, and what each plan includes.',
     images: ['https://www.userecapture.com/api/og?title=ReCapture%20FAQ%20%E2%80%94%20Common%20Questions%20About%20Lead%20Recovery&eyebrow=FAQ'],
   },

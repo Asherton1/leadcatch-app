@@ -77,7 +77,7 @@ export default function PricingPage() {
           <Link href="/faq" className="pricing-faq-card" style={{ display: 'block', textDecoration: 'none', background: '#111', border: '1px solid #1e1e1e', borderRadius: '16px', padding: '2.5rem 2rem', textAlign: 'center' }}>
             <p style={{ fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ff6b35', margin: '0 0 1rem' }}>FAQ</p>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', margin: '0 0 0.75rem', letterSpacing: '-0.02em' }}>Still have questions?</h2>
-            <p style={{ fontSize: '1rem', color: '#888', lineHeight: 1.6, margin: '0 0 1.5rem' }}>Setup, the AI voice callback, compliance, billing &mdash; every answer, searchable, in one place.</p>
+            <p style={{ fontSize: '1rem', color: '#888', lineHeight: 1.6, margin: '0 0 1.5rem' }}>Setup, the AI voice callback, compliance, billing. Every answer, searchable, in one place.</p>
             <span className="pricing-faq-card-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#ff6b35', fontWeight: 600, fontSize: '0.95rem' }}>Browse the full FAQ <span aria-hidden="true">&rarr;</span></span>
           </Link>
         </div>

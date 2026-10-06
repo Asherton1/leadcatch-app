@@ -128,7 +128,7 @@ export default function FAQClient() {
             <span className="faq-hero-headline-muted">Honestly answered.</span>
           </h1>
           <p className="faq-hero-sub">
-            Everything about ReCapture &mdash; setup, the AI voice callback, compliance, and billing. No fluff.
+            Everything about ReCapture: setup, the AI voice callback, compliance, and billing. No fluff.
           </p>
 
           <div className="faq-search">

@@ -13,12 +13,12 @@ import './about.css'
 import StoryAccordion from '../components/StoryAccordion'
 
 export const metadata = {
-  title: 'About ReCapture — Form Abandonment Recovery Built in Dallas, TX',
-  description: 'The story behind ReCapture — built by a digital marketing veteran in Dallas who spent a decade watching high-value leads slip through the cracks.',
+  title: 'About ReCapture | Form Abandonment Recovery Built in Dallas, TX',
+  description: 'The story behind ReCapture, built by a digital marketing veteran in Dallas who spent a decade watching high-value leads slip through the cracks.',
   alternates: { canonical: '/about' },
   openGraph: {
-    title: 'About ReCapture — Form Abandonment Recovery Built in Dallas, TX',
-    description: 'The story behind ReCapture — built by a digital marketing veteran in Dallas who spent a decade watching high-value leads slip through the cracks.',
+    title: 'About ReCapture | Form Abandonment Recovery Built in Dallas, TX',
+    description: 'The story behind ReCapture, built by a digital marketing veteran in Dallas who spent a decade watching high-value leads slip through the cracks.',
     url: 'https://www.userecapture.com/about',
     siteName: 'ReCapture',
     type: 'website',
@@ -31,8 +31,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About ReCapture — Built in Dallas, TX',
-    description: 'The story behind ReCapture — a decade of watching high-value leads slip through the cracks.',
+    title: 'About ReCapture | Built in Dallas, TX',
+    description: 'The story behind ReCapture, a decade of watching high-value leads slip through the cracks.',
     images: ['https://www.userecapture.com/api/og?title=The%20leads%20were%20always%20there&eyebrow=About'],
   },
 }
@@ -74,7 +74,7 @@ export default function AboutPage() {
         <div className="about-clients-inner">
           <p className="about-clients-eyebrow">The work</p>
           <h2 className="about-clients-headline">A decade in the trenches.</h2>
-          <p className="about-clients-lede">Before ReCapture, I spent ten years running paid acquisition for the kind of businesses where a single lead is worth thousands &mdash; med spas, dental groups, luxury real estate, high-end services. I watched the money go in and the leads come out, and I watched a huge share of them vanish in the gap nobody measured. ReCapture is what a decade of that gap taught me to build.</p>
+          <p className="about-clients-lede">Before ReCapture, I spent ten years running paid acquisition for the kind of businesses where a single lead is worth thousands: med spas, dental groups, luxury real estate, high-end services. I watched the money go in and the leads come out, and I watched a huge share of them vanish in the gap nobody measured. ReCapture is what a decade of that gap taught me to build.</p>
 
           <StatCounter />
 
@@ -92,7 +92,7 @@ export default function AboutPage() {
           <div className="about-values-v2-grid">
             <div className="about-values-v2-cell">
               <div className="about-values-v2-title">Every lead matters</div>
-              <div className="about-values-v2-desc">You paid for that click. If someone starts your form, you deserve to know about it &mdash; whether they finish or not.</div>
+              <div className="about-values-v2-desc">You paid for that click. If someone starts your form, you deserve to know about it, whether they finish or not.</div>
             </div>
             <div className="about-values-v2-cell">
               <div className="about-values-v2-title">Simple beats complicated</div>

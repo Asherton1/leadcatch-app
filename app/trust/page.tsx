@@ -8,11 +8,11 @@ import "../landing.css"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Trust & Compliance — ReCapture",
+  title: "Trust & Compliance | ReCapture",
   description: "How ReCapture handles data, compliance, security, and your responsibilities as a customer. TCPA, CAN-SPAM, GDPR, HIPAA-ready.",
   alternates: { canonical: "/trust" },
   openGraph: {
-    title: "Trust & Compliance — ReCapture",
+    title: "Trust & Compliance | ReCapture",
     description: "How ReCapture handles data, compliance, security, and your responsibilities. TCPA, CAN-SPAM, GDPR, HIPAA-ready.",
     url: "https://www.userecapture.com/trust",
     siteName: "ReCapture",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Trust & Compliance — ReCapture",
+    title: "Trust & Compliance | ReCapture",
     description: "How ReCapture handles data, compliance, security. TCPA, CAN-SPAM, GDPR, HIPAA-ready.",
     images: ["https://www.userecapture.com/api/og?title=Trust%20%26%20Compliance&eyebrow=Trust"],
   },
@@ -47,7 +47,7 @@ export default function TrustPage() {
           How ReCapture handles your data, your visitors, and the laws that govern both.
         </h1>
         <p style={{ fontSize: "1rem", color: "#a1a1aa", lineHeight: 1.75 }}>
-          ReCapture sits between your forms and your visitors. That means we take compliance seriously — not as marketing, but as a working operational discipline. This page tells you exactly what we capture, when, why, and what your responsibilities are as the customer deploying our software.
+          ReCapture sits between your forms and your visitors. That means we take compliance seriously, not as marketing but as a working operational discipline. This page tells you exactly what we capture, when, why, and what your responsibilities are as the customer deploying our software.
         </p>
         <p style={{ fontSize: "0.85rem", color: "#666", marginTop: "1.5rem", fontStyle: "italic" }}>
           Last updated: May 2026. Material changes will be communicated in advance to active customers.
@@ -59,20 +59,20 @@ export default function TrustPage() {
         {/* Section: What we capture and when */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            01 — What we capture
+            01 · What we capture
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             Form abandonment data, captured before submission.
           </h2>
           <div style={{ color: "#a1a1aa", lineHeight: 1.8, fontSize: "0.95rem" }}>
             <p>
-              When a visitor begins typing into a form on a customer’s website, ReCapture captures the contact details a visitor enters — name, email, and phone number — along with non-content metadata: the time spent on the form, the device type, and the page URL. It does not capture the contents of free-text fields such as a message or "describe your situation" box.
+              When a visitor begins typing into a form on a customer’s website, ReCapture captures the contact details a visitor enters (name, email and phone number) along with non-content metadata: the time spent on the form, the device type, and the page URL. It does not capture the contents of free-text fields such as a message or "describe your situation" box.
             </p>
             <p>
               We do not capture: passwords, payment card data, social security numbers, credit card CVVs, or any field marked sensitive by the customer or detected by our defensive filters.
             </p>
             <p>
-              ReCapture reads a field's value after the visitor finishes entering it — it does not log individual keystrokes and does not record or replay browsing sessions. Captured contact details are transmitted when a form is abandoned: on tab close, page navigation, exit-intent, or via a periodic check while the form sits incomplete. Visitors who never start a form are never captured.
+              ReCapture reads a field's value after the visitor finishes entering it. It does not log individual keystrokes and does not record or replay browsing sessions. Captured contact details are transmitted when a form is abandoned: on tab close, page navigation, exit-intent, or via a periodic check while the form sits incomplete. Visitors who never start a form are never captured.
             </p>
             <p>
               EU, UK, and Swiss visitors are blocked, and the block is enforced twice. In the browser, the tracker resolves the visitor&apos;s country before anything is transmitted; if that lookup is unavailable it falls back to the browser timezone rather than capturing by default. On our side, every capture request is independently checked against the country of the originating connection and refused before the payload is parsed or stored. A request that arrives without a resolvable country is refused as well. Both checks fail closed: when we cannot establish where a visitor is, we do not capture.
@@ -86,7 +86,7 @@ export default function TrustPage() {
         {/* Section: Client responsibilities */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            02 — Customer responsibilities
+            02 · Customer responsibilities
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             ReCapture is the infrastructure. You own the relationship with your visitors.
@@ -121,7 +121,7 @@ export default function TrustPage() {
         {/* Section: Security */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            03 — Security posture
+            03 · Security posture
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             Encryption in transit and at rest. Row-level access controls. Audit logs.
@@ -145,7 +145,7 @@ export default function TrustPage() {
         {/* Section: TCPA */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            04 — TCPA & voice callback
+            04 · TCPA & voice callback
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             AI voice callback is opt-in, disclosed, and quiet-hours aware.
@@ -169,7 +169,7 @@ export default function TrustPage() {
         {/* Section: Data retention */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            05 — Data retention
+            05 · Data retention
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             Lead data is retained as long as the customer account is active. Opt-outs are retained indefinitely.
@@ -196,7 +196,7 @@ export default function TrustPage() {
         {/* Section: Subprocessors */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            06 — Subprocessors
+            06 · Subprocessors
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             Vendors that process customer or visitor data on our behalf.
@@ -252,7 +252,7 @@ export default function TrustPage() {
         {/* Section: HIPAA / BAA */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            07 — Healthcare & HIPAA
+            07 · Healthcare & HIPAA
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             HIPAA-ready architecture. BAAs available on Enterprise plans.
@@ -273,7 +273,7 @@ export default function TrustPage() {
         {/* Section: Compliance contact */}
         <section className="reveal" style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid #1a1a1a" }}>
           <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ff6b35", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
-            08 — Contact
+            08 · Contact
           </p>
           <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1.25rem", lineHeight: 1.3 }}>
             Questions, security disclosures, data subject requests.

@@ -128,7 +128,7 @@ export default function WhyUsPage() {
 
         {/* ── What Sets Us Apart ──────────────────────────────────────── */}
         <h2 className="reveal">Everything Else Starts at Submit</h2>
-        <p className="reveal">A CRM records the people who finished. Analytics counts the ones who arrived. Your ad platforms only ever learn from the ones who converted. Every one of those tools begins at the same instant &mdash; the moment somebody presses the button. Which means the majority of people who wanted what you sell are, to every system you own, indistinguishable from someone who landed on the wrong page and left.</p>
+        <p className="reveal">A CRM records the people who finished. Analytics counts the ones who arrived. Your ad platforms only ever learn from the ones who converted. Every one of those tools begins at the same instant, the moment somebody presses the button. Which means the majority of people who wanted what you sell are, to every system you own, indistinguishable from someone who landed on the wrong page and left.</p>
         <p className="reveal">ReCapture starts one step earlier. That single shift changes what is knowable about your demand.</p>
 
         <Knowables />
@@ -210,8 +210,8 @@ export default function WhyUsPage() {
         </div>
 
         <h2 className="reveal">Who ReCapture Is Built For</h2>
-        <p>Any business with a contact form and more than one location losing leads every day. A dental group with 8 offices. A med spa franchise with 15 locations. A property management company with 200 units. A luxury real estate team covering three markets. The common thread: high-ticket services where a single recovered lead is worth $1,500 to $10,000 — and where Baymard Institute puts form abandonment at 60-70%.</p>
-        <p>ReCapture captures every partial submission, scores each lead by intent, alerts your team in real time, and automatically sends a branded recovery email — across every location, under one dashboard. No other tool does all four. Not Podium. Not GoHighLevel. Not CartStack.</p>
+        <p>Any business with a contact form and more than one location losing leads every day. A dental group with 8 offices. A med spa franchise with 15 locations. A property management company with 200 units. A luxury real estate team covering three markets. The common thread: high-ticket services where a single recovered lead is worth $1,500 to $10,000, and where Baymard Institute puts form abandonment at 60-70%.</p>
+        <p>ReCapture captures every partial submission, scores each lead by intent, alerts your team in real time, and automatically sends a branded recovery email, across every location, under one dashboard. No other tool does all four. Not Podium. Not GoHighLevel. Not CartStack.</p>
 
         <h2 className="reveal">The Bottom Line</h2>
         <div className="reveal" style={{ borderLeft: '3px solid #ff6b35', background: '#111', borderRadius: '0 10px 10px 0', padding: '1.5rem 2rem', margin: '2rem 0' }}>
@@ -220,7 +220,7 @@ export default function WhyUsPage() {
 
         <div className="reveal" style={{ background: '#111', border: '1px solid #1e1e1e', borderRadius: '12px', padding: '2.5rem', margin: '3rem 0', textAlign: 'center' }}>
           <h3 style={{ color: '#ff6b35', fontSize: '1.5rem', margin: '0 0 0.75rem 0' }}>Ready to recover your lost leads?</h3>
-          <p style={{ color: '#888', margin: '0 0 1.5rem 0' }}>Start your free trial — full access from day one. No setup fees. Cancel anytime.</p>
+          <p style={{ color: '#888', margin: '0 0 1.5rem 0' }}>Start your free trial with full access from day one. No setup fees. Cancel anytime.</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/demo" style={{ display: 'inline-block', background: '#ff6b35', color: '#fff', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem' }}>Try the Live Demo</Link>
             <Link href="/start-trial" style={{ display: 'inline-block', background: 'transparent', color: '#ff6b35', fontWeight: 700, padding: '0.875rem 2rem', borderRadius: '8px', textDecoration: 'none', fontSize: '0.95rem', border: '1px solid rgba(255,107,53,0.4)' }}>Start your 7-day free trial</Link>

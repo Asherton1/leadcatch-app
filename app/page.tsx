@@ -22,7 +22,7 @@ import IntegrationMarquee from './components/IntegrationMarquee'
 import TestimonialSpotlight from './components/TestimonialSpotlight'
 
 export const metadata = {
-  title: 'ReCapture — The Recovery Layer for High-Ticket Service Businesses',
+  title: 'ReCapture | The Recovery Layer for High-Ticket Service Businesses',
   description: 'Recapture every high-value lead that almost got away. The recovery layer for high-ticket service businesses.',
 }
 
@@ -117,7 +117,7 @@ export default function LandingPage() {
 
           <p className="mf-body">
             Every prospect who started typing was telling you something. That they were interested.
-            That they needed what you sell. That they were ready &mdash; until life interrupted.
+            That they needed what you sell. That they were ready, until life interrupted.
           </p>
 
           <p className="mf-pull">
@@ -172,7 +172,7 @@ export default function LandingPage() {
       <section className="lc-section reveal" style={{ textAlign: 'center' }}>
         <p style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#ff6b35', marginBottom: '0.75rem' }}>Integrations</p>
         <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 0.75rem' }}>Works with the tools you already use</h2>
-        <p style={{ fontSize: '1rem', color: '#888', maxWidth: 520, margin: '0 auto 2.5rem', lineHeight: 1.6 }}>Recovered leads flow straight into your existing stack — no rip-and-replace, no manual imports.</p>
+        <p style={{ fontSize: '1rem', color: '#888', maxWidth: 520, margin: '0 auto 2.5rem', lineHeight: 1.6 }}>Recovered leads flow straight into your existing stack. No rip-and-replace, no manual imports.</p>
         <IntegrationMarquee />
         <div style={{ marginTop: '2rem' }}>
           <Link href="/integrations" className="page-transition-link" style={{ color: '#ff6b35', fontWeight: 600, fontSize: '0.9375rem', textDecoration: 'none' }}>See all integrations &rarr;</Link>
