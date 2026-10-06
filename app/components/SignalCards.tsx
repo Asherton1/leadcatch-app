@@ -6,14 +6,14 @@ import './steps-flow.css'
 const CARDS = [
   {
     id: 'see',
-    kicker: 'The platforms',
-    title: 'What they see',
+    kicker: 'Today',
+    title: 'What Meta and Google see',
     body: 'The people who finished. Every optimization decision, every lookalike audience, every dollar of budget gets made from that group alone.',
   },
   {
     id: 'miss',
-    kicker: 'The platforms',
-    title: 'What they miss',
+    kicker: 'The gap',
+    title: 'What they never find out',
     body: 'Everyone who typed their name, their email, their phone number, and then got pulled away. Real intent, demonstrated and then invisible.',
   },
   {
