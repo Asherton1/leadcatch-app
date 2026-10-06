@@ -37,7 +37,7 @@ const TIERS = [
   },
   {
     key: 'starter',
-    name: 'Starter',
+    name: 'Enterprise',
     price: '$1,997',
     locations: '5 to 8 locations',
     headline: 'For groups stepping into multi-location.',

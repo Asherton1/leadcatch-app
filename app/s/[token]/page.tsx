@@ -119,9 +119,9 @@ function locationCountFrom(notes: string | null): number | null {
 const PLAN_LADDER = [
   { max: 1,   name: 'Pro',     price: '$397',   period: '/mo', scope: 'One website, every form and page included' },
   { max: 4,   name: 'Group',   price: '$897',   period: '/mo', scope: 'Two to four locations' },
-  { max: 8,   name: 'Starter', price: '$1,997', period: '/mo', scope: 'Five to eight locations' },
-  { max: 16,  name: 'Growth',  price: '$3,997', period: '/mo', scope: 'Nine to sixteen locations' },
-  { max: 30,  name: 'Scale',   price: '$6,997', period: '/mo', scope: 'Seventeen to thirty locations' },
+  { max: 8,   name: 'Enterprise', price: '$1,997', period: '/mo', scope: 'Five to eight locations' },
+  { max: 16,  name: 'Enterprise', price: '$3,997', period: '/mo', scope: 'Nine to sixteen locations' },
+  { max: 30,  name: 'Enterprise', price: '$6,997', period: '/mo', scope: 'Seventeen to thirty locations' },
   { max: 9999, name: 'Custom', price: 'Custom', period: '',    scope: 'Thirty-one or more locations' },
 ]
 
