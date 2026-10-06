@@ -306,7 +306,7 @@ export default function ForMedSpas() {
               <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for single-location med spas. Includes recovery dashboard, tracker, automated follow-up emails, AI voice callback within 60 seconds, and instant SMS/Slack alerts.
             </p>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for established med spas with consistent ad spend. Adds SMS alerts to front desk, AI voice callback (Marissa), and weekly performance reports.
+              <strong style={{ color: '#e4e4e7' }}>Group</strong> at $897/mo for two to four locations. Everything in Pro across every location, plus one rolled-up dashboard, per-location reporting, and recovery emails branded to each spa.
             </p>
             <p>
               <strong style={{ color: '#e4e4e7' }}>Enterprise</strong> for multi-location groups, BAA-required healthcare practices, and sites with high lead volume. Custom pricing, dedicated account manager.

@@ -300,7 +300,7 @@ export default function ForLuxuryAuto() {
               <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for single-rooftop dealerships. Includes recovery dashboard, tracker, automated follow-up emails, AI voice callback within 60 seconds, and instant SMS/Slack alerts.
             </p>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for established dealerships with consistent ad spend. Adds SMS alerts to sales floor, AI voice callback (Marissa), and weekly performance reports.
+              <strong style={{ color: '#e4e4e7' }}>Group</strong> at $897/mo for two to four rooftops. Everything in Pro across every rooftop, plus one rolled-up dashboard, per-rooftop reporting, and recovery emails branded to each dealership.
             </p>
             <p>
               <strong style={{ color: '#e4e4e7' }}>Enterprise</strong> for multi-rooftop groups, dealer groups, and high lead volume sites. Custom pricing, dedicated account manager, multi-rooftop dashboard.

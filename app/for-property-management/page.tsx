@@ -307,7 +307,7 @@ export default function ForPropertyManagement() {
               <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for single-property managers. Includes recovery dashboard, tracker, automated follow-up emails, AI voice callback within 60 seconds, and instant SMS/Slack alerts.
             </p>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for established multifamily operators with consistent traffic. Adds SMS alerts to leasing team, AI voice callback (Marissa), and weekly performance reports.
+              <strong style={{ color: '#e4e4e7' }}>Group</strong> at $897/mo for two to four properties. Everything in Pro across every property, plus one rolled-up dashboard, per-property reporting, and recovery emails branded to each community.
             </p>
             <p>
               <strong style={{ color: '#e4e4e7' }}>Enterprise</strong> for portfolio operators (10+ properties), institutional multifamily, and high lead volume sites. Custom pricing, dedicated account manager, multi-property dashboard.

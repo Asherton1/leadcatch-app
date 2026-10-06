@@ -307,7 +307,7 @@ export default function ForDental() {
               <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for single-office practices. Includes recovery dashboard, tracker, automated follow-up emails, AI voice callback within 60 seconds, and instant SMS/Slack alerts.
             </p>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo for established practices with consistent ad spend. Adds SMS alerts to front desk, AI voice callback (Marissa), and weekly performance reports.
+              <strong style={{ color: '#e4e4e7' }}>Group</strong> at $897/mo for groups of two to four practices. Everything in Pro across every office, plus one rolled-up dashboard, per-office reporting, and recovery emails branded to each practice.
             </p>
             <p>
               <strong style={{ color: '#e4e4e7' }}>Enterprise</strong> for multi-office groups (DSOs), BAA-required HIPAA deployments, and high lead volume sites. Custom pricing, dedicated account manager.
