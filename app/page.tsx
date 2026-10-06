@@ -50,21 +50,24 @@ export default function LandingPage() {
 
         <div className="hero-split">
           <div className="hero-left">
-            <p style={{ fontSize: '0.65rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Born &amp; Built in Dallas, Texas</p>
+            <p style={{ fontSize: '0.65rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Built in Dallas, Texas</p>
             <h1 className="hero-animate">
               Your Best Leads<br />
               <span className="hero-highlight">Never Hit Submit.</span>
             </h1>
             <p className="hero-subtitle hero-animate-delay">
               You paid for the click. You paid for the landing page. Then they typed their
-              name, their email, and something pulled them away &mdash; and every system you
-              own forgot they existed. ReCapture keeps them. Contact fields only, never
-              keystrokes, sent back to your ad platforms as real signal. So the people who
-              almost became clients get a second chance to.
+              name, their email, and something pulled them away, and every system you own
+              forgot they existed. ReCapture keeps them, and tells Meta and Google those
+              people were real. So the people who almost became clients get a second
+              chance to.
             </p>
             <div className="cta-group hero-animate-delay2">
               <Link href="/start-trial" className="cta-primary">Start your 7-day free trial</Link>
             </div>
+            <p className="hero-animate-delay2" style={{ fontSize: '0.78rem', color: '#6b6b6b', marginTop: '1.1rem', lineHeight: 1.6 }}>
+              Contact fields only. Never keystrokes.
+            </p>
           </div>
           <div className="hero-right hero-animate-delay2">
         <HeroCapture />

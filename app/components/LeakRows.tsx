@@ -9,7 +9,7 @@ const ROWS = [
     num: '01',
     eyebrow: 'The behavior',
     title: 'They start. Then vanish.',
-    text: 'A prospect finds your site, opens your form, types their name and email — then their phone buzzes. They switch tabs. They never come back. And you never knew they existed.',
+    text: 'A prospect finds your site, opens your form, types their name and email, then their phone buzzes. They switch tabs. They never come back. And you never knew they existed.',
     stat: '70%',
     statLabel: 'never return',
   },
@@ -18,7 +18,7 @@ const ROWS = [
     num: '02',
     eyebrow: 'The pattern',
     title: 'Every extra field costs you.',
-    text: 'Five fields might seem reasonable, but most visitors abandon after three. Every additional field is a silent conversion killer — and until now you had no way to see which one broke them.',
+    text: 'Five fields might seem reasonable, but most visitors abandon after three. Every additional field is a silent conversion killer, and until now you had no way to see which one broke them.',
     stat: '3',
     statLabel: 'fields to the breaking point',
   },
@@ -36,7 +36,7 @@ const ROWS = [
 export default function LeakRows() {
   const ref = useRef<HTMLDivElement | null>(null)
   const [on, setOn] = useState(false)
-  const [open, setOpen] = useState<string | null>('behavior')
+  const [open, setOpen] = useState<string | null>(null)
 
   useEffect(() => {
     const el = ref.current
