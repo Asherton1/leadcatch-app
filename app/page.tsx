@@ -144,8 +144,15 @@ export default function LandingPage() {
         <SignalCards />
 
         <p className="signal-close">
+          It runs the other way too. Bots, four-second bounces and anything your team
+          marks as junk go back to the platforms as an exclusion signal, so they stop
+          hunting for more people like that. Every other tool in this category only ever
+          sends the wins. Nobody tells the platforms what a bad lead looks like, which is
+          why they keep finding them.
+        </p>
+        <p className="signal-close">
           You keep running your campaigns exactly as you do now. The platforms just stop
-          working from the leftovers &mdash; and you finally know which ones are working.
+          working from the leftovers, and you finally know which ones are working.
         </p>
       </section>
 
