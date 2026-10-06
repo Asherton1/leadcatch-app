@@ -175,6 +175,14 @@ const features: FeatureItem[] = [
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
     ),
+    title: 'Response Guard: Nobody Lets a Hot Lead Go Cold',
+    description: 'Catching the inquiry is half of it. The other half is somebody actually picking up the phone, and that is where most of these die. The alert arrives, the front desk is busy, it scrolls up the channel, and a lead worth thousands sits untouched for three days. Response Guard puts a clock on every high-intent inquiry and escalates when nobody acts: five minutes, fifteen, thirty, each one louder than the last, with the value of the lead attached. The money is the part that works, because three uncontacted leads is ignorable and nineteen thousand dollars waiting is not. The clock only runs during your own opening hours, so nothing is overdue at midnight, and it stops the moment somebody marks the lead contacted.',
+    visual: null,
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    ),
     title: 'Exclusion Signals: Tell the Platforms What Not to Want',
     description: 'Every tool in this category only ever sends positive signal. You feed Meta and Google your conversions, they go and find more people like that, and nothing ever tells them what a bad lead looks like. So they keep finding those too, and you keep paying for them. ReCapture sends the other half. Bots and instant bounces are flagged automatically, and anything else your team marks as junk goes back to the platforms as a disqualified signal. Meta gets a zero-value event so value-based optimisation learns the pattern is worthless. Google gets a retraction, which removes the conversion outright so Smart Bidding stops counting it as a win. Nobody else can do this, because nobody else sees the session before it reaches a CRM.',
     visual: null,
