@@ -2535,6 +2535,13 @@ export default function Dashboard() {
 
       <BreakpointPanel clientId={selectedClient?.id ?? null} />
 
+      {/* ── Everything above is analytics. Everything below is the lead list. ── */}
+      <div className="dash-split">
+        <span className="dash-split-rule" />
+        <span className="dash-split-label">Your leads</span>
+        <span className="dash-split-rule" />
+      </div>
+
       {/* ── Status filter chips ─────────────────────────────────────────────── */}
       <div className="status-chips">
         {([
