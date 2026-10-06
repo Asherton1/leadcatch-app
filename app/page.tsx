@@ -9,15 +9,11 @@ import Footer from './components/Footer'
 import LeakRows from './components/LeakRows'
 import StepsFlow from './components/StepsFlow'
 import IndustryDrawers from './components/IndustryDrawers'
-import SignalCards from './components/SignalCards'
-import LiveVisitorsDemo from './components/LiveVisitorsDemo'
 import ScrollReveal from './components/ScrollReveal'
 import ParticleNetwork from './components/ParticleNetwork'
 import PhantomCapture from './components/PhantomCapture'
 import HeroCapture from './components/HeroCapture'
-import BreakpointSim from './components/BreakpointSim'
-import LeakFlow from './components/LeakFlow'
-import SignalShift from './components/SignalShift'
+import FeatureShowcase from './components/FeatureShowcase'
 import LedgerFeed from './components/LedgerFeed'
 import LedgerHeadline from './components/LedgerHeadline'
 import Logo from './components/Logo'
@@ -129,73 +125,25 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="lc-section signal-section reveal">
+      <section className="lc-section fs-section reveal">
         <p className="signal-eyebrow">The part nobody else does</p>
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
-          <span className="title-muted">Your ad platforms are learning</span><br />
-          from a fraction of your demand.
+          <span className="title-muted">Most tools start at the submission.</span><br />
+          This is everything around it.
         </h2>
         <p className="section-subtitle">
-          Meta and Google only find out someone was interested when they press submit.
+          Six features, one at a time. Pick any of them.
         </p>
 
-        <SignalShift />
-
-        <SignalCards />
-
-        <p className="signal-close">
-          It runs the other way too. Bots, four-second bounces and anything your team
-          marks as junk go back to the platforms as an exclusion signal, so they stop
-          hunting for more people like that. Every other tool in this category only ever
-          sends the wins. Nobody tells the platforms what a bad lead looks like, which is
-          why they keep finding them.
-        </p>
-        <p className="signal-close">
-          You keep running your campaigns exactly as you do now. The platforms just stop
-          working from the leftovers, and you finally know which ones are working.
-        </p>
+        <FeatureShowcase />
       </section>
 
       <div className="section-divider" />
 
-      <section className="lc-section leakmap-section reveal">
-        <p className="signal-eyebrow">Leak Map</p>
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
-          <span className="title-muted">A form is only one way</span><br />
-          people give up on you.
-        </h2>
-        <p className="section-subtitle">
-          They tap your number at nine at night and nobody answers. They open your
-          booking page and see a three week wait. Every one of those is somebody who
-          wanted to talk to you, and nothing you own records a single one.
-        </p>
 
-        <LeakFlow />
-      </section>
 
-      <div className="section-divider" />
 
-      <section className="lc-section breakpoint-section reveal">
-        <p className="signal-eyebrow">Breakpoint</p>
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
-          <span className="title-muted">You know your forms leak.</span><br />
-          You do not know where.
-        </h2>
-        <p className="section-subtitle">
-          Analytics stops at the pageview. Your CRM starts at the submission. The part in
-          between, where people actually give up, is invisible to every tool you own.
-        </p>
 
-        <BreakpointSim />
-
-        <p className="signal-close">
-          Breakpoint names the field, split by mobile and desktop, using the sessions that
-          never submitted. One broken phone input on a mobile layout can cost a third of
-          your inquiries, and nothing else you run would ever tell you.
-        </p>
-      </section>
-
-      <div className="section-divider" />
 
       <section className="lc-section how-it-works-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Three Steps to Recovered Revenue</h2>
@@ -207,29 +155,7 @@ export default function LandingPage() {
 
 
 
-      <section className="lc-section reveal">
-        <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 1.5rem' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }} className="lv-grid">
-            <div>
-              <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>
-                Live Visitors
-              </p>
-              <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', fontWeight: 700, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.25rem' }}>
-                Not just who you lost. Who is on your site right now.
-              </h2>
-              <div style={{ color: '#a0a0a0', fontSize: '1.0625rem', lineHeight: 1.7 }}>
-                <p style={{ marginBottom: '1rem' }}>
-                  Recovery is the second half. The first is seeing the people who are still deciding. Live Visitors shows who is on your site at this moment, what page they are on, where they came from, and how engaged they are.
-                </p>
-                <p style={{ margin: 0 }}>
-                  When someone opens your form, you see it happen. When they leave without submitting, you already know who they were.
-                </p>
-              </div>
-            </div>
-            <LiveVisitorsDemo />
-          </div>
-        </div>
-      </section>
+
 
       <section className="lc-section">
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Purpose-Built for High-Ticket Industries</h2>
@@ -250,76 +176,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="lc-section finish-section reveal">
-        <p className="signal-eyebrow">Finish Anywhere</p>
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
-          <span className="title-muted">Nobody goes back</span><br />
-          and fills it in again.
-        </h2>
-        <p className="section-subtitle">
-          Every recovery tool sends a link and asks the person to start over. Retyping
-          what you already typed is worse than never starting, so almost nobody does it.
-          This removes the going back.
-        </p>
 
-        <div className="fa-thread">
-          <div className="fa-msg fa-out">
-            Hi, it&apos;s Northgate Furniture. You started getting in touch and did not
-            quite finish. No need to go back to the site, just reply here and tell us:
-            what are you looking for. Reply STOP to opt out.
-          </div>
-          <div className="fa-msg fa-in">a dining table for six</div>
-          <div className="fa-msg fa-out">
-            Perfect, that is everything we needed. Someone will be in touch shortly.
-          </div>
-        </div>
 
-        <p className="signal-close">
-          The answer lands on the lead next to everything they already typed. No link, no
-          second visit, no retyping. It only runs for businesses who have added a consent
-          line to their form, because this is a text to somebody who never pressed submit,
-          and that is not a corner worth cutting.
-        </p>
-      </section>
 
-      <div className="section-divider" />
-
-      <section className="lc-section guard-section reveal">
-        <p className="signal-eyebrow">Response Guard</p>
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
-          <span className="title-muted">Catching the lead</span><br />
-          was the easy part.
-        </h2>
-        <p className="section-subtitle">
-          The alert arrives, the front desk is busy, it scrolls up the channel, and an
-          inquiry worth thousands sits there for three days. Response Guard puts a clock
-          on it.
-        </p>
-
-        <div className="rg-ladder">
-          <div className="rg-step">
-            <span className="rg-when">5 minutes</span>
-            <span className="rg-msg">Still waiting: Megan Whitfield, worth about $6,500, came in five minutes ago and nobody has picked it up.</span>
-          </div>
-          <div className="rg-step">
-            <span className="rg-when">15 minutes</span>
-            <span className="rg-msg">Megan Whitfield has been sitting for fifteen minutes. Speed matters more than anything else here.</span>
-          </div>
-          <div className="rg-step rg-step-last">
-            <span className="rg-when">30 minutes</span>
-            <span className="rg-msg">Megan Whitfield has gone thirty minutes with no contact. This one is going cold.</span>
-          </div>
-        </div>
-
-        <p className="signal-close">
-          The money is the part that works. Three uncontacted leads is easy to ignore.
-          Nineteen thousand dollars waiting is not. The clock only runs during your own
-          opening hours, so nothing is overdue at midnight, and it stops the moment
-          somebody marks the lead contacted.
-        </p>
-      </section>
-
-      <div className="section-divider" />
 
       <section className="pricing-band reveal">
         <div className="pricing-band-inner">
