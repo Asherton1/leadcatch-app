@@ -491,6 +491,12 @@ export async function POST(request: NextRequest) {
     !botVerdict.isBot &&
     intentFactor >= 1.3
   ) {
+    console.log('[finish] eval', JSON.stringify({
+      phone: !!phone,
+      intent: intentFactor,
+      order: bp?.field_order?.length ?? 0,
+      filled: bp?.filled_fields ?? [],
+    }))
     // Ask the question they stalled on, not for a contact detail we already have.
     const question = nextUnanswered(
       bp?.field_order ?? null,
