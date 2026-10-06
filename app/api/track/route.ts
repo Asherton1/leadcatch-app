@@ -791,7 +791,7 @@ export async function POST(request: NextRequest) {
 
       // Mark as sent so subsequent heartbeat upserts for this same lead
       // don't re-fire conversions. Guarded above by meta/google_conversion_sent.
-      const convUpdate: Record<string, boolean | string[] | number> = {
+      const convUpdate: Record<string, boolean | string | string[] | number> = {
         match_keys: matchKeys,
         match_strength: strength,
       }
@@ -807,6 +807,9 @@ export async function POST(request: NextRequest) {
         client.google_ads_refresh_token
       ) {
         convUpdate.google_conversion_sent = true
+        // Needed later if this lead gets disqualified: Google matches an
+        // adjustment against the original conversion's timestamp.
+        convUpdate.google_conversion_sent_at = new Date().toISOString()
       }
       if (Object.keys(convUpdate).length > 0) {
         await supabase.from('leads').update(convUpdate).eq('id', lead.id)

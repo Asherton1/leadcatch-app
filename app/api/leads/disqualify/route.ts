@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase-admin'
-import { sendMetaConversion } from '@/lib/ad-conversions'
+import { sendMetaConversion, sendGoogleAdjustment } from '@/lib/ad-conversions'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
 
     const { data: lead } = await supabaseAdmin
       .from('leads')
-      .select('id, client_id, email, phone, name, session_id, disqualified_at, exclusion_sent_at')
+      .select('id, client_id, email, phone, name, session_id, disqualified_at, exclusion_sent_at, google_conversion_sent, google_conversion_sent_at, gclid')
       .eq('id', lead_id)
       .maybeSingle()
 
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
 
     const { data: client } = await supabaseAdmin
       .from('clients')
-      .select('meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, exclusion_signals_enabled')
+      .select('meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, exclusion_signals_enabled, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token')
       .eq('id', lead.client_id)
       .maybeSingle()
 
@@ -85,14 +85,45 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    if (sent) {
+    // Google is the stronger half. A RETRACTION removes the conversion outright
+    // rather than just devaluing it, so Smart Bidding stops counting it as a win.
+    let retracted = false
+    if (
+      client?.exclusion_signals_enabled !== false &&
+      client?.google_ads_enabled &&
+      client?.google_ads_customer_id &&
+      client?.google_ads_refresh_token &&
+      lead.google_conversion_sent &&
+      lead.google_conversion_sent_at
+    ) {
+      try {
+        const r = await sendGoogleAdjustment({
+          customerId: client.google_ads_customer_id,
+          refreshToken: client.google_ads_refresh_token,
+          conversionId: client.google_ads_conversion_id,
+          conversionLabel: client.google_ads_conversion_label,
+          leadEmail: lead.email,
+          leadPhone: lead.phone,
+          gclid: lead.gclid ?? null,
+          originalConversionAt: lead.google_conversion_sent_at,
+        })
+        retracted = r.success === true
+      } catch (e) {
+        console.error('[exclusion] google adjustment failed:', e)
+      }
+    }
+
+    if (sent || retracted) {
       await supabaseAdmin
         .from('leads')
-        .update({ exclusion_sent_at: new Date().toISOString() })
+        .update({
+          exclusion_sent_at: new Date().toISOString(),
+          ...(retracted ? { google_adjustment_sent_at: new Date().toISOString() } : {}),
+        })
         .eq('id', lead_id)
     }
 
-    return NextResponse.json({ ok: true, disqualified: true, signal: sent ? 'sent' : 'skipped' })
+    return NextResponse.json({ ok: true, disqualified: true, meta: sent, google: retracted })
   } catch (e) {
     console.error('[exclusion] handler error:', e)
     return NextResponse.json({ ok: false, error: 'server error' }, { status: 500 })

@@ -3733,3 +3733,36 @@ button.returning-cta:focus-visible {
   font-size: 0.72rem;
   color: #6b6b6b;
 }
+
+/* Mark as junk, in the lead modal */
+.dq-note {
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: #7a7a7a;
+  margin: 0 0 0.75rem;
+  max-width: 58ch;
+}
+.dq-btn {
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #9ca3af;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 0.4rem;
+  padding: 0.5rem 0.95rem;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.dq-btn:hover { color: #ef4444; border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.06); }
+.dq-btn.is-on {
+  color: #ef4444;
+  border-color: rgba(239,68,68,0.45);
+  background: rgba(239,68,68,0.09);
+}
+.dq-auto {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.72rem;
+  color: #6b6b6b;
+}

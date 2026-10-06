@@ -311,3 +311,104 @@ export async function addToSuppressionAudience(payload: SuppressionPayload) {
     return { success: false, error: String(err) }
   }
 }
+
+/**
+ * Retracts the value of a conversion already uploaded to Google Ads.
+ *
+ * Meta has no true negative, so the best available there is a zero-value event.
+ * Google does have one: a RETRACTION adjustment removes the conversion from the
+ * account entirely, so Smart Bidding stops treating that person as a win and
+ * stops looking for more like them.
+ *
+ * Needs the original conversion's timestamp to match the row, which is why we
+ * record google_conversion_sent_at when the conversion first goes out.
+ */
+export async function sendGoogleAdjustment(payload: {
+  customerId: string
+  refreshToken: string
+  conversionId: string
+  conversionLabel: string
+  leadEmail?: string | null
+  leadPhone?: string | null
+  gclid?: string | null
+  originalConversionAt: string
+}) {
+  const {
+    customerId, refreshToken, conversionId,
+    leadEmail, leadPhone, gclid, originalConversionAt,
+  } = payload
+
+  const developerToken = process.env.GOOGLE_ADS_DEVELOPER_TOKEN
+  if (!developerToken) {
+    console.error('Google adjustment skipped — GOOGLE_ADS_DEVELOPER_TOKEN missing')
+    return { success: false, error: 'missing_developer_token' }
+  }
+  if (!customerId || !refreshToken || !conversionId) {
+    console.error('Google adjustment skipped — missing credentials')
+    return { success: false, error: 'missing_credentials' }
+  }
+  if (!originalConversionAt) {
+    return { success: false, error: 'no_original_conversion' }
+  }
+
+  const accessToken = await getGoogleAccessToken(refreshToken)
+  if (!accessToken) return { success: false, error: 'oauth_token_refresh_failed' }
+
+  const fmt = (iso: string) =>
+    new Date(iso).toISOString().replace('T', ' ').replace(/\.\d{3}Z$/, '+00:00')
+
+  const conversionIdNumeric = conversionId.replace(/^AW-/, '')
+  const conversionActionResource = `customers/${customerId}/conversionActions/${conversionIdNumeric}`
+
+  const adjustment: Record<string, unknown> = {
+    conversionAction: conversionActionResource,
+    adjustmentType: 'RETRACTION',
+    adjustmentDateTime: fmt(new Date().toISOString()),
+    gclidDateTimePair: {
+      conversionDateTime: fmt(originalConversionAt),
+      ...(gclid ? { gclid } : {}),
+    },
+  }
+
+  // Without a gclid, Google matches on hashed identifiers instead.
+  if (!gclid) {
+    const ids: Array<Record<string, string>> = []
+    if (leadEmail) ids.push({ hashedEmail: sha256(leadEmail) as string })
+    if (leadPhone) ids.push({ hashedPhoneNumber: hashPhone(leadPhone) as string })
+    if (ids.length === 0) return { success: false, error: 'no_identifiers' }
+    adjustment.userIdentifiers = ids
+    delete adjustment.gclidDateTimePair
+    adjustment.orderId = undefined
+  }
+
+  const url = `https://googleads.googleapis.com/${GOOGLE_ADS_API_VERSION}/customers/${customerId}:uploadConversionAdjustments`
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'developer-token': developerToken,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        conversionAdjustments: [adjustment],
+        partialFailure: true,
+      }),
+    })
+
+    const body = await res.json()
+    if (!res.ok) {
+      console.error('Google adjustment failed:', res.status, JSON.stringify(body).slice(0, 400))
+      return { success: false, error: `http_${res.status}` }
+    }
+    if (body.partialFailureError) {
+      console.error('Google adjustment partial failure:', JSON.stringify(body.partialFailureError).slice(0, 400))
+      return { success: false, error: 'partial_failure' }
+    }
+    return { success: true }
+  } catch (e) {
+    console.error('Google adjustment exception:', e)
+    return { success: false, error: 'exception' }
+  }
+}
