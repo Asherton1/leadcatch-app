@@ -439,7 +439,13 @@ function LeadModal({
 
     const { error } = await supabase
       .from('leads')
-      .update({ status: pendingStatus })
+      .update({
+        status: pendingStatus,
+        // Response Guard stops chasing once somebody has actually handled it.
+        ...(pendingStatus === 'contacted' || pendingStatus === 'converted'
+          ? { guard_cleared_at: new Date().toISOString() }
+          : {}),
+      })
       .eq('id', lead.id)
     if (!error) {
       onStatusChange(lead.id, pendingStatus)

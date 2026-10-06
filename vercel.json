@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/outreach-queue",
       "schedule": "0 20 * * 1-5"
+    },
+    {
+      "path": "/api/cron/response-guard",
+      "schedule": "*/5 * * * *"
     }
   ]
 }
