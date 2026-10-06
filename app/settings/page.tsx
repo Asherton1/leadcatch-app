@@ -30,6 +30,8 @@ interface ClientSettings {
   email_footer: string | null
   message_template: string | null
   sms_enabled: boolean
+  finish_anywhere_enabled: boolean
+  finish_consent_confirmed: boolean
   sms_phone: string | null
   email_alert_enabled: boolean
   email_alert_address: string | null
@@ -197,6 +199,8 @@ export default function SettingsPage() {
         email_footer: settings.email_footer,
         message_template: settings.message_template,
         sms_enabled: settings.sms_enabled,
+        finish_anywhere_enabled: settings.finish_anywhere_enabled,
+        finish_consent_confirmed: settings.finish_consent_confirmed,
         sms_phone: settings.sms_phone,
         email_alert_enabled: settings.email_alert_enabled,
         email_alert_address: settings.email_alert_address,
@@ -622,6 +626,45 @@ export default function SettingsPage() {
                 <span className="settings-hint">Where lead alert emails are delivered</span>
               </div>
             )}
+
+            {/* Finish Anywhere */}
+            <div className="settings-toggle-row">
+              <div className="settings-toggle-info">
+                <div className="settings-toggle-label">
+                  Finish Anywhere
+                  <span className="settings-badge-pro">Pro</span>
+                </div>
+                <div className="settings-toggle-desc">
+                  When somebody gives a phone number but not an email, we text them and
+                  they reply with it. No link, no going back to your site.
+                </div>
+              </div>
+              <Toggle
+                on={settings.finish_anywhere_enabled}
+                onChange={v => update("finish_anywhere_enabled", v)}
+                disabled={!isPro || !settings.finish_consent_confirmed}
+              />
+            </div>
+
+            <div className="settings-toggle-row settings-indent">
+              <div className="settings-toggle-info">
+                <div className="settings-toggle-label">Consent line is on my form</div>
+                <div className="settings-toggle-desc">
+                  Required before Finish Anywhere can be switched on. Add a line near your
+                  phone field reading: &ldquo;We may text you about this enquiry. Reply STOP
+                  to opt out.&rdquo; Without it we would be texting somebody who never
+                  agreed to hear from you, which is not something we will do.
+                </div>
+              </div>
+              <Toggle
+                on={settings.finish_consent_confirmed}
+                onChange={v => {
+                  update("finish_consent_confirmed", v)
+                  if (!v) update("finish_anywhere_enabled", false)
+                }}
+                disabled={!isPro}
+              />
+            </div>
 
             {/* SMS */}
             <div className="settings-toggle-row">
