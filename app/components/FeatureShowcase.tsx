@@ -216,7 +216,13 @@ export default function FeatureShowcase() {
               className={'fs-tab' + (open === t.key ? ' is-on' : '')}
               style={{ ['--o']: i + 1 } as CSSProperties}
               aria-expanded={open === t.key}
-              onClick={() => setOpen(prev => (prev === t.key ? null : t.key))}
+              onClick={() =>
+                setOpen(prev => {
+                  if (prev !== t.key) return t.key
+                  // only a phone or tablet can close an open row
+                  return window.matchMedia('(max-width: 860px)').matches ? null : prev
+                })
+              }
             >
               <span className="fs-tab-n">{t.n}</span>
               <span className="fs-tab-name">{t.name}</span>
