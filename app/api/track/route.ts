@@ -5,6 +5,7 @@ import { sendSmsAlert } from '@/lib/sms'
 import { sendFirstLeadCelebration } from '@/lib/onboarding-emails'
 import { sendEmailAlert } from '@/lib/email-alert'
 import { sendMetaConversion, sendGoogleConversion } from '@/lib/ad-conversions'
+import { openFinishSession, missingFields } from '@/lib/finish-anywhere'
 
 // Check do_not_contact list before firing recovery actions
 async function isOptedOut(clientId: string, phone: string | null, email: string | null): Promise<boolean> {
@@ -194,7 +195,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, teams_webhook_url, ghl_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, first_lead_email_sent, email, first_name, timezone, breakpoint_enabled, response_guard_enabled')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, teams_webhook_url, ghl_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, first_lead_email_sent, email, first_name, timezone, breakpoint_enabled, response_guard_enabled, finish_anywhere_enabled, finish_consent_confirmed')
     .eq('api_key', api_key)
     .single()
 
@@ -473,6 +474,34 @@ export async function POST(request: NextRequest) {
           .eq('id', lead.id)
       } catch (e) {
         console.error('[guard] start failed:', e)
+      }
+    }
+  }
+
+  // Finish Anywhere. Only for clients who switched it on AND confirmed the
+  // consent line is on their form, because this texts somebody who never
+  // pressed submit.
+  if (
+    lead?.id &&
+    phone &&
+    client.finish_anywhere_enabled === true &&
+    client.finish_consent_confirmed === true &&
+    !autoJunk &&
+    !botVerdict.isBot &&
+    intentFactor >= 1.3
+  ) {
+    const needed = missingFields({ email: email as string | null, phone: phone as string | null })
+    if (needed.length) {
+      try {
+        await openFinishSession({
+          clientId: client.id,
+          leadId: lead.id,
+          phone: phone as string,
+          businessName: client.company_name || client.name || 'us',
+          needed,
+        })
+      } catch (e) {
+        console.error('[finish] open failed:', e)
       }
     }
   }
