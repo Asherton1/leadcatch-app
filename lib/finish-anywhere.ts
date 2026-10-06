@@ -23,7 +23,12 @@ export function prettify(name: string) {
 
 /** Tidy a form label into something that reads inside a sentence. */
 export function asQuestion(label: string | null, name: string) {
-  const text = (label ?? '').replace(/\*/g, '').replace(/\s*:\s*$/, '').trim()
+  // Labels often end in a colon, a question mark or an asterisk. Strip them so
+  // the sentence we build does not end up with two marks in a row.
+  const text = (label ?? '')
+    .replace(/\*/g, '')
+    .replace(/[\s:?.]+$/, '')
+    .trim()
   if (text && text.length >= 3) return text
   return prettify(name)
 }
@@ -50,6 +55,19 @@ export function nextUnanswered(
     if (label && CONTACTISH.test(label)) continue
     return { name, label }
   }
+  return null
+}
+
+/**
+ * Twilio always sends E.164. Forms capture whatever the person typed, so the
+ * two never match on a raw string compare. Everything that looks up a session
+ * goes through this.
+ */
+export function toE164(raw: string): string | null {
+  const d = (raw ?? '').replace(/\D/g, '')
+  if (d.length === 10) return '+1' + d
+  if (d.length === 11 && d.startsWith('1')) return '+' + d
+  if (d.length > 11) return '+' + d
   return null
 }
 
@@ -103,10 +121,13 @@ export async function openFinishSession(opts: {
 }) {
   const { clientId, leadId, phone, businessName, question } = opts
 
+  const e164 = toE164(phone)
+  if (!e164) return { started: false, reason: 'bad_phone' }
+
   const { data: existing } = await supabaseAdmin
     .from('finish_sessions')
     .select('id')
-    .eq('phone', phone)
+    .eq('phone_e164', e164)
     .is('completed_at', null)
     .gt('expires_at', new Date().toISOString())
     .maybeSingle()
@@ -118,6 +139,7 @@ export async function openFinishSession(opts: {
       client_id: clientId,
       lead_id: leadId,
       phone,
+      phone_e164: e164,
       awaiting_field: question.name,
       fields_needed: [question.name],
       collected: { _label: question.label ?? '' },
@@ -137,7 +159,7 @@ export async function openFinishSession(opts: {
     `No need to go back to the site, just reply here and tell us: ${ask}. ` +
     `Reply STOP to opt out.`
 
-  const sent = await sendText(phone, body)
+  const sent = await sendText(e164, body)
   return { started: sent, sessionId: session.id }
 }
 
@@ -146,7 +168,7 @@ export async function handleFinishReply(fromPhone: string, body: string) {
   const { data: session } = await supabaseAdmin
     .from('finish_sessions')
     .select('id, client_id, lead_id, awaiting_field, collected, prompts_sent')
-    .eq('phone', fromPhone)
+    .eq('phone_e164', toE164(fromPhone) ?? fromPhone)
     .is('completed_at', null)
     .gt('expires_at', new Date().toISOString())
     .order('created_at', { ascending: false })

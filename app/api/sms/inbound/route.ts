@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
         const { data: sess } = await supabaseAdmin
           .from('finish_sessions')
           .select('client_id')
-          .eq('phone', from)
+          .eq('phone_e164', from)
           .order('created_at', { ascending: false })
           .limit(1)
           .maybeSingle()
