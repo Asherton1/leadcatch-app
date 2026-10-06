@@ -3766,3 +3766,17 @@ button.returning-cta:focus-visible {
   font-size: 0.72rem;
   color: #6b6b6b;
 }
+
+/* Response Guard, on the attention strip */
+.attn-waiting {
+  margin-left: 0.85rem;
+  padding-left: 0.85rem;
+  border-left: 1px solid rgba(255,255,255,0.14);
+  font-size: 0.82rem;
+  color: #9ca3af;
+}
+.attn-waiting b {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #ef4444;
+  font-weight: 800;
+}

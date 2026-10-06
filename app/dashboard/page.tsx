@@ -38,6 +38,8 @@ interface Lead {
   bot_reason?: string | null
   disqualified_at?: string | null
   disqualified_reason?: string | null
+  guard_level?: number | null
+  guard_started_at?: string | null
   converted_value?: number | null
   google_conversion_sent?: boolean | null
   id: string
@@ -1243,7 +1245,7 @@ export default function Dashboard() {
     const poll = async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason, disqualified_at, disqualified_reason')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason, disqualified_at, disqualified_reason, guard_level, guard_started_at')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
 
@@ -1276,7 +1278,7 @@ export default function Dashboard() {
     setSearch('')
     supabase
       .from('leads')
-      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason, disqualified_at, disqualified_reason')
+      .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason, disqualified_at, disqualified_reason, guard_level, guard_started_at')
       .eq('client_id', selectedClient.id)
       .order('created_at', { ascending: false })
       .then(({ data, error }) => {
@@ -1292,7 +1294,7 @@ export default function Dashboard() {
     const iv = setInterval(async () => {
       const { data, error } = await supabase
         .from('leads')
-        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason, disqualified_at, disqualified_reason')
+        .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason, disqualified_at, disqualified_reason, guard_level, guard_started_at')
         .eq('client_id', selectedClient.id)
         .order('created_at', { ascending: false })
       if (!error && data) setLeads(data as Lead[])
@@ -1831,9 +1833,18 @@ export default function Dashboard() {
     const oldest = rows.length > 0
       ? rows.reduce((a, b) => new Date(a.created_at) < new Date(b.created_at) ? a : b)
       : null
+    // Response Guard: how long the worst one has been sitting, and whether the
+    // escalation has already fired on anything.
+    const waitingMins = oldest
+      ? Math.max(0, Math.floor((Date.now() - new Date(oldest.created_at).getTime()) / 60000))
+      : 0
+    const escalated = rows.filter(l => (l.guard_level ?? 0) > 0).length
+
     return {
       count: rows.length,
       value: rows.reduce((sum, l) => sum + (l.estimated_value ?? 0), 0),
+      waitingMins,
+      escalated,
       oldestAt: oldest ? oldest.created_at : null,
       rows: [...rows].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()),
     }
@@ -2019,6 +2030,16 @@ export default function Dashboard() {
               {' from the last 48 hours '}
               {needsAttention.count === 1 ? 'has' : 'have'} not been contacted
               <span className="attn-value">{formatCurrency(needsAttention.value)} in pipeline</span>
+              {needsAttention.waitingMins >= 5 && (
+                <span className="attn-waiting">
+                  Longest wait{' '}
+                  <b>
+                    {needsAttention.waitingMins >= 60
+                      ? `${Math.floor(needsAttention.waitingMins / 60)}h ${needsAttention.waitingMins % 60}m`
+                      : `${needsAttention.waitingMins}m`}
+                  </b>
+                </span>
+              )}
             </span>
             <span className="attn-cta">
               {attnOpen ? 'Hide' : 'Review'}
