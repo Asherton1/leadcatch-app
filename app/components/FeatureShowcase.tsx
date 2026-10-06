@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useState, type CSSProperties } from 'react'
+import { Fragment, useEffect, useState, type CSSProperties } from 'react'
 import SignalShift from './SignalShift'
 import SignalCards from './SignalCards'
 import LeakFlow from './LeakFlow'
@@ -198,7 +198,13 @@ function Panel({ k }: { k: Key }) {
 }
 
 export default function FeatureShowcase() {
-  const [open, setOpen] = useState<Key>('signals')
+  const [open, setOpen] = useState<Key | null>(null)
+
+  // Mobile lands with everything collapsed. On desktop the rail sits above a
+  // tall stage, so one is opened on mount to avoid a blank panel area.
+  useEffect(() => {
+    if (window.matchMedia('(min-width: 861px)').matches) setOpen('signals')
+  }, [])
 
   return (
     <div className="fs">
@@ -210,7 +216,7 @@ export default function FeatureShowcase() {
               className={'fs-tab' + (open === t.key ? ' is-on' : '')}
               style={{ ['--o']: i + 1 } as CSSProperties}
               aria-expanded={open === t.key}
-              onClick={() => setOpen(t.key)}
+              onClick={() => setOpen(prev => (prev === t.key ? null : t.key))}
             >
               <span className="fs-tab-n">{t.n}</span>
               <span className="fs-tab-name">{t.name}</span>
