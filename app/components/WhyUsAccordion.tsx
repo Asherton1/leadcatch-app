@@ -175,6 +175,14 @@ const features: FeatureItem[] = [
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
     ),
+    title: 'Finish Anywhere: They Complete It By Text',
+    description: 'Every recovery tool on the market sends a link and asks the person to start again. Almost nobody does, because going back and retyping what you already typed is worse than never starting. Finish Anywhere removes the going back. Somebody abandons your form after giving a phone number, and we text them the actual question they stalled on, worded the way your form worded it. They reply in plain English from wherever they are, and the answer lands on the lead alongside everything they already entered. No link to click, no second visit, no retyping. It only runs for clients who have added a consent line to their form, because this sends a text to somebody who never pressed submit, and that is not a corner we are willing to cut.',
+    visual: null,
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+    ),
     title: 'Response Guard: Nobody Lets a Hot Lead Go Cold',
     description: 'Catching the inquiry is half of it. The other half is somebody actually picking up the phone, and that is where most of these die. The alert arrives, the front desk is busy, it scrolls up the channel, and a lead worth thousands sits untouched for three days. Response Guard puts a clock on every high-intent inquiry and escalates when nobody acts: five minutes, fifteen, thirty, each one louder than the last, with the value of the lead attached. The money is the part that works, because three uncontacted leads is ignorable and nineteen thousand dollars waiting is not. The clock only runs during your own opening hours, so nothing is overdue at midnight, and it stops the moment somebody marks the lead contacted.',
     visual: null,

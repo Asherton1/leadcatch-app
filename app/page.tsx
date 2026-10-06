@@ -250,6 +250,40 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section className="lc-section finish-section reveal">
+        <p className="signal-eyebrow">Finish Anywhere</p>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
+          <span className="title-muted">Nobody goes back</span><br />
+          and fills it in again.
+        </h2>
+        <p className="section-subtitle">
+          Every recovery tool sends a link and asks the person to start over. Retyping
+          what you already typed is worse than never starting, so almost nobody does it.
+          This removes the going back.
+        </p>
+
+        <div className="fa-thread">
+          <div className="fa-msg fa-out">
+            Hi, it&apos;s Northgate Furniture. You started getting in touch and did not
+            quite finish. No need to go back to the site, just reply here and tell us:
+            what are you looking for. Reply STOP to opt out.
+          </div>
+          <div className="fa-msg fa-in">a dining table for six</div>
+          <div className="fa-msg fa-out">
+            Perfect, that is everything we needed. Someone will be in touch shortly.
+          </div>
+        </div>
+
+        <p className="signal-close">
+          The answer lands on the lead next to everything they already typed. No link, no
+          second visit, no retyping. It only runs for businesses who have added a consent
+          line to their form, because this is a text to somebody who never pressed submit,
+          and that is not a corner worth cutting.
+        </p>
+      </section>
+
+      <div className="section-divider" />
+
       <section className="lc-section guard-section reveal">
         <p className="signal-eyebrow">Response Guard</p>
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
