@@ -353,7 +353,7 @@ export default function ForLegal() {
               <strong style={{ color: '#e4e4e7' }}>Pro</strong> at $397/mo includes the recovery dashboard, the tracker, automated follow-up email, live visitor tracking with intent scoring, CRM push to Lawmatics or Clio, and instant SMS or Slack alerts to the intake team.
             </p>
             <p>
-              <strong style={{ color: '#e4e4e7' }}>Enterprise</strong> from $1,997/mo for multi-office firms and high-volume practices. Unlimited sites, dedicated account manager, and per-office lead segmentation.
+              <strong style={{ color: '#e4e4e7' }}>Enterprise</strong> from $1,997/mo for firms with five or more offices, priced by office count. Dedicated account manager and per-office lead segmentation. Two to four offices is Group at $897/mo.
             </p>
             <p style={{ fontSize: '0.9rem', color: '#666' }}>
               Card required at signup, not charged until day 8. Cancel anytime during the trial.

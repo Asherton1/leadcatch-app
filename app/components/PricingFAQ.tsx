@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: 'What if I have multiple websites?',
-    a: 'Pro covers one site. If you run 3 or more sites, Enterprise is more cost-effective and includes a centralized dashboard with per-site reporting, custom-branded recovery emails per site, and a dedicated account manager. For 2 sites, you can run two Pro accounts or contact us about a multi-site Pro plan.',
+    a: 'Pro covers one website, including every form, page and subdomain on it. Two to four sites is Group at $897/mo, which adds one rolled-up dashboard across every site and per-site reporting. Five or more sites is Enterprise from $1,997/mo, priced by site count, with custom-branded recovery emails per site and a dedicated account manager.',
   },
   {
     q: 'How long does setup take?',

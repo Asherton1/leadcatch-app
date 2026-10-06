@@ -223,8 +223,8 @@ export const faqCategories: FAQCategory[] = [
         a: "You get full access to every feature on the Pro plan for 7 days. A card is required to start (so there's no friction when you decide to continue), but you can cancel anytime in your dashboard before day 7 and you won't be charged. After day 7, billing starts automatically at $397/mo.",
       },
       {
-        q: "What's the difference between Pro and Enterprise?",
-        a: 'Pro at $397/mo covers one website with every form and page on it: capture, intent scoring, the dashboard, campaign attribution, conversion signals to Meta and Google, branded recovery emails, SMS and Slack alerts, Breakpoint diagnostics and webhooks. A BAA is available on request. Multi-location pricing runs by number of sites, starting at $897 for two to four locations and $1,997 for five to eight, and adds one rolled-up dashboard across every site, per-location reporting, white-glove onboarding, a BAA as standard and a dedicated account manager.',
+        q: "What's the difference between Pro, Group and Enterprise?",
+        a: 'Pro at $397/mo covers one website, including every form and page on it and any subdomains: capture, intent scoring, the live visitor view, the dashboard, campaign attribution, conversion signals to Meta and Google, exclusion signals for the leads you mark as junk, Breakpoint field diagnostics, Leak Map, Response Guard escalation, Finish Anywhere, branded recovery emails, SMS and Slack alerts and webhooks. A BAA is available on request. Group at $897/mo covers two to four locations and adds one rolled-up dashboard across every site, per-location reporting and custom-branded recovery emails per site. Enterprise starts at $1,997/mo for five or more locations and is priced by location count, adding white-glove onboarding, a BAA as standard and a dedicated account manager.',
       },
       {
         q: 'Do you offer an annual discount?',
@@ -232,7 +232,7 @@ export const faqCategories: FAQCategory[] = [
       },
       {
         q: 'What if I have multiple websites?',
-        a: 'Pro covers up to 3 sites. For 4+ sites, Enterprise is more cost-effective and includes a centralized dashboard with per-site reporting, custom-branded recovery emails per site, and a dedicated account manager.',
+        a: 'Pro covers one website, including every form, page and subdomain on it. From two locations up it moves to Group at $897/mo for two to four locations, then Enterprise from $1,997/mo for five or more, priced by location count. Group and Enterprise add one rolled-up dashboard across every site, per-site reporting and custom-branded recovery emails per site.',
       },
       {
         q: 'Can I cancel anytime?',
