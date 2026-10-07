@@ -775,7 +775,6 @@
     if (e.clientY < 20) {
       exitIntentFired = true;
       sendAll(false);
-      try { showIntercept('exit_intent'); } catch (err) {}
       setTimeout(function () { exitIntentFired = false; }, 3000);
     }
   });
@@ -877,11 +876,13 @@
   }
 
   function closeIntercept(engaged, reason, st) {
+    // Send first, then tear down. Ordering it the other way left the send
+    // happening after the element it belongs to was already gone.
+    sendInterceptEvent(engaged ? 'engaged' : 'dismissed', reason, st);
     if (interceptHost && interceptHost.parentNode) {
       interceptHost.parentNode.removeChild(interceptHost);
     }
     interceptHost = null;
-    sendInterceptEvent(engaged ? 'engaged' : 'dismissed', reason, st);
   }
 
   function showIntercept(reason) {
@@ -1000,6 +1001,25 @@
       idleTimer = setTimeout(function () { showIntercept('idle'); }, 12000);
     } catch (err) {}
   }, true);
+
+
+  // Predictive exit: fire on upward velocity, not on arrival at the top edge.
+  // By the time the cursor is 20px from the chrome the decision is already made,
+  // so we watch how fast they are heading up there instead.
+  var exY = null, exT = 0, exArmed = true;
+  doc.addEventListener('mousemove', function (e) {
+    if (!exArmed) return;
+    var now = Date.now();
+    if (exY !== null && now > exT) {
+      var vy = (e.clientY - exY) / (now - exT);   // px per ms; negative is upward
+      if (vy < -0.35 && e.clientY < 180) {
+        exArmed = false;
+        setTimeout(function () { exArmed = true; }, 4000);
+        try { showIntercept('exit_intent'); } catch (err) {}
+      }
+    }
+    exY = e.clientY; exT = now;
+  }, { passive: true });
 
   // --- Public API ---
   win.ReCapture = {
