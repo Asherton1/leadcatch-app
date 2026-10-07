@@ -898,45 +898,52 @@
     wrap.innerHTML =
       '<style>' +
       ':host,*{box-sizing:border-box}' +
-      '.c{position:fixed;right:20px;bottom:20px;width:300px;max-width:calc(100vw - 32px);' +
-        'background:#121212;color:#fff;border:1px solid rgba(255,255,255,0.12);border-radius:12px;' +
-        'padding:16px 16px 14px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;' +
-        'box-shadow:0 12px 40px rgba(0,0,0,0.45);animation:in .3s cubic-bezier(.34,1.26,.52,1) both,glow 1.3s ease-in-out .35s 3}' +
-      '@media(max-width:520px){.c{left:16px;right:16px;bottom:16px;width:auto}}' +
+      '.s{position:fixed;right:20px;bottom:20px;width:302px;max-width:calc(100vw - 32px);' +
+        'padding:1.5px;border-radius:13px;overflow:hidden;isolation:isolate;' +
+        'background:rgba(255,255,255,0.10);' +
+        'box-shadow:0 12px 40px rgba(0,0,0,0.45),0 0 20px rgba(255,107,53,0.20);' +
+        'animation:in .3s cubic-bezier(.34,1.26,.52,1) both}' +
+      '@media(max-width:520px){.s{left:16px;right:16px;bottom:16px;width:auto}}' +
+      '.s::before{content:"";position:absolute;top:50%;left:50%;width:220%;height:220%;' +
+        'margin:-110% 0 0 -110%;z-index:0;' +
+        'background:conic-gradient(from 0deg,rgba(255,107,53,0) 0deg,rgba(255,107,53,0) 240deg,' +
+        '#ff6b35 310deg,#ffc2a3 338deg,#ff6b35 352deg,rgba(255,107,53,0) 360deg);' +
+        'animation:sweep 2.8s linear infinite}' +
+      '.c{position:relative;z-index:1;background:#121212;color:#fff;border-radius:11.5px;' +
+        'padding:16px 16px 14px;' +
+        'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}' +
       '@keyframes in{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}' +
-      '@keyframes glow{0%,100%{box-shadow:0 12px 40px rgba(0,0,0,.45),0 0 0 0 rgba(255,107,53,0);border-color:rgba(255,255,255,0.12)}50%{box-shadow:0 12px 40px rgba(0,0,0,.45),0 0 30px 8px rgba(255,107,53,.5);border-color:#ff6b35}}' +
-      '@keyframes ring{0%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1.16)}}' +
-      '.c::after{content:"";position:absolute;inset:-1px;border-radius:12px;border:2px solid #ff6b35;opacity:0;pointer-events:none;z-index:-1;animation:ring 1.3s ease-out .35s 3}' +
-      '@media(prefers-reduced-motion:reduce){.c,.c::after{animation:none}.c::after{display:none}}' +
+      '@keyframes sweep{to{transform:rotate(1turn)}}' +
+      '@media(prefers-reduced-motion:reduce){.s{animation:none}.s::before{animation:none;background:#ff6b35;opacity:.5}}' +
       '.h{font-size:15px;font-weight:650;letter-spacing:-.01em;margin:0 22px 4px 0}' +
       '.b{font-size:13px;line-height:1.5;color:#a0a0a0;margin:0 0 12px}' +
       '.r{display:flex;gap:8px}' +
       'input{flex:1;min-width:0;height:38px;padding:0 10px;font-size:14px;font-family:inherit;' +
         'color:#fff;background:#1c1c1c;border:1px solid rgba(255,255,255,0.14);border-radius:8px;outline:none}' +
       'input:focus{border-color:#ff6b35}' +
-      'button.s{height:38px;padding:0 14px;font-size:13px;font-weight:650;font-family:inherit;' +
+      'button.s2{height:38px;padding:0 14px;font-size:13px;font-weight:650;font-family:inherit;' +
         'color:#fff;background:#ff6b35;border:0;border-radius:8px;cursor:pointer;white-space:nowrap}' +
       'button.x{position:absolute;top:10px;right:10px;width:24px;height:24px;padding:0;line-height:1;' +
-        'font-size:16px;color:#777;background:none;border:0;cursor:pointer;font-family:inherit}' +
+        'font-size:16px;color:#777;background:none;border:0;cursor:pointer;font-family:inherit;z-index:2}' +
       'button.x:hover{color:#fff}' +
       '.ok{font-size:13px;line-height:1.5;color:#a0a0a0;margin:0}' +
       '</style>' +
-      '<div class="c" role="dialog" aria-label="Finish your enquiry">' +
+      '<div class="s"><div class="c" role="dialog" aria-label="Finish your enquiry">' +
         '<button class="x" aria-label="Close">\u00d7</button>' +
         '<p class="h"></p>' +
         '<p class="b"></p>' +
         '<div class="r">' +
           '<input type="tel" inputmode="tel" autocomplete="tel" placeholder="Your phone number" aria-label="Your phone number">' +
-          '<button class="s"></button>' +
+          '<button class="s2"></button>' +
         '</div>' +
-      '</div>';
+      '</div></div>';
     root.appendChild(wrap);
 
     // textContent, never innerHTML, so client copy cannot inject markup
     var card = root.querySelector('.c');
     root.querySelector('.h').textContent = head;
     root.querySelector('.b').textContent = bodyText;
-    root.querySelector('.s').textContent = cta;
+    root.querySelector('.s2').textContent = cta;
 
     doc.body.appendChild(interceptHost);
     sendInterceptEvent('shown', reason, st);
@@ -945,7 +952,7 @@
       closeIntercept(false, reason, st);
     });
 
-    root.querySelector('.s').addEventListener('click', function () {
+    root.querySelector('.s2').addEventListener('click', function () {
       var val = (root.querySelector('input').value || '').trim();
       if (val.replace(/\D/g, '').length < 7) {
         root.querySelector('input').focus();
