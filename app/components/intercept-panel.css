@@ -1,7 +1,17 @@
 /* Predict and Intercept panel, dashboard */
 
-.ip { max-width: 1200px; margin: 0 auto 2rem; padding: 1.5rem 1.6rem 1.35rem;
-  background: #0f0f0f; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; }
+/* Matches .bp-panel exactly so it sits in the same column, with the same
+   surface, as Breakpoint and Leak Map. No max-width: the dashboard container
+   decides the width. */
+.ip {
+  background: linear-gradient(150deg, #1a1a1a 0%, #151515 55%, #121212 100%);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin: 0 0 1.5rem;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 12px 34px rgba(0,0,0,0.22);
+  padding: 1rem 1.4rem 1.25rem;
+}
 
 .ip-head { display: flex; justify-content: space-between; align-items: flex-start;
   gap: 1.5rem; margin-bottom: 1.35rem; }
@@ -53,7 +63,7 @@
 .ip-foot { font-size: 0.75rem; line-height: 1.55; color: #6b6b70; margin: 1rem 0 0; }
 
 @media (max-width: 860px) {
-  .ip { padding: 1.25rem 1.1rem 1.1rem; }
+  .ip { padding: 1rem 1.1rem 1.1rem; }
   .ip-head { flex-direction: column; gap: 0.9rem; }
   .ip-stats { grid-template-columns: 1fr 1fr; }
   .ip-n { font-size: 1.45rem; }
