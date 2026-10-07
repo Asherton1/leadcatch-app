@@ -837,6 +837,13 @@
 
   function canIntercept() {
     if (!PREDICT.enabled) return false;
+    // The same gate the capture path uses. Without it an EU visitor could be
+    // shown the card, hand over a phone number, be told someone will be in
+    // touch, and have that number silently discarded by complianceAllows.
+    var complianceOk = false;
+    try { complianceAllows(function (allowed) { complianceOk = allowed; }); }
+    catch (e) { complianceOk = false; }
+    if (!complianceOk) return false;
     if (interceptShown) return false;
     if (isExcludedPath()) return false;
     if (isLoggedInAdmin && isLoggedInAdmin()) return false;
@@ -899,21 +906,19 @@
       '<style>' +
       ':host,*{box-sizing:border-box}' +
       '.s{position:fixed;right:20px;bottom:20px;width:302px;max-width:calc(100vw - 32px);' +
-        'padding:1.5px;border-radius:13px;overflow:hidden;isolation:isolate;' +
+        'padding:2px;border-radius:13px;overflow:hidden;isolation:isolate;' +
         'background:rgba(255,255,255,0.10);' +
         'box-shadow:0 12px 40px rgba(0,0,0,0.45),0 0 20px rgba(255,107,53,0.20);' +
-        'animation:in .3s cubic-bezier(.34,1.26,.52,1) both}' +
+        'animation:in .3s cubic-bezier(.34,1.26,.52,1) both,halo 1.7s ease-in-out infinite}' +
       '@media(max-width:520px){.s{left:16px;right:16px;bottom:16px;width:auto}}' +
-      '.s::before{content:"";position:absolute;top:50%;left:50%;width:220%;height:220%;' +
-        'margin:-110% 0 0 -110%;z-index:0;' +
-        'background:conic-gradient(from 0deg,rgba(255,107,53,0) 0deg,rgba(255,107,53,0) 240deg,' +
-        '#ff6b35 310deg,#ffc2a3 338deg,#ff6b35 352deg,rgba(255,107,53,0) 360deg);' +
-        'animation:sweep 2.8s linear infinite}' +
-      '.c{position:relative;z-index:1;background:#121212;color:#fff;border-radius:11.5px;' +
+      '.s::before{content:"";position:absolute;inset:0;z-index:0;background:#ff6b35;' +
+        'animation:throb 1.7s ease-in-out infinite}' +
+      '.c{position:relative;z-index:1;background:#121212;color:#fff;border-radius:11px;' +
         'padding:16px 16px 14px;' +
         'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}' +
       '@keyframes in{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}' +
-      '@keyframes sweep{to{transform:rotate(1turn)}}' +
+      '@keyframes throb{0%,100%{opacity:.3}50%{opacity:1}}' +
+      '@keyframes halo{0%,100%{box-shadow:0 12px 40px rgba(0,0,0,.45),0 0 8px 0 rgba(255,107,53,.12)}50%{box-shadow:0 12px 40px rgba(0,0,0,.45),0 0 32px 7px rgba(255,107,53,.55)}}' +
       '@media(prefers-reduced-motion:reduce){.s{animation:none}.s::before{animation:none;background:#ff6b35;opacity:.5}}' +
       '.h{font-size:15px;font-weight:650;letter-spacing:-.01em;margin:0 22px 4px 0}' +
       '.b{font-size:13px;line-height:1.5;color:#a0a0a0;margin:0 0 12px}' +
