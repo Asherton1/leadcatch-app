@@ -2751,6 +2751,15 @@ export default function Dashboard() {
 
                     </div>
                   ); })()}
+                  {(lead as unknown as { form_data?: Record<string, unknown> | null }).form_data?._finished_by_text === true && (
+                    <div
+                      title="This person answered the last question by text after leaving the form"
+                      style={{ display: "inline-flex", alignItems: "center", gap: "5px", padding: "2px 8px", borderRadius: "9999px", fontSize: "0.7rem", fontWeight: 700, border: "1px solid rgba(255,107,53,0.4)", background: "rgba(255,107,53,0.1)", color: "#ff6b35", marginTop: "4px" }}
+                    >
+                      <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#ff6b35", display: "inline-block" }} />
+                      Finished by text
+                    </div>
+                  )}
                   </div>
 
                 <div className="field-progress">
