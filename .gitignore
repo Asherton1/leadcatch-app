@@ -8,3 +8,4 @@ node_modules
 preview-*.html
 .env*
 public/_backup_*
+DEMO-LOGINS.md
