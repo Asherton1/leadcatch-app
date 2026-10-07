@@ -1,0 +1,61 @@
+/* Predict and Intercept panel, dashboard */
+
+.ip { max-width: 1200px; margin: 0 auto 2rem; padding: 1.5rem 1.6rem 1.35rem;
+  background: #0f0f0f; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; }
+
+.ip-head { display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 1.5rem; margin-bottom: 1.35rem; }
+
+.ip-kicker { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.64rem;
+  font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #ff6b35; margin: 0 0 0.4rem; }
+
+.ip-title { font-size: 1.0625rem; font-weight: 650; color: #fff; letter-spacing: -0.015em; margin: 0 0 0.35rem; }
+
+.ip-sub { font-size: 0.8125rem; line-height: 1.6; color: #8a8a90; margin: 0; max-width: 54ch; }
+
+.ip-filters { display: flex; gap: 0.3rem; flex: none; }
+
+.ip-filter { appearance: none; background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 7px; padding: 0.3rem 0.65rem;
+  font-family: inherit; font-size: 0.75rem; font-weight: 600; color: #8a8a90; cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease; }
+
+.ip-filter:hover { color: #d4d4d8; }
+
+.ip-filter.is-on { color: #ff6b35; border-color: rgba(255,107,53,0.4); background: rgba(255,107,53,0.09); }
+
+.ip-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin-bottom: 1.35rem; }
+
+.ip-stat { padding: 0.9rem 1rem; background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; }
+
+.ip-n { font-size: 1.65rem; font-weight: 700; color: #fff; letter-spacing: -0.03em; line-height: 1.1; }
+.ip-n.ip-good { color: #ff6b35; }
+
+.ip-l { font-size: 0.75rem; line-height: 1.45; color: #c4c4c8; margin-top: 0.3rem; }
+.ip-sl { font-size: 0.6875rem; color: #6b6b70; margin-top: 0.2rem; }
+
+.ip-table { width: 100%; border-collapse: collapse; }
+
+.ip-table th { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.6rem;
+  font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6b6b70;
+  text-align: left; padding: 0 0 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
+
+.ip-table td { font-size: 0.8125rem; color: #8a8a90; padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04); }
+
+.ip-table tr:last-child td { border-bottom: 0; }
+
+.ip-w { color: #e4e4e7; font-weight: 600; }
+.ip-o { color: #ff6b35; font-weight: 650; }
+.ip-r { text-align: right; }
+
+.ip-foot { font-size: 0.75rem; line-height: 1.55; color: #6b6b70; margin: 1rem 0 0; }
+
+@media (max-width: 860px) {
+  .ip { padding: 1.25rem 1.1rem 1.1rem; }
+  .ip-head { flex-direction: column; gap: 0.9rem; }
+  .ip-stats { grid-template-columns: 1fr 1fr; }
+  .ip-n { font-size: 1.45rem; }
+  .ip-table th:first-child, .ip-table td:first-child { max-width: 11ch; }
+}

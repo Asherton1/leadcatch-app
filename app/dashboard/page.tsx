@@ -9,6 +9,7 @@ import Footer from '../components/Footer'
 import '../landing.css'
 import AdminNav from '../components/AdminNav'
 import BreakpointPanel from '../components/BreakpointPanel'
+import InterceptPanel from '@/app/components/InterceptPanel'
 import LeakMap from '../components/LeakMap'
 import Logo from '../components/Logo'
 
@@ -2534,6 +2535,8 @@ export default function Dashboard() {
       <LeakMap clientId={selectedClient?.id ?? null} avgValue={selectedClient?.avg_lead_value ?? 0} />
 
       <BreakpointPanel clientId={selectedClient?.id ?? null} />
+
+      <InterceptPanel clientId={selectedClient?.id ?? null} />
 
       {/* ── Everything above is analytics. Everything below is the lead list. ── */}
       <div className="dash-split">
