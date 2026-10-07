@@ -130,6 +130,14 @@
         body: payload,
         keepalive: true,
         mode: 'cors'
+      }).then(function (r) {
+        return r && r.ok ? r.json() : null;
+      }).then(function (j) {
+        // Per-client settings ride back on a request we already make.
+        if (j && j.predict) {
+          PREDICT.enabled = !!j.predict.enabled;
+          PREDICT.copy = j.predict.copy || null;
+        }
       }).catch(function () { /* silent */ });
     } catch (e) { /* silent */ }
   }
@@ -767,6 +775,7 @@
     if (e.clientY < 20) {
       exitIntentFired = true;
       sendAll(false);
+      try { showIntercept('exit_intent'); } catch (err) {}
       setTimeout(function () { exitIntentFired = false; }, 3000);
     }
   });
@@ -786,6 +795,196 @@
 
   // Heartbeat -- saves data even if unload events fail
   setInterval(function () { sendAll(false); }, HEARTBEAT_MS);
+
+  // ---------------------------------------------------------------------------
+  // Predict and intercept
+  // Watches the signals that precede abandonment and offers an easier path
+  // before the person leaves. Renders in a shadow root so nothing of ours can
+  // touch the host page and nothing of theirs can touch us.
+  // ---------------------------------------------------------------------------
+
+  var PREDICT = { enabled: false, copy: null };
+  var pageLoadedAt = Date.now();
+  var INTERCEPT_ENDPOINT = 'https://www.userecapture.com/api/intercept';
+
+  var interceptShown = false;      // once per session, full stop
+  var interceptHost = null;
+  var idleTimer = null;
+
+  function predictState() {
+    // Pull the live numbers off whichever tracked form has the most progress.
+    var best = null;
+    for (var i = 0; i < trackers.length; i++) {
+      var t = trackers[i];
+      if (!t || t.submitted) continue;
+      var done = 0, total = 0, lastLabel = null;
+      try {
+        var fields = t._getFields ? t._getFields() : [];
+        for (var j = 0; j < fields.length; j++) {
+          var f = fields[j];
+          if (!f || f.type === 'hidden') continue;
+          total++;
+          var v = (f.value || '').trim();
+          if (v) { done++; lastLabel = f.name || f.id || null; }
+        }
+      } catch (e) { continue; }
+      if (!best || done > best.done) {
+        best = { done: done, total: total, lastLabel: lastLabel, tracker: t };
+      }
+    }
+    return best;
+  }
+
+  function canIntercept() {
+    if (!PREDICT.enabled) return false;
+    if (interceptShown) return false;
+    if (isExcludedPath()) return false;
+    if (isLoggedInAdmin && isLoggedInAdmin()) return false;
+    var st = predictState();
+    if (!st) return false;
+    if (st.done < 2) return false;                       // not invested yet
+    if (Date.now() - pageLoadedAt < 8000) return false;  // just arrived
+    return st;
+  }
+
+  function sendInterceptEvent(event, reason, st) {
+    try {
+      fetch(INTERCEPT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        mode: 'cors',
+        body: JSON.stringify({
+          api_key: apiKey,
+          session_id: (st && st.tracker && st.tracker.sessionId) || null,
+          visitor_session_id: visitorSessionId,
+          event: event,
+          trigger_reason: reason || null,
+          field_at: (st && st.lastLabel) || null,
+          fields_completed: (st && st.done) || null,
+          device_type: /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+          page_url: win.location.href
+        })
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
+  function closeIntercept(engaged, reason, st) {
+    if (interceptHost && interceptHost.parentNode) {
+      interceptHost.parentNode.removeChild(interceptHost);
+    }
+    interceptHost = null;
+    sendInterceptEvent(engaged ? 'engaged' : 'dismissed', reason, st);
+  }
+
+  function showIntercept(reason) {
+    var st = canIntercept();
+    if (!st) return;
+    interceptShown = true;
+
+    var copy = PREDICT.copy || {};
+    var head = copy.headline || 'Short on time?';
+    var bodyText = copy.body || 'Leave your number and we will pick this up from here.';
+    var cta = copy.cta || 'Send it';
+    var thanks = copy.thanks || 'Got it. Someone will be in touch shortly.';
+
+    interceptHost = doc.createElement('div');
+    interceptHost.setAttribute('data-rc-intercept', '');
+    interceptHost.style.cssText = 'all:initial;position:fixed;z-index:2147483000;';
+    var root = interceptHost.attachShadow ? interceptHost.attachShadow({ mode: 'closed' }) : null;
+    if (!root) { interceptShown = false; interceptHost = null; return; }
+
+    var wrap = doc.createElement('div');
+    wrap.innerHTML =
+      '<style>' +
+      ':host,*{box-sizing:border-box}' +
+      '.c{position:fixed;right:20px;bottom:20px;width:300px;max-width:calc(100vw - 32px);' +
+        'background:#121212;color:#fff;border:1px solid rgba(255,255,255,0.12);border-radius:12px;' +
+        'padding:16px 16px 14px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;' +
+        'box-shadow:0 12px 40px rgba(0,0,0,0.45);animation:in .28s cubic-bezier(.22,1,.36,1) both}' +
+      '@media(max-width:520px){.c{left:16px;right:16px;bottom:16px;width:auto}}' +
+      '@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}' +
+      '@media(prefers-reduced-motion:reduce){.c{animation:none}}' +
+      '.h{font-size:15px;font-weight:650;letter-spacing:-.01em;margin:0 22px 4px 0}' +
+      '.b{font-size:13px;line-height:1.5;color:#a0a0a0;margin:0 0 12px}' +
+      '.r{display:flex;gap:8px}' +
+      'input{flex:1;min-width:0;height:38px;padding:0 10px;font-size:14px;font-family:inherit;' +
+        'color:#fff;background:#1c1c1c;border:1px solid rgba(255,255,255,0.14);border-radius:8px;outline:none}' +
+      'input:focus{border-color:#ff6b35}' +
+      'button.s{height:38px;padding:0 14px;font-size:13px;font-weight:650;font-family:inherit;' +
+        'color:#fff;background:#ff6b35;border:0;border-radius:8px;cursor:pointer;white-space:nowrap}' +
+      'button.x{position:absolute;top:10px;right:10px;width:24px;height:24px;padding:0;line-height:1;' +
+        'font-size:16px;color:#777;background:none;border:0;cursor:pointer;font-family:inherit}' +
+      'button.x:hover{color:#fff}' +
+      '.ok{font-size:13px;line-height:1.5;color:#a0a0a0;margin:0}' +
+      '</style>' +
+      '<div class="c" role="dialog" aria-label="Finish your enquiry">' +
+        '<button class="x" aria-label="Close">\u00d7</button>' +
+        '<p class="h"></p>' +
+        '<p class="b"></p>' +
+        '<div class="r">' +
+          '<input type="tel" inputmode="tel" autocomplete="tel" placeholder="Your phone number" aria-label="Your phone number">' +
+          '<button class="s"></button>' +
+        '</div>' +
+      '</div>';
+    root.appendChild(wrap);
+
+    // textContent, never innerHTML, so client copy cannot inject markup
+    var card = root.querySelector('.c');
+    root.querySelector('.h').textContent = head;
+    root.querySelector('.b').textContent = bodyText;
+    root.querySelector('.s').textContent = cta;
+
+    doc.body.appendChild(interceptHost);
+    sendInterceptEvent('shown', reason, st);
+
+    root.querySelector('.x').addEventListener('click', function () {
+      closeIntercept(false, reason, st);
+    });
+
+    root.querySelector('.s').addEventListener('click', function () {
+      var val = (root.querySelector('input').value || '').trim();
+      if (val.replace(/\D/g, '').length < 7) {
+        root.querySelector('input').focus();
+        return;
+      }
+      // Put it on the host form so it captures exactly like anything they typed.
+      try {
+        var f = st.tracker && (st.tracker.form || st.tracker.el || st.tracker.formEl);
+        if (f) {
+          var tel = f.querySelector('input[type=tel], input[name*=phone i], input[id*=phone i]');
+          if (tel && !(tel.value || '').trim()) {
+            tel.value = val;
+            tel.dispatchEvent(new Event('input', { bubbles: true }));
+            tel.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        }
+      } catch (e) {}
+      try { sendAll(false); } catch (e) {}
+      card.innerHTML = '';
+      var p = doc.createElement('p');
+      p.className = 'ok';
+      p.textContent = thanks;
+      card.appendChild(p);
+      sendInterceptEvent('engaged', reason, st);
+      setTimeout(function () {
+        if (interceptHost && interceptHost.parentNode) {
+          interceptHost.parentNode.removeChild(interceptHost);
+          interceptHost = null;
+        }
+      }, 3200);
+    });
+  }
+
+  // Idle inside a form is the main trigger. Reset on every keystroke.
+  doc.addEventListener('input', function (e) {
+    try {
+      var el = e.target;
+      if (!el || !el.form) return;
+      if (idleTimer) clearTimeout(idleTimer);
+      idleTimer = setTimeout(function () { showIntercept('idle'); }, 12000);
+    } catch (err) {}
+  }, true);
 
   // --- Public API ---
   win.ReCapture = {

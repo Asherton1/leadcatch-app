@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
 
     const { data: client } = await supabase
       .from('clients')
-      .select('id, active, allowed_domains')
+      .select('id, active, allowed_domains, predict_enabled, predict_copy')
       .eq('api_key', api_key)
       .maybeSingle()
 
@@ -127,7 +127,23 @@ export async function POST(req: NextRequest) {
       })
     }
 
-    return NextResponse.json({ ok: true }, { headers: corsHeaders })
+    // The tracking script reads its per-client settings off this response, so
+    // no extra request is needed on page load. PREDICT_KILL turns the feature
+    // off everywhere without a deploy.
+    const predictOn =
+      process.env.PREDICT_KILL !== '1' &&
+      (client as { predict_enabled?: boolean }).predict_enabled === true
+
+    return NextResponse.json(
+      {
+        ok: true,
+        predict: {
+          enabled: predictOn,
+          copy: predictOn ? (client as { predict_copy?: unknown }).predict_copy ?? null : null,
+        },
+      },
+      { headers: corsHeaders }
+    )
   } catch (err) {
     console.error('visitor-ping error:', err)
     return NextResponse.json({ error: 'Server error' }, { status: 500, headers: corsHeaders })
