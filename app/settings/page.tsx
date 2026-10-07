@@ -681,6 +681,9 @@ export default function SettingsPage() {
               <div className="settings-field settings-indent">
                 <label className="settings-label">Phone Number</label>
                 <input type="tel" className="settings-input" value={settings.sms_phone ?? ""} onChange={e => update("sms_phone", e.target.value)} placeholder="(214) 555-1234" />
+                <p style={{ fontSize: "0.75rem", color: "#6b6b70", lineHeight: 1.55, marginTop: "0.45rem" }}>
+                  Lead alerts and uncontacted-lead escalations are sent to this number. Message and data rates may apply. Reply STOP at any time to stop receiving them.
+                </p>
               </div>
             )}
 

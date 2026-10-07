@@ -268,6 +268,9 @@ export default function ContactPage() {
                     disabled={submitting}
                     autoComplete="tel"
                   />
+                  <p style={{ fontSize: "0.75rem", color: "#6b6b70", lineHeight: 1.55, marginTop: "0.45rem" }}>
+                    By providing your phone number you agree ReCapture may text you about your inquiry. Message and data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/terms" style={{ color: "#ff6b35" }}>Terms</a> and <a href="/privacy" style={{ color: "#ff6b35" }}>Privacy Policy</a>.
+                  </p>
                 </div>
 
                 <div className="audit-form-field">
