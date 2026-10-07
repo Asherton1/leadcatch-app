@@ -31,6 +31,7 @@ interface ClientSettings {
   message_template: string | null
   sms_enabled: boolean
   finish_anywhere_enabled: boolean
+  predict_enabled: boolean | null
   finish_consent_confirmed: boolean
   sms_phone: string | null
   email_alert_enabled: boolean
@@ -664,6 +665,18 @@ export default function SettingsPage() {
                 }}
                 disabled={!isPro}
               />
+            </div>
+
+            {/* Predict and Intercept */}
+            <div className="settings-toggle-row">
+              <div className="settings-toggle-info">
+                <div className="settings-toggle-label">
+                  Predict and Intercept
+                  <span className="settings-badge-pro">Pro</span>
+                </div>
+                <div className="settings-toggle-desc">When a visitor looks about to give up on your form, show a small card offering to take their phone number instead. It appears on your site, so review it before switching on.</div>
+              </div>
+              <Toggle on={!!settings.predict_enabled} onChange={v => update("predict_enabled", v)} disabled={!isPro} />
             </div>
 
             {/* SMS */}
