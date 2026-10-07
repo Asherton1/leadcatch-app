@@ -56,7 +56,7 @@ export default function TermsPage() {
       <div style={{ maxWidth: "780px", margin: "0 auto", padding: "0 2rem 4rem" }}>
 
         <section className="reveal" style={sectionStyle}>
-          <p style={eyebrow}>01 — The service</p>
+          <p style={eyebrow}>01 · The service</p>
           <h2 style={h2}>What ReCapture is.</h2>
           <div style={body}>
             <p>ReCapture is a form-abandonment recovery tool. It identifies visitors who begin filling out a form on your website but leave without submitting, captures the contact details they entered (name, email, phone), and enables follow-up through the channels you configure — email, SMS, and AI voice callback. Features vary by plan.</p>
@@ -64,7 +64,7 @@ export default function TermsPage() {
         </section>
 
         <section className="reveal" style={sectionStyle}>
-          <p style={eyebrow}>02 — Your responsibilities</p>
+          <p style={eyebrow}>02 · Your responsibilities</p>
           <h2 style={h2}>You control the deployment and the visitor relationship.</h2>
           <div style={body}>
             <p>As a customer, you are responsible for:</p>
@@ -79,7 +79,7 @@ export default function TermsPage() {
         </section>
 
         <section className="reveal" style={sectionStyle}>
-          <p style={eyebrow}>03 — Data &amp; privacy</p>
+          <p style={eyebrow}>03 · Data &amp; privacy</p>
           <h2 style={h2}>How captured data is handled.</h2>
           <div style={body}>
             <p>Our data handling is described in full on our <Link href="/privacy" style={{ color: "#ff6b35" }}>Privacy &amp; Data</Link> and <Link href="/trust" style={{ color: "#ff6b35" }}>Trust &amp; Compliance</Link> pages. In summary: the service captures only contact fields, excludes passwords and sensitive fields, does not log keystrokes or record sessions, does not track EU/UK/Swiss visitors, and respects recognized consent platforms. We act as a service provider processing data on your behalf, do not sell captured data, and do not use it to train AI models.</p>
@@ -87,7 +87,7 @@ export default function TermsPage() {
         </section>
 
         <section className="reveal" style={sectionStyle}>
-          <p style={eyebrow}>04 — Subscriptions, trials &amp; billing</p>
+          <p style={eyebrow}>04 · Subscriptions, trials &amp; billing</p>
           <h2 style={h2}>How payment works.</h2>
           <div style={body}>
             <p>The service is offered on a subscription basis, and paid plans require a valid payment method. Where a free trial is offered, it requires a payment method on file; unless you cancel before the trial ends, your subscription begins automatically at the then-current rate.</p>
@@ -96,7 +96,7 @@ export default function TermsPage() {
         </section>
 
         <section className="reveal" style={sectionStyle}>
-          <p style={eyebrow}>05 — Cancellation</p>
+          <p style={eyebrow}>05 · Cancellation</p>
           <h2 style={h2}>Cancel anytime.</h2>
           <div style={body}>
             <p>You may cancel your subscription at any time from your account settings. Cancellation stops future billing; it does not retroactively refund the current billing period. On cancellation, the service stops capturing new data for your account.</p>
@@ -104,7 +104,7 @@ export default function TermsPage() {
         </section>
 
         <section className="reveal" style={sectionStyle}>
-          <p style={eyebrow}>06 — Acceptable use</p>
+          <p style={eyebrow}>06 · Acceptable use</p>
           <h2 style={h2}>Use it lawfully.</h2>
           <div style={body}>
             <p>You agree not to misuse the service, including by attempting to reverse-engineer it, reselling it without authorization, using it to violate the privacy or rights of any individual, or using it for any unlawful purpose. We reserve the right to suspend or terminate accounts that violate these terms.</p>
@@ -112,7 +112,7 @@ export default function TermsPage() {
         </section>
 
         <section className="reveal" style={sectionStyle}>
-          <p style={eyebrow}>07 — Availability &amp; changes</p>
+          <p style={eyebrow}>07 · Availability &amp; changes</p>
           <h2 style={h2}>We improve the service over time.</h2>
           <div style={body}>
             <p>We work to keep the service available and reliable but do not guarantee uninterrupted operation. We may modify, improve, or discontinue features over time, and will make reasonable efforts to notify you of material changes affecting your use.</p>
@@ -120,7 +120,7 @@ export default function TermsPage() {
         </section>
 
         <section className="reveal" style={sectionStyle}>
-          <p style={eyebrow}>08 — Disclaimers &amp; liability</p>
+          <p style={eyebrow}>08 · Disclaimers &amp; liability</p>
           <h2 style={h2}>Provided &quot;as is,&quot; with limited liability.</h2>
           <div style={body}>
             <p>The service is provided &quot;as is&quot; without warranties of any kind, express or implied. ReCapture is a tool, not a law firm, and nothing in the service constitutes legal advice regarding your compliance obligations. To the maximum extent permitted by law, ReCapture&apos;s total liability arising from your use of the service is limited to the amount you paid for it in the twelve months preceding the claim.</p>
@@ -128,7 +128,21 @@ export default function TermsPage() {
         </section>
 
         <section className="reveal" style={sectionStyle}>
-          <p style={eyebrow}>09 — Changes to these terms</p>
+          <p style={eyebrow}>09 · SMS and text messaging</p>
+          <h2 style={h2}>What we send, and how to stop it.</h2>
+          <div style={body}>
+            <p><strong style={{ color: "#fff" }}>Program name:</strong> ReCapture Alerts and Recovery.</p>
+            <p style={{ marginTop: "0.75rem" }}><strong style={{ color: "#fff" }}>What you receive.</strong> Two kinds of message. Operational alerts to account holders about inquiries on their own websites, including new leads and leads that have gone uncontacted. And follow-up messages to people who began a contact form on a customer&apos;s website, entered a phone number alongside consent language, and did not complete it.</p>
+            <p style={{ marginTop: "0.75rem" }}><strong style={{ color: "#fff" }}>Frequency.</strong> Message frequency varies and depends on activity on your website. There is no fixed number of messages.</p>
+            <p style={{ marginTop: "0.75rem" }}><strong style={{ color: "#fff" }}>Cost.</strong> Message and data rates may apply. ReCapture does not charge for messages; your mobile carrier may.</p>
+            <p style={{ marginTop: "0.75rem" }}><strong style={{ color: "#fff" }}>Opting out.</strong> Reply <strong style={{ color: "#fff" }}>STOP</strong> to any message to stop receiving them. Opting out by text adds the number to the do-not-contact list, which suppresses email, SMS and voice together, across every channel.</p>
+            <p style={{ marginTop: "0.75rem" }}><strong style={{ color: "#fff" }}>Getting help.</strong> Reply <strong style={{ color: "#fff" }}>HELP</strong>, or reach us at <a href="mailto:hello@userecapture.com" style={{ color: "#ff6b35" }}>hello@userecapture.com</a> or <a href="tel:+18886060630" style={{ color: "#ff6b35" }}>(888) 606-0630</a>.</p>
+            <p style={{ marginTop: "0.75rem" }}>Carriers are not liable for delayed or undelivered messages.</p>
+          </div>
+        </section>
+
+        <section className="reveal" style={sectionStyle}>
+          <p style={eyebrow}>10 · Changes to these terms</p>
           <h2 style={h2}>Updates are posted here.</h2>
           <div style={body}>
             <p>We may update these terms from time to time. Material changes will be reflected by an updated date on this page, and continued use of the service after changes take effect constitutes acceptance of the revised terms.</p>
@@ -136,7 +150,7 @@ export default function TermsPage() {
         </section>
 
         <section className="reveal" style={sectionStyle}>
-          <p style={eyebrow}>10 — Contact</p>
+          <p style={eyebrow}>11 · Contact</p>
           <h2 style={h2}>Questions about these terms.</h2>
           <div style={body}>
             <p>Reach us at <a href="mailto:hello@userecapture.com" style={{ color: "#ff6b35" }}>hello@userecapture.com</a> or <a href="tel:+18886060630" style={{ color: "#ff6b35" }}>(888) 606-0630</a>.</p>
