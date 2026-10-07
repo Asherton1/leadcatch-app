@@ -201,6 +201,7 @@ export default function SettingsPage() {
         message_template: settings.message_template,
         sms_enabled: settings.sms_enabled,
         finish_anywhere_enabled: settings.finish_anywhere_enabled,
+        predict_enabled: settings.predict_enabled,
         finish_consent_confirmed: settings.finish_consent_confirmed,
         sms_phone: settings.sms_phone,
         email_alert_enabled: settings.email_alert_enabled,
