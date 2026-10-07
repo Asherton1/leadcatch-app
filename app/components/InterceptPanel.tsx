@@ -41,9 +41,25 @@ export default function InterceptPanel({ clientId }: { clientId: string | null }
     return () => { cancelled = true }
   }, [clientId])
 
-  // A client who has never switched this on gets no panel at all rather than
-  // a row of zeros for a feature they do not use.
-  if (loading || rows.length === 0) return null
+  // Still fetching: render nothing rather than flashing an empty state.
+  if (loading) return null
+
+  // No data yet still gets a panel. A blank space where a paid feature should
+  // be reads as paying for something that does not exist.
+  if (rows.length === 0) {
+    return (
+      <section className="ip ip-empty">
+        <p className="ip-kicker">Predict and Intercept</p>
+        <h3 className="ip-title">Nothing to report yet</h3>
+        <p className="ip-sub">
+          When this is switched on and a visitor looks about to give up on your form,
+          ReCapture offers to take their phone number instead, right there on the page.
+          This panel will show you how often that offer appeared and whether it worked.
+          You can turn it on under Settings.
+        </p>
+      </section>
+    )
+  }
 
   const scoped = rows.filter(r => device === 'all' || r.device_type === device)
   const shown = scoped.filter(r => r.event === 'shown').length

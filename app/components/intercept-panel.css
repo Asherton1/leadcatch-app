@@ -69,3 +69,8 @@
   .ip-n { font-size: 1.45rem; }
   .ip-table th:first-child, .ip-table td:first-child { max-width: 11ch; }
 }
+
+/* Nothing-to-report state: same surface, quieter, no stats grid. */
+.ip-empty { padding: 1.15rem 1.4rem 1.25rem; }
+.ip-empty .ip-title { color: #d4d4d8; }
+.ip-empty .ip-sub { max-width: 62ch; }
