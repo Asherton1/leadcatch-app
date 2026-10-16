@@ -212,7 +212,7 @@ export async function POST(request: NextRequest) {
 
   // === DOMAIN ALLOWLIST ENFORCEMENT ===
   // Validates that the request's origin hostname is on this client's allowed_domains list.
-  // Empty allowlist = block all (defensive default — clients must explicitly authorize domains).
+  // Empty allowlist means no restriction has been set, so the check is skipped.
   // Subdomain matching: 'app.example.com' matches 'example.com' in the allowlist.
   const allowedDomains = ((client as any).allowed_domains as string[] | null) ?? []
   if (allowedDomains.length > 0) {

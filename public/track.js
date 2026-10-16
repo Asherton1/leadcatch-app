@@ -349,9 +349,26 @@
       if (win.Cookiebot && win.Cookiebot.consent) {
         return !!(win.Cookiebot.consent.marketing || win.Cookiebot.consent.statistics);
       }
-      // CookieYes
+      // CookieYes. Current builds expose getCkyConsent(); older ones exposed
+      // cookieYesCategoryStatus(). Try the current API first, fall back after.
+      // We accept advertisement or analytics, matching the Cookiebot branch
+      // above. Not functional: capturing contact details to follow up and to
+      // feed ad platforms is not a functional cookie by any reading.
+      if (typeof win.getCkyConsent === 'function') {
+        try {
+          var cky = win.getCkyConsent();
+          if (cky && cky.categories) {
+            // Under an opt-in regime an unanswered banner is not consent.
+            if (cky.isUserActionCompleted === false) return false;
+            return !!(cky.categories.advertisement || cky.categories.analytics);
+          }
+        } catch (e) {}
+      }
       if (typeof win.cookieYesCategoryStatus === 'function') {
-        try { return !!win.cookieYesCategoryStatus('functional'); } catch(e) {}
+        try {
+          return !!(win.cookieYesCategoryStatus('advertisement') ||
+                    win.cookieYesCategoryStatus('analytics'));
+        } catch (e) {}
       }
       // No consent platform detected -> default to allowed (US visitors)
       return true;

@@ -64,7 +64,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Client not active' }, { status: 403, headers: corsHeaders })
     }
 
-    if (client.allowed_domains && page_url) {
+    // An empty list means no restriction has been set, not that nothing is
+    // permitted. An empty array used to reject every request from the client's
+    // own site, silently, which cost one account six months of visitor data.
+    if (Array.isArray(client.allowed_domains) && client.allowed_domains.length > 0 && page_url) {
       try {
         const url = new URL(page_url)
         const hostname = url.hostname.toLowerCase()
