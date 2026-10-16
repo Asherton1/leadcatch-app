@@ -195,7 +195,7 @@ export async function POST(request: NextRequest) {
   // Validate client by api_key
   const { data: client, error: clientError } = await supabase
     .from('clients')
-    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, teams_webhook_url, ghl_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, first_lead_email_sent, email, first_name, timezone, breakpoint_enabled, response_guard_enabled, finish_anywhere_enabled, finish_consent_confirmed')
+    .select('id, avg_lead_value, active, auto_email_enabled, email_delay_minutes, plan, sms_enabled, sms_phone, slack_webhook_url, teams_webhook_url, ghl_webhook_url, retell_agent_id, ai_callback_enabled, webhook_url, company_name, name, quiet_hours_start, quiet_hours_end, min_lead_score, ai_agent_name, ai_services_list, ai_call_hours_start, ai_call_hours_end, email_alert_enabled, email_alert_address, auto_mark_contacted, brand_color, reply_to_email, email_footer, company_tagline, contact_phone, contact_email, meta_capi_enabled, meta_pixel_id, meta_access_token, meta_test_event_code, google_ads_enabled, google_ads_customer_id, google_ads_conversion_id, google_ads_conversion_label, google_ads_refresh_token, allowed_domains, website_url, first_lead_email_sent, email, first_name, timezone, breakpoint_enabled, response_guard_enabled, finish_anywhere_enabled, finish_consent_confirmed')
     .eq('api_key', api_key)
     .single()
 
@@ -212,9 +212,22 @@ export async function POST(request: NextRequest) {
 
   // === DOMAIN ALLOWLIST ENFORCEMENT ===
   // Validates that the request's origin hostname is on this client's allowed_domains list.
-  // Empty allowlist means no restriction has been set, so the check is skipped.
   // Subdomain matching: 'app.example.com' matches 'example.com' in the allowlist.
-  const allowedDomains = ((client as any).allowed_domains as string[] | null) ?? []
+  // An empty allowlist used to skip the check, which meant a leaked api_key could
+  // post leads from any site on the internet. It now falls back to the client's
+  // own website_url so a newly provisioned account is never wide open, and only
+  // skips when neither field gives us a hostname to check against.
+  let allowedDomains = (((client as any).allowed_domains as string[] | null) ?? []).filter(Boolean)
+  if (allowedDomains.length === 0) {
+    const site = (((client as any).website_url as string | null) ?? '').trim()
+    if (site) {
+      try {
+        const h = new URL(site.startsWith('http') ? site : 'https://' + site)
+          .hostname.toLowerCase().replace(/^www\./, '')
+        if (h) allowedDomains = [h]
+      } catch { /* website_url is not a usable URL */ }
+    }
+  }
   if (allowedDomains.length > 0) {
     const originHeader = request.headers.get('origin') || ''
     const refererHeader = request.headers.get('referer') || ''
@@ -254,6 +267,8 @@ export async function POST(request: NextRequest) {
         { status: 403 }
       )
     }
+  } else {
+    console.warn('[track] domain enforcement skipped: client has neither allowed_domains nor a usable website_url', { clientId: client.id })
   }
   // === END DOMAIN ALLOWLIST ENFORCEMENT ===
 
