@@ -711,19 +711,27 @@
     };
   };
 
+  var RC_DEBUG = false;
+  try { RC_DEBUG = /[?&]rcdebug=1/.test(win.location.search) || !!win.__RC_DEBUG; } catch (e) {}
+  function rcdbg() {
+    if (!RC_DEBUG) return;
+    try { console.log.apply(console, ['[RC]'].concat([].slice.call(arguments))); } catch (e) {}
+  }
+
   FormTracker.prototype.send = function (useBeacon) {
-    if (!this.touched) return;
-    if (isExcludedPath()) return;
-    if (isLoggedInAdmin()) return; // staff/owner is logged in to dashboard — skip tracking on marketing pages
+    if (!this.touched) { rcdbg('skip: form never touched'); return; }
+    if (isExcludedPath()) { rcdbg('skip: excluded path'); return; }
+    if (isLoggedInAdmin()) { rcdbg('skip: dashboard auth cookie present'); return; } // staff/owner is logged in to dashboard — skip tracking on marketing pages
     var now = Date.now();
-    if (this._lastSendAt && (now - this._lastSendAt) < 5000) return;
+    if (this._lastSendAt && (now - this._lastSendAt) < 5000) { rcdbg('skip: throttled, last send', now - this._lastSendAt, 'ms ago'); return; }
     this._lastSendAt = now;
     var data = this.payload();
     // Validate captured contact fields — reject junk (partial emails, short phone digits)
     if (!isValidEmail(data.email)) data.email = null;
     if (!isValidPhone(data.phone)) data.phone = null;
     // Require at least one CONTACTABLE field to fire an alert (name alone isn't actionable)
-    if (!data.email && !data.phone) return;
+    if (!data.email && !data.phone) { rcdbg('skip: no valid email or phone. raw named =', JSON.stringify(this.named)); return; }
+    rcdbg('SENDING to', TRACK_URL, '| email:', data.email, '| phone:', data.phone);
     if (useBeacon) {
       sendBeacon(TRACK_URL, data);
     } else {
@@ -734,6 +742,17 @@
   // --- Registry ---
 
   var trackers = [];
+  try {
+    if (RC_DEBUG) {
+      win.__rc = {
+        trackers: trackers,
+        euBlocked: function () { return euBlocked; },
+        consent: function () { return hasTrackingConsent(); },
+        trackUrl: TRACK_URL
+      };
+      rcdbg('debug mode on. endpoint =', TRACK_URL);
+    }
+  } catch (e) {}
 
   function initForm(form) {
     if (form._rcTracked) return;
@@ -743,7 +762,8 @@
 
   function sendAll(useBeacon) {
     complianceAllows(function (allowed) {
-      if (!allowed) return; // EU visitor, or consent rejected
+      if (!allowed) { rcdbg('BLOCKED by compliance gate. euBlocked =', euBlocked, '| consent =', hasTrackingConsent()); return; }
+      rcdbg('compliance gate passed, trying', trackers.length, 'tracker(s)');
       trackers.forEach(function (t) { t.send(useBeacon); });
     });
   }
