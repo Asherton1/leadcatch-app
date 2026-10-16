@@ -458,6 +458,24 @@ export async function POST(request: NextRequest) {
     } catch (e) {
       console.error('[exclusion] auto-flag failed:', e)
     }
+  } else if (lead?.id) {
+    // Re-evaluate, do not just stamp once. The heartbeat interval starts at
+    // page load, not at first keystroke, so the first send can arrive a second
+    // after someone starts typing and carry time_on_form 1 with one field
+    // filled. That trips instant_bounce. Every later send updates the same row
+    // with the real numbers, so without this the flag outlives the evidence for
+    // it and a visitor who filled the whole form stays hidden from the
+    // dashboard forever. Scoped to instant_bounce on purpose: a bot verdict
+    // stays sticky, and a client's own 'marked_by_client' is never touched.
+    try {
+      await supabase
+        .from('leads')
+        .update({ disqualified_at: null, disqualified_reason: null })
+        .eq('id', lead.id)
+        .eq('disqualified_reason', 'instant_bounce')
+    } catch (e) {
+      console.error('[exclusion] auto-clear failed:', e)
+    }
   }
 
   // Response Guard. The clock only runs on leads worth chasing, and only while
