@@ -170,7 +170,7 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
 
   // Build signed unsubscribe URL -- token is HMAC-signed so it can't be forged
   const unsubToken = signUnsubscribeToken(lead.id)
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://userecapture.com'
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.userecapture.com'
   const unsubscribeUrl = `${baseUrl}/api/unsubscribe?token=${encodeURIComponent(unsubToken)}`
 
   const vars: Record<string, string> = {

@@ -33,7 +33,7 @@ interface ClientRow {
 
 function installNudgeHtml(firstName: string, apiKey: string, daysSinceSignup: number): string {
   const greeting = firstName ? 'Hi ' + firstName + ',' : 'Hi there,'
-  const scriptTag = '<script src="https://userecapture.com/track.js?key=' + apiKey + '"></script>'
+  const scriptTag = '<script src="https://www.userecapture.com/track.js?key=' + apiKey + '"></script>'
 
   return [
     '<table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;font-family:Inter,-apple-system,sans-serif;">',
@@ -64,7 +64,7 @@ function installNudgeHtml(firstName: string, apiKey: string, daysSinceSignup: nu
     '<tr><td style="padding:0 0 32px 0;">',
     '<table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #1e1e1e;border-radius:8px;">',
     '<tr><td style="padding:16px 20px;font-family:Courier,monospace;font-size:13px;color:#22c55e;word-break:break-all;line-height:1.6;">',
-    '&lt;script src=&quot;https://userecapture.com/track.js?key=' + apiKey + '&quot;&gt;&lt;/script&gt;',
+    '&lt;script src=&quot;https://www.userecapture.com/track.js?key=' + apiKey + '&quot;&gt;&lt;/script&gt;',
     '</td></tr>',
     '</table>',
     '</td></tr>',

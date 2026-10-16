@@ -27,7 +27,7 @@ export default function GetStartedPage() {
   }
 
   const scriptTag = client
-    ? `<script src="https://userecapture.com/track.js?key=${client.api_key}"></script>`
+    ? `<script src="https://www.userecapture.com/track.js?key=${client.api_key}"></script>`
     : ''
 
   async function handleCopy() {

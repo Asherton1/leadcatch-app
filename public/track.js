@@ -59,6 +59,16 @@
     scriptUrl = new URL(scriptEl.src);
     apiKey    = scriptUrl.searchParams.get('key');
     baseUrl   = scriptUrl.origin;
+    // Canonicalise the host. userecapture.com 307s to www.userecapture.com,
+    // and a CORS preflight is not allowed to follow a redirect, so a POST
+    // built from a non-www script src dies with ERR_INVALID_REDIRECT before
+    // it is ever sent. The <script> tag itself follows the 307 happily, so
+    // the install looks perfectly healthy. visitor-ping and intercept are
+    // hardcoded to www, which is why a non-www install reports visitors and
+    // never captures a single lead.
+    if (scriptUrl.hostname.toLowerCase() === 'userecapture.com') {
+      baseUrl = 'https://www.userecapture.com';
+    }
   } catch (e) { return; }
 
   if (!apiKey) {
@@ -397,9 +407,8 @@
     callback(true);
   }
 
-  // Post to the PAGE's origin, not the script's. A page served from
-  // example.com loading the script from www.example.com would otherwise
-  // make a cross-origin POST that the browser silently drops.
+  // On userecapture.com itself, post same-origin. Everywhere else post to
+  // baseUrl, which has been canonicalised to www above.
   var TRACK_URL = (function () {
     try {
       var h = win.location.hostname || '';

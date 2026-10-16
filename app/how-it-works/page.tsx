@@ -66,7 +66,7 @@ export default function HowItWorksPage() {
             <span className="hiw-code-dot green"></span>
             <span className="hiw-code-filename">your-website.html</span>
           </div>
-          <code>&lt;script src=&quot;https://userecapture.com/track.js?key=YOUR_API_KEY&quot;&gt;&lt;/script&gt;</code>
+          <code>&lt;script src=&quot;https://www.userecapture.com/track.js?key=YOUR_API_KEY&quot;&gt;&lt;/script&gt;</code>
         </div>
         <p className="hiw-setup-compat reveal">Works on WordPress, Webflow, Wix, Squarespace, Shopify, and any custom-built website.</p>
       </section>
