@@ -23,10 +23,20 @@
     '/checkout', '/billing', '/account'
   ];
 
+  // Excluded on EVERY site, clients' included, unlike the list above. A page
+  // that takes card details puts any third-party script on it inside the
+  // merchant's PCI DSS scope (6.4.3 and 11.6.1), so we stay off it entirely.
+  var PAYMENT_PATHS = [
+    '/checkout', '/cart', '/billing', '/payment', '/pay', '/order-pay'
+  ];
+
   function isExcludedPath() {
     try {
       var hostname = win.location.hostname || '';
-      var pathname = win.location.pathname || '';
+      var pathname = (win.location.pathname || '').toLowerCase().replace(/\/+$/, '') || '/';
+      for (var q = 0; q < PAYMENT_PATHS.length; q++) {
+        if (pathname === PAYMENT_PATHS[q] || pathname.indexOf(PAYMENT_PATHS[q] + '/') === 0) return true;
+      }
       var isOwnSite = /(^|\.)userecapture\.com$/i.test(hostname);
       if (!isOwnSite) return false;
       for (var p = 0; p < EXCLUDED_PATHS.length; p++) {
@@ -43,6 +53,10 @@
   // might have password fields, etc.
   var SENSITIVE_FIELD_TYPES = ['password'];
   var SENSITIVE_FIELD_RE = /password|passwd|pwd|secret|ssn|credit[\-_\s]?card|cvv|cvc/i;
+
+  // Card-specific. Used to refuse an entire form rather than a single field,
+  // because being present on a payment form is the problem, not what we store.
+  var PAYMENT_FIELD_RE = /credit[\-_\s]?card|card[\-_\s]?number|cardnumber|cc[\-_\s]?num|cvv|cvc|card[\-_\s]?expiry|exp[\-_\s]?(month|year)/i;
 
   function isSensitiveField(el) {
     if (!el) return false;
@@ -485,10 +499,17 @@
     return /Mobile|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ? 'mobile' : 'desktop';
   }
 
+  // Never a person's name, however the word "name" shows up in the label.
+  // WooCommerce puts "House number and street name" in the placeholder on
+  // billing_address_1, which matched /\bname\b/ and wrote a street address into
+  // the name column on a live client account. "Company name (optional)" did the
+  // same thing to billing_company.
+  var NOT_A_NAME_RE = /address|street|city|town|state|province|country|zip|postal|postcode|county|suite|apt|company|business|organi[sz]ation|user[\-_\s]?name|file[\-_\s]?name|card/i;
+
   var CLASSIFY = [
     { key: 'email', type: 'email', re: /e[\-_]?mail/i },
     { key: 'phone', type: 'tel',   re: /phone|mobile|cell|tel(?:ephone)?/i },
-    { key: 'name',  type: null,    re: /\bname\b|full[\-_\s]?name|first[\-_\s]?name|last[\-_\s]?name/i },
+    { key: 'name',  type: null,    re: /\bname\b|full[\-_\s]?name|first[\-_\s]?name|last[\-_\s]?name/i, not: NOT_A_NAME_RE },
   ];
 
   function classifyField(el) {
@@ -501,6 +522,7 @@
     ].join(' ');
     for (var i = 0; i < CLASSIFY.length; i++) {
       var c = CLASSIFY[i];
+      if (c.not && c.not.test(hay)) continue;
       if ((c.type && el.type === c.type) || c.re.test(hay)) return c.key;
     }
     return 'other';
@@ -629,9 +651,11 @@
           } else {
             self.nameParts.full = val;
           }
-          self.named.name = self.nameParts.full
-            || [self.nameParts.first, self.nameParts.last].filter(Boolean).join(' ')
-            || val;
+          // First plus last wins over a loose "full" match. A later field that
+          // looks name-ish must never overwrite a name we already assembled
+          // correctly from dedicated first and last inputs.
+          var assembled = [self.nameParts.first, self.nameParts.last].filter(Boolean).join(' ');
+          self.named.name = assembled || self.nameParts.full || val;
         } else {
           self.named[type] = val;
         }
@@ -754,9 +778,25 @@
     }
   } catch (e) {}
 
+  function takesPayment(form) {
+    try {
+      var els = form.querySelectorAll('input,select,textarea');
+      for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        var hay = ((el.name || '') + ' ' + (el.id || '') + ' ' +
+                   (el.placeholder || '') + ' ' + (el.getAttribute('autocomplete') || ''));
+        if (PAYMENT_FIELD_RE.test(hay)) return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+
   function initForm(form) {
     if (form._rcTracked) return;
     form._rcTracked = true;
+    // Path matching is not enough. A checkout can live at any URL, so refuse any
+    // form carrying card fields wherever it sits.
+    if (takesPayment(form)) return;
     trackers.push(new FormTracker(form));
   }
 
