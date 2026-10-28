@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
 
     const { data: existing } = await supabase
       .from('visitors')
-      .select('id, country, last_ping_at, active_since')
+      .select('id, country, last_ping_at, active_since, is_active')
       .eq('client_id', client.id)
       .eq('session_id', session_id)
       .maybeSingle()
@@ -115,7 +115,13 @@ export async function POST(req: NextRequest) {
       } else {
         update.last_ping_at = new Date().toISOString()
       }
-      await supabase.from('visitors').update(update).eq('id', existing.id)
+      // Already idle, still idle. The live panel requires is_active, so nothing
+      // reads this row any more and there is nothing worth writing. Abandoned
+      // tabs were posting three writes a minute for thirteen days each.
+      const stillIdle = is_active === false && existing.is_active === false && !mark_offline
+      if (!stillIdle) {
+        await supabase.from('visitors').update(update).eq('id', existing.id)
+      }
     } else {
       // New visitor — geo lookup + full insert
       const geo = await lookupGeo(ip)
@@ -137,6 +143,7 @@ export async function POST(req: NextRequest) {
         gclid: gclid || null,
         fbclid: fbclid || null,
         is_active: is_active !== false,
+        active_since: new Date().toISOString(),
       })
     }
 
