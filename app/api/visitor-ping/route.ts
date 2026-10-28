@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
 
     const { data: existing } = await supabase
       .from('visitors')
-      .select('id, country')
+      .select('id, country, last_ping_at, active_since')
       .eq('client_id', client.id)
       .eq('session_id', session_id)
       .maybeSingle()
@@ -96,6 +96,16 @@ export async function POST(req: NextRequest) {
       const update: Record<string, unknown> = {
         page_url: page_url || null,
         is_active: is_active !== false,
+      }
+      // A gap longer than five minutes means they left and came back, so the
+      // current visit starts now. Without this, time on site measures the age
+      // of the browser tab rather than the visit: a tab left open since Oct 15
+      // was reporting an 18,400 minute session.
+      const gapMs = existing.last_ping_at
+        ? Date.now() - new Date(existing.last_ping_at as string).getTime()
+        : 0
+      if (!existing.active_since || gapMs > 5 * 60 * 1000) {
+        update.active_since = new Date().toISOString()
       }
       if (mark_offline) {
         console.log('[visitor-ping] MARK_OFFLINE for session:', session_id)

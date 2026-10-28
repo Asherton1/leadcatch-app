@@ -129,8 +129,15 @@
   doc.addEventListener('scroll',    markActive, { passive: true });
   doc.addEventListener('touchstart', markActive, { passive: true });
 
+  // After this long with no mouse, key, scroll or touch, stop pinging at all.
+  // A background tab keeps setInterval alive indefinitely, so abandoned tabs
+  // were pinging every 20 seconds for thirteen days, filling the live visitor
+  // panel with people long gone and burning database writes the whole time.
+  var IDLE_STOP_MS = 30 * 60 * 1000;
+
   function sendVisitorPing() {
     if (isExcludedPath()) return;
+    if (Date.now() - lastActivityAt > IDLE_STOP_MS) return;
     try {
       var utm = parseUtmParams();
       var isActive = (Date.now() - lastActivityAt) < 60000;

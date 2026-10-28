@@ -15,13 +15,14 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Missing client_id' }, { status: 400 })
     }
 
-    const twoMinAgo = new Date(Date.now() - 30 * 1000).toISOString()
+    const liveWindow = new Date(Date.now() - 30 * 1000).toISOString()
 
     const { data: visitors, error } = await supabase
       .from('visitors')
-      .select('id, session_id, page_url, referrer, user_agent, country, city, region, utm_source, utm_medium, utm_campaign, pages_visited, form_started, is_active, created_at, last_ping_at')
+      .select('id, session_id, page_url, referrer, user_agent, country, city, region, utm_source, utm_medium, utm_campaign, pages_visited, form_started, is_active, created_at, last_ping_at, active_since')
       .eq('client_id', clientId)
-      .gte('last_ping_at', twoMinAgo)
+      .eq('is_active', true)
+      .gte('last_ping_at', liveWindow)
       .order('last_ping_at', { ascending: false })
 
     if (error || !visitors) {
@@ -57,7 +58,8 @@ export async function GET(req: NextRequest) {
     // Compute intent score for each visitor
     const enriched = visitors.map(v => {
       const journey = eventsBySession[v.session_id] || []
-      const timeOnSite = Math.round((new Date(v.last_ping_at).getTime() - new Date(v.created_at).getTime()) / 1000)
+      const visitStart = (v as { active_since?: string | null }).active_since || v.created_at
+      const timeOnSite = Math.round((new Date(v.last_ping_at).getTime() - new Date(visitStart).getTime()) / 1000)
 
       let intent_score = 0
       if (v.form_started) intent_score += 40
