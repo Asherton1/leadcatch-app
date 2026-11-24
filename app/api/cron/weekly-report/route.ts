@@ -93,7 +93,7 @@ export async function GET(req: NextRequest) {
     const totalLeads = weekLeads.length
     const recovered = weekLeads.filter(l => l.status === 'converted').length
     const contacted = weekLeads.filter(l => l.status === 'contacted').length
-    const open = weekLeads.filter(l => l.status === 'open').length
+    const open = weekLeads.filter(l => l.status === 'abandoned').length
     const avgValue = client.avg_lead_value || 400
     const revenueAtRisk = totalLeads * avgValue
     const recoveredRevenue = recovered * avgValue
