@@ -77,6 +77,7 @@ export default function AgencyConsole() {
           .from('leads')
           .select('id, client_id, name, status, estimated_value, converted_value, created_at, meta_conversion_sent, suppressed_at, email, phone')
           .in('client_id', ids)
+          .neq('status', 'submitted')
         ld = (data ?? []) as LeadRow[]
       }
 

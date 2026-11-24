@@ -1248,6 +1248,7 @@ export default function Dashboard() {
         .from('leads')
         .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason, disqualified_at, disqualified_reason, guard_level, guard_started_at')
         .eq('client_id', selectedClient.id)
+        .neq('status', 'submitted')
         .order('created_at', { ascending: false })
 
       if (cancelled || error || !data) return
@@ -1281,6 +1282,7 @@ export default function Dashboard() {
       .from('leads')
       .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason, disqualified_at, disqualified_reason, guard_level, guard_started_at')
       .eq('client_id', selectedClient.id)
+      .neq('status', 'submitted')
       .order('created_at', { ascending: false })
       .then(({ data, error }) => {
         if (error) setLeadsError(error.message)
@@ -1297,6 +1299,7 @@ export default function Dashboard() {
         .from('leads')
         .select('id, session_id, name, email, phone, fields_completed, total_fields, time_on_form, device_type, estimated_value, status, created_at, client_id, email_sent, email_sent_at, form_data, meta_conversion_sent, google_conversion_sent, suppressed_at, converted_value, match_keys, match_strength, visitor_session_id, suspected_bot, bot_reason, disqualified_at, disqualified_reason, guard_level, guard_started_at')
         .eq('client_id', selectedClient.id)
+        .neq('status', 'submitted')
         .order('created_at', { ascending: false })
       if (!error && data) setLeads(data as Lead[])
     }, 10000)
