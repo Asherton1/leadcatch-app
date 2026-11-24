@@ -710,7 +710,7 @@ export async function POST(request: NextRequest) {
   // --- TEAMS ALERT ---
   if (email || phone) {
     try {
-      if (client.teams_webhook_url) {
+      if (client.teams_webhook_url && !wasSubmitted) {
         const score = Number(fields_completed ?? 0) >= 3 ? 'Hot' : Number(fields_completed ?? 0) >= 2 ? 'Warm' : 'Cold'
         const teamsMsg = {
           '@type': 'MessageCard',
@@ -757,7 +757,7 @@ export async function POST(request: NextRequest) {
   // --- GOHIGHLEVEL SYNC ---
   if (name || email || phone) {
     try {
-      if (client.ghl_webhook_url) {
+      if (client.ghl_webhook_url && !wasSubmitted) {
         const score = Number(fields_completed ?? 0) >= 3 ? 'hot' : Number(fields_completed ?? 0) >= 2 ? 'warm' : 'cold'
         const ghlPayload = {
           source: 'ReCapture',
