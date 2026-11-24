@@ -351,6 +351,13 @@ export async function POST(request: NextRequest) {
     fieldsCompleted: Number(fields_completed ?? 0),
     honeypot: (body as Record<string, unknown>).hp,
   })
+  // A completed submission is already sitting in the client's inbox. We still
+  // store the row, because it carries the Meta CAPI and Google offline
+  // conversion signal, but it is NOT a lead to chase. It must never reach an
+  // alert, a recovery email or an AI callback, and it must not be labelled
+  // abandoned. 59% of one client's lead list was people who had submitted.
+  const wasSubmitted = bp?.submitted === true
+
   const payload = {
     client_id: client.id,
     session_id,
@@ -365,7 +372,7 @@ export async function POST(request: NextRequest) {
     time_on_form: Number(time_on_form ?? 0),
     device_type: device_type ?? null,
     estimated_value,
-    status: 'abandoned',
+    status: wasSubmitted ? 'submitted' : 'abandoned',
     form_data: form_data ?? null,
   }
 
@@ -392,6 +399,31 @@ export async function POST(request: NextRequest) {
       },
       { status: 500 }
     )
+  }
+
+  // The same person often abandons once and then submits seconds later under a
+  // new session id, which left the earlier row sitting in the lead list as an
+  // abandonment forever. Retire any recent row for the same contact.
+  if (wasSubmitted) {
+    const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
+    const pairs: [string, string | null][] = [
+      ['email', (email as string) ?? null],
+      ['phone', (phone as string) ?? null],
+    ]
+    for (const [col, val] of pairs) {
+      if (!val) continue
+      try {
+        await supabase
+          .from('leads')
+          .update({ status: 'submitted' })
+          .eq('client_id', client.id)
+          .eq('status', 'abandoned')
+          .gte('created_at', since)
+          .eq(col, val)
+      } catch (e) {
+        console.error('[submit-retire] failed on', col, e)
+      }
+    }
   }
 
   // --- FIRST-LEAD CELEBRATION (fire-and-forget, never blocks API) ---
@@ -556,7 +588,8 @@ export async function POST(request: NextRequest) {
     client.sms_phone &&
     client.plan !== 'essentials' &&
     (email || phone) &&
-    !optedOut
+    !optedOut &&
+    !wasSubmitted
   ) {
     const { data: existing } = await supabase
       .from('leads')
@@ -591,7 +624,8 @@ export async function POST(request: NextRequest) {
   if (
     client.email_alert_enabled &&
     client.email_alert_address &&
-    (email || phone)
+    (email || phone) &&
+    !wasSubmitted
   ) {
     const { data: existing } = await supabase
       .from('leads')
@@ -622,8 +656,8 @@ export async function POST(request: NextRequest) {
   }
 
 
-  // --- SLACK ALERT ---
-  if (email || phone) {
+  // --- SLACK ALERT --- (also wraps Teams and GHL)
+  if ((email || phone) && !wasSubmitted) {
     try {
       if (client.slack_webhook_url) {
         const score = Number(fields_completed ?? 0) >= 3 ? 'Hot' : Number(fields_completed ?? 0) >= 2 ? 'Warm' : 'Cold'
@@ -920,7 +954,7 @@ export async function POST(request: NextRequest) {
         formData: (form_data as Record<string, unknown>) ?? null,
         fieldsCompleted: Number(fields_completed ?? 0),
         totalFields: Number(total_fields ?? 0),
-        clientCompanyName: '[ADMIN] ' + clientLabel + ' - ' + score,
+        clientCompanyName: '[ADMIN] ' + clientLabel + ' - ' + score + (wasSubmitted ? ' - SUBMITTED, no action' : ''),
       })
     } catch (err) {
       console.error('Admin notify failed for lead', lead.id, err)
@@ -931,7 +965,7 @@ export async function POST(request: NextRequest) {
   // --- AUTO-RECOVERY EMAIL ---
 
     // AI Voice Callback (Retell)
-    if (client.ai_callback_enabled && phone && process.env.RETELL_API_KEY && !isQuietHours(client.quiet_hours_start, client.quiet_hours_end, client.timezone) && isWithinCallHours(client.ai_call_hours_start, client.ai_call_hours_end, client.timezone) && !optedOut && !botVerdict.isBot) {
+    if (client.ai_callback_enabled && phone && process.env.RETELL_API_KEY && !isQuietHours(client.quiet_hours_start, client.quiet_hours_end, client.timezone) && isWithinCallHours(client.ai_call_hours_start, client.ai_call_hours_end, client.timezone) && !optedOut && !botVerdict.isBot && !wasSubmitted) {
       try {
         const agentId = client.retell_agent_id || 'agent_f0c3170df59b32221bfebd7c7f'
         const phoneClean = String(phone).replace(/[^+\d]/g, '')
@@ -961,7 +995,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-  if (client.auto_email_enabled && email && client.plan !== 'essentials' && !optedOut && !botVerdict.isBot) {
+  if (client.auto_email_enabled && email && client.plan !== 'essentials' && !optedOut && !botVerdict.isBot && !wasSubmitted) {
     const delayMinutes = client.email_delay_minutes ?? 0
 
     if (delayMinutes > 0) {
