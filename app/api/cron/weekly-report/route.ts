@@ -46,6 +46,7 @@ export async function GET(req: NextRequest) {
       .from('leads')
       .select('id, name, email, status, estimated_value, created_at')
       .eq('client_id', client.id)
+      .neq('status', 'submitted')
       .gte('created_at', weekAgo)
       .order('created_at', { ascending: false })
 
@@ -82,6 +83,7 @@ export async function GET(req: NextRequest) {
       .from('leads')
       .select('id, status')
       .eq('client_id', client.id)
+      .neq('status', 'submitted')
       .gte('created_at', twoWeeksAgo)
       .lt('created_at', weekAgo)
 

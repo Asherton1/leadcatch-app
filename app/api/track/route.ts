@@ -527,7 +527,7 @@ export async function POST(request: NextRequest) {
 
   // Response Guard. The clock only runs on leads worth chasing, and only while
   // the client is actually open, so nobody is marked overdue at midnight.
-  if (lead?.id && client.response_guard_enabled !== false && !autoJunk && !botVerdict.isBot) {
+  if (lead?.id && client.response_guard_enabled !== false && !autoJunk && !botVerdict.isBot && !wasSubmitted) {
     // intentFactor runs 0.4 to 2.5 and already weighs field completion, time on
     // form, repeat visits and whether we got both email and phone. Above 1.3
     // means they did at least one of those things properly.
@@ -554,6 +554,7 @@ export async function POST(request: NextRequest) {
     client.finish_consent_confirmed === true &&
     !autoJunk &&
     !botVerdict.isBot &&
+    !wasSubmitted &&
     intentFactor >= 1.3
   ) {
     // Ask the question they stalled on, not for a contact detail we already have.
