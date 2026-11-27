@@ -841,7 +841,9 @@ export async function POST(request: NextRequest) {
   // Non-blocking: failures don't stop the recovery email. Both fire in
   // parallel for speed. Only triggers when lead has email or phone.
   if (email || phone) {
-    const conversionPromises: Promise<unknown>[] = []
+    type ConvResult = { success: boolean } | null
+    let metaPromise: Promise<ConvResult> | null = null
+    let googlePromise: Promise<ConvResult> | null = null
 
     // Fire conversions ONCE per lead, not on every heartbeat upsert.
     // track.js re-sends every 15s while the visitor is on the page, so
@@ -856,7 +858,7 @@ export async function POST(request: NextRequest) {
     const googleAlreadySent = convState?.google_conversion_sent === true
 
     if (!metaAlreadySent && client.meta_capi_enabled && client.meta_pixel_id && client.meta_access_token) {
-      conversionPromises.push(
+      metaPromise = (
         sendMetaConversion({
           pixelId: client.meta_pixel_id,
           accessToken: client.meta_access_token,
@@ -869,19 +871,25 @@ export async function POST(request: NextRequest) {
           eventSourceUrl: request.headers.get('referer') ?? undefined,
           ipAddress: request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? undefined,
           userAgent: request.headers.get('user-agent') ?? undefined,
-        }).catch(err => console.error('Meta CAPI dispatch error for lead', lead.id, err))
+        }).catch(err => {
+          console.error('Meta CAPI dispatch error for lead', lead.id, err)
+          return { success: false }
+        })
       )
     }
 
+    // google_ads_conversion_label is NOT required: it is the gtag snippet's
+    // label and plays no part in uploadClickConversions. Requiring it here
+    // meant a fully configured client who had not pasted a label never
+    // dispatched at all.
     if (
       !googleAlreadySent &&
       client.google_ads_enabled &&
       client.google_ads_customer_id &&
       client.google_ads_conversion_id &&
-      client.google_ads_conversion_label &&
       client.google_ads_refresh_token
     ) {
-      conversionPromises.push(
+      googlePromise = (
         sendGoogleConversion({
           customerId: client.google_ads_customer_id,
           refreshToken: client.google_ads_refresh_token,
@@ -890,14 +898,21 @@ export async function POST(request: NextRequest) {
           leadEmail: (email as string) ?? null,
           leadPhone: (phone as string) ?? null,
           estimatedValue: signal_value,
-        }).catch(err => console.error('Google Ads dispatch error for lead', lead.id, err))
+        }).catch(err => {
+          console.error('Google Ads dispatch error for lead', lead.id, err)
+          return { success: false }
+        })
       )
     }
 
-    // Fire and continue — don't await individual results, but await the
-    // batch so logs appear in this request's runtime
-    if (conversionPromises.length > 0) {
-      await Promise.allSettled(conversionPromises)
+    // Await both so the platform's own answer is in hand before we record
+    // anything. Promise.allSettled "fulfils" a call that returned
+    // { success: false }, so the settled state alone says nothing.
+    if (metaPromise || googlePromise) {
+      const [metaResult, googleResult] = await Promise.all([
+        metaPromise ?? Promise.resolve(null),
+        googlePromise ?? Promise.resolve(null),
+      ])
 
       // Record which identifiers went with the event. Match quality is a
       // function of how many strong keys the platform had to resolve against,
@@ -918,22 +933,22 @@ export async function POST(request: NextRequest) {
       if (matchKeys.includes('user_agent')) strength += 7
 
       // Mark as sent so subsequent heartbeat upserts for this same lead
-      // don't re-fire conversions. Guarded above by meta/google_conversion_sent.
+      // don't re-fire conversions.
+      //
+      // This flag records that the PLATFORM ACCEPTED the event, not that we
+      // were configured to try. It previously keyed off the client's config
+      // alone, so a dead pixel token stamped every lead as sent while Meta
+      // received nothing, and the dashboard reported conversions that did not
+      // exist. A flag that can lie to a client about their ad data is worse
+      // than no flag. A failed send leaves it false and retries next beat.
       const convUpdate: Record<string, boolean | string | string[] | number> = {
         match_keys: matchKeys,
         match_strength: strength,
       }
-      if (!metaAlreadySent && client.meta_capi_enabled && client.meta_pixel_id && client.meta_access_token) {
+      if (metaResult?.success === true) {
         convUpdate.meta_conversion_sent = true
       }
-      if (
-        !googleAlreadySent &&
-        client.google_ads_enabled &&
-        client.google_ads_customer_id &&
-        client.google_ads_conversion_id &&
-        client.google_ads_conversion_label &&
-        client.google_ads_refresh_token
-      ) {
+      if (googleResult?.success === true) {
         convUpdate.google_conversion_sent = true
         // Needed later if this lead gets disqualified: Google matches an
         // adjustment against the original conversion's timestamp.
