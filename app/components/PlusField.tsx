@@ -53,11 +53,21 @@ const VERT = `
     // rebuilds the whole thing. That is the product, literally.
     vec3 p = mix(aHome, aRebuild, uReturn * aKept);
 
-    // Sub-pixel drift. Four frequencies with no common period, so it never
-    // returns to a state you have already seen.
-    p.x += sin(uTime * 0.041 + aSeed * 17.0) * 0.009;
-    p.y += cos(uTime * 0.029 + aSeed * 23.0) * 0.009;
-    p.z += sin(uTime * 0.017 + aSeed * 11.0) * 0.012;
+    // Idle churn. Phase comes from POSITION, not from a per-point random
+    // seed: a random seed makes neighbours drift in unrelated directions,
+    // which smears the faces and walls into a cloud and costs the crisp
+    // silhouette. Phased by position, points within a small neighbourhood
+    // move almost together, so the surface holds while regions churn
+    // against each other. Wavelength is roughly a third of the mark.
+    vec3 h = aHome;
+    p.x += sin(uTime * 0.370 + h.y * 6.1 + h.z * 3.7) * 0.026;
+    p.y += cos(uTime * 0.310 + h.x * 5.7 + h.z * 4.3) * 0.026;
+    p.z += sin(uTime * 0.230 + h.x * 4.9 + h.y * 5.3) * 0.030;
+
+    // A slower, longer swell underneath, so the churn never settles into a
+    // recognisable pattern. No two of these frequencies share a period.
+    p.x += sin(uTime * 0.131 + h.y * 1.9) * 0.016;
+    p.y += cos(uTime * 0.097 + h.x * 1.7) * 0.016;
 
     // The grey is lost for good. The orange is only ever on loan.
     float fly = uBreak * (1.0 - uReturn * aKept);
@@ -337,8 +347,10 @@ export default function PlusField({ driveSelector = '[data-field-drive]' }: { dr
 
       ptr.x += (ptr.tx - ptr.x) * 0.05
       ptr.y += (ptr.ty - ptr.y) * 0.05
-      group.rotation.y = -0.24 + ptr.x + p * 1.15
-      group.rotation.x = 0.1 + ptr.y * 0.7 - p * 0.14
+      // A slow sway on top. Rigid, so it cannot smear anything.
+      const idle = reduced ? 0 : 1
+      group.rotation.y = -0.24 + ptr.x + p * 1.15 + Math.sin(t * 0.080) * 0.035 * idle
+      group.rotation.x = 0.1 + ptr.y * 0.7 - p * 0.14 + Math.cos(t * 0.057) * 0.025 * idle
       camera.position.z = baseZ - p * 0.45
 
       renderer.render(scene, camera)
