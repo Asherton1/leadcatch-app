@@ -100,7 +100,7 @@ const FRAG = `
     vec3 col = mix(grey, orange, vHeat);
     col = mix(col, hot, vHeat * vHeat * 0.45);
 
-    float a = soft * vAlpha * (0.058 + vHeat * 0.19) * uBoost;
+    float a = soft * vAlpha * (0.195 + vHeat * 0.165) * uBoost;
     gl_FragColor = vec4(col, a);
   }
 `
@@ -114,7 +114,7 @@ export default function PlusField({ driveSelector = '[data-field-drive]' }: { dr
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const small = window.matchMedia('(max-width: 900px)').matches
-    const n = small ? 7000 : 16000
+    const n = small ? 11000 : 26000
 
     let renderer: THREE.WebGLRenderer
     try {
@@ -129,7 +129,7 @@ export default function PlusField({ driveSelector = '[data-field-drive]' }: { dr
     let baseZ = 5.4
     const fitZ = (aspect: number) => {
       // Half-extent we want visible, so the mark never touches an edge.
-      const target = aspect < 1 ? 1.78 : 2.12
+      const target = aspect < 1 ? 1.5893 : 1.7667
       return target / (Math.tan((FOV * Math.PI) / 360) * Math.min(1, aspect))
     }
 
@@ -196,13 +196,13 @@ export default function PlusField({ driveSelector = '[data-field-drive]' }: { dr
     const samplePlus = (): [number, number, number] => {
       const r = Math.random()
       let x: number, y: number, z: number
-      if (r < 0.30) {
+      if (r < 0.34) {
         ;[x, y] = inPlane()
         z = (Math.random() < 0.5 ? -1 : 1) * D + (Math.random() - 0.5) * 0.015
       } else if (r < 0.56) {
         ;[x, y] = onPerimeter(Math.random())
-        x += (Math.random() - 0.5) * 0.034
-        y += (Math.random() - 0.5) * 0.034
+        x += (Math.random() - 0.5) * 0.012
+        y += (Math.random() - 0.5) * 0.012
         z = (Math.random() * 2 - 1) * D
       } else {
         ;[x, y] = inPlane()
