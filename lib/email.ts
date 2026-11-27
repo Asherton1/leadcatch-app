@@ -195,11 +195,15 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
   const html        = buildHtml(bodyContent, vars)
 
   // ── 4. Send via Resend ─────────────────────────────────────────────────────
-  // Free tier: must use onboarding@resend.dev until a domain is verified.
-  // Once the client verifies their domain, set from_email in the clients table.
+  // Sender address. onboarding@resend.dev is NOT usable here: Resend only
+  // delivers from it to the account owner's own address, so every real lead
+  // was rejected. Default to our own verified domain and carry the client's
+  // business name as the display name. A client only needs from_email set
+  // once their own domain is verified in Resend.
+  const DEFAULT_FROM = 'recovery@userecapture.com'
   const from = client.from_email
     ? `${senderName} <${client.from_email}>`
-    : `${senderName} <onboarding@resend.dev>`
+    : `${senderName} <${DEFAULT_FROM}>`
 
   console.log('Calling Resend with:', lead.email, subject)
 
@@ -212,7 +216,7 @@ export async function sendEmailForLead(leadId: string): Promise<EmailResult> {
       to:      lead.email,
       subject,
       html,
-      ...(replyTo ? { reply_to: replyTo } : {}),
+      ...(replyTo ? { replyTo } : {}),
     })
     if (error || !data) {
       const detail = error?.message ?? 'Resend returned no data'

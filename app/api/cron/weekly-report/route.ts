@@ -340,7 +340,7 @@ export async function GET(req: NextRequest) {
     `).join('') : ''
 
     await resend.emails.send({
-      from: 'ReCapture <onboarding@resend.dev>',
+      from: 'ReCapture <hello@userecapture.com>',
       to: 'hello@userecapture.com',
       subject: `Monday Briefing — $${mrr}/mo MRR · ${activeCount} clients · ${totalLeadsAll} leads · $${totalAtRisk.toLocaleString()} at risk`,
       html: `
