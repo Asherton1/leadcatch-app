@@ -1,6 +1,11 @@
 import { Resend } from 'resend'
 import { createHmac } from 'crypto'
-import { supabase } from './supabase'
+// MUST be the service-role client. This module runs only in API routes
+// (track, send-recovery, cron/send-emails). It previously imported the ANON
+// client, so row-level security blocked the lead lookup below: every call
+// logged "Lead data: undefined" and returned "Lead not found" before reaching
+// Resend. That is why no recovery email has ever been sent, for any client.
+import { supabaseAdmin as supabase } from './supabase-admin'
 
 // Sign a lead's email for one-click unsubscribe links.
 // Signature uses UNSUBSCRIBE_SECRET env var. Token format: <leadId>.<sig>

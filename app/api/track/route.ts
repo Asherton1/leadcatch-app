@@ -376,10 +376,15 @@ export async function POST(request: NextRequest) {
     form_data: form_data ?? null,
   }
 
+  // The alert flags come back with the upserted row. The tracker heartbeats
+  // every 15s while a filled-in form sits abandoned, and each beat re-runs this
+  // route, so without these the same lead was re-alerted over and over for as
+  // long as the visitor's tab stayed open. SMS already re-checked its own flag;
+  // Slack, Teams, GHL and the email alert did not.
   const { data: lead, error: leadError } = await supabase
     .from('leads')
     .upsert(payload, { onConflict: 'session_id' })
-    .select('id')
+    .select('id, email_alert_sent, slack_sent, teams_sent, ghl_sent')
     .single()
 
   if (leadError) {
@@ -626,7 +631,8 @@ export async function POST(request: NextRequest) {
     client.email_alert_enabled &&
     client.email_alert_address &&
     (email || phone) &&
-    !wasSubmitted
+    !wasSubmitted &&
+    !lead.email_alert_sent
   ) {
     const { data: existing } = await supabase
       .from('leads')
@@ -660,7 +666,7 @@ export async function POST(request: NextRequest) {
   // --- SLACK ALERT --- (also wraps Teams and GHL)
   if ((email || phone) && !wasSubmitted) {
     try {
-      if (client.slack_webhook_url) {
+      if (client.slack_webhook_url && !lead.slack_sent) {
         const score = Number(fields_completed ?? 0) >= 3 ? 'Hot' : Number(fields_completed ?? 0) >= 2 ? 'Warm' : 'Cold'
         const slackMsg = {
           blocks: [
@@ -711,7 +717,7 @@ export async function POST(request: NextRequest) {
   // --- TEAMS ALERT ---
   if (email || phone) {
     try {
-      if (client.teams_webhook_url && !wasSubmitted) {
+      if (client.teams_webhook_url && !wasSubmitted && !lead.teams_sent) {
         const score = Number(fields_completed ?? 0) >= 3 ? 'Hot' : Number(fields_completed ?? 0) >= 2 ? 'Warm' : 'Cold'
         const teamsMsg = {
           '@type': 'MessageCard',
@@ -758,7 +764,7 @@ export async function POST(request: NextRequest) {
   // --- GOHIGHLEVEL SYNC ---
   if (name || email || phone) {
     try {
-      if (client.ghl_webhook_url && !wasSubmitted) {
+      if (client.ghl_webhook_url && !wasSubmitted && !lead.ghl_sent) {
         const score = Number(fields_completed ?? 0) >= 3 ? 'hot' : Number(fields_completed ?? 0) >= 2 ? 'warm' : 'cold'
         const ghlPayload = {
           source: 'ReCapture',
