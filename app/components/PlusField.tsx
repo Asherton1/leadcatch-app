@@ -40,6 +40,7 @@ const VERT = `
   uniform float uPixelRatio;
   uniform float uBreak;
   uniform float uReturn;
+  uniform float uFade;
 
   varying float vKept;
   varying float vAlpha;
@@ -55,9 +56,11 @@ const VERT = `
 
     // Sub-pixel drift. Four frequencies with no common period, so it never
     // returns to a state you have already seen.
-    p.x += sin(uTime * 0.041 + aSeed * 17.0) * 0.009;
-    p.y += cos(uTime * 0.029 + aSeed * 23.0) * 0.009;
-    p.z += sin(uTime * 0.017 + aSeed * 11.0) * 0.012;
+    p.x += sin(uTime * 0.236 + aSeed * 17.0) * 0.055;
+    p.y += cos(uTime * 0.191 + aSeed * 23.0) * 0.055;
+    p.z += sin(uTime * 0.127 + aSeed * 11.0) * 0.070;
+    p.x += sin(uTime * 0.071 + aSeed * 5.0) * 0.030;
+    p.y += cos(uTime * 0.053 + aSeed * 7.0) * 0.030;
 
     // The grey is lost for good. The orange is only ever on loan.
     float fly = uBreak * (1.0 - uReturn * aKept);
@@ -67,16 +70,20 @@ const VERT = `
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * mv;
 
+    // Never let a point that drifted near the lens blow up across the
+    // screen. Without this the scatter produces huge white blobs.
+    float depth = max(-mv.z, 1.2);
+
     // Fewer points are drawing the same shape, so they carry more weight.
     float grow = 1.0 - uReturn * aKept * 0.30;
-    gl_PointSize = aSize * uPixelRatio * grow * (58.0 / -mv.z);
+    gl_PointSize = min(aSize * uPixelRatio * grow * (58.0 / depth), 13.0 * uPixelRatio);
 
     // Grey fades out as it scatters and never fully comes back.
     float greyFade = 1.0 - smoothstep(0.15, 0.95, uBreak) * (1.0 - aKept) * 0.82;
     vAlpha = greyFade;
 
     vHeat = aKept * (0.45 + uReturn * 0.55);
-    vAlpha *= 1.0 + uReturn * aKept * 0.25;
+    vAlpha *= (1.0 + uReturn * aKept * 0.25) * uFade;
   }
 `
 
@@ -129,7 +136,7 @@ export default function PlusField({ driveSelector = '[data-field-drive]' }: { dr
     let baseZ = 5.4
     const fitZ = (aspect: number) => {
       // Half-extent we want visible, so the mark never touches an edge.
-      const target = aspect < 1 ? 1.78 : 2.12
+      const target = aspect < 1 ? 1.70 : 1.92
       return target / (Math.tan((FOV * Math.PI) / 360) * Math.min(1, aspect))
     }
 
@@ -242,7 +249,8 @@ export default function PlusField({ driveSelector = '[data-field-drive]' }: { dr
 
       const sx = x * 1.4 + (Math.random() - 0.5) * 1.5
       const sy = y * 1.4 + (Math.random() - 0.5) * 1.5
-      const sz = (Math.random() - 0.5) * 2.2
+      // Biased away from the camera, so nothing scatters into the lens.
+      const sz = (Math.random() * 0.8 - 0.62) * 2.0
       const sl = Math.hypot(sx, sy, sz) || 1
       scatter[i * 3] = sx / sl; scatter[i * 3 + 1] = sy / sl; scatter[i * 3 + 2] = sz / sl
 
@@ -274,6 +282,7 @@ export default function PlusField({ driveSelector = '[data-field-drive]' }: { dr
         uBoost: { value: small ? 2.0 : 1.0 },
         uBreak: { value: 0 },
         uReturn: { value: 0 },
+        uFade: { value: 1 },
       },
       transparent: true,
       depthWrite: false,
@@ -334,11 +343,15 @@ export default function PlusField({ driveSelector = '[data-field-drive]' }: { dr
       mat.uniforms.uTime.value = reduced ? 0 : t
       mat.uniforms.uBreak.value = smooth(0.10, 0.32, p)
       mat.uniforms.uReturn.value = smooth(0.28, 0.52, p)
+      mat.uniforms.uFade.value = 1 - smooth(0.93, 1.0, p)
 
       ptr.x += (ptr.tx - ptr.x) * 0.05
       ptr.y += (ptr.ty - ptr.y) * 0.05
-      group.rotation.y = -0.24 + ptr.x + p * 1.15
-      group.rotation.x = 0.1 + ptr.y * 0.7 - p * 0.14
+      const idle = reduced ? 0 : 1
+      group.rotation.y = -0.24 + ptr.x + p * 1.15 + Math.sin(t * 0.083) * 0.045 * idle
+      group.rotation.x = 0.1 + ptr.y * 0.7 - p * 0.14 + Math.cos(t * 0.061) * 0.032 * idle
+      const breath = 1 + Math.sin(t * 0.047) * 0.014 * idle
+      group.scale.setScalar(breath)
       camera.position.z = baseZ - p * 0.45
 
       renderer.render(scene, camera)
