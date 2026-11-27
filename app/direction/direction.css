@@ -603,3 +603,17 @@
     color: #b4b4b4;
   }
 }
+
+
+/* ------------------------------------------------------------------
+   MOBILE: the mark sits centred behind the copy rather than off to one
+   side, so the desktop panel opacities leave pricing and body text
+   fighting the glow. Text wins on a phone; the mark stays a presence.
+   ------------------------------------------------------------------ */
+@media (max-width: 768px) {
+  .dir-stage .dir-sec.alt { background: rgba(13, 13, 13, 0.90); }
+  .dir-stage .dir-sec:not(.alt):not(.dir-manifesto) { background: rgba(10, 10, 10, 0.88); }
+  .dir-stage .dir-manifesto { background: rgba(13, 13, 13, 0.90); }
+  .dir-stage .rseq { background: rgba(10, 10, 10, 0.88); }
+  .dir-stage .lc-footer { background: rgba(8, 8, 10, 0.80); }
+}
