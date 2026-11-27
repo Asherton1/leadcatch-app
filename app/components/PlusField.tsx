@@ -129,7 +129,7 @@ export default function PlusField({ driveSelector = '[data-field-drive]' }: { dr
     let baseZ = 5.4
     const fitZ = (aspect: number) => {
       // Half-extent we want visible, so the mark never touches an edge.
-      const target = aspect < 1 ? 1.70 : 1.92
+      const target = aspect < 1 ? 1.78 : 2.12
       return target / (Math.tan((FOV * Math.PI) / 360) * Math.min(1, aspect))
     }
 
