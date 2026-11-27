@@ -172,8 +172,16 @@ export async function sendGoogleConversion(payload: GoogleConversionPayload) {
     return { success: false, error: 'missing_developer_token' }
   }
 
-  if (!customerId || !refreshToken || !conversionId || !conversionLabel) {
-    console.error('Google Ads skipped — missing required fields')
+  // conversionLabel is deliberately NOT required here. It is the gtag snippet's
+  // label and plays no part in uploadClickConversions, which addresses the
+  // conversion action by resource name. Requiring it meant any client who had
+  // not pasted a label had every upload silently skipped as "missing
+  // credentials" while looking fully configured. The adjustment path below
+  // never required it, so the two were inconsistent.
+  if (!customerId || !refreshToken || !conversionId) {
+    console.error('Google Ads skipped — missing required fields', {
+      hasCustomerId: !!customerId, hasRefreshToken: !!refreshToken, hasConversionId: !!conversionId,
+    })
     return { success: false, error: 'missing_credentials' }
   }
 
@@ -186,6 +194,9 @@ export async function sendGoogleConversion(payload: GoogleConversionPayload) {
   // Conversion ID format: "AW-12345678" → numeric portion only
   const conversionIdNumeric = conversionId.replace(/^AW-/, '')
   const conversionActionResource = `customers/${customerId}/conversionActions/${conversionIdNumeric}`
+  // Logged so a wrong value is diagnosable: this must be the numeric conversion
+  // ACTION id, not the AW-xxxx conversion id from the gtag snippet.
+  console.log('Google Ads conversion action:', conversionActionResource)
 
   const userIdentifiers: Array<Record<string, string>> = []
   if (leadEmail) userIdentifiers.push({ hashedEmail: sha256(leadEmail) as string })

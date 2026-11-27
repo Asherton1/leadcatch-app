@@ -573,14 +573,91 @@
     } catch (e) {}
   }
 
+  // --- Div-based ("formless") form support ---
+  //
+  // Every discovery path below used to be querySelectorAll('form'), so a form
+  // built as a bare <div> of inputs -- the default in React, Next and Webflow --
+  // was invisible to ReCapture and captured nothing at all.
+
+  var VIRTUAL_MAX_FIELDS = 15;   // above this we have climbed into page chrome
+  var VIRTUAL_MAX_HOPS   = 10;
+
+  var SUBMIT_TEXT_RE = /\b(submit|send|request|book|schedule|apply|subscribe|continue|next|confirm|claim|reserve|get started|get a quote|get my|sign up|contact us)\b/i;
+  var NOT_SUBMIT_RE  = /\b(cancel|clear|reset|back|previous|close|dismiss|remove|delete|log ?in|sign ?in|forgot)\b/i;
+
+  function looksLikeSubmit(btn) {
+    try {
+      var label = ((btn.innerText || btn.textContent || '') + ' ' +
+                   (btn.getAttribute && (btn.getAttribute('aria-label') || btn.value || '') || ''))
+                  .replace(/\s+/g, ' ').trim();
+      if (NOT_SUBMIT_RE.test(label)) return false;   // negatives always win
+      // Deliberately NOT treating a bare <button> with no type as a submit.
+      // Inside a real <form> the HTML default makes that true, but in a div
+      // every nav toggle and accordion is also a typeless <button>: on this
+      // very site "Pricing+" and "Resources+" matched. Marking a lead
+      // submitted because someone opened a menu would silently cancel their
+      // recovery email, which is worse than missing the submit.
+      if (btn.getAttribute && btn.getAttribute('type') === 'submit') return true;
+      return SUBMIT_TEXT_RE.test(label);
+    } catch (e) { return false; }
+  }
+
+  function fieldCount(node) {
+    try { return node.querySelectorAll(FIELD_SELECTOR).length; } catch (e) { return 0; }
+  }
+
+  // Climb from the field and keep the TIGHTEST wrapper that holds the whole
+  // cluster. Stop before a parent drags in unrelated inputs (a newsletter box
+  // in the footer, a search bar in the header), so two separate widgets never
+  // collapse into one lead.
+  function virtualContainerFor(el) {
+    var node = el.parentElement;
+    var best = null, bestCount = 0, hops = 0;
+    while (node && node !== doc.body && node !== doc.documentElement && hops < VIRTUAL_MAX_HOPS) {
+      var count = fieldCount(node);
+      if (count > VIRTUAL_MAX_FIELDS) break;
+      // A parent that drags in further inputs once we already hold a cluster is
+      // a page wrapper, not this form. Stop before a footer newsletter box and
+      // a contact form collapse into a single lead.
+      if (bestCount >= 2 && count > bestCount) break;
+      // Keep the SMALLEST element at which the field count last grew: that is
+      // the tightest node holding the whole cluster. Climbing past it only
+      // widens the net (on this site it reached the full page wrapper).
+      if (count > bestCount) { best = node; bestCount = count; }
+      node = node.parentElement; hops++;
+    }
+    return best;
+  }
+
+  function initVirtualForm(el) {
+    try {
+      // Already covered by a real form or an existing virtual container.
+      for (var i = 0; i < trackers.length; i++) {
+        if (trackers[i] && trackers[i].form && trackers[i].form.contains(el)) return;
+      }
+      var container = virtualContainerFor(el);
+      if (!container || container._rcTracked) return;
+      if (takesPayment(container)) return;   // same card-field refusal as real forms
+      container._rcTracked = true;
+      rcdbg('registering div-based form', container.tagName, container.className || '');
+      trackers.push(new FormTracker(container, true));
+    } catch (e) { /* never break the host page */ }
+  }
+
   // --- FormTracker ---
 
   var pageSession = genId();
   var trackerCount = 0;
 
-  function FormTracker(form) {
+  function FormTracker(form, isVirtual) {
     this.form      = form;
-    plantHoneypot(form);
+    this.isVirtual = !!isVirtual;
+    // Honeypot is injected into real <form> elements only. A div-based form is
+    // usually React-managed, and appending a node into a React-owned container
+    // can be torn out on the next render or break reconciliation outright. Bot
+    // scoring still runs server side, so a virtual form loses the honeypot
+    // signal and nothing else. Never risk the host page for a signal.
+    if (!this.isVirtual) plantHoneypot(form);
     this.sessionId = pageSession + (trackerCount > 0 ? '_' + trackerCount : '');
     this.startTime = null;
     this.touched   = false;
@@ -676,6 +753,24 @@
       self.submitted = true;
       self.send(false);
     });
+
+    // A div-based form never fires 'submit'. Without this, every completed
+    // div-form submission would be recorded as an abandonment and the client
+    // would be chased for a lead they already have. Detect the submit click.
+    if (this.isVirtual) {
+      this.form.addEventListener('click', function (e) {
+        if (!e.isTrusted) return;
+        try {
+          var btn = e.target && e.target.closest
+            ? e.target.closest('button,[type=submit],[role=button],a[href="#"]')
+            : null;
+          if (!btn) return;
+          if (!looksLikeSubmit(btn)) return;
+          self.submitted = true;
+          self.send(false);
+        } catch (err) { /* never break the host page */ }
+      }, true);
+    }
   };
 
   FormTracker.prototype.payload = function () {
@@ -854,7 +949,13 @@
       var el = e.target;
       if (!el || !el.matches || !el.matches(FIELD_SELECTOR)) return;
       var f = el.form || (el.closest && el.closest('form'));
-      if (f && !f._rcTracked) initForm(f);
+      if (f) {
+        if (!f._rcTracked) initForm(f);
+        return;
+      }
+      // No <form> ancestor at all: a div-based form. Register it lazily, on the
+      // first real keystroke, so we never guess at inert markup.
+      initVirtualForm(el);
     } catch (err) {}
   }, true);
 
