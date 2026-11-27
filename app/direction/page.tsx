@@ -278,10 +278,10 @@ export default function DirectionPreview() {
         Direction preview. Not linked from anywhere and not indexed. Every section from the
         live homepage is here, rebuilt on one spacing and type scale.
       </p>
-      </div>{/* /dir-stage */}
 
 
       <Footer />
+      </div>{/* /dir-stage */}
     </div>
   )
 }

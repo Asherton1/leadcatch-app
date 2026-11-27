@@ -547,3 +547,19 @@
   }
   .dir-h1 { max-width: 100%; }
 }
+
+
+/* The field runs behind the footer and blooms there. A light scrim keeps
+   the links and legal text readable through the glow. */
+.dir-stage .lc-footer {
+  position: relative;
+  z-index: 1;
+  background: rgba(8, 8, 10, 0.42);
+}
+
+.dir-stage .lc-footer .footer-link,
+.dir-stage .lc-footer .footer-col-label,
+.dir-stage .lc-footer .footer-tagline {
+  position: relative;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
+}
