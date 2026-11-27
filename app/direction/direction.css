@@ -495,10 +495,10 @@
 }
 
 /* The rest let the object glow through without losing contrast. */
-.dir-stage .dir-sec.alt { background: rgba(13,13,16,0.88); }
-.dir-stage .dir-sec:not(.alt):not(.dir-manifesto) { background: rgba(9,9,11,0.85); }
-.dir-stage .dir-manifesto { background: rgba(13,13,16,0.88); }
-.dir-stage .rseq { background: rgba(10,10,12,0.82); }
+.dir-stage .dir-sec.alt { background: rgba(13,13,16,0.72); }
+.dir-stage .dir-sec:not(.alt):not(.dir-manifesto) { background: rgba(9,9,11,0.68); }
+.dir-stage .dir-manifesto { background: rgba(13,13,16,0.74); }
+.dir-stage .rseq { background: rgba(10,10,12,0.70); }
 
 /* ---------- Headline assembly ---------- */
 

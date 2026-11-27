@@ -76,7 +76,10 @@ const VERT = `
 
     // Fewer points are drawing the same shape, so they carry more weight.
     float grow = 1.0 - uReturn * aKept * 0.30;
-    gl_PointSize = min(aSize * uPixelRatio * grow * (58.0 / depth), 13.0 * uPixelRatio);
+    // Ceiling sits well ABOVE the normal size at rest (~29 * ratio), so it
+    // only ever catches a point that scattered near the lens. The previous
+    // 13.0 was below the normal size and shrank the whole mark.
+    gl_PointSize = min(aSize * uPixelRatio * grow * (58.0 / depth), 34.0 * uPixelRatio);
 
     // Grey fades out as it scatters and never fully comes back.
     float greyFade = 1.0 - smoothstep(0.15, 0.95, uBreak) * (1.0 - aKept) * 0.82;
