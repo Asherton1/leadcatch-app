@@ -1,0 +1,341 @@
+/* ============================================================
+   PROVE IT: the page runs ReCapture on the visitor, live.
+   Nothing is transmitted or stored. Everything below happens
+   in the browser and is thrown away on reload.
+   ============================================================ */
+
+.lcd {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(255,107,53,0.1) 0%, transparent 58%),
+    #0d0d10;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+.lcd-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* ---------- Left: a real form ---------- */
+
+.lcd-form-card {
+  background: linear-gradient(170deg, #17171b 0%, #0f0f12 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 1.75rem;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+
+.lcd-form-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.35rem;
+}
+
+.lcd-form-note {
+  font-size: 0.8125rem;
+  color: #7c7c85;
+  margin: 0 0 1.5rem;
+  line-height: 1.6;
+}
+
+.lcd-field { margin-bottom: 1rem; }
+
+.lcd-label {
+  display: block;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7c7c85;
+  margin-bottom: 0.45rem;
+}
+
+.lcd-input {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 0.8rem 0.95rem;
+  color: #fff;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .2s ease, background .2s ease;
+}
+
+.lcd-input::placeholder { color: #4a4a52; }
+
+.lcd-input:focus {
+  border-color: rgba(255,107,53,0.55);
+  background: rgba(255,107,53,0.04);
+}
+
+.lcd-submit {
+  width: 100%;
+  margin-top: 0.5rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #8a8a92;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.85rem;
+  border-radius: 10px;
+  cursor: not-allowed;
+}
+
+.lcd-hint {
+  margin: 1.25rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: #ff6b35;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.lcd-hint i {
+  flex: 0 0 6px; width: 6px; height: 6px; border-radius: 50%;
+  background: #ff6b35; margin-top: 0.5em;
+  animation: lcdPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes lcdPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.7); } }
+
+/* ---------- Right: what ReCapture sees ---------- */
+
+.lcd-panel {
+  background: linear-gradient(170deg, #17171b 0%, #0f0f12 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 1.5rem 1.75rem 1.75rem;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  position: relative;
+  overflow: hidden;
+  transition: border-color .5s ease, box-shadow .5s ease;
+}
+
+.lcd-panel.captured {
+  border-color: rgba(255,107,53,0.45);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,107,53,0.2), 0 0 60px rgba(255,107,53,0.12);
+}
+
+.lcd-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.lcd-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7c7c85;
+  transition: color .4s ease;
+}
+
+.lcd-status i {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #4a4a52;
+  transition: background .4s ease, box-shadow .4s ease;
+}
+
+.lcd-status.watching { color: #4ade80; }
+.lcd-status.watching i { background: #4ade80; box-shadow: 0 0 10px rgba(74,222,128,0.6); }
+
+.lcd-status.caught { color: #ff6b35; }
+.lcd-status.caught i { background: #ff6b35; box-shadow: 0 0 12px rgba(255,107,53,0.8); }
+
+.lcd-timer {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  color: #5e5e66;
+  letter-spacing: 0.08em;
+}
+
+.lcd-metric {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.55rem 0;
+  font-size: 0.875rem;
+  color: #9a9aa2;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.lcd-metric b {
+  color: #fff;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.lcd-metric b.pending { color: #4a4a52; font-weight: 400; }
+
+/* Intent score */
+
+.lcd-score-wrap { margin: 1.35rem 0 0.25rem; }
+
+.lcd-score-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.lcd-score-label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7c7c85;
+}
+
+.lcd-score {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #ff6b35;
+  font-variant-numeric: tabular-nums;
+}
+
+.lcd-bar {
+  height: 4px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.07);
+  overflow: hidden;
+}
+
+.lcd-bar i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #ff6b35, #ffa172);
+  border-radius: 3px;
+  transition: width .5s cubic-bezier(.2,.8,.3,1);
+}
+
+.lcd-score-note {
+  font-size: 0.75rem;
+  color: #6f6f78;
+  margin: 0.65rem 0 0;
+  line-height: 1.5;
+}
+
+/* What would have happened */
+
+.lcd-actions {
+  margin-top: 1.35rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: grid;
+  gap: 0.6rem;
+}
+
+.lcd-action {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.8125rem;
+  color: #9a9aa2;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.lcd-panel.captured .lcd-action { opacity: 1; transform: none; }
+.lcd-panel.captured .lcd-action:nth-child(2) { transition-delay: .1s; }
+.lcd-panel.captured .lcd-action:nth-child(3) { transition-delay: .2s; }
+
+.lcd-action span.tick {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(255,107,53,0.14);
+  border: 1px solid rgba(255,107,53,0.35);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 18px;
+}
+.lcd-action span.tick::before {
+  content: ''; width: 5px; height: 9px;
+  border: solid #ff6b35; border-width: 0 1.6px 1.6px 0;
+  transform: rotate(45deg) translateY(-1px);
+}
+
+/* The stamp */
+
+.lcd-stamp {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-11deg) scale(1.6);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: rgba(255,107,53,0.92);
+  border: 3px solid rgba(255,107,53,0.75);
+  border-radius: 10px;
+  padding: 0.4rem 1.1rem;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  text-transform: uppercase;
+}
+
+.lcd-panel.captured .lcd-stamp { animation: lcdStamp 1.5s cubic-bezier(.2,.9,.3,1) forwards; }
+
+@keyframes lcdStamp {
+  0%   { opacity: 0; transform: translate(-50%,-50%) rotate(-11deg) scale(1.9); }
+  18%  { opacity: 1; transform: translate(-50%,-50%) rotate(-11deg) scale(1); }
+  70%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%,-50%) rotate(-11deg) scale(1.04); }
+}
+
+.lcd-privacy {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  line-height: 1.65;
+  color: #6f6f78;
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+}
+
+.lcd-privacy svg { width: 14px; height: 14px; stroke: #6f6f78; fill: none; stroke-width: 1.7; flex: 0 0 14px; margin-top: 0.15em; }
+
+.lcd-reset {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.14);
+  color: #9a9aa2;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1.25rem;
+  transition: border-color .2s ease, color .2s ease;
+}
+.lcd-reset:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+
+@media (max-width: 860px) {
+  .lcd-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .lcd-form-card, .lcd-panel { padding: 1.35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lcd-panel.captured .lcd-stamp { animation: none; opacity: 0; }
+  .lcd-hint i { animation: none; }
+  .lcd-action { transition: none; }
+}

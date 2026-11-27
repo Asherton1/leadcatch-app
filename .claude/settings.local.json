@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -n \"Re</span><span.*Capture\\\\|color: ''#fff''.*Re\\\\|color: ''#ffffff''.*Re\" /Users/mac/leadcatch-app/app/page.tsx /Users/mac/leadcatch-app/app/dashboard/page.tsx /Users/mac/leadcatch-app/app/signup/page.tsx /Users/mac/leadcatch-app/app/login/page.tsx /Users/mac/leadcatch-app/app/get-started/page.tsx /Users/mac/leadcatch-app/app/test-form/page.tsx)",
+      "Bash(npx vercel:*)",
+      "Bash(/Users/mac/.nvm/versions/node/v22.13.1/bin/npx vercel:*)",
+      "Read(//Users/mac/.nvm/versions/**)",
+      "Read(//usr/local/lib/node_modules/npm/bin/**)",
+      "Bash(/usr/local/bin/npx vercel:*)",
+      "Read(//usr/local/bin/**)",
+      "Read(//usr/local/**)",
+      "Read(//opt/**)",
+      "Read(//Users/mac/**)",
+      "Bash(ls /opt/homebrew/opt/node*/bin/node)",
+      "Bash(ls /usr/local/opt/node*/bin/node)",
+      "Bash(ls ~/.nvm/versions/node/*/bin/node)",
+      "Bash(mdfind -name node)",
+      "Bash(/usr/local/bin/node /Users/mac/.npm/_npx/69f9afb961c37556/node_modules/.bin/vercel --prod)",
+      "Bash(npm run *)",
+      "Bash(git -C /Users/mac/leadcatch-app status)",
+      "Bash(git -C /Users/mac/leadcatch-app diff --stat)",
+      "Bash(git -C /Users/mac/leadcatch-app add app/landing.css app/page.tsx)",
+      "Bash(git -C /Users/mac/leadcatch-app commit -m ' *)",
+      "Bash(git *)"
+    ]
+  }
+}

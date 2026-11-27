@@ -1,0 +1,334 @@
+/* ============================================================
+   COMPONENT SURFACES
+   The five existing components keep their markup and their
+   behaviour. Only the surface changes: depth, a cursor-tracked
+   sheen, accent lines that draw in, and numerals treated as
+   artwork rather than labels. Scoped to .dir so the live page
+   is untouched.
+   ============================================================ */
+
+.dir {
+  --sheen: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(255, 107, 53, 0.13) 0%,
+    rgba(255, 107, 53, 0.04) 38%,
+    transparent 68%
+  );
+}
+
+/* A shared lift. Every interactive surface answers the pointer. */
+.dir .leak-row,
+.dir .sfl-card,
+.dir .ind-card,
+.dir .ts-card,
+.dir .fs-tab,
+.dir .dir-window,
+.dir .lcd-form-card,
+.dir .lcd-panel {
+  position: relative;
+  isolation: isolate;
+}
+
+.dir .leak-row::before,
+.dir .sfl-card::before,
+.dir .ind-card::before,
+.dir .ts-card::before,
+.dir .fs-tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--sheen);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.dir .leak-row:hover::before,
+.dir .sfl-card:hover::before,
+.dir .ind-card:hover::before,
+.dir .ts-card:hover::before,
+.dir .fs-tab:hover::before { opacity: 1; }
+
+/* ------------------------------------------------------------
+   1. LEAK ROWS
+   Were flat list rows. Now editorial bands: an oversized ghost
+   numeral, a rule that draws across on hover, and real presence.
+   ------------------------------------------------------------ */
+
+.dir .leak-row {
+  border: 1px solid transparent;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 0.35rem 1.25rem;
+  transition: background .4s ease, border-color .4s ease, transform .4s cubic-bezier(.2,.8,.3,1);
+  overflow: hidden;
+}
+
+.dir .leak-row:hover {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(6px);
+}
+
+/* The numeral becomes artwork: huge, hollow, clipped by the row. */
+.dir .leak-num {
+  font-size: clamp(4.5rem, 11vw, 9rem) !important;
+  font-weight: 800 !important;
+  line-height: 0.8 !important;
+  letter-spacing: -0.06em !important;
+  color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.09);
+  opacity: 1 !important;
+  transition: -webkit-text-stroke-color .45s ease, transform .55s cubic-bezier(.2,.8,.3,1);
+  z-index: 0;
+}
+
+.dir .leak-row:hover .leak-num {
+  -webkit-text-stroke-color: rgba(255, 107, 53, 0.4);
+  transform: scale(1.04);
+}
+
+.dir .leak-trigger { position: relative; z-index: 1; }
+
+.dir .leak-eyebrow {
+  color: #ff6b35 !important;
+  letter-spacing: 0.2em !important;
+  font-weight: 700 !important;
+}
+
+.dir .leak-title {
+  letter-spacing: -0.03em !important;
+  transition: color .3s ease;
+}
+
+.dir .leak-row:hover .leak-title { color: #fff !important; }
+
+/* ------------------------------------------------------------
+   2. STEPS
+   Were three identical dark cards. Now a connected run with
+   glowing nodes and a numeral that sits behind the content.
+   ------------------------------------------------------------ */
+
+.dir .sfl-card {
+  background: linear-gradient(168deg, rgba(23,23,27,0.9) 0%, rgba(14,14,17,0.9) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 18px !important;
+  overflow: hidden;
+  transition: transform .4s cubic-bezier(.2,.8,.3,1), border-color .4s ease, box-shadow .4s ease;
+}
+
+.dir .sfl-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 107, 53, 0.3) !important;
+  box-shadow: 0 28px 70px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,107,53,0.1);
+}
+
+.dir .sfl-num {
+  font-size: clamp(3.5rem, 7vw, 5.5rem) !important;
+  font-weight: 800 !important;
+  color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+  transition: -webkit-text-stroke-color .4s ease;
+}
+
+.dir .sfl-card:hover .sfl-num { -webkit-text-stroke-color: rgba(255, 107, 53, 0.42); }
+
+.dir .sfl-node-dot {
+  box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.55);
+  animation: dirNode 2.8s ease-out infinite;
+}
+
+@keyframes dirNode {
+  0%   { box-shadow: 0 0 0 0 rgba(255,107,53,0.5); }
+  70%  { box-shadow: 0 0 0 12px rgba(255,107,53,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,107,53,0); }
+}
+
+.dir .sfl-card:nth-child(2) .sfl-node-dot { animation-delay: .5s; }
+.dir .sfl-card:nth-child(3) .sfl-node-dot { animation-delay: 1s; }
+
+.dir .sfl-stat-num {
+  font-size: 2rem !important;
+  letter-spacing: -0.035em !important;
+}
+
+/* ------------------------------------------------------------
+   3. INDUSTRY CARDS
+   Were flat tiles. Now lifted surfaces with a gradient edge
+   that only appears under the cursor.
+   ------------------------------------------------------------ */
+
+.dir .ind-card {
+  background: linear-gradient(170deg, rgba(22,22,26,0.92) 0%, rgba(13,13,16,0.92) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 18px !important;
+  overflow: hidden;
+  transition: transform .4s cubic-bezier(.2,.8,.3,1), border-color .4s ease, box-shadow .4s ease;
+}
+
+.dir .ind-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 107, 53, 0.32) !important;
+  box-shadow: 0 26px 64px rgba(0,0,0,0.58);
+}
+
+.dir .ind-trigger { position: relative; z-index: 1; }
+
+.dir .ind-tag {
+  color: #ff6b35 !important;
+  letter-spacing: 0.18em !important;
+  font-weight: 700 !important;
+}
+
+.dir .ind-headline {
+  letter-spacing: -0.02em !important;
+  line-height: 1.3 !important;
+}
+
+.dir .ind-value { color: #9a9aa2 !important; }
+
+.dir .ind-more {
+  color: #ff6b35 !important;
+  font-weight: 600 !important;
+}
+
+/* ------------------------------------------------------------
+   4. TESTIMONIAL
+   Was a plain bordered box. Now a proper pull quote: oversized
+   mark, generous measure, lifted surface.
+   ------------------------------------------------------------ */
+
+.dir .ts-card {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,107,53,0.07) 0%, transparent 60%),
+    linear-gradient(170deg, #17171b 0%, #0f0f12 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 34px 90px rgba(0,0,0,0.55);
+  padding: 3rem 3.25rem !important;
+}
+
+.dir .ts-mark {
+  font-size: 5rem !important;
+  line-height: 0.7 !important;
+  color: rgba(255, 107, 53, 0.22) !important;
+  opacity: 1 !important;
+}
+
+.dir .ts-quote {
+  font-size: clamp(1.0625rem, 2.1vw, 1.375rem) !important;
+  line-height: 1.65 !important;
+  color: #e8e8ea !important;
+  letter-spacing: -0.012em;
+}
+
+.dir .ts-dot {
+  transition: background .3s ease, transform .3s ease;
+}
+
+.dir .ts-dot.active { transform: scaleX(2.2); transform-origin: center; }
+
+.dir .ts-arrow {
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  background: rgba(255,255,255,0.03) !important;
+  transition: border-color .25s ease, background .25s ease;
+}
+
+.dir .ts-arrow:hover {
+  border-color: rgba(255,107,53,0.45) !important;
+  background: rgba(255,107,53,0.08) !important;
+}
+
+/* ------------------------------------------------------------
+   5. FEATURE SHOWCASE
+   Tabs were flat text rows. Now they read as a control surface,
+   with the active one clearly held.
+   ------------------------------------------------------------ */
+
+.dir .fs-tab {
+  border-radius: 12px !important;
+  border: 1px solid transparent !important;
+  transition: background .3s ease, border-color .3s ease, transform .3s ease;
+  overflow: hidden;
+}
+
+.dir .fs-tab:hover {
+  background: rgba(255,255,255,0.025) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  transform: translateX(4px);
+}
+
+.dir .fs-tab.is-on {
+  background: linear-gradient(90deg, rgba(255,107,53,0.12) 0%, rgba(255,107,53,0.02) 100%) !important;
+  border-color: rgba(255,107,53,0.35) !important;
+  transform: none;
+}
+
+.dir .fs-tab.is-on .fs-tab-name { color: #fff !important; font-weight: 700 !important; }
+.dir .fs-tab.is-on .fs-tab-n { color: #ff6b35 !important; }
+
+.dir .fs-stage {
+  background: linear-gradient(170deg, #17171b 0%, #0f0f12 100%) !important;
+  border: 1px solid rgba(255,255,255,0.09) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+}
+
+@media (max-width: 760px) {
+  .dir .ts-card { padding: 2rem 1.5rem !important; }
+  .dir .leak-row:hover { transform: none; }
+  .dir .leak-num { font-size: clamp(3.5rem, 18vw, 5rem) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dir .sfl-node-dot { animation: none; }
+  .dir .leak-row:hover,
+  .dir .sfl-card:hover,
+  .dir .ind-card:hover,
+  .dir .fs-tab:hover { transform: none; }
+}
+
+/* ------------------------------------------------------------
+   FEATURE SHOWCASE PADDING
+   Giving .fs-stage a border and a background exposed that its
+   panel carries no padding of its own, so content sat flush
+   against the new edge. The six tabs also ran edge to edge with
+   no gap between them.
+   ------------------------------------------------------------ */
+
+.dir .fs-grid {
+  gap: 0.5rem !important;
+}
+
+.dir .fs-tab {
+  padding: 0.95rem 0.85rem !important;
+}
+
+.dir .fs-stage {
+  padding: 2rem !important;
+  margin-top: 1.5rem;
+}
+
+.dir .fs-panel {
+  padding: 0 !important;
+}
+
+@media (max-width: 760px) {
+  .dir .fs-stage { padding: 1.25rem !important; }
+  .dir .fs-grid { gap: 0.4rem !important; }
+}
+
+/* The six panels range from 417px to 1064px tall and only one is ever
+   in the DOM, so the stage was resizing by up to 2.5x per click. Lock it
+   to the tallest and centre the content, so short tabs read as breathing
+   room rather than as the box collapsing. */
+@media (min-width: 900px) {
+  .dir .fs-stage {
+    min-height: 1120px;
+    display: flex;
+    align-items: center;
+  }
+  .dir .fs-panel { width: 100%; }
+}

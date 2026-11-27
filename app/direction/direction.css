@@ -1,0 +1,549 @@
+/* ============================================================
+   DIRECTION PREVIEW
+   A full homepage built on one spacing and type system rather
+   than section-by-section decisions. Preview route only.
+   ============================================================ */
+
+.dir {
+  --d-bg:        #09090b;
+  --d-bg-alt:    #0d0d10;
+  --d-surface:   #141418;
+  --d-surface-2: #1a1a1f;
+  --d-border:    rgba(255, 255, 255, 0.08);
+  --d-border-up: rgba(255, 255, 255, 0.14);
+
+  --d-text:      #ffffff;
+  --d-body:      #b7b7bd;
+  --d-muted:     #7c7c85;
+  --d-faint:     #55555e;
+
+  --d-orange:    #ff6b35;
+
+  /* One spacing scale. Every gap on the page comes from here. */
+  --d-s1: 0.5rem;
+  --d-s2: 0.875rem;
+  --d-s3: 1.25rem;
+  --d-s4: 2rem;
+  --d-s5: 3rem;
+  --d-s6: 4.5rem;
+  --d-s7: 7rem;
+
+  --d-gutter: 3rem;
+  --d-max: 1180px;
+
+  background: var(--d-bg);
+  color: var(--d-body);
+  /* clip, not hidden. overflow-x: hidden makes this a scroll container,
+     which silently disables position: sticky on every descendant, and the
+     field canvas stops pinning. clip gives the same clipping with none of
+     that. */
+  overflow-x: clip;
+}
+
+/* ---------- Section shell ---------- */
+
+.dir-sec {
+  padding: var(--d-s7) var(--d-gutter);
+  position: relative;
+}
+
+.dir-sec.alt { background: var(--d-bg-alt); }
+.dir-sec.tight { padding-top: var(--d-s6); padding-bottom: var(--d-s6); }
+
+.dir-wrap {
+  max-width: var(--d-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.dir-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--d-border) 20%, var(--d-border) 80%, transparent);
+  border: 0;
+  margin: 0;
+}
+
+/* ---------- One heading block, used everywhere ---------- */
+
+.dir-head { margin-bottom: var(--d-s6); max-width: 46rem; }
+.dir-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+
+.dir-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--d-orange);
+  margin: 0 0 var(--d-s3);
+}
+
+.dir-h2 {
+  /* Matches .section-title on the live page exactly. */
+  font-size: clamp(1.35rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--d-text);
+  margin: 0 0 var(--d-s3);
+}
+
+.dir-h2 .q { color: var(--d-faint); }
+
+.dir-lede {
+  /* Matches .section-subtitle on the live page exactly. */
+  font-size: clamp(0.875rem, 2.5vw, 1.25rem);
+  line-height: 1.7;
+  color: var(--d-body);
+  margin: 0;
+  max-width: 44rem;
+}
+
+.dir-head.center .dir-lede { margin-left: auto; margin-right: auto; }
+
+/* ---------- Hero ---------- */
+
+.dir-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #070708;
+  isolation: isolate;
+}
+
+.intent-field {
+  position: absolute;
+  inset: 0 -6% 0 38%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.dir-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #070708 0%, rgba(7,7,8,0.94) 30%, rgba(7,7,8,0.3) 58%, transparent 82%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.dir-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--d-max);
+  margin: 0 auto;
+  padding: 0 var(--d-gutter);
+  width: 100%;
+}
+
+.dir-h1 {
+  /* Measured against invoicegenai.ma: its h1 is 123.8px at a 1440 viewport
+     (8.6vw), line-height 0.96, weight 400. Ours was 63.4px at weight 800.
+     Same typeface (Geist), just the scale, weight and leading changed. */
+  font-size: clamp(2.5rem, 8.4vw, 7.4rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.034em;
+  color: var(--d-text);
+  margin: 0 0 var(--d-s3);
+  max-width: 17ch;
+}
+
+.dir-h1 em { font-style: normal; color: var(--d-orange); }
+
+.dir-sub {
+  /* Matches .hero-subtitle on the live page exactly. */
+  font-size: 1.25rem;
+  line-height: 1.75;
+  color: var(--d-body);
+  max-width: 46ch;
+  margin: 0 0 var(--d-s4);
+}
+
+.dir-actions { display: flex; gap: var(--d-s2); align-items: center; flex-wrap: wrap; }
+
+.dir-primary {
+  background: var(--d-orange);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  padding: 0.95rem 1.9rem;
+  border-radius: 0.625rem;
+  text-decoration: none;
+  box-shadow: 0 6px 28px rgba(255,107,53,0.26);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.dir-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 38px rgba(255,107,53,0.34); }
+
+.dir-ghost {
+  border: 1px solid var(--d-border-up);
+  color: var(--d-text);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.95rem 1.9rem;
+  border-radius: 0.625rem;
+  text-decoration: none;
+  transition: border-color .2s ease, background .2s ease;
+}
+.dir-ghost:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.03); }
+
+.dir-legend {
+  display: flex;
+  gap: var(--d-s5);
+  margin-top: var(--d-s5);
+  font-size: 0.8125rem;
+  color: var(--d-muted);
+  flex-wrap: wrap;
+}
+.dir-legend span { display: inline-flex; align-items: center; gap: var(--d-s1); }
+.dir-legend i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.dir-legend .lost { background: #6b6b72; }
+.dir-legend .kept { background: var(--d-orange); box-shadow: 0 0 10px rgba(255,107,53,0.7); }
+
+/* ---------- Shared card ---------- */
+
+.dir-card {
+  background: var(--d-surface);
+  border: 1px solid var(--d-border);
+  border-radius: 16px;
+  padding: var(--d-s4);
+  transition: border-color .25s ease, transform .25s ease, background .25s ease;
+}
+
+.dir-card:hover {
+  border-color: var(--d-border-up);
+  background: var(--d-surface-2);
+  transform: translateY(-3px);
+}
+
+.dir-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--d-s3); }
+.dir-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--d-s3); }
+
+.dir-card-kicker {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--d-orange);
+  margin: 0 0 var(--d-s2);
+}
+
+.dir-card-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--d-text);
+  margin: 0 0 var(--d-s2);
+  line-height: 1.3;
+}
+
+.dir-card-body {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--d-muted);
+  margin: 0;
+}
+
+/* ---------- Dashboard window frame ---------- */
+
+.dir-window {
+  background: var(--d-surface);
+  border: 1px solid var(--d-border);
+  border-radius: 16px;
+  padding: var(--d-s3);
+  box-shadow: 0 40px 110px rgba(0,0,0,0.65);
+  overflow: hidden;
+}
+
+.dir-window-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding-bottom: var(--d-s3);
+  margin-bottom: var(--d-s3);
+  border-bottom: 1px solid var(--d-border);
+}
+
+.dir-window-bar i {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: rgba(255,255,255,0.13);
+  display: inline-block;
+}
+
+.dir-window-label {
+  margin-left: var(--d-s1);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--d-muted);
+}
+
+.dir-window > *:not(.dir-window-bar) { max-width: 100%; width: 100%; }
+
+/* ---------- Manifesto ---------- */
+
+.dir-manifesto {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,107,53,0.07) 0%, transparent 60%),
+    var(--d-bg-alt);
+  border-top: 1px solid var(--d-border);
+  border-bottom: 1px solid var(--d-border);
+  text-align: center;
+}
+
+.dir-mf-lead {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: var(--d-text);
+  margin: 0 0 var(--d-s4);
+}
+.dir-mf-lead span { color: var(--d-faint); display: block; }
+
+.dir-mf-body {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--d-body);
+  max-width: 40rem;
+  margin: 0 auto var(--d-s5);
+}
+
+.dir-mf-pull {
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--d-text);
+  max-width: 34rem;
+  margin: 0 auto var(--d-s4);
+  padding-top: var(--d-s4);
+  border-top: 2px solid var(--d-orange);
+  display: inline-block;
+}
+
+.dir-mf-close {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--d-orange);
+  margin: 0;
+}
+
+/* ---------- Pricing ---------- */
+
+.dir-pricing {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,107,53,0.1) 0%, transparent 62%),
+    var(--d-surface);
+  border-top: 1px solid var(--d-border);
+  border-bottom: 1px solid var(--d-border);
+  text-align: center;
+}
+
+.dir-price {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  color: var(--d-orange);
+  line-height: 1;
+  margin: 0 0 var(--d-s2);
+}
+
+.dir-price small {
+  font-size: 0.3em;
+  font-weight: 600;
+  color: var(--d-muted);
+  letter-spacing: 0;
+}
+
+.dir-price-note {
+  font-size: 1rem;
+  color: var(--d-body);
+  margin: 0 0 var(--d-s5);
+}
+
+/* ---------- Concierge ---------- */
+
+.dir-concierge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--d-s6);
+  align-items: center;
+}
+
+.dir-phone {
+  font-size: clamp(1.5rem, 3.4vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--d-orange);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: var(--d-s2);
+}
+
+.dir-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--d-s2); }
+
+.dir-list li {
+  display: flex;
+  gap: var(--d-s2);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--d-body);
+}
+
+.dir-list li::before {
+  content: '';
+  flex: 0 0 6px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--d-orange);
+  margin-top: 0.55em;
+}
+
+/* ---------- Final CTA ---------- */
+
+.dir-final {
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(255,107,53,0.14) 0%, transparent 62%),
+    var(--d-bg);
+}
+
+.dir-final h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: var(--d-text);
+  margin: 0 0 var(--d-s3);
+}
+
+.dir-final p { font-size: 1.0625rem; color: var(--d-body); margin: 0 0 var(--d-s5); }
+
+.dir-sublinks {
+  display: flex;
+  gap: var(--d-s5);
+  justify-content: center;
+  margin-top: var(--d-s4);
+  flex-wrap: wrap;
+}
+.dir-sublinks a { color: var(--d-muted); font-size: 0.9375rem; text-decoration: none; transition: color .2s ease; }
+.dir-sublinks a:hover { color: var(--d-text); }
+
+.dir-note {
+  max-width: var(--d-max);
+  margin: 0 auto;
+  padding: var(--d-s4) var(--d-gutter) var(--d-s6);
+  font-size: 0.8125rem;
+  color: var(--d-faint);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1000px) {
+  .dir-grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .dir {
+    --d-gutter: 1.25rem;
+    --d-s6: 3rem;
+    --d-s7: 4rem;
+  }
+  .dir-hero { min-height: 90vh; }
+  .intent-field { inset: 40% -34% 0 -12%; }
+  .dir-hero::after {
+    background: linear-gradient(180deg, #070708 0%, rgba(7,7,8,0.9) 40%, rgba(7,7,8,0.45) 68%, rgba(7,7,8,0.9) 100%);
+  }
+  .dir-h1 { max-width: 100%; }
+  .dir-actions { flex-direction: column; align-items: stretch; }
+  .dir-primary, .dir-ghost { text-align: center; }
+  .dir-grid-3, .dir-grid-2, .dir-concierge-grid { grid-template-columns: 1fr; }
+  .dir-head { margin-bottom: var(--d-s5); }
+  .dir-sublinks { gap: var(--d-s3); }
+}
+
+/* ============================================================
+   THE STAGE
+   The field is sticky behind the whole opening act rather than
+   decoration inside one section. Sections above it carry their
+   own translucency so the object stays visible as a presence
+   without ever competing with text.
+   ============================================================ */
+
+.dir-stage { position: relative; }
+
+.dir-stage-canvas {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  margin-bottom: -100vh;
+}
+
+.dir-stage-canvas .intent-field { position: absolute; inset: 0; }
+
+.dir-stage > section,
+.dir-stage > .rseq { position: relative; z-index: 1; }
+
+/* Hero sits fully in the field. */
+.dir-stage .dir-hero { background: transparent; min-height: 100vh; }
+.dir-stage .dir-hero::after {
+  /* The object is solid now, not a diffuse cloud, so the copy column
+     needs a harder floor under it or the headline fights the highlights. */
+  background: linear-gradient(90deg, #070708 0%, #070708 30%, rgba(7,7,8,0.88) 44%, rgba(7,7,8,0.25) 62%, transparent 78%);
+}
+
+/* The rest let the object glow through without losing contrast. */
+.dir-stage .dir-sec.alt { background: rgba(13,13,16,0.88); }
+.dir-stage .dir-sec:not(.alt):not(.dir-manifesto) { background: rgba(9,9,11,0.85); }
+.dir-stage .dir-manifesto { background: rgba(13,13,16,0.88); }
+.dir-stage .rseq { background: rgba(10,10,12,0.82); }
+
+/* ---------- Headline assembly ---------- */
+
+.dir-h1 .ln {
+  display: block;
+  overflow: hidden;
+}
+
+.dir-h1 .ln > span {
+  display: inline-block;
+  transform: translateY(105%);
+  animation: dirRise 1.05s cubic-bezier(.16,.9,.24,1) forwards;
+}
+
+.dir-h1 .ln:nth-child(1) > span { animation-delay: .12s; }
+.dir-h1 .ln:nth-child(2) > span { animation-delay: .26s; }
+
+@keyframes dirRise { to { transform: translateY(0); } }
+
+.dir-fade {
+  opacity: 0;
+  animation: dirFade .9s ease forwards;
+}
+.dir-fade.d1 { animation-delay: .5s; }
+.dir-fade.d2 { animation-delay: .65s; }
+.dir-fade.d3 { animation-delay: .8s; }
+
+@keyframes dirFade { to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .dir-h1 .ln > span { transform: none; animation: none; }
+  .dir-fade { opacity: 1; animation: none; }
+}
+
+
+/* ---------- Mobile: the mark sits centred behind the copy ---------- */
+@media (max-width: 760px) {
+  /* The desktop scrim runs left to right, which does nothing when the
+     mark is centred behind the text rather than off to one side. */
+  .dir-stage .dir-hero::after {
+    background: linear-gradient(180deg,
+      rgba(7,7,8,0.94) 0%,
+      rgba(7,7,8,0.70) 42%,
+      rgba(7,7,8,0.62) 74%,
+      rgba(7,7,8,0.88) 100%);
+  }
+  .dir-h1 { max-width: 100%; }
+}
