@@ -1,0 +1,350 @@
+/* ============================================================
+   LANDING POLISH LAYER
+   Imported AFTER landing.css so it wins on cascade order.
+   Everything here is one intentional system. Delete this file
+   and remove its import to revert the homepage completely.
+   ============================================================ */
+
+:root {
+  /* Contrast floor. Body copy at #888 on #0a0a0a was the single
+     most common legibility failure across the page. */
+  --rc-text-body:    #b4b4b4;
+  --rc-text-muted:   #8c8c8c;
+  --rc-eyebrow-size: 0.75rem;
+
+  --rc-surface:      #111113;
+  --rc-surface-2:    #171719;
+  --rc-border:       rgba(255, 255, 255, 0.09);
+  --rc-border-lift:  rgba(255, 255, 255, 0.14);
+}
+
+/* ------------------------------------------------------------
+   1. ONE HEADING RULE
+   Orange eyebrow, white headline, optional single muted lead
+   line. Orange is reserved for eyebrows, CTAs, accent rules and
+   the hero highlight. It was previously doing five jobs at once,
+   which is what made the page read as unfinished.
+   ------------------------------------------------------------ */
+
+.landing .section-title {
+  color: #ffffff;
+  letter-spacing: -0.035em;
+}
+
+.landing .section-title .title-muted {
+  color: #6f6f74;
+}
+
+/* Every eyebrow on the page, one treatment. */
+.landing .signal-eyebrow,
+.landing .manifesto-eyebrow,
+.landing .pricing-band-eyebrow,
+.landing .concierge-callout-eyebrow,
+.landing .rc-eyebrow {
+  display: block;
+  font-size: var(--rc-eyebrow-size);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  opacity: 1;
+  margin: 0 0 1rem 0;
+}
+
+.landing .section-subtitle {
+  color: var(--rc-text-body);
+  max-width: 640px;
+}
+
+/* ------------------------------------------------------------
+   2. HERO
+   The capture panel is the product shown in one glance, and it
+   was semi-transparent over the brightest part of the skyline
+   photo. Put it on a real surface and raise its internal
+   contrast. Nothing about the photo or the headline changes.
+   ------------------------------------------------------------ */
+
+.landing .hc-frame {
+  background: linear-gradient(168deg, #17171a 0%, #0e0e10 100%);
+  border: 1px solid var(--rc-border-lift);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* 9px labels at #5a5a5f were unreadable even on a solid surface. */
+.landing .hc-label {
+  font-size: 0.6875rem;
+  color: #8e8e98;
+  letter-spacing: 0.1em;
+}
+
+.landing .hc-form-title {
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+}
+
+/* 88px inside a 568px column broke "Your Best Leads" across two lines and
+   "Never Hit Submit." across two more, giving four ragged lines where the
+   markup intends two. Scale the headline to the column it actually lives in.
+   Mobile is full width and already correct, so it is left alone. */
+@media (min-width: 900px) {
+  .landing .hero h1 {
+    font-size: clamp(2.75rem, 4.4vw, 4.25rem);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+  }
+}
+
+/* A quiet scrim so the panel never fights the sunset behind it. */
+.landing .hero-right {
+  position: relative;
+}
+
+.landing .hero-right::before {
+  content: '';
+  position: absolute;
+  inset: -12% -8%;
+  background: radial-gradient(ellipse at center, rgba(5, 5, 6, 0.82) 0%, rgba(5, 5, 6, 0.45) 55%, transparent 78%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.landing .hero-right > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* This line sat on the busiest part of the photo on mobile. */
+.landing .hero-left .cta-group + p {
+  color: #c2c2c2;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.9);
+}
+
+/* ------------------------------------------------------------
+   3. PRICING
+   This is the money moment and it was the dimmest element on
+   the page. Elevated surface, display-size price, real button.
+   ------------------------------------------------------------ */
+
+.landing .pricing-band {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 107, 53, 0.09) 0%, transparent 62%),
+    var(--rc-surface);
+  border-top: 1px solid var(--rc-border);
+  border-bottom: 1px solid var(--rc-border);
+  padding: 5rem 2rem;
+}
+
+.landing .pricing-band-line {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  color: #ffffff;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.landing .pricing-band-line strong {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  display: inline-block;
+  vertical-align: -0.08em;
+}
+
+.landing .pricing-band-link {
+  background: var(--orange);
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  padding: 0.95rem 2.25rem;
+  border-radius: 0.625rem;
+  box-shadow: 0 4px 20px var(--orange-glow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.landing .pricing-band-link:hover {
+  background: var(--orange-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px var(--orange-glow);
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------
+   4. CONCIERGE
+   Moved to sit beside the pricing and final CTA as the
+   alternative path. Its list was 0.8rem at low opacity.
+   ------------------------------------------------------------ */
+
+.landing .concierge-callout {
+  background: var(--bg-secondary);
+  padding: 4rem 2rem;
+}
+
+.landing .concierge-callout-line {
+  font-size: clamp(1.125rem, 2.6vw, 1.5rem);
+  color: #ffffff;
+}
+
+.landing .concierge-callout-list li {
+  color: var(--rc-text-body);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+.landing .concierge-callout-foot {
+  color: var(--rc-text-muted);
+}
+
+/* ------------------------------------------------------------
+   5. STEPS AS A TIMELINE
+   Steps, Industries and the feature drawers were three near
+   identical card grids in sequence. By the third one the eye
+   stops reading it as new information. The steps become a
+   connected run instead.
+   ------------------------------------------------------------ */
+
+.landing .how-it-works-section {
+  position: relative;
+}
+
+@media (min-width: 900px) {
+  .landing .how-it-works-section .sfl-grid {
+    position: relative;
+  }
+
+  .landing .how-it-works-section .sfl-grid::before {
+    content: '';
+    position: absolute;
+    left: 16%;
+    right: 16%;
+    top: 2.25rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.4) 15%, rgba(255, 107, 53, 0.4) 85%, transparent);
+    z-index: 0;
+  }
+
+  .landing .how-it-works-section .sfl-card {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* ------------------------------------------------------------
+   6. SECTION RHYTHM
+   Alternating surface so adjacent sections read as separate
+   beats rather than one continuous scroll of dark.
+   ------------------------------------------------------------ */
+
+.landing .ledger-section {
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(255, 107, 53, 0.07) 0%, transparent 60%),
+    var(--bg-secondary);
+}
+
+.landing .manifesto {
+  background: var(--rc-surface);
+  border-top: 1px solid var(--rc-border);
+  border-bottom: 1px solid var(--rc-border);
+}
+
+.landing .mf-body {
+  color: var(--rc-text-body);
+}
+
+/* ------------------------------------------------------------
+   7. NAV
+   Trimmed from eleven items to six plus phone, login and a
+   trial button. Every removed item still lives in the footer.
+   ------------------------------------------------------------ */
+
+.landing .lc-nav,
+.lc-nav {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.nav-cta {
+  background: var(--orange);
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.nav-cta:hover {
+  background: var(--orange-light);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1180px) {
+  .nav-cta { display: none; }
+}
+
+/* ------------------------------------------------------------
+   8. LEAK ROWS INSIDE THE LEDGER
+   Folded in from the section that was cut, so no content is
+   lost. Compact three across under the feed.
+   ------------------------------------------------------------ */
+
+.landing .ledger-leakrows {
+  max-width: var(--section-max-width);
+  margin: 3.5rem auto 0;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--rc-border);
+}
+
+.landing .ledger-leakrows .rc-eyebrow {
+  text-align: center;
+}
+
+.landing .ledger-leakrows-note {
+  text-align: center;
+  color: var(--rc-text-muted);
+  font-size: 0.9375rem;
+  max-width: 580px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+
+/* ------------------------------------------------------------
+   9. MOBILE
+   Checked at 375. The hero subtitle ran to seven lines and the
+   reassurance line sat on the brightest part of the photo.
+   ------------------------------------------------------------ */
+
+@media (max-width: 768px) {
+  .landing .hero-subtitle {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+
+  .landing .hero-right::before {
+    inset: -6% -4%;
+  }
+
+  .landing .pricing-band {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .landing .pricing-band-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .landing .concierge-callout {
+    padding: 3rem 1.25rem;
+    text-align: left;
+  }
+
+  .landing .concierge-callout-list li {
+    font-size: 0.9375rem;
+  }
+}

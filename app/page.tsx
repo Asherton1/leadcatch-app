@@ -1,8 +1,7 @@
 import Link from 'next/link'
-import SignalFlow from './components/SignalFlow'
 import Image from 'next/image'
 import './landing.css'
-import StatsBar from './components/StatsBar'
+import './landing-polish.css'
 import GSAPAnimations from './components/GSAPAnimations'
 import MobileNav from './components/MobileNav'
 import Footer from './components/Footer'
@@ -16,6 +15,7 @@ import HeroCapture from './components/HeroCapture'
 import FeatureShowcase from './components/FeatureShowcase'
 import LedgerFeed from './components/LedgerFeed'
 import LedgerHeadline from './components/LedgerHeadline'
+import RecoverySequence from './components/RecoverySequence'
 import Logo from './components/Logo'
 import GridBackdrop from './components/GridBackdrop'
 import IntegrationMarquee from './components/IntegrationMarquee'
@@ -50,7 +50,7 @@ export default function LandingPage() {
 
         <div className="hero-split">
           <div className="hero-left">
-            <p style={{ fontSize: '0.65rem', fontWeight: 600, color: '#ff6b35', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Built in Dallas, Texas</p>
+            <p style={{ fontSize: '0.75rem', fontWeight: 700, color: '#ff6b35', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Built in Dallas, Texas</p>
             <h1 className="hero-animate">
               Your Best Leads<br />
               <span className="hero-highlight">Never Hit Submit.</span>
@@ -65,7 +65,7 @@ export default function LandingPage() {
             <div className="cta-group hero-animate-delay2">
               <Link href="/start-trial" className="cta-primary">Start your 7-day free trial</Link>
             </div>
-            <p className="hero-animate-delay2" style={{ fontSize: '0.78rem', color: '#6b6b6b', marginTop: '1.1rem', lineHeight: 1.6 }}>
+            <p className="hero-animate-delay2" style={{ fontSize: '0.8125rem', marginTop: '1.1rem', lineHeight: 1.6 }}>
               Contact fields only. Never keystrokes.
             </p>
           </div>
@@ -75,36 +75,26 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="concierge-callout reveal">
-        <div className="concierge-callout-inner">
-          <p className="concierge-callout-eyebrow">Or skip the form entirely</p>
-          <p className="concierge-callout-line">
-            Call <a href="tel:+18886060630" className="concierge-callout-number">(888) 606-0630</a> and talk to Marissa, our AI concierge.
-          </p>
-          <ul className="concierge-callout-list">
-            <li>Answers what ReCapture does, how it installs, and what it will and will not do</li>
-            <li>Works out which plan fits your number of locations, and quotes that one</li>
-            <li>Texts you a page built around what you told her, before you hang up</li>
-          </ul>
-          <p className="concierge-callout-foot">
-            No hold music, no queue, and nobody will call you back unless you ask.
-          </p>
-        </div>
-      </section>
-
+      {/* The ledger shows the problem and the product in one image, so it
+          leads. The old "Invisible Revenue Leak" section said the same thing
+          again one screen later; its stat and its three rows are folded in
+          below rather than given a screen of their own. */}
       <section className="lc-section ledger-section">
         <LedgerHeadline />
 
         <LedgerFeed />
+
+        <div className="ledger-leakrows reveal">
+          <p className="rc-eyebrow">Where it goes</p>
+          <p className="ledger-leakrows-note">
+            Baymard Institute puts form abandonment at 60 to 70 percent.
+            Until now, you had no way to see who those people were.
+          </p>
+          <LeakRows />
+        </div>
       </section>
 
       <div className="section-divider" />
-
-      <section className="lc-section">
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>The Invisible Revenue Leak</h2>
-        <p className="section-subtitle">Baymard Institute puts form abandonment at 60-70%. Until now, you had no way to see who those people were.</p>
-        <LeakRows />
-      </section>
 
       <section className="manifesto reveal">
         <div className="manifesto-inner">
@@ -128,6 +118,8 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <RecoverySequence />
+
       <section className="lc-section fs-section reveal">
         <p className="signal-eyebrow">The part nobody else does</p>
         <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>
@@ -143,61 +135,70 @@ export default function LandingPage() {
 
       <div className="section-divider" />
 
-
-
-
-
-
       <section className="lc-section how-it-works-section">
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Three Steps to Recovered Revenue</h2>
+        <p className="rc-eyebrow" style={{ textAlign: 'center' }}>Setup</p>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "0.5rem" }}>Three Steps to Recovered Revenue</h2>
         <p className="section-subtitle">No complex setup. No dev team required. Just results.</p>
         <StepsFlow />
       </section>
 
       <div className="section-divider" />
 
-
-
-
-
       <section className="lc-section">
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>Purpose-Built for High-Ticket Industries</h2>
+        <p className="rc-eyebrow" style={{ textAlign: 'center' }}>Who it is for</p>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "0.5rem" }}>Purpose-Built for High-Ticket Industries</h2>
         <p className="section-subtitle">ReCapture is not a generic form tool. Every feature was designed for businesses where a single recovered lead pays for the entire year.</p>
         <IndustryDrawers />
 
       </section>
 
-
-
       <section className="lc-section reveal" style={{ textAlign: 'center' }}>
-        <p style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#ff6b35', marginBottom: '0.75rem' }}>Integrations</p>
-        <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 0.75rem' }}>Works with the tools you already use</h2>
-        <p style={{ fontSize: '1rem', color: '#888', maxWidth: 520, margin: '0 auto 2.5rem', lineHeight: 1.6 }}>Recovered leads flow straight into your existing stack. No rip-and-replace, no manual imports.</p>
+        <p className="rc-eyebrow">Integrations</p>
+        <h2 className="section-title" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', marginTop: '0.5rem', marginBottom: '0.75rem' }}>Works with the tools you already use</h2>
+        <p className="section-subtitle">Recovered leads flow straight into your existing stack. No rip-and-replace, no manual imports.</p>
         <IntegrationMarquee />
         <div style={{ marginTop: '2rem' }}>
           <Link href="/integrations" className="page-transition-link" style={{ color: '#ff6b35', fontWeight: 600, fontSize: '0.9375rem', textDecoration: 'none' }}>See all integrations &rarr;</Link>
         </div>
       </section>
 
-
-
-
+      {/* Proof before price. */}
+      <section className="lc-section testimonials-tone">
+        <p className="rc-eyebrow" style={{ textAlign: 'center' }}>Proof</p>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "0.5rem" }}>What Our Clients Say</h2>
+        <TestimonialSpotlight />
+      </section>
 
       <section className="pricing-band reveal">
         <div className="pricing-band-inner">
           <p className="pricing-band-eyebrow">Simple, transparent pricing</p>
           <p className="pricing-band-line">
-            Plans start at <strong>$397/mo</strong> · 7-day free trial · Cancel anytime
+            Plans start at <strong>$397/mo</strong><br />
+            7-day free trial. Cancel anytime.
           </p>
           <Link href="/pricing" className="pricing-band-link page-transition-link">
-            See all plans &rarr;
+            See all plans
           </Link>
         </div>
       </section>
 
-      <section className="lc-section testimonials-tone">
-        <h2 className="section-title" style={{ fontSize: "clamp(1.35rem, 5vw, 3.25rem)", lineHeight: 1.2, marginBottom: "0.75rem", marginTop: "1.5rem" }}>What Our Clients Say</h2>
-        <TestimonialSpotlight />
+      {/* The alternative path, sitting beside the price rather than
+          interrupting before anyone knows what the product is. */}
+      <section className="concierge-callout reveal">
+        <div className="concierge-callout-inner">
+          <p className="concierge-callout-eyebrow">Or skip the form entirely</p>
+          <p className="concierge-callout-line">
+            Call <a href="tel:+18886060630" className="concierge-callout-number">(888) 606-0630</a> and talk to Marissa, our AI concierge.
+          </p>
+          <ul className="concierge-callout-list">
+            <li>Answers what ReCapture does, how it installs, and what it will and will not do</li>
+            <li>Works out which plan fits your number of locations, and quotes that one</li>
+            <li>Texts you a page built around what you told her, before you hang up</li>
+          </ul>
+          <p className="concierge-callout-foot">
+            No hold music, no queue, and nobody will call you back unless you ask.
+          </p>
+        </div>
       </section>
 
       <section className="final-cta reveal">

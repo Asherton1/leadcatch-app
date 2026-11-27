@@ -18,12 +18,9 @@ export default function MobileNav() {
   return (
     <>
       <div className="nav-desktop">
-        <Link data-label="About" href="/about" className={isActive('/about') ? 'nav-link nav-active' : 'nav-link'}>About</Link>
         <Link data-label="Why Us" href="/why-us" className={isActive('/why-us') ? 'nav-link nav-active' : 'nav-link'}>Why Us</Link>
         <Link data-label="How It Works" href="/how-it-works" className={isActive('/how-it-works') ? 'nav-link nav-active' : 'nav-link'}>How It Works</Link>
-        <Link data-label="Dashboard" href="/dashboard-tour" className={isActive('/dashboard-tour') ? 'nav-link nav-active' : 'nav-link'}>Dashboard</Link>
         <Link href="/demo" className={isActive('/demo') ? 'nav-link nav-active' : 'nav-link'} style={{ display: 'inline-flex', alignItems: 'center', gap: '7px' }}><span className="live-demo-dot" />Live Demo</Link>
-        <Link data-label="Integrations" href="/integrations" className={isActive('/integrations') ? 'nav-link nav-active' : 'nav-link'}>Integrations</Link>
         <div className="nav-dropdown-wrapper">
           <span className={(isActive('/pricing') || isActive('/enterprise')) ? 'nav-link nav-active' : 'nav-link'} style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>Pricing <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           <div className="nav-dropdown-menu">
@@ -43,6 +40,7 @@ export default function MobileNav() {
         </div>
         <a href="tel:+18886060630" className="nav-phone">(888) 606-0630</a>
         <Link href="/login" className="nav-login">Login</Link>
+        <Link href="/start-trial" className="nav-cta">Start free trial</Link>
       </div>
 
       <button

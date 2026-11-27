@@ -1,0 +1,376 @@
+/* ============================================================
+   THE RECOVERY SEQUENCE
+   Pinned, scroll-driven walkthrough of what ReCapture actually
+   does. Five steps, one pinned stage, real product surfaces.
+   ============================================================ */
+
+.rseq {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(255, 107, 53, 0.08) 0%, transparent 55%),
+    #0a0a0a;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.rseq-pin {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.rseq-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 3rem;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+
+/* ---------- Left: the rail ---------- */
+
+.rseq-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ff6b35;
+  margin: 0 0 1.75rem;
+}
+
+.rseq-count {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  color: #6f6f76;
+  letter-spacing: 0.08em;
+  margin: 0 0 1rem;
+}
+
+.rseq-count b { color: #ff6b35; font-weight: 600; }
+
+.rseq-title {
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: #fff;
+  margin: 0 0 1rem;
+  min-height: 2.2em;
+}
+
+.rseq-body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #b4b4b4;
+  margin: 0 0 2.5rem;
+  max-width: 42ch;
+  min-height: 5.1em;
+}
+
+.rseq-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rseq-rail-item {
+  position: relative;
+  padding: 0.6rem 0 0.6rem 1.5rem;
+  font-size: 0.875rem;
+  color: #5e5e66;
+  transition: color 0.35s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+}
+
+.rseq-rail-item::before {
+  content: '';
+  position: absolute;
+  left: -4.5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2a2a2e;
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.rseq-rail-item.done { color: #8a8a92; }
+.rseq-rail-item.done::before { background: rgba(255, 107, 53, 0.45); }
+
+.rseq-rail-item.active { color: #fff; font-weight: 600; }
+.rseq-rail-item.active::before {
+  background: #ff6b35;
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.18);
+}
+
+/* ---------- Right: the pinned stage ---------- */
+
+.rseq-stage {
+  position: relative;
+  height: 500px;
+}
+
+.rseq-card {
+  position: absolute;
+  background: linear-gradient(168deg, #17171a 0%, #0e0e10 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  transition: opacity 0.55s cubic-bezier(.2,.7,.3,1), transform 0.55s cubic-bezier(.2,.7,.3,1);
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+
+.rseq-card.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* The form card is the anchor. It stays, it changes state. */
+.rseq-form {
+  top: 0;
+  left: 0;
+  width: 340px;
+  padding: 1.35rem;
+  z-index: 2;
+}
+
+.rseq-form.dim { opacity: 0.32; filter: saturate(0.4); }
+
+.rseq-form-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.rseq-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8e8e98;
+}
+
+.rseq-chip i {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #4ade80;
+  display: inline-block;
+}
+
+.rseq-chip.gone i { background: #6f6f76; }
+.rseq-chip.hot { color: #ff6b35; }
+.rseq-chip.hot i { background: #ff6b35; }
+
+.rseq-time {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.625rem;
+  color: #5e5e66;
+  letter-spacing: 0.08em;
+}
+
+.rseq-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rseq-field-label {
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6f6f76;
+}
+
+.rseq-field-value {
+  font-size: 0.875rem;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.rseq-field-value.shown { opacity: 1; }
+
+.rseq-field-value.empty { color: #3a3a40; }
+
+.rseq-caret {
+  display: inline-block;
+  width: 2px;
+  height: 0.95em;
+  background: #ff6b35;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  animation: rseqBlink 1s step-end infinite;
+}
+
+@keyframes rseqBlink { 50% { opacity: 0; } }
+
+/* Satellite cards fan out from the form. */
+.rseq-lead {
+  top: 36px;
+  right: 0;
+  width: 300px;
+  padding: 1.1rem 1.25rem;
+  z-index: 3;
+}
+
+/* Cards fan into their own vertical bands. They overlap on the
+   horizontal, which is the layered look, but no card may cover
+   another card's title. */
+.rseq-recovery {
+  bottom: 132px;
+  right: 0;
+  width: 320px;
+  padding: 1rem 1.15rem;
+  z-index: 4;
+}
+
+.rseq-signal {
+  bottom: 0;
+  left: 0;
+  width: 320px;
+  padding: 1rem 1.15rem;
+  z-index: 5;
+}
+
+.rseq-card-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rseq-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.45rem 0;
+  font-size: 0.8125rem;
+  color: #b4b4b4;
+}
+
+.rseq-row strong { color: #fff; font-weight: 600; }
+
+.rseq-row-icon {
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  background: rgba(255, 107, 53, 0.12);
+  border: 1px solid rgba(255, 107, 53, 0.22);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 26px;
+}
+
+.rseq-row-icon svg { width: 13px; height: 13px; stroke: #ff6b35; fill: none; stroke-width: 1.8; }
+
+.rseq-pill {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.5rem;
+  border-radius: 5px;
+  background: rgba(74, 222, 128, 0.12);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  white-space: nowrap;
+}
+
+.rseq-score {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ff6b35;
+  letter-spacing: -0.02em;
+}
+
+.rseq-meter {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+  margin-top: 0.6rem;
+}
+
+.rseq-meter i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ff6b35, #ff8659);
+  transition: width 1s cubic-bezier(.2,.7,.3,1);
+}
+
+.rseq-card.in .rseq-meter i { width: 84%; }
+
+/* ---------- Mobile ---------- */
+/* Pinning a tall stage on a phone fights the browser chrome and
+   reads as broken scrolling, so below 900px the pin is disabled
+   and the steps become a normal vertical stack. */
+
+@media (max-width: 900px) {
+  .rseq-pin { min-height: 0; display: block; }
+  .rseq-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 3.5rem 1.25rem;
+  }
+  .rseq-title { min-height: 0; font-size: 1.5rem; }
+  .rseq-body { min-height: 0; margin-bottom: 1.5rem; }
+
+  /* The absolutely positioned fan needs a fixed-height stage, which
+     leaves a large dead gap on a phone whenever only some cards are
+     showing. On mobile the cards flow normally instead and a card
+     that has not been reached yet is simply not in the layout. */
+  .rseq-stage {
+    height: auto;
+    transform: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .rseq-card {
+    position: static;
+    width: 100%;
+    display: none;
+    transform: translateY(12px);
+  }
+
+  .rseq-card.in {
+    display: block;
+    transform: none;
+  }
+
+  .rseq-form.dim { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rseq-card { transition: opacity 0.2s linear; transform: none; }
+  .rseq-card.in { transform: none; }
+  .rseq-caret { animation: none; }
+}
