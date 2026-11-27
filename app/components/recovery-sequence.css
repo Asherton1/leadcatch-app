@@ -62,7 +62,7 @@
    the column never reflows while the playhead moves. */
 .rseq-blocks {
   position: relative;
-  min-height: clamp(230px, 34vh, 330px);
+  min-height: clamp(190px, 26vh, 260px);
   margin-bottom: 1.5rem;
 }
 
@@ -73,24 +73,25 @@
   backface-visibility: hidden;
 }
 
-/* Clamped against viewport HEIGHT as well as width: this sits inside a
-   100vh pin, so a tall headline on a short laptop screen would push the
-   card off the bottom. */
+/* Exactly .section-title from landing.css, with the -0.035em that
+   .landing .section-title sets, so it matches every other heading on
+   the live site. */
 .rseq-title {
-  font-size: clamp(1.9rem, min(6vw, 8.4vh), 5rem);
-  font-weight: 600;
-  line-height: 1.04;
-  letter-spacing: -0.016em;
+  font-size: clamp(1.35rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
   color: #fff;
   margin: 0 auto 1.1rem;
-  max-width: 19ch;
+  max-width: 22ch;
   text-wrap: balance;
 }
 
+/* Exactly .section-subtitle from landing.css. */
 .rseq-body {
-  font-size: clamp(0.95rem, 1.25vw, 1.1875rem);
-  line-height: 1.6;
-  color: #a8a8b0;
+  font-size: clamp(0.875rem, 2.5vw, 1.25rem);
+  line-height: 1.7;
+  color: #a0a0a0;
   margin: 0 auto;
   max-width: 58ch;
   text-wrap: pretty;
@@ -359,14 +360,11 @@
   .rseq-card:nth-of-type(4) { order: 9; }
 
   .rseq-title {
-    font-size: clamp(1.75rem, 8.5vw, 2.4rem);
-    line-height: 1.06;
-    letter-spacing: -0.022em;
     max-width: 100%;
     margin: 0 0 0.75rem;
   }
 
-  .rseq-body { margin: 0; max-width: 100%; font-size: 1rem; }
+  .rseq-body { margin: 0; max-width: 100%; }
   .rseq-rail { display: none; }
 
   .rseq-form { filter: none; }

@@ -18,6 +18,7 @@ export default function MobileNav() {
   return (
     <>
       <div className="nav-desktop">
+        <Link data-label="About Us" href="/about" className={isActive('/about') ? 'nav-link nav-active' : 'nav-link'}>About Us</Link>
         <Link data-label="Why Us" href="/why-us" className={isActive('/why-us') ? 'nav-link nav-active' : 'nav-link'}>Why Us</Link>
         <Link data-label="How It Works" href="/how-it-works" className={isActive('/how-it-works') ? 'nav-link nav-active' : 'nav-link'}>How It Works</Link>
         <Link href="/demo" className={isActive('/demo') ? 'nav-link nav-active' : 'nav-link'} style={{ display: 'inline-flex', alignItems: 'center', gap: '7px' }}><span className="live-demo-dot" />Live Demo</Link>
