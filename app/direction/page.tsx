@@ -20,7 +20,7 @@ import '../landing-polish.css'
 import './direction.css'
 import './direction-components.css'
 
-// IntentField is a client component whose markup is an empty div, so it
+// PlusField is a client component whose markup is an empty div, so it
 // server renders harmlessly and the WebGL context is only ever created
 // inside its effect. ssr:false is not permitted from a server component
 // in the app router, and is not needed here.

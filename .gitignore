@@ -9,3 +9,4 @@ preview-*.html
 .env*
 public/_backup_*
 DEMO-LOGINS.md
+tsconfig.tsbuildinfo
