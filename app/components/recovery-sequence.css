@@ -320,33 +320,30 @@
 
 @media (max-width: 900px), (prefers-reduced-motion: reduce) {
   .rseq-pin { min-height: 0; display: block; overflow: visible; }
-  .rseq-inner { padding: 3.5rem 1.25rem; text-align: left; }
 
-  .rseq-blocks { position: static; min-height: 0; margin-bottom: 2rem; }
-
-  .rseq-block {
-    position: static;
-    opacity: 1;
-    transform: none;
-    padding-bottom: 1.6rem;
-  }
-
-  .rseq-block + .rseq-block {
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
-    padding-top: 1.6rem;
-  }
-
-  .rseq-title { font-size: 1.6rem; max-width: 100%; margin-left: 0; }
-  .rseq-body { margin-left: 0; }
-  .rseq-rail { display: none; }
-
-  .rseq-stage {
-    position: static;
-    min-height: 0;
+  /* display:contents lets the copy blocks and the cards become siblings
+     of one flex column, so each step can sit directly above the card it
+     is talking about instead of all five blocks then all four cards. */
+  .rseq-inner {
+    padding: 3.5rem 1.25rem;
+    text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 1.5rem;
   }
+
+  .rseq-eyebrow { order: 0; margin: 0; }
+  .rseq-count { display: none; }
+  .rseq-copy { display: contents; }
+  .rseq-blocks { display: contents; }
+  .rseq-stage { display: contents; }
+
+  .rseq-block { position: static; opacity: 1; transform: none; filter: none; }
+  .rseq-block:nth-of-type(1) { order: 1; }
+  .rseq-block:nth-of-type(2) { order: 3; }
+  .rseq-block:nth-of-type(3) { order: 4; }
+  .rseq-block:nth-of-type(4) { order: 6; }
+  .rseq-block:nth-of-type(5) { order: 8; }
 
   .rseq-card {
     position: static;
@@ -354,9 +351,29 @@
     transform: none;
     opacity: 1;
     filter: none;
+    margin: 0;
   }
+  .rseq-card:nth-of-type(1) { order: 2; }
+  .rseq-card:nth-of-type(2) { order: 5; }
+  .rseq-card:nth-of-type(3) { order: 7; }
+  .rseq-card:nth-of-type(4) { order: 9; }
+
+  .rseq-title {
+    font-size: clamp(1.75rem, 8.5vw, 2.4rem);
+    line-height: 1.06;
+    letter-spacing: -0.022em;
+    max-width: 100%;
+    margin: 0 0 0.75rem;
+  }
+
+  .rseq-body { margin: 0; max-width: 100%; font-size: 1rem; }
+  .rseq-rail { display: none; }
 
   .rseq-form { filter: none; }
   .rseq-chip.gone { display: none; }
   .rseq-meter i { transform: scaleX(0.84); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rseq-block, .rseq-card { opacity: 1 !important; transform: none !important; filter: none !important; }
 }

@@ -206,8 +206,35 @@ export default function RecoverySequence() {
       return () => { st.kill(); clearInline() }
     })
 
-    mm.add('(max-width: 900px), (prefers-reduced-motion: reduce)', () => {
+    // No pin on a phone: a tall pinned stage fights the browser chrome
+    // collapsing and reads as broken scrolling. Each step animates in as
+    // you reach it instead, so it is still animated rather than static.
+    mm.add('(max-width: 900px) and (prefers-reduced-motion: no-preference)', () => {
       clearInline()
+      if (score) score.textContent = '84'
+      const items = [...blocks, ...cards]
+      const tweens = items.map(el =>
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 28 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+          }
+        )
+      )
+      return () => {
+        tweens.forEach(tw => { tw.scrollTrigger?.kill(); tw.kill() })
+        clearInline()
+      }
+    })
+
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      clearInline()
+      if (score) score.textContent = '84'
       return () => {}
     })
 
