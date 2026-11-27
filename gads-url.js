@@ -22,12 +22,12 @@ const env = Object.fromEntries(
     })
 )
 
-const SECRET = env.UNSUBSCRIBE_SECRET || env.CRON_SECRET
+const SECRET = env.GADS_FEED_SECRET
 const BASE = env.NEXT_PUBLIC_BASE_URL || 'https://www.userecapture.com'
 const filter = (process.argv[2] || '').toLowerCase()
 
 if (!SECRET) {
-  console.error('UNSUBSCRIBE_SECRET not found in .env.local')
+  console.error('GADS_FEED_SECRET not found in .env.local')
   process.exit(1)
 }
 

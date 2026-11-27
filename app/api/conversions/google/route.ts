@@ -22,13 +22,23 @@ export const dynamic = 'force-dynamic'
 // them instead of double counting.
 const WINDOW_DAYS = 30
 
+// A secret of its own, not UNSUBSCRIBE_SECRET. Sharing that one would mean
+// any future rotation of these feed URLs also invalidated every unsubscribe
+// link already sitting in a sent email.
 function sign(clientId: string): string {
-  const secret = process.env.UNSUBSCRIBE_SECRET || process.env.CRON_SECRET || 'recapture-fallback-secret-change-me'
+  const secret = process.env.GADS_FEED_SECRET
+  if (!secret) return ''
   return createHmac('sha256', secret).update(`gads:${clientId}`).digest('hex').slice(0, 32)
 }
 
 function tokenMatches(clientId: string, provided: string): boolean {
   const expected = sign(clientId)
+  // No secret configured means no valid token exists. Never fall through to
+  // serving a client's click ids on an empty or guessed token.
+  if (!expected) {
+    console.error('[gads-csv] GADS_FEED_SECRET is not set; refusing all requests')
+    return false
+  }
   if (provided.length !== expected.length) return false
   return timingSafeEqual(Buffer.from(provided), Buffer.from(expected))
 }
